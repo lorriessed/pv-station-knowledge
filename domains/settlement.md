@@ -294,3 +294,83 @@ stationParam.put("spMemberId", spMemberId);
 - FAP记账仅对转账类型订单执行，避免非转账订单误记账
 - `LightSpOrderItemDao` 新增按订单项目编号查询方法
 - `LightFapRecordService.compensationVoucherJob()` — 补偿任务接口
+
+---
+
+## 运维收入A51冲销暂估 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` (commits by sunzn, 2026-01-12~16, TAEI-2812 运维收入成本管理模块)
+
+- `OperationMaintenanceServiceImpl.coverOperationMaintenanceA51()` — A51数据暂估冲销入口
+- `coverA51()` — 执行A51类型数据冲销，从记账数据取数计算冲销金额
+- 允许确认实际时同步集团内项目公司A58成本信息
+- 项目公司客户编码查询验证机制
+- 冲销凭证生成和状态更新
+- 涉及文件: `LightSapService.java`, `OperationMaintenanceService.java`, `LightSapServiceImpl.java`, `OperationMaintenanceServiceImpl.java`
+- **关联需求**: TAEI-2812 (运维收入成本管理模块-集团内项目公司记账优化, 孙志男负责)
+
+## 基金模式上收入 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` (commits by 解钦, 2025-12-29~12-31, TAEI-2804 基金模式上收入)
+
+- 资金结算表重命名: `light_zh_settle` → `light_fund_settle`
+- 基金收入结算功能: `FundSettlementService` 实现
+- 基金收入冲销功能 (`reverseFundIncome`)
+- 基金结算类型字段新增
+- 收入确认时添加确认时间和确认人信息
+- 资金结算收入检查功能
+- SAP记账队列重试计数字段初始化 (finance-service, 解钦 2025-12-29)
+- 收入处理策略重构: 华融模式电站收入校验策略、结算数据创建和SAP调用逻辑优化
+- **关联需求**: TAEI-2804 (基金模式上收入, 杨越越/姜传德/解钦参与)
+
+## 采购申请结算重构 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-finance-service` + `rrsjk-admin-web` (commits by yumiao/sunzn, 2026-01-12~17)
+
+- 采购申请结算编辑功能数据提交方式重构 (admin-web)
+- 采购单ID类型修改 (finance-service)
+- 发票核销流程优化，添加采购单ID字段
+- 采购记录状态列表查询功能 (SAP)
+- 按采购类型查询采购记录
+- 无纸化服务中运维商合同查询修复
+- Guava缓存优化路灯电站数据查询性能
+- 电表状态数据显示修复
+- **关联需求**: TAEI-2805 (2025-12-31合同及基础政策升级)
+
+## 统众资方接入 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-finance-service` + `rrsjk-admin-web` (commits by tn_wangb, 2026-01-05~16)
+
+- 统众资方项目公司主数据管理
+- 统众资方发票模板菜单
+- 电站回购成本增加合作共建费
+- 请款申请预算体编码增加农村服务
+- 原材料回购成本价格计算更改
+- 租金支付批次标识处理
+- 租金支付传云报账是否直付字段更改
+- 影像推送更改
+- 退质保金备注修改
+- **关联需求**: 内部资方接入系列
+
+## 共建费模式 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` (commits by majinhu, 2025-12-29~2026-01-16, TAEI-2805/2814)
+
+- **联合建设费模式枚举** (`JointConstructionFeeModelEnum`): SUPPORT/NOT_SUPPORT
+- **共建专项合同类型**: `TP_PAYMENT_AGENCY` (合同类型值33)
+- 共建费主合同模板配置 (`jonitConstructionFeeMasterTemplate`)
+- 共建费主合同签署成功回调 (`gjfMasterStationSignSuccess`)
+- 合同模板区分: 主合同 vs 专项合同
+- 租金模式设置: `BaseLightStationMode.setRentalMode()` — 根据项目公司+共建费用模式确定租金模式
+- 施工审批通过添加电站逆变器绑定功能 (`/merchant/light/workOrder/auditOk.do`)
+- 4种模式统一重构合同记录创建逻辑
+- 共建费模式判断: 项目公司代码 → `LightCompanyInfo.jointConstructionFeeModel` → 是否创建共建专项合同
+- 电站新建时租金模式设置功能
+- 公司联合建设费模式支持判断
+- **关联需求**: TAEI-2805 (2025-12-31合同及基础政策升级), TAEI-2814 (微信小程序银行卡变更)
+
+## 绿证交易库存调整 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `cbs-web` (commits by yumiao/德, 2026-01-04~15, TAEI-2800)
+
+- 手动调整库存生成流水记录
+- 库存流水操作类型: `库存调整-覆盖`, `库存调整-删除`
+- 消息通知功能添加 (系统消息优先级字段映射)
+- 品牌名称更新: 日日顺 → 海尔
+- CBS通知面板功能
+- 品牌名/首页标题更新
+- **关联需求**: TAEI-2800 (绿证交易手动调整库存)

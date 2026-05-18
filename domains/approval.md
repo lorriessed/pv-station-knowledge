@@ -290,3 +290,134 @@
 - Hermes MEMORY.md，2026-05-09 迁移。
 - rrsjk-admin-web/nahui-pv.hds-h5 代码扫描 2026-05-10。
 - rrsjk-energystorage-service 代码扫描 2026-05-11。
+- 云效补漏第3期 (2025-12-29~2026-01-18) 代码扫描 2026-01-18。
+
+---
+
+## 审核派单系统 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` (commits by 解钦, 2026-01-06~17, TAEI-2815 二级商管理/TAEI-2808 建站变更)
+
+### 核心实体
+- `LightAuditDispatchLog` — 派单日志实体
+  - 审核类型枚举: `PLAN_AUDIT`(方案审核), `TECH_AUDIT`(技术审核), `BUSINESS_AUDIT`(商务审核)
+  - 派单类型枚举: `MANUAL`(人工派单), `AUTO`(自动派单)
+  - 任务类型枚举: `AUDIT_TASK`(审核任务)
+  - 处理标识枚举: `SELF_AUDIT`(主动审核), `SNAP_INVALID`(抢单作废), `RE_DISPATCH`(人工改派)
+- `LightTechAuditor` — 技术审核人员管理实体
+
+### 派单服务
+- `LightAuditDispatchLogService.dispatchOrder(DispatchOrderRequest)` — 派单入口
+- 时间范围验证: 审核人员需在有效时间范围内
+- 审核人员选择: 按审核类型查询有效审核人员
+- 等量分配: 按待办数量等量分配到审核人员
+- 重新派单功能: 支持人工改派
+
+### 审核人员管理
+- 光伏技术审核人员管理功能 (`LightTechAuditor` CRUD)
+- 审核后更新派单信息功能
+- 组件照片上传校验功能
+
+### 前端
+- `rrsjk-admin-web`: 技术审核人员管理页面 (解钦 2026-01-13~14)
+- **关联需求**: TAEI-2815 (二级商管理), TAEI-2808 (建站变更方案/房型增加处理结果跟踪)
+
+## 电站方案/完工撤回 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-merchant-web` + `rrsjk-admin-web` (commits by wangxiran, 2026-01-04~16, TAEI-2808)
+
+- 电站方案撤回功能 (`LightStationService.withdrawPlan()`)
+- 电站完工撤回功能 (`LightStationService.withdrawComplete()`)
+- 撤回操作中审核字段设置修复
+- 光伏申报记录详情查询功能
+- 方案审核报表开发
+- 电站审核报表开发
+- **前端**: `rrsjk-merchant-web` 添加撤回接口, `rrsjk-admin-web` 添加撤回按钮和报表
+- **关联需求**: TAEI-2808 (完工后变更电站方案/房型增加处理结果跟踪)
+
+## 安全节点照片组 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` (commits by wangxiran, 2026-01-11~16, TAEI-2808)
+
+- 完工/修改完工增加安全节点照片组
+- 商务审核增加照片状态
+- 技术审核增加照片状态
+- 审核页面照片展示优化
+- **关联需求**: TAEI-2808 (申请增加房产证明、荷载报告影像收集)
+
+## 房产证和荷载报告 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` (commits by 解钦, 2026-01-06~07, TAEI-2808)
+
+- 房产证和荷载报告图片功能
+- 电站变更实体添加房产证和荷载报告字段
+- 组件照片上传校验功能
+- 方案变更待办事项查询接口
+- 电站完工变更方案待办事项功能
+- **关联需求**: TAEI-2808 (完工后变更电站方案/房型增加处理结果跟踪 + 申请增加房产证明、荷载报告影像收集)
+
+## 零碳商户公告 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-merchant-web` + `rrsjk-admin-web` (commits by 代继宁, 2026-01-07~16, TAEI-2813)
+
+### 核心功能
+- `LightZeroMerchantNotice` — 商户公告实体
+- `LightZeroMerchantNoticeEvent` — 事件驱动公告发送
+- `LightZeroMerchantNoticeListener` — 监听器实现公告发送逻辑
+- 合同签署成功后自动触发商户公告发送
+- 商户公告列表分页查询 (支持时间范围筛选)
+- 商户公告审核功能 (待审核 → 审核通过/驳回)
+- 商户公告操作日志查询
+
+### 枚举
+- `LightZeroMerchantNoticeEnum` — 零碳商户通知枚举值
+- 招商银行租赁电站实体类 (`LightCmbLeaseStation`)
+
+### 前端
+- `rrsjk-admin-web`: 商户公告列表/添加/审核页面
+- `rrsjk-merchant-web`: 商户公告列表接口
+- **关联需求**: TAEI-2813 (微信小程序银行卡变更)
+
+## 逆变器序列号变更 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` + `rrsjk-light-operation-service` + `repairs` + `nahui-pv.merchant-micro.osp` (commits by sunzn/付凯善/马金虎, 2026-01-04~16, TAEI-2813)
+
+- 逆变器变更重复数据校验功能 (`LightInveterService`)
+- 逆变器铭牌OCR识别功能 (后端接口 + 前端支持)
+- 空逆变器SN号重复绑定问题修复
+- 逆变器解绑逻辑重构
+- 工单备件逆变器变更状态处理逻辑修复 (repairs)
+- 逆变器序列号字段支持 (数据库 + Mapper)
+- SN码OCR识别 (merchant-micro.osp 前端)
+- 变更备件登记支持SN码OCR识别
+- **关联需求**: TAEI-2813 (逆变器序列号变更逻辑优化)
+
+## 运维工单超期申诉优化 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-operation-service` + `rrsjk-hds-web` + `nahui-pv.hds-h5` + `nahui-pv.merchant-micro.osp` (commits by sunzn/李培龙, 2026-01-04~16, TAEI-2809)
+
+- 申诉功能时间限制校验 (测试环境移除, 生产环境激活)
+- 审核备注字段添加并优化超时逻辑
+- 申诉审核弹窗信息返现功能
+- 工单超期天数计算逻辑修复
+- 工单申诉导出功能 (含审核备注字段)
+- 扩展运维商提交申诉时的见证性资料附件类型
+- 运维商提交申诉判断条件暂时取消 (HDS页面)
+- **前端**: nahui-pv.hds-h5 (超期申诉页面), nahui-pv.merchant-micro.osp (申诉提交)
+- **关联需求**: TAEI-2809 (HDS/商户通/APP运维工单超期申诉优化)
+
+## 华融整村推进 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-light-service` (commits by yumiao, 2026-01-05~16, TAEI-2807)
+
+- 整村汇流模式支持 (`HrflcStationModel`)
+- 整村推进电站类型处理逻辑修复
+- 整村电站逆变器信息同步模块类型修正 (dev环境 P→N)
+- 整村推进电站限制检查移除
+- 项目同步中进件模式设置修复
+- 子服务商成员ID字段支持
+- 模块序列号权限控制功能
+- 方案审核列表查询功能
+- **关联需求**: TAEI-2807 (华融整村推进电站进件开发)
+
+## 日历工作日节假日 (代码明确证明, 2026-01-18 扫描补漏第3期)
+**来源**: `rrsjk-system-service` (commits by yumiao, 2026-01-13~16)
+
+- 日历表工作日节假日功能
+- 日历天服务引用配置
+- 短信发送服务签名配置
+- Guava依赖添加
+- **关联需求**: 基础服务升级
+

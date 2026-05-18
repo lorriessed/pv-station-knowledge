@@ -182,3 +182,44 @@
 |---|---|
 | ONLINE | 线上签署 (DCC 电子签章) |
 | OFFLINE | 线下签署 (纸质合同) |
+
+---
+
+## 补漏第3期新增枚举 (2026-01-18 扫描)
+
+### 审核类型枚举 (LightAuditDispatchLog.AuditTypeEnum)
+**来源**: `rrsjk-light-api/src/main/java/com/rrsjk/light/entity/dispatch/LightAuditDispatchLog.java` (解钦, 2026-01-14)
+| 枚举值 | 说明 |
+|---|---|
+| PLAN_AUDIT | 方案审核 |
+| TECH_AUDIT | 技术审核 |
+| BUSINESS_AUDIT | 商务审核 |
+
+### 派单类型枚举 (LightAuditDispatchLog.DispatchTypeEnum)
+**来源**: 同上
+| 枚举值 | 说明 |
+|---|---|
+| MANUAL | 人工派单 |
+| AUTO | 自动派单 |
+
+### 处理标识枚举 (LightAuditDispatchLog.OperateTypeEnum)
+**来源**: 同上
+| 枚举值 | 说明 |
+|---|---|
+| SELF_AUDIT | 主动审核 |
+| SNAP_INVALID | 抢单作废 |
+| RE_DISPATCH | 人工改派 |
+
+### 共建费模式枚举 (LightCompanyInfo.JointConstructionFeeModelEnum)
+**来源**: `rrsjk-light-service` (majinhu, 2025-12-29)
+| 枚举值 | 说明 |
+|---|---|
+| SUPPORT | 支持共建费模式 |
+| NOT_SUPPORT | 不支持共建费模式 |
+
+### 合同类型新增 (LightStationContractRecord.ContractTypeEnum)
+**来源**: 同上
+| 枚举值 | 说明 |
+|---|---|
+| TP_PAYMENT_AGENCY | 共建专项合同 (值=33) |
+
