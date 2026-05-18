@@ -1,0 +1,391 @@
+# 移动端应用架构
+
+最后更新: 2026-05-15
+
+## 1. Cordova H5 桥接应用体系
+
+### 1.1 定位
+
+海尔 H5 桥接应用是一套跨平台方案，通过 **Cordova WebView 容器** 承载 H5 业务页面，同时提供**原生能力插件**供 H5 页面调用（设备信息、相机、存储、网络请求、文件选择、电话等）。
+
+**来源**: `esp-mag-haier-android-main`, `esp-mag-haier-ios-main`, `esp-mag-haier-h5-portal` (代码明确证明, 2026-05-15)
+
+### 1.2 三端架构
+
+| 端 | 仓库 | 技术 | 包名 | 最近提交 |
+|---|---|---|---|---|
+| Android | esp-mag-haier-android-main | Java + Cordova + WebView | com.trade.center.main | 2026-05-12 朗新一期交付代码 |
+| iOS | esp-mag-haier-ios-main | Objective-C + Cordova + WKWebView | com.trade.mainapp | 2026-05-12 朗新交付源码一期 |
+| H5 Portal | esp-mag-haier-h5-portal | H5 (空壳) | - | 2026-05-12 朗新交付源码一期 |
+
+### 1.3 应用入口流程
+
+```
+启动 → SplashActivity → 登录 → MainActivity(WebView加载H5)
+```
+
+**Android**:
+- `SplashActivity` → 启动页
+- `LoginAct` → 登录页面 (用户名/密码)
+- `HomeAct` → 主页 (Cordova WebView)
+- `PrivacyWebAct` → 隐私协议 WebView
+
+### 1.4 后端 API 接口
+
+| 接口 | 用途 | 来源 |
+|---|---|---|
+| `/eunomia-server/pf_auth/restfulapi/authen/login` | 登录认证 | ApiConfig.java |
+| `/allinone-server/member/streamUpload/uploadSimpleFile` | 文件上传 | ApiConfig.java |
+| `/allinone-server/member/desk/getUserInfo` | 获取用户信息 | ApiConfig.java |
+
+**说明**: 这些接口指向 `eunomia-server` 和 `allinone-server`，属于海尔统一认证/会员体系，**不属于 PVS 光伏业务系统**。
+
+### 1.5 Cordova 插件体系 (Android)
+
+所有插件通过 `cordova.exec()` 从 H5 调用，Java 端继承 `CordovaPlugin` 实现：
+
+| 插件名 | Java 类 | 功能 |
+|---|---|---|
+| HaierDevice | DevicePlugin | 设备信息获取 |
+| HaierStorage | StoragePlugin | 本地存储 (SharedPreferences) |
+| HaierNetwork | NetworkPlugin | 网络状态检测 |
+| HaierHttp | HttpPlugin | HTTP 网络请求封装 |
+| HaierCamera | CameraPlugin | 拍照/相册选择 |
+| HaierFilePicker | FilePickerPlugin | 文件选择器 |
+| HaierPhone | DockPhonePlugin | 拨打电话 |
+| HaierNativeServer | NativeServerPlugin | 原生服务调用 |
+
+### 1.6 Cordova 插件体系 (iOS)
+
+与 Android 对称的 iOS 插件实现：
+
+| 插件名 | iOS 类 | 功能 |
+|---|---|---|
+| HaierDevice | HaierDevicePlugin | 设备信息 |
+| HaierStorage | HaierStoragePlugin | 本地存储 |
+| HaierNetwork | HaierNetworkPlugin | 网络状态 |
+| HaierHttp | HaierHttpPlugin | HTTP 请求 |
+| HaierCamera | HaierCameraPlugin | 相机/相册 |
+| HaierPhone | HaierPhonePlugin | 电话 |
+| HaierFilePicker | HaierFilePickerPlugin | 文件选择 |
+| HaierNativeServer | HaierNativeServerPlugin | 原生服务 |
+
+### 1.7 网络层封装 (Android)
+
+**来源**: `esp-mag-haier-android-main/libNetwork/src/main/java/.../HttpRequest.java` (代码明确证明)
+
+- **技术栈**: OkHttp + RxJava3
+- **支持请求方式**: GET, POST (JSON/Form), PUT, DELETE
+- **调用方式**: 回调方式 (HttpCallback) + RxJava Observable
+- **默认服务器**: `http://192.168.1.102:8080/` (开发环境)
+- **基础响应**: `BaseDO` (returnCode, returnMsg)
+
+### 1.8 安全配置
+
+| 配置项 | 值 | 说明 |
+|---|---|---|
+| 明文传输 | 允许 (`cleartextTrafficPermitted=true`) | 开发/内网环境 |
+| H5 白名单 | `*` (全开放) | 允许加载任意 H5 页面 |
+| FileProvider | `${applicationId}.fileprovider` | 相机拍照文件共享 |
+| 存储权限 | READ_EXTERNAL_STORAGE (maxSdkVersion=32) | Android 13 以下 |
+| 媒体权限 | READ_MEDIA_IMAGES/VIDEO/AUDIO | Android 13+ |
+
+### 1.9 H5 入口配置
+
+```xml
+<!-- config.xml -->
+<content src="index.html" />
+<!-- 开发环境 H5 地址 -->
+<allow-navigation href="http://10.105.165.237:8081/*" />
+<allow-navigation href="http://10.105.165.237:8080/*" />
+<allow-navigation href="http://192.168.31.184:8080/*" />
+<allow-navigation href="*" />
+```
+
+## 2. Flutter 移动应用体系
+
+### 2.1 纳光宝 APP (nahuipv_business_flutter)
+
+**来源**: `nahuipv_business_flutter` (代码明确证明, 2026-05-15)
+
+- **应用名**: 纳光宝 (光伏终端用户 APP)
+- **版本**: 1.1.0+202****0401
+- **技术栈**: Flutter + Riverpod (状态管理) + Dio (网络) + Retrofit (API) + Fluro (路由)
+- **SDK 版本**: Dart >=3.0.1 <4.0.0
+
+#### 2.1.1 核心依赖
+
+| 依赖 | 版本 | 用途 |
+|---|---|---|
+| flutter_riverpod | ^2.3.6 | 状态管理 |
+| dio | ^5.2.0 | HTTP 客户端 |
+| retrofit | ^4.0.1 | REST API 声明式调用 |
+| fluro | ^2.0.5 | 路由管理 |
+| flutter_inappwebview | ^6.0.0 | WebView 容器 |
+| image_picker | ^0.8.7+5 | 图片选择 |
+| cached_network_image | ^3.2.3 | 图片缓存 |
+| shared_preferences | ^2.1.1 | 本地存储 |
+
+#### 2.1.2 模块化依赖 (Git 子仓库)
+
+| 模块 | Git URL | 版本 |
+|---|---|---|
+| nhpv_common_business | mobile/business/packages/nhpv_common_business.git | >=0.0.3 |
+| nhpv_usercenter_business | mobile/business/packages/nhpv_usercenter_business.git | >=0.0.4 |
+| log_report_plugin | mobile/common/log_report_plugin.git | >=0.0.2 |
+
+#### 2.1.3 历史业务变更
+
+| 日期 | 变更内容 | 提交信息 |
+|---|---|---|
+| 2025-03-05 | Android 14 版本更新兼容 | fix：版本更新兼容android14 |
+| 2025-03-04 | 图片防盗链设置 | feat: 图片防盗链设置/设置2 |
+| 2025-02-24 | VPP 电站列表接口修改 | chore：修改vpp电站列表接口 |
+| 2025-01-20 | 个人中心迁移至 usercenter 库 | refactor: 个人中心相关功能迁移 |
+
+### 2.2 通用业务库 (nhpv_common_business)
+
+**来源**: `nhpv_common_business` (代码明确证明, 2026-05-15)
+
+- **定位**: Flutter 通用业务组件库，被纳光宝等多端复用
+- **版本**: 0.0.3
+- **功能**: 通用 UI 组件、网络请求封装、图片处理、版本更新
+
+#### 2.2.1 核心依赖
+
+| 依赖 | 版本 | 用途 |
+|---|---|---|
+| r_upgrade (自研) | git ref:main | 版本更新/APK 下载 |
+| flutter_inappwebview | ^6.0.0 | WebView 容器 |
+| retrofit | ^4.0.1 | REST API |
+| dio | ^5.2.0 | HTTP 客户端 |
+| permission_handler | ^9.2.0 | 权限管理 |
+| image_gallery_saver | ^2.0.3 | 图片保存到相册 |
+
+#### 2.2.2 历史业务变更
+
+| 日期 | 变更内容 | 提交信息 |
+|---|---|---|
+| 2025-03-05 | Android 14 版本更新兼容 | fix：版本更新兼容android14 |
+| 2025-02-24 | 修改测试环境域名 | chore: 修改测试环境域名 |
+| 2025-01-24 | 新增 APK 测试下载地址 | feat: 版本更新功能新增apk测试下载地址 |
+| 2025-01-21 | 个人中心迁移至 usercenter | refactor: 个人中心相关功能迁移至usercenter库 |
+| 2025-01-16 | 更换 APP 协议地址 | refactor：更换app相关协议地址 |
+| 2025-01-13 | 新增 VPP 账号类型 | feat：新增vpp账号类型 |
+| 2024-12-20 | WebView 改为 inappwebview | feat: webview容器改为inappwebview |
+
+### 2.3 登录业务模块 (nhpv_login_business)
+
+**来源**: `nhpv_login_business` (代码明确证明, 2026-05-16)
+
+- **定位**: Flutter 登录功能模块
+- **版本**: 0.0.5
+- **依赖**: `nhpv_common_business` (git ref: dev)
+- **最近提交**: 2025-02-08 (Merge branch 'dev')
+- **业务价值**: 低，仅为 Flutter package 包装层，实际登录逻辑在 nhpv_common_business 中
+- ⚠️ 仓库中无业务 Dart 源码，仅有 pubspec.yaml 和配置文件
+
+### 2.4 个人中心业务模块 (nhpv_usercenter_business)
+
+**来源**: `nhpv_usercenter_business` (代码明确证明, 2026-05-16)
+
+- **定位**: Flutter 个人中心功能模块
+- **版本**: 0.0.4
+- **依赖**: `nhpv_common_business` (git ref: main)
+- **最近提交**: 2025-03-04 (feat：账号类型默认vpp账号)
+- **关键业务变更**:
+  - 2025-02-17: 账号类型默认改为 VPP 账号
+  - 2025-01-24: 版本更新功能新增 APK 测试下载地址
+  - 2025-01-21: 个人中心相关功能从 common 库分离
+  - 2025-01-17: 修改注销须知内 App 名字
+  - 2025-01-16: 更换 App 相关协议地址
+  - 2025-01-15: 版本更新接口新增 appType 字段
+- ⚠️ 仓库中无业务 Dart 源码，仅有 pubspec.yaml 和配置文件，实际代码在 nhpv_common_business 中
+
+### 2.5 签名配置
+
+**来源**: `nahuipv_business_flutter/android/key.properties` (代码明确证明)
+
+```properties
+storePassword=123456
+keyPassword=123456
+keyAlias=business
+storeFile=key.jks
+```
+
+⚠️ **安全警告**: 签名密码明文存储在仓库中，存在安全风险。
+
+### 2.4 纳光宝与 VPP 后端的关系
+
+根据代码分析，纳光宝 APP 通过以下方式与 VPP 后端交互：
+
+| 前端功能 | 后端服务 | 数据来源 |
+|---|---|---|
+| 电站列表 | vpp-api-elecbusiness | 大屏/电站数据接口 |
+| 发电/储能/负载数据 | vpp-api-elecbusiness | 时序数据 |
+| 电站收入 | vpp-api-elecbusiness | 收入统计 |
+| VPP 账号管理 | vpp-api-system | 用户/租户管理 |
+| 绿证相关 | vpp-api-gect | 绿证交易 |
+| 绿电收益 | vpp-api-gpower | 绿电收益管理 |
+
+**来源推断**: 基于 API 路由对应关系推断
+
+## 2.5 微信小程序矩阵
+
+### 2.5.1 施工小程序 (nahui-pv.construction-mini)
+
+**来源**: `nahui-pv.construction-mini` (代码明确证明, 2026-05-18 全量通读)
+
+- **定位**: 施工/安装流程微信小程序
+- **技术栈**: 微信小程序 + Vant WeApp 组件库
+- **核心功能**:
+  - 相机拍照: 逆变器铭牌图拍摄 + 验真逻辑（隐藏验真逻辑、水印验真优化）
+  - 水印管理: 唯一码增加渠道标识、水印像素优化、方位节流效果
+  - 图片处理: 原图保存信息、相册预览模式、二维码大小调整
+- **关键 API**: `miniprogram/wxapi/main.js`, `miniprogram/wxapi/request.js`, `miniprogram/utils/_data.js`
+- **业务价值**: 中 — 施工环节影像采集，逆变器铭牌验真涉及数据真实性校验
+
+### 2.5.2 绿能小程序 (nahui-pv.greenenergy-mini)
+
+**来源**: `nahui-pv.greenenergy-mini` (代码明确证明, 2026-05-18 全量通读)
+
+- **定位**: 绿能业务微信小程序
+- **技术栈**: 微信小程序 + wxParse 富文本解析
+- **核心功能**:
+  - **银行卡变更管理**: 云管家光伏管理新增银行卡变更管理按钮、申请流程、变更记录列表（packageB/pages/bankChange/）
+  - ARMS 监控: 只允许生产环境执行 ARMS 监听
+  - 充值/水卡: packageC 包含充值、充值记录、水卡管理等功能
+- **关键页面路径**:
+  - `pages/bankCard/` — 银行卡管理
+  - `packageB/pages/bankChange/bankChangeList/` — 银行卡变更列表
+  - `packageB/pages/bankChange/bankChangeInfo/` — 银行卡变更详情
+  - `packageB/pages/changeRecord/` — 变更记录
+  - `packageD/pages/wineSale/bankCard/` — 酒类销售银行卡
+- **业务价值**: 中 — 银行卡变更直接影响结算流程
+
+### 2.5.3 EPCB 小程序 (nahui-pv.epcb-mini)
+
+**来源**: `nahui-pv.epcb-mini` (代码明确证明, 2026-05-18 全量通读)
+
+- **定位**: EPCB (工程总承包) 微信小程序
+- **技术栈**: 微信小程序 + Vant WeApp + ARMS 监控
+- **核心功能**:
+  - ARMS 监控接入: 系统评价入口、ARMS 环境配置（只允许生产环境）
+  - 登录校验: 去除登录校验（2026-01-28）
+- **业务价值**: 低 — 主要是监控和基础设施配置
+
+## 3. H5 Web 应用矩阵
+
+### 3.1 HDS 管理平台 (nahui-pv.hds-h5)
+
+**来源**: `nahui-pv.hds-h5` (代码明确证明, 2026-05-18 全量通读)
+
+- **定位**: 综合运维管理 H5 平台（含 OSP、EPC、光伏能源、运维、租金等模块）
+- **技术栈**: Vue 3 + Vue Router + Element Plus（推测）
+- **路由模块**:
+
+| 路由前缀 | 模块名称 | 核心功能 |
+|---|---|---|
+| `/osp` | OSP 运维服务商 | 运维商管理 |
+| `/epc` | EPC 工程管理 | 工程承包管理 |
+| `/pvEnergy` | 光伏能源管理 | 多资方电站管理（CMB/ACQ/KVA/CHD/ZY/GX/CQ_GDT 等）|
+| `/rent` | 支付租金管理 | 银联付款合计、结算明细、租金扣除 |
+| `/maintainance` | 运维管理 | 方案库、故障库、电站运维、工单管理、巡检管理 |
+| `/sparePartsManage` | 备件管理 | 备件库存、调拨 |
+| `/sparePartMonitor` | 备件监控 | 备件使用监控 |
+| `/sparePartsSettlement` | 备件结算 | 备件费用结算 |
+| `/dataBoard` | 数据大屏 | 数据可视化 |
+| `/baseData` | 基础数据 | 组织架构、属性配置、仓储管理 |
+| `/socialization` | 社会化 | 社会化功能 |
+| `/bidding` | 招投标 | 招投标管理 |
+| `/automaticDrawing` | 自动出图 | 自动图纸生成 |
+| `/workManage` | 工作管理 | 日常工作管理 |
+| `/processManage` | 流程管理 | 审批流程管理 |
+
+- **运维管理子模块** (`/maintainance`, 765 行路由配置):
+  - 方案库 (`solution/`) — 解决方案列表
+  - 故障库 (`faultCategory/`) — 故障分类及解决措施
+  - 电站运维 (`station/`) — 零碳家庭/零碳E家庭/光储业务等多类型电站运维
+  - 故障工单 (`faultWorkOrder/`) — 招银工单/中信工单/协鑫工单/工单审核/工单效率
+  - 巡检管理 (`inspect/`) — 巡检计划、执行、记录
+  - 运维配置 (`config/`) — 巡检/工单/报表/字典配置
+
+- **光伏能源多资方路由** (`/pvEnergy`):
+  - `/cmbEnergy` — 招银能源（电站列表、逆变器列表、收入明细、结算明细、保险）
+  - `/pvEnergy` — 户用光伏（合同列表、电站列表、审核列表、逆变器列表）
+  - `/acqEnergy` — 收购能源（电站列表、逆变器列表）
+  - `/kvaEnergy` — KVA（逆变器列表及详情）
+  - `/chdEnergy` — 华电能源（电站列表、逆变器列表）
+  - `/zyEnergy` — 中银能源
+  - `/gxEnergy` — 协鑫能源
+  - `/cqGdtEnergy` — 重庆国电投能源
+
+- **近期业务变更** (2026-04~05):
+  - 国电投(GDT)逆变器列表新增（与后端 rrsjk-hds-web `InverterController.java` CQ_GDT 查询链路对应）
+  - 电站租金查询详情: 兼容中文状态和类型、添加账单生成时间
+  - 新增电站数据变更过程信息查询接口
+  - 工商业项目运维商管理弹框更新
+  - 超期申诉功能优化 + 运维政策兑现功能优化
+  - 电费管理: 新增报表、估算电费修复、应收电量新增
+  - 交易账号: 中信一般户去除、优化建行基本户
+- **业务价值**: **高** — HDS 是运维商/分中心的核心管理平台
+
+### 3.2 商户微前端 OSP (nahui-pv.merchant-micro.osp)
+
+**来源**: `nahui-pv.merchant-micro.osp` (代码明确证明, 2026-05-18 全量通读)
+
+- **定位**: 商户端微前端 OSP 应用（基于 Qiankun 微前端架构）
+- **技术栈**: Vue 2 + Qiankun 微前端 + Vue Router
+- **微前端配置**: `base: /mch/{subName}` (微前端模式) 或 `/sub/{subName}` (独立模式)
+- **路由模块**:
+
+| 模块文件 | 模块名称 | 核心功能 |
+|---|---|---|
+| `osp.js` | OSP 运维管理 | 在线签约、备件保证金、服务商清欠、人员管理、上岗资格 |
+| `commercial.js` | 工商业管理 | 工商业项目相关 |
+| `ospSpare.js` | OSP 备件管理 | 订单执行、借货订单、服务调拨、服务商订单、呆滞备件、库存管理、备件结算 |
+| `ospSupplier.js` | OSP 供应商管理 | 供应商相关 |
+
+- **OSP 运维管理核心页面**:
+  - `ospReg` — 在线签约
+  - `depositList` — 备件保证金列表
+  - `bailPay` — 支付保证金
+  - `advanceClear` — 服务商清欠
+  - `personnelList` — 人员管理
+  - `jobQualification` — 上岗资格管理
+  - 权限码: `light_osp`, `light_osp_warranty`
+
+- **OSP 备件管理核心页面**:
+  - 订单管理: 订单执行视图、借货订单、服务调拨、服务商订单、呆滞备件
+  - 库存管理: 当前库存视图、库存调整、库存设置
+  - 备件结算: 备件费用结算
+  - 地址管理
+
+- **近期业务变更** (2026-04~05):
+  - 电站租金查询详情: 添加账单生成时间、更新状态反显
+  - 运维工单超期申诉: 新增判断逻辑 + 新增提示 + 恢复超期申诉条件 + 去除审核人脱敏
+  - 业主银行卡变更: 新增模块、状态变更、上传新银行卡号照片新增 OCR 识别、撤销展示条件
+  - 超期申诉功能优化 + 运维政策兑现功能优化
+  - 特殊费用列表: 添加导出、设置审核和脱敏
+  - 光e宝: 取消下载模板、新增截图示例模版
+- **业务价值**: **高** — 商户端核心运维/备件/结算管理平台
+
+## 4. 移动端应用与 PVS/VPP 业务的关系
+
+| 应用 | 面向用户 | 关联后端 | 业务域 |
+|---|---|---|---|
+| Cordova H5 桥接 App | 海尔内部 (运维/业务) | eunomia-server, allinone-server | 通用管理 |
+| 纳光宝 APP | 光伏终端用户 | VPP 后端服务 (elecbusiness, gect, gpower) | 电站运营/绿证/绿电 |
+| 施工小程序 | 施工/安装人员 | 待确认 (可能对接 rrsjk-light-service) | 施工/完工确认 |
+| 绿能小程序 | 绿能用户/云管家 | 待确认 | 绿能运营/银行卡变更 |
+| EPCB 小程序 | EPC 工程人员 | 待确认 | 工程承包 |
+| HDS 管理平台 | 运维商/分中心 | rrsjk-hds-web, rrsjk-light-operation-service | 运维/工单/租金/逆变器 |
+| 商户微前端 OSP | 商户/运维商 | rrsjk-merchant-service, rrsjk-light-operation-service | 运维/备件/结算 |
+| 绿能管理 Flutter | 绿能管理人员 | 待确认 | 绿能运营 |
+| 湖南智充 APP | 充电桩用户 | 待确认 | 充电桩运营 |
+
+## 4. 知识库更新记录
+
+| 日期 | 更新内容 | 来源 |
+|---|---|---|
+| 2026-05-15 | 创建: Cordova H5 桥接架构/Flutter 纳光宝 APP/插件体系 | 全量通读5个移动端仓库 |

@@ -1,0 +1,2214 @@
+[
+  {
+    "id": "47035b0b8e62431639e3ce6357",
+    "subject": "HDS-电费管理新增分中心/项目公司/资方维度的3个报表",
+    "description": "",
+    "gmtCreate": 1763351732000,
+    "gmtModified": 1764809680000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2694",
+    "statusStageId": "4",
+    "updateStatusAt": 1764809680000,
+    "idPath": "47035b0b8e62431639e3ce6357",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fab4f8f3180c360585",
+      "name": "孙志男"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      },
+      {
+        "id": "659f78fab4f8f3180c36057b",
+        "name": "李培龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d3fd0a5bf6511ded82b8c0cfab",
+    "subject": "【建站】合同 已生成租金账单的电站，CBS 合同管理菜单，点击重新签署合同需要沿用老租金政策",
+    "description": "",
+    "gmtCreate": 1763360710000,
+    "gmtModified": 1763524190000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2695",
+    "statusStageId": "4",
+    "updateStatusAt": 1763524190000,
+    "idPath": "d3fd0a5bf6511ded82b8c0cfab",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fcb4f8f3180c3605f6",
+        "name": "包鑫"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "982fa0222914c11908393173a5",
+    "subject": "【工商业】服务商申请配货  限制为电站方案审核通过后",
+    "description": "",
+    "gmtCreate": 1763363514000,
+    "gmtModified": 1763524183000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2696",
+    "statusStageId": "4",
+    "updateStatusAt": 1763524183000,
+    "idPath": "982fa0222914c11908393173a5",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78f9b4f8f3180c360559",
+        "name": "王斌"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6c7a02548094e25178aec76fe8",
+    "subject": "【工商业】替换开工资料为最新版本",
+    "description": "",
+    "gmtCreate": 1763446160000,
+    "gmtModified": 1763524174000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2697",
+    "statusStageId": "4",
+    "updateStatusAt": 1763524174000,
+    "idPath": "6c7a02548094e25178aec76fe8",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c36056e",
+        "name": "杨辉"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6a2e7116399bb87e7fa9e31c0d",
+    "subject": "对已完工电站运维商所属管理逻辑优化",
+    "description": "",
+    "gmtCreate": 1763456722000,
+    "gmtModified": 1764238013000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2698",
+    "statusStageId": "4",
+    "updateStatusAt": 1764238013000,
+    "idPath": "6a2e7116399bb87e7fa9e31c0d",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fab4f8f3180c360585",
+      "name": "孙志男"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "高",
+            "identifier": "78e298582a410cb0b889dd04b9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1e0b41d140b3e105e838ac8851",
+    "subject": "运维商入驻流程优化",
+    "description": "",
+    "gmtCreate": 1763456804000,
+    "gmtModified": 1764238015000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2699",
+    "statusStageId": "4",
+    "updateStatusAt": 1764238015000,
+    "idPath": "1e0b41d140b3e105e838ac8851",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fab4f8f3180c360585",
+      "name": "孙志男"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      },
+      {
+        "id": "659f78fab4f8f3180c36057b",
+        "name": "李培龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "高",
+            "identifier": "78e298582a410cb0b889dd04b9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5c782c783dad417d508588ead8",
+    "subject": "第三方社会化电站逆变器数据对接",
+    "description": "",
+    "gmtCreate": 1763457154000,
+    "gmtModified": 1776133776000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2700",
+    "statusStageId": "4",
+    "updateStatusAt": 1776133776000,
+    "idPath": "5c782c783dad417d508588ead8",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fdb4f8f3180c36061a",
+      "name": "于淼"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "2a4c99c492e08530133d5dc189",
+        "fieldName": "需求规模",
+        "values": [
+          {
+            "displayValue": "小",
+            "identifier": "小"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "高",
+            "identifier": "78e298582a410cb0b889dd04b9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "9debfe5a3375ed8e171afc01af",
+    "subject": "【银联】银联接口 -接口增加字段",
+    "description": "",
+    "gmtCreate": 1763465367000,
+    "gmtModified": 1764682957000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2702",
+    "statusStageId": "4",
+    "updateStatusAt": 1764682957000,
+    "idPath": "9debfe5a3375ed8e171afc01af",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fdb4f8f3180c36061a",
+        "name": "于淼"
+      },
+      {
+        "id": "67343854efe082117fd0b5e8",
+        "name": "商轶龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "390a91803f24c494a17287779d",
+    "subject": "【小程序端 】C端业务可以查询电费支付情况",
+    "description": "",
+    "gmtCreate": 1763537374000,
+    "gmtModified": 1766994347000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已取消",
+      "id": "141230",
+      "name": "已取消",
+      "nameEn": "Canceled"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2703",
+    "statusStageId": "5",
+    "updateStatusAt": 1766994347000,
+    "idPath": "390a91803f24c494a17287779d",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": null,
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3d0bddf095a9e70212acd96d8f",
+    "subject": "【建站】方案审核、完工分中心审核、技术审核、商务审核，记录审核人的 IP地址",
+    "description": "",
+    "gmtCreate": 1763627287000,
+    "gmtModified": 1765336301000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2704",
+    "statusStageId": "4",
+    "updateStatusAt": 1765336301000,
+    "idPath": "3d0bddf095a9e70212acd96d8f",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": [
+      {
+        "id": "519e188ad11c348a04c9c67b43",
+        "name": "建站",
+        "color": "#49AEAC"
+      }
+    ],
+    "participants": [
+      {
+        "id": "659f78fdb4f8f3180c36061a",
+        "name": "于淼"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "734e7644e193d86cdbf992515e",
+    "subject": "【AI】电站编码 业主姓名 地址 项目公司    AI业主姓名 AI地址  AI项目公司",
+    "description": "",
+    "gmtCreate": 1763627464000,
+    "gmtModified": 1765008848000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2705",
+    "statusStageId": "4",
+    "updateStatusAt": 1765008848000,
+    "idPath": "734e7644e193d86cdbf992515e",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fdb4f8f3180c36061a",
+        "name": "于淼"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bdfcdcf7e0e31098cdd9577a1e",
+    "subject": "【验收考核】白名单",
+    "description": "",
+    "gmtCreate": 1763706143000,
+    "gmtModified": 1765008856000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已取消",
+      "id": "141230",
+      "name": "已取消",
+      "nameEn": "Canceled"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2706",
+    "statusStageId": "5",
+    "updateStatusAt": 1765008856000,
+    "idPath": "bdfcdcf7e0e31098cdd9577a1e",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "67343854efe082117fd0b5e8",
+        "name": "商轶龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "f4b94f772e8d0cf7d43421c346",
+    "subject": "【GDE】泰语翻译",
+    "description": "",
+    "gmtCreate": 1763783481000,
+    "gmtModified": 1764572525000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2707",
+    "statusStageId": "4",
+    "updateStatusAt": 1764572525000,
+    "idPath": "f4b94f772e8d0cf7d43421c346",
+    "assignedTo": {
+      "id": "6771fa77ddf7780be068fd13",
+      "name": "徐晓凤"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "6771fa77ddf7780be068fd13",
+      "name": "徐晓凤"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "6771fa77ddf7780be068fd13",
+        "name": "徐晓凤"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "decffd5a94004d551c33d67eb4",
+    "subject": "【建站】房屋照片:增加字段“装修承诺函 ” ，非必填，华融通过B2传送",
+    "description": "",
+    "gmtCreate": 1764037930000,
+    "gmtModified": 1765114981000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2708",
+    "statusStageId": "4",
+    "updateStatusAt": 1765114981000,
+    "idPath": "decffd5a94004d551c33d67eb4",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": null,
+    "trackers": [
+      {
+        "id": "659f78fdb4f8f3180c36061a",
+        "name": "于淼"
+      }
+    ],
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "0f5c4921f83ac032e723146d7a",
+    "subject": "运维商政策兑现-(户用)模块 负向政策兑现功能优化",
+    "description": "",
+    "gmtCreate": 1764055860000,
+    "gmtModified": 1765849069000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2709",
+    "statusStageId": "4",
+    "updateStatusAt": 1765849065000,
+    "idPath": "0f5c4921f83ac032e723146d7a",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fab4f8f3180c360585",
+      "name": "孙志男"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      },
+      {
+        "id": "659f78fab4f8f3180c36057b",
+        "name": "李培龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "auto",
+        "fieldId": "sumActualLaborHour",
+        "fieldName": "实际工时汇总",
+        "values": [
+          {
+            "displayValue": "8",
+            "identifier": "8"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "float",
+        "fieldId": "101587",
+        "fieldName": "实际工时",
+        "values": [
+          {
+            "displayValue": "8",
+            "identifier": "8"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "高",
+            "identifier": "78e298582a410cb0b889dd04b9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "9cb7bcc5ee2a89bc4dbe9f2209",
+    "subject": "【共享支付】云报账接口增加字段：支付还是代付",
+    "description": "",
+    "gmtCreate": 1764071910000,
+    "gmtModified": 1766994325000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2710",
+    "statusStageId": "4",
+    "updateStatusAt": 1766994325000,
+    "idPath": "9cb7bcc5ee2a89bc4dbe9f2209",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": null,
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "date",
+        "fieldId": "80",
+        "fieldName": "计划完成时间",
+        "values": [
+          {
+            "displayValue": "2025-12-08 23:59:59",
+            "identifier": "2025-12-08 23:59:59"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d66f0e0d554979495590bd5b1d",
+    "subject": "【建站】越秀变更银行卡更换模版",
+    "description": "",
+    "gmtCreate": 1764145904000,
+    "gmtModified": 1765869888000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2711",
+    "statusStageId": "4",
+    "updateStatusAt": 1765869888000,
+    "idPath": "d66f0e0d554979495590bd5b1d",
+    "assignedTo": {
+      "id": "6771fa77ddf7780be068fd13",
+      "name": "徐晓凤"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "6771fa77ddf7780be068fd13",
+      "name": "徐晓凤"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "69362612a9444359a99a3759",
+        "name": "王金浩"
+      },
+      {
+        "id": "659f78fab4f8f3180c36057b",
+        "name": "李培龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "51de988d988323e5f4fc1eb8a6",
+    "subject": "工商业场景-踏勘设计物料选择增加模糊搜索功能",
+    "description": "",
+    "gmtCreate": 1764222315000,
+    "gmtModified": 1776133987000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2713",
+    "statusStageId": "4",
+    "updateStatusAt": 1776133987000,
+    "idPath": "51de988d988323e5f4fc1eb8a6",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fdb4f8f3180c36061a",
+      "name": "于淼"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c36056e",
+        "name": "杨辉"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "2a4c99c492e08530133d5dc189",
+        "fieldName": "需求规模",
+        "values": [
+          {
+            "displayValue": "小",
+            "identifier": "小"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "高",
+            "identifier": "78e298582a410cb0b889dd04b9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5032132259c100592afe3a2d3b",
+    "subject": "【共享支付】创建支付明细时取电站上的银行卡、联行号、支行名称",
+    "description": "",
+    "gmtCreate": 1764296817000,
+    "gmtModified": 1765008813000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2716",
+    "statusStageId": "4",
+    "updateStatusAt": 1765008813000,
+    "idPath": "5032132259c100592afe3a2d3b",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78f9b4f8f3180c360559",
+        "name": "王斌"
+      },
+      {
+        "id": "67343854efe082117fd0b5e8",
+        "name": "商轶龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cbc5b1fa926df17cb1a5c60132",
+    "subject": "【政策】三种考核组件库存、逆变器库存、整改时效机制白名单优化",
+    "description": "",
+    "gmtCreate": 1764297631000,
+    "gmtModified": 1776068745000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2717",
+    "statusStageId": "4",
+    "updateStatusAt": 1776068745000,
+    "idPath": "cbc5b1fa926df17cb1a5c60132",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "67343854efe082117fd0b5e8",
+      "name": "商轶龙"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "692d3c9946600729fed99470",
+        "name": "代继宁"
+      },
+      {
+        "id": "67343854efe082117fd0b5e8",
+        "name": "商轶龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "e06542f3ef29876ae3536bf8a7",
+    "subject": "【政策】合同时效系统修改",
+    "description": "",
+    "gmtCreate": 1764834561000,
+    "gmtModified": 1764839022000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2722",
+    "statusStageId": "4",
+    "updateStatusAt": 1764839022000,
+    "idPath": "e06542f3ef29876ae3536bf8a7",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "657bd28d53f8f8ef26ac16e0",
+        "name": "解钦"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "0fd1486aa7449f4b1dbcb4e7db",
+    "subject": "【政策】并网时效每日生成",
+    "description": "",
+    "gmtCreate": 1764835214000,
+    "gmtModified": 1765795538000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2723",
+    "statusStageId": "4",
+    "updateStatusAt": 1765795538000,
+    "idPath": "0fd1486aa7449f4b1dbcb4e7db",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "67343854efe082117fd0b5e8",
+        "name": "商轶龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "163807b1b50ab1e1ae8b54b842",
+    "subject": "【租金】商户通、小程序、APP端增加显示电站由共享支付的成功明细/ 支付失败记录",
+    "description": "",
+    "gmtCreate": 1764849342000,
+    "gmtModified": 1766994336000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2724",
+    "statusStageId": "4",
+    "updateStatusAt": 1766994336000,
+    "idPath": "163807b1b50ab1e1ae8b54b842",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "692d3c9946600729fed99470",
+        "name": "代继宁"
+      },
+      {
+        "id": "67343854efe082117fd0b5e8",
+        "name": "商轶龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "49f82e739eacf94f9e740ef5e6",
+    "subject": "【大屏】光伏资产管理大屏、 增加展示运维侧大屏展示、工商业大屏",
+    "description": "",
+    "gmtCreate": 1764849413000,
+    "gmtModified": 1767003419000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2725",
+    "statusStageId": "4",
+    "updateStatusAt": 1767003412000,
+    "idPath": "49f82e739eacf94f9e740ef5e6",
+    "assignedTo": {
+      "id": "6771fa77ddf7780be068fd13",
+      "name": "徐晓凤"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "6771fa77ddf7780be068fd13",
+      "name": "徐晓凤"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fcb4f8f3180c3605e9",
+        "name": "刘飞"
+      },
+      {
+        "id": "675bc856d497cd558d05e5d5",
+        "name": "张硕文"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7597c2e54e5ff10ec764e869f7",
+    "subject": "【AI】房产证AI提取",
+    "description": "",
+    "gmtCreate": 1764849507000,
+    "gmtModified": 1765336238000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已取消",
+      "id": "141230",
+      "name": "已取消",
+      "nameEn": "Canceled"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2726",
+    "statusStageId": "5",
+    "updateStatusAt": 1765336238000,
+    "idPath": "7597c2e54e5ff10ec764e869f7",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": null,
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cf23ee4b23816d7a7fd477f81f",
+    "subject": "【共享支付】退汇和退回处理",
+    "description": "",
+    "gmtCreate": 1764991142000,
+    "gmtModified": 1765795588000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2727",
+    "statusStageId": "4",
+    "updateStatusAt": 1765795548000,
+    "idPath": "cf23ee4b23816d7a7fd477f81f",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78f9b4f8f3180c360559",
+        "name": "王斌"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "9f4eba8879b7236449b434c5a3",
+    "subject": "【AI】AI识别房产证",
+    "description": "",
+    "gmtCreate": 1764991165000,
+    "gmtModified": 1778578137000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "开发中",
+      "id": "142838",
+      "name": "开发中",
+      "nameEn": "In Development"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2728",
+    "statusStageId": "11",
+    "updateStatusAt": 1778578137000,
+    "idPath": "9f4eba8879b7236449b434c5a3",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "6853c475dc197ec05c0aefef",
+        "name": "陈国栋"
+      },
+      {
+        "id": "67282f5ed229156c3e6ab1c3",
+        "name": "付凯善"
+      },
+      {
+        "id": "6729bfd1ab4680a503a9fde0",
+        "name": "马斌"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "date",
+        "fieldId": "80",
+        "fieldName": "计划完成时间",
+        "values": [
+          {
+            "displayValue": "2026-05-19 23:59:59",
+            "identifier": "2026-05-19 23:59:59"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "2a4c99c492e08530133d5dc189",
+        "fieldName": "需求规模",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "中"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "96f8b67cd43a0d4d36ac975927",
+    "subject": "运维商政策兑现-(户用)模块 负向政策兑现功能优化",
+    "description": "",
+    "gmtCreate": 1765004260000,
+    "gmtModified": 1767060243000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2729",
+    "statusStageId": "4",
+    "updateStatusAt": 1765849083000,
+    "idPath": "96f8b67cd43a0d4d36ac975927",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fab4f8f3180c36057b",
+      "name": "李培龙"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      },
+      {
+        "id": "659f78fab4f8f3180c36057b",
+        "name": "李培龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4118d0d0912c3edfc8a0273fbd",
+    "subject": "商户通及HDS系统 - 运维商特殊费用模块功能优化",
+    "description": "",
+    "gmtCreate": 1765004397000,
+    "gmtModified": 1765849035000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2730",
+    "statusStageId": "4",
+    "updateStatusAt": 1765849026000,
+    "idPath": "4118d0d0912c3edfc8a0273fbd",
+    "assignedTo": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "creator": {
+      "id": "659f78fbb4f8f3180c3605b5",
+      "name": "高媛"
+    },
+    "modifier": {
+      "id": "659f78fab4f8f3180c360585",
+      "name": "孙志男"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "659f78fab4f8f3180c360585",
+        "name": "孙志男"
+      },
+      {
+        "id": "659e0c249736f3ea5b130f12",
+        "name": "薛荣基"
+      },
+      {
+        "id": "659f78fab4f8f3180c36057b",
+        "name": "李培龙"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "auto",
+        "fieldId": "sumActualLaborHour",
+        "fieldName": "实际工时汇总",
+        "values": [
+          {
+            "displayValue": "8",
+            "identifier": "8"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "float",
+        "fieldId": "101587",
+        "fieldName": "实际工时",
+        "values": [
+          {
+            "displayValue": "8",
+            "identifier": "8"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "28ce446bb1bcd27a0cc2bba6b4",
+    "subject": "【越秀】对接“农户固定收益异常支付信息查询”",
+    "description": "",
+    "gmtCreate": 1765005285000,
+    "gmtModified": 1776134157000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已完成",
+      "id": "100014",
+      "name": "已完成",
+      "nameEn": "Done"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2731",
+    "statusStageId": "4",
+    "updateStatusAt": 1776134157000,
+    "idPath": "28ce446bb1bcd27a0cc2bba6b4",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "659f78fdb4f8f3180c36061a",
+      "name": "于淼"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": null,
+    "participants": [
+      {
+        "id": "657bd28d53f8f8ef26ac16e0",
+        "name": "解钦"
+      }
+    ],
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "date",
+        "fieldId": "80",
+        "fieldName": "计划完成时间",
+        "values": [
+          {
+            "displayValue": "2025-12-19 23:59:59",
+            "identifier": "2025-12-19 23:59:59"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "2a4c99c492e08530133d5dc189",
+        "fieldName": "需求规模",
+        "values": [
+          {
+            "displayValue": "小",
+            "identifier": "小"
+          }
+        ]
+      },
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b072db1921e83be64fa0aa119f",
+    "subject": "【新商政策】升级",
+    "description": "",
+    "gmtCreate": 1765008775000,
+    "gmtModified": 1765337513000,
+    "workitemType": {
+      "id": "9uy29901re573f561d69jn40",
+      "name": "产品类需求"
+    },
+    "status": {
+      "displayName": "已取消",
+      "id": "141230",
+      "name": "已取消",
+      "nameEn": "Canceled"
+    },
+    "formatType": null,
+    "categoryId": "Req",
+    "logicalStatus": "NORMAL",
+    "parentId": "EMPTY_VALUE",
+    "serialNumber": "TAEI-2732",
+    "statusStageId": "5",
+    "updateStatusAt": 1765337513000,
+    "idPath": "b072db1921e83be64fa0aa119f",
+    "assignedTo": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "creator": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "modifier": {
+      "id": "65fac6b34e877bb17c2ca8cd",
+      "name": "杨越越"
+    },
+    "verifier": null,
+    "space": {
+      "id": "b3d85a1ebc1388a6445bbfc329",
+      "name": "光伏链群敏捷研发"
+    },
+    "sprint": null,
+    "labels": [
+      {
+        "id": "8e4ac81f09a3f2144997700987",
+        "name": "光伏政策及结算",
+        "color": "#51B023"
+      }
+    ],
+    "participants": null,
+    "trackers": null,
+    "versions": null,
+    "customFieldValues": [
+      {
+        "fieldFormat": "list",
+        "fieldId": "priority",
+        "fieldName": "优先级",
+        "values": [
+          {
+            "displayValue": "中",
+            "identifier": "66e78e21fe1b1c631e1baa5802"
+          }
+        ]
+      }
+    ]
+  }
+]
