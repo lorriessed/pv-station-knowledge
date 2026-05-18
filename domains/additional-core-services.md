@@ -705,3 +705,30 @@ Dubbo 应用名：`rrsjk-merchant-service`
 | **工作流** | repairs 集成 Flowable 工作流引擎 |
 | **Dubbo 分组** | repairs 使用 `hds`、`mobile` 分组提供多版本服务 |
 | **主要数据库** | MySQL（通过 JDBC 数据源配置） |
+
+---
+
+## CBS招投标管理审核模块 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → `TenderManagmentAudit.java`, `TenderManagmentAuditDto.java`, `TenderManagmentAuditServiceImpl.java`, `tenderManagmentAudit.xml` (commits f2eabc25, cb11fc99, laowang, 2026-05-15~18)
+**需求**: TAEI-3102 【户用光伏】CBS招投标流程
+
+- **Entity**: `TenderManagmentAudit` — 455行实体类 (注意拼写是 managment 而非 management)
+- **DTO**: `TenderManagmentAuditDto` — 490行数据传输对象
+- **Service**: `TenderManagmentAuditService` + `TenderManagmentAuditServiceImpl`
+- **DAO**: `TenderManagmentAuditDao` — 67行，完整CRUD
+- **Mapper**: `tenderManagmentAudit.xml` — 283行SQL映射
+- **推断表**: `tender_managment_audit`
+- **Git Author**: `laowang` (1162359451@qq.com) — 新发现，映射表中未记录
+- **业务域**: CBS (招投标管理) — 新增模块
+
+---
+
+## 广发(GF)业务扩展 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → gf 包下多个文件 (commits 95e6085b, 78c868d4, 9ef2445c, e21d8269, 7a3fbe26, majinhu, 2026-05-12~18)
+
+- **并网保险**: `GfMergeGridInputPieceRequest` +91行，`GfMergeGridInputPieceProcess` 新增投保方/被保方字段
+- **CBS对接**: 广发电站并网查询 (`mergeStatus` 修复字段类型)
+- **购售电合同**: `updateGfBusinessOpportunityInputPieceResult` 业主信息修改更正结果查询
+- **技术审核**: 状态检查逻辑更新 (`refactor(gf)`)
+- **状态拦截**: 完工进件、并网进件拦截退回驳回状态
+

@@ -254,3 +254,43 @@ stationParam.put("spMemberId", spMemberId);
 **影响范围**: `GET /light/lightSapPurchaseRecord/list.do` 和导出接口，所有涉及电站多维度条件筛选的对账单查询。
 
 **同时变更**: 移除未使用的 `org.apache.curator.shaded.com.google.common.collect.ImmutableMap` import。
+
+---
+
+## 自持电站损益报表 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → `CmOwnerStationReportServiceImpl.java`, `CmOwnerStationReportDao.java` (commits dd0926551c, b13ce495, c9616c63, 0a42ed04, tn_wangb, 2026-05-12~18)
+**需求**: TAEI-3100 【报表】自持电站损益报表
+
+- **Service 层**: `CmOwnerStationReportServiceImpl` — 报表查询与生成逻辑
+- **DAO**: `CmOwnerStationReportDao` — findBy, getById, batchInsert, findReportBy
+- **Entity**: `CmOwnerStationReport` — 报表数据实体
+- **Entity**: `CmOwnerStationReportThirdLog` — 第三方推送日志
+- **Service**: `CmOwnerStationWhiteListService` — 白名单控制 (注入 CmOwnerStationReportDao 和 CmOwnerStationReportService)
+- **业务逻辑**: 
+  - 发电来源字段非必填，兼容1PG0公司导入
+  - 高压电费查询逻辑特殊处理
+  - 二期需求扩展字段和查询条件
+- **推断表**: `cm_owner_station_report`, `cm_owner_station_report_third_log`, `cm_owner_station_white_list`
+
+---
+
+## 金蝶记账失败状态处理 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → `LightProjectElectricOrderServiceImpl.java`, `LightProjectElectricOrder.java` (commits 92fcbf81, 85bbef82, mabin, 2026-05-14~15)
+
+- 新增 `JINDIE_FAIL` 枚举值 — 标识金蝶记账失败状态
+- 股转公司5月份历史已收款收入数据重传逻辑 (282行新增)
+- 金蝶返回凭证为空时正确设置失败状态和原因
+- 发票冲销失败原因保存优化 (`LightProjectElectricInvoiceReverseRecordServiceImpl`)
+- FAP查询流程优化，移除过时代码
+
+---
+
+## FAP凭证补偿机制 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → `LightFapRecordServiceImpl.java`, `LightFapRecord.java` (commits 34fc750e, 597db042, 代继宁, 2026-05-18)
+
+- `LightFapRecord` 新增 compensationStatus 字段 (54行)
+- 补偿状态枚举: PENDING(待确认), CONFIRMED(已确认), COMPENSATED(已补偿), PENDING_MANUAL(待人工确认)
+- 支持业务类型: 物料回购补偿、站点回购补偿、服务押金补偿
+- FAP记账仅对转账类型订单执行，避免非转账订单误记账
+- `LightSpOrderItemDao` 新增按订单项目编号查询方法
+- `LightFapRecordService.compensationVoucherJob()` — 补偿任务接口

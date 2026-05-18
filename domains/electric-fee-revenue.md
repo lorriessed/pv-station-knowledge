@@ -164,3 +164,20 @@ rrsjk-light-service (Dubbo Service)
 - 增加导出限制（@LimitationExport）
 - 线程池优化（16 线程，每页 1000 条，CSV 最大 50 万行）
 - 保留原有 light-service 用于其他 CRUD 操作
+
+---
+
+### 电费收益导入月份区间校验优化 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-admin-web` → `LightProjectElectricOrderController.java` (commit d9158c52, 龙龙, 2026-05-18)
+**需求**: TAEI-3079 【电费】电费收益相关优化
+
+- **重构**: 移除控制器中导入数据月份重复校验逻辑，改用数据库批量查询验证
+- **新增**: `listByElecNoAndMonthRange()` 方法支持月份区间数据查询
+- **废弃**: 旧的按月份查询方法标记为 `@Deprecated`，统一使用区间查询
+- **优化**: 
+  - 工商业电站ID查询逻辑简化
+  - 临时数据查询方法从单月改为区间查询
+  - 多个业务流程中的查询方法调用适配
+  - 服务层参数格式化和注释文档更新
+- **性能提升**: 从N次单月查询 → 1次批量区间查询
+

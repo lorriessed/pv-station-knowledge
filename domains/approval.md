@@ -273,6 +273,19 @@
 - 电站迁移审核中各审核角色的权限模型。
 - 资方主数据审核流程的具体审核节点。
 
+---
+
+## 完工前变更方案审批流变更 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-admin-web` → `planChangeList.ftl` (commit 84e2b58, tn_wangb, 2026-05-14)
+**来源(后端)**: `rrsjk-light-service` → `LightStationPlanChangeServiceImpl.java`, `LightStationPlanChange.xml`, `LightStationPlanChangeAuditLog.xml`
+**需求**: TAEI-3083 【建站】完工前变更方案审批流变更
+
+- **新增状态**: `NO_NEED_AUDIT` (无需审核) — 第六种审批状态
+- **原有状态**: CHECK_PASS(验收通过), CHECK_REJECT(验收驳回), CHANGE_FINISH(变更完成), DISABLE(删除), ENABLE(审核通过)
+- **相关表**: `light_station_plan_change` (主表), `light_station_plan_change_audit_log` (审批日志), `light_station_plan_change_detail` (变更明细), `light_station_epc_plan_change` (EPC变更), `light_station_epc_plan_change_log` (EPC变更日志)
+- **推断**: 新增"无需审核"状态简化了特定场景下的审批流程，跳过审核环节直接进入变更完成
+
+
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
 - rrsjk-admin-web/nahui-pv.hds-h5 代码扫描 2026-05-10。

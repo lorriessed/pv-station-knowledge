@@ -64,6 +64,53 @@
 - 越秀、中核、华融等资方特殊政策规则。
 - 年度规模阶梯政策的暂估→兑现具体核算逻辑和 SAP 记账规则。
 
+---
+
+## 风电产值法兼容1.0 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → `CmLightProjectIncomePolicyServiceImpl.java`, `CmLightProject.java`, `CmNode.java` (commit 704eff2a, 解钦, 2026-05-18)
+**需求**: TAEI-3107 【风电】风电产值法兼容1.0
+
+- **新增业务域**: 风电(wind electric) — 首次接入工商业政策体系
+- **Entity 变更**:
+  - `CmLightProject` +30行风电相关字段
+  - `CmLightProjectIncomePolicy` +64行风电政策字段
+  - `CmLightProjectIncomePolicyItem` +12行
+  - `CmNode` +69行节点管理扩展
+- **Service 重构**: `CmLightProjectIncomePolicyServiceImpl` 大规模重构 (+206/-61行)
+- **测试**: 新增 `CmWindPowerIntegrationTest` (301行) — 完整测试覆盖
+- **Mapper**: CmLightProjectIncomePolicy.xml +36, CmLightProjectIncomePolicyItem.xml +34, CmNode.xml +16
+- **前端**: admin-web 新增"工商业收入政策配置"新增按钮
+- **推断**: 兼容1.0模式意味着支持旧版风电项目数据迁移
+
+---
+
+## 电站收入限制策略重构 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → 8种资方模式的 ServiceImpl (commits e4982fee, 04049063, 解钦, 2026-05-12~14)
+
+- **设计模式**: 策略接口 + 工厂类扩展
+- **覆盖8种资方模式**:
+  - HuaRongTradeIncomeSettle (华融)
+  - LightFundSettle (基金)
+  - LightHdIncome (户电)
+  - LightStationYuexiuSettle (越秀)
+  - LightZhSettle (ZH)
+  - ZhaoYinTradeIncomeSettle (招银)
+  - ZhongYinTradeIncomeSettle (中银)
+  - PuYinTradeIncomeSettle (浦银)
+- **重构内容**: 电站不同模式是否上收入的策略判断，每种模式新增 Dao + Service 方法
+- **校验增强**: 八种模式导入收入时校验电站状态
+
+---
+
+## A端政策结算逻辑调整 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` (commits d73aba1d, eb8bd383, c0935ef2, 解钦, 2026-05-14~18)
+**需求**: TAEI-3089 【结算】A端政策结算逻辑调整
+
+- **基金科目修复**: `FundStationIncomeHandleStrategy` 安装费科目从 A40 修正为 A41
+- **电站回退**: `ReverseUseStrategy` 兼容完工前领用不创建SO出库队列的情况
+- **越秀租金修复**: `LightYuexiuIncomeBillJobServiceImpl` 租金收益拉取+列表展示 (+110/-52行)
+
+
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
 - 旧 cron 输出 2026-05-09 提到政策获取由 elecContractId 转向 stationCode，并按屋顶类型取值，待从代码复核。

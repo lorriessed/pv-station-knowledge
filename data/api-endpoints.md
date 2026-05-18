@@ -282,4 +282,38 @@
    250|| `/api/v1/inverter/real-time-power` | POST | 逆变器发电功率查询 (已注释停用) | 7 |
    251|
    252|**服务配置**: 端口 8083, context-path `/openapi`, Dubbo + Zookeeper 注册中心, OAuth2 JWT 认证
+
+---
+
+## 新增 API (2026-05-19 云效驱动扫描发现)
+
+### 中银租后 API (rrsjk-light-openapi-service)
+**来源**: `ZhongYinBocLeaseService.java`, `ZhongYinBocLeaseServiceImpl.java` (commits 0227a9e, 2a6ba28, mabin, 2026-05-16)
+**需求**: TAEI-3084 【户用光伏】中银租后接口对接
+
+| 方法 | 说明 |
+|---|---|
+| `findZhongYinStationInfo()` | 中银电站维度查询信息接口 |
+| `findZhongYinTotalElec()` | 中银租后总发电量查询 |
+
+**Mapper**: `OdsLightStationElec.xml` — 新增 zhongYinElecTotalDtoMap 结果映射 + findZhongYinTotalElec 查询
+
+### 共享支付账单查询 API (rrsjk-light-operation-service)
+**来源**: `StationRentService` (commits e08e2d33, 30d657e1, sunzn, 2026-05-14)
+**需求**: TAEI-3086 HDS/商户通/APP添加共享支付账单查询
+
+| 方法 | 说明 |
+|---|---|
+| 共享支付查询 | 按租用月份查询共享支付账单记录 |
+| 共享账单记录查询 | 优化后的共享账单查询逻辑 |
+
+**推断**: Dubbo 接口，被 HDS(hds-web)、商户通(merchant-micro)、APP(pv.osp-uni) 三端调用
+
+### CBS招投标管理 API (rrsjk-light-service)
+**来源**: `TenderManagmentAuditService.java` (commits f2eabc25, cb11fc99, laowang, 2026-05-15~18)
+**需求**: TAEI-3102 【户用光伏】CBS招投标流程
+
+| 方法 | 说明 |
+|---|---|
+| CRUD 操作 | 招投标审核管理 — 完整增删改查 |
    253|
