@@ -14,7 +14,18 @@
 
 | 表名 | 说明 | 数据库 |
 |---|---|---|
-| `light_project_electric_order` | 电费收益主表（非户用） | rrsjk_light |
+| `light_project_electric_order` | 电费收益主表 | rrsjk_light |
+
+**注意：此表实际数据构成（2026-05-18 数据库实测 135万条）**：
+| project_type | 含义 | 占比 |
+|---|---|---|
+| YL（银联模式/公司备案） | 电站可能建在个人屋顶，但由公司统一备案结算，电网打款到项目公司账户 | ~99.3% |
+| PUB_BUILD（公共租赁） | 公司投资的公共建筑项目 | ~0.6% |
+| MIX（混合模式） | 多种电站共用一个发电户号 | 极少 |
+| WHOLE_VILLAGE（整村推进） | 整村推进项目 | 极少 |
+| CM（工商业） | 纯工商业项目 | 仅54条，几乎可以忽略 |
+
+**旧知识库标注"非户用"不够准确**——YL 模式本质是公司代持的户用电站，工商业反而是边角料。
 | `light_project_electric_order_owner` | 分账明细表 | rrsjk_light |
 | `light_project_electric_order_temporarily` | 临时表 | rrsjk_light |
 | `light_project_electric_order_change` | 变更记录表 | rrsjk_light |
