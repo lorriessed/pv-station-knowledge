@@ -370,6 +370,59 @@ storeFile=key.jks
   - 光e宝: 取消下载模板、新增截图示例模版
 - **业务价值**: **高** — 商户端核心运维/备件/结算管理平台
 
+### 3.3 零碳适家商户微前端 (nahui-pv.merchant-micro.zch)
+
+**来源**: `nahui-pv.merchant-micro.zch` (代码明确证明, 2026-05-19 全量通读)
+
+- **定位**: 零碳适家(ZCH)商户端微前端应用
+- **技术栈**: Vue.js (微前端架构)
+- **最近业务活动** (2026-04~05):
+  - **零碳适家建站**: 支持不同组件混用 (yuanruilin, 2026-04-28)
+  - **结算申请**: 调整结算申请页面选择明细接口请求参数 (yuanruilin, 2026-04-16)
+  - **关联发票页面**: 注释部分提示 (yuanruilin, 2026-04-27)
+  - **异常处理**: 优化异常处理逻辑并补充登录过期提示 (yuanruilin, 2026-04-21)
+  - **CSS构建**: 修改CSS提取配置 (开发/生产环境统一) (yuanruilin, 2026-04-21)
+  - **全局样式**: 调整全局样式导入方式 (yuanruilin, 2026-04-21)
+- **⚠️ 注意**: 脚本检测到 0 个业务文件（可能是文件扩展名过滤导致），但 commit message 表明有实际业务变更
+- **业务价值**: **中** — 零碳适家是独立于PVS核心光伏业务的子品牌，但结算申请等逻辑可能共享后端服务
+
+### 3.4 移动端 H5 门户 (nahui-pv.mobile-h5)
+
+**来源**: `nahui-pv.mobile-h5` (代码明确证明, 2026-05-19 全量通读)
+
+- **定位**: 光伏移动端 H5 页面集合
+- **近期业务活动** (2026-05):
+  - **数据字典优化**: 获取数据字典优化调整 (yanghui, 2026-05-15)
+  - **二维码识别**: 二维码识别优化 (yanghui, 2026-05-14)
+  - 持续活跃: 2026-05-19 仍有合并提交
+- **业务价值**: **高** — 移动端核心H5入口，日常活跃开发
+
+### 3.5 OSP 运维服务小程序 (nahui-pv.osp-mini)
+
+**来源**: `nahui-pv.osp-mini` (代码明确证明, 2026-05-19 全量通读)
+
+- **定位**: 运维服务(OSP)微信小程序
+- **技术栈**: 微信小程序
+- **最近业务活动**:
+  - **备件申请**: 增加备件规格展示 (徐勇, 2024-12-31)
+  - **备件查询**: 取消备件描述字段，改为备件名称 (徐勇, 2024-12-31)
+  - **逆变器详情**: 直流/交流展示更改 (李培龙, 2024-09-10)
+  - **故障字典**: 新增过程记录和故障字典优化 (李培龙, 2024-08-27)
+- **最后业务提交**: 2025-01-08 (合并)
+- **业务价值**: **中** — 运维服务商移动端入口，涉及备件申请和逆变器数据展示，但近半年无新业务提交
+
+### 3.6 绿能管理 Flutter 骨架 (nahuipv-greenergy-management-flutter)
+
+**来源**: `nahuipv-greenergy-management-flutter` (代码明确证明, 2026-05-19 全量通读)
+
+- **定位**: 分中心 APP (app_sub_center)
+- **技术栈**: Flutter
+- **⚠️ 骨架项目**: 仅包含 Android 项目骨架配置（AndroidManifest.xml、styles.xml、gradle.properties、pubspec.yaml），**无实际 Dart 业务代码**
+- **唯一提交**: `init project` (chufh, 2026-04-07)
+- **pubspec.yaml**: 应用名 `app_sub_center`，描述"分中心app"，仅依赖 flutter SDK 和 cupertino_icons
+- **业务价值**: **低** — 初始化的空壳项目，实际业务逻辑可能在后续迭代中通过依赖包引入或直接在 lib/ 目录下开发
+- **⚠️ 注意**: 与已通读的 `nahuipv_greenergy_flutter`（绿能管理Flutter）是**不同的仓库**，需后续关注此骨架项目是否开始填充业务代码
+
 ## 4. 移动端应用与 PVS/VPP 业务的关系
 
 | 应用 | 面向用户 | 关联后端 | 业务域 |
@@ -382,10 +435,16 @@ storeFile=key.jks
 | HDS 管理平台 | 运维商/分中心 | rrsjk-hds-web, rrsjk-light-operation-service | 运维/工单/租金/逆变器 |
 | 商户微前端 OSP | 商户/运维商 | rrsjk-merchant-service, rrsjk-light-operation-service | 运维/备件/结算 |
 | 绿能管理 Flutter | 绿能管理人员 | 待确认 | 绿能运营 |
+| nahuipv_greenergy_flutter (已通读) | 绿能管理用户 | VPP后端 | 绿能运营 |
+| 分中心APP (nahuipv-greenergy-management-flutter) | 待确认 | 待确认 | 待开发 (骨架项目) |
 | 湖南智充 APP | 充电桩用户 | 待确认 | 充电桩运营 |
+| 零碳适家商户端 (nahui-pv.merchant-micro.zch) | 零碳适家商户 | 待确认 | 零碳适家/结算 |
+| OSP运维小程序 (nahui-pv.osp-mini) | 运维服务人员 | 待确认 | 运维/备件 |
+| 移动端H5 (nahui-pv.mobile-h5) | 移动用户 | 待确认 | 综合 |
 
 ## 4. 知识库更新记录
 
 | 日期 | 更新内容 | 来源 |
 |---|---|---|
 | 2026-05-15 | 创建: Cordova H5 桥接架构/Flutter 纳光宝 APP/插件体系 | 全量通读5个移动端仓库 |
+| 2026-05-19 | 新增: merchant-micro.zch 零碳适家微前端/osp-mini 小程序/greenergy-management-flutter 骨架 | 全量通读第6轮 |

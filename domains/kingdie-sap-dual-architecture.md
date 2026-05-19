@@ -152,3 +152,4 @@ rrsjk-light-report-service（报表层）
 3. **rowId 生成**: `R` + ywms + 左补零18位bid，冲销前缀 `C_`
 4. **幂等**: `syncFinance` 先查已有记录（bid+ywms），有belnr直接返回
 5. **历史数据重传**：05-14有专门commit处理5月份历史已收款收入重传金蝶
+6. **并发控制**（2026-05-19新增）：`syncFinance()` 使用 Redis 分布式锁 `jinDie:sync:finance:{bid}:{ywms}`（1分钟超时），防止同一业务单据并发同步。锁冲突时标记 flag=E 直接返回

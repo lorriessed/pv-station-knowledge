@@ -119,18 +119,19 @@
    119|- 新增: `CHARGING_PILE`="充电桩"
    120|- 已有: `REVERSE_FLOW_METER`="防逆流电表"
    121|
-   122|### nahui-dicts-serve 枚举清理 (2026-04-30~2026-05-12)
-   123|- **来源**: `nahui-dicts-serve` (commits 17bac12/ca5e24e, 李宁, 2026-04-30~2026-05-12)
-   124|- 已删除的枚举字典文件:
-   125|  - `apv/finance/purchaseAuditStatus.js` (采购审核状态, 30行)
-   126|  - `apv/purchase/complainStatusList.js` (投诉状态, 30行)
-   127|  - `apv/purchase/warningStatusList.js` (预警状态, 42行)
-   128|  - `apv/station/contractStatus.js` (电站合同状态, 60行)
-   129|  - `apv/station/modeStatus.js` (电站模式状态, 48行)
-   130|  - `shop/store/saleChannelList.js` (销售渠道, 24行)
-   131|  - `zch/station/status.js` (零碳电站状态, 18行)
-   132|- 保留并修改: `purchaseAuditStatusList.js`, `purchaseTypeList.js`, `applyTypeList.js`, `customerPurchaseStatus.js`, `invoiceStatusList.js`, `invoiceTypeList.js`, `orderStatusList.js`, `payStatusList.js`, `payTypeList.js`
-   133|- **影响**: 这些枚举可能被迁移到其他数据管理方式（如后端字典接口），或相关功能已废弃
+### nahui-dicts-serve 枚举清理 (2026-04-30~2026-05-12)
+- **来源**: `nahui-dicts-serve` (commits 17bac12/ca5e24e, 李宁, 2026-04-30~2026-05-12)
+- 已删除的枚举字典文件:
+  - `apv/purchase/complainStatusList.js` (投诉状态, 30行)
+  - `apv/purchase/warningStatusList.js` (预警状态, 42行)
+  - `apv/station/contractStatus.js` (电站合同状态, 60行)
+  - `apv/station/modeStatus.js` (电站模式状态, 48行)
+  - `shop/store/saleChannelList.js` (销售渠道, 24行)
+  - `zch/station/status.js` (零碳电站状态, 18行)
+- **恢复文件** (2026-05-19, 袁睿林, commit 4e20c548):
+  - `apv/finance/purchaseAuditStatus.js` (30行, 请款申请审核状态) — **2026-05-12 删除后恢复**
+- 保留并修改: `purchaseAuditStatusList.js`, `purchaseTypeList.js` (APV+ZCH), `applyTypeList.js`, `customerPurchaseStatus.js`, `invoiceStatusList.js`, `invoiceTypeList.js`, `orderStatusList.js`, `payStatusList.js`, `payTypeList.js`
+- **影响**: 这些枚举可能被迁移到其他数据管理方式（如后端字典接口），或相关功能已废弃
    134|
    135|### 运维商授权区域状态 (rrsjk-light-service, TAEI-2698/2699, 2025-11-17~2025-12-07 代码明确证明)
    136|- **来源**: `LightOpAuthorityZone.java` → `StatusEnum`

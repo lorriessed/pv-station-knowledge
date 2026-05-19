@@ -364,6 +364,45 @@ stationParam.put("spMemberId", spMemberId);
 - 公司联合建设费模式支持判断
 - **关联需求**: TAEI-2805 (2025-12-31合同及基础政策升级), TAEI-2814 (微信小程序银行卡变更)
 
+## 自持电站报表 Controller 按年/月拆分 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-admin-web` → `CmOwnerStationReportController.java` (commits tn_wangb, 2026-05-15~19, commit af9a454c6)
+**需求**: TAEI-3100 【报表】自持电站损益报表
+
+- **API 拆分**: 原单一 `doList.do` 拆分为两个独立接口：
+  - `doYearList.do` — 按年度查询（参数 `year`，Service 调用 `findPageByYear()`）
+  - `doMonthList.do` — 按月度查询（参数 `yearMonth`，Service 调用 `findPageByMonth()`）
+- **导出拆分**: 原单一 `doExport.do` 拆分为：
+  - `doYearExport.do` — 年度导出，文件名含年份
+  - `doMonthExport.do` — 月度导出，文件名含月份
+- **列表页**: `list.html` 移除了 `queryCondition` 参数传递
+- **分页导出**: 月度导出使用每页 5000 条分页循环导出（EasyExcel），年度导出同理
+- **前端模板**: `cmOwnerStationReportList.ftl` 大规模更新（393行变更）
+
+---
+
+## 电费收益订单导入月份去重校验移除 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-admin-web` → `LightProjectElectricOrderController.java` (commit 龙龙 d9158c52f, 2026-05-18)
+**需求**: TAEI-3079 【电费】电费收益相关优化
+
+- **变更**: 导入数据时的"发电户号+月份"重复校验逻辑被**全部注释掉**
+- **原逻辑**: 遍历开始月份到结束月份之间的每个月，检查 `elecNo_monthKey` 是否在 `importMonthMap` 中已存在，防止同一户号同一月份在导入数据中重复
+- **影响**: 导入时不再阻止同一发电户号在同一月份出现多条记录，重复校验可能改由后端 Service 层或数据库唯一约束处理
+
+---
+
+## 金蝶财务同步并发控制 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-finance-service` → `JinDieSyncFinanceModel.java` (commit mabin 08f696150, 2026-05-19)
+
+- **分布式锁**: 使用 `StringRedisTemplate.opsForValue().setIfAbsent()` 实现 Redis 分布式锁
+- **锁 key**: `jinDie:sync:finance:{bid}:{ywms}`，锁粒度到业务ID+业务模式级别
+- **超时时间**: 1 分钟自动释放（防止死锁）
+- **锁冲突处理**: 获取锁失败时设置 flag="E"，message="金蝶财务同步正在执行中"，直接返回
+- **释放锁**: finally 块中调用 `stringRedisTemplate.delete(lockKey)` 确保释放
+- **幂等保护不变**: 锁检查在幂等检查之前，已有成功记录（有 belnr）的仍直接返回
+- **影响范围**: `syncFinance()` 方法，不影响 `reverseFinanceToSap()` 冲销方法
+
+---
+
 ## 绿证交易库存调整 (代码明确证明, 2026-01-18 扫描补漏第3期)
 **来源**: `cbs-web` (commits by yumiao/德, 2026-01-04~15, TAEI-2800)
 

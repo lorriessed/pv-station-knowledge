@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-05-18 23:01:15
+更新时间: 2026-05-19 23:01:24
 
 ## 仓库列表
 
@@ -16,8 +16,8 @@
 - job-service: /data/pvcode/job-service (无变更)
 - log_report_plugin: /data/pvcode/log_report_plugin (无变更)
 - nahui-dashboad-h5: /data/pvcode/nahui-dashboad-h5 (无变更)
-- nahui-dicts-serve: /data/pvcode/nahui-dicts-serve (无变更)
-- nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (无变更)
+- nahui-dicts-serve: /data/pvcode/nahui-dicts-serve (变更)
+- nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (变更)
 - nahui-pv.epcb-mini: /data/pvcode/nahui-pv.epcb-mini (无变更)
 - nahui-pv.greenenergy-mini: /data/pvcode/nahui-pv.greenenergy-mini (无变更)
 - nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (无变更)
@@ -31,13 +31,13 @@
 - nahuipv-hnzc-app-ios: /data/pvcode/nahuipv-hnzc-app-ios (无变更)
 - nahuipv-vpp-hnzl-rn: /data/pvcode/nahuipv-vpp-hnzl-rn (无变更)
 - nahuipv_business_flutter: /data/pvcode/nahuipv_business_flutter (无变更)
-- nahuipv_greenergy_flutter: /data/pvcode/nahuipv_greenergy_flutter (无变更)
+- nahuipv_greenergy_flutter: /data/pvcode/nahuipv_greenergy_flutter (变更)
 - nhpv_common: /data/pvcode/nhpv_common (无变更)
 - nhpv_common_business: /data/pvcode/nhpv_common_business (无变更)
 - nhpv_login_business: /data/pvcode/nhpv_login_business (无变更)
 - nhpv_usercenter: /data/pvcode/nhpv_usercenter (无变更)
 - nhpv_usercenter_business: /data/pvcode/nhpv_usercenter_business (无变更)
-- nhpv_watermark_camera: /data/pvcode/nhpv_watermark_camera (无变更)
+- nhpv_watermark_camera: /data/pvcode/nhpv_watermark_camera (变更)
 - order-service: /data/pvcode/order-service (无变更)
 - pv-certificates: /data/pvcode/pv-certificates (无变更)
 - pv.osp-uni: /data/pvcode/pv.osp-uni (无变更)
@@ -46,14 +46,14 @@
 - repairs: /data/pvcode/repairs (无变更)
 - rrs-dispenser-server: /data/pvcode/rrs-dispenser-server (无变更)
 - rrsjk-activity-service: /data/pvcode/rrsjk-activity-service (无变更)
-- rrsjk-admin-web: /data/pvcode/rrsjk-admin-web (无变更)
+- rrsjk-admin-web: /data/pvcode/rrsjk-admin-web (变更)
 - rrsjk-app-web: /data/pvcode/rrsjk-app-web (无变更)
 - rrsjk-appapi-web: /data/pvcode/rrsjk-appapi-web (无变更)
 - rrsjk-async-import-export: /data/pvcode/rrsjk-async-import-export (无变更)
 - rrsjk-cms-service: /data/pvcode/rrsjk-cms-service (无变更)
 - rrsjk-echannel-service: /data/pvcode/rrsjk-echannel-service (无变更)
 - rrsjk-energystorage-service: /data/pvcode/rrsjk-energystorage-service (无变更)
-- rrsjk-finance-service: /data/pvcode/rrsjk-finance-service (无变更)
+- rrsjk-finance-service: /data/pvcode/rrsjk-finance-service (变更)
 - rrsjk-flowable-service: /data/pvcode/rrsjk-flowable-service (无变更)
 - rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (无变更)
 - rrsjk-item-service: /data/pvcode/rrsjk-item-service (无变更)
@@ -102,5 +102,5 @@
 - vpp-template: /data/pvcode/vpp-template (无变更)
 - vpp-template-ui: /data/pvcode/vpp-template-ui (无变更)
 - vpp-thai-dashboard: /data/pvcode/vpp-thai-dashboard (无变更)
-- watermark-camera-android: /data/pvcode/watermark-camera-android (无变更)
-- watermark-camera-ios: /data/pvcode/watermark-camera-ios (无变更)
+- watermark-camera-android: /data/pvcode/watermark-camera-android (变更)
+- watermark-camera-ios: /data/pvcode/watermark-camera-ios (变更)

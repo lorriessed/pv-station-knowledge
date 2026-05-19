@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-05-18T23:01:15.386712",
+  "last_scan_at": "2026-05-19T23:01:24.883671",
   "repos": {
     "base-service": {
       "head": "9befec0aea815ef32d4cbc9e37e854bedf7023a7",
@@ -62,12 +62,12 @@
       "branch": "master"
     },
     "nahui-dicts-serve": {
-      "head": "17bac12479dc8df829eb8dfb41599b22ff6e5c77",
+      "head": "6bc47f3ce85c9c8e969523721b282eca5cc2f4e5",
       "path": "/data/pvcode/nahui-dicts-serve",
       "branch": "master"
     },
     "nahui-pv.construction-mini": {
-      "head": "efc147aca121e5978c82835080c32a059e7a77b9",
+      "head": "f8ee7f973a646a8aa333f4e1d3e50d59f851a836",
       "path": "/data/pvcode/nahui-pv.construction-mini",
       "branch": "master"
     },
@@ -102,7 +102,7 @@
       "branch": "master"
     },
     "nahui-pv.mobile-h5": {
-      "head": "4b8eb8964aaeda5595f03820921fa3e0880429ed",
+      "head": "1d805a4c04b75b06ee035db82b78d6f2e5cb8726",
       "path": "/data/pvcode/nahui-pv.mobile-h5",
       "branch": "master"
     },
@@ -137,7 +137,7 @@
       "branch": "main"
     },
     "nahuipv_greenergy_flutter": {
-      "head": "5fa2cc92df8c29f056b45db1c3e62a7595801c3b",
+      "head": "bb4e192bba0e1660e630db88dd9bdf2a8c16041c",
       "path": "/data/pvcode/nahuipv_greenergy_flutter",
       "branch": "master"
     },
@@ -167,7 +167,7 @@
       "branch": "main"
     },
     "nhpv_watermark_camera": {
-      "head": "567d9564c672c47d9afda2ac5fb3b56d048912dd",
+      "head": "1d055893f13130c66b1a0aceaf26a00f69c8d922",
       "path": "/data/pvcode/nhpv_watermark_camera",
       "branch": "master"
     },
@@ -212,7 +212,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "f69b4602fbe59f88ed3ed43d83e283984bf57c33",
+      "head": "af9a454c6c506b59d5da2309318a289438f07496",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -247,7 +247,7 @@
       "branch": "master"
     },
     "rrsjk-finance-service": {
-      "head": "adb79ad31b5d6b9394cc08823a8ff48c7b90eed0",
+      "head": "9a43f625717089b63fcc874bceb4bd5bd5305dbd",
       "path": "/data/pvcode/rrsjk-finance-service",
       "branch": "master"
     },
@@ -312,7 +312,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-h5": {
-      "head": "cc4dc1da0e2324f5adb8f628bffa92e1385906c5",
+      "head": "e646df57a0437d44592a1d15f409751d3fbaad25",
       "path": "/data/pvcode/rrsjk-merchant-h5",
       "branch": "master"
     },
@@ -492,12 +492,12 @@
       "branch": "master"
     },
     "watermark-camera-android": {
-      "head": "a1159727f7bb369f96cf6dce8ecf1a509e03208e",
+      "head": "ea30d7512b4a928520ad51c182b05fa3e9888389",
       "path": "/data/pvcode/watermark-camera-android",
       "branch": "master"
     },
     "watermark-camera-ios": {
-      "head": "03001b29afab546070168bc5bcda06afef51ad5a",
+      "head": "6537e6197c30b9525ff1b3d6dc6e5731f88345d7",
       "path": "/data/pvcode/watermark-camera-ios",
       "branch": "master"
     }

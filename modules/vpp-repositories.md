@@ -41,7 +41,7 @@
 | 仓库 | 路径 | 技术 | 状态 |
 |---|---|---|---|
 | nahuipv-vpp-hnzl-rn | /data/pvcode/nahuipv-vpp-hnzl-rn | React Native | 待通读 |
-| nahuipv-greenergy-management-flutter | /data/pvcode/nahuipv-greenergy-management-flutter | Flutter | 待通读 |
+| nahuipv-greenergy-management-flutter | /data/pvcode/nahuipv-greenergy-management-flutter | Flutter | 2026-05-19 全量通读 ✅ (分中心app骨架/无Dart业务代码) |
 | nahuipv_greenergy_flutter | /data/pvcode/nahuipv_greenergy_flutter | Flutter | 待通读 |
 | nahuipv-hnzc-app-android | /data/pvcode/nahuipv-hnzc-app-android | 原生 Android | 待通读 |
 | nahuipv-hnzc-app-ios | /data/pvcode/nahuipv-hnzc-app-ios | 原生 iOS | 待通读 |
@@ -59,5 +59,5 @@
 ## 统计
 
 - **总仓库数**: 29 (含移动端和H5桥接)
-- **已通读**: 22 (15个后端 + 2个数据平台 + 2个Flutter移动应用 + 3个Cordova桥接)
-- **待通读**: 7
+- **已通读**: 23 (15个后端 + 2个数据平台 + 2个Flutter移动应用 + 1个Flutter骨架 + 3个Cordova桥接)
+- **待通读**: 6
