@@ -413,3 +413,50 @@ stationParam.put("spMemberId", spMemberId);
 - CBS通知面板功能
 - 品牌名/首页标题更新
 - **关联需求**: TAEI-2800 (绿证交易手动调整库存)
+
+---
+
+## 华融B43模式上收入记质保金逻辑 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `HuaRongIncomeQualityGuaranteeServiceImpl.java` (commits: yumiao 23846b5, 08debe1e, 2026-05-18)
+**需求**: TAEI-3044 【户用光伏】华融上收入的时候再多1个账，业务模式B43，DMBTR=收入金额(应收账款)*质量保证金比例
+
+- **核心逻辑**: 华融业务模式 B43（融资租赁）在收入结算时，需要额外记一笔质量保证金账
+- **计算公式**: DMBTR = 收入金额(应收账款) × 质量保证金比例
+- **防御性校验修复**: `findLatestByStationCode(entity.getStationCode())` 改为 `findLatestByStationCode(existsHrflcywmlB43.getStationCode())` — 使用B43记录的电站码而非entity的，避免空指针
+- **涉及服务**: 
+  - `HuaRongIncomeQualityGuaranteeServiceImpl` — 华融收入质保金服务
+  - `HuaRongTradeIncomeSettleDao.findLatestByStationCode()` — 查询最新收入结算记录
+- **关联文件**: `rrsjk-admin-web` → 华融质保金页面权限点复用华融交易收入 (commit yumiao, 2026-05-18)
+
+---
+
+## 收入导入Assert懒加载优化 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → 多个SettleServiceImpl (commits: 解钦 880f3d1, 2c23886, 2026-05-19)
+**需求**: TAEI-3085 【收入】增加上收限制
+
+- **性能优化**: 将 `Assert.isTrue(condition, "error message")` 改为 `Assert.isTrue(condition, () -> "error message")`
+- **原因**: 原始写法在 Assert 之前就会拼接字符串（即使 condition 为 true），改为 lambda 懒加载后，仅在条件不满足时才拼接错误消息
+- **涉及8个服务类**:
+  - `HuaRongTradeIncomeSettleServiceImpl` (华融)
+  - `LightFundSettleServiceImpl` (基金)
+  - `LightHdIncomeServiceImpl` (弘德)
+  - `LightStationYuexiuSettleServiceImpl` (越秀)
+  - `LightZhSettleServiceImpl` (中核)
+  - `PuYinTradeIncomeSettleServiceImpl` (普银)
+  - `ZhaoYinTradeIncomeSettleServiceImpl` (招银)
+  - `ZhongYinTradeIncomeSettleServiceImpl` (中银)
+- **业务语义**: 收入导入时检查电站是否已在其他业务模式下存在收入记录，防止重复上收入
+- **冲突检测**: `incomeConflicts.containsKey(stationCode)` — 跨业务模式的收入冲突检测
+
+---
+
+## 电站回退领用兼容完工前领用 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `CompleteConfirmServiceImpl.java` (commits: 解钦 e5c0361, 2fbdd00, 789fff6, eb8bd38, 2026-05-15~19)
+**需求**: TAEI-3083 【建站】完工前变更方案审批流变更
+
+- **核心修复**: 电站回退重新领用时，需要兼容「完工前领用」的特殊场景
+- **完工前领用特点**: 不创建SO出库队列（Sales Order Outbound Queue），因此冲销时不需要处理出库队列
+- **基金收入科目修复**: A40 → A41，基金重上收入安装费科目调整
+- **状态流转优化**: `CompleteConfirmServiceImpl` 中审核逻辑增加 `stationCode` 字段设置 (`updateStation.setStationCode(dbStation.getStationCode())`)
+- **BusinessStatusMode 变更**: `offLineChoose` 参数从必传改为 `@Nullable`，支持线下验收结合技术商务并行
+- **影响链**: 电站回退 → 冲销领用事项 → 不创建SO出库队列（完工前场景） → 基金科目A40→A41

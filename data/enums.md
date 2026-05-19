@@ -224,3 +224,42 @@
 |---|---|
 | TP_PAYMENT_AGENCY | 共建专项合同 (值=33) |
 
+---
+
+## 计收方法枚举 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `CmLightProject.IncomeMethodEnum` (commit: 解钦 db25723, 2026-05-19)
+**需求**: TAEI-3107 【风电】风电产值法兼容1.0
+
+| 枚举值 | 说明 |
+|---|---|
+| FINAL_INSPECTION | 终验法（默认） |
+| OUTPUT_VALUE | 产值确认法 |
+
+> 原 `ConfirmMethodEnum` 重命名为 `IncomeMethodEnum`，数据库字段 `confirm_method` → `income_method`
+
+---
+
+## 招投标审核状态枚举 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `TenderManagmentAudit.java` (commit: laowang f2eabc2, 2026-05-15)
+**需求**: TAEI-3102 【户用光伏】CBS招投标流程
+
+| 枚举值 | 说明 | 适用范围 |
+|---|---|---|
+| AGREE | 通过 | 所有审核环节 |
+| DISAGREE | 驳回 | 所有审核环节 |
+| REJECT | 拒绝 | 仅首次附件审核 |
+
+---
+
+## 项目分类枚举 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `TenderManagmentAudit.projectCategory` (commit: laowang f2eabc2, 2026-05-15)
+**需求**: TAEI-3102 【户用光伏】CBS招投标流程
+
+| 枚举值 | 说明 |
+|---|---|
+| FD | 风电 |
+| GSY | 工商业 |
+| HYEPC | 户用EPC |
+| YW | 运维 |
+| LTSJ | 零碳世家 |
+

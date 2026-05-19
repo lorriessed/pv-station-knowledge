@@ -231,3 +231,15 @@
 - 这些字段与广发模式过程进件（施工验收 CP_GZFZCP_200020_3750~4290）的编码体系对应
 - **证据等级**: 代码明确证明
 
+---
+
+## 线下验收结合技术商务并行状态流转优化 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `BusinessStatusMode.java` (commit: yumiao f4c1f22, 2026-05-19)
+**需求**: TAEI-3044/TAEI-3087 【户用光伏】华融相关优化
+
+- **参数变更**: `BusinessStatusMode.updateStationBusinessStatus()` 方法中 `offLineChoose` 参数从必传改为 `@Nullable`
+- **业务语义**: 支持线下验收与技术/商务审核并行处理，不再强制要求线下验收选择
+- **审核流程**: `CompleteConfirmServiceImpl.stationAudit()` 增加 `stationCode` 字段设置，确保审核更新时电站编码正确传递
+- **状态流转影响**: 允许电站在技术审核和商务审核并行时独立推进状态，不阻塞于线下验收环节
+- **关联枚举**: `LightStation.ModeEnum` 控制不同业务模式下的状态流转策略
+

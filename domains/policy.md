@@ -115,3 +115,23 @@
 - Hermes MEMORY.md，2026-05-09 迁移。
 - 旧 cron 输出 2026-05-09 提到政策获取由 elecContractId 转向 stationCode，并按屋顶类型取值，待从代码复核。
 - rrsjk-admin-web 代码扫描 2026-05-10，年度规模阶梯政策全面升级。
+
+---
+
+## 工商业风电项目计收方法扩展 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `CmLightProject.java`, `CmLightProjectIncomePolicyServiceImpl.java` (commits: 解钦 db25723, 704eff2, 2026-05-19)
+**需求**: TAEI-3107 【风电】风电产值法兼容1.0
+
+- **字段重命名**: `CmLightProject.confirmMethod` → `CmLightProject.incomeMethod`（计收方法）
+  - 枚举同步重命名: `ConfirmMethodEnum` → `IncomeMethodEnum`
+  - 数据库字段: `confirm_method` → `income_method`
+- **计收方法枚举值**:
+  - `FINAL_INSPECTION` — 终验法（默认）
+  - `OUTPUT_VALUE` — 产值确认法
+- **业务类型扩展**: `CmLightProject.businessType` 支持 `WIND_POWER`（风电），原有 `LIGHT`（光伏）
+- **政策匹配逻辑**: `CmLightProjectIncomePolicyServiceImpl.findPolicyByNodeId()`:
+  - 终验法（默认）: 按 nodeId + engineeringType 查找政策
+  - 产值确认法: 按 projectCode 查找项目制定政策（需项目级别配置）
+- **前端DTO**: `CmLightProjectNewRequest` 新增 `incomeMethod` 字段
+- **MyBatis映射**: `CmLightProject.xml` 新增 `income_method` 字段到 resultMap、INSERT、UPDATE 语句
+- **兼容处理**: 默认终验法保持向后兼容，不影响已有光伏项目

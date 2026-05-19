@@ -247,3 +247,21 @@
 ### 备件保证金 (rrsjk-light-service, 孙志男, 2025-12-02 代码明确证明)
 - **来源**: 提交 8e804d74, 6ddc9d0c
 - 备件保证金单新增业务类型字段
+
+---
+
+### 运维会展大屏相关表 (rrsjk-light-operation-service, 孙志男, 2026-05-19)
+- **来源**: TAEI-3066 展会-运维大屏
+- **operation_screen_model**: 运维会展大屏数据模型 — 综合健康等级、发电量、容量、实时功率、在线/离线/异常统计、资方标识等
+- **operation_elec_month_model**: 资方年月发电量统计 — 按资方+年月的发电量数据
+- **operation_model_station**: 电站模型站点表 — 新增 `special_flag` 字段（资产所属标识）
+
+### cm_light_project 字段变更 (rrsjk-light-service, 解钦, 2026-05-19)
+- **来源**: TAEI-3107 【风电】风电产值法兼容1.0
+- **字段重命名**: `confirm_method` → `income_method`（计收方法）
+- **枚举**: `IncomeMethodEnum` (FINAL_INSPECTION/OUTPUT_VALUE)
+- **业务类型**: 支持 `WIND_POWER`（风电）
+
+### 招投标管理审核表 (rrsjk-light-service, laowang, 2026-05-15~19)
+- **来源**: TAEI-3102 【户用光伏】CBS招投标流程
+- **tender_managment_audit**: 招投标管理审核 — 项目分类、项目名称、容量、地理信息、多级审核状态（附件/招标文件/价值链材料）、初审/终审标书

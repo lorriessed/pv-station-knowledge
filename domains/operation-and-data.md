@@ -489,3 +489,35 @@ rrsjk-light-data-service
 | 缓存 | Redis | Redis |
 | 定时任务 | @EnableScheduling + 独立Job服务 | @EnableScheduling + 线程池 |
 | 端口 | -1 (纯 Dubbo 服务) | -1 (纯 Dubbo 服务) |
+
+---
+
+## 运维会展大屏数据模型 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-operation-service` → `OperationScreenModel.java` (commits: sunzn 1f378fb, 0f55e41, 63f206e, 2026-05-18~19)
+**需求**: TAEI-3066 展会-运维大屏
+
+- **OperationScreenModel 实体**: 运维会展大屏核心数据模型，包含以下指标：
+  - `specialFlag` — 资方标识
+  - `comprehensiveHealthLevel` / `comprehensiveHealthScore` — 综合健康等级/分值
+  - `operationStationCount` — 运维电站数量
+  - `priorityRatio` / `healthRatio` / `goodRatio` / `subHealthRatio` / `unhealthyRatio` — 各健康等级占比
+  - `onlineCount` / `onlineRatio` / `offlineCount` / `offlineRatio` / `abnormalCount` / `abnormalRatio` — 在线/离线/异常统计
+  - `totalPowerGeneration` — 总发电量（万度）
+  - `cumulativeIncome` — 累计收益（万元）
+  - `totalCapacityMwp` — 总容量（Mwp）
+  - `realTimePowerMw` — 实时功率（MW）
+- **ComprehensiveHealthScore 枚举**: 健康等级枚举，用于大屏展示
+- **OperationModelStation 扩展**: 新增 `specialFlag` 字段（资产所属标识），支持按资方筛选
+- **MyBatis映射**: `OperationScreenModel.xml` — 完整 CRUD + 分页查询
+
+---
+
+## 资方年月发电量统计表 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-operation-service` → `OperationElecMonthModel.java` (commit: sunzn 0f55e41, 2026-05-19)
+**需求**: TAEI-3066 展会-运维大屏
+
+- **OperationElecMonthModel**: 资方年月发电量统计实体
+- **表结构**: 记录各资方按年月的发电量统计数据
+- **Service**: `OperationElecMonthModelService` — 分页查询、新增、修改、删除完整 CRUD
+- **DAO**: `OperationElecMonthModelDao` + MyBatis `OperationElecMonthModel.xml` (114行映射)
+- **用途**: 为运维会展大屏提供资方维度的年月发电量统计数据
