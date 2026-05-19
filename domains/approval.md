@@ -140,6 +140,56 @@
 | BUSINESS_AUDIT_REJECT | 商务验收驳回 |
 | BUSINESS_AUDIT_APPROVAL | 商务验收通过 |
 
+### 商务审核并行模式 (TAEI-2857, 2026-01-19~2026-02-08 补漏第4期)
+- **来源**: `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/model/BusinessStatusMode.java` (于淼, commit: b9a4566 + 系列提交)
+- **需求**: TAEI-2857 【建站】商务验收技术验收并行审核
+- **核心变更**: 引入 `businessStatus` 字段到 `light_station` 表，实现技术审核和商务审核的双轨并行状态机
+
+**BusinessStatusMode 状态机逻辑**:
+```
+技术审核 + 商务审核 双轨并行，通过 StationStatusCombine 组合状态:
+- businessStatus: 商务审核独立状态 (5种)
+- stationStatus: 电站整体状态
+
+审核类型 (audit_type):
+- TECH_CHECK: 技术审核
+- WAIT_FIRST_AUDIT: 商务审核
+- UPLOAD_GRID_INFO: 提交并网资料
+
+关键分支逻辑:
+1. 技术审核驳回 + 容量变化(changeRoofOrHouseType=YES):
+   → 商务审核回退 (BUSINESS_AUDIT_APPROVAL → BUSINESS_INFO_UPLOADED)
+   → 撤销商务派单记录
+2. 技术审核驳回 + 容量未变化(changeRoofOrHouseType=NO):
+   → 商务审核可独立推进 (BUSINESS_INFO_UPLOADED → WAIT_BUSINESS_AUDIT)
+3. 技术审核通过:
+   → 若商务已通过 → ENABLE (电站完成)
+   → 校验快照: 房屋类型/容量与快照不一致则回退商务审核
+4. 提交并网资料:
+   → 技术已通过 → WAIT_BUSINESS_AUDIT
+   → 技术驳回 + 容量未变 → WAIT_BUSINESS_AUDIT (并行)
+   → 技术驳回 + 容量变化 → BUSINESS_INFO_UPLOADED (等待)
+
+商务审核快照校验 (business_audit_snapshot 表):
+- 技术审核通过时，对比 snapshotHouseType vs 最新houseType
+- 对比 snapshotCompleteConfirmCapacity vs 最新CompleteConfirmCapacity
+- 不一致时自动回退商务审核状态并记录操作日志
+```
+
+**LightStation.BusinessStatus 枚举** (代码明确证明):
+| 状态值 | 说明 | 触发条件 |
+|--------|------|---------|
+| WAIT_UPLOAD_GRID_INFO | 待提交并网验收资料 | 完工确认审核通过 |
+| BUSINESS_INFO_UPLOADED | 已提交并网资料 | 上传并网资料后，或技术驳回容量变化时回退 |
+| WAIT_BUSINESS_AUDIT | 待商务验收 | 已提交资料且技术通过/容量未变驳回 |
+| BUSINESS_AUDIT_REJECT | 商务验收驳回 | 商务审核驳回 |
+| BUSINESS_AUDIT_APPROVAL | 商务验收通过 | 商务审核通过且技术也通过 |
+
+**涉及表字段变更**:
+- `light_station.business_status` — 新增商务审核状态字段
+- `light_station_audit` — 新增 `change_roof_or_house_type` 字段记录容量是否变化
+- `business_audit_snapshot` — 商务审核快照表，保存审核时的房屋类型和容量快照
+
 ### 核心 Service 汇总
 
 | Service | 职责 | 关键方法 |
