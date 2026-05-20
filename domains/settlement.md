@@ -522,3 +522,13 @@ stationParam.put("spMemberId", spMemberId);
 
 - 新增超期考核电站驳回考核附加表功能
 - 涉及 Dubbo 服务配置优化和日志级别调整
+
+### 运维收入管理合并开票优化 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-trade-service` → `CloudInvoiceCreateModel.java`, `InvoiceServiceImpl.java`
+**Commits**: 76a29a7a/cf86a40e, 开发者: sunzn, 2026-05-19~20
+**需求分支**: `szn_merge_invoice_20260519`
+
+- **合并逻辑**: `CloudInvoiceCreateModel.cloudInvoiceHeadItemListByOperation()` 新增运维收入合并开票明细合并 — 当 `relationNoAll` 以 "OM" 开头且 `relationType` 为 `OperationMaintenance` 时，将多条发票明细合并为一条传参给票税云
+- **金额规则**: `InvoiceServiceImpl` 中运维收入(`OperationMaintenance`)新增数据允许单条金额小于0，但合并开票总金额必须大于0（非运维收入仍要求单条金额≥0）
+- **跳过验证**: BREAK(合同解约)、PEO开头(电费订单)、LightElec开头(工商业电费)的单据跳过含税单价×数量与含税金额的平衡验证(容差0.5元)
+- **发票明细合并方法**: `handelInvoices()` — 取第一条发票的元数据，累加所有发票的 amount/untaxAmount/taxAmount 作为合并后单条明细的价格和金额

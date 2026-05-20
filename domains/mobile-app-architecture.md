@@ -215,6 +215,87 @@ storeFile=key.jks
 
 ⚠️ **安全警告**: 签名密码明文存储在仓库中，存在安全风险。
 
+### 2.6 海尔绿能 Flutter APP (nahuipv_greenergy_flutter) 2026-05-20 更新
+
+**来源**: `nahuipv_greenergy_flutter` (代码明确证明, 2026-05-20 第7轮全量通读)
+
+- **应用名**: 海尔绿能
+- **版本**: 2.2.2+202****1901 (上次记录为 2.2.1+202****1401)
+- **技术栈**: Flutter + Riverpod (状态管理) + Dio (网络) + Retrofit (API) + Fluro (路由)
+- **SDK 版本**: Dart >=3.3.4 <4.0.0
+
+#### 2.6.1 新增发现: DJI 无人机 SDK 集成
+
+**⚠️ 新发现 (2026-05-20 通读)**: `nahuipv_greenergy_flutter` 集成了 **DJI Mobile SDK**，用于无人机飞控。这在之前通读中未被发现。
+
+- **USB 配件支持**: `android/app/src/main/res/xml/accessory_filter.xml` 定义了 4 种 DJI 设备:
+  - T600 (农业无人机)
+  - AG410 (农业无人机)
+  - com.dji.logiclink (DJI 逻辑链路)
+  - WM160 (遥控器)
+- **AndroidManifest.xml**: 
+  - `android.hardware.usb.host` 和 `android.hardware.usb.accessory` 权限
+  - `com.dji.sdk.API_KEY` meta-data 配置
+  - MainActivity 监听 `android.hardware.usb.action.USB_ACCESSORY_ATTACHED` USB 事件
+- **Splash Activity**: `activity_aplsh.xml` 包含"点击调用飞控"和"切换App"按钮
+- **UXSDK 组件**: styles.xml 中大量 DJI UX SDK 样式 (UXSDKBatteryWidget, UXSDKFlightModeListItem, UXSDKObstacleAvoidanceListItem 等)
+- **签名配置**: `android/key.properties` 中 `dji.api.key=d38d5408aa93389e40d53b11`
+
+**⚠️ 安全警告**: DJI API Key 明文存储在 `key.properties` 中。
+
+#### 2.6.2 近期活跃开发 (2026-05-14 ~ 2026-05-19)
+
+| 日期 | 提交信息 | 作者 |
+|---|---|---|
+| 2026-05-19 | chore: v2.2.2+202****1901 | dongxueqiang |
+| 2026-05-18 | chore: 更换水印相机Android SDK(二维码白边,logo) | dongxueqiang |
+| 2026-05-14 | Merge #50 into master from chore-map-key | 褚福贺 |
+| 2026-05-14 | Merge #51 into master from feat_gf | 褚福贺 |
+| 2026-05-14 | Merge #49 into master from opt-station-list-item | 褚福贺 |
+
+- **地图 Key 更新**: `chore-map-key` 分支
+- **水印相机 SDK 更换**: 修复二维码白边和 logo 问题
+- **电站列表项优化**: `opt-station-list-item` 分支
+- **广发业务**: `feat_gf` 分支 (与 domains/guangfa-business.md 相关)
+
+#### 2.6.3 Git 依赖模块
+
+| 模块 | Git URL | 用途 |
+|---|---|---|
+| nhpv_common | mobile/greenergy/packages/nhpv_common.git | 公共组件库 (网络/状态/工具) |
+| nhpv_usercenter | mobile/greenergy/packages/nhpv_usercenter.git | 个人中心模块 |
+| log_report_plugin | mobile/common/log_report_plugin.git | 日志上报 |
+| nhpv_camera | mobile/greenergy/plugins/nhpv_watermark_camera.git | 水印相机插件 |
+
+#### 2.6.4 第三方服务
+
+| 服务 | 配置 | 说明 |
+|---|---|---|
+| 高德地图 | AMap API Key (key.properties) | 定位服务 |
+| DJI SDK | DJI API Key (key.properties) | 无人机飞控 |
+| Mapbox | MAPBOX_DOWNLOADS_TOKEN (gradle.properties, 脱敏) | 地图服务 |
+| 微信分享 | WXEntryActivity | 微信SDK集成 |
+
+### 2.7 通用组件库 (nhpv_common)
+
+**来源**: `nhpv_common` (代码明确证明, 2026-05-20 第7轮全量通读)
+
+- **定位**: Flutter 公共组件库，被 nahuipv_greenergy_flutter 等 APP 通过 Git 依赖引入
+- **版本**: 1.1.0+202****0701
+- **业务价值**: **中** — 提供网络封装、状态管理、路由、图片处理等基础设施，但本身不包含光伏业务逻辑
+- **仓库结构**: 仅有 `pubspec.yaml` 和 `analysis_options.yaml` 配置文件，实际 Dart 代码在 Git 依赖中或通过其他仓库引用
+- **⚠️ 注意**: 通读仅发现配置文件，无 Dart 源码文件。实际代码需从其 Git 仓库 `mobile/greenergy/packages/nhpv_common.git` 获取
+
+### 2.8 VPP 湖南智绿 RN 应用 (nahuipv-vpp-hnzl-rn)
+
+**来源**: `nahuipv-vpp-hnzl-rn` (代码明确证明, 2026-05-20 第7轮全量通读)
+
+- **定位**: VPP 湖南智绿 React Native 应用
+- **业务文件数**: 0
+- **唯一提交**: `feat: 代码交付仓库初始化20250801` (chufh, 2025-08-01)
+- **状态**: 空壳仓库，自初始化以来无实际业务代码
+- **业务价值**: **极低** — 模板/骨架项目，尚未开始业务开发
+
 ### 2.4 纳光宝与 VPP 后端的关系
 
 根据代码分析，纳光宝 APP 通过以下方式与 VPP 后端交互：
@@ -423,6 +504,69 @@ storeFile=key.jks
 - **业务价值**: **低** — 初始化的空壳项目，实际业务逻辑可能在后续迭代中通过依赖包引入或直接在 lib/ 目录下开发
 - **⚠️ 注意**: 与已通读的 `nahuipv_greenergy_flutter`（绿能管理Flutter）是**不同的仓库**，需后续关注此骨架项目是否开始填充业务代码
 
+## 3. 湖南智充 APP (nahuipv-hnzc-*)
+
+### 3.1 定位
+
+**⚠️ 非光伏业务**: 这是"慧能智充" **电动汽车充电桩** APP，与 PVS 光伏业务**完全无关**。虽然仓库前缀为 `nahuipv-`（组织命名空间），但业务域属于充电桩运营，不是光伏电站。
+
+**来源**: `nahuipv-hnzc-app-android` (代码明确证明, 2026-05-20 全量通读)
+
+### 3.2 技术架构
+
+| 端 | 仓库 | 技术 | 最后提交 | 业务文件数 |
+|---|---|---|---|---|
+| Android | nahuipv-hnzc-app-android | Java 原生 Android | 2025-10-13 (chufh) | 146 |
+| iOS | nahuipv-hnzc-app-ios | 原生 iOS (仅有 AMap SDK 配置) | 2025-10-14 (chufh) | 3 |
+
+### 3.3 核心功能 (Android)
+
+- **充电站查询**: 地图搜索附近充电站 (`/api/omp/mt/powerStation/queryStationListForLXGH`)
+- **电站详情**: 站点信息、充电桩状态、价格 (`/api/omp/mt/powerStation/queryStationInfoForShare`)
+- **路线规划**: 高德地图驾车导航到充电站 (DriveRouteActivity, AMapNavActivity)
+- **扫码充电**: ZXing 扫码识别充电桩 SN (`/api/omp/mt/pile/getGunNoByGunName`)
+- **用户登录**: 手机号一键登录 (`/mt/security/login`)
+- **支付**: 微信/支付宝 H5 支付 (WXPayEntryActivity, AliH5PayActivity)
+- **广告/营销**: 开屏广告 (`/mt/route/marketing/app/advertisement/queryAdvertisementList`)
+- **版本更新**: APP 升级检测 (`/mt/route/support/app/sys/upgrade/queryUpgradeInfo`)
+
+### 3.4 后端 API (非 PVS)
+
+| API 路径 | 用途 | 所属系统 |
+|---|---|---|
+| `/mt/security/login` | 用户登录 | 慧能智充后端 |
+| `/mt/route/user/app/charging/user/chargeUserInfo` | 用户信息 | 慧能智充后端 |
+| `/api/omp/mt/powerStation/queryStationInfoForShare` | 电站详情 | 慧能智充后端 |
+| `/api/omp/mt/powerStation/queryStationListForLXGH` | 电站列表 | 慧能智充后端 |
+| `/api/omp/mt/pile/getGunNoByGunName` | SN 校验 | 慧能智充后端 |
+| `/mt/route/marketing/app/advertisement/queryAdvertisementList` | 广告列表 | 慧能智充后端 |
+| `/mt/route/support/app/sys/upgrade/queryUpgradeInfo` | 版本升级 | 慧能智充后端 |
+
+**⚠️ 这些 API 指向慧能智充 (ykccn.com) 后端，不是 rrsjk.com 光伏后端。**
+
+### 3.5 第三方服务集成
+
+| 服务 | 用途 | 配置位置 |
+|---|---|---|
+| 高德地图 | 定位、导航、充电站搜索 | AndroidManifest.xml (GD_MAP_APP_ID) |
+| 百度定位 | 辅助定位 | AndroidManifest.xml |
+| 微信支付 | 充电费用支付 | WXPayEntryActivity |
+| 支付宝 H5 | 充电费用支付 | AliH5PayActivity |
+| 七鱼客服 | 在线客服 | AndroidManifest.xml (com.qiyusf.sentry) |
+| ZXing | 二维码扫描 | tools/scan/zxing/ |
+| 百度统计 | 数据统计 | AndroidManifest.xml 注释中提及 |
+
+### 3.6 应用入口流程
+
+```
+启动 → SplashActivity (广告加载) → PrivacyActivity (隐私协议)
+  → SNInputActivity (可选) → LoadingActivity (H5下载) → MainActivity(WebView)
+```
+
+### 3.7 结论
+
+**nahuipv-hnzc-app-android 和 nahuipv-hnzc-app-ios 属于充电桩业务线，不是光伏业务。** 通读了解其架构即可，不需要提取光伏业务规则或写入光伏业务 domain 文件。标记为低 PVS 业务价值。
+
 ## 4. 移动端应用与 PVS/VPP 业务的关系
 
 | 应用 | 面向用户 | 关联后端 | 业务域 |
@@ -434,17 +578,19 @@ storeFile=key.jks
 | EPCB 小程序 | EPC 工程人员 | 待确认 | 工程承包 |
 | HDS 管理平台 | 运维商/分中心 | rrsjk-hds-web, rrsjk-light-operation-service | 运维/工单/租金/逆变器 |
 | 商户微前端 OSP | 商户/运维商 | rrsjk-merchant-service, rrsjk-light-operation-service | 运维/备件/结算 |
-| 绿能管理 Flutter | 绿能管理人员 | 待确认 | 绿能运营 |
-| nahuipv_greenergy_flutter (已通读) | 绿能管理用户 | VPP后端 | 绿能运营 |
-| 分中心APP (nahuipv-greenergy-management-flutter) | 待确认 | 待确认 | 待开发 (骨架项目) |
-| 湖南智充 APP | 充电桩用户 | 待确认 | 充电桩运营 |
+| 海尔绿能 Flutter | 绿能管理用户 | VPP 后端 + rrsjk-light-service | 绿能运营/无人机巡检 |
+| 湖南智充 Android | ⚠️ 非光伏业务 | ykccn.com 后端 | 充电桩运营 |
+| 湖南智充 iOS | ⚠️ 非光伏业务 | ykccn.com 后端 | 充电桩运营 |
+| 湖南 RN (vpp-hnzl) | ⚠️ 空壳 | 待开发 | VPP 移动端 |
+| 分中心APP (greenergy-management) | ⚠️ 骨架项目 | 待确认 | 待开发 |
 | 零碳适家商户端 (nahui-pv.merchant-micro.zch) | 零碳适家商户 | 待确认 | 零碳适家/结算 |
 | OSP运维小程序 (nahui-pv.osp-mini) | 运维服务人员 | 待确认 | 运维/备件 |
 | 移动端H5 (nahui-pv.mobile-h5) | 移动用户 | 待确认 | 综合 |
 
-## 4. 知识库更新记录
+## 5. 知识库更新记录
 
 | 日期 | 更新内容 | 来源 |
 |---|---|---|
 | 2026-05-15 | 创建: Cordova H5 桥接架构/Flutter 纳光宝 APP/插件体系 | 全量通读5个移动端仓库 |
 | 2026-05-19 | 新增: merchant-micro.zch 零碳适家微前端/osp-mini 小程序/greenergy-management-flutter 骨架 | 全量通读第6轮 |
+| 2026-05-20 | 新增: 湖南智充APP (非光伏业务)/nahuipv_greenergy_flutter DJI无人机SDK集成/nhpv_common | 全量通读第7轮 |

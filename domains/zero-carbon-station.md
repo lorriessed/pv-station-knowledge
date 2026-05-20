@@ -29,6 +29,14 @@
 - ODS 数据源的接入方式和同步频率
 - 零碳适家结算与安装费结算的关系
 
+### 零碳适家请款申请数据字典过滤 (代码明确证明, 2026-05-20)
+**来源**: `nahui-pv.merchant-micro.zch` → `src/views/zeroCarbon/settlement/addPaymentRequest.vue`
+**Commit**: c3c420d1, 开发者: yuanruilin, 2026-05-20
+
+- 请款申请页(purchaseTypeList)的数据字典过滤从 **按label过滤** (`e.label === '工程安装'`) 改为 **按value过滤** (`e.value === '13'`)
+- 数据字典查询: `getDicts("zch/finance", "purchaseTypeList")`
+- **影响**: `value='13'` 对应工程安装类型，改用value过滤更稳定(label可能被修改)
+
 ## 来源
 - 每日代码扫描 2026-05-13，rrsjk-hds-web, rrsjk-light-operation-service
 

@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-05-19T22:00:41.521524",
+  "last_run_at": "2026-05-20T22:00:17.519419",
   "completed_repos": [
     "base-service",
     "cbs-web",
@@ -129,11 +129,11 @@
     "nahui-pv.mobile-h5": "2026-05-19T22:00:41.521524",
     "nahui-pv.osp-mini": "2026-05-19T22:00:41.521524",
     "nahuipv-greenergy-management-flutter": "2026-05-19T22:00:41.521524",
-    "nahuipv-hnzc-app-android": "2026-05-12T22:00:08.400039",
-    "nahuipv-hnzc-app-ios": "2026-05-12T22:00:08.400039",
-    "nahuipv-vpp-hnzl-rn": "2026-05-12T22:00:08.400039",
-    "nahuipv_greenergy_flutter": "2026-05-12T22:00:08.400039",
-    "nhpv_common": "2026-05-12T22:00:08.400039",
+    "nahuipv-hnzc-app-android": "2026-05-20T22:00:17.519419",
+    "nahuipv-hnzc-app-ios": "2026-05-20T22:00:17.519419",
+    "nahuipv-vpp-hnzl-rn": "2026-05-20T22:00:17.519419",
+    "nahuipv_greenergy_flutter": "2026-05-20T22:00:17.519419",
+    "nhpv_common": "2026-05-20T22:00:17.519419",
     "nhpv_usercenter": "2026-05-12T22:00:08.400039",
     "nhpv_watermark_camera": "2026-05-12T22:00:08.400039",
     "order-service": "2026-05-12T22:00:08.400039",
@@ -306,5 +306,5 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 7
+  "sweep_round": 8
 }

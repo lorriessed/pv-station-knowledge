@@ -93,3 +93,12 @@
 - 短信模板：1133(主合同)、1134(装机)、1135(结算)、1146(权属证明)
 - 事件总线：`LightStationDccContractEvent` → `LightStationDccContractListener`
 
+## CBS 管理后台 (`domains/cbs-management.md`)
+- 关键词：CBS、分中心、分中心用户、后台管理、定时任务日志、登录认证、菜单管理。
+- 知识库：`domains/cbs-management.md`
+- 代码入口：`cbs-web` → `SysSubCenterController`(分中心管理), `HomeController`(登录), `JobLogController`(定时任务日志), `MenuController`(菜单)
+- 路由前缀：`/sysSubCenter/`(分中心), `/sys/login.do`(登录)
+- 技术栈：Java + Spring MVC + Shiro + Velocity/FreeMarker
+- **分中心管理**: `/sysSubCenter/subCenterList`(列表), `/sysSubCenter/subCenterUserList`(人员), `/sysSubCenter/addSubCenterUser`(添加人员)
+- **登录**: 验证码(randomCode)已改为非必填 (2026-05-20)
+

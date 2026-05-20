@@ -62,11 +62,11 @@ VPP (Virtual Power Plant，虚拟电厂) 是海尔新能源在光伏业务之外
 |---|---|---|---|
 | 纳光宝 APP | nahuipv_business_flutter | Flutter | 终端用户光伏运营(电站列表/发电数据/收入) |
 | 通用业务组件 | nhpv_common_business | Flutter | 纳光宝等多端复用的通用组件库 |
-| 湖南 RN | nahuipv-vpp-hnzl-rn | React Native | 湖南 VPP 移动端 |
-| 绿能管理 Flutter | nahuipv-greenergy-management-flutter | Flutter | 绿能管理 APP |
-| 绿能 Flutter | nahuipv_greenergy_flutter | Flutter | 绿能相关功能 |
-| 湖南智充 Android | nahuipv-hnzc-app-android | 原生 Android | 湖南智充 APP |
-| 湖南智充 iOS | nahuipv-hnzc-app-ios | 原生 iOS | 湖南智充 APP |
+| 湖南 RN | nahuipv-vpp-hnzl-rn | React Native | ⚠️ 空壳仓库，2025-08 初始化后无业务代码 |
+| 绿能管理 Flutter | nahuipv-greenergy-management-flutter | Flutter | ⚠️ 骨架项目，无 Dart 业务代码 |
+| 绿能 Flutter | nahuipv_greenergy_flutter | Flutter | 海尔绿能APP (v2.2.2)，含 DJI 无人机 SDK 集成 |
+| 湖南智充 Android | nahuipv-hnzc-app-android | 原生 Android | ⚠️ 充电桩APP (非光伏业务) |
+| 湖南智充 iOS | nahuipv-hnzc-app-ios | 原生 iOS | ⚠️ 充电桩APP (非光伏业务) |
 
 ### 3.5 Cordova H5 桥接应用 (非VPP业务)
 

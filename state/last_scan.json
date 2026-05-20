@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-05-19T23:01:24.883671",
+  "last_scan_at": "2026-05-20T23:01:18.881148",
   "repos": {
     "base-service": {
       "head": "9befec0aea815ef32d4cbc9e37e854bedf7023a7",
@@ -7,9 +7,9 @@
       "branch": "master"
     },
     "cbs-web": {
-      "head": "b8a91db203a7ec94422ca8ec2823215f5d5f13ab",
+      "head": "712b6897eef92f6b1e26ecde0ba35986370e1082",
       "path": "/data/pvcode/cbs-web",
-      "branch": "master"
+      "branch": "dev"
     },
     "esp-mag-haier-android-main": {
       "head": "511ce2f566b0696bb11baa4ece6822d04d764910",
@@ -67,7 +67,7 @@
       "branch": "master"
     },
     "nahui-pv.construction-mini": {
-      "head": "f8ee7f973a646a8aa333f4e1d3e50d59f851a836",
+      "head": "28e68d378446bd88852d1b07c8b2597904d2db16",
       "path": "/data/pvcode/nahui-pv.construction-mini",
       "branch": "master"
     },
@@ -92,7 +92,7 @@
       "branch": "master"
     },
     "nahui-pv.merchant-micro.zch": {
-      "head": "bd7353772635dbc3d7bda17a8d0a50c1847a350c",
+      "head": "0ccb178c67a5e7a2bdf92953753b370bb26f3c90",
       "path": "/data/pvcode/nahui-pv.merchant-micro.zch",
       "branch": "master"
     },
@@ -102,7 +102,7 @@
       "branch": "master"
     },
     "nahui-pv.mobile-h5": {
-      "head": "1d805a4c04b75b06ee035db82b78d6f2e5cb8726",
+      "head": "2428b09cc98cd78d3cd7d646f0a53f3b9146d242",
       "path": "/data/pvcode/nahui-pv.mobile-h5",
       "branch": "master"
     },
@@ -167,7 +167,7 @@
       "branch": "main"
     },
     "nhpv_watermark_camera": {
-      "head": "1d055893f13130c66b1a0aceaf26a00f69c8d922",
+      "head": "3ae1490b009c16519796540ab27df548162c4bdb",
       "path": "/data/pvcode/nhpv_watermark_camera",
       "branch": "master"
     },
@@ -312,7 +312,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-h5": {
-      "head": "e646df57a0437d44592a1d15f409751d3fbaad25",
+      "head": "c796d970401b78cd1fd750926f57a17212358eb2",
       "path": "/data/pvcode/rrsjk-merchant-h5",
       "branch": "master"
     },
@@ -322,7 +322,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "1ca6373da1a0b93e77a43bc70ed1bcf05fc16bee",
+      "head": "445f78b183f9d38ca0170820aa9f5b2c207d98e3",
       "path": "/data/pvcode/rrsjk-merchant-web",
       "branch": "master"
     },
@@ -382,7 +382,7 @@
       "branch": "dev"
     },
     "rrsjk-trade-service": {
-      "head": "a5c5a4be4264097b3e6d348f1cb5bd758fab9933",
+      "head": "1ed166b6c1373cbe3c224a34f1c39e73e4542055",
       "path": "/data/pvcode/rrsjk-trade-service",
       "branch": "master"
     },

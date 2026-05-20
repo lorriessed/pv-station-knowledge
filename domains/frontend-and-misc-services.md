@@ -86,13 +86,32 @@
 ### 2. nahuipv_greenergy_flutter - 绿能Flutter APP
 
 #### 技术栈
-- **框架**: Flutter (Dart SDK >=3.3.4)
-- **版本**: 2.2.1+202****1401
+- **框架**: Flutter (Dart SDK >=3.3.4 <4.0.0)
+- **版本**: 2.2.2+202****1901 (2026-05-20 更新，上次为 2.2.1+202****1401)
 - **状态管理**: Riverpod
 - **网络**: Dio + retrofit
-- **路由**: go_router
+- **路由**: fluro
 - **UI组件**: 自研组件库 + nhpv_common 公共库
 - **依赖**: nhpv_common (公共模块)、flutter_screenutil、freezed
+
+#### ⚠️ 新发现: DJI 无人机 SDK 集成 (2026-05-20 通读)
+
+**海尔绿能 APP 集成了 DJI Mobile SDK 用于无人机飞控**：
+- **USB 配件**: T600、AG410 (农业无人机)、WM160 (遥控器)、com.dji.logiclink
+- **AndroidManifest.xml**: `android.hardware.usb.accessory` 权限 + `com.dji.sdk.API_KEY` meta-data
+- **飞控入口**: `activity_aplsh.xml` 包含"点击调用飞控"和"切换App"按钮
+- **UXSDK 组件**: 电池状态、飞行模式、避障、RTK 卫星状态、雷达距离等大量 DJI UX 样式
+- **DJI API Key**: `d38d5408aa93389e40d53b11` (key.properties)
+- **Mapbox**: MAPBOX_DOWNLOADS_TOKEN (gradle.properties)
+- **高德地图**: AMap API Key (key.properties)
+
+**⚠️ 安全警告**: DJI API Key、高德 API Key、签名密码明文存储在仓库中。
+
+#### 近期活跃开发 (2026-05-14 ~ 2026-05-19)
+- 更换水印相机 Android SDK (修复二维码白边、logo 问题)
+- 地图 Key 更新 (chore-map-key)
+- 电站列表项优化 (opt-station-list-item)
+- 广发业务 (feat_gf) — 与 domains/guangfa-business.md 相关
 
 #### 页面/路由
 主要页面模块 (lib/pages/):

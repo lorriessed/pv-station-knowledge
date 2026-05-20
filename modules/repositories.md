@@ -1,11 +1,11 @@
 # 代码仓库索引
 
-更新时间: 2026-05-19 23:01:24
+更新时间: 2026-05-20 23:01:18
 
 ## 仓库列表
 
 - base-service: /data/pvcode/base-service (无变更)
-- cbs-web: /data/pvcode/cbs-web (无变更)
+- cbs-web: /data/pvcode/cbs-web (变更)
 - esp-mag-haier-android-main: /data/pvcode/esp-mag-haier-android-main (无变更)
 - esp-mag-haier-h5-portal: /data/pvcode/esp-mag-haier-h5-portal (无变更)
 - esp-mag-haier-ios-main: /data/pvcode/esp-mag-haier-ios-main (无变更)
@@ -22,7 +22,7 @@
 - nahui-pv.greenenergy-mini: /data/pvcode/nahui-pv.greenenergy-mini (无变更)
 - nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (无变更)
 - nahui-pv.merchant-micro.osp: /data/pvcode/nahui-pv.merchant-micro.osp (无变更)
-- nahui-pv.merchant-micro.zch: /data/pvcode/nahui-pv.merchant-micro.zch (无变更)
+- nahui-pv.merchant-micro.zch: /data/pvcode/nahui-pv.merchant-micro.zch (变更)
 - nahui-pv.merchant-monorepo-h5: /data/pvcode/nahui-pv.merchant-monorepo-h5 (无变更)
 - nahui-pv.mobile-h5: /data/pvcode/nahui-pv.mobile-h5 (变更)
 - nahui-pv.osp-mini: /data/pvcode/nahui-pv.osp-mini (无变更)
@@ -58,7 +58,7 @@
 - rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (无变更)
 - rrsjk-item-service: /data/pvcode/rrsjk-item-service (无变更)
 - rrsjk-light-common: /data/pvcode/rrsjk-light-common (无变更)
-- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (变更)
+- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (无变更)
 - rrsjk-light-iot-service: /data/pvcode/rrsjk-light-iot-service (无变更)
 - rrsjk-light-message-service: /data/pvcode/rrsjk-light-message-service (无变更)
 - rrsjk-light-openapi-service: /data/pvcode/rrsjk-light-openapi-service (无变更)
@@ -80,7 +80,7 @@
 - rrsjk-pvbusiness-job-service: /data/pvcode/rrsjk-pvbusiness-job-service (无变更)
 - rrsjk-report-web: /data/pvcode/rrsjk-report-web (无变更)
 - rrsjk-system-service: /data/pvcode/rrsjk-system-service (无变更)
-- rrsjk-trade-service: /data/pvcode/rrsjk-trade-service (无变更)
+- rrsjk-trade-service: /data/pvcode/rrsjk-trade-service (变更)
 - system-service: /data/pvcode/system-service (无变更)
 - uni-choose-file-android: /data/pvcode/uni-choose-file-android (无变更)
 - uni-choose-file-ios: /data/pvcode/uni-choose-file-ios (无变更)
