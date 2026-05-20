@@ -8545,6 +8545,17 @@
 - //	@RequestMapping(value = "/subCenterTimeIntervalMap.html")
 - //    @RequestMapping(value = "/cardDetail.html", method = RequestMethod.GET)
 
+## SysSubCenterController
+- 文件: `cbs-web/src/main/java/com/haier/cbs/web/controller/subCenter/SysSubCenterController.java`
+- @RequestMapping("/sysSubCenter")
+- @RequestMapping(value = "subCenter.html", method = { RequestMethod.GET })
+- @RequestMapping(value = "subCenterUser.html", method = { RequestMethod.GET })
+- @RequestMapping(value = "/subCenterList", method = { RequestMethod.GET })
+- @RequestMapping(value = "/subCenterUserList", method = { RequestMethod.GET })
+- @RequestMapping(value = "/addSubCenterUser", method = { RequestMethod.POST })
+- @RequestMapping(value = "/removeSubCenterUser", method = { RequestMethod.POST })
+- @RequestMapping(value = "/getSubCenterById", method = { RequestMethod.GET })
+
 ## GovernmentAppUserController
 - 文件: `cbs-web/src/main/java/com/haier/cbs/web/controller/governmentApp/GovernmentAppUserController.java`
 - @RequestMapping(value = "userList.html", method = { RequestMethod.GET })

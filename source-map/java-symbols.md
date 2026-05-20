@@ -17446,6 +17446,7 @@
 - `SysRoleMenuServiceImpl` (class) `com.nahui.energy.service.sys.impl` -> `vpp-api-ems/vpp-biz/src/main/java/com/nahui/energy/service/sys/impl/SysRoleMenuServiceImpl.java`
 - `SysSession` (class) `com.haier.cbs.system.entity` -> `system-service/system-service/src/main/java/com/haier/cbs/system/entity/SysSession.java`
 - `SysSessionDao` (interface) `com.haier.cbs.system.dao` -> `system-service/system-impl/src/main/java/com/haier/cbs/system/dao/SysSessionDao.java`
+- `SysSubCenterController` (class) `com.haier.cbs.web.controller.subCenter` -> `cbs-web/src/main/java/com/haier/cbs/web/controller/subCenter/SysSubCenterController.java`
 - `SysTenantController` (class) `com.nahui.energy.controller.sys` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/controller/sys/SysTenantController.java`
 - `SysUser` (class) `com.haier.cbs.system.entity` -> `system-service/system-service/src/main/java/com/haier/cbs/system/entity/SysUser.java`
 - `SysUser` (class) `com.nahui.energy.po` -> `vpp-api-auth/vpp-biz/src/main/java/com/nahui/energy/po/SysUser.java`
