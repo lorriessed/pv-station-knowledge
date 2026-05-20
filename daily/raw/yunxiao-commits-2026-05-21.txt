@@ -1,0 +1,287 @@
+cbs-web|e651a0a01476df7204e22aeeef62cdf6ef8ff9ab|德|2026-05-20|fix(subCenter): 解决用户表格数据兼容性问题|origin/feature/202605/regionUnlimit
+cbs-web|55fd97bc6a7312d8fdfe470b22ddd65c956430c5|德|2026-05-20|refactor(subCenter): 优化分中心用户管理代码结构|
+cbs-web|067f144fa9e123549232a41a26513e04a30079cb|德|2026-05-20|refactor(subCenter): 优化分中心用户管理代码结构|
+cbs-web|db7e82dd584a138ea95117a73791ef414a85dc51|德|2026-05-20|feat(subCenter): 修改分中心用户添加功能以支持完整用户信息提交|
+cbs-web|5cdaa64a5afe45eb89fd78647d5fd1a9c36f5793|德|2026-05-20|refactor(subCenter): 优化用户网格数据加载逻辑|
+cbs-web|ef6346aae2e9a0ea15e5f233d30ac348e53fb2e9|德|2026-05-20|fix(subCenter): 修复子中心用户编辑页面的数据加载问题|
+cbs-web|d67439b572a2d62448d8fbe7081bdf649ec8bd2e|德|2026-05-20|fix(subCenter): 修复用户搜索功能并优化数据网格加载|
+cbs-web|9a470a2765cd928e6c539174f5e5689cdb516fb5|德|2026-05-20|fix(subCenter): 修复用户网格数据加载的请求方法|
+cbs-web|d00dc4d20b60fa9e1d5de077cf2d7c5a7ac3edec|德|2026-05-19|fix(subCenter): 修正子中心用户移除接口路径|
+cbs-web|1460773b521f8918f6c1ceee0e19b09e60290561|德|2026-05-19|fix(subCenter): 修正分中心模块的API路径|
+cbs-web|166d577ddd882f92aba2ed8e42f48e840bea072f|德|2026-05-19|feat(subCenter): 添加分中心管理功能|
+rrsjk-admin-web|c9d923c3598f5add178dfe75d6dd1375b0c1909e|yumiao|2026-05-20|feat(Epic2): 新增逆变器列表(DWS)页面 - 复制lightInveterList.ftl为lightInveterListDws.ftl，调用doListDws.do接口|
+rrsjk-admin-web|3310ac1138452273fae2f479b21240603256e46b|yumiao|2026-05-20|feat(Epic2): 新增逆变器列表(DWS)查询接口 - doListDws.do调用findByPageDws，参数与旧版一致|
+rrsjk-admin-web|8f64a70aa5adf3caa8a48cfda5bf4651e688bd26|yumiao|2026-05-20|feat(Epic2): 新增逆变器列表(DWS)页面 - 复制lightInveterList.ftl为lightInveterListDws.ftl，调用doListDws.do接口|origin/feature/202605/ods_electroc_data
+rrsjk-admin-web|92994ec3086c2c699187c902cf9f2726c664324c|yumiao|2026-05-20|feat(Epic2): 新增逆变器列表(DWS)查询接口 - doListDws.do调用findByPageDws，参数与旧版一致|
+rrsjk-admin-web|874242ac7f9ea28f1d4e339403a704dad5962830|yumiao|2026-05-20|feat:电站分中心初审替换新版分中心|
+rrsjk-admin-web|2d117e7335c298d42f690c70593540bb2e92dd04|yumiao|2026-05-20|feat:人员获取新分中心|
+rrsjk-admin-web|dd6b0726a59b5e87a4ca218eb56b32c82a5ebbee|yumiao|2026-05-18|fix: 华融质保金页面权限点复用华融交易收入|origin/hrflc-guar-2604, origin/from_master_20230314_yumiao
+rrsjk-admin-web|ce36c529fe6b9e5e6eea7b9afbaf8a49a1999898|yumiao|2026-05-15|fix(image-viewer): OSS加quality,q_75压缩参数加速图片加载|origin/feature/202605/image-rotation
+rrsjk-admin-web|f5343bc9f314624053fc1b8ac2ac5c43317cbaac|yumiao|2026-05-15|fix(image-viewer): OSS加quality,q_75压缩参数加速图片加载|
+rrsjk-admin-web|4d679cda1a9037e6a6d4e3b9297b0e69db5ddaa3|yumiao|2026-05-15|fix(image-viewer): OSS加quality,q_75压缩参数加速图片加载|
+rrsjk-admin-web|8067fe9721f4152ecb876556b637c264303b940b|yumiao|2026-05-15|fix(image-viewer): 重置按钮失效修复 - loadRotated URL未变时不触发fit|
+rrsjk-admin-web|503d64ca58091cbb8267f2640dbaec6ee3b3b3e7|yumiao|2026-05-15|fix(image-viewer): OSS旋转前加auto-orient消除EXIF双旋转|
+rrsjk-admin-web|a88432583e62c8a943d0034bc7550a5b857bd306|yumiao|2026-05-15|fix(image-viewer): 锚点改用getBoundingClientRect, 图片居中切margin:auto|
+rrsjk-admin-web|872f092489eb9b6d6a9963c26ede5b6092209338|yumiao|2026-05-15|fix(image-viewer): 加速滚轮缩放(1.03→1.10), 修复放大后flex居中导致顶部不可达|
+rrsjk-admin-web|64530c6bc8faf5d477437b1ccb7c4542f122422f|yumiao|2026-05-14|fix(image-viewer): CSS旋转后布局尺寸翻转, 用effW/effH计算显示尺寸|
+rrsjk-admin-web|62e9cabc73ea7769e824c127558d65117d7d431c|yumiao|2026-05-14|fix(image-viewer): 超大图片(>4096px)旋转切CSS transform, 修复isNonImageExt误判|
+rrsjk-admin-web|84538d91883150117d36d467622df334791680cc|yumiao|2026-05-14|fix(image-viewer): 滚轮缩放降速至1.03，修复锚点scroll被浏览器提前clamp的bug|
+rrsjk-admin-web|ed1a113b2740beb3a6864a0ea013dc0bc3883b0b|yumiao|2026-05-14|fix(image-viewer): 滚轮缩放降速至1.03，修复锚点scroll被浏览器提前clamp的bug|
+rrsjk-admin-web|cbb2635e1dec2759c1beff3bd243dac3b34ecece|代继宁|2026-05-20|fix(frontend): 修正存款列表中的状态判断逻辑|origin/20260416-FapRecordOfReceipts
+rrsjk-admin-web|9aa5dcf2fe5d188e842daac39fb02c3f17d42952|代继宁|2026-05-19|fix(light): 修复参数映射中的数组值处理问题|
+rrsjk-admin-web|69cc75b783e09398a2ead4e991aa49e5c22e623e|代继宁|2026-05-19|fix(fap): 修复FAP状态显示和订单推送确认提示|
+rrsjk-admin-web|bb6b4e1f381b5c680ba660549b03665b2960b6a5|代继宁|2026-05-19|fix(frontend): 修复FAP推送功能的条件判断逻辑|
+rrsjk-admin-web|f5f1c8c015f8fef9220aab11e874f2a029953d7b|代继宁|2026-05-19|feat(light): 添加FAP收款记录导出功能并修复状态常量|
+rrsjk-admin-web|f3fccf20b714d130bb8ba88ab91aeca3c5a235dd|代继宁|2026-05-18|feat(order): 添加记账状态显示和优化FAP推送条件|
+rrsjk-admin-web|a9393c1724815c307623ff58ffb758eae9856c05|tn_wangb|2026-05-19|工商业自持电站损益报表优化|
+rrsjk-admin-web|0d68240bcb353b1dee62d3447032b305ab8be8f7|tn_wangb|2026-05-19|工商业自持电站损益报表优化|origin/20260506-wb-cmOwnerStationReport
+rrsjk-admin-web|e365f76e5f1fccb1d9d312341964ca6e059431b1|tn_wangb|2026-05-18|工商业自持电站损益报表优化|
+rrsjk-admin-web|042e421f574f1d40bd810159045af6b0ba97ecc0|tn_wangb|2026-05-18|工商业自持电站损益报表优化|
+rrsjk-admin-web|198c335ba187abe748a927f4edb818968d9aa998|tn_wangb|2026-05-15|工商业自持电站损益报表优化|
+rrsjk-admin-web|fa58a32a2692a7d3f9ecd51e6841c042b482a574|tn_wangb|2026-05-14|工商业自持电站损益报表优化|
+rrsjk-admin-web|5acd5c6f9b45a9e84ba034d26c49d3dc21bb3b16|tn_wangb|2026-05-14|工商业自持电站损益报表|
+rrsjk-admin-web|71111d816f0109876467156da113ea075a9bbe65|tn_wangb|2026-05-14|处理历史问题，原材料回购财务审核导出没有支付方式和发票状态的值|
+rrsjk-admin-web|8e18381de12135e24f2e84d8d8acff0ae6979579|tn_wangb|2026-05-14|处理历史问题，原材料回购财务审核导出没有支付方式和发票状态的值|
+rrsjk-admin-web|58fa686593edd1ae42e8eaa8143bc359cdface63|tn_wangb|2026-05-14|工商业自持电站损益报表|
+rrsjk-admin-web|4c5d6e93a7de7f24c3f07cea55283c7a94a9394d|baoxin|2026-05-20|fix:服务商省份授权|origin/feature/202605/regionUnlimit
+rrsjk-admin-web|9542dca256f7e2f5df49b4619df9a5f5696080bf|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-admin-web|a6235f65ab415ac59eb6261fb93a49ed6d5ec317|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-admin-web|9d6e7c6f927117ef2cc063925a52a4a969f66b0d|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-admin-web|e5bb45377362cbeaf8e5bac6d2d562c6cb4cddcc|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-admin-web|fa4beef55249775741f9d7a0c3f9163f091c767a|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-admin-web|b082f6c2d79f3892969578ff80749aa7ca5efecf|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-admin-web|542f36abf0919abe95a53129b81c66860c8c9a3c|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-admin-web|bad83af2ab4c58713aaecde9592ac595a79b5fa6|majinhu|2026-05-19|feat(grid): 为并网信息和电费归集方式列添加格式化功能|origin/20260508-guangfa-binwang
+rrsjk-admin-web|bf6054120037337f0615f3ec7de13641492c1dca|majinhu|2026-05-19|fix: 重命名文件|
+rrsjk-admin-web|6959a98634fb058c6518d636cac8e84d3d3c1786|majinhu|2026-05-19|fix(frontend): 修复表格字段映射和日期格式化问题|
+rrsjk-admin-web|80de877d28c2a9653bb265439da30a0db659c1cd|majinhu|2026-05-19|feat(grid): 添加电站名称列到进件列表|
+rrsjk-admin-web|857cc51cd6363e458fcb755f5f78634a662870b7|majinhu|2026-05-19|refactor(grid): 重构表格初始化逻辑以提高代码可读性|
+rrsjk-admin-web|75c8ae37b5cd566f1938bc5e7009f9339a261321|majinhu|2026-05-19|feat(gfMergeGridInputPiece): 添加并网进件详情页面和设计信息展示功能|
+rrsjk-admin-web|c6b954a5de5c95f90e030ea226fd27445868e5a3|majinhu|2026-05-19|style(frontend): 更新表格注释语法并调整列配置|
+rrsjk-admin-web|9c349c2b7c052ad55da46b071b0ec471532fbfa4|majinhu|2026-05-14|feat：修复导出转换|
+rrsjk-admin-web|5c3cf7a2e29fc2aff372988ba8cca11a54407e8b|lilong|2026-05-20|feat.【发电户号电费模板映射】本地页面调试修改|origin/20260519-alone-electricAI
+rrsjk-admin-web|61f44106fc7d013cad9a27725f80c22137a69665|lilong|2026-05-20|feat.【发电户号电费模板映射】基础服务代码|
+rrsjk-admin-web|d342875ee427d1349442ad29fb5c6ad102b59b87|德|2026-05-20|feat(service): 添加子中心服务引用配置|
+rrsjk-admin-web|06e1916c3ed1ee1150533eddc924ee6575a89f1f|德|2026-05-15|fix(hrflc): 修复审核状态值拼写错误|origin/hrflc-epc-20260312
+rrsjk-admin-web|f81eac4fa95bdf99718b781f71fecc8e183895f8|德|2026-05-15|fix(hrflc): 修正审核状态枚举值和显示逻辑|
+rrsjk-admin-web|d07a3cb6ca23e18ae7be53a8866e9d45bfb9bf85|解钦|2026-05-20|feat(cm-wind-electric): 配置修改|origin/feature-cm-wind-electric
+rrsjk-admin-web|621fb47bdb9681652333a2dc74f4e8ed19190b7b|解钦|2026-05-20|feat(cm-wind-electric): 收入政策导入和状态问题处理|
+rrsjk-admin-web|5f8c71723e3369821619d47393cc2b21df383eea|解钦|2026-05-19|feat(cm-wind-electric): 工商业收入政策新增|
+rrsjk-admin-web|cd294a26bfc8391289677001cd2901576156aa4a|解钦|2026-05-19|feat(cm-wind-electric): 工商业收入政策新增|
+rrsjk-admin-web|77d24426006b6015a9e418ceb0407e38b23cc101|解钦|2026-05-19|feat(cm-wind-electric): 工商业收入政策新增|
+rrsjk-admin-web|15e384959d203f7d088174864768645d0fcd0ff4|解钦|2026-05-19|feat(cm-wind-electric): 工商业收入政策新增|
+rrsjk-admin-web|b499350bc6caa6a90303a6f71a00c93345f151f7|解钦|2026-05-19|feat(cm-wind-electric): 工商业立项预审页面新增计收方法字段|
+rrsjk-admin-web|d6876d0df89b416506d6a53eb7305d40b28a2320|解钦|2026-05-19|feat(cm-wind-electric): 工商业项目新增计收方法字段|
+rrsjk-admin-web|9c5ec6c7a52543a23ef4a3f9c46131e26746660c|解钦|2026-05-18|feat(cm-wind-electric): 工商业收入政策配置增加新增按钮|
+rrsjk-admin-web|d1971e9cabc6e47f4b9bd70737e2bf94779d9166|解钦|2026-05-18|feat(cm-wind-electric): 工商业收入政策配置增加新增按钮|
+rrsjk-admin-web|d742a9264f83874561b81ca7f8767168e6a6214a|mabin|2026-05-20|feat(light): 添加房产证OCR识别功能支持|origin/20260518-fangchanzhengOCR
+rrsjk-admin-web|aa91dd59abd315ad8bd5a971dde106f511664139|mabin|2026-05-19|feat(light): 添加房产证AI识别功能|
+rrsjk-admin-web|56a3140c448fed58151309113e383499163e72bd|龙龙|2026-05-20|feat(light): 新增公共建筑类电站政策配置功能|origin/20260520_longlong_pub_build_policy
+rrsjk-admin-web|d9158c52f1910df6b57ac10c2847c13f0db24e78|龙龙|2026-05-18|refactor(light): 优化电费收益订单月份区间校验逻辑|origin/yyyyMMdd_longlong_fix
+rrsjk-finance-service|08f69615008167e5316129ea8fb7e7787d74c684|mabin|2026-05-19|feat(sap): 添加金蝶财务同步并发控制功能|
+rrsjk-hds-web|051de901c61cb28c9cd5fc69915c48b3ffe70c0c|sunzn|2026-05-19|feat(lightoperation): 添加月电量数据查询功能|origin/szn_exhibition_20260506
+rrsjk-hds-web|441f76154cb5ad83dec7944ba8c210249f1877ed|sunzn|2026-05-18|fix(lightoperation): 修复逆变器数据查询中的日期处理逻辑|
+rrsjk-hds-web|051de901c61cb28c9cd5fc69915c48b3ffe70c0c|sunzn|2026-05-19|feat(lightoperation): 添加月电量数据查询功能|origin/szn_exhibition_20260506
+rrsjk-hds-web|441f76154cb5ad83dec7944ba8c210249f1877ed|sunzn|2026-05-18|fix(lightoperation): 修复逆变器数据查询中的日期处理逻辑|
+rrsjk-light-data-service|f030e67e35d5c4b15bc7d74e8b122e8ab88acb97|yumiao|2026-05-20|fix: DWS SqlSessionFactory开启mapUnderscoreToCamelCase - DWS表下划线字段映射到驼峰实体属性|origin/feature/202605/ods_electroc_data, origin/dev, dev
+rrsjk-light-data-service|5925c64528e4bb4d0d6296c5f67173e7cfc334d5|yumiao|2026-05-20|fix: 修正DWS mapper和实体的inverter/inveter拼写 - DWS表字段是inverter_sn/inverter_state(非inveter)|
+rrsjk-light-data-service|544d4f23482192e310904c00c25f48cb521513ab|yumiao|2026-05-20|fix: 修复DwsDataConverter引用已删除的getId()方法|
+rrsjk-light-data-service|523d7a11e96c7694b6a56088dfc26e947acb02ac|yumiao|2026-05-20|fix: 修复DWS查询Unknown column id报错 - DWS表无id字段，移除实体和mapper中的id引用，COUNT(id)改为COUNT(1)|
+rrsjk-light-data-service|f451e9afd27876585d963895e518f0e35a1f4895|yumiao|2026-05-20|feat(Epic2): 新增DWS查询接口 - LightInveterDataService添加findByPageDws方法，代理调用DwsInveterDataService|
+rrsjk-light-data-service|a00044b2055b14d0328024bc063ea563aaf5b587|yumiao|2026-05-20|feat: Epic 1 DWS数据源接入 - 新增dws多数据源配置、DwsInveterData实体、DAO/Service层及字段映射转换器|
+rrsjk-light-data-service|935bd9503629b8913e6ef542c0f57e5ca6cfc3fc|yumiao|2026-05-20|feat(Epic2): 新增DWS查询接口 - LightInveterDataService添加findByPageDws方法，代理调用DwsInveterDataService|
+rrsjk-light-data-service|29bbe54b67c7389fcd3740892fdd207289adf123|yumiao|2026-05-20|feat: Epic 1 DWS数据源接入 - 新增dws多数据源配置、DwsInveterData实体、DAO/Service层及字段映射转换器|
+rrsjk-light-data-service|218c66c061816961a1496bb07b4cd111e7c190ff|yumiao|2026-05-18|log:锦浪逆变器逆变器图表保存问题|HEAD -> master, origin/yyyyMMdd_longlong_fix, origin/master, origin/HEAD
+rrsjk-light-data-service|6f92b30b199bb602500db14e65e29f9768fbc56f|yumiao|2026-05-18|log:锦浪逆变器逆变器图表保存问题|
+rrsjk-light-data-service|ddfcdb7aec91cfdab9de2831bdfa09344ff03467|yumiao|2026-05-14|log:去掉模拟类|
+rrsjk-light-data-service|4b4d24688952b241f2e27164789c1aa566961252|yumiao|2026-05-14|log:打印堆栈信息|
+rrsjk-light-data-service|70f469943d352de150bee49e1825d52a1307714a|yumiao|2026-05-14|log:打印堆栈信息|
+rrsjk-light-data-service|d1e6cc74311ee0bd954e85302970378cb54c40ac|wangxiran|2026-05-19|feat(audit): 实现电站影像审核驳回功能|
+rrsjk-light-data-service|9bcb2a91167e5a02852a5738c8eb3513d1de9367|wangxiran|2026-05-15|  - 新增 LightInveterDataService.findCqGdtByPage   - 新增 DAO 方法 findCqGdtByPage、queryCqGdtCountByPage   - 新增 mapper SQL：findCqGdtByPage、queryCqGdtCountByPage   - CQ_GDT SQL 使用 INNER JOIN light_station ls ON ls.station_code = lid.station_code   - firstThreePowerAt 改为从 light_station.first_three_power_at 返回   - /queryCqGdtInverterList 改为调用 findCqGdtByPage|origin/featrue-cq_gdt-wxr-20260513
+rrsjk-light-data-service|e8d818ac5b86ebeded20242ba68b6992cef19a64|wangxiran|2026-05-14|feat(data): 添加逆变器数据中首次功率记录时间字段|
+rrsjk-light-openapi-service|f672a76ad8c79fb13f3e5039e08d24b2070a340d|mabin|2026-05-16|fix(zhaoyin): 更新招银租后电站状态查询日志记录|origin/dev, dev
+rrsjk-light-openapi-service|490d9d361c4b0e8dbd8a5d6210ef210f7c059d2f|mabin|2026-05-16|fix(dao): 修复中银电量统计查询方法名错误|origin/20260511-zhongYinLease
+rrsjk-light-openapi-service|2a6ba28b070348f5a389dfe16f9790bad30802a7|mabin|2026-05-16|feat(energy): 添加中银租后总发电量查询功能|
+rrsjk-light-openapi-service|0158748f8c0a83ed0ea09f72451b80f94d0cda6b|mabin|2026-05-16|fix(mapper): 修复日期比较逻辑|
+rrsjk-light-operation-service|16cf782beec9cc8aa06c4d04af1cdc068f8826c7|dengqiu|2026-05-14|年度保发导出功能完善|
+rrsjk-light-operation-service|df66f67f2db40319b76f87fd3822b3193e4f67b9|sunzn|2026-05-19|fix(database): 修改电量月度数据查询排序规则|origin/szn_exhibition_20260506
+rrsjk-light-operation-service|0f55e4127b2350fbd93594eca3a19cb09b073dc3|sunzn|2026-05-19|feat(operation): 添加资方年月发电量统计功能|
+rrsjk-light-operation-service|63f206e979a6d3d7def14b092c8d3e88519dc558|sunzn|2026-05-18|feat(operation): 添加资产所属标识字段|
+rrsjk-light-operation-service|1f378fb52f9f0b6f63b05c389b3f8eb46b4e490f|sunzn|2026-05-18|feat(operation): 添加运维会展大屏数据模型功能|
+rrsjk-light-operation-service|7debe743780e09b4b307e53c06f3edf82787c4ea|sunzn|2026-05-15|fix(operation): 修复逆变器模型服务中的日期比较逻辑|
+rrsjk-light-operation-service|c2909a97c41d4779df268c5fd9d7bdbe954c8ea5|sunzn|2026-05-14|feat(operation): 添加站点模型页面详情功能|
+rrsjk-light-operation-service|4b0d74a8aac781670070e8e5b312b472b43cdf1e|sunzn|2026-05-14|fix(light-station): 过滤掉已终止的逆变器变更记录|origin/szn_acc_op_youhua_20260511
+rrsjk-light-operation-service|e08e2d3334b9d234500dfb23255624ca83742cee|sunzn|2026-05-14|fix(light-operation): 修正共享支付查询中的租用月份参数|
+rrsjk-light-operation-service|01411e26fac187b6be26764586384528e370d1b8|sunzn|2026-05-14|fix(light-operation): 修正共享支付查询中的租用月份参数|
+rrsjk-light-operation-service|e82b22389c7235849290e258941771f9d0ca0386|sunzn|2026-05-14|fix(operation): 修复共享支付查询参数传递错误|
+rrsjk-light-operation-service|30d657e1fefd05f3be9bda05cc607f5da42a0c3b|sunzn|2026-05-14|refactor(light-operation): 优化共享账单记录查询逻辑|
+rrsjk-light-operation-service|df66f67f2db40319b76f87fd3822b3193e4f67b9|sunzn|2026-05-19|fix(database): 修改电量月度数据查询排序规则|origin/szn_exhibition_20260506
+rrsjk-light-operation-service|0f55e4127b2350fbd93594eca3a19cb09b073dc3|sunzn|2026-05-19|feat(operation): 添加资方年月发电量统计功能|
+rrsjk-light-operation-service|63f206e979a6d3d7def14b092c8d3e88519dc558|sunzn|2026-05-18|feat(operation): 添加资产所属标识字段|
+rrsjk-light-operation-service|1f378fb52f9f0b6f63b05c389b3f8eb46b4e490f|sunzn|2026-05-18|feat(operation): 添加运维会展大屏数据模型功能|
+rrsjk-light-operation-service|7debe743780e09b4b307e53c06f3edf82787c4ea|sunzn|2026-05-15|fix(operation): 修复逆变器模型服务中的日期比较逻辑|
+rrsjk-light-operation-service|c2909a97c41d4779df268c5fd9d7bdbe954c8ea5|sunzn|2026-05-14|feat(operation): 添加站点模型页面详情功能|
+rrsjk-light-operation-service|4b0d74a8aac781670070e8e5b312b472b43cdf1e|sunzn|2026-05-14|fix(light-station): 过滤掉已终止的逆变器变更记录|origin/szn_acc_op_youhua_20260511
+rrsjk-light-operation-service|e08e2d3334b9d234500dfb23255624ca83742cee|sunzn|2026-05-14|fix(light-operation): 修正共享支付查询中的租用月份参数|
+rrsjk-light-operation-service|01411e26fac187b6be26764586384528e370d1b8|sunzn|2026-05-14|fix(light-operation): 修正共享支付查询中的租用月份参数|
+rrsjk-light-operation-service|e82b22389c7235849290e258941771f9d0ca0386|sunzn|2026-05-14|fix(operation): 修复共享支付查询参数传递错误|
+rrsjk-light-operation-service|30d657e1fefd05f3be9bda05cc607f5da42a0c3b|sunzn|2026-05-14|refactor(light-operation): 优化共享账单记录查询逻辑|
+rrsjk-light-report-service|b8130daf9800e9a32b61426076acb72390916759|代继宁|2026-05-15|refactor(report): 移除给定时间参数的空值检查逻辑|origin/20260514-reportMapStationQuery
+rrsjk-light-report-service|269d62f32fd7412ac5698756215ed5d1749a79ec|代继宁|2026-05-15|refactor(report): 优化报表统计中的日期参数处理逻辑|
+rrsjk-light-report-service|1120866eb987616493e93cb5aa5a3ebd06dc1660|代继宁|2026-05-15|fix(report): 修复给定时间为空时的处理逻辑|
+rrsjk-light-report-service|52c0c5b6c8ad4964c3a60b03eb3321bc876f6bcc|代继宁|2026-05-15|feat(report): 添加电站模式筛选功能|
+rrsjk-light-report-service|a363deffe52414d04bc8bac38d4756024771526f|baoxin|2026-05-15|fix:在建资产管理修改|origin/20260429-LL-report
+rrsjk-light-report-service|a0e7a12a204fb5ead9e92e2cc7aa58b9614c8680|baoxin|2026-05-14|fix:新增资产管理|
+rrsjk-light-report-service|784a4d745970ea558a22764ace3c956154cf59e5|mabin|2026-05-14|Revert "fix:修改"|
+rrsjk-light-service|b222454d5a2857d820175a4d6a7aa7579891a6cc|yumiao|2026-05-19|test:验证推送规则|origin/master-follow
+rrsjk-light-service|85da1e49e78a00e7b00f618c07540b013689b923|yumiao|2026-05-19|test:验证推送规则|
+rrsjk-light-service|e3e81268d05e8d97b5e83598de11aacacbcba826|yumiao|2026-05-19|test:验证推送规则|
+rrsjk-light-service|f4c1f2285ac092a1bf0f3063aded74d8e3e80b4a|yumiao|2026-05-19|feat:优化线下验收结合技术商务并行的电站状态流转|origin/feature/202605/offLineStatus
+rrsjk-light-service|759697e331ad591340be3dec3663d679812f6415|yumiao|2026-05-19|feat:优化线下验收结合技术商务并行的电站状态流转|
+rrsjk-light-service|3c8d7bd880a82c29fc9635cb02dc3b94490248b2|yumiao|2026-05-18|feat:绿能云管家查询光伏账单功能修复|
+rrsjk-light-service|23846b52fe6cb9b40c23153093ca693cff6b6b68|yumiao|2026-05-18|fix:华融上收入记质保金增加防御性校验|origin/follow-master
+rrsjk-light-service|98f808b7d9cf721e4db98af5636597da76c9a161|yumiao|2026-05-18|fix:华融上收入记质保金增加防御性校验|
+rrsjk-light-service|cb67fb3b67319cf7534302bf82df12b1b994a2c1|yumiao|2026-04-29|fix:华融质保金|
+rrsjk-light-service|19c01e79f1bc1829cf722db70ef41d3d8661fc7a|yumiao|2026-04-28|fix:华融质保金|
+rrsjk-light-service|08debe1e6ace62005127cf4493c159fcded5610d|yumiao|2026-05-18|fix:华融上收入记质保金增加防御性校验|
+rrsjk-light-service|cc335db9e3253c3a4463096b849c0e372f03c84c|yumiao|2026-05-14|fix:去掉多余引用|
+rrsjk-light-service|e1c7b3c956545d736131081bacf7dbebd0175ad4|代继宁|2026-05-20|refactor(light): 优化分页查询逻辑|origin/20260416-fap
+rrsjk-light-service|0e7e2f5e187a7f0b3a5bc6becbe1bc3b90e006e6|代继宁|2026-05-20|refactor(fap): 优化FAP记录处理逻辑并移除补偿状态相关代码|
+rrsjk-light-service|34fc750e87c4892bc4262fc4cededd8ab90f393e|代继宁|2026-05-18|feat(fap): 添加FAP凭证补偿机制并优化客户信息更新逻辑|
+rrsjk-light-service|597db042574504eb9cfb0cee4bc1b95a8cca6b47|代继宁|2026-05-18|feat(fap): 添加凭证更新补偿功能支持|
+rrsjk-light-service|43ae803caf62acd9a30cc532248d19a24b15b836|代继宁|2026-05-14|feat(order): 逆变器销售场景确认收款逻辑更新|
+rrsjk-light-service|9c9366b0e39b686e0e9b72aa874fed20b8d36dd0|代继宁|2026-05-14|refactor(light): 修改安装费对账单签署回调地址|origin/20250514-installFeeBillCallback
+rrsjk-light-service|ed664f5002400683b6ccdd5f338481461f75a88f|tn_wangb|2026-05-20|工商业风电项目产值收入法|origin/feature-cm-wind-electric
+rrsjk-light-service|c7558e098e1a681211c8e19c20e1379fe7100a28|tn_wangb|2026-05-20|工商业风电上收入|
+rrsjk-light-service|e62c14035dc939694504e4d3edac783bd9699259|tn_wangb|2026-05-19|工商业风电上收入|
+rrsjk-light-service|8bb7105af54fd9ba3f72585582b3595b527202ac|tn_wangb|2026-05-19|工商业自持电站损益报表 二期需求|origin/20260506-wb-cmOwnerStationReport
+rrsjk-light-service|c9616c6373846bf79a320ef0aa4abcb8eff169e4|tn_wangb|2026-05-18|工商业自持电站损益报表 二期需求|
+rrsjk-light-service|0a42ed04b5fbdbd91266d9a1a1e2c97f9af774fe|tn_wangb|2026-05-18|工商业自持电站损益报表 二期需求|
+rrsjk-light-service|80cd34b6ff4b08dda7b03b88ed12605fd6ac3585|tn_wangb|2026-05-15|工商业自持电站损益报表 二期需求|
+rrsjk-light-service|a4f60fb807ab46ad69fba6a6bb1315ccb0cd93e9|tn_wangb|2026-05-15|工商业自持电站损益报表 二期需求|
+rrsjk-light-service|3b6aff9e57f3a005cb28899913a8287813e5a8d5|tn_wangb|2026-05-14|工商业自持电站损益报表 高压电费查询修改|
+rrsjk-light-service|b13ce495468167a5eb51b57dc2367ec1ec951529|tn_wangb|2026-05-14|工商业自持电站损益报表  发电来源字段非必填，兼容1PG0公司导入|origin/20260514-wb-planChange
+rrsjk-light-service|f502d2efa2eb688aac076a7ce07ad8088dbb7004|baoxin|2026-05-20|fix:服务商省份授权|origin/feature/202605/regionUnlimit
+rrsjk-light-service|d1c5dcde51e6e319e6fc05ff2e4f68117dd88e09|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-light-service|d3f0e6b7d867c0f367c60882ea9732b7db7653a8|baoxin|2026-05-20|fix:服务商省份授权|
+rrsjk-light-service|d2e8770803900379d8d9fd52a585e9e286308e50|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|5136c054c4ccfe04d22ac03db77486cf7b05ee9f|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|5d0f9e358852b28838d008f62b8e2f8f7cfda704|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|667bbda2841478ea1a061794ae5315b35a04e163|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|91d4fd22d2a16789740b47ef29bd5961f32b059c|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|410f3c726f9ff4fcd47a942a6668457140766f65|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|2fb18cd952e673a486ad36c9ca51bae462c21288|baoxin|2026-05-19|fix:服务商省份授权|
+rrsjk-light-service|1285748cf486735e5581d97ba75c3caed90639fb|baoxin|2026-05-19|fix:院内双坡政策展示|origin/v2026-04-20-bx-stationContract
+rrsjk-light-service|6ff6da56b1b99d9e81977a8ffc11a50d0e8bf3fc|majinhu|2026-05-20|fix(gf): 修复保险附件为空时的处理逻辑|origin/20260508-guangfa-binwang
+rrsjk-light-service|75ffdaa98107a66109eba1b8ceed7c1b1b4160b9|majinhu|2026-05-20|feat(gf): 添加广发电站信息修改结果同步更新功能|origin/20260424-guangfa-0507yezhu
+rrsjk-light-service|cfb1bbd163f3d2539abd560abd2abff31fbd66e0|majinhu|2026-05-20|feat(gf): 更新广发进件查询接口以支持节点类型参数|
+rrsjk-light-service|6bb53275693471f9fec7282c4c07e15eb432b71a|majinhu|2026-05-20|feat(gf): 添加电站信息更正功能支持|
+rrsjk-light-service|2390ffa62708acab3fd21497f63631a0d7cb744f|majinhu|2026-05-20|refactor(gf): 重构广发业主信息更正接口调用方法|
+rrsjk-light-service|ae366a88cc2c13d1f6dbc699c11c16ee050a80e9|majinhu|2026-05-20|feat(gf): 新增广发电站信息更正功能|
+rrsjk-light-service|cb6a36c8a090d5bbe849ff246c9877099f7275cc|majinhu|2026-05-20|refactor(model): 优化合并网格进件状态枚举引用|
+rrsjk-light-service|07ef8c5b2c5e60fcbc81038145bc9e924cb1a310|majinhu|2026-05-20|fix(gf-business-opportunity): 移除业务状态设置|
+rrsjk-light-service|4fdeb0e44bc70b33ffef4a6f25ee66a7d8a3a8e1|majinhu|2026-05-19|fix(gf): 限制推送条件。首次进件成功推送网关进件，过程进件成功才推送并网进件|
+rrsjk-light-service|2f78e7b6bb5ef07f245b9baa23d87042a28850c4|majinhu|2026-05-19|feat(gf): 添加电站名称字段支持|
+rrsjk-light-service|f9464513584b0d4f106875704e571d7f2b855e21|majinhu|2026-05-19|refactor(gf): 重构文件组装逻辑以支持多张照片|
+rrsjk-light-service|e21d8269e3375483c301d52b62ecc2a024dfdb1a|majinhu|2026-05-18|feat(gf): 添加购售电合同处理功能|
+rrsjk-light-service|801b90514e0bbbf3bc736a66820981456af2f32f|majinhu|2026-05-18|feat(gf): 业主信息修改更正结果查询 updateGfBusinessOpportunityInputPieceResult|
+rrsjk-light-service|7a3fbe2653ae86170d1bd944a55fcc4fdf47f7cc|majinhu|2026-05-18|refactor(gf): 更新技术审核状态检查逻辑|
+rrsjk-light-service|d990acafc121e72ba1b1f7d2387a62d57cad1193|majinhu|2026-05-15|feat: 验收报告图片分类修改|
+rrsjk-light-service|fd34162b597e8382ae604c5b15a37b378c7b497c|majinhu|2026-05-15|feat: 完工进件，并网进件拦截退回驳回状态|
+rrsjk-light-service|c9f07fa3ee7a6b566ff6d468eacea4a38f01922a|majinhu|2026-05-15|fix: 推送失败插入日志；电站审批驳回不再推送。|
+rrsjk-light-service|0978420814464400307a520e46494689d6cb4ce2|majinhu|2026-05-15|fix: 推送失败插入日志；|
+rrsjk-light-service|738f8eb1c8fcc6749e97aabce54c2cb0d554b905|majinhu|2026-05-14|fix: 去掉校验；|origin/2026-05-14-nibianqi
+rrsjk-light-service|2b8359cbe897e3b39922d39ecd12dba835b32f4a|majinhu|2026-05-14|fix: 更改为绑定状态；|
+rrsjk-light-service|3769fb3cb2b7ad6284d5a83cc002a90c77cc9916|lilong|2026-05-20|feat.【发电户号电费模板映射】添加接口：根据发电户号批量查询电站信息|origin/20260519-alone-electricAI
+rrsjk-light-service|e5429ef28337835f235f5863a643dc4148b2a51f|lilong|2026-05-20|feat.【发电户号电费模板映射】基础服务代码：按照发电户号批量检索信息|
+rrsjk-light-service|b322dc486fe517229b391bc5b1ce5f313bedc369|lilong|2026-05-20|feat.【发电户号电费模板映射】基础服务代码：按照发电户号批量检索信息|
+rrsjk-light-service|2194b026cf166c8f76e3eab98fb475ecba98b981|lilong|2026-05-20|feat.【发电户号电费模板映射】基础服务代码，添加修改|
+rrsjk-light-service|f24108f180b98d2b40bd4e765ffffe425b42e960|lilong|2026-05-20|feat.【发电户号电费模板映射】基础服务代码|
+rrsjk-light-service|5820650805ee3628c55d048e0268dd98287f1bcd|lilong|2026-05-18|feat.【户用光伏】招银组件功率匹配价格，打印log排查问题|origin/20260515-alone-zhaoyin-price
+rrsjk-light-service|1df6e9ca1623003ead3c9ec751724be8b4840c93|lilong|2026-05-18|feat.【户用光伏】招银组件功率匹配价格，去除查询字段batterType字段|
+rrsjk-light-service|a22177c721db242b3a04345be8aaeec13d3231b5|lilong|2026-05-18|feat.【户用光伏】招银组件功率匹配价格，module_type字段确认|
+rrsjk-light-service|4c442001fd766d60aca82462a1742251243ae73a|德|2026-05-19|fix(order): 修复采购订单查询逻辑|origin/xq-feature-rocketmq, origin/jcd-bugfix
+rrsjk-light-service|15bbc958e77a547f66d25e06c091857e35922421|德|2026-05-18|feat(hrflc): 添加删除状态字段到审计所有者记录|origin/hrflc-epc-20260312
+rrsjk-light-service|3f2cfaf4592cf06bb44060b031c03f5c742ffc33|德|2026-05-15|refactor(light): 移除未使用的依赖注入|
+rrsjk-light-service|5d54ea7ad577548626f2fbf720d0cf3dc950476e|德|2026-05-14|refactor(light): 移除未使用的依赖注入|
+rrsjk-light-service|ee595c18937f56e7671bab8619a100ecb984f112|德|2026-05-14|feat(light): 添加分中心信息字段支持|
+rrsjk-light-service|99e3aa9e37b7d05d4a26f36afc80c9883038260c|解钦|2026-05-20|feat(feature-cm-wind-electric): 收入政策的状态修改和生成的字政策字段设置|
+rrsjk-light-service|8a9d967c3d6fdc3ad41d26925427bcda2e6c004d|解钦|2026-05-20|feat(feature-cm-wind-electric): 项目定制类型的政策编码生成|
+rrsjk-light-service|0a5fe895d0c4548f61c4ca81451c473531ea57c7|解钦|2026-05-20|feat(feature-cm-wind-electric): 提供根据业务类型查询节点的方法|
+rrsjk-light-service|e5c036192e8c92898354ed646d57ba82aecf3c9c|解钦|2026-05-19|fix: 电站回退重新领用兼容完工前领用的情况|
+rrsjk-light-service|880f3d11bd9c867aa24d289de43eab62b7b84e20|解钦|2026-05-19|feat(income-constrain): 收入限制修复|origin/xq-feature-income-contrain
+rrsjk-light-service|2c2388633f741ca6f558ff8e92c2f0d87bf2ec78|解钦|2026-05-19|feat(income-constrain): 中核收入增加限制问题修复|
+rrsjk-light-service|2fbdd007892ac1266e8d7b35645d1ad26fc8f45f|解钦|2026-05-19|fix: 修复电站回退领用的时候没有考虑完工前领用的问题|
+rrsjk-light-service|db2572314ecea45f82ef795c83ea2ded8d67b1e0|解钦|2026-05-19|feat(cm-wind-electric): 1. 工商业风电项目扩展计收方法字段 2. 修改设计方案|
+rrsjk-light-service|704eff2aebf198cbf364d6e1a4bc75112e44e708|解钦|2026-05-18|feat(cm-wind-electric): 工商业兼容风电|
+rrsjk-light-service|789fff6c8a5e05ad0b00c38c95c1674edce8a2bb|解钦|2026-05-18|feat(电站回退): 处理冲销领用事项时兼容完工前领用不创建SO出库队列的情况|
+rrsjk-light-service|eb8bd3835dd5b707e0575dd90fa35f632326c58e|解钦|2026-05-18|feat(电站回退): 处理冲销领用事项时兼容完工前领用不创建SO出库队列的情况|
+rrsjk-light-service|d73aba1d5beadf3d3c4b9f462f78ca8466b47b7c|解钦|2026-05-16|fix(电站回退基金收入): 基金重上收入安装费科目修复，A40 -> A41|
+rrsjk-light-service|c06ff4621232de6e5910cd2db5a86c2e4b4a443b|解钦|2026-05-14|feat(station-income-constrain): 导入收入异常判断重构|
+rrsjk-light-service|70186ba0a33b6cbca5e5d545e46c3b5fe9d93126|解钦|2026-05-14|feat(station-income-constrain):  1. 电站不同模式是否上收入的策略接口重构，增加工厂类扩展  2. 重构不同的收入模式的电站查询|
+rrsjk-light-service|04049063ebb1eae53f1379ec26badacd8be0447f|解钦|2026-05-14|feat(station-income-constrain):  1. 电站不同模式是否上收入的策略接口重构，增加工厂类扩展  2. 重构不同的收入模式的电站查询|
+rrsjk-light-service|c0935ef2d62fe53f9f633d1f20b2971498efe756|解钦|2026-05-14|feat(yuexiu-rent-pull-fix): 1. 越秀租金收益拉取问题修复 2. 租金收益列表展示问题修复|origin/xq-feature-yuexiu-bill-pull-fix
+rrsjk-light-service|cf7e5c4bf76c3674d222458528256a625d1c410c|mabin|2026-05-20|refactor(alibabaAI): 修改房产证OCR接口参数和URL配置|
+rrsjk-light-service|537f78373dbd729f992203046233b84163903ee7|mabin|2026-05-20|feat(image): 添加用户代理信息字段支持|origin/20260520-jindieFix
+rrsjk-light-service|4445200c4819696efc6136766f53cddb51a058f9|mabin|2026-05-20|fix(constants): 修正图片模板中的布尔值配置错误|origin/20260520-Image
+rrsjk-light-service|d3c26bf829f679319e5b51764731d077e2827400|mabin|2026-05-20|fix(config): 组件串线图不加验真|
+rrsjk-light-service|8c7702ae410e1d4e7c97a72b159d66bd2fb20501|mabin|2026-05-19|fix(config): 测试合并|origin/20260519-test1
+rrsjk-light-service|f72e81ddae6263ce26db69a5e77d16041e075bf2|mabin|2026-05-19|fix(config): 修改生产环境配置中的图片验真接口URL协议|
+rrsjk-light-service|27e157f8530980e50b7ed8a9cd334d9e545300f3|mabin|2026-05-19|perf(config): 修复报错|
+rrsjk-light-service|0d2c790a005a5d2be2f51e4c6ce13eb53b54a1c9|mabin|2026-05-19|perf(config): 调整图像验证线程池配置以优化性能|origin/20260423-ImageTemplateUpdate
+rrsjk-light-service|32977edbfde268aae54315955190fca69d40c23a|mabin|2026-05-19|refactor(light): 优化图片验证服务异步处理机制|
+rrsjk-light-service|c08dd1e0f9f55042eb234ef6d88d13ba1cdca49c|mabin|2026-05-19|config(image): 更新生产环境图片验证接口地址|
+rrsjk-light-service|2e213ebdc6a611d53490d76c6c59e81b972397bb|mabin|2026-05-18|feat(light): 处理历史数据增加分页处理，保证唯一处理|
+rrsjk-light-service|d1c2307f2a458679acb8534d56897c9cea6c0e4f|mabin|2026-05-18|feat(light): 处理历史数据增加分页处理，保证唯一处理|
+rrsjk-light-service|30c5fa17f48c1f44366db6c8f65daf8cedb5914b|mabin|2026-05-18|fix(light): 修复订单处理中的循环中断问题|
+rrsjk-light-service|323540e3630f5f9bc733b12c15ab2933935091a1|mabin|2026-05-18|feat(acceptance): 在并网确认和电站影像修改时新增房产证OCR识别功能|origin/20260518-fangchanzhengOCR
+rrsjk-light-service|ee04e9fa73404fcefb555f315ea8123c3af17e2f|mabin|2026-05-18|feat(alibabaAI): 添加房产证OCR识别功能|
+rrsjk-light-service|6d23d22e419176c5d267be17964740ba4f64b079|mabin|2026-05-18|refactor(AcceptanceConfirmService): 简化日志记录器引用|
+rrsjk-light-service|7324a3b84bf6c36dc0101564ea9179a28a48246e|mabin|2026-05-18|fix(payment): 金蝶历史记录记录失败原因不换行|
+rrsjk-light-service|4cee9ec18be8bd04a02dc5de1a824a1f6873a691|mabin|2026-05-16|fix(payment): 金蝶历史记录放开限制|
+rrsjk-light-service|85bbef82677b0123b6f53a4bbc1c1dc8b904d52c|mabin|2026-05-15|fix(payment): 优化处理历史数据，解决金蝶记账失败状态处理问题|
+rrsjk-light-service|39e794e56720aeda067d520698ec32befa7234f0|mabin|2026-05-14|Revert "refactor(project): 移除金蝶SAP服务相关功能"|
+rrsjk-light-service|cbf0533d377ac0a03a15bb179f87e45205635a44|mabin|2026-05-14|fix(service): 先保持注释状态|
+rrsjk-light-service|1184da521178ce7bdbe2a5802b6f05827e200cb6|mabin|2026-05-14|fix(service): 优化历史线下股转公司电费发票冲销失败返回原因保存|origin/20260415-kingdie
+rrsjk-light-service|99bd85ccb84ca576a06f932fd0942a14f84128d6|sunzn|2026-05-20|fix(business): 修复财务业务逻辑中的未税总价计算|origin/szn_merge_invoice_20260519
+rrsjk-light-service|09d0b2eb1f30a44761f15a9dc951193c92833e3a|sunzn|2026-05-19|fix(billing): 修复合并开票金额验证逻辑|origin/szn_acc_op_youhua_20260511
+rrsjk-light-service|5dda37971bbe1975bfe33d4d3159af167468fae8|sunzn|2026-05-14|fix(service): 修复操作维护服务中的SAP接口调用|
+rrsjk-light-service|99bd85ccb84ca576a06f932fd0942a14f84128d6|sunzn|2026-05-20|fix(business): 修复财务业务逻辑中的未税总价计算|origin/szn_merge_invoice_20260519
+rrsjk-light-service|09d0b2eb1f30a44761f15a9dc951193c92833e3a|sunzn|2026-05-19|fix(billing): 修复合并开票金额验证逻辑|origin/szn_acc_op_youhua_20260511
+rrsjk-light-service|5dda37971bbe1975bfe33d4d3159af167468fae8|sunzn|2026-05-14|fix(service): 修复操作维护服务中的SAP接口调用|
+rrsjk-light-service|b8b9252d929685a926b539f21e28fbca1e7f0bf2|wangxiran|2026-05-19|fix(dto): 修复LightStationLnAppDto类中的乱码字符问题|origin/featrue-20260519
+rrsjk-light-service|5a4d20f0f626770be55751cd8ba98b8e70229e6f|wangxiran|2026-05-19|fix(dto): 修复LightStationLnAppDto类中的乱码字符问题|origin/master202605191734, origin/featrue-wxr-20260519
+rrsjk-light-service|fd7b543d0d0cbf6d902bdf5c11d39e3157c38929|wangxiran|2026-05-19|feat(audit): 实现电站影像审核驳回功能|origin/feature-wxr-audit-20260519
+rrsjk-light-service|b8db69d20c230df7986b296c0304e0bd7a2f55d1|wangxiran|2026-05-15|增加并网范围校验|origin/featrue-wxr-20260515
+rrsjk-light-service|5cede4c24bc5de630eda7fe692e1ed7482cd168d|wangxiran|2026-05-14|feat(light-station): 添加组件装机功率相关字段和数据填充功能|origin/feature-wxr-20260430-app
+rrsjk-light-service|0dd6f3df1d5c1ffbc2fa051d0612d2381e71b438|laowang|2026-05-20|feat: 添加招投标当前阶段标识及待提交状态|origin/20260515-wjh-toubiaogl
+rrsjk-light-service|b2647df4798a70160a7725e3c816d0f592bd405d|laowang|2026-05-20|feat: 添加电站地区信息字段|origin/20260519-wjh-zerocityid
+rrsjk-light-service|4d9ec27944d571f579519b3a9d0f25f84d194d4f|laowang|2026-05-19|feat: 新增零碳能源代理商请求地区字段2.0|
+rrsjk-light-service|e7ec4d105f2f6f01a22031bbabcc37faa2860afd|laowang|2026-05-19|feat: 新增零碳能源代理商请求地区字段|
+rrsjk-light-service|2c2caf78ecba2e76a80f27b9e60d76469ef2c901|laowang|2026-05-19|feat: 实现招投标管理审核功能|
+rrsjk-light-service|cb11fc990b62342ef2c1ea447458ca838b4976f7|laowang|2026-05-18|feat: 新增招投标管理审核模块|
+rrsjk-light-service|c3713349f9a2c5d6b3d5554ce4e82650c5e4dc87|龙龙|2026-05-20|feat(light): 新增公共建筑类电站政策配置功能|origin/20260520_longlong_pub_build_policy
+rrsjk-light-service|ae969c435ed4f3a02a94869e8bfe8abaf4604674|龙龙|2026-05-18|refactor(light): 优化电费收益订单月份区间校验逻辑|origin/yyyyMMdd_longlong_fix
+rrsjk-light-service|efe9e10b033d09f5c081468bcd8687ef88688cea|龙龙|2026-05-18|fix(light): 解决策略项模块类型验证逻辑问题|
+rrsjk-light-service|4ec202bf5f90326f6e6ac52017644dae462c50e3|龙龙|2026-05-14|fix 循环依赖 强行中断 具体为什么 之后再查询|
+rrsjk-merchant-web|aed0592aa48b4e02eca347298fc003d2ef4db084|yumiao|2026-05-20|config:优化附件上传速度|origin/dev, dev
+rrsjk-merchant-web|b6eb03f9ca0f21cb2a3fb442f97160844c6150c9|yumiao|2026-05-18|fix:对账单暂时修复(精细化条件查询)|
+rrsjk-merchant-web|efab62efb37ea7fdb494e072493c16dfb45bdb2e|yumiao|2026-05-14|fix:组件编码导出问题|
+rrsjk-merchant-web|f1168ecb2fbe178c93b336bacabe0bd56df8258a|代继宁|2026-05-20|fix(order): 修复FAP订单取消逻辑问题|origin/20260416-FapRecordOfReceipts
+rrsjk-merchant-web|c857948d8a2476759b728c2fc9d800cc247accf3|baoxin|2026-05-20|fix:服务商省份授权|origin/feature/202605/regionUnlimit
+rrsjk-merchant-web|fd0a25a62f882f29fe8b289e66a03a3b51da544a|majinhu|2026-05-18|fix(gf): 删除合并多余重复方法|
+rrsjk-openapi-web|410e7467fc5ced4554e0cff2f0cf6443c9c21660|mabin|2026-05-16|feat(ZhongYinLease): 新增电站总发电量查询接口|origin/20260511-zhongYinLease
+rrsjk-trade-service|aa59a782fc773d39dbd1ddd101a0f89b649a9eb3|代继宁|2026-05-20|fix(order): 修正订单同步到财务系统的日期范围和发票号设置|origin/20260416-FapRecordOfReceipts
+rrsjk-trade-service|0bfb805f1cf2e1301a7a752dafc034aeac943aab|代继宁|2026-05-19|fix(order): 修复轻采购销售订单凭证处理逻辑|
+rrsjk-trade-service|58530b1c5feeb1111c7c324931fab592eff15e33|代继宁|2026-05-18|fix(order): 解决新能源FAP凭证重复更新和公司代码验证问题|
+rrsjk-trade-service|78410b0f78de3edf4047ad07fef384f4fb0465ed|代继宁|2026-05-18|``` feat(order): 新增新能源FAP凭证更新日志记录功能|
+rrsjk-trade-service|1654766374db839a9e2697b641e0b4fdf59f4809|代继宁|2026-05-18|feat(order): 添加订单编号设置功能|
+rrsjk-trade-service|8915b51b1224cc4468a48e968dcdb97665069fa4|代继宁|2026-05-18|fix(order): 修正订单账户状态初始化值|
+rrsjk-trade-service|544cb572815bd66162e1c0b20d38afa1653cbb30|代继宁|2026-05-18|feat(order): 添加订单记账状态字段|
+rrsjk-trade-service|d926d296c5713cc543c9bca8a7453ffdaf526e41|代继宁|2026-05-14|feat(order): 逆变器销售场景确认收款逻辑更新|
+rrsjk-trade-service|76a29a7abdb46229fe4afbd8a40bc6f747f3c70a|sunzn|2026-05-20|fix(invoice): 修复发票关系类型验证逻辑|origin/szn_merge_invoice_20260519
+rrsjk-trade-service|76a29a7abdb46229fe4afbd8a40bc6f747f3c70a|sunzn|2026-05-20|fix(invoice): 修复发票关系类型验证逻辑|origin/szn_merge_invoice_20260519
+system-service|fc0aedbb26d25e9a8cd63841f2b7432d15b616a5|德|2026-05-20|refactor(system): 为分中心用户DTO添加序列化支持|origin/feature/202605/regionUnlimit
+system-service|b19a9f65849682299c5522525fe61baa640d135f|德|2026-05-20|feat(system): 添加分中心用户DTO并重构用户信息传递方式|
+system-service|3236e0ccd1a005f42112b8aaa6bb66127f2490dc|德|2026-05-20|feat(system): 修改分中心用户批量操作接口支持完整用户信息|
+system-service|be46e83a3df38d88283a4795dba8f98a6413f024|德|2026-05-19|refactor(system): 移除分中心实体中的软删除字段和相关查询条件|

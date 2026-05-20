@@ -312,3 +312,22 @@
 - **查询优化**: 销售订单、意向管理、采购管理查询优化 (`51c3ee4`, 2026-01-29)
 - **回款管理**: 回款管理增加手动开票功能 (`6c927e8`, 2026-01-21)
 
+### 华融质保金防御性校验 (代码明确证明, 2026-05-18~19)
+**来源**: `rrsjk-light-service` → HuaRongIncomeQualityGuaranteeServiceImpl.java, HrflcEpcStationMode.java, HrflcFirstProjectJobServiceImpl.java, HrflcSecondProjectJobServiceImpl.java (commits cb67fb3/98f808b/23846b5/08debe1, yumiao, 2026-05-18~19)
+- **防御性校验新增**: 华融收入质保金定时任务(`HuaRongIncomeQualityGuaranteeServiceImpl`) 增加三重校验：
+  1. 检查电站是否已有记账凭证(`voucher`)，已有则跳过（防止重复记账）
+  2. 检查华融收入结算数据是否存在，不存在则跳过
+  3. 检查华融收入结算数据是否已记账(`voucher`非空)，未记账则跳过（必须先记收入再记质保金）
+- **精度修复**: `BigDecimal.ROUND_HALF_UP` → `RoundingMode.HALF_UP`（弃用旧API）
+- **异常日志**: 堆栈信息改为只记录 `e.getMessage()`，避免日志过长
+- **变量命名**: `entity` → `existsHrflcywmlB43`，`incomeSettle` → `existsHrflcywmlA55`（HRFLC业务命名规范）
+- **证据等级**: 代码明确证明
+
+### 线下验收+技术商务并行状态流转优化 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` → CompleteConfirmServiceImpl.java, BusinessStatusMode.java (commits f4c1f22/759697e, yumiao, 2026-05-19)
+- **业务变更**: 优化线下验收结合技术商务并行的电站状态流转
+- `CompleteConfirmServiceImpl`: 完工确认服务新增/修改1行，支持线下验收流程
+- `BusinessStatusMode`: 业务状态枚举变更1个值，支持技术商务并行
+- **推断**: 允许线下验收（实地验收）与技术审核、商务审核并行进行，而不是串行等待，缩短电站并网周期
+- **证据等级**: 代码明确证明
+

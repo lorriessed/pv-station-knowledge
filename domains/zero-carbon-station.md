@@ -68,3 +68,12 @@
 - **字段拆分**: `countryId/provinceId/cityId/districtId` → `agentCountryId/agentProvinceId/agentCityId/agentDistrictId` + `plantCountryId/plantProvinceId/plantCityId/plantDistrictId`
 - **API变更**: `ZeroCarbonEnergyApi` 中上传电站和安装商信息时，地区字段从 provider 信息映射到 agent 地区字段
 - **国家ID硬编码**: `agentCountryId = 129065`（中国）
+
+### 零碳适家FAP收款接入 (代码明确证明, 2026-05-19~20)
+**来源**: `rrsjk-light-service` → 代继宁 commits, `rrsjk-admin-web` → 代继宁 commits
+**关联需求**: TAEI-3021 【零碳适家】保证金收款接FAP、订单收款接FAP
+- 零碳适家业务的保证金收款和订单收款接入FAP财务系统
+- 与TAEI-3022绿证交易订单收款接FAP共享相同的技术实现
+- 代继宁负责后端开发，前端在rrsjk-admin-web中实现
+- 涉及FAP凭证补偿机制、状态常量修复、客户信息更新优化
+- **证据等级**: 代码明确证明

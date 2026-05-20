@@ -181,3 +181,25 @@ rrsjk-light-service (Dubbo Service)
   - 服务层参数格式化和注释文档更新
 - **性能提升**: 从N次单月查询 → 1次批量区间查询
 
+### 发电户号电费模板映射 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → LightStationElecTemplateMapping.java, LightStationElecTemplateMappingService/Impl, LightStationElecTemplateMappingDao, LightStationElecTemplateMapping.xml (commits f24108f/2194b02/b322dc4/e5429ef/3769fb3, lilong, 2026-05-20, branch: 20260519-alone-electricAI)
+**关联需求**: 发电户号电费模板映射
+- **实体**: `LightStationElecTemplateMapping` — 映射表 `light_station_elec_template_mapping`
+  - 用途: 建立发电户号(elec_no)与电费模板之间的映射关系
+- **服务**: `LightStationElecTemplateMappingService` — 增删改查 + 批量操作
+  - `LightStationElecTemplateMappingBatchDeleteCommand`: 批量删除命令
+  - `LightStationElecTemplateMappingDto`: 数据传输对象
+- **接口**: 新增根据发电户号批量查询电站信息接口
+- **前端**: `rrsjk-admin-web` → lilong commits 添加基础服务代码和接口
+- **Dao**: `LightStationElecTemplateMappingDao` + Mapper XML
+- **证据等级**: 代码明确证明
+
+### 工商业自持电站损益报表 (代码明确证明, 2026-05-14~19)
+**来源**: `rrsjk-admin-web` → `CmOwnerStationReportController.java`, `CmOwnerStationReportExcel.java`, `cmOwnerStationReportList.ftl` (commits a9393c1/198c335/5acd5c6, tn_wangb, 2026-05-14~19, branch: 20260506-wb-cmOwnerStationReport)
+- **报表功能**: 新增工商业自持电站损益报表，包含列表展示和导出功能
+- **字段**: 报表包含收入、成本、利润等损益相关字段
+- **列表页**: `cmOwnerStationReportList.ftl` 重构（393行变更）
+- **导出**: `CmOwnerStationReportExcel.java` 定义导出格式
+- **关联**: 与 TAEI-3025 BT报表项目可能有重叠（同一批开发人员）
+- **证据等级**: 代码明确证明
+

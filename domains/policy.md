@@ -135,3 +135,12 @@
 - **前端DTO**: `CmLightProjectNewRequest` 新增 `incomeMethod` 字段
 - **MyBatis映射**: `CmLightProject.xml` 新增 `income_method` 字段到 resultMap、INSERT、UPDATE 语句
 - **兼容处理**: 默认终验法保持向后兼容，不影响已有光伏项目
+
+### 工商业风光电收入政策 (代码明确证明, 2026-05-18~20)
+**来源**: `rrsjk-admin-web` → 解钦 commits (cm-wind-electric), `rrsjk-light-service` → cm-wind-electric 相关代码 (commits d07a3cb/621fb47/5f8c717/cd2942a/77d2442/b499350/d6876d0/9c5ec6c/d1971e9, 解钦, 2026-05-18~20, branch: feature-cm-wind-electric)
+- **立项预审**: 工商业立项预审页面新增计收方法字段（incomeMethod）
+- **收入政策配置**: 工商业收入政策新增功能，支持新增按钮和配置管理
+- **导入功能**: 收入政策导入和状态问题处理
+- **业务类型**: 支持风电(WIND_POWER)和光伏(LIGHT)两种业务类型
+- **计收方法**: 终验法(FINAL_INSPECTION) / 产值确认法(OUTPUT_VALUE)
+- **证据等级**: 代码明确证明

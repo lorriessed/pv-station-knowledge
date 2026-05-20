@@ -265,3 +265,25 @@
 ### 招投标管理审核表 (rrsjk-light-service, laowang, 2026-05-15~19)
 - **来源**: TAEI-3102 【户用光伏】CBS招投标流程
 - **tender_managment_audit**: 招投标管理审核 — 项目分类、项目名称、容量、地理信息、多级审核状态（附件/招标文件/价值链材料）、初审/终审标书
+
+### 新增数据表 (2026-05-14~21 云效驱动扫描)
+
+#### DWS数据源相关 (rrsjk-light-data-service, yumiao, 2026-05-20, Epic2)
+- **dws_inveter_data** (推断): DWS数据源逆变器数据表 — 映射到 DwsInveterData 实体
+  - 字段: inverter_sn, sp_id, station_code, station_name, brand_id, inverter_state, collector_sn, pac, full_hour, power, elec_day/month/year/total, data_time_at, bind_status, usage_status, first_link_at, station_submitter, data_source
+  - 数据源: `spring.dws.datasource` (Doris/DWS库)
+  - Mapper: `mybatis/mapper/dws/DwsInveterData.xml`
+
+#### 广发并网进件相关 (rrsjk-light-service, majinhu, 2026-05-19~20, TAEI-3073)
+- **gf_merge_grid_input_piece**: 广发并网进件 — station_code, input_piece_id, voltage_level, merge_type, feecollect_type, elec_account_num, ele_factory_num
+- **gf_business_opportunity**: 广发商机注册
+- **gf_first_input_piece**: 广发首次进件
+- **gf_complete_input_piece**: 广发过程进件（施工验收）
+- **gf_light_station**: 广发电站
+- **gf_light_station_confirm_img**: 广发电站确认影像
+
+#### AI房产证识别 (rrsjk-light-service, mabin, 2026-05-18~20, TAEI-2728)
+- **light_station_house_certificate_ocr**: 房产证OCR识别记录 — station_code, house_certificate_url, ocr_status, ocr_result(JSON), source_station_name, ocr_station_name, source_id_no, ocr_id_no, source_address, ocr_address
+
+#### 发电户号电费模板映射 (rrsjk-light-service, lilong, 2026-05-20)
+- **light_station_elec_template_mapping**: 发电户号与电费模板映射 — 建立发电户号(elec_no)与电费模板的关联关系

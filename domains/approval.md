@@ -471,3 +471,16 @@
 - Guava依赖添加
 - **关联需求**: 基础服务升级
 
+### AI房产证识别 (代码明确证明, 2026-05-18~20)
+**来源**: `rrsjk-light-service` → LightStationHouseCertificateOcr.java, LightStationHouseCertificateOcrService.java, LightImageVerification.java, CompleteConfirmServiceImpl.java (commits ee04e9f/323540e/cf7e5c4, mabin, 2026-05-18~20, branch: 20260518-fangchanzhengOCR)
+**关联需求**: TAEI-2728 【AI】AI识别房产证
+- **实体**: `LightStationHouseCertificateOcr` — 映射表 `light_station_house_certificate_ocr`
+  - 字段: stationCode, houseCertificateUrl, ocrStatus, ocrResult(JSON), sourceStationName(原业主姓名), ocrStationName(OCR识别业主名), sourceIdNo(原身份证号), ocrIdNo(OCR身份证号), sourceAddress(原地址), ocrAddress(OCR识别地址)
+- **触发时机**: 并网确认(CompleteConfirm)和电站影像修改时，自动触发房产证OCR识别
+- **技术实现**: 调用阿里云AI大模型接口进行房产证图片OCR识别
+  - 接口参数和URL配置: 2026-05-20 修正了房产证OCR接口参数和URL配置
+- **线程池**: 新增/调整线程池配置支持异步OCR处理
+- **影像验证**: `LightImageVerification` 新增房产证相关字段
+- **前端**: `rrsjk-admin-web` → mabin commits 添加房产证AI识别功能入口
+- **证据等级**: 代码明确证明
+

@@ -49,5 +49,31 @@
 - 广发与其他资方的审核流程差异
 - 广发模式下完工确认的后端服务实现类
 
+### 广发并网进件完整流程 (代码明确证明, 2026-05-19~20)
+**来源**: `rrsjk-light-service` → GfMergeGridInputPiece.java, GfApiUrlEnum.java, GfMergeGridInputPieceService/Impl, GfMergeGridInputPieceApi, GfBusinessOpportunityService/Impl, GfStationHandleStrategy, GfCompleteInputPieceProcess (commits 75ffdaa/cfb1bbd/ae366a8/2390ffa, majinhu, 2026-05-19~20, branch: 20260508-guangfa-binwang)
+**关联需求**: TAEI-3073 【户用光伏】广发并网进件-附件改造、提交、电站详情
+- **对接接口**: GfApiUrlEnum 定义15+个广发对接接口，前缀 `/inputpiece-plant/`
+  - LOGIN → OPEN_ACCOUNT → OPEN_ACCOUNT_QUERY → BUSINESS_INPUT_PIECE → FIRST_INPUT_PIECE → QUERY_INPUT_PIECE_STATE
+  - PROPERTY_CONTRACT_SIGN/PREVIEW/QRY/RUSH_CONTRACT/COMPANY_SEAL_CONTRACT/TERMINATE_CONTRACT
+  - COMPLETE_INPUT_PIECE(过程进件) → CORRECTION_INPUT_PIECE(信息更正) → QUERY_STATION_INFO
+  - QUERY_GRID_RESULT(并网结果查询) → SYNC_STATION_INFO(电站信息同步)
+- **核心实体**:
+  - `GfMergeGridInputPiece`: 并网进件，字段 stationCode, inputPieceId, voltageLevel, mergeType, feecollectType, elecAccountNum, eleFactoryNum
+  - `GfBusinessOpportunity`: 商机注册
+  - `GfFirstInputPiece`: 首次进件
+  - `GfCompleteInputPiece`: 过程进件（施工验收阶段）
+  - `GfLightStation`: 广发电站
+  - `GfLightStationConfirmImg`: 电站确认影像
+- **服务架构**:
+  - `GfMergeGridInputPieceService`: 并网进件服务，包含列表查询、详情查询、信息更正
+  - `GfMergeGridInputPieceApi`: Dubbo API 接口
+  - `GfBusinessOpportunityService`: 商机注册服务
+  - `GfStationHandleStrategy`: 电站处理策略（strategy模式）
+  - `GfModeJob`: 广发模式定时任务
+  - `GfCompleteInputPieceProcess`: 过程进件流程模型
+- **前端页面**: `rrsjk-admin-web` → gf/GfMergeGridInputPieceList.ftl(列表), gf/GfMergeGridInputPieceDetail.ftl(详情+设计信息), gf/GfLightStationList.ftl, gf/GfCompleteInputPieceList.ftl
+- **电站信息更正**: 2026-05-20 新增 `GfLightStation` 信息更正功能，支持同步更新广发电站信息修改结果
+- **证据等级**: 代码明确证明
+
 ## 来源
 - 每日代码扫描 2026-05-13，nahui-pv.mobile-h5, nahuipv_greenergy_flutter, rrsjk-light-service
