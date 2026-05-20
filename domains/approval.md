@@ -481,6 +481,39 @@
   - 接口参数和URL配置: 2026-05-20 修正了房产证OCR接口参数和URL配置
 - **线程池**: 新增/调整线程池配置支持异步OCR处理
 - **影像验证**: `LightImageVerification` 新增房产证相关字段
-- **前端**: `rrsjk-admin-web` → mabin commits 添加房产证AI识别功能入口
+- **证据等级**: 代码明确证明
+
+### 派单2.0 — 审核通过后清空审核字段 (2026-02-27 代码明确证明)
+**来源**: `rrsjk-light-service` → `BaseLightStationMode.java`, `LightStationAuditDao.java`, `LightStationAudit.xml`, `LightAuditDispatchLogDao.java`, `LightAuditDispatchLog.xml` (commits c94236d/7cd8e3e/7688d73, 解钦, TAEI-2869)
+- **背景**: 修改电站方案后需要重新走审核流程，但旧审核信息(audit_by, audit_at, reject_reson等)会残留
+- **变更逻辑**: `BaseLightStationMode` 中电站更新时将审核状态重置为 `WAIT_AUDIT`，同时清空以下字段:
+  - `audit_by` = null, `audit_at` = null, `reject_reson` = null
+  - `audit_remark` = null, `rejection_type` = null, `rejection_type_description` = null
+- **新SQL**: 新增 `updateForClearAuditInfo` 方法，与原有 `updateSimple` 不同，它显式设置上述字段为null
+- **派单逻辑优化**: `LightAuditDispatchLogDao.findWaitDispatchLogByStationIdAndAuditType` 替换了 `findLatestDispatchLogByStationIdAndAuditType`，只查询 `deal_flag = 'WAIT'` 的待派单记录
+- **证据等级**: 代码明确证明
+
+### 派单2.0 — 提交订单时技术审核状态检查 (2026-02-10 代码明确证明)
+**来源**: `rrsjk-light-service` → `DispatchOrderAspect.java` (commit a414dd62c8, 解钦)
+- **变更**: `SUBMIT` 场景从静态返回 `WAIT_FIRST_AUDIT` 改为调用 `getAuditTypeForSubmit()` 动态判断
+- **逻辑**: 检查电站是否已有 `TECH_CHECK` 类型审核且状态为 `AUDIT_OK`
+  - 技术审核通过 → 返回 `WAIT_FIRST_AUDIT`（允许派单）
+  - 技术审核未通过 → 返回 `null`（阻止派单）
+- **证据等级**: 代码明确证明
+
+### 并网资料提交校验 & 审核类型动态支持 (2026-02-10 代码明确证明)
+**来源**: `rrsjk-light-service` (commits 058d2c9b/b6f3b1f3/0a466d0c, 解钦)
+- 修复并网资料提交校验逻辑
+- 验收确认服务添加动态审核类型支持
+- 添加审核类型校验逻辑
+- **证据等级**: 代码明确证明
+
+### 方案变更 — 审核校验与变更次数统计 (TAEI-2869, 2026-02-25 代码明确证明)
+**来源**: `rrsjk-light-service` → `LightStationPlanChangeServiceImpl.java`, `LightStationPlanChange.xml`, `LightPlanChangeDetail.java`, `LightStationPlanChangeExtra.java` (commits f5705d68/807b8116/d4ce5147, 解钦)
+- **审核校验**: 创建变更方案前调用 `checkAuditProcessingPlan()`，防止并发变更
+- **变更次数统计**: 新增 `completeBeforeChangeNum`（完工前变更次数）和 `completeAfterChangeNum`（完工后变更次数）
+  - SQL子查询: `COUNT(*) FROM light_station_plan_change WHERE status='CHANGE_FINISH' AND change_node='COMPLETE_BEFORE/COMPLETE_AFTER' AND id < a.id`
+  - 变更节点枚举: `ChangeNodeEnum` — `COMPLETE_BEFORE`(完工前变更), `COMPLETE_AFTER`(完工后变更)
+- **SQL优化**: `findStationCountByDifferNode` 的 `changeId` 参数改为可选
 - **证据等级**: 代码明确证明
 

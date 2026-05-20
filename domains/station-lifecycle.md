@@ -328,6 +328,40 @@
 - **业务变更**: 优化线下验收结合技术商务并行的电站状态流转
 - `CompleteConfirmServiceImpl`: 完工确认服务新增/修改1行，支持线下验收流程
 - `BusinessStatusMode`: 业务状态枚举变更1个值，支持技术商务并行
-- **推断**: 允许线下验收（实地验收）与技术审核、商务审核并行进行，而不是串行等待，缩短电站并网周期
+- **证据等级**: 代码明确证明
+
+### 组件编码与电站型号一致性校验 (TAEI-2869, 2026-02-25 代码明确证明)
+**来源**: `rrsjk-light-service` → `LightModuleSnServiceImpl.java` (commit 24c8a5b6, 解钦)
+- 提交电站组件编码(SN)时，校验组件编码对应的物料号与新方案组件物料号是否匹配
+- 校验逻辑: `lightComponentLibrary.getSkuCode().equals(planConfigList.getSku())`
+- 不匹配时抛出: `"您提交的电站组件编码对应的型号{snCode}与电站不一致，请核实后提交"`
+- **证据等级**: 代码明确证明
+
+### 电站方案变更 — 新旧区域映射校验 (2026-02-25 代码明确证明)
+**来源**: `rrsjk-light-service` → `LightStationChangeOperationServiceImpl.java`, `NewOldRegionDto.java` (commit 1cc0b4e2, sunzn)
+- 电站变更时校验新旧区域是否在已知映射中，存储在Redis（key: `new_region_id_old_region_id`）
+- 接口: `addNewOldAreaToRedis(oldRegionId, newRegionId)` — 添加新旧区域映射
+- 不在映射中的区域变更会被拦截
+- **证据等级**: 代码明确证明
+
+### 社会化电站导入优化 (2026-02-09~11 代码明确证明)
+**来源**: `rrsjk-hds-web` → `SocializationStationController.java` (commits 73d07853/c357fbfe 等, sunzn)
+- 必填字段校验: 省市区地址、电站容量、运维承接/结束时间、合同编号、委托方全称
+- 格式校验: 手机号、身份证格式
+- ZIP文件中文编码兼容修复
+- 枚举更新: `rrsjk-light-operation-service` 更新社会化电站实体枚举值
+- 合同年限字段类型修改
+- **证据等级**: 代码明确证明
+
+### 资产所属分类 — SpecialFlag 生成 (2026-02-09 代码明确证明)
+**来源**: `rrsjk-light-service` → `LightStation.java` (commit 60ea94de, 解钦)
+- `SpecialFlagEnum.generateSpecialFlagOptions()` 生成CBS可用的资产所属分类
+- 按 name 分组枚举值，过滤 NOT_DIS
+- LightStation.xml 新增 `specialFlagList` 多值IN查询 + `firstThreePowerAtStart/End` 功率范围查询
+- **证据等级**: 代码明确证明
+
+### 工单申诉 — 超期状态重置修复 (2026-02-10 代码明确证明)
+**来源**: `rrsjk-light-operation-service` → `LightOperationWorkOrderServiceImpl.java` (commit c85550eb, sunzn)
+- 申诉审核通过时同步重置 `workOrder.setOverTime(false)`
 - **证据等级**: 代码明确证明
 

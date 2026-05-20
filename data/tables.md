@@ -287,3 +287,16 @@
 
 #### 发电户号电费模板映射 (rrsjk-light-service, lilong, 2026-05-20)
 - **light_station_elec_template_mapping**: 发电户号与电费模板映射 — 建立发电户号(elec_no)与电费模板的关联关系
+
+### 逆变器字段变更 (2026-02-13, sunzn)
+- **light_inveter**: 新增 `overvoltage_threshold_stage1` (电网过压一级保护阈值V), `output_limit` (有功功率输出限制)
+- **light_inveter_data**: 新增同上两个字段
+- **light_inveter_record**: 新增同上两个字段
+- 来源: 爱仕维(AISWEI)数据接入 + 能控云数据拉取
+
+### 方案变更次数统计字段 (2026-02-24~25, 解钦, TAEI-2869)
+- **light_station_plan_change_extra**: 新增 `complete_before_change_num` (完工前变更次数), `complete_after_change_num` (完工后变更次数)
+- 统计逻辑: `COUNT(*) FROM light_station_plan_change WHERE status='CHANGE_FINISH' AND change_node='COMPLETE_BEFORE/COMPLETE_AFTER' AND id < a.id`
+
+### 电站查询扩展条件 (2026-02-09, 解钦)
+- **light_station.xml**: 新增 `specialFlagList` (资产所属多值IN查询), `first_three_power_at` 范围查询

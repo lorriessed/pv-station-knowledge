@@ -259,7 +259,21 @@
 |---|---|
 | FD | 风电 |
 | GSY | 工商业 |
-| HYEPC | 户用EPC |
-| YW | 运维 |
-| LTSJ | 零碳世家 |
+|| HYEPC | 户用EPC |
+|| YW | 运维 |
+|| LTSJ | 零碳世家 |
+
+### 方案变更节点枚举
+**来源**: `rrsjk-light-service` → `LightStationPlanChange.java`
+| 枚举值 | 说明 |
+|---|---|
+| COMPLETE_BEFORE | 完工前变更 |
+| COMPLETE_AFTER | 完工后变更 |
+
+### 审核类型枚举 (代码确认)
+**来源**: `rrsjk-light-service` → `LightStationAudit.java`
+| 枚举值 | 说明 |
+|---|---|
+| TECH_CHECK | 技术审核 |
+| WAIT_FIRST_AUDIT | 一审(商务审核) |
 

@@ -545,3 +545,30 @@ stationParam.put("spMemberId", spMemberId);
 - **金额规则**: `InvoiceServiceImpl` 中运维收入(`OperationMaintenance`)新增数据允许单条金额小于0，但合并开票总金额必须大于0（非运维收入仍要求单条金额≥0）
 - **跳过验证**: BREAK(合同解约)、PEO开头(电费订单)、LightElec开头(工商业电费)的单据跳过含税单价×数量与含税金额的平衡验证(容差0.5元)
 - **发票明细合并方法**: `handelInvoices()` — 取第一条发票的元数据，累加所有发票的 amount/untaxAmount/taxAmount 作为合并后单条明细的价格和金额
+
+### 发票红冲 — 股权转移判断逻辑替换 (2026-02-12 代码明确证明)
+**来源**: `rrsjk-trade-service` → `InvoiceJobServiceImpl.java` (commits 3b60c259/0e964698/f4630827, 解钦)
+- **变更原因**: 原来通过 `invoice.getSystemCode()` 判断调用票税云(TAX_INVOICE_CLOUD)还是微智慧(WZH)，但股权转移后判断逻辑不准确
+- **新逻辑**: 通过 `LightCompanyInfoService.isStockTransfer(companyCode)` 查询项目公司是否股权转移
+  - 未股转(`false`) → 调用票税云(`cloudInvoiceReverseModel.reverse`)
+  - 已股转(`true`) → 调用微智慧(`wzhCloudInvoiceReverseModel.reverse`)
+- **影响范围**: 发票红冲执行(`reverseInvoiceResult`) + 发票红冲结果查询(`queryInvoiceReverseResult`) 两处
+- **涉及表**: `invoice` 表（红冲状态管理）
+- **依赖服务**: `LightCompanyInfoService`（Dubbo远程调用，查询项目公司股转状态）
+- **证据等级**: 代码明确证明
+
+### 电量账单统计 — DISTINCT去重修复 (2026-02-27 代码明确证明)
+**来源**: `rrsjk-light-operation-service` → `LightOperationStationElecBill.xml` (commit d3909faf, sunzn)
+- **问题**: JOIN操作导致同一电站被多次关联，COUNT/SUM 出现重复计算
+- **修复**: 三个统计维度全部改用 `DISTINCT`:
+  1. 子中心维度: `count(DISTINCT s.station_code)`, `sum(DISTINCT s.complete_confirm_capacity)`
+  2. 项目公司维度: `count(DISTINCT s.station_code)`, `sum(DISTINCT s.complete_confirm_capacity)`
+  3. 省份维度: `count(DISTINCT s.station_code)`, `sum(DISTINCT s.complete_confirm_capacity)`
+- **影响**: 电站总数(total_station_num)和装机容量(total_power)统计数据准确性提升
+- **证据等级**: 代码明确证明
+
+### 电费结算查询 — NULL值判断修复 (2026-02-25 代码明确证明)
+**来源**: `rrsjk-light-operation-service` (commit 5d4fb615, sunzn)
+- 修复电费结算查询条件缺失NULL值判断的问题
+- 优化电费结算任务查询逻辑 (commit bcd2f119)
+- **证据等级**: 代码明确证明

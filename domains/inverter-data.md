@@ -92,6 +92,50 @@
 - **DwsDataConverter**: DWS字段到LightInveterData的转换器，处理字段名差异和类型转换
 - **证据等级**: 代码明确证明
 
+### 逆变器变更服务校验逻辑 (2026-02-10 代码明确证明)
+**来源**: `rrsjk-light-operation-service` → `LightStationInverterChangeServiceImpl.java` (commit 9c83ff00, sunzn, TAEI-2868)
+- 创建逆变器变更申请时的多维度校验:
+  1. 旧逆变器必须存在绑定关系（`LightStationInverter` 表查询）
+  2. 旧逆变器绑定关系必须唯一（防止一条SN绑定多个电站）
+  3. 旧逆变器必须与报警电站存在绑定关系（stationCode 匹配校验）
+  4. 新逆变器不能已存在绑定关系（防止误绑定到已有电站的逆变器）
+- 不同状态处理: 已有变更记录时，区分验收通过(`TECHNICAL_ACCEPTANCE_OK`)和流程终止(`STOP`)状态
+- **证据等级**: 代码明确证明
+
+### 逆变器变更验证与品牌校验优化 (2026-02-11 代码明确证明)
+**来源**: `rrsjk-light-operation-service` (commits 77fc1b04/0b11b674/9e230c7f, sunzn)
+- 优化逆变器变更服务逻辑，添加品牌校验
+- 重构验证逻辑提升代码可维护性
+- **证据等级**: 代码明确证明
+
+### 工单备件登记 — 不创建变更信息的场景 (2026-02-11 代码明确证明)
+**来源**: `repairs` → `WoPartServiceImpl.java` (commit 6f1a2484, sunzn, TAEI-2868)
+- 新增常量 `NO_CREATE_REGISTER = -1L` 标识不需要创建变更信息的场景
+- 工单备件电站数据创建返回ID为-1时，跳过逆变器变更创建流程
+- 保持原有SN一致性验证逻辑，只在需要时执行验收通过操作
+- 场景: 工单备件登记时允许不触发电站逆变器变更流程
+- **证据等级**: 代码明确证明
+
+### 逆变器新字段 — 过压保护阈值和功率输出限制 (2026-02-13 代码明确证明)
+**来源**: `rrsjk-light-data-service` → `LightInveter.java`, `LightInveterData.java`, `LightInveterRecord.java`, `AisweiInveterResponse.java`, `LightInverterCommon.java`, `HighPerformanceNengKongCloudFixThread.java`, MyBatis Mapper XML (commit 49a8e581, sunzn)
+- 新增字段:
+  - `overvoltageThresholdStage1`: 电网过压一级保护阈值(V) — 爱仕维
+  - `outputLimit`: 有功功率输出限制 — 爱仕维
+- 覆盖实体: `LightInveter`, `LightInveterData`, `LightInveterRecord`（3个表同步新增字段）
+- 数据源: 爱仕维(AISWEI)接口和能控云数据拉取
+- 映射: `acOverVol1` → `overvoltageThresholdStage1`, `activePowerSet` → `outputLimit`
+- 数据处理: `LightInverterCommon` 中新增字段传递逻辑，确保 Record→Data 转换时不丢失
+- **证据等级**: 代码明确证明
+
+### 锦浪逆变器数据修复 (2026-02-10~11 代码明确证明)
+**来源**: `rrsjk-light-data-service` → `GinlongPullMessageClient.java`, `GinlongService.java` (commits fdcbcdfb/e23ee8e3/a2bced29/f9beab7d/ee7f9a89, sunzn)
+- 修复锦浪逆变器数据采集问题
+- 解决锦浪API响应数据解析异常
+- 解决锦浪接口调用超时问题
+- 修复逆变器数据分页查询逻辑
+- 添加 GinlongPullMessageClient 查询日志记录功能
+- **证据等级**: 代码明确证明
+
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
 - 代码来源待每日扫描补充：/data/pvcode/rrsjk-light-data-service。
