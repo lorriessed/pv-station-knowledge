@@ -75,5 +75,31 @@
 - **电站信息更正**: 2026-05-20 新增 `GfLightStation` 信息更正功能，支持同步更新广发电站信息修改结果
 - **证据等级**: 代码明确证明
 
+### 广发资方 — 项目公司配置/产品配置/项目公司政策/商机注册/营销政策 (TAEI-2884/2885/2891, 2026-03-02~16 代码明确证明)
+**来源**: `rrsjk-light-service` (majinhu, 10+ commits; baoxin, 6 commits), `rrsjk-admin-web` (龙龙/majinhu, 5 commits)
+**关联需求**: TAEI-2884 (广发资方项目公司配置/产品配置/项目公司政策), TAEI-2885 (广发商机注册对接), TAEI-2891 (广发营销政策配置)
+
+- **广发EPC模式支持**: 新增广发EPC模式 (`龙龙`, commit 633daaa, 2026-03-03)
+- **广发展信息授权协议**: 多次修复协议逻辑 (包鑫, 6 commits, 2026-03-02~04)
+- **广发首次进件**: 添加广发首次进件功能模块 (马金虎, commit cdfbac5, 2026-03-09)
+  - 广发电站详情页面图片展示功能更新 (马金虎, commit 240e83b, 2026-03-09)
+  - 广发模式屋顶结构相关字段添加 (马金虎, commit b64125b, 2026-03-02)
+  - 重构广发首片流程中的基础信息验证和产品筛选逻辑 (马金虎, commit 3135dcc, 2026-03-02)
+  - 更新广发电站首次进件功能 (马金虎, commit 7bbfbca, 2026-03-02)
+  - 修复广发商机推送逻辑，添加个人信息合同状态过滤条件 (马金虎, commit 1dfb10e, 2026-03-02)
+- **广发合同支持**:
+  - 广发合同预览和签署地址获取修复 (马金虎, commit 5a5f77e, 2026-03-11)
+  - 广发合同作废功能 (马金虎, commit c167020, 2026-03-11)
+  - 广发合同支持功能添加 (马金虎, commit 753da9c, 2026-03-11)
+  - 广发二维码查询功能 (马金虎, commit 84a3515, 2026-03-12)
+- **广发营销政策**: 广发展信息授权协议类型支持 (马金虎, commit b7e67f7, 2026-03-16)
+- **广发模式图片处理**: 添加广发模式图片处理功能 (马金虎, commit ab2acf7, 2026-03-03)
+- **商机注册推送**: `GfBusinessOpportunityProcess.businessInputPiece()` 定时任务推送商机到广发
+  - 查询条件: `businessStatus=WAIT_PUSH` AND `personInfoContractStatus=SIGNED`
+  - 推送失败处理: 状态改为 INTERCEPTION，记录驳回原因
+- **涉及文件**: `GfBusinessOpportunityProcess.java`, `GfContractProcess.java`, `GfFirstInputPieceProcess.java`, `GfDict.java`
+- **证据等级**: 代码明确证明
+
 ## 来源
 - 每日代码扫描 2026-05-13，nahui-pv.mobile-h5, nahuipv_greenergy_flutter, rrsjk-light-service
+- 历史补漏第6期扫描 2026-05-22 (2026-03-02~2026-03-22)

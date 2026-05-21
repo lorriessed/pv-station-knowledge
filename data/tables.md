@@ -307,3 +307,17 @@
 - **FAP记录表**: 凭证补偿机制相关字段、取消FAP记录时的状态处理
 - **涉及表**: 订单相关表 (trade-service), FAP凭证记录表 (light-service), 财务相关表 (finance-service)
 - **关键变更**: 订单记账状态字段跟踪订单是否已记账, FAP凭证补偿确保接口调用失败时可重试
+
+### 220KV变电站名称字段 (TAEI-2880, 2026-03-04~12)
+- **light_station.substation220kvName**: 220KV变电站名称 — 并网节点新增字段
+  - 关联DTO: `LightStationConfirmDto.substation220kvName`
+  - 校验: 长度校验 (wangxiran, 2026-03-06)
+  - **来源**: `rrsjk-light-service` → `LightStation.java`, `AcceptanceConfirmService.java`
+  - **证据等级**: 代码明确证明
+
+### 运维收入冲销字段 (TAEI-2871/2876, 2026-03-02~20)
+- **operation_maintenance.isReverse**: 是否已冲销 — "0"=已冲销, "1"=未冲销
+- **operation_maintenance.reverseBy**: 冲销操作人
+- **operation_maintenance.reverseAt**: 冲销时间
+  - **来源**: `rrsjk-light-service` → `OperationMaintenance.java`, `OperationMaintenance.xml`
+  - **证据等级**: 代码明确证明

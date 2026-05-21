@@ -589,3 +589,100 @@ stationParam.put("spMemberId", spMemberId);
   - 线下金蝶记账: 新增功能 (commit 2f4a94b99b)
 - **涉及需求**: TAEI-3021(零碳适家保证金收款接FAP), TAEI-3022(绿证交易订单收款接FAP), TAEI-3092(农户租金类个税报表及记账), TAEI-3093(电站图片模板组数据库存储)
 - **证据等级**: 代码明确证明
+
+### 运维收入成本管理 — 批量导入/批量删除/电站详情明细 (TAEI-2871/2876, 2026-03-02~20 代码明确证明)
+**来源**: `rrsjk-hds-web` (sunzn, 12 commits), `rrsjk-light-service` (sunzn, 10+ commits), `nahui-pv.hds-h5` (李培龙, 8 commits)
+
+- **批量导入**: `OperationMaintenanceController` 新增 Excel 批量导入功能，支持全空行过滤、模板下载、删除导入模板
+  - 导入时校验: 按开票序号分组校验金额总和 (`龙龙`, commit c029fbd, 2026-03-10)
+  - 允许单条负数但批次总金额必须大于0 (`龙龙`, commit 8a1f462, 2026-03-10)
+  - HDS前端: `OperationMaintenanceController` 添加导入导出功能 (sunzn, commit d684828, 2026-03-12)
+- **批量删除**: 支持批量删除运维收入账单记录
+  - 前端: `nahui-pv.hds-h5` 运维收入管理列表增加批量导入/批量删除功能 (李培龙, commit 90da666, 2026-03-12)
+- **电站详情明细**: 新增批量导入/批量删除账单的电站详情明细展示
+  - 前端: 电站收入成本明细新增子管理单号 (李培龙, commit 275488e, 2026-03-13)
+  - HDS前端: 运维收入成本管理历史导入数据明细新增传参 (李培龙, commit c87162f, 2026-03-20)
+- **冲销功能增强**:
+  - A51暂估冲销: `LightSapServiceImpl.coverOperationMaintenanceA51()` 新增 opCode 参数，支持按记账类型区分A48和A51冲销处理 (sunzn, commit eb9bba4, 2026-03-19)
+  - 冲销队列管理: `OperationMaintenanceQueueServiceImpl` 根据记账类型区分冲销处理 (sunzn, commit eb9bba4)
+  - 重复冲销修复: 解决重复冲销导致的数据异常问题 (sunzn, commit 81d600b/bbfd083, 2026-03-03)
+  - 冲销账单数据变更修复 (sunzn, commit 759ea82, 2026-03-10)
+  - 历史账单冲销任务: 保留原数据状态为"已冲销"，创建新管理单号数据及电站详情 (sunzn, 2026-03-17)
+- **涉及表**: `operation_maintenance` (新增 isReverse/reverseBy/reverseAt 字段), `operation_maintenance_station`, `operation_maintenance_queue`
+- **关联需求**: TAEI-2871 (运维收入成本管理模块迭代), TAEI-2876 (运维收入成本管理列表：增加批量导入/批量删除账单的电站详情明细)
+- **证据等级**: 代码明确证明
+
+### 零碳适家请款结算 — 对账单确认回调/云报账支付状态/安装费列表 (TAEI-2883, 2026-03-02~20 代码明确证明)
+**来源**: `rrsjk-finance-service` (代继宁, 20+ commits), `rrsjk-admin-web` (代继宁, 7 commits), `rrsjk-finance-service` (魏秋阳, sunzn)
+
+- **对账单确认回调**: `ZeroCarbonApplySettleService.zeroCarbonConfrimCallBack()` 新增回调接口，对接无纸化结算确认状态
+  - 回调参数: `ZeroCarbonApplySettleNoPaper` + `ZeroCarbonApplySettleLog`
+  - 逻辑: 对账单确认后更新请款单状态，触发后续结算流程 (代继宁, commit 74ffa56, 2026-03-19)
+- **云报账支付状态**: 新增云报账支付状态字段 `ybzPayStatus`，优化状态更新逻辑
+  - 状态流转: 初始 → 预算占用申请中(10) → 报账单申请中(11) → 支付成功/失败
+  - 定时查询出款状态: `queryYbzStatusList()` 定时查询云报账出款结果 (代继宁, commit 4869126, 2026-03-19)
+- **安装费列表优化**:
+  - 安装费列表增加对账和支付状态字段 (代继宁, commit 9777dc0, 2026-03-19)
+  - 修复零碳申请结算页面权限和数据显示问题 (代继宁, commit f7c452b, 2026-03-11)
+  - 修复零碳申请结算中的支付类型筛选和时间精度问题 (代继宁, commit d51ef8c, 2026-03-20)
+  - 完善零碳适家请款结算单合同状态处理逻辑 (代继宁, commit f6beaa79, 2026-03-17)
+  - 修复零碳申请结算状态更新逻辑 (代继宁, commit aa58333, 2026-03-17)
+  - 重构零碳申请结算审批记录处理逻辑 (代继宁, commit f2296bd, 2026-03-17)
+- **发票校验**: 新增服务商ID支持并优化发票校验流程 (代继宁, commit 7abda1d, 2026-03-20)
+- **预算占用**: 重构零碳预算占用相关实体和配置 (代继宁, commit f6db0cd, 2026-03-02)
+- **无纸化结算**: 更新无纸化结算状态并优化账单更新逻辑 (代继宁, commit 3300760, 2026-03-20)
+- **关联需求**: TAEI-2883 (零碳适家安装费结算，商户通及CBS对账单、发票、请款，对接HBC和云报账系统)
+- **证据等级**: 代码明确证明
+
+### 零碳适家智投配货申请 — 配货额度占用 (TAEI-2933, 2026-03-03~20 代码明确证明)
+**来源**: `rrsjk-admin-web` (德/姜传德, 2 commits), `rrsjk-merchant-h5` (李培龙, 2 commits), `rrsjk-finance-service` (代继宁)
+
+- **智投订单管理**: 新增智投订单详情和列表页面，实现审核功能 (德, commit 15c404b, 2026-03-02)
+- **配货申请**: 商户通新增零碳智投配货申请功能
+  - 智投备货申请列表展示变更 (李培龙, commit 44c7fdb, 2026-03-03)
+  - 逆变器详情变更当日功率数据展示，添加tooltip提示 (李培龙, commit 64bac06, 2026-03-17)
+- **发货额度占用**: 智投订单发货后需要占用服务商发货额度
+- **防重复提交**: `lightConfirmOrder` 添加防重复提交功能 (德, commit 0681ef2, 2026-03-19)
+- **关联需求**: TAEI-2933 (零碳智投商户通新增零碳智投配货申请，智投订单发货后需要占用服务商发货额度)
+- **证据等级**: 代码明确证明
+
+### 零碳适家分中心更新 (TAEI-2886, 2026-03-04 代码明确证明)
+**来源**: `rrsjk-light-service` (代继宁/姜传德/包鑫)
+
+- 分中心数据更新 (2026-03-04)
+- 关联需求: TAEI-2886 (零碳适家分中心更新0304)
+- **证据等级**: 代码明确证明
+
+### 运维收入冲销 — 重复冲销修复与历史账单冲销 (TAEI-2871, 2026-03-02~20 代码明确证明)
+**来源**: `rrsjk-light-service` (sunzn, multiple commits)
+
+- **重复冲销防护**: `isReverse` 字段默认值设置为"1"（未冲销），创建运维数据时初始化冲销状态
+  - 冲销前检查: `!"0".equals(oldData.getIsReverse())` 防止已冲销数据再次冲销
+  - 已确认收款无法冲销: `!OperationMaintenance.Status.CONFIRMED_SK.value().equals(oldData.getStatus())`
+- **历史账单冲销任务**:
+  - 逻辑变更: 保留原数据状态为"已冲销"，创建新的管理单号数据及电站详情 (而非直接修改原数据)
+  - 冲销完成后: 插入新电站明细数据，更改账单编码换新
+  - 账单主数据: 主状态更新为待确认，暂估凭证/冲销凭证/确认实际凭证/确认收款凭证全部置空
+  - 循环冲销: 每种业务类型都需要冲掉 (`reverseFinanceToSap(rowId, "C_" + bid)`)
+- **冲销凭证前缀**: `C_` + rowId (标准冲销前缀规则)
+- **已冲销数据保护**: 账单已冲销后不允许变更数据
+- **证据等级**: 代码明确证明
+
+### 审核列表 — 最近一次审核人信息展示 (TAEI-2878, 2026-03-09~16 代码明确证明)
+**来源**: `rrsjk-light-service` (yumiao, commit 76c35f9), `rrsjk-admin-web` (yumiao, commit 4285803)
+
+- **新增字段**: `lastAuditBy` (最近审核人), `lastAuditAt` (最近审核时间)
+- **审核列表页面**: 显示最近一次审核人信息 (yumiao, commit 4285803, 2026-03-16)
+- **方案/技术/商务审核驳回意见**: 数据来源更改为从审核记录表获取 (解钦, commit ef217d7, 2026-03-12)
+- **电站技术审核回显**: 修复 `changeRoofOrHouseType` 回显问题 (yumiao, 6 commits, 2026-03-09)
+- **关联需求**: TAEI-2878 (商户通菜单精简优化) 及审核相关优化
+- **证据等级**: 代码明确证明
+
+### 机制电价管理 — 批量审核功能 (2026-03-13 代码明确证明)
+**来源**: `rrsjk-admin-web` (mabin, commits 7b14446/5429dfa, 2026-03-13)
+
+- 机制电价管理增加批量审核功能
+- 导入导出增加批次号字段
+- 增加批量审核弹窗
+- 修复机制电量管理导出入围比例不显示问题 (mabin, commit 621ada2, 2026-03-11)
+- **证据等级**: 代码明确证明

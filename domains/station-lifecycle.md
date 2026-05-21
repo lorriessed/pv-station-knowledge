@@ -381,3 +381,25 @@
 - **分支**: `origin/20260518-fangchanzhengOCR`, `origin/20260520-fix`
 - **证据等级**: 代码明确证明
 
+### 并网节点 — 220KV变电站名称字段 (TAEI-2880, 2026-03-04~12 代码明确证明)
+**来源**: `rrsjk-light-service` (wangxiran, 6 commits), `rrsjk-admin-web` (wangxiran, 4 commits)
+**关联需求**: TAEI-2880 (建站并网节点增加字段：220KV变电站名称)
+
+- **后端字段**: `LightStation` / `LightStationConfirmDto` / `AcceptanceConfirmService` 新增 `substation220kvName` (220KV变电站名称) 字段
+  - 实体: `LightStation.java` 添加字段 (wangxiran, commit 179f4d9, 2026-03-04)
+  - DTO: `LightStationConfirmDto` 添加字段 (wangxiran, commit 1b09eba, 2026-03-04)
+  - 验收服务: `AcceptanceConfirmService` 添加字段到验收确认 (wangxiran, commits 03a53cd/31790b3, 2026-03-04)
+  - 长度校验: 220KV变电站名称长度校验 (wangxiran, commits 3813bdc/54772db, 2026-03-06)
+- **前端显示**: 电站详情页面显示220KV变电站名称 (wangxiran, commits 1b84d09/1903d2f/445027e, 2026-03-04~12)
+- **报表**: 工商业电站并网统计功能新增 (wangxiran, commit 079bb0e, 2026-03-10)
+- **证据等级**: 代码明确证明
+
+### 发电户号变更优化 (TAEI-2879, 2026-03-02~09 代码明确证明)
+**来源**: `rrsjk-light-service` (yumiao, 4 commits)
+**关联需求**: TAEI-2879 (建站发电户号变更优化)
+
+- 并网资料提交事务优化: 去掉不必要的事务包裹 (yumiao, commits 9b1dd31/df26f5e, 2026-03-05~06)
+- 上传过并网资料传参问题修复 (yumiao, commit 05d063a, 2026-03-09)
+- 完工审核通过后赋值商务审核状态为"待提交并网资料" (yumiao, commit fe3e60a, 2026-03-02)
+- **证据等级**: 代码明确证明
+
