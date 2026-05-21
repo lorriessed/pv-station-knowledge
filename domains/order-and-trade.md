@@ -713,6 +713,25 @@ rrsjk-trade-service 采用 **B2B2C** 混合业务模式：
 
 ---
 
+### 1.10 ESAP 服务集成 (代码明确证明, 2026-05-21 全量通读补遗)
+**来源**: `order-service` (majinhu, commits: 07dff43, 25e3549, a08e535, dcbd277, 1f534f4, 2025-11-27)
+
+order-service 在 2025-11 新增了 **ESAP 服务**集成，这是 SAP 接口的新一代实现:
+
+- **新增 SAP FI_COSMO_POST 接口支持**: 用于卡奥斯(COSMO)平台的财务过账
+- **SAP 客户端模型优化**: 重构属性转换调用，提升 SAP 客户端代码的可维护性
+- **GVS 环境 SAP 接口配置**: 更新 SAP 接口配置以支持 GVS (Global Verification Service?) 环境
+- **ESAP 测试类**: 添加了 ESAP 服务的单元测试，修改日期解析方式
+
+**技术细节**:
+- ESAP 相关代码位于 `order-impl/src/test/java/com/haier/cbs/order/` 测试目录
+- 涉及 `DubboConfig.java` 中 zookeeper 注册中心配置 (timeout=10000ms)
+- SAP 客户端模型属性转换优化减少了类型转换错误
+
+**与现有 SAP 集成的关系**: order-service 已有成熟的 SAP 同步体系 (SyncSelfOrderToSapService, SyncFinanceToSapService, SyncInvoiceToSapService)，ESAP 是对现有 SAP 集成能力的扩展，专门面向卡奥斯平台。
+
+---
+
 ## 子订单退款定时任务和订单状态管理 (代码明确证明, 2026-01-20)
 **来源**: `rrsjk-trade-service` (代继宁, commits: 04e251b, 19b16f4, 5f45c1f, 870329e, 0caf480, 2026-01-20)
 

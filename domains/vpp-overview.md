@@ -51,7 +51,7 @@ VPP (Virtual Power Plant，虚拟电厂) 是海尔新能源在光伏业务之外
 
 | 模块 | 仓库 | 职责 |
 |---|---|---|
-| 管理后台 H5 | he-vpp.admin-h5 | VPP 管理后台移动端 |
+| 管理后台 H5 | he-vpp.admin-h5 | VPP 管理后台，含售电交易/发票管理/订单管理/审批模块 |
 | 湖南政策 H5 | he-vpp.hnzl-h5 | 湖南政策相关 H5 |
 | 泰国大屏 | vpp-thai-dashboard | 泰国市场数据大屏, 华为FusionSolar北向API集成, 定时采集电站/设备数据 |
 | 模板 UI | vpp-template-ui | 前端组件模板 (pnpm monorepo, 仅 pnpm-workspace.yaml) |

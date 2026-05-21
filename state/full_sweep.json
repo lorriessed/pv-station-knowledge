@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-05-20T22:00:17.519419",
+  "last_run_at": "2026-05-21T22:00:09.087524",
   "completed_repos": [
     "base-service",
     "cbs-web",
@@ -134,11 +134,11 @@
     "nahuipv-vpp-hnzl-rn": "2026-05-20T22:00:17.519419",
     "nahuipv_greenergy_flutter": "2026-05-20T22:00:17.519419",
     "nhpv_common": "2026-05-20T22:00:17.519419",
-    "nhpv_usercenter": "2026-05-12T22:00:08.400039",
-    "nhpv_watermark_camera": "2026-05-12T22:00:08.400039",
-    "order-service": "2026-05-12T22:00:08.400039",
-    "pv-certificates": "2026-05-12T22:00:08.400039",
-    "pv.osp-uni": "2026-05-12T22:00:08.400039",
+    "nhpv_usercenter": "2026-05-21T22:07:27.938137",
+    "nhpv_watermark_camera": "2026-05-21T22:07:27.938141",
+    "order-service": "2026-05-21T22:07:27.938143",
+    "pv-certificates": "2026-05-21T22:07:27.938146",
+    "pv.osp-uni": "2026-05-21T22:07:27.938148",
     "pv.ospboard-h5": "2026-05-12T22:00:08.400039",
     "r_upgrade": "2026-05-12T22:00:08.400039",
     "repairs": "2026-05-12T22:00:08.400039",
@@ -306,5 +306,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 8
+  "sweep_round": 9,
+  "last_sweep_at": "2026-05-21T22:07:27.938118"
 }
