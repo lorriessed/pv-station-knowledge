@@ -139,3 +139,23 @@
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
 - 代码来源待每日扫描补充：/data/pvcode/rrsjk-light-data-service。
+
+### DWS逆变器列表数据源 (2026-05-20 代码明确证明)
+**来源**: `rrsjk-light-service` (commits a00044b205/f451e67, yumiao), `rrsjk-light-data-service` (commits a00044b205/f451e67/5925c64/544d4f2/523d7a1, yumiao), `rrsjk-admin-web` (commits c9d923c359/8f64a70aa5, yumiao), 分支 `origin/feature/202605/ods_electroc_data`
+- **DWS数据源接入**: 新增独立DWS多数据源配置，用于逆变器列表查询
+- **新实体**: `DwsInveterData` (注意拼写: DwsInveterData 非 DwsInverterData)
+- **DAO/Service**: DwsInveterDataService + 字段映射转换器 `DwsDataConverter`
+- **新接口**: `LightInveterDataService.findByPageDws()` 代理调用 `DwsInveterDataService`
+- **前端页面**: 复制 `lightInveterList.ftl` 为 `lightInveterListDws.ftl`，调用 `doListDws.do` 接口
+- **DWS表字段**: `inverter_sn`, `inverter_state` (非 inveter 拼写，修正了 mapper/实体中的拼写错误)
+- **问题修复**:
+  - DWS SqlSessionFactory 开启 `mapUnderscoreToCamelCase` (下划线→驼峰映射)
+  - DWS表无id字段: 移除实体和mapper中的id引用，`COUNT(id)` 改为 `COUNT(1)`
+  - 修正 `DwsDataConverter` 引用已删除的 `getId()` 方法
+- **证据等级**: 代码明确证明
+
+### 组件串线图 (推断, 2026-05-20)
+**来源**: `rrsjk-light-service` (commit d3c26bf829, mabin, `fix(config): 组件串线图不加验真`)
+- 组件串线图展示功能，图片验真跳过处理
+- 关联需求: TAEI-3128 逆变器列表新增展示「实际组件串线图」在逆变器详情页
+- **证据等级**: 推断

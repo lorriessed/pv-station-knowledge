@@ -365,3 +365,19 @@
 - 申诉审核通过时同步重置 `workOrder.setOverTime(false)`
 - **证据等级**: 代码明确证明
 
+### 房产证OCR识别 (TAEI-2728, 2026-05-18~20 代码明确证明)
+**来源**: `rrsjk-light-service` → `LightStationHouseCertificateOcr.java` (rrsjk-light-api), `LightStationHouseCertificateOcrServiceImpl.java` (commit ee04e9fa73, mabin), `AcceptanceConfirmServiceImpl.java`
+- **触发时机**: 并网确认 (`gridConfirm`) 和电站影像修改 (`modifyStationImg`) 时自动调用
+- **新表**: `light_station_house_certificate_ocr` (MyBatis XML 243行)
+- **Dubbo服务**: `LightStationHouseCertificateOcrService` (service.xml line 808)
+- **OCR流程**:
+  1. `createData()`: 创建记录, ocrStatus=`running` (AliStatusEnum)
+  2. `alibabaApi.houseCertificateOcr()`: 调用阿里云大模型API识别房产证
+  3. 成功: ocrStatus=`success`, 解析 JSON 提取 name/id/add 字段
+  4. 失败: ocrStatus=`failed`, 记录错误信息
+- **去重机制**: `checkIfExist(stationCode, houseUrl, userName, idNo, address)` 按5个字段组合去重
+- **实体字段**: stationCode, houseCertificateUrl, ocrStatus, ocrResult(JSON), sourceStationName/ocrStationName, sourceIdNo/ocrIdNo, sourceAddress/ocrAddress
+- **配套变更**: admin-web 添加房产证AI识别页面、图片验真优化、OSS图片查看器压缩加速
+- **分支**: `origin/20260518-fangchanzhengOCR`, `origin/20260520-fix`
+- **证据等级**: 代码明确证明
+

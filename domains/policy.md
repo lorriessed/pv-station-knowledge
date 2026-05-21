@@ -144,3 +144,26 @@
 - **业务类型**: 支持风电(WIND_POWER)和光伏(LIGHT)两种业务类型
 - **计收方法**: 终验法(FINAL_INSPECTION) / 产值确认法(OUTPUT_VALUE)
 - **证据等级**: 代码明确证明
+
+### 工商业风电 — 收入政策并行审核与产值收入法 (TAEI-3089等, 2026-05-21 代码明确证明)
+**来源**: `rrsjk-light-service` (commits eb6bb79b1b/70d878b337/37a61acc36, 解钦), (commits 34ba647038/3f623d59d0/aebab86a81/ed664f5002, tn_wangb/龙龙), `rrsjk-admin-web` (解钦 + tn_wangb)
+- **并行审核方案**: 收入政策支持并行审核（非串行），`feat(cm-wind-electric): 收入政策并行审核方案实现`
+- **项目定制政策编码**: 项目定制类型的政策编码自动生成
+- **政策状态与子政策**: 收入政策的状态修改 + 生成的子政策字段设置
+- **导入校验**: 增加收入政策导入的校验逻辑
+- **产值收入法**: 工商业风电项目新增产值收入法确认方式 (tn_wangb)
+- **终验法**: 工商业风电项目终验法 (tn_wangb, admin-web)
+- **损益报表**: 工商业自持电站损益报表二期优化 (tn_wangb, 5 commits)
+- **方案变更**: 方案变更修改功能 (tn_wangb)
+- **分支**: `origin/feature-cm-wind-electric`, `origin/20260506-wb-cmOwnerStationReport`, `origin/20260514-wb-planChange`
+- **证据等级**: 代码明确证明
+
+### 公共建筑类电站政策配置 (2026-05-20~21 代码明确证明)
+**来源**: `rrsjk-light-service` (commits c3713349f9/ec4aa571aa, 龙龙=王斌), `rrsjk-merchant-web` (commits a35d75b9be/22fd7029e0, 龙龙)
+- **政策配置**: 新增公共建筑类电站政策配置功能
+- **省份筛选**: 支持按省份ID列表查询即时奖励政策
+- **A端政策**: 支持按省市区三级筛选 (accurateToRegion, cityName, regionName)
+- **导出增强**: Excel导出新增省市区字段注解和映射
+- **Swagger**: 所有筛选参数带Swagger注解，方便前端对接
+- **分支**: `origin/20260520_longlong_pub_build_policy`, `origin/feature/202605/regionUnlimit`
+- **证据等级**: 代码明确证明

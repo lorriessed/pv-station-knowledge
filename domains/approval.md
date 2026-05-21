@@ -517,3 +517,15 @@
 - **SQL优化**: `findStationCountByDifferNode` 的 `changeId` 参数改为可选
 - **证据等级**: 代码明确证明
 
+### 方案变更驳回 — 完工后方案变更验收驳回 (TAEI-3123, 2026-05-21 代码明确证明)
+**来源**: `rrsjk-light-service` (commit 67a86bd279, wangxiran), `rrsjk-admin-web` (commit b571944e7f, wangxiran), `rrsjk-light-data-service` (commit d1e6cc7431, wangxiran)
+- **变更方案驳回目标**: 完工后方案变更的验收驳回支持驳回到方案审核节点
+- **审核驳回图片附件**: 驳回时可上传图片附件，记录驳回原因
+- **电站影像审核驳回**: 电站影像审核也支持驳回功能
+- **完整业务链**:
+  - `rrsjk-light-service`: `feat(plan): 添加变更方案驳回目标功能` + `feat(audit): 添加审核驳回图片附件功能`
+  - `rrsjk-admin-web`: `feat(light): 添加验收审核驳回节点选择功能` + `feat(audit): 添加图片审核驳回功能`
+  - `rrsjk-light-data-service`: `feat(audit): 实现电站影像审核驳回功能`
+- **分支**: `origin/feature-wangxiran-changePlan`, `origin/feature-wxr-audit-20260519`
+- **证据等级**: 代码明确证明
+
