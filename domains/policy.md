@@ -175,3 +175,11 @@
 - `policyPointList.js` — 政策积分
 - `policyExeStandardList.js` — 政策执行标准
 - `documentDetailStatusList.js` — 文档详情状态
+
+### 电站完工匹配政策区位码 (代码明确证明, 2026-05-23 补漏第7期)
+**来源**: `rrsjk-light-service` (TAEI-2967, 解钦, 2026-04-10~04-11)
+- 电站完工时重新匹配policyCode，区分不同模式、电站类型
+- 原policyCode保存到电站信息扩展表中（保留历史记录）
+- 电站完工时间和签约时间大于60天才重新匹配新的区位码
+- 完工匹配政策区位码回退机制
+- 对应需求: TAEI-2967 (完工后终止电站) + 政策匹配优化

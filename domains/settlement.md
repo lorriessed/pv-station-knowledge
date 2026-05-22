@@ -755,3 +755,17 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `nahui-dicts-serve` → `src/data/zch/base/` (袁睿林, 2026-04-17)
 - `businessModelTypeList.js`: `LIGHT_STORAGE`=零碳适家-光储, `E_STATION`=零碳E站
 - `businessModelStatus.js`: `WAIT_AUDIT`待审核 → `AUDIT_REJECT`审批不通过 → `WAIT_SIGN`待签署 → `ENABLE`已授权
+
+### 运维收入合并收款功能 (代码明确证明, 2026-05-23 补漏第7期)
+**来源**: `rrsjk-light-api/.../entity/OperationMaintenance.java`, `rrsjk-light-api/.../entity/OperationMaintenanceSapLog.java` (TAEI-2984, sunzn, commit 2982b61, 2026-04-08)
+- `OperationMaintenance` 新增 `allOrderNo` 字段 — 合并收款总单号，将多条运维收入记录合并为一笔收款
+- 新增 `OperationMaintenanceSapLog` 实体 — 运维收入管理记账日志表，记录SAP记账凭证、记账状态、凭证号等
+- `OperationMaintenanceService.mergeSk(List<Long> ids, String operateBy)` — 合并收款核心方法
+- 对应需求: TAEI-2953/2969/2972/2984 (HDS运维收入成本管理系列)
+
+### 暂估电价独立表 (代码明确证明, 2026-05-23 补漏第7期)
+**来源**: `rrsjk-light-report-api/.../entity/local/LightEstimateCityElecPrice.java` (TAEI-2959, baoxin, commit daf77a1, 2026-04-08)
+- 暂估电价查询从 `LightCityElecPrice` (通用城市电价表) 改为 `LightEstimateCityElecPrice` (独立暂估电价表)
+- `LightEstimateCityElecPrice`: id, provinceId, provinceName, cityId, cityName, elecPrice
+- 按省市区维度维护暂估电价，河北省硬编码为 0.3644
+- `LightEstimateStationServiceImpl` 电价Map构建逻辑变更

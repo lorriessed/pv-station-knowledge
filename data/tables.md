@@ -321,3 +321,22 @@
 - **operation_maintenance.reverseAt**: 冲销时间
   - **来源**: `rrsjk-light-service` → `OperationMaintenance.java`, `OperationMaintenance.xml`
   - **证据等级**: 代码明确证明
+
+### 运维收入SAP记账日志表 (TAEI-2984, 2026-04-08 代码明确证明)
+- **operation_maintenance_sap_log**: 运维收入管理记账日志
+  - `id`: 主键
+  - `allOrderNo`: 合并收款总单号
+  - 记账凭证、记账状态、凭证号等字段
+  - **来源**: `rrsjk-light-api` → `OperationMaintenanceSapLog.java` (sunzn)
+  - **证据等级**: 代码明确证明
+
+### 暂估电价表 (TAEI-2959, 2026-04-08 代码明确证明)
+- **light_estimate_city_elec_price**: 暂估电价表（按省市区维度）
+  - `id`: 主键
+  - `provinceId`: 省份ID
+  - `provinceName`: 省份名称
+  - `cityId`: 城市ID
+  - `cityName`: 城市名称
+  - `elecPrice`: 电价 (BigDecimal)
+  - **来源**: `rrsjk-light-report-api` → `LightEstimateCityElecPrice.java` (baoxin)
+  - **证据等级**: 代码明确证明

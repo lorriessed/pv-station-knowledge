@@ -82,6 +82,15 @@
 - 新增出库管控(完工前领用)页面物料领用状态数据字典
 - 关联接口: `rrsjk-merchant-web` → `LightUseOrderController.completeBeforeDoList.do`
 
+### 领用逻辑优化 — 库龄分析报表 (代码明确证明, 2026-05-23 补漏第7期)
+**来源**: `rrsjk-light-report-service`, `rrsjk-admin-web` (TAEI-2957, 解钦, 2026-03-27~03-30)
+- 新增已领料未完工材料库龄分析报表
+- 报表新增字段: 公司、品牌、物料组、产品组
+- 领用明细列表重构 (origin/xq-feature-use-deal-history)
+- 领用单新增 `completeFlag` 字段 — 用于确认完工前领用是否完工
+- 完工前领用处理历史电站数据 (含定时任务)
+- 完工节点兼容出库事务执行的逻辑变化，电站终止逻辑同步变更
+
 ## 待确认
 - 各调拨类型对应库存扣减和在途库存规则。
 - 商内调拨与普通调拨的财务/权限差异。

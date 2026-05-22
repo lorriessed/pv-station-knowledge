@@ -571,10 +571,20 @@ VPP 项目的代码模板/参考项目，包含一个完整的发票管理模块
 - **端口**: 8086, context-path: `/template`
 - **Nacos服务名**: `vpp-api-template`
 
+## 12. GDE即采即销SAP集成 (代码明确证明, 2026-05-23 补漏第7期)
+**来源**: `vpp-pv-oversea` (TAEI-2977, mabin, 2026-03-31~04-01)
+- 销售订单创建中电站信息验证和销售部门设置
+- 销售单获取客户编码接口
+- 付款计划、销售订单和采购订单确认功能
+- SAP发票账户生成中的客户编号处理
+- 冲销接口参数接收方式改为POST
+- 对应需求: TAEI-2977 (GDE即采即销临时流程)
+
 ## 13. 知识库更新记录
 
 | 日期 | 更新内容 | 来源 |
 |---|---|---|
+| 2026-05-23 | 补漏第7期: GDE即采即销SAP集成 | vpp-pv-oversea, mabin, TAEI-2977 |
 | 2026-05-15 | 全量通读5个VPP仓库: crawler(爬虫)/data-platform(数据平台)/openapi(开放API)/pv-oversea(海外光伏)/template(模板) | 本节全部内容 |
 | 2026-05-14 | 全量通读5个VPP仓库: gpower(绿电收益)/km(知识管理)/meta(产品出货)/system(系统管理)/template | domains/vpp-green-electricity.md 等 |
 | 2026-05-13 | 重写VPP项目概述: 技术栈/业务模块/定时任务/数据库表 | 全量通读5个VPP仓库 |
