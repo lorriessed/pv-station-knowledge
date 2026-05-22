@@ -92,6 +92,18 @@
 - **DwsDataConverter**: DWS字段到LightInveterData的转换器，处理字段名差异和类型转换
 - **证据等级**: 代码明确证明
 
+### 三天连续发电状态刷新 — 性能优化 (代码明确证明, 2026-05-22)
+**来源**: `rrsjk-light-data-service` → `LightInveterDataServiceImpl.java`, `LightInveterDao.java` (commits 030fa75d/73850ff6/7db3df5e, yumiao+majinhu, TAEI-3141)
+- **优化前**: 逐条查询+逐条更新，每批20个逆变器，线程池并发执行，数据库查询次数 = 逆变器数量
+- **优化后**: 
+  - 新增 `findContinuousElecSns()` 批量查询方法，一次SQL获取所有满足连续发电条件的逆变器SN集合
+  - 改为内存判断 `continuousSns.contains(data.getInveterSn())`
+  - 批量大小从20提升到500，减少数据库往返
+  - 增加锦浪拉取数据重试机制 (`73850ff6`)
+- **性能影响**: 从 O(N) 次查询降为 O(1) 次查询 + O(N) 内存判断
+- **elecStatus字段**: 新增 `fix:elecStatus字段不跟随发电流写入` (`42379cbc`)，防止状态字段被错误的流式写入覆盖
+- **证据等级**: 代码明确证明
+
 ### 逆变器变更服务校验逻辑 (2026-02-10 代码明确证明)
 **来源**: `rrsjk-light-operation-service` → `LightStationInverterChangeServiceImpl.java` (commit 9c83ff00, sunzn, TAEI-2868)
 - 创建逆变器变更申请时的多维度校验:

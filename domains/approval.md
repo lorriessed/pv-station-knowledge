@@ -323,6 +323,17 @@
 - 电站迁移审核中各审核角色的权限模型。
 - 资方主数据审核流程的具体审核节点。
 
+### 审核驳回支持按单张图片驳回 (代码明确证明, 2026-05-21)
+**来源**: `rrsjk-light-service` → `LightStationBaseAuditRequest.java`, `LightStationServiceImpl.java` (commits 9d11afa3/873488c3/67a86bd2/cbf16220, wangxiran, TAEI-3057, 分支 origin/feature-wxr-audit-20260519 + origin/feature-wangxiran-changePlan)
+- `LightStationBaseAuditRequest` 新增 `imageRejectList` 字段存储驳回图片明细
+- 新增 `LightAuditImageRejectService` 服务处理驳回图片相关操作
+- 审核通过时自动清理相关驳回记录
+- 审核驳回时保存驳回图片附件信息到数据库
+- 变更方案驳回支持选择目标节点（驳回到方案审核等）
+- **业务意义**: 之前驳回只能整单驳回，现在可以针对具体图片驳回，提升审核精确度
+- **前端关联**: `rrsjk-admin-web` 审核页面拒绝类型控件适配 (commit 6fca2a3f, wangxiran)
+- **证据等级**: 代码明确证明
+
 ---
 
 ## 完工前变更方案审批流变更 (代码明确证明, 2026-05-19)

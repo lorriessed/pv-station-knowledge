@@ -49,6 +49,21 @@
 - 广发与其他资方的审核流程差异
 - 广发模式下完工确认的后端服务实现类
 
+### 广发进件推送失败状态回退 (代码明确证明, 2026-05-22)
+**来源**: `rrsjk-light-service` → `GfCompleteInputPieceProcess.java`, `GfMergeGridInputPieceProcess.java` (commit 52621ae1, majinhu, 2026-05-22, branch: 20260508-guangfa-binwang)
+- **完整状态流**: 【技术审核通过→推完工进件→广发完工审核通过→上传并网资料→商务验收通过→推并网进件】
+- **推送失败回退规则**:
+  - 完工进件推送失败 → 退回**技术审核驳回**
+  - 并网进件推送失败 → 退回**商务验收驳回**
+- **业务意义**: 确保推送失败时电站状态回退到正确的审核驳回节点，避免状态卡死
+- **证据等级**: 代码明确证明
+
+### 广发业主信息更正 (代码明确证明, 2026-05-20)
+**来源**: `rrsjk-light-service` → `GfBusinessOpportunityServiceImpl.java` (commit ae366a88, majinhu, 2026-05-20)
+- 新增 `updateGfBusinessOpportunityInputPieceResult` 方法，查询业主信息修改更正结果
+- 支持广发业主信息更正功能
+- **证据等级**: 代码明确证明
+
 ### 广发并网进件完整流程 (代码明确证明, 2026-05-19~20)
 **来源**: `rrsjk-light-service` → GfMergeGridInputPiece.java, GfApiUrlEnum.java, GfMergeGridInputPieceService/Impl, GfMergeGridInputPieceApi, GfBusinessOpportunityService/Impl, GfStationHandleStrategy, GfCompleteInputPieceProcess (commits 75ffdaa/cfb1bbd/ae366a8/2390ffa, majinhu, 2026-05-19~20, branch: 20260508-guangfa-binwang)
 **关联需求**: TAEI-3073 【户用光伏】广发并网进件-附件改造、提交、电站详情
