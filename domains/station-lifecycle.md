@@ -403,3 +403,12 @@
 - 完工审核通过后赋值商务审核状态为"待提交并网资料" (yumiao, commit fe3e60a, 2026-03-02)
 - **证据等级**: 代码明确证明
 
+### 电站状态字典扩展 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/apv/station/` (2026-03~2026-05, 袁睿林/杨辉)
+- 新增电站状态"待三方审核"（`statusList.js`）
+- 新增备案类型（`beiAnType.js`）、项目类型（`proTypeList.js`）
+- 新增合同类型扩展：广发主合同、华融EPC业主主合同（`contractTypeList.js`）
+- 新增华融EPC合同类型（`contractTypeList.js`, 李培龙, 2026-04-27）
+- 安装方式字典大更新（`installList.js`, 310行）
+- 新增配送列表（`distributionList.js`）
+

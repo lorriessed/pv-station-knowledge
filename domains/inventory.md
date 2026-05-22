@@ -54,6 +54,34 @@
 - 查询条件: 电站编码、创建时间范围、处理状态 (success: 0=待处理, 1=已处理)
 - 通过 `getAllStationCodeByMemberId()` 按会员权限过滤电站范围
 
+### 采购与物料管理 (repairs, 2026-05-22 代码明确证明)
+- **来源**: `repairs` → `CdMaterialService.java`, `SpPurchaseService.java`, `CdMaterialSubstituteService.java`
+- **物料主数据同步**: `CdMaterialService.synchronousRrsMaterialJob()` 定时同步日日顺备件信息（物料主数据）
+- **物料替代**: `CdMaterialSubstituteService` 管理物料替代关系
+- **物料质保**: `CdMaterialWarrantService` 管理物料质保期
+- **采购单**: `SpPurchaseService` — 新增/编辑/提交/删除采购单
+- **安全库存**: `SpWarehouseAttachService.SynchronizeJob()` 定时同步安全库存
+
+### 备件款账单流水 (repairs, 2026-05-22 代码明确证明)
+- **来源**: `repairs` → `CdWarehouseService.partsPaymentFlow()`
+- 记录订单交款/回退/认责等财务流水
+- 参数: `orderCode`(业务订单号), `sourceId`(业务ID), `warehouseId`, `operType`(账单类型), `businessAmount`, `businessDesc`, `materialId`, `detailId`, `userInfo`
+
+### 库存管理 (repairs, 2026-05-22 代码明确证明)
+- **来源**: `repairs` → `SpStoreageService.java`, `SpStoreage.java`
+- `getStoreageList()` — 查询仓库可用库存
+- `getStoreageTotalList()` — 查询仓库总库存
+- `delete()` / `deleteBatchnum()` — 删除库存/按批次号删除
+
+### 仓库调拨路线 (repairs, 2026-05-22 代码明确证明)
+- **来源**: `repairs` → `CdWarehouseRouteService.java`
+- `queryRoute()` — 调出仓库列表，关联调拨圈，如果维护了就展示维护服务商，没有维护则返回空
+
+### 完工前领用物料状态 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/apv/store/useStatusList.js` (袁睿林, 2026-03-19)
+- 新增出库管控(完工前领用)页面物料领用状态数据字典
+- 关联接口: `rrsjk-merchant-web` → `LightUseOrderController.completeBeforeDoList.do`
+
 ## 待确认
 - 各调拨类型对应库存扣减和在途库存规则。
 - 商内调拨与普通调拨的财务/权限差异。

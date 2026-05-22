@@ -167,3 +167,11 @@
 - **Swagger**: 所有筛选参数带Swagger注解，方便前端对接
 - **分支**: `origin/20260520_longlong_pub_build_policy`, `origin/feature/202605/regionUnlimit`
 - **证据等级**: 代码明确证明
+
+### 政策字典体系 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/apv/policy/` (袁睿林, 2026-03~2026-05)
+- `policyMode.js` — 政策模式（60行）
+- `policyStandardList.js` — 政策标准
+- `policyPointList.js` — 政策积分
+- `policyExeStandardList.js` — 政策执行标准
+- `documentDetailStatusList.js` — 文档详情状态

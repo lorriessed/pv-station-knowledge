@@ -277,3 +277,133 @@
 | TECH_CHECK | 技术审核 |
 | WAIT_FIRST_AUDIT | 一审(商务审核) |
 
+---
+
+## nahui-dicts-serve 前端数据字典索引 (配置证明, 2026-05-22 扫描)
+
+> 以下字典来自 `nahui-dicts-serve` 前端数据字典仓库，2026-03~2026-05 期间大量新增。
+> 这些是前端展示用的下拉选项值，实际业务逻辑以 rrsjk-light-service 后端 Java 枚举为准。
+> 来源: `nahui-dicts-serve/src/data/` (commits 2026-03~2026-05, 袁睿林/李培龙/杨辉)
+
+### 电站状态相关
+- `apv/station/statusList.js` — 电站状态（含"待三方审核"）
+- `apv/station/businessReviewStatus.js` — 商务审核状态
+- `apv/station/technicalReviewStatus.js` — 技术审核状态
+- `apv/station/manageEditStatus.js` — 实施方案变更状态
+- `apv/station/abnormal.js` — 异常状态
+- `apv/station/alarmStatusList.js` — 告警状态
+- `apv/station/dispatchStatusList.js` — 派单状态
+- `apv/station/startWorkStatusList.js` — 开工状态
+- `apv/station/roadWorkStatusList.js` — 施工进度状态
+- `apv/station/feedbackStatusList.js` — 反馈状态
+- `apv/station/feedbackTypeList.js` — 反馈类型
+- `apv/station/changeNodeList.js` — 变更节点
+- `apv/station/changeTypeList.js` — 变更类型
+- `apv/station/inverterChangeStatusList.js` — 逆变器变更状态
+- `apv/station/convergingStatusList.js` — 汇聚状态
+- `apv/station/convergingStationStatusList.js` — 汇聚电站状态
+- `apv/station/personInfoAuthStatusList.js` — 个人信息授权状态
+
+### 电站基础信息
+- `apv/station/beiAnType.js` — 备案类型
+- `apv/station/proTypeList.js` — 项目类型
+- `apv/station/contractTypeList.js` — 合同类型（含广发主合同、华融EPC等）
+- `apv/station/componentSizeList.js` — 组件尺寸
+- `apv/station/houseTypeList.js` — 房屋类型
+- `apv/station/installList.js` — 安装方式（大更新）
+- `apv/station/installPlanList.js` — 安装计划
+- `apv/station/moduleList.js` — 组件列表
+- `apv/station/shapeList.js` — 形状列表
+- `apv/station/gridTypeList.js` — 并网类型
+- `apv/station/docTypeList.js` — 文档类型
+- `apv/station/roofStyleList.js` — 屋顶样式
+- `apv/station/stationMode.js` — 电站模式
+- `apv/station/distributionList.js` — 配送列表
+- `apv/station/peirodList.js` — 期间列表
+
+### 押金/额度管理 (bail)
+- `apv/bail/shareQuotaStatus.js` — 共享额度状态
+- `apv/bail/auxiliaryQuotaAuditStatus.js` — 辅材额度审核状态
+- `apv/bail/bailType.js` — 押金类型
+- `apv/bail/payChannel.js` — 支付渠道
+- `apv/bail/payStatus.js` — 支付状态
+
+### 财务/请款
+- `apv/finance/purchaseTypeList.js` — 请款申请类型
+- `apv/finance/purchaseAuditStatus.js` — 请款申请审核状态
+- `apv/finance/purchaseAuditStatusList.js` — 审核状态列表
+- `apv/finance/moduleList.js` — 模块列表
+- `apv/finance/nodeTypeList.js` — 节点类型
+- `apv/finance/policyStandardList.js` — 政策标准
+
+### 采购/库存
+- `apv/purchase/applyTypeList.js` — 申请类型
+- `apv/purchase/orderStatusList.js` — 订单状态
+- `apv/purchase/payStatusList.js` — 支付状态
+- `apv/purchase/payTypeList.js` — 支付类型
+- `apv/purchase/invoiceStatusList.js` — 发票状态
+- `apv/purchase/invoiceTypeList.js` — 发票类型
+- `apv/purchase/customerPurchaseStatus.js` — 客户采购状态
+- `apv/purchase/specialOutboundStatus.js` — 特殊出库状态
+- `apv/purchase/stockUpStatus.js` — 备货状态
+- `apv/purchase/repurchaseReasonList.js` — 回购原因
+
+### 业主租金
+- `apv/owenrRental/receiptRecordStatus.js` — 收款记录状态
+- `apv/owenrRental/rentalPaymentStatus.js` — 租金支付状态
+- `apv/owenrRental/rentalSignTypeList.js` — 租金签约类型
+
+### 政策
+- `apv/policy/policyMode.js` — 政策模式
+- `apv/policy/policyStandardList.js` — 政策标准
+- `apv/policy/policyPointList.js` — 政策积分
+- `apv/policy/policyExeStandardList.js` — 政策执行标准
+- `apv/policy/documentDetailStatusList.js` — 文档详情状态
+
+### 超期考核
+- `apv/overdue/overdueInventory.js` — 超期库存
+- `apv/overdue/overdueStatus.js` — 超期状态
+
+### 服务商/仓储
+- `apv/base/spContractStatus.js` — 服务商合同状态
+- `apv/base/spWhitelist.js` — 服务商白名单（769行）
+- `apv/store/serviceProviderTypeList.js` — 服务商类型
+- `apv/store/useStatusList.js` — 物料领用状态（完工前领用）
+
+### 零碳适家 (zch)
+- `zch/base/businessModelTypeList.js` — 业务模式类型（LIGHT_STORAGE光储 / E_STATION零碳E站）
+- `zch/base/businessModelStatus.js` — 业务模式审核状态（WAIT_AUDIT/AUDIT_REJECT/WAIT_SIGN/ENABLE）
+- `zch/finance/sapPurchaseStatusList.js` — SAP对账单状态
+- `zch/finance/operateTypeList.js` — 操作类型
+- `zch/finance/purchaseTypeList.js` — 请款申请类型
+- `zch/finance/checkStatus.js` — 核对状态
+- `zch/finance/confirmStatusList.js` — 确认状态
+- `zch/finance/invoiceRelevanceList.js` — 发票关联
+- `zch/finance/invoiceStatusList.js` / `invoiceTypeList.js` — 发票状态/类型
+- `zch/finance/purchaseAuditStatusList.js` — 审核状态列表
+
+### 广发商机 (gf)
+- `gf/station/towardsList.js` — 朝向
+- `gf/station/designTypeList.js` — 设计方案
+- `gf/station/inverterBrandNameList.js` — 逆变器品牌
+- `gf/station/moduleBrandNameList.js` — 组件品牌
+- `gf/station/mainBeamTypeList.js` — 主梁类型
+- `gf/station/pitchedRoofFaceTypeList.js` — 坡屋面朝向
+- `gf/station/roofStructureTypeList.js` — 屋顶结构
+- `gf/station/tileTypeList.js` — 瓦片类型
+- `gf/station/towardsList.js` — 朝向
+- `gf/station/houseTypeList.js` — 房屋类型（通过 apv 共享）
+
+### 运维/HDS (osp/hds)
+- `osp/hds/importTaskOperation.js` — 导入任务操作（CONFIRMED确认暂估 / CONFIRM_INCOME确认实际 / BATCH_COVER批量覆盖 / ALL_STATION_DETAIL / A48_STATION_DETAIL / A51_STATION_DETAIL）
+- `osp/hds/importTaskStatus.js` — 导入任务状态（PROCESSING/COMPLETED/FAILED）
+- `osp/hds/houseType.js` — 房屋类型
+
+### 华融 (hr)
+- `hr/userInfoStatus.js` — 华融用户信息登记状态
+
+### 业主银行卡变更 (osp/merchant)
+- `osp/merchant/bankInfoStatus.js` — 业主银行卡变更状态
+- `osp/merchant/bankBentPaymentMode.js` — 银行卡变更打款模式
+- `osp/merchant/bankFieldMethod.js` — 银行卡变更字段方法
+

@@ -686,3 +686,72 @@ stationParam.put("spMemberId", spMemberId);
 - 增加批量审核弹窗
 - 修复机制电量管理导出入围比例不显示问题 (mabin, commit 621ada2, 2026-03-11)
 - **证据等级**: 代码明确证明
+
+---
+
+## 备件运维财务结算 (repairs, 2026-05-22 代码明确证明)
+**来源**: `repairs` → finance/ 目录下各 Service 接口
+
+### 服务商清欠三级审批
+- **流程**: 运维商提交 → 中心审批 → 业务部审批 → 财务审批
+- **状态机**: 初始(0) → 已提交(1) → 中心通过(2)/驳回(3) → 业务部通过(4)/驳回(5) → 财务通过(6)/驳回(7) / 取消(8)
+- **Service**: `SpAdvanceClearEntityService` — `centerApproval()` / `businessDepartmentApproval()` / `financeApproval()`
+
+### 预付/交款管理
+- **状态机**: 初始(0) → 已提交(1) → 交款成功(2)/失败(3) → 审批通过(4)/驳回(5) → 退款成功(6)/失败(7)
+- **Service**: `SpAdvancePaymentService` — `receivePayStatus()` 接收服务商收款状态
+
+### 应付账款
+- `monthStartAccountsPayableJob()` — 月初统计应付账款定时任务
+- `confirmSettle()` — 确认账单
+- `saveContractInfo()` / `updateContractInfo()` — 应付账单合同信息管理（DCC 电签）
+- `getSignUrl()` — 获取电签链接
+- `signCallback()` — 签章回调流程
+- `requestPayment()` — 应付账单请款
+- `updateSettleStatus()` — 定时更新付款状态
+
+### 应收账款
+- `monthStartAccountsReceivableJob()` — 月初统计应收账款定时任务
+- `confirm()` — 确认账单
+- `signCallback()` — 签章回调流程
+
+### SAP 记账 (repairs 服务)
+- **业务类型**: B07=入库记账, B25=领用记账, B23=扣除押金记账(运维商责任), B24=厂家责任记账(供应商责任)
+- `addSpSapAccountTranSn()` — 调拨/服务订单新增 SAP
+- `addSpSapAccountTranSnDetailSh()` — 货损插销新增 SAP
+- `addSpSapAccountOldbackListsDetail()` — 旧件回退作废新增 SAP
+- `synchronizationSapAccountJob()` — 同步 SAP 信息定时任务
+
+### 保外收入统计
+- `warrantIncomeCountJob()` — 保外收入数据统计定时任务
+
+---
+
+### 业主银行卡变更管理 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-pv.greenenergy-mini` → `packageB/pages/bankChange/` + `nahui-dicts-serve` → `src/data/osp/merchant/bankInfoStatus.js` 等 (袁睿林, 2026-02)
+- 云管家光伏管理新增银行卡变更管理入口
+- 功能流程: 申请 → 变更记录列表 → 审核
+- 相关数据字典:
+  - `bankInfoStatus.js` — 业主银行卡变更状态
+  - `bankBentPaymentMode.js` — 银行卡变更打款模式
+  - `bankFieldMethod.js` — 银行卡变更字段方法
+
+### HDS 运维收入导入任务 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/osp/hds/importTaskOperation.js` (李培龙, 2026-04-08)
+- 导入任务操作类型:
+  - `CONFIRMED` — 确认暂估
+  - `CONFIRM_INCOME` — 确认实际
+  - `BATCH_COVER` — 批量覆盖（冲销）
+  - `ALL_STATION_DETAIL` — 导入电站详情
+  - `A48_STATION_DETAIL` — A48导入电站详情（运维政策兑现）
+  - `A51_STATION_DETAIL` — A51导入电站详情（暂估记账）
+- 导入任务状态: `PROCESSING` 处理中 → `COMPLETED` 已完成 / `FAILED` 处理失败
+
+### 请款申请审核状态 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/apv/finance/purchaseAuditStatus.js` (袁睿林, 2026-04-28)
+- 新增请款申请审核状态字典文件（曾被删除后恢复，commit 4e20c548）
+
+### 零碳适家业务模式 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/zch/base/` (袁睿林, 2026-04-17)
+- `businessModelTypeList.js`: `LIGHT_STORAGE`=零碳适家-光储, `E_STATION`=零碳E站
+- `businessModelStatus.js`: `WAIT_AUDIT`待审核 → `AUDIT_REJECT`审批不通过 → `WAIT_SIGN`待签署 → `ENABLE`已授权

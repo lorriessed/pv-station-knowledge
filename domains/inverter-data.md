@@ -159,3 +159,12 @@
 - 组件串线图展示功能，图片验真跳过处理
 - 关联需求: TAEI-3128 逆变器列表新增展示「实际组件串线图」在逆变器详情页
 - **证据等级**: 推断
+
+### 逆变器维修流程 (repairs, 2026-05-22 代码明确证明)
+**来源**: `repairs` → `SpInverterInfoService.java`, `InverterStatusEnum.java`, `SpInverterSnInfoService.java`
+- **独立于发电数据绑定**的逆变器维修业务流程，在 `repairs` 服务中管理
+- **状态机**: 初始(0) → 已提交(1) → 供应商通过(2)/驳回(3) → 运维商寄回(4) → 供应商签收(5) → 供应商发货(6) → 运维商签收(7) / 取消(8)
+- **业务实体**: `sp_inverter_info`(维修申请主表), `sp_inverter_sn_info`(SN明细)
+- **审批流程**: 运维商创建 → 供应商审批（维修措施+维修价格+预计完成时间）→ 运维商寄回（物流单号）→ 供应商签收 → 供应商发货 → 运维商签收
+- **Service**: `SpInverterInfoService` — save/submitOrder/supplierApproval/operationAndMaintenanceVendorsPost/supplierSign/supplierDelivery/operationAndMaintenanceVendorsSign
+- **证据等级**: 代码明确证明

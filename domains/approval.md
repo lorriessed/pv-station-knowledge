@@ -529,3 +529,13 @@
 - **分支**: `origin/feature-wangxiran-changePlan`, `origin/feature-wxr-audit-20260519`
 - **证据等级**: 代码明确证明
 
+### 实施方案变更状态 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/apv/station/manageEditStatus.js` (张硕文, 2026-05-21)
+- 实施方案变更状态数据字典新增
+
+### 招投标审核状态 (前端配置证明, 2026-05-22 扫描回溯)
+**来源**: `nahui-dicts-serve` 关联后端 `rrsjk-light-service` → `TenderManagmentAudit.java` (commit f2eabc2, laowang, 2026-05-15)
+- 需求: TAEI-3102 【户用光伏】CBS招投标流程
+- 审核状态: `AGREE`通过 / `DISAGREE`驳回 / `REJECT`拒绝(仅首次附件审核)
+- 项目分类: `FD`风电 / `GSY`工商业 / `HYEPC`户用EPC / `YW`运维 / `LTSJ`零碳世家
+

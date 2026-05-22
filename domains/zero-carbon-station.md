@@ -77,3 +77,8 @@
 - 代继宁负责后端开发，前端在rrsjk-admin-web中实现
 - 涉及FAP凭证补偿机制、状态常量修复、客户信息更新优化
 - **证据等级**: 代码明确证明
+
+### 零碳适家业务模式 (前端配置证明, 2026-05-22 扫描)
+**来源**: `nahui-dicts-serve` → `src/data/zch/base/` (袁睿林, 2026-04-17)
+- `businessModelTypeList.js`: `LIGHT_STORAGE`=零碳适家-光储, `E_STATION`=零碳E站, `ALL`=所有模式
+- `businessModelStatus.js`: `WAIT_AUDIT`待审核 → `AUDIT_REJECT`审批不通过 → `WAIT_SIGN`待签署 → `ENABLE`已授权
