@@ -1,6 +1,6 @@
 # 逆变器与发电数据
 
-更新时间: 2026-05-16
+更新时间: 2026-05-23
 
 ## 已确认知识
 
@@ -73,8 +73,21 @@
 - 这是对 2026-05-12 锦浪逆变器数据采集链路集中修复的后续优化，增加可观测性
 - **证据等级**: 代码明确证明
 
+### 逆变器列表导出排序修复 (代码明确证明, 2026-05-23)
+**来源**: `rrsjk-admin-web` → `LightInveterController.java` (commit a132fbeb, yumiao, 2026-05-23); `rrsjk-light-data-service` → `LightInveterDataService.java`, `LightInveterDataDao.java`, `LightInveterDataServiceImpl.java`, `LightInveterData.xml` (commit 03d26bf8, yumiao, 2026-05-23)
+- **问题**: 逆变器列表导出原使用 `findByPage()` (排序 `data_time_at DESC`)，分页导出时数据顺序与页面不一致
+- **修复方案**: 新增专用导出方法链:
+  - Controller: `doExport()` 中 `lightInveterDataService.findByPage()` → `lightInveterDataService.exportPage()`
+  - Service: 新增 `exportPage()` 方法，调用 `lightInveterDataDao.exportByCbs()`
+  - DAO: 新增 `exportByCbs()` 方法，复用 `newFindByCbs` 同名 SQL 但排序改为 `ORDER BY id DESC`
+  - Mapper XML: `exportByCbs` 与 `newFindByCbs` 查询字段完全相同（27列），仅排序子句不同
+- **排序差异**: 页面列表 `newFindByCbs` 按 `data_time_at DESC`（最新数据优先），导出 `exportByCbs` 按 `id DESC`（最新插入记录优先）
+- **影响范围**: 仅影响 `rrsjk-admin-web` 逆变器列表导出功能，不影响页面列表展示 (`doList.do`)
+- **pom.xml**: rrsjk-admin-web 父版本 8.0.5 → 8.0.6
+- **证据等级**: 代码明确证明
+
 ## 待确认
-- 各数据源的字段映射差异。
+|- 各数据源的字段映射差异。
 - 发电告警的触发条件和业务口径。
 - `rrsjk-light-iot-service` IoT 服务的具体职责和数据流 (commit 7dcf95b, 2026-05-14 初始化项目基础结构和配置)
 - CQ_GDT 模式的首次并网时间(`first_three_power_at`)从 `light_station` 而非 `light_station_elec` 获取的业务原因

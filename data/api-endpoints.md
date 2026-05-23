@@ -309,6 +309,62 @@
 
 **推断**: Dubbo 接口，被 HDS(hds-web)、商户通(merchant-micro)、APP(pv.osp-uni) 三端调用
 
+### 用户问题管理 API (rrsjk-admin-web)
+**来源**: `UserProblemManagementController.java` (2026-05-23 全量通读)
+基础路径: `/userProblemManagement`
+
+| 路径 | 说明 | 权限 |
+|---|---|---|
+| list.html | 列表页面 | userProblemManagement:read:list |
+| doList.do | 分页查询 | userProblemManagement:read:list |
+| doExport.do | 导出 | userProblemManagement:read:export |
+
+**查询条件**: userAccount, userName, isSolved, startTime, endTime
+**导出限制**: EasyExcel, 每页3000条
+
+### BT股转模式及中核资产管理 API (rrsjk-admin-web)
+**来源**: `BtAssetManagementController.java` (2026-05-23 全量通读)
+基础路径: `/btAssetManagement/`
+
+| 路径 | 说明 | 权限 |
+|---|---|---|
+| list.html | 列表页面 | btAssetManagement:list |
+| list.do | 分页查询 | btAssetManagement:list |
+| doExport.do | 导出(限流:3次/50秒) | btAssetManagement:export |
+| downloadTemplate.do | 下载导入模板 | - |
+| importData.do | 导入数据 | btAssetManagement:import |
+
+**业务说明**: BT股转模式资产管理，包含电站编码、交易单价、运维单价、估值日期、项目公司等信息。导入时校验电站是否存在于 light_station 表，并关联 BtProjectCompanyMasterData 项目公司主数据。
+
+### BT资金资产分配明细 API (rrsjk-admin-web)
+**来源**: `BtFundAssetAllocateDetailController.java` (2026-05-23 全量通读)
+基础路径: `/btFundAssetAllocateDetail/`
+
+| 路径 | 说明 | 权限 |
+|---|---|---|
+| list.html | 列表页面 | btFundAssetAllocateDetail:list |
+| list.do | 分页查询 | btFundAssetAllocateDetail:list |
+| doExport.do | 导出 | btFundAssetAllocateDetail:export |
+| downloadTemplate.do | 下载导入模板 | - |
+| importData.do | 导入数据 | btFundAssetAllocateDetail:import |
+
+### 异步导入导出任务 API (rrsjk-async-import-export)
+**来源**: `AsyncImportExportTaskController.java` (2026-05-23 全量通读)
+基础路径: `/task`，服务端口 8099, context-path `/async`
+
+| 路径 | 方法 | 说明 |
+|---|---|---|
+| POST /export | POST | 提交异步导出任务（Redis分布式锁防重） |
+| GET /{taskId} | GET | 查询任务详情 |
+
+**技术架构**:
+- 消息队列: RocketMQ 5.0.7, Topic: `ASYNC_EXPORT_TOPIC`
+- 数据源: 双数据源 — light(光伏 rrsjk_light库) + local(异步任务本地库)
+- 存储: 导出文件上传至阿里云 OSS (bucket: rrslnfile)
+- 防重机制: Redis锁 `export_lock:{user}{taskCode}`，20分钟超时
+- 系统保护: CPU空闲<30% 或 JVM使用率>95% 时拒绝新任务
+- 当前支持的导出: `light_station_export` (电站列表导出)
+
 ### CBS招投标管理 API (rrsjk-light-service)
 **来源**: `TenderManagmentAuditService.java` (commits f2eabc25, cb11fc99, laowang, 2026-05-15~18)
 **需求**: TAEI-3102 【户用光伏】CBS招投标流程

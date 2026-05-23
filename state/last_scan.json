@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-05-22T23:01:39.598767",
+  "last_scan_at": "2026-05-23T23:01:20.909735",
   "repos": {
     "base-service": {
       "head": "9befec0aea815ef32d4cbc9e37e854bedf7023a7",
@@ -212,7 +212,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "34cc805ac7e6181181cd0858aa375e3c252f4a96",
+      "head": "a132fbeb100d9f5bf21921ab68981d679ba110b4",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -272,7 +272,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "73850ff662683fdc892fae78ff18ab7ac1474e81",
+      "head": "03d26bf8f4605ffc146fccca772e775b7738963a",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },

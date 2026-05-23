@@ -1,42 +1,40 @@
      1|# PVS 知识索引
      2|
-     3|更新时间: 2026-05-20
-     4|
-     5|## 概况
-     6|
-     7|| 指标 | 数值 |
-     8||---|---|
-     9|| 总仓库数 | 100 (PVS 72 + VPP/其他 28) |
-    10|| 已通读 | 66/100 (66%) |
-    11|| 知识库文件 | 65 个 |
-    12|| 知识库大小 | 6.4MB |
-    13|| Domain 业务文件 | 25 个 (326KB) |
-    14|| Source-map 索引 | 47,009 行 |
+更新时间: 2026-05-23
+
+## 概况
+
+| 指标 | 数值 |
+|---|---|
+| 总仓库数 | 100 (PVS 72 + VPP/其他 28) |
+| 已通读 | 100/100 (第11轮) |
+| 知识库文件 | 65+ 个 |
+| 知识库大小 | 6.4MB+ |
+| Domain 业务文件 | 27+ 个 (326KB+) |
+| Source-map 索引 | 47,009+ 行 |
     15|
-    16|## 仓库通读进度
-    17|
-    18|### Java 后端（46/60 已通读）
-    19|- **未通读 14 个**: cbs-web(438 Java), nahuipv-hnzc-app-android(220), vpp-api-auth(92), rrs-dispenser-server(63), system-service(54), rrsjk-light-common(50), rrsjk-migration-member(48), job-service(41), item-service(34), rrsjk-activity-service(31), rrsjk-app-web(30), rrsjk-light-iot-service(29), rrsjk-pay-web(29), r_upgrade(25)
-    20|
-    21|### 前端/移动端/其他（20/40 已通读）
-    22|- 主要为 Flutter 包装层、iOS 原生、微信小程序、H5 页面等
-    23|
-    24|## 目录
-    25|
-    26|### domains/ — 业务域知识 (25 个文件)
-    27|- **电站与运维**: station-lifecycle, inverter-data, investor-management, operation-and-data, zero-carbon-station
-    28|- **审核审批**: approval ⭐ (CBS 三审流程完整)
-    29|- **交易订单**: order-and-trade, settlement, inventory, policy
-    30|- **核心服务**: additional-core-services, web-and-additional-services, frontend-and-misc-services, remaining-services-and-frontends
-    31|- **资方对接**: zhaoyin-lease, guangfa-business
-    32|- **派单管理**: dispatch-order-scheduled-tasks
-    33|- **收入策略**: income-mode-strategies
-    34|- **移动端**: mobile-app-architecture
-    35|- **VPP 项目**: vpp-overview, vpp-data, vpp-gec, vpp-green-electricity, vpp-system-management, vpp-thai-dashboard, vpp-knowledge-management, vpp-product-shipment
-    36|
-    37|### modules/ — 代码仓库索引
-    38|- repositories.md: PVS 100 个仓库索引 (66/100 已通读 ✅)
-    39|- vpp-repositories.md: VPP 仓库索引
+## 仓库通读进度
+
+### 全部 100 个仓库已通读 ✅ (第11轮，2026-05-23)
+- 所有 PVS 72 + VPP/其他 28 个仓库均已完成全量通读
+- 本轮重扫: rrsjk-admin-web, rrsjk-app-web, rrsjk-appapi-web, rrsjk-async-import-export, rrsjk-cms-service
+
+## 目录
+
+### domains/ — 业务域知识 (27+ 个文件)
+- **电站与运维**: station-lifecycle, inverter-data, investor-management, operation-and-data, zero-carbon-station
+- **审核审批**: approval ⭐ (CBS 三审流程完整)
+- **交易订单**: order-and-trade, settlement, inventory, policy
+- **核心服务**: additional-core-services, web-and-additional-services, frontend-and-misc-services, remaining-services-and-frontends
+- **资方对接**: zhaoyin-lease, guangfa-business
+- **派单管理**: dispatch-order-scheduled-tasks
+- **收入策略**: income-mode-strategies
+- **移动端**: mobile-app-architecture
+- **VPP 项目**: vpp-overview, vpp-data, vpp-gec, vpp-green-electricity, vpp-system-management, vpp-thai-dashboard, vpp-knowledge-management, vpp-product-shipment
+
+### modules/ — 代码仓库索引
+- repositories.md: PVS 100 个仓库索引 (100/100 已通读 ✅)
+- vpp-repositories.md: VPP 仓库索引
     40|
     41|### data/ — 表/枚举/API
     42|- tables.md: 数据库表结构
