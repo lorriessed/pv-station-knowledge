@@ -1,414 +1,751 @@
-# 电站生命周期
+# 电站生命周期全链路状态流转
 
-更新时间: 2026-05-09
+更新时间: 2026-05-24
 
-## 已确认知识
+## 一、双状态字段设计
 
-### 主流程
-录单 -> 审核 -> 方案 -> 下单 -> 施工 -> 完工 -> 技术审核 -> 可选线下验收 -> 商务审核 -> 启用。
+电站同时维护两个状态字段，并行推进、互不阻塞：
 
-### 电站状态机
-已确认状态包括：INIT、WAIT_AUDIT、WAIT_THIRD_AUDIT、WAIT_CONFIG、WAIT_ORDER、ROADWORKING、ROADWORK_CONFIRM、COMPLETE_WAIT_AUDIT、WAIT_TECH_CHECK、WAIT_OFF_LINE_CHECK、WAIT_UPLOAD_GRID_INFO、WAIT_FIRST_AUDIT、ENABLE、DISABLE、STOP、REPURCHASE。驳回后可重新提交，异常终止包括 DISABLE、STOP、REPURCHASE。
+### 主状态 (status) — LightStation.Status 枚举
 
-### 电站模式 (ModeEnum)
-**来源**: rrsjk-light-service → `YuexiuFileEnum.java`, `entity/LightStation.java`
-| 模式 | 含义 | 对应公司 |
-|---|---|---|
-| YX | 越秀模式 | 1Q10 (青岛海尔绿色能源科技有限公司) |
+| 状态值 | 含义 | 阶段 |
+|--------|------|------|
+| INIT | 待提交审核 | 录单阶段 |
+| WAIT_AUDIT | 待审核 | 方案审核 |
+| WAIT_THIRD_AUDIT | 待三方审核 | 资方投件审核 |
+| AUDIT_REJECT | 驳回 | 审核驳回 |
+| WAIT_CONFIG | 审核完成待配方案 | 方案配置 |
+| WAIT_ORDER | 待下单 | 备货前 |
+| ROADWORKING | 施工中 | 下单后 |
+| ROADWORK_CONFIRM | 施工信息待确认 | 施工确认 |
+| ROADWORK_REJECT | 施工信息驳回 | 施工驳回 |
+| COMPLETE_WAIT_AUDIT | 完工确认审核 | 完工审核 |
+| COMPLETE_AUDIT_REJECT | 完工确认审核驳回 | 完工驳回 |
+| WAIT_TECH_CHECK | 待技术审核 | 技术审核 |
+| TECH_CHECK_REJECT | 技术审核驳回 | 技术驳回 |
+| WAIT_OFF_LINE_CHECK | 待线下验收 | 线下验收（可选） |
+| OFF_LINE_CHECK_REJECT | 线下验收驳回 | 线下驳回 |
+| WAIT_UPLOAD_GRID_INFO | 待提交并网验收资料 | 并网资料 |
+| WAIT_FIRST_AUDIT | 待商务审核 | 商务审核 |
+| FIRST_AUDIT_REJECT | 商务审核驳回 | 商务驳回 |
+| ENABLE | 已完成 | 并网启用 ✅ |
+| DISABLE | 删除 | 终止 |
+| STOP | 已终止 | 终止 |
+| REPURCHASE | 已回购 | 资方回购 |
+| SUSPENDING | 暂停 | 信息变更中冻结 |
 
-### 电站类型 (StationTypeEnum)
-**来源**: rrsjk-light-service → `YuexiuFileEnum.java`
+### 商务状态 (businessStatus) — 独立并行字段
+
+| 状态值 | 含义 |
+|--------|------|
+| WAIT_UPLOAD_GRID_INFO | 待上传并网资料 |
+| BUSINESS_INFO_UPLOADED | 已上传并网资料 |
+| WAIT_BUSINESS_AUDIT | 待商务审核 |
+| BUSINESS_AUDIT_APPROVAL | 商务审核通过 |
+| BUSINESS_AUDIT_REJECT | 商务审核驳回 |
+
+### 核心调度器
+
+**`BusinessStatusMode.java`** — 同时控制 status 和 businessStatus 的联动，是双状态流转的总调度器。
+
+---
+
+## 二、完整状态流转详解
+
+### [节点1] 创建电站 → INIT（待提交审核）
+
+**触发入口**:
+- 各模式 StationModel 的 register 方法：
+  - `LightOrdinaryStationModel.registerOrdinaryStation()` → `POST /light/station/register`
+  - `LightHouseholdStationModel.registerHouseholdStation()`
+  - `LightChdStationModel.registerChdStation()`
+  - `LightWholeVillageStationModel.submitWholeVillageStation()`
+  - **EPC模式跳过INIT**: `LightEpcStationModel.registerEpcStation()` → 直接设为 WAIT_AUDIT
+- 各 HandleStrategy: `OrdinaryStationHandleStrategy`, `YxStationHandleStrategy`, `DhStationHandleStrategy`, `GfStationHandleStrategy`, `EpcStationHandleStrategy`
+- `CacheStationServiceImpl` 的 confirmAndSubmit 方法（草稿保存）
+
+**前置校验**:
+- 业主姓名、联系方式、身份证号必填（校验合法性）
+- 省市区地址必填
+- 业主信息图片（userImgList）必填
+- 银行账户信息必填
+- 服务商信息存在且有效
+
+**状态变更**:
+- `status` = `INIT`（EPC模式直接到 WAIT_AUDIT）
+- `contractStatus` = `WAIT_CONFIRM`
+- `signStatus` = `NO_SIGN`
+- `stopStatus` = `INIT`
+- `yuexiuStatus` = `INIT`
+- `provideMaterial` = `ALL`
+
+**副作用（创建大量关联记录）**:
+- 创建电站主记录 `light_station`
+- 创建草稿记录 `light_staging_records`
+- 创建合同记录 `light_station_contract_record`
+- 创建审核记录 `light_station_audit`（状态 WAIT_AUDIT）
+- 创建方案配置 `light_station_plan_config`
+- 保存业主信息图片 `light_station_confirm_img`
+- 记录操作日志 `light_station_operate_log`
+- 创建电站银行卡 `light_station_bank`
+- 创建保姆/运维用户 `light_station_nanny_user`（如有）
+
+**相关表**: `light_station`, `light_staging_records`, `light_station_contract_record`, `light_station_audit`, `light_station_plan_config`, `light_station_confirm_img`, `light_station_operate_log`, `light_station_bank`, `light_station_nanny_user`
+
+---
+
+### [节点2] INIT → WAIT_AUDIT（提交方案审核）
+
+**触发入口**:
+- 各 HandleStrategy 的 `updateStation` / 提交审核方法
+- 从 INIT 状态主动提交审核
+
+**前置校验**:
+- 电站状态为 INIT
+- 资料完整性校验
+
+**状态变更**:
+- `status` = `WAIT_AUDIT`
+
+**副作用**:
+- 更新电站状态
+- 记录操作日志
+
+**相关表**: `light_station`, `light_station_operate_log`
+
+---
+
+### [节点3] WAIT_AUDIT → INIT（撤回）
+
+**触发入口**:
+- 各 HandleStrategy 的 `withdrawal` 方法
+- 服务商在审核前撤回修改
+
+**前置校验**:
+- 电站状态为 WAIT_AUDIT（才能撤回回到INIT）
+- INIT 状态下无法审核（auditInfoReject 中校验）
+
+**状态变更**:
+- `status` = `INIT`
+- `auditReason` 清空
+
+**副作用**:
+- 更新电站状态
+- 记录操作日志
+
+---
+
+### [节点4] WAIT_AUDIT → WAIT_THIRD_AUDIT（进入三方资方审核）
+
+**触发入口**:
+- `LightStationServiceImpl.auditInfoOk()` → `POST /light/station/auditInfoOk`
+- DH模式: 商机审核通过后自动流转
+- GF模式: 商机审核通过后自动流转
+
+**前置校验**:
+- 电站状态为 WAIT_AUDIT
+- DH模式: 商机状态为 `DhBusinessOpportunity.BusinessStatus.SUCCESS`
+- GF模式: 商机状态为 `GfBusinessOpportunity.BusinessStatus.SUCCESS`
+
+**状态变更**:
+- `status` = `WAIT_THIRD_AUDIT`
+- `contractStatus` = `WAIT_CONFIRM`
+- `auditAt` = 当前时间
+
+**副作用**:
+- 更新电站状态
+- 更新DH/GF电站的首次状态为 `WAIT_PUSH`
+- 更新 DH/GF 商机表状态
+- 创建审核记录
+- 更新方案信息
+- HRFLC_EPC模式: 同步PV信息
+
+**相关表**: `light_station`, `light_station_audit`, `light_station_plan_config`, `dh_light_station`, `gf_light_station`, `dh_business_opportunity`, `gf_business_opportunity`
+
+---
+
+### [节点5] WAIT_THIRD_AUDIT → WAIT_CONFIG（三方审核通过，待配方案）
+
+**触发入口**:
+- `DhQueryInputPieceStateModel.dealFirstInputPieceResponseInfo()` — DH投件结果回调
+- `GfQueryInputPieceStateModel` — GF投件结果回调
+
+**前置校验**:
+- 电站状态为 WAIT_THIRD_AUDIT
+- 投件审核状态为成功（FirstStatus.SUCCESS）
+
+**状态变更**:
+- `status` = `WAIT_CONFIG`
+
+**副作用**:
+- 更新电站状态
+- 更新商务机会状态
+- 记录操作日志
+
+**相关表**: `light_station`, `dh_business_opportunity`, `gf_business_opportunity`, `light_station_operate_log`
+
+---
+
+### [节点6] WAIT_CONFIG → WAIT_ORDER（方案配置完成）
+
+**触发入口**:
+- 方案配置完成后，通过审核确认操作触发
+- `LightConfirmOrderServiceImpl` 待下单审核确认
+
+**前置校验**:
+- 方案配置完成
+- 合同状态确认
+
+**状态变更**:
+- `status` = `WAIT_ORDER`
+
+**副作用**:
+- 更新电站状态
+- 确认方案配置
+
+**相关表**: `light_station`, `light_station_plan_config`
+
+---
+
+### [节点7] WAIT_AUDIT / WAIT_ORDER → AUDIT_REJECT（方案审核驳回）
+
+**触发入口**:
+- `LightStationServiceImpl.auditInfoReject()` → `POST /light/station/auditInfoReject`
+- `LightStationServiceImpl.auditInfoRejection()` → `POST /light/station/auditInfoRejection`（带驳回类型）
+
+**前置校验**:
+- 电站状态为 WAIT_AUDIT 或 WAIT_ORDER（且合同状态在特定列表中）
+- 驳回类型不能为空
+
+**状态变更**:
+- `status` = `AUDIT_REJECT`
+- `auditAt` = 当前时间
+- `auditBy` = 操作人
+- `auditReason` = 驳回原因
+- `rejectionType` = 拒绝类型（PROPERTY_DOCUMENT_ISSUE 等8种）
+
+**副作用**:
+- 更新电站状态
+- 创建操作日志（标注"业主信息审核"或"待下单节点驳回"）
+- 记录驳回类型和描述
+
+**拒绝类型**（仅原因分类，不改变状态）:
 | 类型 | 含义 |
-|---|---|
-| COMMON | 普通户用 |
-| HOUSEHOLD | 户用 |
-| PUB_BUILD | 公共建筑/B端电站 |
+|------|------|
+| PROPERTY_DOCUMENT_ISSUE | 房屋证明/辅助材料问题 |
+| DRAWING_DESIGN_ISSUE | 图纸标注及设计问题 |
+| SHADING_ISSUE | 遮挡问题 |
+| PHOTO_UPLOAD_ISSUE | 拍照、图片上传问题 |
+| EQUIPMENT_SELECTION_ISSUE | 设备选型问题 |
+| SYSTEM_INFO_ENTRY_ISSUE | 系统信息录入问题 |
+| LOCATION_SELECTION_ISSUE | 房屋选址问题 |
 
-### 资方附件体系
-**来源**: rrsjk-light-service → `constant/YuexiuFileEnum.java`
+---
 
-#### 越秀模式 (1Q10) 附件编码规则
-- 户用电站: RRS_A_01 ~ RRS_C_13 (信息授权、身份证、房产证明、踏勘设计、租赁物照片等)
-- B端电站: RRS_FR_A_01 ~ RRS_FR_B_17 (营业执照、法人身份证、村委决议、竣工材料等)
-- 按审核阶段分类: 承租人预审 → 风险审查 → 农户投放审查
+### [节点8] WAIT_ORDER → ROADWORKING（下单→施工中）
 
-#### 股转电站附件 (海昕顺/华耀顺)
-| 项目公司 | 编码前缀 | 公司编码 |
-|---|---|---|
-| 青岛海昕顺新能源 | HXS_ | 1Q10 |
-| 郑州华耀顺绿色新能源 | ZZHY_ | 1RM0 |
+**触发入口**:
+- `LightMakeOrderServiceImpl.confirmInbound()` → `POST /light/makeOrder/confirmInbound`
+- `LightMakeOrderServiceImpl.create()` — 备货申请下单
 
-### 逆变器品牌枚举
-**来源**: rrsjk-light-service → `constant/baidu/BrandEnum.java`
-| 枚举值 | 含义 |
-|---|---|
-| GINLONG | 锦浪 |
-| AISWEI / AI1 | 爱士惟 |
-| HOPEWIND | 禾望 |
-| SINENG | 上能 |
-| NAHUI | 纳晖 |
-| GOODWE | 固德威 |
-| HAIER | 海尔 |
+**前置校验**:
+- 电站状态必须为 WAIT_ORDER
+- 合同状态必须 FINISHED（已签订完成）
+- 服务商不能处于退商状态
+- 同一电站不能重复创建主料备货单
+- 共建模式: 共建费合同 + 专项合同必须都签完
+- 顶好模式: 首次进件必须审核通过
 
-### 合作方进件体系
-**来源**: rrsjk-light-service → `constant/dh/DhFileEnum.java`, `constant/gf/GfFileEnum.java`
+**状态变更**:
+- `status` = `ROADWORKING`
+- `orderAt` = 当前时间（下单时间）
 
-#### 顶好 (Dinghao) 进件
-- 商机注册阶段 (business_opportunity): BS_0_10 ~ DHBS_0_680
-  - 业主信息: 身份证、营业执照、法人身份证、银行卡、共签人信息
-  - 区分自然人(NATURE)和非自然人(NOT_NATURE)客户类型
-- 首次进件阶段 (first_input_piece): FS_前缀
-  - 勘察信息: 房屋整体、周边、内部照片
-  - 设计信息: 组件排布、支架、接线图、电气图
+**副作用（核心供应链触发点）**:
+- 创建主料备货单 `light_make_order`（初始 TO_BE_SUBMITTED）
+- 如有辅料（FourItemFlag=YES），创建辅料备货单 `light_auxiliary_make_order`
+- 创建待领用领用单 `light_use_order`（UseStatus=PENDING, UseNode=BEFORE_COMPLETE）
+  - 领用单号格式: `B` + 备货单号 + 序号（如 BLS20260524000001-1）
+- 记录操作日志："备货申请下单"
 
-#### 广发 (Guangfa) 进件
-- 商机注册阶段: BS_0_10 ~ DHBS_0_680 (类似顶好但编码略有差异)
-- 首次进件阶段: FS_前缀 + GZFZ 前缀
-  - 房屋整体类: 包含VR全景图 (FR_200020_60)
-  - 房屋屋顶类: 东南西北各方向照片
-  - 过程进件 (施工验收): CP_GZFZCP_200020_3750 ~ 4290
-    - 施工安全类、基础安装、支架安装、组件安装、逆变器安装、并网箱安装、线缆类、接地极、防水措施
+**相关表**: `light_station`, `light_make_order`, `light_auxiliary_make_order`, `light_use_order`, `light_station_operate_log`
 
-### 百度AI识别
-**来源**: rrsjk-merchant-web → `baidu/ImageRecognizeController.java`
-- 接口: `/light/imageRecognize/imageNum.do`
-- 功能: 图像AI识别太阳板数量
-- 使用百度OCR服务，记录识别日志到 `LightStationBaiduAILogService`
+详见 `domains/order-dispatch-delivery.md`
 
-## 待确认
-- 各资方模式下状态机是否存在专用跳转。
-- WAIT_OFF_LINE_CHECK 的触发条件。
+---
+
+### [节点9] WAIT_ORDER → AUDIT_REJECT（待下单驳回）
+
+**触发入口**:
+- `LightConfirmOrderServiceImpl.quitOrder()` → `POST /light/confirmOrder/quitOrder`
+- `LightStationServiceImpl.auditInfoRejection()` 中 WAIT_ORDER + 特定合同状态
+
+**前置校验**:
+- 电站状态为 WAIT_ORDER
+- 合同状态在 contractStatusList 中
+
+**状态变更**:
+- `status` = `AUDIT_REJECT`（退回待审核）
+
+**副作用**:
+- 更新待下单确认记录状态
+- 更新备货单状态为 RETURNED
+- 记录操作日志
+
+---
+
+### [节点10] ROADWORKING → ROADWORK_CONFIRM（施工完成→待确认）
+
+**触发入口**:
+- `LightWorkOrderServiceImpl.completeConfirm()` → `POST /light/workOrder/completeConfirm`
+
+**前置校验**:
+- 电站状态不为 TECH_CHECK_REJECT 或 WAIT_TECH_CHECK（非整改单）
+- 必填图片组校验（required=1的必填项）
+- 实际用料数量不能超过方案数量
+- 整改单提交时复用原状态
+
+**状态变更**:
+- `status` = `ROADWORK_CONFIRM`
+
+**副作用**:
+- 更新方案配置完成状态 `light_station_plan_config`（status=COMPLETE）
+- 更新派工单审核状态为 WAIT_SP_AUDIT
+- 更新工单施工状态为 ROADWORK_CONFIRM
+- 创建操作日志
+
+**相关表**: `light_station`, `light_station_plan_config`, `light_work_order`, `light_station_complete_img`, `light_work_order_operate_log`
+
+---
+
+### [节点11] ROADWORK_CONFIRM → ROADWORK_REJECT（施工信息驳回）
+
+**触发入口**:
+- `LightStationCompleteImgServiceImpl.roadWorkReject()` → `POST /light/completeImg/roadWorkReject`
+
+**前置校验**:
+- 电站状态为 ROADWORK_CONFIRM
+
+**状态变更**:
+- `status` = `ROADWORK_REJECT`
+
+**副作用**:
+- 更新电站状态
+- 记录操作日志
+- 通知施工队重新提交
+
+---
+
+### [节点12] ROADWORK_CONFIRM → COMPLETE_WAIT_AUDIT（完工确认审核）
+
+**触发入口**:
+- `CompleteConfirmServiceImpl.submitCompleteConfirm()` → `POST /light/completeConfirm/submitCompleteImg`
+- `LightStationCompleteImgServiceImpl.completePro()` → `POST /light/completeImg/completePro`
+
+**前置校验**:
+- 图片必填项校验（完工确认图片组）
+- 组件数量与方案数量校验（OCR识别数量比对）
+- 逆变器信息校验
+- 备案编码校验（特定模式）
+- 无待审核的方案变更申请
+
+**状态变更**:
+- `status` = `COMPLETE_WAIT_AUDIT`
+- `completeApplyAt` = 当前时间
+- 更新组件数量、倾角、配电箱等信息
+- 更新并网证URL、载荷报告图片
+
+**副作用（信息大量更新）**:
+- 更新电站状态
+- 更新方案配置为 COMPLETE 状态
+- 创建技术审核待审核记录 `light_station_audit`
+- 保存完工图片 `light_station_complete_img`
+- 调用地理编码服务获取经纬度
+- 逆变器变更OCR识别
+- 组件倾角变更OCR识别
+- 备案证OCR识别
+- 更新银行卡照片
+
+**相关表**: `light_station`, `light_station_plan_config`, `light_station_audit`, `light_station_complete_img`, `light_station_confirm_img`, `light_station_bank`, `light_work_order`
+
+---
+
+### [节点13] COMPLETE_WAIT_AUDIT → ROADWORKING / COMPLETE_AUDIT_REJECT（撤回）
+
+**触发入口**:
+- `CompleteConfirmServiceImpl.withdrawalOfComplete()` → `POST /light/completeConfirm/withdrawalOfComplete`
+
+**前置校验**:
+- 电站状态为 COMPLETE_WAIT_AUDIT
+- 未派工（orderTeamId 为空）
+
+**状态变更**:
+- 有历史驳回记录: `status` = `COMPLETE_AUDIT_REJECT`
+- 无历史驳回记录: `status` = `ROADWORKING`
+- `expectedStatus` = `COMPLETE_WAIT_AUDIT`
+
+**副作用**:
+- 乐观锁更新（updateStatusWithCheck）
+- Redis 存入撤回标记
+- 创建操作日志
+
+---
+
+### [节点14] COMPLETE_WAIT_AUDIT / COMPLETE_AUDIT_REJECT → WAIT_TECH_CHECK（完工审核通过→技术审核）
+
+**触发入口**:
+- `LightStationCompleteImgServiceImpl.editConfirmImg()` → `POST /light/completeImg/editConfirmImg`
+- `CompleteConfirmServiceImpl.stationCompletedPassed()` L3482
+
+**前置校验**:
+- 图片必填项校验
+- 组件数量与方案数量校验
+- 逆变器信息校验
+- 备案编码校验
+- 无待审核的方案变更申请
+
+**状态变更**:
+- `status` = `WAIT_TECH_CHECK`
+- `businessStatus` = `WAIT_UPLOAD_GRID_INFO`
+- `completeAt` = 当前时间
+
+**副作用**:
+- 更新电站状态
+- 创建技术审核记录 `light_station_audit`（状态 WAIT_AUDIT）
+- 更新整改工单状态（如有）
+- 保存图片变更
+- 更新银行卡照片
+
+**运维商自动划转**: `LightOpAuthorityZoneServiceImpl.autoTransferStationOp()`
+1. 获取电站 regionId
+2. 查询该区域下已中标运维区域（status=ENABLE, isInvestment=0）
+3. 取最新一条，获取 memberId（运维商ID）
+4. 更新电站 opMemberId 和 opTime
+
+**相关表**: `light_station`, `light_station_audit`, `light_station_complete_img`, `light_station_confirm_img`, `light_station_bank`, `light_work_order`, `light_op_authority_zone`
+
+---
+
+### [节点15] TECH_CHECK_REJECT → WAIT_TECH_CHECK（技术驳回后重新提交）
+
+**触发入口**:
+- `CompleteConfirmServiceImpl.updateStationByEdit()` → `POST /light/completeConfirm/updateStationByEdit`
+
+**前置校验**:
+- 电站状态为 TECH_CHECK_REJECT
+- 图片必填项校验
+
+**状态变更**:
+- `status` = `WAIT_TECH_CHECK`（原状态 TECH_CHECK_REJECT）
+- `status` = `COMPLETE_WAIT_AUDIT`（原状态 ROADWORK_REJECT 或 COMPLETE_AUDIT_REJECT）
+
+**副作用**:
+- 更新电站状态
+- 更新方案配置
+- 更新审核记录
+- 记录操作日志
+- 如果技术审核驳回且勾选容量/房型变化，商务审核状态可能回退
+
+---
+
+### [节点16] 技术审核通过 → 双状态联动（BusinessStatusMode.handleTechAuditPass）
+
+**核心调度器**: `BusinessStatusMode.java`
+
+| 当前商务状态 | 主状态变为 | 商务状态变为 |
+|-------------|-----------|-------------|
+| WAIT_UPLOAD_GRID_INFO | WAIT_UPLOAD_GRID_INFO | 不变 |
+| WAIT_BUSINESS_AUDIT | WAIT_FIRST_AUDIT | 不变 |
+| BUSINESS_INFO_UPLOADED | WAIT_FIRST_AUDIT | WAIT_BUSINESS_AUDIT |
+| **BUSINESS_AUDIT_APPROVAL** | **ENABLE** ✅ | 不变 |
+
+**快照校验**: 技术审核通过时，对比商务审核快照中的屋顶类型和装机容量。不一致则回退商务审核状态为 WAIT_BUSINESS_AUDIT。
+
+**线下验收分支**: 如果 `offLineChoose = YES`，主状态变为 WAIT_OFF_LINE_CHECK（而非直接ENABLE）
+
+---
+
+### [节点17] 技术审核驳回 → 商务状态联动（BusinessStatusMode.handleTechReject*）
+
+**容量发生变化（changeRoofOrHouseType=YES）— 商务状态回退**:
+
+| 原商务状态 | 驳回后 |
+|-----------|--------|
+| BUSINESS_AUDIT_APPROVAL | BUSINESS_INFO_UPLOADED |
+| WAIT_BUSINESS_AUDIT | BUSINESS_INFO_UPLOADED（撤销派单） |
+| WAIT_UPLOAD_GRID_INFO | 不变 |
+| BUSINESS_INFO_UPLOADED | 不变 |
+| BUSINESS_AUDIT_REJECT | 不变 |
+
+**容量未发生变化（changeRoofOrHouseType=NO）— 商务状态不回退**:
+
+| 原商务状态 | 驳回后 |
+|-----------|--------|
+| WAIT_BUSINESS_AUDIT | 不变（商务继续审） |
+| BUSINESS_INFO_UPLOADED | WAIT_BUSINESS_AUDIT（主动派单） |
+| BUSINESS_AUDIT_APPROVAL | 不变 |
+
+---
+
+### [节点18] 商务审核驳回 → 主状态联动
+
+**触发入口**: `BusinessStatusMode.handleBusinessAudit()` + 驳回
+**触发入口**: `CompleteConfirmServiceImpl.rejectAuditBySp()` 服务商驳回
+
+| 技术审核状态 | 主状态变为 |
+|-------------|-----------|
+| 技术审核已通过 (AUDIT_OK) | FIRST_AUDIT_REJECT |
+| 技术审核待审核 (WAIT_AUDIT) | WAIT_TECH_CHECK（打回技术审核） |
+| 技术审核已驳回 (AUDIT_REJECT) | TECH_CHECK_REJECT |
+
+**状态变更**: `businessStatus` = `BUSINESS_AUDIT_REJECT`
+
+---
+
+### [节点19] 商务审核通过 → 主状态联动
+
+**触发入口**: `BusinessStatusMode.handleBusinessAudit()` + 通过
+**触发入口**: `LightStationServiceImpl.auditInfoOkBySubStaff()` 中审核类型为 WAIT_FIRST_AUDIT
+
+| 技术审核状态 | 主状态变为 |
+|-------------|-----------|
+| 技术审核已通过 (AUDIT_OK) | **ENABLE** ✅ |
+| 技术审核待审核 (WAIT_AUDIT) | WAIT_TECH_CHECK（等技术审完） |
+| 技术审核已驳回 (AUDIT_REJECT) | TECH_CHECK_REJECT |
+
+**状态变更**: `businessStatus` = `BUSINESS_AUDIT_APPROVAL`
+
+---
+
+### [节点20] WAIT_TECH_CHECK → WAIT_OFF_LINE_CHECK（开启线下验收）
+
+**触发入口**: `BusinessStatusMode.handleTechAuditPass()` 中 offLineChoose=YES
+
+**前置校验**:
+- 技术审核通过
+- 开启了线下验收流程
+
+**状态变更**:
+- `status` = `WAIT_OFF_LINE_CHECK`
+- `offLineStatus` = `OFF_LINE_INIT`
+
+---
+
+### [节点21] WAIT_OFF_LINE_CHECK → ENABLE（线下验收通过→已完成）
+
+**触发入口**: `OffLineStationFlowServiceImpl.passAudit()` → `POST /light/offLine/passAudit`
+
+**前置校验**:
+- offLineStatus 在允许操作的状态列表中
+- 线下审核报告必填
+- 完工合影照片必填
+
+**状态变更**:
+- `status` = `ENABLE`
+- `offLineStatus` = `FINISHED_OFF_LINE_PROCESS`
+- `yuexiuStatus` = `ENABLE`
+- `finishAt` = 当前时间
+
+**副作用（电站启用核心动作）**:
+- 保存线下审核报告和完工合影
+- 创建审核记录
+- 调用 `completeConfirmService.dealAfterCompleted()` 处理完成后逻辑
+- 发送电站完成奖励发放消息
+- 自动划转运维商
+- 记录操作日志
+
+**相关表**: `light_station`, `light_station_confirm_img`, `light_station_audit`, `light_station_operate_log`, `light_op_authority_zone`
+
+---
+
+### [节点22] WAIT_OFF_LINE_CHECK → OFF_LINE_CHECK_REJECT（线下验收驳回）
+
+**触发入口**: `OffLineStationFlowServiceImpl.rejectAudit()` → `POST /light/offLine/rejectAudit`
+
+**状态变更**:
+- `offLineStatus` = `OFF_LINE_CHECK_REJECT`
+- `offLineRejectReason` = 驳回原因
+- 商务审核已完成: `status` = `OFF_LINE_CHECK_REJECT`
+
+---
+
+## 三、终止状态流转
+
+### [节点23] 任意有效状态 → DISABLE（删除）
+
+**触发入口**: `LightStationServiceImpl.removeStation()` → `DELETE /light/station/remove`
+
+**状态变更**: `status` = `DISABLE`
+
+**副作用**:
+- 所有方案配置设为 DISABLE
+- 合同记录设为 DISABLE
+- 事务提交
+
+---
+
+### [节点24] 任意有效状态 → STOP（终止）
+
+**触发入口**:
+- `LightStopStationServiceImpl.stopedLightStation()` → `POST /light/stopStation/stop`
+- `LightStopStationServiceImpl.auditOk()` 终止审核通过
+
+**前置校验**:
+- 电站不在终止流程中
+- 合同状态校验（HR模式下S开头非SN开头的合同需FINISHED才能直接终止）
+
+**状态变更**:
+- `status` = `STOP`
+- `stopStatus` = `STOP`
+- HR模式S合同非FINISHED: `stopStatus` = `WAIT_SIGN`
+
+**副作用**:
+- 合同记录设为 DISABLE
+- 越秀模式: 清空投放审查状态
+- DH模式: 删除关联信息，电站编码加前缀
+- 发送完工前领用逆向消息（MQ）
+
+---
+
+### [节点25] ENABLE → REPURCHASE（已回购）
+
+**触发入口**: `LightStationRepurchaseServiceImpl` 回购审核通过方法（auditPass 等）
+
+**前置校验**:
+- 回购审核通过
+- 电站已完成
+
+**状态变更**: `status` = `REPURCHASE`
+
+**副作用**:
+- 创建回购记录
+- 更新相关财务记录
+
+---
+
+### [节点26] 任意有效状态 → SUSPENDING（暂停）
+
+**触发入口**:
+- `StationChangeStrategy.process()` — 信息变更中电站冻结
+- `LightStationChangePlanToDoJobServiceImpl` 定时任务
+
+**前置校验**:
+- 电站信息变更流程进行中
+- 当前状态不是 SUSPENDING
+
+**状态变更**: `status` = `SUSPENDING`
+
+**副作用**:
+- 创建操作日志（"信息变更中电站为暂时冻结状态，不可审批"）
+
+---
+
+## 四、驳回与整改工单体系
+
+### 驳回时创建整改工单
+
+**代码路径**: `CompleteConfirmServiceImpl.auditReject()` + `LightWorkOrderServiceImpl.createRectifyOrder()`
+
+| 驳回节点 | 工单类型 (docType) | 工单初始状态 |
+|---------|-------------------|-------------|
+| 完工审核驳回 | COMPLETE_RECTIFY（完工验收整改单） | RECTIFY_WAIT_SUBMIT |
+| 技术审核驳回 | TECH_RECTIFY（技术验收整改单） | RECTIFY_WAIT_SUBMIT |
+
+### 整改单逻辑
+- 继承主工单的施工队信息（施工队长、团队等）
+- 同类型整改单只保留一条（已存在则重置状态，不新建）
+- 通过 `parentOrderId` 关联到主工单
+- 用户重新修改完工信息提交时，整改单被取消 `cancelRectifyOrders()`
+- 技术审核通过时，整改单审核状态被更新为 AUDIT_OK
+
+### 工单状态流转
+```
+主工单（MAIN）派单 → 施工队承接 → 提交施工信息 → 完工审核
+  → 驳回 → 创建整改单（RECTIFY_WAIT_SUBMIT）
+  → 施工队修改后重新提交 → 整改单被取消，重新进入审核
+  → 通过 → 电站状态流转
+```
+
+---
+
+## 五、双状态并行汇总图
+
+```
+录单 → INIT → [提交审核] → WAIT_AUDIT
+                          ↘ [方案审核通过/资方通过] → WAIT_THIRD_AUDIT → WAIT_CONFIG → WAIT_ORDER
+                          ↘ [审核驳回] → AUDIT_REJECT → [重新提交] → WAIT_AUDIT
+
+WAIT_ORDER → [下单] → ROADWORKING → [施工完成] → ROADWORK_CONFIRM
+                                           ↘ [驳回] → ROADWORK_REJECT → [重新提交] → ROADWORK_CONFIRM
+
+ROADWORK_CONFIRM → [完工审核] → COMPLETE_WAIT_AUDIT
+                                ↘ [撤回] → ROADWORKING / COMPLETE_AUDIT_REJECT
+
+COMPLETE_WAIT_AUDIT → [完工通过] → WAIT_TECH_CHECK + businessStatus=WAIT_UPLOAD_GRID_INFO
+
+                          status（技术审核）                    businessStatus（商务审核）
+                          ┌─────────────────────┐              ┌────────────────────────────┐
+WAIT_TECH_CHECK ────────→ │ [技术审核通过]       │              │ WAIT_UPLOAD_GRID_INFO      │
+                          │ → 根据商务状态联动   │              │   ↓ [提交并网资料]         │
+TECH_CHECK_REJECT ←────── │ [技术审核驳回]       │              │ BUSINESS_INFO_UPLOADED     │
+                          │ → 商务状态可能回退   │              │   ↓                        │
+                          └─────────────────────┘              │ WAIT_BUSINESS_AUDIT        │
+                                                               │   ↓ [商务审核]             │
+WAIT_FIRST_AUDIT ←──────────────────────────────────────────── │   ↓                        │
+  ↓ [商务审核通过]                                             │ BUSINESS_AUDIT_APPROVAL    │
+  → 技术也通过 → ENABLE ✅                                     │   ↓                        │
+  → 技术未通过 → WAIT_TECH_CHECK / TECH_CHECK_REJECT           │ 与技术审核联动 → ENABLE ✅ │
+  ↓ [商务审核驳回]                                             └────────────────────────────┘
+  → FIRST_AUDIT_REJECT / WAIT_TECH_CHECK / TECH_CHECK_REJECT
+
+ENABLE ✅ → [线下验收（可选）] → OFF_LINE_CHECK_REJECT
+        → [回购] → REPURCHASE
+        → [终止] → STOP / DISABLE
+        → [信息变更中] → SUSPENDING
+```
+
+---
+
+## 六、不同模式的生命周期差异
+
+| 模式 | 创建入口 | 特殊差异 |
+|------|---------|---------|
+| 普通模式 | LightOrdinaryStationModel | 标准流程 |
+| 户用模式 | LightHouseholdStationModel | 标准流程 |
+| EPC模式 | LightEpcStationModel | 跳过INIT，直接WAIT_AUDIT |
+| 顶好模式 | LightStationDhMode | 需DH商机审核通过，有WAIT_THIRD_AUDIT |
+| 广发模式 | LightStationGfMode | 需GF商机审核通过，有WAIT_THIRD_AUDIT |
+| 越秀模式 | LightYuexiuStationModel | 有yuexiuStatus独立状态 |
+| 整县模式 | LightWholeVillageStationModel | 整县批量流程 |
+| 华润模式 | LightChdStationModel | 特殊合同状态校验 |
+
+---
+
+## 七、核心 Service 清单
+
+| 服务 | 文件 | 职责 |
+|------|------|------|
+| 方案审核 | LightStationServiceImpl.java | auditInfoOk/auditInfoReject |
+| 下单 | LightMakeOrderServiceImpl.java | 备货申请下单 |
+| 完工确认 | CompleteConfirmServiceImpl.java | 完工审核、双状态调度 |
+| 状态调度器 | BusinessStatusMode.java | 技术/商务双状态联动 |
+| 施工工单 | LightWorkOrderServiceImpl.java | 工单管理、整改单 |
+| 线下验收 | OffLineStationFlowServiceImpl.java | 线下验收流程 |
+| 终止 | LightStopStationServiceImpl.java | 电站终止 |
+| 回购 | LightStationRepurchaseServiceImpl.java | 电站回购 |
+| 运维划转 | LightOpAuthorityZoneServiceImpl.java | 自动划转运维商 |
+
+---
 
 ## 来源
-- Hermes MEMORY.md，2026-05-09 迁移。
-- 代码来源待每日扫描补充：/data/pvcode/rrsjk-light-service。
 
-## 华融EPC电站模式 (代码明确证明)
-**来源**: `rrsjk-light-service` → `HrflcEpcStationMode.java`, `CompleteConfirmServiceImpl.java`, `LightStationHrflcServiceImpl.java`, `HrflcFirstProjectJobServiceImpl.java`, `HrflcSecondProjectJobServiceImpl.java` (commits 7ecb846/223a41d/efaa535/663a20d/ac59815, 2026-05-12)
-
-### 华融EPC状态管理
-- 华融EPC模式有独立的状态管理链路，通过 `HrflcEpcStationMode` 建模
-- `CompleteConfirmServiceImpl` 中包含华融EPC电站状态更新逻辑，修复了状态更新问题
-- `HrflcFirstProjectJobServiceImpl` 和 `HrflcSecondProjectJobServiceImpl` 负责华融EPC项目状态管理的定时任务
-- `LightStationHrflcServiceImpl` 处理华融EPC电站核心业务逻辑
-- 新增主行联行号字段支持（`LightStationRequest`, `LightStationConfirmRequest`）
-
-### 主行联行号
-- **来源**: `rrsjk-light-service` → `LightStationRequest.java`, `LightStationConfirmRequest.java`, `LightStationServiceImpl.java` (commit fd8aea1, 2026-05-12)
-- 电站确认和录单时支持传递主行联行号字段，用于HRFLC-EPC模式确认逻辑
-
-### 广发模式前端完工确认 (前端确认)
-**来源**: `nahui-pv.mobile-h5` → `src/views/apv/completeAffirmGf/` 目录 (commits b01daf0/81f3652/698782d, yanghui, 2026-05-12~2026-05-14)
-- 广发模式(H5端)完工确认详情页面: `completeAffirmGf/index.jsx`, `components/videoDatum.jsx`
-- 广发详情页面新增 VR 链接展示: `src/views/apv/stationDetailsGf/StationInfoGF.jsx`
-- VR 链接样式优化: `src/utils/app.js`, `completeAffirmGf/index.less`
-- 路由定义: `src/router/modules/apv.jsx`
-- **证据等级**: 配置明确证明（前端组件/路由层面确认）
-
-### Flutter App 电站列表与导航
-**来源**: `nahuipv_greenergy_flutter` → 多个文件 (commits 2026-05-08~2026-05-14, jiangting/dongxueqiang)
-- 电站列表新增字段: 经销商(`dealer`)和装机功率(`installCapacity`)
-- 地图导航: 支持高德/百度/腾讯地图 (`map_utils.dart`, `map_dialog.dart`)
-- 电话拨打组件: `phone_call.dart`
-- 功能指引: 电站列表功能引导页面 (`station_feature_guide.dart`)
-- API Key 外部化: 高德/大疆 key 从硬编码改为 `android/key.properties` + Gradle 占位符
-
-### 电站完工后自动划转运维商 (代码明确证明, 2026-05-18 历史补漏第1期)
-**来源**: `rrsjk-light-service` → `LightOpAuthorityZoneServiceImpl.autoTransferStationOp()`, `CompleteConfirmServiceImpl`, `LightStationEpcServiceImpl`, `HrflcEpcStationMode`, `OffLineStationFlowServiceImpl` (TAEI-2698/2699/2700, 2025-11-17~2025-12-07)
-- **触发时机**: 电站完工确认审核通过(auditOk)、EPC模式下单、华润模式确认、线下电站流程审核通过时
-- **核心方法**: `LightOpAuthorityZoneService.autoTransferStationOp(LightStation)`
-- **划转逻辑**:
-  1. 获取电站的 regionId(区域ID)
-  2. 查询该区域下已中标的运维区域: status=ENABLE 且 isInvestment=0(非投资)
-  3. 取最新一条匹配记录，获取其 memberId(运维商ID)
-  4. 更新电站的 opMemberId 为新的运维商ID
-  5. 更新运维承接时间(opTime)
-  6. 同步更新 LightOperationStation 的运维承接时间和成员ID
-- **调用链路**:
-  - `CompleteConfirmServiceImpl.auditOk()` → 完工确认审核通过 → `autoTransferStationOp()`
-  - `LightStationEpcServiceImpl` → EPC模式电站创建 → `autoTransferStationOp()`
-  - `HrflcEpcStationMode` → 华润模式 → `autoTransferStationOp()`
-  - `OffLineStationFlowServiceImpl` → 线下电站审核流程 → `autoTransferStationOp()`
-- **相关表**: light_op_authority_zone(运维商授权区域), light_op_contract_record(运维合同), light_station(电站主表opMemberId字段)
-- **合同生成**: 运维商区域授权每5个区域生成一份"服务区域授权补充协议"，状态为WAIT_SIGN(待签署)
-
-### 运维商入驻流程 (代码明确证明, 2026-05-18 历史补漏第1期)
-**来源**: `rrsjk-light-service` → `LightOpAuthorityZone.java`, `LightOpAuthorityZoneService.java` (TAEI-2699, 2025-11-18)
-- 运维商入驻流程优化: 涉及运维商授权区域管理
-- 运维商入驻后需要授权区域(Region)才能承接电站运维
-- 授权区域有状态(ENABLE/DISABLE)和投资属性(isInvestment)区分
-
-### 第三方社会化电站逆变器数据对接 (代码明确证明, 2026-05-18 历史补漏第1期)
-**来源**: `rrsjk-light-service` → `CompleteConfirmServiceImpl`, `LightStationConfirmImg.java` (TAEI-2700, 2025-11-18)
-- 第三方社会化电站的逆变器数据通过确认图片服务对接
-- 涉及实体: LightStationConfirmImg(电站确认图片), LightStationAudit(电站审核)
-
-### 线下电站审核流程 (代码明确证明, 2026-05-18 历史补漏第1期)
-**来源**: `rrsjk-light-service` → `OffLineStationFlowServiceImpl.java` (TAEI-2704, 2025-11-20)
-- 线下电站审核流程完善: 方案审核、完工分中心审核、技术审核、商务审核
-- 审核记录审核人IP地址(TAEI-2704)
-- 审核通过后触发运维商自动划转
-
-### 分中心编码(subCenterCode)支持 (代码明确证明, 2026-05-18)
-**来源**: TAEI-3053【建站】一商做全国, `rrsjk-light-service` (commits 1a83966b/ee595c18, 姜传德/德, 2026-05-14)
-
-#### 实体变更
-- **City**: 新增 `subCenterCode` 字段（分中心编码）
-- **LightSpStore**: 新增 `subCenterCode` + `subCenterName` 字段（服务商仓库分中心信息）
-- **LightPurchaseAppeals**: 新增分中心信息字段
-
-#### MyBatis Mapper 变更
-- **City.xml**: 查询/插入/更新/条件筛选逻辑中增加 `sub_center_code` 字段
-- **LightSpStore.xml**: 字段映射和查询条件处理逻辑中增加分中心字段
-- **LightPurchaseAppeals.xml**: 查询逻辑中增加分中心字段
-
-#### 业务逻辑变更
-- `LightConfirmOrderServiceImpl`: 分中心代码赋值来源从服务商改为门店（`spStore` → `store`）
-- `LightServiceProviderServiceImpl`: 注入 `CityDao`，根据城市ID获取分中心信息设置到仓库对象
-- `LightTransferSpApplyServiceImpl`: 调拨申请中增加分中心信息传递
-
-#### 业务语义
-- **一商做全国**: 一个服务商可以做全国业务，需要通过分中心编码来区分不同区域的业务归属
-- 分中心信息关联: 城市 → 分中心编码 → 服务商仓库
-
-### 运维电站承接时间 (2025-12-19~23, TAEI-2782/TAEI-2784)
-- **来源**: `rrsjk-light-operation-service` (commits 62bcfe9/d1c9d46/035aa8f, sunzn)
-- **需求背景**: 商户通/HDS运维服务电站列表需展示"承接运维时间"，电站数据变更流程升级需区分建站商与运维商身份
-- **实体变更** (`LightOperationStation`):
-  - `spMemberId` — 建站商会员ID(新增)
-  - `opMemberId` — 运维商会员ID(已有, 新增赋值逻辑)
-  - `opCode` — 运维商编码
-  - `opName` — 运维商名称
-  - `opType` — 运维商身份类型(identityType)
-  - `specialTime` — 承接运维时间(LocalDateTime, 核心新增字段)
-- **Service新增方法** (`LightOperationStationService`):
-  - `updateStationOpTimeAndMemberId(memberId, stationCode, opTime)` — 运维招商区域, 电站已完成节点时更新承接时间及运维商会员ID
-    - 逻辑: 校验运维商存在且状态为"运营中"(ENABLE) → 查询电站 → 批量更新opMemberId/opCode/opName/opType/specialTime → insertOrUpdateBatch
-  - `updateStationOpTime(memberId)` — 建站运维商签署主合同后更新自有电站的承接时间
-- **定时任务** (`LightOperationScheduledJobService`):
-  - `refreshHistoryOpSpecialTime` — 历史电站承接时间刷新Job(异步执行)
-- **查询条件扩展** (`StationQuery`):
-  - 新增 `spMemberId` 查询字段
-- **服务商身份类型** (`LightOperationProviderServiceImpl`, commit 65eb67f):
-  - 区分建站商与运维商, 优化名称重复同步逻辑(避免同一公司名被重复识别)
-- **Mapper变更**:
-  - `LightOperationStation.xml` — 新增承接时间相关SQL
-  - `LightStation.xml` — 查询条件增加spMemberId
-
-### 逆变器替换/变更优化 (2025-12-08~23, TAEI-2748)
-- **来源**: `rrsjk-light-service` + `rrsjk-light-data-service` (commits by majinhu/yumiao)
-- **解绑重新绑定逻辑简化** (`LightInveterDataServiceImpl.unbindAndReBindInverter`):
-  - 旧逻辑: 复杂的分支处理(id有无/发电绑定有无/运维变更判断), 包含零碳适家电站禁止解绑的限制
-  - 新逻辑: 统一流程 — 电站存在性校验 → 有id且有发电绑定则解绑 → 查找旧逆变器记录 → updateStationInverter → 创建新逆变器绑定
-  - **删除的限制**: 移除了"零碳适家电站暂不支持解绑同时更换新逆变器"的硬编码限制
-  - 简化后代码从 ~80行 减少到 ~35行
-- **逆变器替换校验** (`LightInveterDataService`):
-  - 新增 `validateInverterReplace` 方法
-  - 新增新逆变器占用校验(inverterSnNotBindByStation)
-- **CompleteConfirmService优化** (`CompleteConfirmServiceImpl`):
-  - 逆变器序列号更新和解绑逻辑重构
-  - 事务处理优化
-  - 移除逆变器OCR验证相关代码(yumiao, 2025-12-24)
-- **BOM与OCR一致性校验**: 2025-12-08 启用逆变器BOM与OCR数据一致性校验(majinhu)
-- **单元测试**: 新增逆变器绑定功能单元测试(71行)
-
-### GF 模式完工确认施工照片字段 (代码明确证明, 2026-05-18)
-**来源**: `rrsjk-merchant-web` → `LightStationController.java` (commit 1ca6373da, wangxiran, 2026-05-18)
-
-在完工确认缓存接口 (`completeConfirmCache.do`) 中，从 cache 对象向 result 返回新增 8 个 GF 模式专有施工照片字段：
-| 字段 | 含义 | 对应施工阶段 |
-|---|---|---|
-| basicPhotoList | 基础照片 | 施工安全类 |
-| bracketImgList | 支架照片 | 支架安装 |
-| moduleImgList | 组件照片 | 组件安装 |
-| inverterInstallImgList | 逆变器安装照片 | 逆变器安装 |
-| gridTableImgList | 并网箱照片 | 并网箱安装 |
-| wireImgList | 线缆照片 | 线缆类 |
-| connectGroundImgList | 接地极照片 | 接地极 |
-| waterproofImgList | 防水照片 | 防水措施 |
-
-- 注释明确说明：非 GF 模式这些字段为 null/空 list，覆盖无影响
-- 这些字段与广发模式过程进件（施工验收 CP_GZFZCP_200020_3750~4290）的编码体系对应
-- **证据等级**: 代码明确证明
-
----
-
-## 线下验收结合技术商务并行状态流转优化 (代码明确证明, 2026-05-20)
-**来源**: `rrsjk-light-service` → `BusinessStatusMode.java` (commit: yumiao f4c1f22, 2026-05-19)
-**需求**: TAEI-3044/TAEI-3087 【户用光伏】华融相关优化
-
-- **参数变更**: `BusinessStatusMode.updateStationBusinessStatus()` 方法中 `offLineChoose` 参数从必传改为 `@Nullable`
-- **业务语义**: 支持线下验收与技术/商务审核并行处理，不再强制要求线下验收选择
-- **审核流程**: `CompleteConfirmServiceImpl.stationAudit()` 增加 `stationCode` 字段设置，确保审核更新时电站编码正确传递
-- **状态流转影响**: 允许电站在技术审核和商务审核并行时独立推进状态，不阻塞于线下验收环节
-- **关联枚举**: `LightStation.ModeEnum` 控制不同业务模式下的状态流转策略
-
----
-
-## 电站新增屋顶类型和电网类型 (代码明确证明, 2026-01-19~2026-02-08 补漏第4期)
-**来源**: `rrsjk-light-service` (解钦/商轶龙/于淼) + `nahui-dicts-serve` (李培龙)
-**需求**: TAEI-2863 【建站】增加新的屋顶类型 + TAEI-2866 【建站】增加电网类型
-
-- **屋顶类型**: LightStation.houseType 字段扩展，新增屋顶类型枚举值
-  - 原有: `flat`(平顶屋), `slope`(斜屋顶)
-  - 变更涉及多个 Station Mode 类: `BaseLightStationMode`, `LightHouseholdStationMode`, `LightOrdinaryStationMode`, `LightCorpStationMode`, `LightGovStationMode`, `LightSpicStationMode`, `LightWholeVillageStationMode`, `LightChdStationModel`, `LightCnnChnStationModel`, `LightDhStationMode`
-  - 计划审核流程功能 (`e0ad9e0`, 解钦, 2026-01-22)
-- **电网类型**: 新增电网类型配置，影响电站并网资料提交
-- **数据字典**: `nahui-dicts-serve` 同步更新相关字典数据
-- **变更影响**: 屋顶类型/房型变化在审核流程中标记为 `changeRoofOrHouseType`，影响技术/商务审核并行状态流转
-
-## 运维APP新增"所属建站商"字段 (代码明确证明, 2026-01-19~2026-02-08)
-**来源**: `pv.osp-uni` (李培龙, commits: 88f32f8, 8181b35, 2026-01-27~28)
-**需求**: TAEI-2854 海尔绿能运维APP新增"所属建站商"字段
-
-- UniApp 端电站信息新增 `建站商名称` 字段展示
-- 修改角色名称、版本号更新等配套变更
-
-## 逆变器相关优化 (代码明确证明, 2026-01-19~2026-02-08)
-**来源**: `rrsjk-light-service` (于淼, commits: b388392, 9e17796, d3b4185 等)
-**需求**: TAEI-2862 获取逆变器一级过压保护值和有功控制百分比值
-
-- **逆变器功率处理**: 优化逆变器功率计算逻辑，修复设备功率提取问题 (cmbleasing)
-- **逆变器数据查询**: 优化逆变器数据查询逻辑 (2 commits, 2026-02-02)
-- **一级过压保护值**: 新增获取逆变器一级过压保护值和有功控制百分比值功能
-- **关联服务**: `rrsjk-light-iot-service` 逆变器数据服务同步更新
-
-## 超期申诉审核功能 (代码明确证明, 2026-01-19~2026-02-08)
-**来源**: `nahui-pv.hds-h5` + `pv.osp-uni` + `nahui-pv.merchant-micro.osp` (李培龙, 2026-01-23~27)
-
-- **HDS页面**: 超期申诉审核添加音频展示 (`184ce4f`, 2026-01-26)
-- **音频功能**: 申诉审核支持音频上传、展示和播放
-  - 设置音频类型、音频展示样式、音频格式支持
-  - 商户端(`merchant-micro.osp`)添加音频播放和上传文件类型优化
-- **审核按钮**: 超期申诉审核按钮校验恢复 (`0697d62`, 2026-01-27)
-- **申诉描述**: 修复工单申诉审核申诉描述溢出问题 (`45c4f5d`, 2026-01-26)
-- **审核备注**: 新增审核备注限制200字符 (`8bb4602`, 2026-01-27)
-
-## 完工确认模块优化 (代码明确证明, 2026-01-19~2026-02-08)
-**来源**: `rrsjk-light-service` (于淼, 20+ commits, 2026-01-23~2026-02-06)
-
-- **模块序列号**: 优化模块序列号批量操作方法 (`1f11335`, 2026-02-02)
-- **序列号批量删除**: 修复完工确认模块序列号批量删除保存逻辑 (`bddb5e7`, 2026-02-03)
-- **参数验证**: 修复模块序列查询参数验证逻辑 (3 commits, 2026-02-02)
-- **事务管理**: 移除完工确认服务中的冗余手动事务管理，优化事务控制
-- **草稿码**: 修复草稿码生成时的空指针异常 (`800bf49`, 2026-01-31)
-- **状态过滤**: 更新查询条件排除状态值5 (`c6e2019`, 2026-02-06)
-- **数据库连接**: 添加数据库连接保活配置 (`7dcf51d`, `405cb2c`, 2026-01-26)
-- **light_staging_records**: 修复表插入语句字段数量不匹配问题 (4 commits, 2026-01-26)
-
-## 银联签约状态优化 (代码明确证明, 2026-01-29~2026-01-30)
-**来源**: `rrsjk-light-service` (于淼, commits: b593e7f, 8cacf87, cb56e64)
-
-- **签约状态**: 更新银联签约状态逻辑以应对暂停情况
-- **重推功能**: 移除银联重推功能代码 (4 commits, refactor switch-light-mode)
-- **用户数据导入**: 修复银联用户数据导入时间过滤问题 (`cb56e64`, 2026-01-30)
-
-## 绿能分时发电量报表 (代码明确证明, 2026-01-19~2026-02-08)
-**来源**: `he-vpp.admin-h5` (张硕文, commits: 12700f4, 65c7c61, 2026-02-02~02-04)
-**需求**: TAEI-2856 【电力交易】四川报表管理 + TAEI-2844/2845 越秀/中核大屏
-
-- **电力交易报表**: 新增电力交易报表页面 (`65c7c61`, 2026-02-04)
-- **分时发电量**: 绿能分时发电量报表 (`12700f4`, 2026-02-02)
-- **查询优化**: 销售订单、意向管理、采购管理查询优化 (`51c3ee4`, 2026-01-29)
-- **回款管理**: 回款管理增加手动开票功能 (`6c927e8`, 2026-01-21)
-
-### 华融质保金防御性校验 (代码明确证明, 2026-05-18~19)
-**来源**: `rrsjk-light-service` → HuaRongIncomeQualityGuaranteeServiceImpl.java, HrflcEpcStationMode.java, HrflcFirstProjectJobServiceImpl.java, HrflcSecondProjectJobServiceImpl.java (commits cb67fb3/98f808b/23846b5/08debe1, yumiao, 2026-05-18~19)
-- **防御性校验新增**: 华融收入质保金定时任务(`HuaRongIncomeQualityGuaranteeServiceImpl`) 增加三重校验：
-  1. 检查电站是否已有记账凭证(`voucher`)，已有则跳过（防止重复记账）
-  2. 检查华融收入结算数据是否存在，不存在则跳过
-  3. 检查华融收入结算数据是否已记账(`voucher`非空)，未记账则跳过（必须先记收入再记质保金）
-- **精度修复**: `BigDecimal.ROUND_HALF_UP` → `RoundingMode.HALF_UP`（弃用旧API）
-- **异常日志**: 堆栈信息改为只记录 `e.getMessage()`，避免日志过长
-- **变量命名**: `entity` → `existsHrflcywmlB43`，`incomeSettle` → `existsHrflcywmlA55`（HRFLC业务命名规范）
-- **证据等级**: 代码明确证明
-
-### 线下验收+技术商务并行状态流转优化 (代码明确证明, 2026-05-19)
-**来源**: `rrsjk-light-service` → CompleteConfirmServiceImpl.java, BusinessStatusMode.java (commits f4c1f22/759697e, yumiao, 2026-05-19)
-- **业务变更**: 优化线下验收结合技术商务并行的电站状态流转
-- `CompleteConfirmServiceImpl`: 完工确认服务新增/修改1行，支持线下验收流程
-- `BusinessStatusMode`: 业务状态枚举变更1个值，支持技术商务并行
-- **证据等级**: 代码明确证明
-
-### 组件编码与电站型号一致性校验 (TAEI-2869, 2026-02-25 代码明确证明)
-**来源**: `rrsjk-light-service` → `LightModuleSnServiceImpl.java` (commit 24c8a5b6, 解钦)
-- 提交电站组件编码(SN)时，校验组件编码对应的物料号与新方案组件物料号是否匹配
-- 校验逻辑: `lightComponentLibrary.getSkuCode().equals(planConfigList.getSku())`
-- 不匹配时抛出: `"您提交的电站组件编码对应的型号{snCode}与电站不一致，请核实后提交"`
-- **证据等级**: 代码明确证明
-
-### 电站方案变更 — 新旧区域映射校验 (2026-02-25 代码明确证明)
-**来源**: `rrsjk-light-service` → `LightStationChangeOperationServiceImpl.java`, `NewOldRegionDto.java` (commit 1cc0b4e2, sunzn)
-- 电站变更时校验新旧区域是否在已知映射中，存储在Redis（key: `new_region_id_old_region_id`）
-- 接口: `addNewOldAreaToRedis(oldRegionId, newRegionId)` — 添加新旧区域映射
-- 不在映射中的区域变更会被拦截
-- **证据等级**: 代码明确证明
-
-### 社会化电站导入优化 (2026-02-09~11 代码明确证明)
-**来源**: `rrsjk-hds-web` → `SocializationStationController.java` (commits 73d07853/c357fbfe 等, sunzn)
-- 必填字段校验: 省市区地址、电站容量、运维承接/结束时间、合同编号、委托方全称
-- 格式校验: 手机号、身份证格式
-- ZIP文件中文编码兼容修复
-- 枚举更新: `rrsjk-light-operation-service` 更新社会化电站实体枚举值
-- 合同年限字段类型修改
-- **证据等级**: 代码明确证明
-
-### 资产所属分类 — SpecialFlag 生成 (2026-02-09 代码明确证明)
-**来源**: `rrsjk-light-service` → `LightStation.java` (commit 60ea94de, 解钦)
-- `SpecialFlagEnum.generateSpecialFlagOptions()` 生成CBS可用的资产所属分类
-- 按 name 分组枚举值，过滤 NOT_DIS
-- LightStation.xml 新增 `specialFlagList` 多值IN查询 + `firstThreePowerAtStart/End` 功率范围查询
-- **证据等级**: 代码明确证明
-
-### 工单申诉 — 超期状态重置修复 (2026-02-10 代码明确证明)
-**来源**: `rrsjk-light-operation-service` → `LightOperationWorkOrderServiceImpl.java` (commit c85550eb, sunzn)
-- 申诉审核通过时同步重置 `workOrder.setOverTime(false)`
-- **证据等级**: 代码明确证明
-
-### 房产证OCR识别 (TAEI-2728, 2026-05-18~20 代码明确证明)
-**来源**: `rrsjk-light-service` → `LightStationHouseCertificateOcr.java` (rrsjk-light-api), `LightStationHouseCertificateOcrServiceImpl.java` (commit ee04e9fa73, mabin), `AcceptanceConfirmServiceImpl.java`
-- **触发时机**: 并网确认 (`gridConfirm`) 和电站影像修改 (`modifyStationImg`) 时自动调用
-- **新表**: `light_station_house_certificate_ocr` (MyBatis XML 243行)
-- **Dubbo服务**: `LightStationHouseCertificateOcrService` (service.xml line 808)
-- **OCR流程**:
-  1. `createData()`: 创建记录, ocrStatus=`running` (AliStatusEnum)
-  2. `alibabaApi.houseCertificateOcr()`: 调用阿里云大模型API识别房产证
-  3. 成功: ocrStatus=`success`, 解析 JSON 提取 name/id/add 字段
-  4. 失败: ocrStatus=`failed`, 记录错误信息
-- **去重机制**: `checkIfExist(stationCode, houseUrl, userName, idNo, address)` 按5个字段组合去重
-- **实体字段**: stationCode, houseCertificateUrl, ocrStatus, ocrResult(JSON), sourceStationName/ocrStationName, sourceIdNo/ocrIdNo, sourceAddress/ocrAddress
-- **配套变更**: admin-web 添加房产证AI识别页面、图片验真优化、OSS图片查看器压缩加速
-- **分支**: `origin/20260518-fangchanzhengOCR`, `origin/20260520-fix`
-- **证据等级**: 代码明确证明
-
-### 并网节点 — 220KV变电站名称字段 (TAEI-2880, 2026-03-04~12 代码明确证明)
-**来源**: `rrsjk-light-service` (wangxiran, 6 commits), `rrsjk-admin-web` (wangxiran, 4 commits)
-**关联需求**: TAEI-2880 (建站并网节点增加字段：220KV变电站名称)
-
-- **后端字段**: `LightStation` / `LightStationConfirmDto` / `AcceptanceConfirmService` 新增 `substation220kvName` (220KV变电站名称) 字段
-  - 实体: `LightStation.java` 添加字段 (wangxiran, commit 179f4d9, 2026-03-04)
-  - DTO: `LightStationConfirmDto` 添加字段 (wangxiran, commit 1b09eba, 2026-03-04)
-  - 验收服务: `AcceptanceConfirmService` 添加字段到验收确认 (wangxiran, commits 03a53cd/31790b3, 2026-03-04)
-  - 长度校验: 220KV变电站名称长度校验 (wangxiran, commits 3813bdc/54772db, 2026-03-06)
-- **前端显示**: 电站详情页面显示220KV变电站名称 (wangxiran, commits 1b84d09/1903d2f/445027e, 2026-03-04~12)
-- **报表**: 工商业电站并网统计功能新增 (wangxiran, commit 079bb0e, 2026-03-10)
-- **证据等级**: 代码明确证明
-
-### 发电户号变更优化 (TAEI-2879, 2026-03-02~09 代码明确证明)
-**来源**: `rrsjk-light-service` (yumiao, 4 commits)
-**关联需求**: TAEI-2879 (建站发电户号变更优化)
-
-- 并网资料提交事务优化: 去掉不必要的事务包裹 (yumiao, commits 9b1dd31/df26f5e, 2026-03-05~06)
-- 上传过并网资料传参问题修复 (yumiao, commit 05d063a, 2026-03-09)
-- 完工审核通过后赋值商务审核状态为"待提交并网资料" (yumiao, commit fe3e60a, 2026-03-02)
-- **证据等级**: 代码明确证明
-
-### 电站状态字典扩展 (前端配置证明, 2026-05-22 扫描)
-**来源**: `nahui-dicts-serve` → `src/data/apv/station/` (2026-03~2026-05, 袁睿林/杨辉)
-- 新增电站状态"待三方审核"（`statusList.js`）
-- 新增备案类型（`beiAnType.js`）、项目类型（`proTypeList.js`）
-- 新增合同类型扩展：广发主合同、华融EPC业主主合同（`contractTypeList.js`）
-- 新增华融EPC合同类型（`contractTypeList.js`, 李培龙, 2026-04-27）
-- 安装方式字典大更新（`installList.js`, 310行）
-- 新增配送列表（`distributionList.js`）
-
+- `rrsjk-light-service` → `LightStation.java`（状态枚举）
+- `rrsjk-light-service` → `CompleteConfirmServiceImpl.java`（审核逻辑）
+- `rrsjk-light-service` → `BusinessStatusMode.java`（状态调度器）
+- `rrsjk-light-service` → `LightWorkOrderServiceImpl.java`（工单管理）
+- `rrsjk-light-service` → `LightMakeOrderServiceImpl.java`（下单逻辑）
+- `rrsjk-light-service` → `LightStationServiceImpl.java`（方案审核）
+- `rrsjk-light-service` → `OffLineStationFlowServiceImpl.java`（线下验收）
+- `rrsjk-light-service` → `LightStopStationServiceImpl.java`（终止）
+- `rrsjk-light-service` → `LightStationRepurchaseServiceImpl.java`（回购）
+- `rrsjk-light-service` → 各 StationModel 类（不同模式入口）
+- 代码扫描日期: 2026-05-24

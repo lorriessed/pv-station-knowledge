@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-05-23T22:00:35.786113",
+  "last_run_at": "2026-05-24T22:00:36.348771",
   "completed_repos": [
     "base-service",
     "cbs-web",
@@ -108,7 +108,7 @@
     "rrsjk-appapi-web": "2026-05-23T22:00:35.786113",
     "rrsjk-async-import-export": "2026-05-23T22:00:35.786113",
     "rrsjk-cms-service": "2026-05-23T22:00:35.786113",
-    "rrsjk-finance-service": "2026-05-12T22:00:08.400039",
+    "rrsjk-finance-service": "2026-05-24T22:00:36.348771",
     "rrsjk-light-service": "2026-05-12T22:00:08.400039",
     "rrsjk-merchant-web": "2026-05-12T22:00:08.400039",
     "rrsjk-light-report-service": "2026-05-12T22:00:08.400039",
@@ -148,14 +148,10 @@
     "repairs": "2026-05-22T22:00:31.980403",
     "rrs-dispenser-server": "2026-05-22T22:00:31.980403",
     "rrsjk-activity-service": "2026-05-22T22:00:31.980403",
-    "rrsjk-app-web": "2026-05-23T22:00:35.786113",
-    "rrsjk-appapi-web": "2026-05-23T22:00:35.786113",
-    "rrsjk-async-import-export": "2026-05-23T22:00:35.786113",
-    "rrsjk-cms-service": "2026-05-23T22:00:35.786113",
-    "rrsjk-echannel-service": "2026-05-12T22:00:08.400039",
-    "rrsjk-energystorage-service": "2026-05-12T22:00:08.400039",
-    "rrsjk-flowable-service": "2026-05-12T22:00:08.400039",
-    "rrsjk-hds-web": "2026-05-12T22:00:08.400039",
+    "rrsjk-echannel-service": "2026-05-24T22:00:36.348771",
+    "rrsjk-energystorage-service": "2026-05-24T22:00:36.348771",
+    "rrsjk-flowable-service": "2026-05-24T22:00:36.348771",
+    "rrsjk-hds-web": "2026-05-24T22:00:36.348771",
     "rrsjk-item-service": "2026-05-12T22:00:08.400039",
     "rrsjk-light-common": "2026-05-12T22:00:08.400039",
     "rrsjk-light-data-service": "2026-05-12T22:00:08.400039",
@@ -310,6 +306,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 11,
+  "sweep_round": 12,
   "last_sweep_at": "2026-05-23T22:00:35.786113"
 }

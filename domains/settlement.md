@@ -727,11 +727,23 @@ stationParam.put("spMemberId", spMemberId);
 
 ---
 
-### 业主银行卡变更管理 (前端配置证明, 2026-05-22 扫描)
-**来源**: `nahui-pv.greenenergy-mini` → `packageB/pages/bankChange/` + `nahui-dicts-serve` → `src/data/osp/merchant/bankInfoStatus.js` 等 (袁睿林, 2026-02)
-- 云管家光伏管理新增银行卡变更管理入口
-- 功能流程: 申请 → 变更记录列表 → 审核
-- 相关数据字典:
+### 业主银行卡变更管理 (代码明确证明 + 前端配置证明)
+**后端来源**: `rrsjk-light-service` → `LightStationBankCardChange.java` + `LightBankChangeDto.java` + `LightStationBankCardChangeServiceImpl.java` + Mapper XML (commit f832bee6bb + 后续修复, sunzn, 2026-04-15~22, TAEI-2994 电站业主银行卡信息变更管理)
+**前端来源**: `nahui-pv.greenenergy-mini` → `packageB/pages/bankChange/` + `nahui-dicts-serve` → `src/data/osp/merchant/bankInfoStatus.js` 等 (袁睿林, 2026-02)
+
+#### 后端实现
+- **实体**: `LightStationBankCardChange` (230行) — 存储银行卡变更记录
+  - 关键字段: ownerName, subCenterCode, specialFlag, fieldMethod, signStatus, rentPaymentMode, bankAccount, bankName, bankNo, bankProvinceCode/CityCode/RegionCode, houseBankCode/Name, stationType, old/new bank info, status, workOrderNo
+- **DTO**: `LightBankChangeDto` (128行) — 银行卡变更申请数据传输对象
+- **DAO**: `LightStationBankCardChangeDao` (46行) + Mapper XML (531行)
+- **Service**: `LightStationBankCardChangeService` (79行接口) → `LightStationBankCardChangeServiceImpl` (360行)
+  - 核心方法: 申请创建、初审、终审、取消、查询列表、详情
+  - **工单集成**: 关联工单系统实现状态联动
+  - **OCR集成**: 银行卡图片OCR识别 (commit aa8554f01c)
+  - **租金支付模式自动计算**: 根据电站资方属性自动判断
+- **前端**: 云管家光伏管理新增银行卡变更管理入口
+- **功能流程**: 申请 → 初审 → 终审 → 变更记录列表 → 审核
+- **相关数据字典**:
   - `bankInfoStatus.js` — 业主银行卡变更状态
   - `bankBentPaymentMode.js` — 银行卡变更打款模式
   - `bankFieldMethod.js` — 银行卡变更字段方法
@@ -769,3 +781,91 @@ stationParam.put("spMemberId", spMemberId);
 - `LightEstimateCityElecPrice`: id, provinceId, provinceName, cityId, cityName, elecPrice
 - 按省市区维度维护暂估电价，河北省硬编码为 0.3644
 - `LightEstimateStationServiceImpl` 电价Map构建逻辑变更
+
+### 统众乐道租金支付管理 (代码明确证明, 2026-04-23)
+**来源**: `rrsjk-admin-web` → commits by tn_wangb (王斌, 2026-04-23, branch `20260423-wb-tzld`, TAEI-2990 【股转】乐道、统众增加租金支付明细菜单 只能看乐道下项目公司数据 支持导出、导入支付结果)
+- CBS新增租金支付明细菜单，仅展示乐道项目公司数据
+- 支持导出和导入支付结果功能
+- 共享支付明细增加支付状态导入接口 (tn_wangb, 2026-04-14~17, branch `20260414-wb-shareBill`)
+
+### 辅材额度新增页面 (代码明确证明, 2026-04-22)
+**来源**: `rrsjk-light-api` → `AuxiliaryMaterialCreditLimitDto.java` + `LightServiceProviderService.java` (commit f7ca3f7916, baoxin, TAEI-2995 【政策】辅材政策切换为辅材额度)
+- 新增 DTO `AuxiliaryMaterialCreditLimitDto`: auxiliaryDepositAmount(总额), auxiliaryDepositBalance(可用余额), auxiliaryDepositFreezeAmount(冻结金额), auxiliaryDepositWrittenOffAmount(核销金额)
+- Dubbo 接口新增 `getAuxiliaryMaterialCreditLimit(Long memberId)` 方法
+- 辅材额度流水类型从 S7→S8 重命名 (commit 741ce0be9b, yumiao)
+  - S7 原为下单冻结流水 → 改名为 S8
+  - S11 签收时不再更新 pendingWrittenOffAmount (注释掉)
+  - D13 核销时不再扣减 pendingWrittenOffAmount (注释掉)
+  - 新增快照生成逻辑: snapshotAfterFreeze, snapshotAfterRelease
+
+### 质保金退款新增出款公司 (代码明确证明, 2026-05-21)
+**来源**: `rrsjk-finance-service`, commit 9d9fca1 (tn_wangb, 2026-05-21, branch `20260521-wb-depositRefund`)
+- 推质保金增加 1QJ0 出款公司
+- 影响采购单请款、质保金退款申请流程
+
+### 金蝶财务同步并发控制 (代码明确证明, 2026-05-19)
+**来源**: `rrsjk-finance-service`, commit 08f6961 (mabin, 2026-05-19)
+- 添加金蝶财务同步并发控制功能
+- 防止多个SAP记账任务同时执行导致数据冲突
+
+### rrsjk-finance-service 核心业务模块速览 (2026-05-24 通读确认)
+**来源**: `rrsjk-finance-service` 全量通读
+
+#### 账单与对账模块
+- `BillService` — 统一账单服务，支持支付宝/微信/建行/转账汇款等多渠道流水拉取
+- `BillAlipayService` / `BillWechatService` / `BillCcbService` / `BillNetPayService` — 各渠道账单查询
+- `FinanceJobService` — 财务定时任务集（拉账单、对账、结算汇总、SAP同步等80+任务类型）
+
+#### SAP 集成模块
+- `SapFinanceAndOrderService` — SAP采购单请款管理（创建/更新/删除/审核/确认）
+- `SapRecordService` — SAP总账记账、系统发票号获取
+- `SapPurchaseRecordService` — SAP采购单CRUD，含VPP系统专用接口 `createForVpp()`
+- `LightIncomeRecordService` — 光伏收入SAP记账（辅材押金、运维保证金、备件款、零碳保证金、电费月汇总等）
+- `JinDieSapRecordService` — 金蝶SAP记录（股转公司电费收益收入记账）
+- `DepositRecordService` — 质保金管理（推送SAP、更新发票凭证、历史数据处理）
+- `LightSapJobService` — 光伏SAP定时任务集（总账记账、能源币记账、冲销、发票归档等）
+
+#### 请款与结算模块
+- `PurchaseApplySettleService` — 请款申请单管理
+- `PurchaseApplySettleDepositRefundService` — 质保金退款申请/审核/支付
+- `PurchaseApplySettleNoPaperService` — 无纸化请款（含运维请款）
+- `PurchaseApplySettleQuotaAuditService` — 预算额度审核（市场部长→技术→供应链→小微主四级审核）
+- `PurchaseApplySettleAttachmentService` — 请款单附件上传管理（定时推送影像）
+- `PurchaseApplySettleDeductionService` — 应付扣除生成与记账
+
+#### 账户额度管理
+- `PayAccountQuotaConfigService` — 出款账户配置（创建/修改/冻结/解冻/作废）
+- 额度占用: `occupy(payCompany, payBankAccount, payType, occupyAmount, applyNo)`
+- 每日额度占用报表定时任务: `payAccountQuotaReportJob()`
+- 默认支付方式配置: `setDefaultPayType()`
+
+#### 发票校验 (UPP)
+- `InvoiceCheckService` — 发票校验信息管理（批量OCR识别、票验平台查询/占用/释放）
+- `InvoiceCheckUppService` — UPP票验平台对接（OCR→状态查询→发票占用→释放）
+- `UppRecordService` — UPP调用记录
+
+#### 云报账 (YBZ)
+- `YbzRecordService` — 云报账出款申请/查询定时任务
+- `LightRentPaymentRecordService` — 租金支付请求云报账/查询结果/回调
+
+#### 第三方店铺结算
+- `SettlementThirdOrderItemCommissionService` — 第三方店铺分佣结算
+- `SettlementThirdOrderItemCommissionDailySumService` — 第三方店铺结算日汇总
+- `CustomRebateThirdService` — 第三方店铺返款明细
+- `CashThirdOrderService` — 第三方店铺提现客户日汇总
+
+#### 海尔招聘财务
+- `HaierRecruitPayDetailService` — 订单收款明细（关联采购单、确认收款、开发票）
+- `HaierRecruitSettleDetailService` — 订单结算明细
+- `HaierRecruitXsSummaryService` — 小顺佣金汇总/返款
+
+#### 客户与额度管理
+- `MdrCustomerService` — MDR客户信息（建户查询、APP下单校验、额度更新、快递白条）
+- `MdrCustomerContractService` — MDR客户合同录入
+- `MdrCustomerOrderDetailsService` — MDR客户订单/逾期订单查询
+- `MdrFinancialSolutionsService` — MDR客户金融解决方案
+- `CreditCustomerService` — 360客户信息查询
+- `CustomerFinanceService` — 根据法人公司编码和税号查询逾期金额
+
+#### 定时任务类型 (TaskType, 81种)
+覆盖：创建任务、更新凭证、结算汇总、SAP同步、支付宝/微信/建行/银联对账、MPC/GTMS返款、MDR客户拉取、UPP发票核销、海尔招聘对账、云智妆对账等

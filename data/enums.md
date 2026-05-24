@@ -407,3 +407,17 @@
 - `osp/merchant/bankBentPaymentMode.js` — 银行卡变更打款模式
 - `osp/merchant/bankFieldMethod.js` — 银行卡变更字段方法
 
+### 服务商省份授权 (2026-05-19~21 代码明确证明)
+**来源**: `rrsjk-light-service` → `LightSpServiceProvince.java` (dev分支, commits: 包鑫, branch: regionUnlimit)
+- **StatusEnum** (审核状态):
+  - `WAIT_CENTER_AUDIT` — 待分中心审核
+  - `CENTER_AUDIT_REJECTED` — 分中心审核驳回
+  - `WAIT_HD_AUDIT` — 待总部审核
+  - `HD_AUDIT_REJECTED` — 总部审核驳回
+  - `AUDIT_OK` — 审核通过
+- **ApproveStatusEnum** (开通状态):
+  - `NO_APPROVE` — 未开通
+  - `APPROVED` — 已开通
+- **业务含义**: 服务商申请指定省/市的服务授权后，先经分中心审核，再经总部审核，审核通过后开通授权
+- **证据等级**: 代码明确证明
+

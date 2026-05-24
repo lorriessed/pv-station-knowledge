@@ -550,3 +550,91 @@
 - 审核状态: `AGREE`通过 / `DISAGREE`驳回 / `REJECT`拒绝(仅首次附件审核)
 - 项目分类: `FD`风电 / `GSY`工商业 / `HYEPC`户用EPC / `YW`运维 / `LTSJ`零碳世家
 
+---
+
+## Flowable 审核流程引擎 (2026-05-24 通读确认)
+
+> **来源**: `rrsjk-flowable-service` 全量通读 (2026-05-24)
+> **证据等级**: 代码明确证明
+
+### 服务定位
+
+`rrsjk-flowable-service` 是一个基于 **Flowable 6.7.1** 的通用审核流程引擎，为多个业务系统提供可配置的审核流程能力。不直接处理光伏业务逻辑，而是作为基础设施服务被其他系统调用。
+
+### 技术架构
+
+- **框架**: Spring Boot 2.2.4 + Flowable 6.7.1 + Dubbo 2.7.4.1 + MyBatis 3.5.2
+- **数据库**: 独立数据源（与业务库分离）
+- **依赖**: rrs-dispenser-server（通过 Dubbo 获取审核人员配置）
+
+### 四种流程模板
+
+| 流程 ID | 名称 | 审核模式 | BPMN文件 |
+|---|---|---|---|
+| `singleRequest` | 单一审核流程 | 单人审核，自动判断是否自己审核 | `processes/singleRequest.bpmn20.xml` |
+| `multiRequest` | 会签申请流程 | 多人串行会签，全部同意才通过 | `processes/multiRequest.bpmn20.xml` |
+| `palRequest` | 并行会签流程 | 多人并行会签，至少一人同意即可 | `processes/palRequest.bpmn20.xml` |
+| `tlpRequest` | 两级会签流程 | 先直线审核→再多人并行会签 | `processes/tlpRequest.bpmn20.xml` |
+
+### 审核状态枚举 (`AuditStatusEnum`)
+
+| 状态 | 说明 |
+|---|---|
+| `WAIT_PARENT_AUDIT` | 已提交待直线审核（多级审核） |
+| `WAIT_AUDIT` | 已提交待审核 |
+| `AUDIT_REJECT` | 审核驳回 |
+| `WAIT_SOLVE` | 审核通过待处理 |
+| `SOLVE_REJECT` | 处理驳回 |
+| `SOLVE_FINISH` | 处理完成 |
+| `FLOW_STOP` | 流程终止 |
+
+### 流程变量键 (`ConstantsParamsKeyEnum`)
+
+| 变量键 | 说明 |
+|---|---|
+| `submitUser` | 提报人 |
+| `quesType` | 问题类别 |
+| `quesSubType` | 问题子类 |
+| `quesDesc` | 问题描述 |
+| `businessNo` | 业务单号 |
+| `filePath` | 文件路径 |
+| `auditStatus` | 审核状态 |
+| `assigneeList` | 审核人列表 |
+| `assigneeSize` | 审核人数量 |
+| `flowType` | 流程类型 |
+| `AUDIT_USER` | 审核人 |
+| `twoAuditors` | 二级审核人 |
+| `SOLVE_USER` | 处理人 |
+| `solveFilePath` | 上传资料路径 |
+
+### 核心接口 (Dubbo)
+
+| 接口 | 方法 | 说明 |
+|---|---|---|
+| `StartEventService` | startEvent() | 启动流程（自动配置审核人） |
+| `StartEventService` | findBy() | 查询我提报的流程 |
+| `StartEventService` | showProcessDiagram() | 获取流程图PNG |
+| `StartEventService` | stopProcessInstance() | 终止流程 |
+| `ProcessTaskService` | audit() | 单个审核（同意/驳回） |
+| `ProcessTaskService` | batchAudit() | 批量审核 |
+| `ProcessTaskService` | solve() | 处理问题（同意/驳回+上传资料） |
+| `ProcessTaskService` | findBy() | 查询待我审核/我已审核的流程 |
+
+### 审核人配置机制
+
+审核人员配置存储在 `rrs-dispenser-server` 中：
+- `FlowableConfigService` — 按问题类别/子类别查询审核人列表
+- `FlowableUserConfigService` — 用户层级关系（提报人→直线上级）
+- 如果提报人自己就是审核人 → 自动审核通过
+
+### 审核监听器
+
+| 监听器 | 触发时机 | 逻辑 |
+|---|---|---|
+| `AuditEndListener` | 审核任务结束 | 同意→WAIT_SOLVE，驳回→AUDIT_REJECT；会签模式下判断是否全部完成 |
+| `FirstAuditEndListener` | 一级审核结束 | 同意→进入二级审核(WAIT_AUDIT)，驳回→AUDIT_REJECT |
+| `SolveListener` | 处理任务结束 | 同意→SOLVE_FINISH，驳回→SOLVE_REJECT |
+
+### 与光伏业务的关系
+
+Flowable 是一个**通用审核流程引擎**，不直接处理光伏业务。光伏业务中的某些审核场景（如错误信息上报、问题处理等）可能通过此服务进行流程管理。具体业务与Flowable的关联需要通过 `rrs-dispenser-server` 中的 `FlowableConfig` 配置来建立。

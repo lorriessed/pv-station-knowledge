@@ -340,3 +340,34 @@
   - `elecPrice`: 电价 (BigDecimal)
   - **来源**: `rrsjk-light-report-api` → `LightEstimateCityElecPrice.java` (baoxin)
   - **证据等级**: 代码明确证明
+
+### 服务商省份授权表 (2026-05-19~21 代码明确证明)
+**来源**: `rrsjk-light-service` dev 分支, `LightSpServiceProvince.java`, `LightSpServiceProvince.xml` (commits: 包鑫 40个提交, branch: 涉及 regionUnlimit 等分支)
+- **light_sp_service_province**: 服务商省份授权申请表
+  - `id`: 主键
+  - `sp_id`: 服务商id
+  - `member_id`: 会员id
+  - `login_id`: 登录账号
+  - `sp_name`: 服务商名称
+  - `province_id`: 省id
+  - `province_name`: 省名称
+  - `city_id`: 意向市id
+  - `city_name`: 意向市名称
+  - `sub_center_code`: 分中心编码
+  - `sub_center_name`: 分中心名称
+  - `apply_at`: 申请时间
+  - `status`: 状态
+  - `approve_status`: 审批状态
+  - `activate_at`: 激活时间
+  - `reject_at`: 驳回时间
+  - `reject_reason`: 驳回原因
+  - `description`: 描述
+  - **Mapper**: `LightSpServiceProvinceDao` → `LightSpServiceProvince.xml`
+- **light_sp_service_province_audit_log**: 服务商省份授权审批日志表
+  - 记录审批操作流水
+- **业务逻辑**:
+  - 服务商可申请指定省/市的授权，关联分中心
+  - 支持审批流程（申请→审批→激活/驳回）
+  - admin-web 前端批量修复省份授权相关显示问题（40次提交迭代）
+  - 关联 `LightSpAuthorityZone` 表（授权区域），新增省份授权后同步更新
+- **证据等级**: 代码明确证明

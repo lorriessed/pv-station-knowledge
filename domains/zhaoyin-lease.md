@@ -272,3 +272,12 @@ rrsjk-light-service / rrsjk-light-data-service (Dubbo 提供者)
 - 新枚举类名为 `TechnicalSchemeEnumV2` / `LeaseRoofTypeEnumV2`，避免冲突
 - 电价查询方法从 `getPrice()` 改为 `getPriceV2()`
 - 查询参数增加了 `regionName`（区县）和 `leaseRoofType`（租赁屋顶类型）
+
+### 9.9 需求变更 — 新旧数据区分逻辑 (2026-05-22~23 代码明确证明)
+**来源**: `CmbLeasingPushApiServiceImpl.java`, `CmbLeasingStationDao.java`, `CmbLeasingStation.xml` (commits: f1a84bb3, ba806d00, lilong, branch: 20260515-alone-zhaoyin-price)
+- **问题**: 原逻辑通过某个字段区分新旧数据，需求变更后改用 `createAt` 时间字段作为新旧数据的区分依据
+- **变更**: `CmbLeasingPushApiServiceImpl` 中的新老数据判断逻辑从字段匹配改为 `createAt` 时间比较
+- **取值方式**: 组件功率匹配价格的取值方式发生变化，同时区分新老数据
+- **配置**: application-dev.yml 和 application-prod.yml 新增相关配置项
+- **Mapper**: `CmbLeasingStation.xml` 新增/修改查询SQL以支持 createAt 区分逻辑
+- **证据等级**: 代码明确证明

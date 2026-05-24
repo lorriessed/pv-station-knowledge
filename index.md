@@ -1,35 +1,38 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-05-23
+更新时间: 2026-05-24
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
 | 总仓库数 | 100 (PVS 72 + VPP/其他 28) |
-| 已通读 | 100/100 (第11轮) |
-| 知识库文件 | 65+ 个 |
-| 知识库大小 | 6.4MB+ |
-| Domain 业务文件 | 27+ 个 (326KB+) |
+| 已通读 | 100/100 (第12轮) |
+| 知识库文件 | 68+ 个 |
+| 知识库大小 | 6.5MB+ |
+| Domain 业务文件 | 30+ 个 (340KB+) |
 | Source-map 索引 | 47,009+ 行 |
-    15|
+
 ## 仓库通读进度
 
-### 全部 100 个仓库已通读 ✅ (第11轮，2026-05-23)
+### 全部 100 个仓库已通读 ✅ (第12轮，2026-05-24)
 - 所有 PVS 72 + VPP/其他 28 个仓库均已完成全量通读
-- 本轮重扫: rrsjk-admin-web, rrsjk-app-web, rrsjk-appapi-web, rrsjk-async-import-export, rrsjk-cms-service
+- 本轮重扫: rrsjk-echannel-service, rrsjk-energystorage-service, rrsjk-finance-service, rrsjk-flowable-service, rrsjk-hds-web
 
 ## 目录
 
-### domains/ — 业务域知识 (27+ 个文件)
+### domains/ — 业务域知识 (30+ 个文件)
 - **电站与运维**: station-lifecycle, inverter-data, investor-management, operation-and-data, zero-carbon-station
-- **审核审批**: approval ⭐ (CBS 三审流程完整)
-- **交易订单**: order-and-trade, settlement, inventory, policy
+- **审核审批**: approval ⭐ (CBS 三审流程完整 + Flowable 流程引擎)
+- **交易订单**: order-and-trade, settlement, inventory, policy, **order-dispatch-delivery** ⭐ (下单-配货-发货全链路)
 - **核心服务**: additional-core-services, web-and-additional-services, frontend-and-misc-services, remaining-services-and-frontends
 - **资方对接**: zhaoyin-lease, guangfa-business
 - **派单管理**: dispatch-order-scheduled-tasks
 - **收入策略**: income-mode-strategies
 - **移动端**: mobile-app-architecture
+- **渠道电商**: echannel-service ⭐ (多渠道订单聚合)
+- **储能服务**: energy-storage-service ⭐ (收益测算/充放电策略)
+- **HDS Web**: hds-web ⭐ (EPC项目/电站管理/API入口)
 - **VPP 项目**: vpp-overview, vpp-data, vpp-gec, vpp-green-electricity, vpp-system-management, vpp-thai-dashboard, vpp-knowledge-management, vpp-product-shipment
 
 ### modules/ — 代码仓库索引
@@ -95,6 +98,7 @@
     97|| 结算/财务 | ✅ 完整 | settlement.md |
     98|| 政策/奖励 | ✅ 完整 | policy.md |
     99|| 仓储/调拨 | ✅ 完整 | inventory.md |
+|| **下单-配货-发货** | ✅ 完整 | order-dispatch-delivery.md ⭐ |
    100|| VPP 整体架构 | ✅ 完整 | vpp-overview.md |
    101|
    102|- source-map/controllers.md：Controller/API 静态入口索引。
