@@ -518,6 +518,11 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
 - tables: `id`
 
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/OperationModelStation.xml
+- namespace: `com.rrsjk.light.operation.dao.OperationModelStationDao`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
+- tables: `id`
+
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightWorkOrderImg.xml
 - namespace: `com.rrsjk.light.operation.dao.LightWorkOrderImgDao`
 - statements: `select:findBy`, `insert:create`, `insert:batchInsert`, `delete:deleteByWorkOrderSn`
@@ -585,6 +590,11 @@
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightWorkOrderModule.xml
 - namespace: `com.rrsjk.light.operation.dao.LightWorkOrderModuleDao`
 - statements: `select:findBy`, `insert:create`, `insert:batchInsert`, `delete:deleteByWorkOrderSn`, `update:update`
+- tables: `id`
+
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/OperationScreenModel.xml
+- namespace: `com.rrsjk.light.operation.dao.OperationScreenModelDao`
+- statements: `insert:create`, `update:update`, `delete:delete`, `select:findBy`, `select:countOf`, `select:getById`
 - tables: `id`
 
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightWorkOrderProcess.xml
@@ -722,6 +732,11 @@
 - statements: `select:getByMemberId`, `insert:create`, `update:update`
 - tables: `id`
 
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/BusinessCooperationIntention.xml
+- namespace: `com.rrsjk.light.operation.dao.BusinessCooperationIntentionDao`
+- statements: `insert:create`, `select:getById`, `select:findBy`, `select:countOf`, `update:update`
+- tables: `id`
+
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightModuleInfo.xml
 - namespace: `com.rrsjk.light.operation.dao.LightModuleInfoDao`
 - statements: `insert:create`, `update:update`, `select:findBy`, `select:countOf`, `select:getById`, `insert:batchInsert`
@@ -765,6 +780,11 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `update:delByRelationId`
 - tables: `id`
 
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/OperationElecMonthModel.xml
+- namespace: `com.rrsjk.light.operation.dao.OperationElecMonthModelDao`
+- statements: `insert:create`, `update:update`, `delete:delete`, `select:findBy`, `select:countOf`, `select:getById`
+- tables: `id`
+
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightOperationCapitalContract.xml
 - namespace: `com.rrsjk.light.operation.dao.LightOperationCapitalContractDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `update:deleteByRelationId`, `select:getByRelationId`
@@ -784,9 +804,19 @@
 - statements: `insert:create`, `update:update`, `select:get`
 - tables: `id`
 
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/ReportScreenMapModel.xml
+- namespace: `com.rrsjk.light.operation.dao.ReportScreenMapModelDao`
+- statements: `insert:create`, `update:update`, `delete:delete`, `select:findBy`, `select:countOf`, `select:getById`
+- tables: `id`
+
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightWorkOrderLog.xml
 - namespace: `com.rrsjk.light.operation.dao.LightWorkOrderLogDao`
 - statements: `select:findBy`, `insert:create`, `insert:batchInsert`
+
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/LightInverterModel.xml
+- namespace: `com.rrsjk.light.operation.dao.LightInverterModelDao`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
+- tables: `id`
 
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/PublicLiabilityInsurance.xml
 - namespace: `com.rrsjk.light.operation.dao.PublicLiabilityInsuranceDao`
@@ -9032,7 +9062,7 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightSubSp.xml
 - namespace: `com.rrsjk.report.dao.light.LightSubSpDao`
-- statements: `select:get`, `select:findOneByMemberId`, `select:findListBySpMemberId`
+- statements: `select:get`, `select:findOneByMemberId`, `select:findListBySpMemberId`, `select:findListByParentMemberId`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightConstructionTeam.xml
 - namespace: `com.rrsjk.report.dao.light.LightConstructionTeamDao`

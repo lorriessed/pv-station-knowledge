@@ -255,6 +255,9 @@
 - **operation_screen_model**: 运维会展大屏数据模型 — 综合健康等级、发电量、容量、实时功率、在线/离线/异常统计、资方标识等
 - **operation_elec_month_model**: 资方年月发电量统计 — 按资方+年月的发电量数据
 - **operation_model_station**: 电站模型站点表 — 新增 `special_flag` 字段（资产所属标识）
+- **report_screen_map_model** (2026-05-25 新增): 地图省市电站数量分布 — 为运维会展大屏提供按省市维度的电站数量统计 (Mapper: `ReportScreenMapModel.xml`, Service: `ReportScreenMapModelService`)
+- **business_cooperation_intention** (2026-05-25 确认): 商务合作意向记录 — 会展大屏"联系我们"表单提交 (Entity: `BusinessCooperationIntention`, 95行)
+- **light_inverter_model** (2026-05-25 确认): 逆变器数据模型表 — 会展大屏逆变器数据柱状图查询 (Mapper: `LightInverterModel.xml`)
 
 ### cm_light_project 字段变更 (rrsjk-light-service, 解钦, 2026-05-19)
 - **来源**: TAEI-3107 【风电】风电产值法兼容1.0

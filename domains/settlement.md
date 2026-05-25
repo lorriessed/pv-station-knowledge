@@ -151,6 +151,33 @@ StationIncomeHandleStrategyFactory
 - **来源**: rrsjk-finance-service, `LightSapLedgerUseServiceModel.java`, commit d29ccde (龙龙, 2026-05-09)
 - 注释了越秀模式下的A88流程处理逻辑（临时屏蔽，原因待确认）
 
+### FAP 记录体系 — 保证金/电费/采购订单覆盖 (代码明确证明, 2026-04-28~05-07)
+**来源**: `rrsjk-light-service` → `LightDepositServiceImpl.java`, `LightSparePartsDepositServiceImpl.java`, `ZeroCarbonSpDepositServiceImpl.java`, `rrsjk-trade-service` → 订单FAP相关 (commits b4d16db7/2ade7d1d/c014b8b2/cbc285bb/c82b7fdc/a4dcb786/414880c0, 代继宁, 2026-04-28~05-07)
+**关联需求**: FAP财务系统对接持续迭代
+- **保证金取消逻辑修复**: 
+  - 新增 FAP 记账状态检查 — 已记账的订单不允许取消 (`AccountStatusEnum.YES`)
+  - 修复空指针问题 — FAP记录不存在时不抛异常，改为跳过作废流程
+  - 三个保证金服务同步修复: `LightDepositServiceImpl`, `LightSparePartsDepositServiceImpl`, `ZeroCarbonSpDepositServiceImpl`
+- **FAP记录创建优化**:
+  - 统一 FAP 记录创建流程 (`cbc285bb`)
+  - 修复 FAP 状态设置逻辑错误 (`414880c0`)
+  - 修复 FAP 记录检查逻辑错误 (`a4dcb786`)
+- **FAP查询定时任务**: 更新FAP查询定时任务逻辑 (`d2505003/d7449276`)
+- **电费单据**: 更新电费单据作废摘要并添加凭证状态枚举 (`2ade7d1d`)
+- **Trade Service FAP集成**: 
+  - 移除 `LightFapRecordService` 的 Dubbo 服务配置 (`c487affb`)
+  - 修复轻采购销售订单FAP收款创建逻辑 (`e0a6927b/56040ceb`)
+  - 添加订单项目同步到FAP功能 (`68f6c7fc`)
+  - 修复线下转账支付流程中的FAP记录创建逻辑 (`944d1684`)
+- **证据等级**: 代码明确证明
+
+### 零碳适家安装费 — 服务重构 (代码明确证明, 2026-04-30)
+**来源**: `rrsjk-light-service` → `ZeroCarbonSpDepositServiceImpl.java` (commits 0fafc048/298da120/3a301b8d, 代继宁, 2026-04-30, branch: master_pre_prod_20260206-ZeroCarbonInstallFee)
+- 优化零碳安装费用服务实现
+- 修复零碳适家保证金FAP记录创建和状态同步问题
+- 零碳FAP状态设置逻辑修复
+- **证据等级**: 代码明确证明
+
 ## 待确认
 - CM 共享账单完整审批流。
 - SAP A88、A92 等凭证业务含义和资方差异。
@@ -165,6 +192,11 @@ StationIncomeHandleStrategyFactory
 **来源**: `rrsjk-light-service` → 代继宁 commits 34fc750/597db04/0e7e2f5, branch 20260416-FapRecordOfReceipts
 **关联需求**: TAEI-3021/3022 保证金收款接FAP、订单收款接FAP
 - **凭证补偿**: 新增FAP凭证补偿机制，用于FAP推送失败后的重试和补偿
+- **11种业务类型覆盖**: MATERIAL_REPURCHASE(物料回购), STATION_REPURCHASE(站点回购), SERVICE_DEPOSIT(服务押金), SPARE_PARTS_DEPOSIT(备件押金), INVERTER_SALE(逆变器销售), MALL_ORDER(商城订单), ZERO_CARBON_DEPOSIT(零碳押金), ZERO_CARBON_ORDER(零碳订单), VPP_ORDER(VPP订单), EPC_RECEIPT(EPC收款), ELECTRIC_ORDER(电费订单)
+- **补偿任务**: `LightFapRecordService.compensationVoucherJob()` — 扫描 `compensationStatus=WAIT` 的记录，按业务类型分发处理
+- **客户信息保护**: 更新凭证时不再覆盖已有的 `accountCustomerCode`/`accountCustomerName`
+- **确认人信息**: 统一使用 `getConfirmBy()` 方法，从FAP查询结果中提取确认人
+- **DAO新增**: `LightSpOrderItemDao.getByOrderItemNo(String)` — 按订单项目编号查询
 - **状态常量**: 修复FAP收款记录状态常量，移除补偿状态相关代码
 - **客户信息更新**: 优化客户信息更新逻辑
 - **逆变器销售场景**: 确认收款逻辑更新
@@ -403,16 +435,16 @@ stationParam.put("spMemberId", spMemberId);
 
 ---
 
-## 金蝶财务同步并发控制 (代码明确证明, 2026-05-19)
-**来源**: `rrsjk-finance-service` → `JinDieSyncFinanceModel.java` (commit mabin 08f696150, 2026-05-19)
+## 金蝶财务同步并发控制 (代码明确证明, 2026-05-19; 2026-05-25 更新)
+**来源**: `rrsjk-finance-service` → `JinDieSyncFinanceModel.java` (commits: mabin 08f696150 2026-05-19, 3d94616 2026-05-25)
 
 - **分布式锁**: 使用 `StringRedisTemplate.opsForValue().setIfAbsent()` 实现 Redis 分布式锁
-- **锁 key**: `jinDie:sync:finance:{bid}:{ywms}`，锁粒度到业务ID+业务模式级别
+- **锁 key**: `jinDie:sync:finance:{bid}:{ywms}`（正向同步和冲销共用 `CONCURRENT_LOCK_PREFIX`）
 - **超时时间**: 1 分钟自动释放（防止死锁）
 - **锁冲突处理**: 获取锁失败时设置 flag="E"，message="金蝶财务同步正在执行中"，直接返回
 - **释放锁**: finally 块中调用 `stringRedisTemplate.delete(lockKey)` 确保释放
 - **幂等保护不变**: 锁检查在幂等检查之前，已有成功记录（有 belnr）的仍直接返回
-- **影响范围**: `syncFinance()` 方法，不影响 `reverseFinanceToSap()` 冲销方法
+- **~~影响范围: syncFinance() 方法，不影响 reverseFinanceToSap() 冲销方法~~** → **2026-05-25 更新**: `reverseFinanceToSap()` 冲销方法也加了相同的分布式锁保护（commit 3d94616, branch `20250525-jindieRepeatFix`），防止冲销并发导致重复记账
 
 ---
 
@@ -571,6 +603,33 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `rrsjk-light-operation-service` (commit 5d4fb615, sunzn)
 - 修复电费结算查询条件缺失NULL值判断的问题
 - 优化电费结算任务查询逻辑 (commit bcd2f119)
+- **证据等级**: 代码明确证明
+
+### 工商业风电产值收入法 (代码明确证明, 2026-05-18~22)
+**来源**: `rrsjk-light-service`, `rrsjk-admin-web`, `rrsjk-merchant-web` (tn_wangb/王斌, TAEI-3085/3100, 分支 origin/feature-cm-wind-electric + origin/20260506-wb-cmOwnerStationReport)
+- **工商业自持电站损益报表二期**: 前端页面+后端报表逻辑+商户端数据
+- **工商业风电项目产值收入法**: 风电项目上收入的产值法计算逻辑
+- **工商业风电项目终验法**: 风电项目终验法计算逻辑
+- **工商业收款切换FAP**: 工商业收款流程切换至FAP系统
+- **方案变更修改**: 方案变更相关逻辑适配
+- **证据等级**: 代码明确证明
+
+### 招银组件功率匹配价格 (代码明确证明, 2026-05-18~23)
+**来源**: `rrsjk-light-service`, `rrsjk-admin-web` (lilong/李龙, TAEI-3112, 分支 origin/20260515-alone-zhaoyin-price)
+- **需求变更**: 改用 `createAt` 作为新旧数据的区分逻辑
+- **取值方式变化**: 组件功率匹配价格的取值逻辑调整，区分新老数据
+- **证据等级**: 代码明确证明
+
+### 发电户号电费模板映射 (代码明确证明, 2026-05-20~22)
+**来源**: `rrsjk-light-service`, `rrsjk-admin-web` (lilong/李龙, TAEI-3112, 分支 origin/20260519-alone-electricAI)
+- **后端接口**: 按发电户号批量查询电站信息、按ID列表批量获取数据
+- **前端功能**: 页面本地调试、导出Excel样式调整、添加按钮shiro权限控制
+- **证据等级**: 代码明确证明
+
+### AI识别对账单导入电费收益开票 (代码明确证明, 2026-05-21~22)
+**来源**: `rrsjk-light-service`, `rrsjk-admin-web` (lilong/李龙, TAEI-3112, 分支 origin/20260519-alone-electricAI)
+- **页面跳转接口**: 新增页面跳转接口及修改
+- **映射关系**: 金额和税额从映射关系中取值，项目公司名称映射成销方名称
 - **证据等级**: 代码明确证明
 
 ### FAP收款记录全链路 (TAEI-3021/3022/3092, 2026-05-18~21 代码明确证明)
@@ -802,11 +861,6 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `rrsjk-finance-service`, commit 9d9fca1 (tn_wangb, 2026-05-21, branch `20260521-wb-depositRefund`)
 - 推质保金增加 1QJ0 出款公司
 - 影响采购单请款、质保金退款申请流程
-
-### 金蝶财务同步并发控制 (代码明确证明, 2026-05-19)
-**来源**: `rrsjk-finance-service`, commit 08f6961 (mabin, 2026-05-19)
-- 添加金蝶财务同步并发控制功能
-- 防止多个SAP记账任务同时执行导致数据冲突
 
 ### rrsjk-finance-service 核心业务模块速览 (2026-05-24 通读确认)
 **来源**: `rrsjk-finance-service` 全量通读

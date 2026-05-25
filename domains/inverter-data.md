@@ -193,3 +193,77 @@
 - **审批流程**: 运维商创建 → 供应商审批（维修措施+维修价格+预计完成时间）→ 运维商寄回（物流单号）→ 供应商签收 → 供应商发货 → 运维商签收
 - **Service**: `SpInverterInfoService` — save/submitOrder/supplierApproval/operationAndMaintenanceVendorsPost/supplierSign/supplierDelivery/operationAndMaintenanceVendorsSign
 - **证据等级**: 代码明确证明
+
+### 锦浪逆变器数据重试机制 (代码明确证明, 2026-05-22)
+**来源**: `rrsjk-light-data-service` → `GinlongService.java` (commits 9b6d7da~73850ff, yumiao, 2026-05-22)
+- 锦浪逆变器数据采集增加重试机制，解决连续三天发电数据拉取不稳定问题
+- 使用多线程处理连续三天发电数据拉取
+- 增加状态日志排查 (`feat: 增加状态日志`, `feat: 增加连续3天有发电数据日志排查`)
+- **证据等级**: 代码明确证明
+
+### 逆变器解绑替换 — 采集器信息透传 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `LightInveterDataService.java` (2026-05-25 全量通读)
+- `unBindStationAndReplace()` 方法扩展：新增采集器信息透传参数
+  - `collectorSn` — 采集器序列号（GF 模式使用）
+  - `collectorImageUrl` — 采集器影像 URL（GF 模式使用）
+  - `collectorCaptcha` — 采集器验证码（GF 模式下爱士惟品牌使用）
+- 解绑次数统计: `getUnbindCountByInveterSn()`
+- 解绑记录: `recordUnbindLog()`
+- 新旧逆变器验证: `validateNewInverter()`, `validateOldAndNewInverter()`, `getNewInveterSnValidResult()`
+- **证据等级**: 代码明确证明
+
+### 发电数据预占位机制 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `LightInveterService.java` (2026-05-25 全量通读)
+- `occupyTodayInveterRecord()` — 查询昨天活跃的 SN，预写入 `e_today=0` 记录
+- **目的**: 降低白天高并发时 create 操作的重复写入风险
+- **证据等级**: 代码明确证明
+
+### Kafka 双写机制 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `KafkaProducerService.java`, `KafkaDoubleWriteProperties` (2026-05-25 全量通读)
+- 逆变器数据发送 Kafka 时支持按 SN 码配置双写到新队列
+- `KafkaDoubleWriteProperties.isEnabled()` — 开关控制
+- `shouldDoubleWrite(inveterSn)` — 过滤需要双写的 SN
+- 使用同一个 `kafkaTemplate3` 实例，发送到不同 topic
+- **证据等级**: 代码明确证明
+
+### 问题电站规则计算 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `LightOperationScheduledJobService.java`, `ReportProblemStationService.java` (2026-05-25 全量通读)
+- `calcProblemStation()` — 每小时执行，合并计算 rule1/rule2/rule3
+- 批量写入 `report_problem_station` 表（ON DUPLICATE KEY UPDATE）
+- `calcStationYearSummary()` — 每天凌晨 1:30 执行，写入 `report_station_year_summary_YYYY` 分表
+- **证据等级**: 代码明确证明
+
+### HdsReportService 发电管理报表 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `HdsReportService.java` (2026-05-25 全量通读)
+- Dubbo 服务，支持三个维度分页查询:
+  - `queryTotalPage()` — 累计维度（每行=一个电站某年数据），需传 year
+  - `queryYearPage()` — 年维度（每行=一个电站某年某月数据），需传 year
+  - `queryMonthPage()` — 月维度（每行=一个电站某年某月某日数据），需传 year+month
+- `submitExportTask()` — 提交异步导出任务，返回 taskNo
+- `getExportTask(taskNo)` — 查询导出任务状态（PENDING/RUNNING/DONE/FAIL）
+- 导出任务关联 `ReportExportTask` 表，包含 OSS 下载地址
+- **证据等级**: 代码明确证明
+
+### 浦银/中核发电数据推送 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `ElecPushService.java`, `LightElectricDataService.java` (2026-05-25 全量通读)
+- `doPushZH()` — 推送中核发电数据（重载：支持/不支持电站+逆变器数据）
+- `doPushPF()` — 推送浦银发电数据
+- `doHistoryPushZH()`, `doHistoryPushZH2()`, `doHistoryPushZHByDay()` — 历史数据推送
+- 浦银发电量查询: `powerQuery()` — 接收 `SpdbRequestBody` (含 accessToken)，返回 `SpdbResponseBody` (respCode=0000 成功)
+- **线程池**: `pyExecutor` (12-100000 线程), `zhExecutor` (12-100000 线程)
+- **证据等级**: 代码明确证明
+
+### 多品牌逆变器数据拉取线程池 (代码明确证明)
+**来源**: `rrsjk-light-data-service` → `ThreadPoolExecutorConfig.java` (2026-05-25 全量通读)
+
+| 线程池 Bean | 核心-最大 | 队列 | 用途 |
+|---|---|---|---|
+| `siNengHandleElectricData` | 32-50000 | 3000 | 上能发电数据处理 |
+| `aishiweiHandleElectricData` | 12-30000 | 1000 | 爱士惟发电数据处理 |
+| `nengkongHandleElectricData` | 12-30000 | 1000 | 能控云发电数据处理 |
+| `commonHandleElectricData` | 6-30000 | 1000 | 通用发电数据处理 |
+| `inveterHistoryBatchThreadPoolExecutor` | 500-4000 | 2000 | 分批次处理逆变器历史数据 |
+| `inveterDataBuildThreadPoolExecutor` | 2000-20000 | 2000 | 逆变器 Data 构建 |
+| `stationDayReportExecutor` | 30-30 | 300000 | 电站日发电量统计 |
+
+- **证据等级**: 代码明确证明

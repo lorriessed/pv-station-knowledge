@@ -47,7 +47,18 @@
 - 广发模式的完整电站状态机（是否与现有状态机有差异）
 - 广发模式的结算/记账规则
 - 广发与其他资方的审核流程差异
-- 广发模式下完工确认的后端服务实现类
+- 广发模式下完工确认的后端服务实现
+
+### 广发业主信息更正接口体系 (代码明确证明, 2026-05-06~07)
+**来源**: `rrsjk-light-service` → `GfApiUrlEnum.java`, `GfCustomerInfoUpdateRequest.java`, `GfCustomerInfoUpdateResponse.java`, `GfInfoUpdateApi.java` (commits c1f11672/e0d7d240/cb74c157/c89386dd/73869893, majinhu, 2026-05-06~07, branch: 20260424-guangfa-0506)
+**关联需求**: TAEI-3068 【户用光伏】广发业主信息更正接口相关开发
+- **新增API端点**: `GfApiUrlEnum.CUSTOMER_INFO_UPDATE` → `/inputpiece-plant/propertyStationUpdate/customerInfoUpdate`
+- **请求实体**: `GfCustomerInfoUpdateRequest` (191行) — 包含进件序号、变更单号、变更原因、业主基本信息等字段
+- **响应实体**: `GfCustomerInfoUpdateResponse` — 包含返回信息(showmsg)、状态(state)、变更单号(msg)
+- **服务接口**: `GfInfoUpdateApi.java` (58行) — 业主信息更新API封装
+- **商机推送**: 商机修改后推送 `customerInfoUpdate` 到广发系统
+- **并网回退字段**: 新增并网回退相关字段支持
+- **证据等级**: 代码明确证明
 
 ### 广发进件推送失败状态回退 (代码明确证明, 2026-05-22)
 **来源**: `rrsjk-light-service` → `GfCompleteInputPieceProcess.java`, `GfMergeGridInputPieceProcess.java` (commit 52621ae1, majinhu, 2026-05-22, branch: 20260508-guangfa-binwang)

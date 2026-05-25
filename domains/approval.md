@@ -316,12 +316,44 @@
 - 电费订单列表页面新增金蝶记账失败状态展示
 - **证据等级**: 代码明确证明
 
+### 审核闭环率报表 — 时间区间分段优化 (代码明确证明, 2026-05-06~07)
+**来源**: `rrsjk-light-report-service` → `LightTechAuditClosedReport.java`, `LightTechAuditClosedReportServiceImpl.java`, `LightAuditDispatchLog.xml` (commits 6c634b8f/be0b1e1b/338e96a5/994b2167, laowang, 2026-05-06~07)
+**关联需求**: TAEI-3062 审核派单「闭环率报表」优化：闭环率按时间段统计和展示
+- **变更前**: 累计区间 — ≤3天 / ≤7天(含≤3) / ≤15天(含≤7) / >15天
+- **变更后**: 分段区间 — ≤3天 / 4-7天 / 8-15天 / 16-30天 / 31-60天 / 61-180天 / 181-365天 / >365天
+- **SQL变更**: `LightAuditDispatchLog.xml` 中的 CASE WHEN 逻辑从累积改为分段:
+  - 原: `DATEDIFF(...) <= 7` 包含 ≤3天的数据
+  - 新: `DATEDIFF(...) > 3 AND <= 7` 仅统计4-7天区间
+  - 新增: 16-30天 / 31-60天 / 61-180天 / 181-365天 / >365天 五个分段
+- **前端变更**: `rrsjk-admin-web` → `dispatchReportClosedList.ftl` 表头字段名从 `closedGt15Days*` 改为分段命名 (`closedLte30Days*`, `closedLte60Days*`, `closedLte180Days*`, `closedLte365Days*`, `closedGt365Days*`)
+- **汇总逻辑**: `LightTechAuditClosedReportServiceImpl` 中新增5个区间的聚合计算和占比公式
+- **证据等级**: 代码明确证明
+
+### 技术审计关闭报表 — 时间区间字段扩展 (代码明确证明, 2026-05-06~07)
+**来源**: `rrsjk-light-report-service` (commits be0b1e1b/338e96a5/994b2167, laowang, 2026-05-06~07)
+**关联需求**: TAEI-3062 审核派单「闭环率报表」优化
+- 扩展技术审计关闭报表时间区间字段，与闭环率报表同步优化
+- **证据等级**: 代码明确证明
+
 ## 待确认
 - 派单规则 3.1 的完整代码来源、配置表、审核类型枚举。
 - 技术审核、商务审核、线下验收的触发和驳回规则。
 - 储能安装维修评价表的具体数据库表名和完整字段结构。
 - 电站迁移审核中各审核角色的权限模型。
 - 资方主数据审核流程的具体审核节点。
+
+### 广发并网状态机 — 推送失败退回机制（代码明确证明, 2026-05-22）
+**来源**: `rrsjk-light-service` → `GfCompleteInputPieceProcess.java`, `GfMergeGridInputPieceProcess.java` (commit 52621ae, majinhu, TAEI-3073, 分支 origin/20260508-guangfa-binwang)
+- **完工进件推送失败**: 退回至 `TECH_CHECK_REJECT`（技术审核驳回）
+- **并网进件推送失败**: 退回至 `FIRST_AUDIT_REJECT`（商务审批驳回）
+- **完整流程**: `技术审核通过 → 推完工进件 → 广发完工审核通过 → 上传并网资料 → 商务验收通过 → 推并网进件`
+- **业务意义**: 修复了推送失败后电站状态未正确回退的问题，确保异常情况下电站不会卡在中间状态
+- **证据等级**: 代码明确证明
+
+### 线下验收 + 技术商务并行状态流优化（代码明确证明, 2026-05-19）
+**来源**: `rrsjk-light-service` (commit f4c1f22, yumiao, TAEI-3021, 分支 origin/feature/202605/offLineStatus)
+- 优化线下验收结合技术商务并行的电站状态流转逻辑
+- **证据等级**: 代码明确证明
 
 ### 审核驳回支持按单张图片驳回 (代码明确证明, 2026-05-21)
 **来源**: `rrsjk-light-service` → `LightStationBaseAuditRequest.java`, `LightStationServiceImpl.java` (commits 9d11afa3/873488c3/67a86bd2/cbf16220, wangxiran, TAEI-3057, 分支 origin/feature-wxr-audit-20260519 + origin/feature-wangxiran-changePlan)

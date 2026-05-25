@@ -2058,6 +2058,18 @@
 - @PostMapping("audiOk.do")
 - @PostMapping("audiReject.do")
 
+## BusinessCooperationIntentionController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/BusinessCooperationIntentionController.java`
+- @RequestMapping("/light/operation/businessCooperationIntention")
+- @PostMapping("/insert")
+- @GetMapping("/findStation")
+- @GetMapping("/getDetail")
+- @GetMapping("/findWeather")
+- @GetMapping("/findInverterData")
+- @GetMapping("/findScreenData")
+- @GetMapping("/findMonthElecData")
+- @GetMapping("/findMapData")
+
 ## LightCsOrderController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/LightCsOrderController.java`
 - @RequestMapping("/cs/order")

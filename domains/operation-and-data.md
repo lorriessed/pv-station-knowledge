@@ -521,3 +521,105 @@ rrsjk-light-data-service
 - **Service**: `OperationElecMonthModelService` — 分页查询、新增、修改、删除完整 CRUD
 - **DAO**: `OperationElecMonthModelDao` + MyBatis `OperationElecMonthModel.xml` (114行映射)
 - **用途**: 为运维会展大屏提供资方维度的年月发电量统计数据
+
+### 运维展会大屏 — 固定电站模块与业务合作意向 (代码明确证明, 2026-05-06~07)
+**来源**: `rrsjk-light-operation-service` → `OperationModelStation.java`, `OperationModelStationService/Impl`, `OperationModelStationDao`, `OperationModelStation.xml` (commits 60c99ad5/e59376d5, sunzn, 2026-05-06~07)
+**关联需求**: TAEI-3066 展会-运维大屏
+- **OperationModelStation 实体**: 运维展会大屏固定电站实体 (76行)
+  - 字段: id, stationCode, stationName, province/city/region/address, healthLevel, reportCode, generateTime 等
+- **OperationModelStationService**: 固定电站服务接口
+  - 按区域查询固定电站列表
+  - 查询电站装机功率和累计发电量
+- **OperationModelStationDao** + **MyBatis映射** (234行): 完整 CRUD + 装机功率/累计发电量查询
+- **业务合作意向功能**: `e59376d5` (sunzn, 2026-05-06) — 运维会展商务合作功能
+- **逆变器变更过程信息查询**: `d4a8b61b` (sunzn, 2026-05-07, branch: szn_shensu_duixian_20260422)
+- **HDS Web**: 新增逆变器变更过程信息查询、电站项目查询功能
+- **证据等级**: 代码明确证明
+
+### 运维会展大屏 HDS Controller 与新增模型 (代码明确证明, 2026-05-25)
+**来源**: `rrsjk-hds-web` → `BusinessCooperationIntentionController.java` + `rrsjk-light-operation-service` 新增模型 (commits: sunzn 051de90/213b7e5/a7a192dd/df66f67/0f55e41, 2026-05-21~25)
+**关联需求**: TAEI-3066 展会-运维大屏
+
+- **HDS Web 新增 `BusinessCooperationIntentionController`**: `/light/operation/businessCooperationIntention`
+  - `POST /insert` — 联系我们(商务合作意向提交)
+  - `GET /findStation` — 查询电站项目(支持 specialFlag 资方筛选)
+  - `GET /getDetail` — 查询电站详情
+  - `GET /findWeather` — 根据电站位置查询未来晴天日期
+  - `GET /findInverterData` — 查询逆变器数据柱状图(含特殊SN演示数据逻辑 + 非当日数据取去年同期)
+  - `GET /findScreenData` — 查询大屏数据(支持 specialFlag)
+  - `GET /findMonthElecData` — 查询月电量柱状图数据(支持 specialFlag)
+  - `GET /findMapData` — 查询地图省市电站数量信息(支持 specialFlag)
+- **Dubbo 服务引用新增**(service.xml):
+  - `businessCooperationIntentionService` — 商务合作意向
+  - `operationModelStationService` — 运维展会固定电站
+  - `lightInverterModelService` — 逆变器数据模型
+  - `operationScreenModelService` — 运维会展大屏数据
+  - `operationElecMonthModelService` — 资方年月发电量统计
+  - `reportScreenMapModelService` — 报表地图模型(新增)
+- **rrsjk-light-operation-service 新增 `ReportScreenMapModel`**: 地图省市电站数量信息模型
+  - Entity + Service + Dao + MyBatis Mapper (ReportScreenMapModel.xml)
+  - **用途**: 为运维会展大屏提供地图维度的省市电站分布数据
+- **逆变器数据查询时间逻辑修复** (2026-05-25): `LightInverterModelServiceImpl` 修正数据过滤逻辑
+- **OperationModelStation 字段扩展**: 新增 `specialFlag`(资产所属标识)、性能指标字段等
+
+### 电站标签服务 (代码明确证明, 2026-05-06)
+**来源**: `rrsjk-light-operation-service` + `rrsjk-hds-web` (commits 5b6805ba/0a26821f/74a70ebb/2eca92f2/5b6eaf7d, dengqiu/马斌, 2026-05-06)
+- 新增电站标签功能: `OperationLabelService`, `OperationLabelDefinitionService`
+- 标签服务配置和标签定义服务配置
+- 修复标签对象字段为空问题
+- **证据等级**: 代码明确证明
+
+### 电站年度保发功能 (代码明确证明, 2026-05-06~07)
+**来源**: `rrsjk-light-operation-service` + `rrsjk-hds-web` (commits fcfc067b/613bd02c/aff6b111/5811c51a, dengqiu/马斌, 2026-05-06~07)
+- 电站年度保发功能接口和统计接口
+- 修复多月一条对账单电量错误更新问题
+- **证据等级**: 代码明确证明
+
+### 储能电站管理 (代码明确证明, 2026-04-29)
+**来源**: `rrsjk-light-operation-service` + `rrsjk-hds-web` (commits d82a9acb/c355499a, dengqiu, 2026-04-29)
+- 添加储能电站管理功能接口
+- **证据等级**: 代码明确证明
+
+---
+
+### CBS 日志框架 (rrsjk-light-common, 代码明确证明, 2026-05-25)
+**来源**: `rrsjk-light-common` → `rrsjk-light-base` 模块 (2026-05-25 全量通读)
+
+`rrsjk-light-common` 是所有 `rrsjk-light-*` 服务的基础依赖库，提供：
+
+#### 日志拦截框架
+- **ControllerLogFilter**: Servlet Filter，自动拦截所有 HTTP 请求（排除 .css/.js/.png 等静态资源），记录请求 URI 和 IP，注入 TraceId 到 Response Header
+- **DbLogFilter**: Druid Filter (注册在 `META-INF/druid-filter.properties` 为 `druid.filters.dbLogFilter`)，拦截所有 SQL 执行，记录 SQL 语句和参数
+- **日志输出**: 按级别分文件输出（debug.log, info.log, warn.log, error.log, app.log），业务错误独立输出（business_error.log），系统日志独立输出（link.log, sql.log, sql-body.log, mq.log, rpc.log, task.log）
+- **日志保留**: app.log 保留 120 天，其他保留 2 天，单文件最大 100MB
+
+#### Trace 上下文
+- **TraceContext**: 线程本地存储，管理 `thraceId` (Long) 和 `rpcId` (List<Integer>)
+- **RPC Header**: `RPC_HEADER_TRACE_ID` 和 `RPC_HEADER_RPC_ID`，通过 HTTP Header 传递链路追踪 ID
+- **防共享**: `TraceContext.clean()` 在每个请求开始时清空，防止线程池复用导致 traceId 污染
+
+#### Manifold 编译期扩展
+- 使用 Manifold 2025.1.9 实现 Java 编译期元编程（运算符重载、属性扩展等）
+- 编译参数: `-Xplugin:Manifold no-bootstrap`
+- 三个模块: `rrsjk-light-base` (基础), `rrsjk-light-manifold` (Manifold 扩展), `rrsjk-light-rocketmq` (RocketMQ 封装)
+
+#### RocketMQ 封装
+- `rrsjk-light-rocketmq` 独立模块，基于 RocketMQ 4.8.0 + Spring Boot Starter 2.1.1
+- 与 `rrsjk-light-message-service` 的 RocketMQ 5.0.7 (Usher) 是两套不同实现
+
+---
+
+### rrsjk-light-iot-service IoT 服务 (代码明确证明, 2026-05-25)
+**来源**: `rrsjk-light-iot-service` (2026-05-25 全量通读)
+
+**状态**: 初始化阶段（2025-12-01 创建，仅基础结构）
+
+- 仅包含基础配置（Dubbo、MyBatis、Kafka、Redis、OSS、线程池）
+- 一个示例 EventBus Listener (`LightDemoListener`)
+- Kafka 消费者配置：消费 `LightInverterRecordKafkaEvent`，重试 3 次，间隔 1s
+- Dubbo 引用大量服务：rrsjk-light-api, rrsjk-light-data-api, repairs-api, zero-carbon 等
+- **当前无实际业务逻辑**，是 `rrsjk-light-operation-service` 的拆分/迁移目标
+- **AI 诊断配置**: 内网地址 `http://10.2.160.220:5000/api/diagnosis/start`（prod）/ `http://121.40.121.163:5000`（dev）
+- **天气 API**: `http://api.xiaoxianglink.com/v1/weather/weather`
+- **工单异步处理**: `workOrderTaskExecutor` (5-20 线程，队列 500)
+- **证据等级**: 代码明确证明

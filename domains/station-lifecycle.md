@@ -734,6 +734,43 @@ ENABLE ✅ → [线下验收（可选）] → OFF_LINE_CHECK_REJECT
 | 回购 | LightStationRepurchaseServiceImpl.java | 电站回购 |
 | 运维划转 | LightOpAuthorityZoneServiceImpl.java | 自动划转运维商 |
 
+### 电站终止管理 — 完工后终止策略体系 (代码明确证明, 2026-04-28~05-07)
+**来源**: `rrsjk-light-service` → `LightStopStationServiceImpl.java`, `StopToDoJobService.java`, `ReverseBasePolicyIncomeStrategy.java`, `ReverseStationIncomeStrategy.java`, `StationFinalizeStrategy.java`, `LightStopStationTodo.java` (commits 2e693e20/7b57c94a/c2c1009b/367b020f/b8013b36/b0974e3a/dbae1aa/d2ef4974/cb9b43f6/f969b395/4fa6b4c4/9838517d/86029e57, 解钦, 2026-04-28~05-07)
+**关联需求**: 电站终止管理功能（多迭代开发）
+- **核心架构**: 基于策略模式的电站终止待办系统 (DAG依赖顺序执行)
+  - `StopToDoJobService`: 定时任务服务，按DAG依赖顺序执行待办
+  - `StopToDoStrategyFactory`: 策略工厂，根据待办类型路由到具体策略
+  - 策略类: `StationFinalizeStrategy` (电站完工), `ReverseBasePolicyIncomeStrategy` (回退基础政策收益), `ReverseStationIncomeStrategy` (回退电站收益)
+- **关键变更**:
+  - 新增 `StationFinalizeStrategy`: 电站完工后终止的策略实现
+  - `ReverseBasePolicyIncomeStrategy`: 大幅重构 (183行+), 新增回退政策收益逻辑
+  - `ReverseStationIncomeStrategy`: 新增回退电站收益逻辑 (52行+)
+  - `LightStopStationTodo`: 新增待办事项实体
+  - **状态控制**: 待完工审核的电站不允许申请方案变更
+  - **功率字段**: 电站终止管理中的功率由 Integer 改为 BigDecimal
+  - **初始状态**: 修复电站终止时的初始状态问题
+  - **撤回接口**: 电站终止的撤回接口修复
+  - **参数改造**: 电站终止管理所有流程的传参改造
+- **旧逻辑移除**: 资产审核通过后，不再自动创建终止待办和冻结电站（从 `LightStopStationServiceImpl` 中移除原有操作日志和冻结逻辑）
+- **前端**: `rrsjk-admin-web` → 终止管理列表增加待办事项 (`eaf55080`, 解钦, 2026-05-07)
+- **商户通**: `rrsjk-merchant-web` → 电站终止流程接口改造 (`f20e7424`, 解钦, 2026-04-30)
+- **证据等级**: 代码明确证明
+
+---
+
+### 超期未完工提醒通知 (代码明确证明, 2026-05-25)
+**来源**: `rrsjk-light-message-service` → `OverdueStationNotifyJob.java` (2026-05-25 全量通读)
+
+电站从首次签约到完工（`complete_at IS NULL`）超过 40 天触发自动提醒：
+- **40 ≤ days < 50**: 仅通知一次（Redis 去重，Key: `overdue_notify_40:spId:{spId}`, TTL=5 天）
+- **50 ≤ days ≤ 60**: 每天通知一次
+- **days > 60**: 停止通知
+
+**权限隔离**: 一级商收到所有超期电站，二级商只收到自己建的站
+**消息渠道**: APP + MER（商户通）各写一条
+**发送方**: 系统自动 (`sendBy="SYSTEM"`)
+**调度方式**: Dubbo 暴露 `OverdueStationNotifyJobService.execute()`，外部 XXL-Job 调用
+
 ---
 
 ## 来源

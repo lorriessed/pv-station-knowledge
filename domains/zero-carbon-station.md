@@ -37,6 +37,15 @@
 - 数据字典查询: `getDicts("zch/finance", "purchaseTypeList")`
 - **影响**: `value='13'` 对应工程安装类型，改用value过滤更稳定(label可能被修改)
 
+### 零碳结算管理页面角色扩展 (代码明确证明, 2026-05-25)
+**来源**: `nahui-pv.merchant-micro.zch` → `src/router/zeroCarbon.js`, `src/store/modules/index/_type_zeroCarbon.js`
+**Commit**: ba04ae91/df23481f, 开发者: yuanruilin, 2026-05-25, branch `dev-yrl-sapPurchase`
+
+- 零碳结算管理相关页面路由角色新增 **"ZERO_CARBON_E_STATION"**
+- 涉及路由文件: `src/router/zeroCarbon.js` (12行变更)
+- 涉及 store 类型文件: `src/store/modules/index/_type_zeroCarbon.js` (8行变更)
+- **影响**: ZERO_CARBON_E_STATION 角色可访问零碳结算管理页面，可能是零碳适家电站的独立角色
+
 ## 来源
 - 每日代码扫描 2026-05-13，rrsjk-hds-web, rrsjk-light-operation-service
 
@@ -82,3 +91,12 @@
 **来源**: `nahui-dicts-serve` → `src/data/zch/base/` (袁睿林, 2026-04-17)
 - `businessModelTypeList.js`: `LIGHT_STORAGE`=零碳适家-光储, `E_STATION`=零碳E站, `ALL`=所有模式
 - `businessModelStatus.js`: `WAIT_AUDIT`待审核 → `AUDIT_REJECT`审批不通过 → `WAIT_SIGN`待签署 → `ENABLE`已授权
+
+### 零碳能源电站容量计算修正 (代码明确证明, 2026-04-28)
+**来源**: `rrsjk-light-service` → `ZeroCarbonEnergyApi.java` (commit 37dc5f00c9, 德/姜传德, 2026-04-28)
+**关联需求**: TAEI-3056 【零碳适家】建站方案登记支持不同品牌不同规格组件混用
+- **Bug修复**: 电站容量计算从 `planQuantity * planPower` 改为仅使用 `planPower`
+- 原逻辑: `.plantCapacity(BigDecimal.valueOf(station.getPlanQuantity()).multiply(BigDecimal.valueOf(station.getPlanPower())).toString())`
+- 修复后: `.plantCapacity(station.getPlanPower().toString())`
+- **业务含义**: `planPower` 已是总装机容量(kW)，不应再乘以组件数量
+- **证据等级**: 代码明确证明
