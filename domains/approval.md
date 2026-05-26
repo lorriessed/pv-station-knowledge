@@ -670,3 +670,7 @@
 ### 与光伏业务的关系
 
 Flowable 是一个**通用审核流程引擎**，不直接处理光伏业务。光伏业务中的某些审核场景（如错误信息上报、问题处理等）可能通过此服务进行流程管理。具体业务与Flowable的关联需要通过 `rrs-dispenser-server` 中的 `FlowableConfig` 配置来建立。
+
+
+## Test Update
+- Added test section for incremental sync testing
