@@ -805,3 +805,11 @@ if (exist != null) {
 ```
 
 **关联需求**: TAEI-3104 (`light_unionpay_rent` 表 `uni_station_id` 唯一键冲突修复，商轶龙处理) 也涉及类似的唯一键冲突问题。
+
+### 房产证OCR识别功能 (代码明确证明, 2026-05-19~05-26)
+**来源**: `rrsjk-admin-web` → `LightStationBusinessController.java` (mabin, commits aa91dd59/d742a926/272c10e9/13302acc/241a78bc, 2026-05-19~05-26)
+- 添加房产证AI识别功能，支持在商务审核环节自动识别房产证信息
+- 涉及模板: `lightStationBusinessAudit.ftl`, `purchaseSaleContractView.ftl`, `userInfoImageView.ftl`
+- 2026-05-26 连续修复OCR状态判断逻辑(3次commit)
+- 同时修复日期格式化: givenTime 从 `"2026-5-26"` 改为 `"2026-05-26"`，防止 `DateTimeParseException`
+- **证据等级**: 代码明确证明

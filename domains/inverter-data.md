@@ -229,10 +229,26 @@
 
 ### Kafka 双写机制 (代码明确证明)
 **来源**: `rrsjk-light-data-service` → `KafkaProducerService.java`, `KafkaDoubleWriteProperties` (2026-05-25 全量通读)
-- 逆变器数据发送 Kafka 时支持按 SN 码配置双写到新队列
+|- 逆变器数据发送 Kafka 时支持按 SN 码配置双写到新队列
 - `KafkaDoubleWriteProperties.isEnabled()` — 开关控制
 - `shouldDoubleWrite(inveterSn)` — 过滤需要双写的 SN
 - 使用同一个 `kafkaTemplate3` 实例，发送到不同 topic
+- **证据等级**: 代码明确证明
+
+### 逆变器列表异步数据获取与缓存 (代码明确证明, 2026-05-26)
+**来源**: `rrsjk-admin-web` → `LightInveterController.java` (commit b644eafd/majinhu, 2026-05-26)
+- 逆变器详情页实现异步数据获取和缓存机制 (267行变更)
+- 涉及天气数据异步拉取，减少页面加载时间
+- 按钮5秒防重复点击置灰处理 (commit 24c23807)
+- 日期格式化修复: givenTime 从 `"2026-5-26"` 改为 `"2026-05-26"`，防止 `DateTimeParseException` (commit edbdc609)
+- 涉及 Controller: `LightInveterController`, `LightStationElecController`, `LightZeroCarbonInverterController`
+- 模板修改: `inveterDetail.ftl`, `lightInveterList.ftl`
+- **证据等级**: 代码明确证明
+
+### 三天连续发电状态刷新 — 定时任务优化 (代码明确证明, 2026-05-25)
+**来源**: `rrsjk-light-data-service` → `LightInveterDataServiceImpl.java`, `LightInveterDao.java`, `LightInveter.xml` (commit dd37b6df, majinhu, 2026-05-25)
+- `isContinueThreeDayElec()` 定时任务优化，134行变更
+- 涉及 DAO 新增查询方法、Mapper XML 新增 SQL 片段、Service 层逻辑重构
 - **证据等级**: 代码明确证明
 
 ### 问题电站规则计算 (代码明确证明)

@@ -98,7 +98,15 @@
 - 知识库：`domains/cbs-management.md`
 - 代码入口：`cbs-web` → `SysSubCenterController`(分中心管理), `HomeController`(登录), `JobLogController`(定时任务日志), `MenuController`(菜单)
 - 路由前缀：`/sysSubCenter/`(分中心), `/sys/login.do`(登录)
-- 技术栈：Java + Spring MVC + Shiro + Velocity/FreeMarker
+|- 技术栈：Java + Spring MVC + Shiro + Velocity/FreeMarker
 - **分中心管理**: `/sysSubCenter/subCenterList`(列表), `/sysSubCenter/subCenterUserList`(人员), `/sysSubCenter/addSubCenterUser`(添加人员)
 - **登录**: 验证码(randomCode)已改为非必填 (2026-05-20)
+
+## 工商业(CM) (`domains/cm-business.md`)
+- 关键词：工商业、风电、终验法、施工进度审核、收入政策、投决审核、项目立项。
+- 知识库：`domains/cm-business.md`
+- 代码入口：`rrsjk-admin-web` → `CmConstructionProgressAuditController`(施工进度审核), `CmLightProjectIncomePolicyController`(收入政策), `CmLightProjectSignInfoController`(签约信息), `CmLightUseController`, `CmNodeController`
+- 路由前缀：`/cmConstructionProgress/`, `/cmLightProjectIncomePolicy/`
+- 核心实体：`CmConstructionProgressAudit`(施工进度审核), `CmLightProjectIncomePolicy`(收入政策), `CmLightProject`(项目)
+- 业务特征：风电与光伏区分、终验法确认收入、并行审核方案、账务信息模块
 

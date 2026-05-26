@@ -960,4 +960,23 @@ stationParam.put("spMemberId", spMemberId);
 **共享支付查询参数修复** (TAEI-3080, 2026-05-14):
 - `e82b223`: 修复共享支付查询参数传递错误
 - `e08e2d3`/`01411e2`: 修正共享支付查询中的租用月份参数
-- `30d657e`: 优化共享账单记录查询逻辑
+|- `30d657e`: 优化共享账单记录查询逻辑
+
+### 金蝶SAP BUKRS字段映射修复 (代码明确证明, 2026-05-26)
+**来源**: `rrsjk-finance-service` → `JinSapClientModel.java` (commit e44ebe80, mabin, 2026-05-26)
+- `financeInputTransferNew()` 方法中新增规则: 当 `header_item.getBUKRS()` 为 `"7CQ0"` (忽略大小写) 时，替换为 `"9002"`
+- **业务含义**: 7CQ0 公司代码在金蝶SAP记账时需要映射到 9002，解决BUKRS字段映射错误导致记账失败的问题
+- **证据等级**: 代码明确证明
+
+### 对账单update方法判空改造 (代码明确证明, 2026-05-26)
+**来源**: `rrsjk-finance-service` → `PurchaseApplySettleMapper.xml` (commit cdc415b8, yumiao, 2026-05-26)
+- update SQL 从全字段SET改为 MyBatis `<set>` + `<if test="field != null">` 动态更新模式
+- 62行变更: 67行删除(全量更新) → 62行新增(动态更新)
+- **影响**: 防止null值覆盖已有数据，部分字段更新时不会将未传字段置空
+- **涉及表**: `purchase_apply_settle` (请款结算表)
+- **证据等级**: 代码明确证明
+
+### 商品类型新增"高端场景工程安装" (代码明确证明, 2026-05-25)
+**来源**: `rrsjk-admin-web` → `finance/self/purchaseApplyConfirm.ftl` (commit 9b2ff71f, 代继宁, 2026-05-25)
+- 财务自助请款确认页面新增商品类型选项
+- **证据等级**: 配置明确证明

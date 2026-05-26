@@ -46,6 +46,11 @@
 - 涉及 store 类型文件: `src/store/modules/index/_type_zeroCarbon.js` (8行变更)
 - **影响**: ZERO_CARBON_E_STATION 角色可访问零碳结算管理页面，可能是零碳适家电站的独立角色
 
+### 零碳结算管理角色扩展确认 (代码明确证明, 2026-05-26)
+**来源**: `nahui-pv.merchant-micro.zch` → `src/router/zeroCarbon.js`, `src/store/modules/index/_type_zeroCarbon.js` (扫描确认, 2026-05-26)
+- 该变更已通过 master 合入 (李宁 merge #72 into master from dev-yrl-sapPurchase)
+- 同时包含 node16 版本兼容修复 (`package.json` 变更)
+
 ## 来源
 - 每日代码扫描 2026-05-13，rrsjk-hds-web, rrsjk-light-operation-service
 

@@ -79,8 +79,14 @@
 
 ### 完工前领用物料状态 (前端配置证明, 2026-05-22 扫描)
 **来源**: `nahui-dicts-serve` → `src/data/apv/store/useStatusList.js` (袁睿林, 2026-03-19)
-- 新增出库管控(完工前领用)页面物料领用状态数据字典
+|- 新增出库管控(完工前领用)页面物料领用状态数据字典
 - 关联接口: `rrsjk-merchant-web` → `LightUseOrderController.completeBeforeDoList.do`
+
+### 服务商入库附件保存与供应商审核附件展示 (前端变更, 2026-05-26)
+**来源**: `nahui-pv.merchant-micro.osp` → `src/views/ospSpare/stockManage/damageListSupplier/addEditPop.vue`, `src/views/ospSpare/stockManage/serviceStock/addEditPop.vue` (A0026566, commit 376e0e0b, 2026-05-26)
+- OSP商户端备件管理: 服务商入库新增附件保存功能
+- 供应商审核页面增加附件展示
+- 97行变更: 2个Vue组件修改
 
 ### 领用逻辑优化 — 库龄分析报表 (代码明确证明, 2026-05-23 补漏第7期)
 **来源**: `rrsjk-light-report-service`, `rrsjk-admin-web` (TAEI-2957, 解钦, 2026-03-27~03-30)

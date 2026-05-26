@@ -5109,6 +5109,9 @@
 - @PostMapping("/submitNodeProgress.do")
 - @GetMapping("/finish/list.do")
 - @GetMapping("/finish/statusCount.do")
+- @GetMapping("/finish/detail.do")
+- @GetMapping("/finish/updateDetail.do")
+- @PostMapping("/finish/update.do")
 
 ## LightSkuDataController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightSkuDataController.java`
@@ -6971,6 +6974,7 @@
 - @PostMapping("/loginOut")
 - @GetMapping("/convertToken")
 - @GetMapping("/hds_idmlogin")
+- @PostMapping("/assertLease/login")
 
 ## KaptchaController
 - 文件: `rrsjk-oauth2-web/src/main/java/com/rrsjk/oauth2/controller/KaptchaController.java`
@@ -10583,6 +10587,12 @@
 - @PostMapping("getLoginUser")
 - @PostMapping("register")
 
+## ZhongYinLeaseController
+- 文件: `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/controller/zhongyin/ZhongYinLeaseController.java`
+- @RequestMapping("/zhongyin")
+- @PostMapping("/powerStationList")
+- @PostMapping("/queryDailyGenerationSummary")
+
 ## ZhaoYinLeaseController
 - 文件: `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/controller/zhaoyin/ZhaoYinLeaseController.java`
 - @RequestMapping("/zhaoyin")
@@ -13706,6 +13716,17 @@
 - @RequestMapping("checkBatchConfirmByMajorMaterial.do")
 - @RequestMapping("batchConfirmByMajorMaterial.do")
 
+## CmConstructionProgressAuditController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/CmConstructionProgressAuditController.java`
+- @RequestMapping("/cmConstructionProgressAudit")
+- @RequestMapping("list.html")
+- @RequestMapping("doList.do")
+- @RequestMapping("detail.html")
+- @RequestMapping("audit.html")
+- @RequestMapping("audit.do")
+- @RequestMapping("projectTrack.html")
+- @RequestMapping("/doExport.do")
+
 ## LightFundSettleController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightFundSettleController.java`
 - @RequestMapping("/lightFundSettle")
@@ -14145,7 +14166,13 @@
 - @RequestMapping("update.html")
 - @RequestMapping("update.do")
 - @RequestMapping("findItem.do")
-- @RequestMapping("findIncomeNodeList.do")
+- @RequestMapping("findAllNodeListByBizType.do")
+- @RequestMapping("getProjectByCode.do")
+- @RequestMapping("importPolicy.do")
+- @RequestMapping("delete.do")
+- @RequestMapping("audit.html")
+- @RequestMapping("audit.do")
+- @RequestMapping("downloadTemplate.do")
 
 ## LightOverduePolicyAreaController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightOverduePolicyAreaController.java`

@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-05-25T23:01:22.794888",
+  "last_scan_at": "2026-05-26T23:01:30.220145",
   "repos": {
     "base-service": {
       "head": "9befec0aea815ef32d4cbc9e37e854bedf7023a7",
@@ -12,17 +12,17 @@
       "branch": "master"
     },
     "esp-mag-haier-android-main": {
-      "head": "511ce2f566b0696bb11baa4ece6822d04d764910",
+      "head": "4e49cfb6c6c54443694bfcb2e7ae4e08899b66eb",
       "path": "/data/pvcode/esp-mag-haier-android-main",
       "branch": "master"
     },
     "esp-mag-haier-h5-portal": {
-      "head": "ef49e0b138d7c74539a02e91f90399a1ea3c8325",
+      "head": "b2c51492756a19f56cbb5ada89bb4f169844c4ff",
       "path": "/data/pvcode/esp-mag-haier-h5-portal",
       "branch": "master"
     },
     "esp-mag-haier-ios-main": {
-      "head": "bbb750a9e4d819587589c8b542e4e6270d9bb16a",
+      "head": "19bcf58fa6bd4a1cc57138a172d4191f14f592af",
       "path": "/data/pvcode/esp-mag-haier-ios-main",
       "branch": "master"
     },
@@ -72,7 +72,7 @@
       "branch": "master"
     },
     "nahui-pv.epcb-mini": {
-      "head": "b4bb6b7f8545ceebc4093746927098a010bda111",
+      "head": "e9d2c3f428c7bfdbaf9bbd9ff0f267526b748bb4",
       "path": "/data/pvcode/nahui-pv.epcb-mini",
       "branch": "master"
     },
@@ -87,7 +87,7 @@
       "branch": "master"
     },
     "nahui-pv.merchant-micro.osp": {
-      "head": "e7d639e72b19a8dd4ed7a2473445e8aca607a937",
+      "head": "47a92f92a4d6294203ecb8e48b8586922fb095bc",
       "path": "/data/pvcode/nahui-pv.merchant-micro.osp",
       "branch": "master"
     },
@@ -212,7 +212,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "a132fbeb100d9f5bf21921ab68981d679ba110b4",
+      "head": "3f4cfbb34121403d526280c4ebfb41ffab982867",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -247,7 +247,7 @@
       "branch": "master"
     },
     "rrsjk-finance-service": {
-      "head": "085821dc9d606f432c7749ddb13bbcb8fd7d01ae",
+      "head": "701b4a5c60fdad7cdd837cb279e77e8c9a04a648",
       "path": "/data/pvcode/rrsjk-finance-service",
       "branch": "master"
     },
@@ -272,7 +272,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "03d26bf8f4605ffc146fccca772e775b7738963a",
+      "head": "dd37b6df404d65b4be4f158811a391cb369e17aa",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -287,7 +287,7 @@
       "branch": "master"
     },
     "rrsjk-light-openapi-service": {
-      "head": "f5ad5ceab651d96c89dcac7e55553d2d36799312",
+      "head": "501c3cbadb0bdbe7fe811dd5bda0518972de4714",
       "path": "/data/pvcode/rrsjk-light-openapi-service",
       "branch": "master"
     },
@@ -297,12 +297,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "98fa17c70584f991fc654383b67052c31904faf2",
+      "head": "07bdb142858725e3b1e59320f97fa66641a5b96f",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "d2e98be75eaa8820db3183c67f5d2b4b29d5fc96",
+      "head": "f6a700a663b4eb313b4036d8aae550ad4074e4fc",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -322,7 +322,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "dce42d5430409e30feee95524f9940f5a99c11e1",
+      "head": "d911f4bc23fde1087fd006c0822b9f5ae40568e8",
       "path": "/data/pvcode/rrsjk-merchant-web",
       "branch": "master"
     },
@@ -347,12 +347,12 @@
       "branch": "master"
     },
     "rrsjk-oauth2-web": {
-      "head": "edc9ca7b220b5a2587abad4aa4cfeb7a6644efb2",
+      "head": "f247dba20e7331e96897e72572b90ccc82fc3c0e",
       "path": "/data/pvcode/rrsjk-oauth2-web",
       "branch": "master"
     },
     "rrsjk-openapi-web": {
-      "head": "eb186de7c3c3b3c283f4fd91951fba7f7cfa6b00",
+      "head": "b150ace4c5107e86d9cadda9bcb7404f7ce9edb5",
       "path": "/data/pvcode/rrsjk-openapi-web",
       "branch": "master"
     },
@@ -462,7 +462,7 @@
       "branch": "master"
     },
     "vpp-data-platform": {
-      "head": "c2dfa4aaf6953a299e247ccebbbfa964f29f0b7a",
+      "head": "731758e0666925ce847ed3ca216751eacad24cf7",
       "path": "/data/pvcode/vpp-data-platform",
       "branch": "master"
     },

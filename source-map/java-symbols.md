@@ -337,6 +337,7 @@
 - `AddedElement` (class) `com.rrsjk.item.dto` -> `rrsjk-item-service/rrsjk-item-api/src/main/java/com/rrsjk/item/dto/AddedElement.java`
 - `AdditionalCommentRequest` (class) `com.rrsjk.mobile.controller.item.vo` -> `rrsjk-mobile-web/src/main/java/com/rrsjk/mobile/controller/item/vo/AdditionalCommentRequest.java`
 - `AdditionalDataSourceConfig` (class) `com.nahui.energy.config` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/config/AdditionalDataSourceConfig.java`
+- `AdditionalDataSourceConfigTest` (class) `com.nahui.energy.config` -> `vpp-data-platform/vpp-data-platform-starter/src/test/java/com/nahui/energy/config/AdditionalDataSourceConfigTest.java`
 - `AddressOperationLog` (class) `com.rrsjk.trade.order.entity` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/order/entity/AddressOperationLog.java`
 - `AddressOperationLogMapper` (interface) `com.rrsjk.trade.order.mapper` -> `rrsjk-trade-service/rrsjk-trade-impl/src/main/java/com/rrsjk/trade/order/mapper/AddressOperationLogMapper.java`
 - `AddressOperationLogService` (interface) `com.rrsjk.trade.order.service` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/order/service/AddressOperationLogService.java`
@@ -1900,9 +1901,16 @@
 - `CmConstructionPlanItemDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmConstructionPlanItemDto.java`
 - `CmConstructionPlanService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/CmConstructionPlanService.java`
 - `CmConstructionPlanServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/CmConstructionPlanServiceImpl.java`
+- `CmConstructionProgressAudit` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/CmConstructionProgressAudit.java`
+- `CmConstructionProgressAuditController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/CmConstructionProgressAuditController.java`
+- `CmConstructionProgressAuditDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/CmConstructionProgressAuditDao.java`
+- `CmConstructionProgressAuditDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmConstructionProgressAuditDto.java`
+- `CmConstructionProgressAuditService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/CmConstructionProgressAuditService.java`
+- `CmConstructionProgressAuditServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/CmConstructionProgressAuditServiceImpl.java`
 - `CmConstructionProgressController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/CmConstructionProgressController.java`
 - `CmConstructionProgressController` (class) `com.rrsjk.merchant.controller.light` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/CmConstructionProgressController.java`
 - `CmConstructionProgressExcel` (class) `com.rrsjk.admin.controller.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/vo/CmConstructionProgressExcel.java`
+- `CmConstructionProgressHisAtchDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmConstructionProgressHisAtchDto.java`
 - `CmConstructionServiceTest` (class) `` -> `rrsjk-light-service/rrsjk-light-impl/src/test/java/com/rrsjk/light/service/impl/CmConstructionServiceTest.java`
 - `CmContractManage` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/CmContractManage.java`
 - `CmContractManageDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/CmContractManageDao.java`
@@ -1951,6 +1959,7 @@
 - `CmGvsSoUse` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/CmGvsSoUse.java`
 - `CmGvsSoUseDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/CmGvsSoUseDao.java`
 - `CmIncomeItemReportDto` (class) `` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmIncomeItemReportDto.java`
+- `CmIncomePolicyTemplateExcel` (class) `com.rrsjk.admin.controller.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/vo/CmIncomePolicyTemplateExcel.java`
 - `CmIncomeProgressReportDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmIncomeProgressReportDto.java`
 - `CmInvestorPaymentExcel` (class) `com.rrsjk.admin.controller.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/vo/CmInvestorPaymentExcel.java`
 - `CmInvestorPaymentItemExcel` (class) `com.rrsjk.admin.controller.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/vo/CmInvestorPaymentItemExcel.java`
@@ -2028,6 +2037,7 @@
 - `CmLightProjectIncomePolicyItemDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/CmLightProjectIncomePolicyItemDao.java`
 - `CmLightProjectIncomePolicyService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/CmLightProjectIncomePolicyService.java`
 - `CmLightProjectIncomePolicyServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/CmLightProjectIncomePolicyServiceImpl.java`
+- `CmLightProjectIncomePolicyServiceImplTest` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/test/java/com/rrsjk/light/service/impl/CmLightProjectIncomePolicyServiceImplTest.java`
 - `CmLightProjectIncomeRecord` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/CmLightProjectIncomeRecord.java`
 - `CmLightProjectIncomeRecordDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/CmLightProjectIncomeRecordDao.java`
 - `CmLightProjectIncomeService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/CmLightProjectIncomeService.java`
@@ -2143,6 +2153,8 @@
 - `CmPaymentService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/CmPaymentService.java`
 - `CmPaymentServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/CmPaymentServiceImpl.java`
 - `CmPaymentSettlementTargetDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmPaymentSettlementTargetDto.java`
+- `CmPolicyAuditRecord` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/CmPolicyAuditRecord.java`
+- `CmPolicyAuditRecordDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/CmPolicyAuditRecordDao.java`
 - `CmPolicyDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmPolicyDto.java`
 - `CmPreOrder` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/CmPreOrder.java`
 - `CmPreOrderApplyDetailDto` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmPreOrderApplyDetailDto.java`
@@ -2308,6 +2320,7 @@
 - `CmStoreServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/CmStoreServiceImpl.java`
 - `CmUploadVoucherRequest` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/CmUploadVoucherRequest.java`
 - `CmValueChainCalculateModel` (class) `com.rrsjk.light.service.model` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/model/CmValueChainCalculateModel.java`
+- `CmWindPowerIntegrationTest` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/test/java/com/rrsjk/light/service/impl/CmWindPowerIntegrationTest.java`
 - `CmbAbstractListResRequest` (class) `com.rrsjk.light.openapi.comleasing.dto.request` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/openapi/comleasing/dto/request/CmbAbstractListResRequest.java`
 - `CmbAbstractRequest` (class) `com.rrsjk.light.openapi.comleasing.dto.request` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/openapi/comleasing/dto/request/CmbAbstractRequest.java`
 - `CmbBaseRegion` (class) `com.rrsjk.light.entity.cmbleasing` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/cmbleasing/CmbBaseRegion.java`
@@ -2324,6 +2337,7 @@
 - `CmbDashboardImpl` (class) `com.rrsjk.report.service.impl` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/service/impl/CmbDashboardImpl.java`
 - `CmbDashboardImplTest` (class) `com.rrsjk.report.service.impl` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/test/java/com/rrsjk/report/service/impl/CmbDashboardImplTest.java`
 - `CmbElectricPrice` (class) `com.rrsjk.light.entity.cmbleasing` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/cmbleasing/CmbElectricPrice.java`
+- `CmbElectricPriceV2` (class) `com.rrsjk.light.entity.cmbleasing` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/cmbleasing/CmbElectricPriceV2.java`
 - `CmbFacade` (interface) `com.rrsjk.light.service.openapi.cmbleasing.api` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/openapi/cmbleasing/api/CmbFacade.java`
 - `CmbFacadeImpl` (class) `com.rrsjk.light.service.openapi.cmbleasing.api.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/openapi/cmbleasing/api/impl/CmbFacadeImpl.java`
 - `CmbFacadeTest` (class) `com.rrsjk.light.service.openapi.cmbleasing.api` -> `rrsjk-light-service/rrsjk-light-impl/src/test/java/com/rrsjk/light/service/openapi/cmbleasing/api/CmbFacadeTest.java`
@@ -5867,6 +5881,7 @@
 - `HttpClientUtil` (class) `com.haier.cbs.web.controller.idm.utils` -> `cbs-web/src/main/java/com/haier/cbs/web/controller/idm/utils/HttpClientUtil.java`
 - `HttpClientUtils` (class) `com.nahui.energy.utils` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/utils/HttpClientUtils.java`
 - `HttpClientUtilsExt` (class) `com.rrsjk.finance.mpcRebate.kjtCore` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/java/com/rrsjk/finance/mpcRebate/kjtCore/HttpClientUtilsExt.java`
+- `HttpClientUtilsTest` (class) `com.nahui.energy.utils` -> `vpp-data-platform/vpp-data-platform-starter/src/test/java/com/nahui/energy/utils/HttpClientUtilsTest.java`
 - `HttpComponentsClientRestfulHttpRequestFactory` (class) `com.rrsjk.light.config` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/config/HttpComponentsClientRestfulHttpRequestFactory.java`
 - `HttpComponentsClientRestfulHttpRequestFactory` (class) `com.rrsjk.light.message.config` -> `rrsjk-light-message-service/rrsjk-light-message-impl/src/main/java/com/rrsjk/light/message/config/HttpComponentsClientRestfulHttpRequestFactory.java`
 - `HttpElecInvoiceUtil` (class) `com.haier.cbs.order.util` -> `order-service/order-impl/src/main/java/com/haier/cbs/order/util/HttpElecInvoiceUtil.java`
@@ -10169,6 +10184,10 @@
 - `LightStationGreenCertificateProgressSchedule` (class) `com.nahui.energy.schedule` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/schedule/LightStationGreenCertificateProgressSchedule.java`
 - `LightStationGreenCertificateProgressService` (interface) `com.nahui.energy.service.progressgreen` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/service/progressgreen/LightStationGreenCertificateProgressService.java`
 - `LightStationGreenCertificateProgressServiceImpl` (class) `com.nahui.energy.service.impl.progressgreen` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/service/impl/progressgreen/LightStationGreenCertificateProgressServiceImpl.java`
+- `LightStationHouseCertificateOcr` (class) `com.rrsjk.light.entity.alibabaAI` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/alibabaAI/LightStationHouseCertificateOcr.java`
+- `LightStationHouseCertificateOcrMapper` (interface) `com.rrsjk.light.mapper` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/mapper/LightStationHouseCertificateOcrMapper.java`
+- `LightStationHouseCertificateOcrService` (interface) `com.rrsjk.light.service.alibabaAI` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/alibabaAI/LightStationHouseCertificateOcrService.java`
+- `LightStationHouseCertificateOcrServiceImpl` (class) `com.rrsjk.light.service.impl.alibabaAI` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/alibabaAI/LightStationHouseCertificateOcrServiceImpl.java`
 - `LightStationHrflc` (class) `com.rrsjk.light.entity.hrflc` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/hrflc/LightStationHrflc.java`
 - `LightStationHrflcDao` (class) `com.rrsjk.light.dao.hrflc` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/hrflc/LightStationHrflcDao.java`
 - `LightStationHrflcService` (interface) `com.rrsjk.light.service.hrflc` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/hrflc/LightStationHrflcService.java`
@@ -14944,6 +14963,8 @@
 - `RepeatSubmitAspect` (class) `com.rrsjk.merchant.annotation.aspect` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/annotation/aspect/RepeatSubmitAspect.java`
 - `RepeatSubmitAspect` (class) `com.rrsjk.mobile.aspect` -> `rrsjk-mobile-web/src/main/java/com/rrsjk/mobile/aspect/RepeatSubmitAspect.java`
 - `RepeatSubmitAspect` (class) `com.rrsjk.openapi.aspect` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/aspect/RepeatSubmitAspect.java`
+- `ReponseEncrypt` (interface) `com.rrsjk.openapi.aspect` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/aspect/ReponseEncrypt.java`
+- `ReponseEncryptAspect` (class) `com.rrsjk.openapi.aspect` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/aspect/ReponseEncryptAspect.java`
 - `ReportAssertStationInfo` (interface) `com.rrsjk.report.service` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/service/ReportAssertStationInfo.java`
 - `ReportAssertStationInfoImpl` (class) `com.rrsjk.report.service.impl` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/service/impl/ReportAssertStationInfoImpl.java`
 - `ReportAssetScreenCmGrid` (class) `com.rrsjk.report.entity.local` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/entity/local/ReportAssetScreenCmGrid.java`
@@ -16881,6 +16902,7 @@
 - `StationStatisticServiceImpl` (class) `com.nahui.energy.service.vpp.impl` -> `vpp-api-elecbusiness/vpp-elecbusiness-biz/src/main/java/com/nahui/energy/service/vpp/impl/StationStatisticServiceImpl.java`
 - `StationStatisticsQuery` (class) `com.rrsjk.light.operation.dto.v2.query` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/dto/v2/query/StationStatisticsQuery.java`
 - `StationStatusRequest` (class) `com.rrsjk.openapi.vo.zhaoyinLease.request` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/vo/zhaoyinLease/request/StationStatusRequest.java`
+- `StationStatusRequest` (class) `com.rrsjk.openapi.vo.zhongyinLease.request` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/vo/zhongyinLease/request/StationStatusRequest.java`
 - `StationStatusResponse` (class) `com.rrsjk.openapi.vo.zhaoyinLease.response` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/vo/zhaoyinLease/response/StationStatusResponse.java`
 - `StationStopUseReverseListener` (class) `com.rrsjk.light.listener` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/listener/StationStopUseReverseListener.java`
 - `StationStopUseReverseMessage` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/StationStopUseReverseMessage.java`
@@ -17821,6 +17843,7 @@
 - `TsKvRepositoryImpl` (class) `com.nahui.energy.repository.impl` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/repository/impl/TsKvRepositoryImpl.java`
 - `TsKvService` (interface) `com.nahui.energy.service` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/service/TsKvService.java`
 - `TsKvServiceImpl` (class) `com.nahui.energy.service.impl` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/service/impl/TsKvServiceImpl.java`
+- `TsKvServiceImplTest` (class) `com.nahui.energy.service.impl` -> `vpp-data-platform/vpp-data-platform-starter/src/test/java/com/nahui/energy/service/impl/TsKvServiceImplTest.java`
 - `TypeConvert` (class) `com.sar.yunkuaichong.utils` -> `nahuipv-hnzc-app-android/app/src/main/java/com/sar/yunkuaichong/utils/TypeConvert.java`
 - `TypeInfo` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/TypeInfo.java`
 - `UIScan` (class) `com.sar.yunkuaichong.tools.scan` -> `nahuipv-hnzc-app-android/app/src/main/java/com/sar/yunkuaichong/tools/scan/UIScan.java`
@@ -19308,7 +19331,14 @@
 - `ZhaoYinTradeIncomeSettleExcel` (class) `com.rrsjk.admin.controller.light.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/vo/ZhaoYinTradeIncomeSettleExcel.java`
 - `ZhaoYinTradeIncomeSettleService` (interface) `com.rrsjk.light.service.zhaoyin` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/zhaoyin/ZhaoYinTradeIncomeSettleService.java`
 - `ZhaoYinTradeIncomeSettleServiceImpl` (class) `com.rrsjk.light.service.zhaoyin` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/zhaoyin/ZhaoYinTradeIncomeSettleServiceImpl.java`
+- `ZhongYinBocLeaseService` (interface) `com.rrsjk.openapi.service` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/service/ZhongYinBocLeaseService.java`
+- `ZhongYinBocLeaseServiceImpl` (class) `com.rrsjk.openapi.service.impl` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-impl/src/main/java/com/rrsjk/openapi/service/impl/ZhongYinBocLeaseServiceImpl.java`
+- `ZhongYinElecByStationDto` (class) `com.rrsjk.openapi.dto.zhongyinLease` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/dto/zhongyinLease/ZhongYinElecByStationDto.java`
+- `ZhongYinElecTotalDto` (class) `com.rrsjk.openapi.dto.zhongyinLease` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/dto/zhongyinLease/ZhongYinElecTotalDto.java`
 - `ZhongYinIncomeModeCheckStrategy` (class) `com.rrsjk.light.service.impl.income.stategy.mode` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/income/stategy/mode/ZhongYinIncomeModeCheckStrategy.java`
+- `ZhongYinInverterData` (class) `com.rrsjk.openapi.dto.zhongyinLease` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/dto/zhongyinLease/ZhongYinInverterData.java`
+- `ZhongYinLeaseController` (class) `com.rrsjk.openapi.controller.zhongyin` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/controller/zhongyin/ZhongYinLeaseController.java`
+- `ZhongYinReturn` (class) `com.rrsjk.openapi.vo.zhongyinLease` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/vo/zhongyinLease/ZhongYinReturn.java`
 - `ZhongYinStationIncomeHandleStrategy` (class) `com.rrsjk.light.service.impl.income.stategy.handle` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/income/stategy/handle/ZhongYinStationIncomeHandleStrategy.java`
 - `ZhongYinTradeIncomeSettle` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/ZhongYinTradeIncomeSettle.java`
 - `ZhongYinTradeIncomeSettle` (class) `com.rrsjk.report.entity.light` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/entity/light/ZhongYinTradeIncomeSettle.java`
@@ -19321,6 +19351,8 @@
 - `ZkNodeData` (class) `com.haier.cbs.job.domain.server` -> `job-service/job-impl/src/main/java/com/haier/cbs/job/domain/server/ZkNodeData.java`
 - `ZyIncomeModeCheckStrategy` (class) `com.rrsjk.light.service.impl.income.stategy.mode` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/income/stategy/mode/ZyIncomeModeCheckStrategy.java`
 - `ZyStationIncomeHandleStrategy` (class) `com.rrsjk.light.service.impl.income.stategy.handle` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/income/stategy/handle/ZyStationIncomeHandleStrategy.java`
+- `ZyTokenRequest` (class) `com.rrsjk.oauth2.pojo.zhongyin` -> `rrsjk-oauth2-web/src/main/java/com/rrsjk/oauth2/pojo/zhongyin/ZyTokenRequest.java`
+- `ZyTokenResponse` (class) `com.rrsjk.oauth2.pojo.zhongyin` -> `rrsjk-oauth2-web/src/main/java/com/rrsjk/oauth2/pojo/zhongyin/ZyTokenResponse.java`
 - `_Manifold_Temp_Main_1` (class) `_temp_` -> `rrsjk-admin-web/src/main/java/_temp_/_Manifold_Temp_Main_1.java`
 - `_Manifold_Temp_Main_2` (class) `_temp_` -> `rrsjk-admin-web/src/test/java/_temp_/_Manifold_Temp_Main_2.java`
 - `and` (interface) `com.haier.cbs.base.eai.aws.productinfo` -> `base-service/base-impl/src/main/java/com/haier/cbs/base/eai/aws/productinfo/ObjectFactory.java`
@@ -19453,6 +19485,7 @@
 - `messageController` (class) `com.rrsjk.merchant.controller.message` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/message/messageController.java`
 - `policyMessage` (class) `com.rrsjk.light.message.entity` -> `rrsjk-light-message-service/rrsjk-light-message-api/src/main/java/com/rrsjk/light/message/entity/policyMessage.java`
 - `policyMessageServiceDao` (class) `com.rrsjk.light.message.dao` -> `rrsjk-light-message-service/rrsjk-light-message-impl/src/main/java/com/rrsjk/light/message/dao/policyMessageServiceDao.java`
+- `powerStationRequest` (class) `com.rrsjk.openapi.vo.zhongyinLease.request` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/vo/zhongyinLease/request/powerStationRequest.java`
 - `provides` (class) `com.sar.yunkuaichong.tools.scan.zxing.decoding` -> `nahuipv-hnzc-app-android/app/src/main/java/com/sar/yunkuaichong/tools/scan/zxing/decoding/Intents.java`
 - `test` (class) `com.nahui.energy.controller.test` -> `vpp-openapi/vpp-openapi-biz/src/test/java/com/nahui/energy/controller/test/test.java`
 - `test` (class) `com.trade.center.main.lib.dock.plugin` -> `esp-mag-haier-android-main/libDock/src/main/java/com/trade/center/main/lib/dock/plugin/test.java`

@@ -160,3 +160,10 @@ shaozhuqing@haier.com, jxj@haier.com, 00080789, liuyp, 00627371,
 ## 与光伏业务的关系
 
 HDS Web 是光伏业务的**重要 HTTP API 入口层**，特别是 EPC 项目管理、电站管理、运维收入管理等核心业务。它不直接操作数据库，而是通过 Dubbo 调用底层微服务。
+
+### 业务合作意向与逆变器数据过滤修复 (代码明确证明, 2026-05-25)
+**来源**: `rrsjk-hds-web` → `BusinessCooperationIntentionController.java` (sunzn, commits 69b1a343/144b80b5/3db84380, 2026-05-25)
+- 修复逆变器数据过滤逻辑错误
+- 修复数据时间戳过滤逻辑错误
+- 移除硬编码的测试数据
+- **影响**: 业务合作意向模块的逆变器数据查询准确性

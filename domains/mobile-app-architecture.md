@@ -594,3 +594,4 @@ storeFile=key.jks
 | 2026-05-15 | 创建: Cordova H5 桥接架构/Flutter 纳光宝 APP/插件体系 | 全量通读5个移动端仓库 |
 | 2026-05-19 | 新增: merchant-micro.zch 零碳适家微前端/osp-mini 小程序/greenergy-management-flutter 骨架 | 全量通读第6轮 |
 | 2026-05-20 | 新增: 湖南智充APP (非光伏业务)/nahuipv_greenergy_flutter DJI无人机SDK集成/nhpv_common | 全量通读第7轮 |
+| 2026-05-26 | 新增: 海尔售电决策辅助系统 (Android+iOS+H5 Portal, 非PVS光伏业务) | 每日增量扫描 |
