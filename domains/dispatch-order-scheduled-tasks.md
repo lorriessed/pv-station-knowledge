@@ -189,3 +189,56 @@ Cron: `0 0 10 18 5 ? 2026`
 - `06e1916c`: 修复审核状态值拼写错误
 - `f81eac4f`: 修正审核状态枚举值和显示逻辑
 
+### 9.6 非工作日派单时间配置 — 时间段重叠校验 (2026-05-09)
+**来源**: `rrsjk-light-service` (解钦, commit: b06f33b, 2026-05-09)
+**代码明确证明**
+
+**新增功能**: 新增/更新非工作日派单时间配置时，校验同一日期同一审核类型的已有配置是否存在时间段重叠。
+
+**重叠判断逻辑**:
+```java
+// 两个区间 [s1, e1) 和 [s2, e2) 满足 s1 < e2 && s2 < e1 即为重叠
+LocalTime newStart = LocalTime.parse(startTime);
+LocalTime newEnd = LocalTime.parse(endTime);
+LocalTime existStart = LocalTime.parse(existing.getStartTime());
+LocalTime existEnd = LocalTime.parse(existing.getEndTime());
+if (newStart.isBefore(existEnd) && existStart.isBefore(newEnd)) {
+    throw new AssertException("时间段存在重叠，请调整后重试");
+}
+```
+
+**新增方法**: `validateTimeOverlap(excludeId, configDate, auditType, startTime, endTime)`
+- 新增配置: `excludeId=null`，检查所有已有配置
+- 更新配置: `excludeId=config.getId()`，排除自身后检查
+
+**影响范围**: `LightAuditDispatchTimeConfigServiceImpl.addConfig()` 和 `updateConfig()` 均增加了 `validateTimeOverlap` 调用。
+
+### 9.7 派单时间范围判断逻辑重构 (2026-05-09)
+**来源**: `rrsjk-light-service` (解钦, commit: b06f33b, 2026-05-09)
+**代码明确证明**
+
+**旧逻辑**:
+```java
+// 非工作日查配置，工作日直接用固定时间(08:30~17:30/18:00)
+if (isHoliday(dispatchAt)) {
+    return lightAuditDispatchTimeConfigService.isWithinNonWorkdayDispatchTime(auditType);
+}
+return !currentTime.isBefore(startTime) && currentTime.isBefore(endTime);
+```
+
+**新逻辑**:
+```java
+// 休息日：只查配置表
+if (isHoliday(dispatchAt)) {
+    return lightAuditDispatchTimeConfigService.isWithinNonWorkdayDispatchTime(auditType);
+}
+// 工作日：先检查正常工作时间
+if (!currentTime.isBefore(startTime) && currentTime.isBefore(endTime)) {
+    return true;
+}
+// 工作日非正常工作时间：也查配置表（下班后额外派单时间段）
+return lightAuditDispatchTimeConfigService.isWithinNonWorkdayDispatchTime(auditType);
+```
+
+**关键区别**: 工作日的非正常工作时间（如晚上/清晨）也可以配置额外派单时间段，不再直接拒绝。
+

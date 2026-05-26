@@ -112,3 +112,56 @@ public class StationIncomeModeCheckStrategyFactory {
 - **新值**: `FUND_INSTALL_YWMS = "A41"` (服务安装)
 - **原因**: 基金安装业务科目需要从A40调整为A41，与SAP记账科目对齐
 
+## 九、收入上收限制重构 — 回购电站拦截 + 错误提示优化 (TAEI-3085, 2026-05-14)
+
+**来源**: `rrsjk-light-service` (解钦, commits: c06ff46, 70186ba, 0404906, 2026-05-14)
+**代码明确证明**
+
+### 9.1 回购电站状态检查优化
+
+**变更**: 从直接检查 `LightStation.Status.REPURCHASE` 改为通过 `LightStationRepurchaseDao.findActiveRepurchaseStationCodes()` 批量查询活跃回购电站。
+
+**涉及文件**:
+- `HuaRongTradeIncomeSettleServiceImpl.java` — 华融收入导入
+- `LightFundSettleServiceImpl.java` — 基金收入导入
+- `LightHdIncomeServiceImpl.java` — 户用收入导入
+- `PuYinSettleQueueJobServiceImpl.java` — 普yin结算
+- `ZhaoYinTradeIncomeSettleServiceImpl.java` — 招银收入导入
+- `ZhongYinTradeIncomeSettleServiceImpl.java` — 中银收入导入
+
+**旧逻辑**:
+```java
+Assert.isTrue(!lightStation.getStatus().equals(LightStation.Status.REPURCHASE.name()),
+    stationCode + "的电站已被回购, 不能导入");
+```
+
+**新逻辑**:
+```java
+Set<String> repurchaseStationCodes = lightStationRepurchaseDao.findActiveRepurchaseStationCodes(stationCodeList);
+Assert.isTrue(!repurchaseStationCodes.contains(stationCode),
+    "电站编码" + stationCode + "为回购中电站不可交易，请检查数据后导入");
+```
+
+**关键区别**: 旧逻辑只检查电站表状态字段是否为 REPURCHASE，新逻辑通过独立的回购记录表 (`light_station_repurchase`) 查询"活跃回购中"的电站，覆盖更精确。
+
+### 9.2 收入冲突错误提示优化
+
+**旧错误信息**: `"以下电站已在其他模式存在收入记录，不能重复导入：XXX在【XX模式】"`
+**新错误信息**: `"电站编码XXX已在【XX模式】模式下存在收入记录，不能重复导入"` — 更明确指向具体电站和模式。
+
+### 9.3 电站状态校验精简
+
+- 移除了独立的 `REPURCHASE` 状态检查（由 `findActiveRepurchaseStationCodes` 替代）
+- 保留了 `DISABLE`（无效电站）检查
+- 保留了 `SUSPENDING`（暂停状态，仅基金模式跳过）检查
+
+### 9.4 新增 DAO 方法
+
+```java
+// LightStationRepurchaseDao.java
+public Set<String> findActiveRepurchaseStationCodes(Collection<String> stationCodes) {
+    return new HashSet<>(this.getSqlSession()
+        .selectList(getNamespacePrefix() + "findActiveRepurchaseStationCodes", stationCodes));
+}
+```
+

@@ -786,3 +786,22 @@ ENABLE ✅ → [线下验收（可选）] → OFF_LINE_CHECK_REJECT
 - `rrsjk-light-service` → `LightStationRepurchaseServiceImpl.java`（回购）
 - `rrsjk-light-service` → 各 StationModel 类（不同模式入口）
 - 代码扫描日期: 2026-05-24
+
+### 图片验真唯一码重复检查 (TAEI-3098, 2026-05-13)
+
+**来源**: `rrsjk-light-service` → `LightImageVerificationServiceImpl.java` (马斌, commit: 4a2c17ba, 2026-05-13)
+**代码明确证明**
+
+**问题**: 图片验真唯一码入库前缺少重复检查，导致唯一键冲突异常（`DuplicateKeyException`）。
+
+**修复**: 在 `insertSelective()` 前增加 `queryLastedByUniqueKey()` 查询，如果已存在相同 `uniqueImageKey` 的记录，直接返回错误"该图片已上传过，请勿重复上传"，阻止重复插入。
+
+```java
+LightImageVerification exist = lightImageVerificationMapper.queryLastedByUniqueKey(imageRequest.getUniqueImageKey());
+if (exist != null) {
+    log.info("{}该图片已上传过，请勿重复上传", imageRequest.getUniqueImageKey());
+    return ExecuteResult.newErrorResult("该图片已上传过，请勿重复上传");
+}
+```
+
+**关联需求**: TAEI-3104 (`light_unionpay_rent` 表 `uni_station_id` 唯一键冲突修复，商轶龙处理) 也涉及类似的唯一键冲突问题。

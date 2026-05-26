@@ -55,7 +55,7 @@
 - **证据等级**: 配置明确证明
 
 ### 重庆国电投(CQ_GDT)逆变器查询与导出 (代码明确证明)
-**来源**: `rrsjk-hds-web` → `InverterController.java` (commit 732c84e4, wangxiran, 2026-05-15); `rrsjk-light-data-service` → `LightInveterDataService.java`, `LightInveterDataDao.java`, `LightInveterDataServiceImpl.java`, `LightInveterData.xml` (commit 60a7882d, wangxiran, 2026-05-15)
+**来源**: `rrsjk-hds-web` → `InverterController.java` (commit 732c84e4, wangxiran, 2026-05-15); `rrsjk-light-data-service` → `LightInveterDataService.java`, `LightInveterDataDao.java`, `LightInveterDataServiceImpl.java`, `LightInveterData.xml` (commit 60a7882d, wangxiran, 2026-05-15); `rrsjk-light-data-service` (commits: e8d818ac, d1acd5ee, 2026-05-14); `rrsjk-hds-web` (commit: df302d2a, 2026-05-15)
 - 新增 `LightStation.ModeEnum.CQ_GDT` 模式的逆变器专用查询链路
 - Controller: `queryCqGdtInverterList()` 接口，调用 `findCqGdtByPage()` 而非通用的 `findByPage()`；同时提供导出功能
 - **关键SQL差异**: `findCqGdtByPage` 使用 `INNER JOIN light_station ls ON ls.station_code = lid.station_code`，而通用查询 `newFindByCbs` 使用 `LEFT JOIN light_station_elec lse`
@@ -63,6 +63,8 @@
 - DAO 新增方法: `findCqGdtByPage()`, `queryCqGdtCountByPage()`
 - 新增 `<sql id="conditionCqGdt">` 条件片段，过滤条件 `ls.mode = #{stationMode}` 作为必选条件（非可选）
 - 通用查询的 `conditionCbs` 未改动，两条查询链路并行存在
+- **新增字段**: `firstThreePowerAt`（首次功率记录时间）— 从 `light_station.first_three_power_at` 获取，2026-05-14 由 wangxiran 添加到数据服务和HDS前端
+- **HDS前端**: 2026-05-15 添加重庆国电投逆变器查询和导出功能 (commit df302d2a, branch: featrue-wxr-20260513-cqgdt)
 - **证据等级**: 代码明确证明
 
 ### 锦浪逆变器图表保存日志优化 (代码明确证明, 2026-05-18)
@@ -177,6 +179,13 @@
   - DWS SqlSessionFactory 开启 `mapUnderscoreToCamelCase` (下划线→驼峰映射)
   - DWS表无id字段: 移除实体和mapper中的id引用，`COUNT(id)` 改为 `COUNT(1)`
   - 修正 `DwsDataConverter` 引用已删除的 `getId()` 方法
+- **证据等级**: 代码明确证明
+
+### DWS逆变器列表导出排序修复 (代码明确证明, 2026-05-23)
+**来源**: `rrsjk-light-data-service` (commits 7e16693/03d26bf, yumiao), `rrsjk-admin-web` (commits e9aecc7/a132fbe/edc3ec0/a6aaac5, yumiao)
+- **问题**: 逆变器列表DWS数据源导出时排序不正确
+- **修复**: 修复DWS查询的排序逻辑，确保导出结果与页面展示一致
+- **关联需求**: TAEI-3145 商务验收页面跳转逆变器详情速度优化
 - **证据等级**: 代码明确证明
 
 ### 组件串线图 (推断, 2026-05-20)

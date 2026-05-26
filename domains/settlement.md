@@ -923,3 +923,41 @@ stationParam.put("spMemberId", spMemberId);
 
 #### 定时任务类型 (TaskType, 81种)
 覆盖：创建任务、更新凭证、结算汇总、SAP同步、支付宝/微信/建行/银联对账、MPC/GTMS返款、MDR客户拉取、UPP发票核销、海尔招聘对账、云智妆对账等
+
+### SAP 记账 xref3 字段变更 — 电站编码替代 bid (TAEI-3076, 2026-05-12)
+
+**来源**: `rrsjk-light-service` (解钦, commit: 72283a8, 2026-05-12)
+**代码明确证明**
+
+**变更**: SAP 记账时 `xref3` 字段从传 `bid`（业务ID）改为传 `stationCode`（电站编码）。
+
+**涉及服务**（全部为各资方收入结算服务）:
+- `HuaRongTradeIncomeSettleServiceImpl.java` — 华融
+- `LightYuexiuSettleModel.java` — 越秀
+- `PuYinSettleQueueJobServiceImpl.java` — 普音
+- `ZhaoYinTradeIncomeSettleServiceImpl.java` — 招银
+- `ZhongYinTradeIncomeSettleServiceImpl.java` — 中银
+
+**旧代码**: `sapItemRecord.setXref3(bid);`
+**新代码**: `sapItemRecord.setXref3(huaRongTradeIncomeSettle.getStationCode());`
+
+**业务含义**: xref3 是 SAP 记账凭证的参考字段，用于关联业务单据。改为电站编码后，SAP 侧可以通过电站编码直接追溯光伏电站的收入记录，提升了业务可追溯性。
+
+### 共享支付账单查询 — 后端实现 (TAEI-3086, 2026-05-11~05-14)
+
+**来源**: `rrsjk-light-service`, `rrsjk-light-operation-service`, `rrsjk-hds-web` (孙志男, 2026-05-11~05-14)
+**代码明确证明**
+
+**变更**: 租金账单明细查询新增 `source=4` 分支，支持共享账单记录查询。
+
+**涉及文件**:
+- `LightRentServiceImpl.java` — 新增 `LightShareBillRecordDao` 注入，`source=4` 时调用共享明细查询
+- `LightShareBillRecordDao.java` — 新增 `countOfDetail()` 和 `findByDetail()` 方法
+- `LightShareBillRecord.xml` — 新增 UNION ALL 查询支持共享账单记录
+
+**查询参数**: `stationCode` + `payDate`（支付日期范围筛选）
+
+**共享支付查询参数修复** (TAEI-3080, 2026-05-14):
+- `e82b223`: 修复共享支付查询参数传递错误
+- `e08e2d3`/`01411e2`: 修正共享支付查询中的租用月份参数
+- `30d657e`: 优化共享账单记录查询逻辑
