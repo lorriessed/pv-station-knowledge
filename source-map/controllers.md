@@ -1085,6 +1085,7 @@
 - @GetMapping("/elecOrder")
 - @GetMapping("/estimateOffStation")
 - @GetMapping("/estimateOffStationSum")
+- @GetMapping("/marketScale")
 
 ## EnergySummaryDayController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/report/EnergySummaryDayController.java`
@@ -12443,6 +12444,20 @@
 - @RequestMapping("showPlanChange.html")
 - @RequestMapping("doExport.do")
 - @RequestMapping(value = {"getLastRejectReason.do"}, method = {RequestMethod.GET})
+
+## HuaRongIncomeQualityGuaranteeController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/HuaRongIncomeQualityGuaranteeController.java`
+- @RequestMapping("/huaRongIncomeQualityGuarantee")
+- @RequestMapping("list.html")
+- @RequestMapping("doList.do")
+- @GetMapping("/downTemplate.do")
+- @PostMapping("importData.do")
+- @RequestMapping("doExport.do")
+- @GetMapping("countBatch.do")
+- @PostMapping("confirm.do")
+- @GetMapping("delete.do")
+- @GetMapping("/reverse/downTemplate.do")
+- @PostMapping("/reverse/importData.do")
 
 ## LightSubsidyController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightSubsidyController.java`

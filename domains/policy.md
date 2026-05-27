@@ -158,6 +158,20 @@
 - **分支**: `origin/feature-cm-wind-electric`, `origin/20260506-wb-cmOwnerStationReport`, `origin/20260514-wb-planChange`
 - **证据等级**: 代码明确证明
 
+### 工商业风电 — 产值收入法进度管控与历史数据处理 (2026-05-25~26 代码明确证明)
+**来源**: `rrsjk-light-service` → `CmConstructionProgressAuditServiceImpl.java`, `CmConstructionPlanServiceImpl.java` (commits 8cf41123/f5da1b1b/1d356948/19a4df77, tn_wangb, branch: origin/feature-cm-wind-electric)
+- **进度维护限制**: 产值收入法(`OUTPUT_VALUE`)的风电项目暂时只能维护到 100%，不允许填写部分进度
+- **进度倍数校验**: 产值收入法项目进度必须是 10% 的倍数
+- **已完成进度计算**: 产值收入法项目从 `cm_construction_progress_audit` 表查询 `AUDIT_OK` 状态的记录，累加 `addProgress` 计算已完成进度（非旧版的 stream reduce 方式）
+- **历史数据补录** (`historyHandle()` 方法):
+  - 遍历所有 `cm_construction_plan_item`，如果已有审核记录则跳过
+  - 从 `cm_operate_log` 中查找包含 "100" 的操作日志，提取操作人和操作时间
+  - 自动创建 `AUDIT_OK` 状态的进度审核记录，progress=100
+  - **业务意义**: 将旧的完工审核状态数据迁移到新的进度审核体系，确保风电产值收入法项目历史数据可用
+- **收款里程碑**: 收款里程碑导入要求收入政策配置者为工程经理 (commits c6e4cae6/34c3a147)
+- **分支已合并**: `feature-cm-wind-electric` 已合入 master (Merge #661)
+- **证据等级**: 代码明确证明
+
 ### 公共建筑类电站政策配置 (2026-05-20~21 代码明确证明)
 **来源**: `rrsjk-light-service` (commits c3713349f9/ec4aa571aa, 龙龙=王斌), `rrsjk-merchant-web` (commits a35d75b9be/22fd7029e0, 龙龙)
 - **政策配置**: 新增公共建筑类电站政策配置功能

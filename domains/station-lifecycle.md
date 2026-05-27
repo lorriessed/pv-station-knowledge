@@ -813,3 +813,21 @@ if (exist != null) {
 - 2026-05-26 连续修复OCR状态判断逻辑(3次commit)
 - 同时修复日期格式化: givenTime 从 `"2026-5-26"` 改为 `"2026-05-26"`，防止 `DateTimeParseException`
 - **证据等级**: 代码明确证明
+
+### 电站转单功能模块 (代码明确证明, 2026-05-26 新增)
+**来源**: `rrsjk-light-service` → `LightStationTransferOrder.java`, `LightStationTransferOrderService.java`, `LightStationTransferOrderServiceImpl.java`, `LightStationTransferOrder.xml` (commit 53e753e3, 姜传德/德, branch: origin/station-transfer-sub-account-20260525)
+- **业务场景**: 电站从一个子账号（服务商）转移到另一个子账号
+- **核心实体**: `LightStationTransferOrder` — 转单订单
+  - 字段: stationId, stationCode, ownerName, installedPower
+  - 服务商: spId, spMemberId, spName
+  - 转出方: outSubSpMemberId, outSubSpName, outRejectReason（拒绝转出原因）
+  - 转入方: inSubSpMemberId, inSubSpName, inRejectReason（拒绝转入原因）
+  - 状态: status, transferApplyAt
+  - 日志: `LightStationTransferOrderLog` — 转单操作日志表
+- **操作流程**: 
+  1. 创建转单 (`create`) — 指定电站、转出/转入子账号
+  2. 确认转单 (`confirm`) — 转入方确认接受
+  3. 拒绝转单 (`reject`) — 转出方或转入方拒绝，填写拒绝原因
+- **数据表**: `light_station_transfer_order`, `light_station_transfer_order_log`
+- **状态**: 开发中（功能分支，未合并到 master）
+- **证据等级**: 代码明确证明

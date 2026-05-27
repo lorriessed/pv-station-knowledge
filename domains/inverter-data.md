@@ -245,6 +245,13 @@
 - 模板修改: `inveterDetail.ftl`, `lightInveterList.ftl`
 - **证据等级**: 代码明确证明
 
+### 逆变器接口超时修复与redWarning空值修复 (代码明确证明, 2026-05-27 增量扫描)
+**来源**: `rrsjk-admin-web` → `LightInveterController.java`, `inveterDetail.ftl` (commits: d388a965/e536c9c2/73cece3b, majinhu/yumiao, 2026-05-27)
+- 超时时间改为3秒 (修复请求超时问题)
+- redWarning 空值异常修复 (防止空指针)
+- inveterDetail.ftl 线上问题修复
+- **证据等级**: 代码明确证明
+
 ### 三天连续发电状态刷新 — 定时任务优化 (代码明确证明, 2026-05-25)
 **来源**: `rrsjk-light-data-service` → `LightInveterDataServiceImpl.java`, `LightInveterDao.java`, `LightInveter.xml` (commit dd37b6df, majinhu, 2026-05-25)
 - `isContinueThreeDayElec()` 定时任务优化，134行变更

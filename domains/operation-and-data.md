@@ -623,3 +623,11 @@ rrsjk-light-data-service
 - **天气 API**: `http://api.xiaoxianglink.com/v1/weather/weather`
 - **工单异步处理**: `workOrderTaskExecutor` (5-20 线程，队列 500)
 - **证据等级**: 代码明确证明
+
+### 电站收益计算电网容量维度扩展 (代码明确证明, 2026-05-27 增量扫描)
+**来源**: `rrsjk-light-data-service` → `LightProfitServiceImpl.java`, `LightStationDao.java`, `LightStation.xml` (commits: baoxin 9927a3cd/6ee377a1, 2026-05-27)
+- **新增电网容量维度**: `findSocialGridQuota`(社会化电网容量) 和 `findWholeGridQuota`(整村电网容量)
+- **收入计算变更**: 多场景收入从 `multiGridQuota + industryGridQuota` 扩展为 `multiGridQuota + industryGridQuota + socialGridQuota + wholeGridQuota`
+- **单价**: 户用 3.45 元/度(去税÷1.13)，多场景(含社会化/整村) 3.8 元/度(去税÷1.13)
+- **废弃API替换**: `BigDecimal.ROUND_DOWN` → `RoundingMode.DOWN`
+- **证据等级**: 代码明确证明

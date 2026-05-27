@@ -522,6 +522,8 @@
 - **触发时机**: 并网确认(CompleteConfirm)和电站影像修改时，自动触发房产证OCR识别
 - **技术实现**: 调用阿里云AI大模型接口进行房产证图片OCR识别
   - 接口参数和URL配置: 2026-05-20 修正了房产证OCR接口参数和URL配置
+  - **生产URL更新** (2026-05-26): `houseImageOcrUrl` 和 `housePdfOcrUrl` 从 `10.2.192.146:14322` 改为 `10.2.160.236:2605/api/POC_extraction` (commit 435fc658, mabin)
+  - 类别字段新增: 识别结果中返回 `message` 字段表示识别类别 (commit cd3b91c0, mabin)
 - **线程池**: 新增/调整线程池配置支持异步OCR处理
 - **影像验证**: `LightImageVerification` 新增房产证相关字段
 - **证据等级**: 代码明确证明
@@ -570,6 +572,19 @@
   - `rrsjk-admin-web`: `feat(light): 添加验收审核驳回节点选择功能` + `feat(audit): 添加图片审核驳回功能`
   - `rrsjk-light-data-service`: `feat(audit): 实现电站影像审核驳回功能`
 - **分支**: `origin/feature-wangxiran-changePlan`, `origin/feature-wxr-audit-20260519`
+- **证据等级**: 代码明确证明
+
+### 审核图片驳回扩展 — 支持现场图片驳回 (TAEI-3057 扩展, 2026-05-25 代码明确证明)
+**来源**: `rrsjk-light-service` → `AuditImageRejectDto.java`, `LightAuditImageRejectRecord.java`, `LightAuditImageRejectServiceImpl.java` (commits: 6997cea/e0250e9b/873488c3, wangxiran, branch: origin/feature-wxr-audit-20260519)
+**关联需求**: TAEI-3057 方案审核/技术审核/商务审核 驳回支持按单张图片驳回
+- **新增目标类型**: `LightAuditImageRejectRecord.TargetTypeEnum` 新增 `STATION_FIELD_IMG`（现场图片），原有 `STATION_CONFIRM_IMG`（电站确认图片）
+- **DTO 扩展**: `AuditImageRejectDto` 新增 `targetName` 和 `targetUrl` 字段，用于现场图片的驳回信息传递
+- **差异化处理**: 
+  - `STATION_CONFIRM_IMG`: 从 `light_station_confirm_img` 表查图片实体，自动填充 name/url
+  - `STATION_FIELD_IMG`: 直接使用 DTO 中的 targetName/targetUrl（图片不在标准表中）
+- **校验增强**: 现场图片类型强制校验 targetName 和 targetUrl 非空，驳回原因 ≤ 50 字符
+- **前端适配**: `rrsjk-admin-web` 审核图片拒绝列表功能 (commits 4bbff2bf/64cbbf85, wangxiran)
+- **业务意义**: 支持审核时对现场拍摄的图片（非系统标准图片）进行单张驳回，提升审核精确度
 - **证据等级**: 代码明确证明
 
 ### 实施方案变更状态 (前端配置证明, 2026-05-22 扫描)
@@ -670,3 +685,25 @@
 ### 与光伏业务的关系
 
 Flowable 是一个**通用审核流程引擎**，不直接处理光伏业务。光伏业务中的某些审核场景（如错误信息上报、问题处理等）可能通过此服务进行流程管理。具体业务与Flowable的关联需要通过 `rrs-dispenser-server` 中的 `FlowableConfig` 配置来建立。
+
+### 企业客户审核 (rrsjk-merchant-service)
+
+**来源**: `rrsjk-merchant-service` → `CorporateClientServiceImpl.java` (代码明确证明, 2026-05-27 全量通读)
+
+企业客户(服务商/安装商)入驻审核流程，不走 Flowable 引擎，是独立的状态机:
+
+- **注册** → 状态 WAIT_AUDIT(待审核)，记录 `corporate_client_process_log`(节点: REGISTER)
+- **审核通过** (`auditOk`) → 状态 ENABLE，记录日志(节点: AUDIT_OK)
+- **审核驳回** (`auditFail`) → 状态 AUDIT_FAIL，记录日志(节点: AUDIT_FAIL)
+- **驳回后重新申请** (`update`) → 状态重新设为 WAIT_AUDIT
+- **审核信息**: auditBy(审核人), auditAt(审核时间), auditRemark(审核备注), subCenter(分中心)
+
+**涉及表**: `corporate_client`, `corporate_client_process_log`
+
+### 工商业客户审核 (rrsjk-merchant-service)
+
+**来源**: `rrsjk-merchant-service` → `IndustryCommerceServiceImpl.java` (代码明确证明, 2026-05-27 全量通读)
+
+- 类型: 01=安装商, 02=设计院, 03=甲方客户
+- 审核通过/驳回后更新状态
+- 审核通过后可查询有效客户列表(`findValidByType`)

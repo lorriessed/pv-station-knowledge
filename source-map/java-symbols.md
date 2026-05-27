@@ -5912,6 +5912,12 @@
 - `HttpsUtils` (class) `com.rrsjk.appapi.util` -> `rrsjk-appapi-web/src/main/java/com/rrsjk/appapi/util/HttpsUtils.java`
 - `HuaRongDashboard` (interface) `com.rrsjk.report.service` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/service/HuaRongDashboard.java`
 - `HuaRongDashboardImpl` (class) `com.rrsjk.report.service.impl` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/service/impl/HuaRongDashboardImpl.java`
+- `HuaRongIncomeQualityGuarantee` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/HuaRongIncomeQualityGuarantee.java`
+- `HuaRongIncomeQualityGuaranteeController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/HuaRongIncomeQualityGuaranteeController.java`
+- `HuaRongIncomeQualityGuaranteeDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/HuaRongIncomeQualityGuaranteeDao.java`
+- `HuaRongIncomeQualityGuaranteeExcel` (class) `com.rrsjk.admin.controller.light.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/vo/HuaRongIncomeQualityGuaranteeExcel.java`
+- `HuaRongIncomeQualityGuaranteeService` (interface) `com.rrsjk.light.service.huarong` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/huarong/HuaRongIncomeQualityGuaranteeService.java`
+- `HuaRongIncomeQualityGuaranteeServiceImpl` (class) `com.rrsjk.light.service.huarong` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/huarong/HuaRongIncomeQualityGuaranteeServiceImpl.java`
 - `HuaRongTradeIncomeSettle` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/HuaRongTradeIncomeSettle.java`
 - `HuaRongTradeIncomeSettle` (class) `com.rrsjk.report.entity.light` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/entity/light/HuaRongTradeIncomeSettle.java`
 - `HuaRongTradeIncomeSettleController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/HuaRongTradeIncomeSettleController.java`
@@ -8002,6 +8008,7 @@
 - `LightInstantRewardPolicyServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/LightInstantRewardPolicyServiceImpl.java`
 - `LightInstantRewardService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/LightInstantRewardService.java`
 - `LightInstantRewardServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/LightInstantRewardServiceImpl.java`
+- `LightInsuranceYuexiuRecord` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/LightInsuranceYuexiuRecord.java`
 - `LightInternalTransferDto` (class) `com.rrsjk.light.dto.wms` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/wms/LightInternalTransferDto.java`
 - `LightInternalTransferDtoExcel` (class) `com.rrsjk.merchant.controller.light.excel` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/excel/LightInternalTransferDtoExcel.java`
 - `LightInternalTransferOrderExcel` (class) `com.rrsjk.admin.controller.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/vo/LightInternalTransferOrderExcel.java`

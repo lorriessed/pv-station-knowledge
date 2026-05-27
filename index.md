@@ -1,23 +1,24 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-05-24
+更新时间: 2026-05-27
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
 | 总仓库数 | 100 (PVS 72 + VPP/其他 28) |
-| 已通读 | 100/100 (第12轮) |
-| 知识库文件 | 68+ 个 |
-| 知识库大小 | 6.5MB+ |
+| 已通读 | 100/100 (第14轮) |
+| 知识库文件 | 70+ 个 |
+| 知识库大小 | 6.8MB+ |
 | Domain 业务文件 | 30+ 个 (340KB+) |
 | Source-map 索引 | 47,009+ 行 |
 
 ## 仓库通读进度
 
-### 全部 100 个仓库已通读 ✅ (第12轮，2026-05-24)
+### 全部 100 个仓库已通读 ✅ (第14轮，2026-05-27)
 - 所有 PVS 72 + VPP/其他 28 个仓库均已完成全量通读
-- 本轮重扫: rrsjk-echannel-service, rrsjk-energystorage-service, rrsjk-finance-service, rrsjk-flowable-service, rrsjk-hds-web
+- 本轮重扫: rrsjk-merchant-h5, rrsjk-merchant-service, rrsjk-merchant-web, rrsjk-migration-member, rrsjk-migration-mix
+- **重要新增**: `domains/merchant-service.md` — 商户服务域完整文档(企业客户/押金/牛人客户/驿站/店铺/供应商/AI集成/外部调用)
 
 ## 目录
 

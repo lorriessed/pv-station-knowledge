@@ -1757,7 +1757,7 @@
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/query/LightStation.xml
 - namespace: `com.rrsjk.light.data.dao.query.LightStationDao`
-- statements: `select:get`, `select:getByStationCode`, `select:listStationSingle`, `select:listStation`, `select:listStationPlus`, `select:listStationValidPlus`, `select:findBy`, `select:countOf`, `update:updateLinkAt`, `update:updatefirstFetchGene`, `update:updatefirstValidFetchGene`, `select:findByStationCode`, `select:countOfYueXiu`, `select:findToYuexiuLightStation`, `select:findListByFirstThreePower`, `select:findHouseholdGridQuota`, `select:findPublicBuildingsGridQuota`, `select:findMultiGridQuota`, `select:findIndustryGridQuota`
+- statements: `select:get`, `select:getByStationCode`, `select:listStationSingle`, `select:listStation`, `select:listStationPlus`, `select:listStationValidPlus`, `select:findBy`, `select:countOf`, `update:updateLinkAt`, `update:updatefirstFetchGene`, `update:updatefirstValidFetchGene`, `select:findByStationCode`, `select:countOfYueXiu`, `select:findToYuexiuLightStation`, `select:findListByFirstThreePower`, `select:findHouseholdGridQuota`, `select:findPublicBuildingsGridQuota`, `select:findMultiGridQuota`, `select:findIndustryGridQuota`, `select:findSocialGridQuota`, `select:findWholeGridQuota`
 - tables: `id`, `light_station`, `light_station_audit`, `light_station_yuexiu`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/query/LightStationWhiteList.xml
@@ -3160,6 +3160,11 @@
 - namespace: `com.rrsjk.light.dao.LightStockTakingDetailDao`
 - statements: `insert:create`, `update:update`, `insert:batchInsert`, `select:get`, `select:getByTakingId`, `delete:deleteByTakingIdAndSkuCode`
 - tables: `id`, `light_stock_taking_detail`
+
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/HuaRongIncomeQualityGuarantee.xml
+- namespace: `com.rrsjk.light.dao.HuaRongIncomeQualityGuaranteeDao`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `insert:batchInsert`, `update:update`, `update:updateByBatchNo`, `delete:deleteByBatchNo`, `select:getById`
+- tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationBank.xml
 - namespace: `com.rrsjk.light.dao.LightStationBankDao`
@@ -9011,7 +9016,7 @@
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightStation.xml
 - namespace: `com.rrsjk.report.dao.light.LightStationDao`
 - statements: `update:update`, `select:get`, `select:getByStationCode`, `select:getByStationCodes`, `select:findStationSum1`, `select:findStationSum`, `select:findStationSumUpgrade`, `select:findStationRegionSum`, `select:findAllStationRegionSum`, `select:findStationCode`, `select:findStationCodeYearMonth`, `select:findByParams`, `select:findStationByParams`, `select:findAreaSum`, `select:findProvince`, `select:findStationCodeByProvince`, `select:findHouseHoldProvince`, `select:findHouseHoldStation`, `select:findMultiProvince`, `select:findMultiStation`, `select:findIndustryProvince`, `select:findIndustryStation`, `select:findSocialProvince`, `select:findSocialStation`, `select:findWholeProvince`, `select:findWholeStation`, `select:findStationIdByProvince`, `select:findMulti`, `select:findIndustry`, `select:findSocial`, `select:findWhole`, `select:findGridHouseNum`, `select:findGridHouseNumBySubNameList`, `select:findInstallHouseNum`, `select:findInstallHouseNumBySubNameList`, `select:findOrderHouseNum`, `select:findOrderHouseNumBySubNameList`, `select:findGridQuota`, `select:findGridQuotaBySubNameList`, `select:findHouseholdGridQuota`, `select:findPublicBuildingsGridQuota`, `select:findHouseholdGridQuotaBT`, `select:findPublicBuildingsGridQuotaBT`, `select:findHouseholdGridQuotaYX`, `select:findPublicBuildingsGridQuotaYX`, `select:findHouseholdGridQuotaZH`, `select:findPublicBuildingsGridQuotaZH`, `select:findMultiGridQuota`, `select:findIndustryGridQuota`, `select:findSocialGridQuota`, `select:findWholeGridQuota`, `select:findInstallQuota`, `select:findInstallQuotaBySubNameList`, `select:findOrderQuota`, `select:findOrderQuotaBySubNameList`, `select:findEfNetTotal`, `select:findSpTodayInstall`, `select:findSpFirstInstall`, `select:findSpMonthInstall`, `select:findOrderSpId`, `select:findGridByCenter`, `select:findGridByCityId`, `select:findGridQuotaByCityId`, `select:findHouseholdGridQuotaByCityId`, `select:findPublicBuildingsGridQuotaByCityId`, `select:findMultiGridQuotaByCityId`, `select:findIndustryGridQuotaByCityId`, `select:findInstallHouseNumByCityId`, `select:findOrderHouseNumByCityId`, `select:findInstallQuotaByCityId`, `select:findOrderQuotaByCityId`, `select:findEfNetTotalByCityId`, `select:findSpMonthInstallByCityId`, `select:findOrderSpIdByCityId`, `select:findGridBySpId`, `select:findGridQuotaBySpId`, `select:findInstallHouseNumBySpId`, `select:findOrderHouseNumBySpId`, `select:findInstallQuotaBySpId`, `select:findOrderQuotaBySpId`
-- tables: `city`, `cmb_leasing_station`, `id`, `light_company_info`, `light_make_order`, `light_purchase_order`, `light_service_provider`, `light_station`, `light_station_audit`, `light_station_operate_log`, `light_station_plan_config`, `light_station_yuexiu`, `light_station_yuexiu_settle`, `light_zh_settle`, `rrsjk_light_report.energy_summary_target`
+- tables: `city`, `cmb_leasing_station`, `id`, `light_company_info`, `light_make_order`, `light_purchase_order`, `light_service_provider`, `light_station`, `light_station_audit`, `light_station_operate_log`, `light_station_yuexiu`, `light_station_yuexiu_settle`, `light_zh_settle`, `rrsjk_light_report.energy_summary_target`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightTransferOrder.xml
 - namespace: `com.rrsjk.report.dao.light.LightTransferOrderDao`

@@ -626,10 +626,17 @@ stationParam.put("spMemberId", spMemberId);
 - **前端功能**: 页面本地调试、导出Excel样式调整、添加按钮shiro权限控制
 - **证据等级**: 代码明确证明
 
-### AI识别对账单导入电费收益开票 (代码明确证明, 2026-05-21~22)
-**来源**: `rrsjk-light-service`, `rrsjk-admin-web` (lilong/李龙, TAEI-3112, 分支 origin/20260519-alone-electricAI)
+### AI识别对账单导入电费收益开票 (代码明确证明, 2026-05-21~26)
+**来源**: `rrsjk-admin-web` (lilong/李龙, TAEI-3110, 分支 origin/20260519-alone-electricAI)
 - **页面跳转接口**: 新增页面跳转接口及修改
 - **映射关系**: 金额和税额从映射关系中取值，项目公司名称映射成销方名称
+- **AI接口参数**: 调整AI接口返回参数类型 (commit 59b22a6b, 2026-05-26)
+- **aiTotalAmount字段**: "AI识别对账单总计金额"字段从接口返回实体的 `aiTotalAmount` 字段中取值 (commit df78daf4/e2447d98, 2026-05-25)
+- **月份逻辑**: 调整开始月份和结束月份的处理逻辑 (commit a332f605, 2026-05-25)
+- **Mock测试**: AI识别添加mock数据用于本地测试 (commit 232d1d5c, 2026-05-25)
+- **页面样式**: 调整页面展示样式 (commit d4cf8216, 2026-05-26)
+- **后端关联**: `rrsjk-light-service` 提供发电户号电费模板映射接口 (commits 1473adc9/ad0e5bad, lilong)
+- **注意**: 此需求号在云效中实际为 TAEI-3110，非 TAEI-3112
 - **证据等级**: 代码明确证明
 
 ### FAP收款记录全链路 (TAEI-3021/3022/3092, 2026-05-18~21 代码明确证明)
@@ -980,3 +987,48 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `rrsjk-admin-web` → `finance/self/purchaseApplyConfirm.ftl` (commit 9b2ff71f, 代继宁, 2026-05-25)
 - 财务自助请款确认页面新增商品类型选项
 - **证据等级**: 配置明确证明
+
+### 零碳适家企业客户押金结算 (代码明确证明, 2026-05-27 全量通读第14轮)
+**来源**: `rrsjk-merchant-service` → `CorporateClientDepositServiceImpl.java` + `CorporateClientDepositDao.java`
+- 零碳适家企业客户需缴纳保证金(sourceFlag=2, companyCode="1QJ0")
+- **押金状态**: WAIT(待确认) → CONFIRMED(已确认收款)
+- **对账状态**: NO(未对账) → YES(已对账)
+- **确认收款流程**: 更新支付信息 → 状态改为 CONFIRMED → 事务内累加 corporate_client.deposit → 转账渠道触发 SAP 记账
+- **SAP 记账**: 调用 FinanceIncomeModel.corporateClientDepositToSap() (Dubbo)，失败不影响收款确认
+- **防重复**: 检查 account_status=YES 或 account_voucher 非空
+- **涉及表**: `corporate_client_deposit`, `corporate_client`
+
+### 华融质保金收入管理 Admin Controller (代码明确证明, 2026-05-27 增量扫描)
+**来源**: `rrsjk-admin-web` → `HuaRongIncomeQualityGuaranteeController.java`, `HuaRongIncomeQualityGuaranteeExcel.java` (commit c48f8260, yumiao, 2026-04-28 分支合并至master 2026-05-27)
+- **路径**: `/huaRongIncomeQualityGuarantee/*`
+- **权限**: 复用 `huaRongTradeIncomeSettle:*` 权限点
+- **功能**:
+  - `list.html` — 华融收入质保金列表页面
+  - `doList.do` — 分页查询(批次号、电站编码、姓名、房屋类型、业务名称、确认日期范围)
+  - `downTemplate.do` — 下载导入模板(批次号,电站编码,质保金比例)
+  - `importData.do` — Excel导入质保金数据，校验: 批次号非空、电站编码非空、质保金比例>0且<1(如2%填0.02)
+  - `doExport.do` — 导出华融收入质保金结算表(EasyExcel, 每页3000条)
+  - `countBatch.do` — 按批次号统计: 电站数量 + 质保金总额
+  - `confirm.do` — 按批次确认上收入(`HuaRongIncomeQualityGuaranteeService.confirmIncome`)
+  - `delete.do` — 按批次删除未确认数据
+  - `reverse/downTemplate.do` — 下载冲销模板(仅电站编码)
+  - `reverse/importData.do` — 批量冲销: 校验FINISH状态记录 → 查找sap_record记账信息 → 调用`syncFinanceToSapService.reverseFinanceToSap()` → 执行`reverseAfter()`后处理
+- **实体**: `HuaRongIncomeQualityGuarantee` (含 StatusEnum.FINISH 状态)
+- **关联**: `rrsjk-light-service` → `HuaRongIncomeQualityGuaranteeService`(B43模式质保金服务)
+- **证据等级**: 代码明确证明
+
+### 金蝶凭证过账冲销流程改造 (代码明确证明, 2026-05-27 增量扫描)
+**来源**: `rrsjk-finance-service` → `JinDieSyncFinanceModel.java`, `JinSapClientModel.java` (commits: mabin 9b888ae4, f4bf864a, 2026-05-27)
+- **核心变更**: `reverseFinanceToSap()` 冲销流程改造为先过账再冲销
+  - 新增调用 `jinSapClientModel.postingVoucherForReverse(rowId, record)` 
+  - 过账成功(`postResult=true`)后才执行 `syncFinanceToSap(record)` 冲销
+  - 过账失败则记录错误日志，不执行冲销
+- **新增接口**: `postingVoucherForReverse(String rowId, KingDieSapRecord sapRecord)`
+  - 请求参数: `{"data": {"xfd6_row_id": rowId}}`
+  - 调用金蝶过账接口 `postVoucherUrl` (配置项 `kingdie.postVoucherUrl`)
+  - 返回 `true`(errorCode="0")或 `false`(记录错误信息)
+- **防溢出修复**: `syncFinanceToSap()` 异常处理中限制 `message` 长度≤199字符，防止数据库字段溢出
+  - 影响 `JinSapClientModel.syncFinanceToSap()` 和 `postingVoucherForReverse()` 的 BusinessException/Exception 分支
+- **日志优化**: `JinDieSapRecordServiceImpl.stockTransElecOrderIncomeToJinDie()` 日志中 `orderId` 替换为 `lightProjectElectricOrder.getOrderNo()`
+- **涉及配置**: `application-dev.yml`, `application-prod.yml` 新增 `kingdie.postVoucherUrl`
+- **证据等级**: 代码明确证明
