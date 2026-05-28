@@ -678,6 +678,15 @@ stationParam.put("spMemberId", spMemberId);
 - **关联需求**: TAEI-2871 (运维收入成本管理模块迭代), TAEI-2876 (运维收入成本管理列表：增加批量导入/批量删除账单的电站详情明细)
 - **证据等级**: 代码明确证明
 
+### 运维维护逻辑删除与修复 (2026-05-28 代码明确证明)
+**来源**: `rrsjk-light-service` (sunzn, branch: origin/szn_om51_20260527)
+- **OperationMaintenance**: 新增逻辑删除功能 (`isDeleted` 字段)
+- **OperationMaintenanceServiceImpl**: 修复冲销逻辑状态判断、维护日志关联ID设置错误、反向标识值修正、数据查询过滤逻辑删除记录
+- **HDS-Web**: `CreateOperationMaintenanceStationController` 批量更新A51数据导入、修正导入数据订单号索引错误
+- **HDS-Web**: `BusinessCooperationIntentionController` 逆变器数据查询功能扩展
+- **HDS-Web**: `EnergyJobController` 新增手动生成报表接口
+- **证据等级**: 代码明确证明
+
 ### 零碳适家请款结算 — 对账单确认回调/云报账支付状态/安装费列表 (TAEI-2883, 2026-03-02~20 代码明确证明)
 **来源**: `rrsjk-finance-service` (代继宁, 20+ commits), `rrsjk-admin-web` (代继宁, 7 commits), `rrsjk-finance-service` (魏秋阳, sunzn)
 
@@ -1031,4 +1040,43 @@ stationParam.put("spMemberId", spMemberId);
   - 影响 `JinSapClientModel.syncFinanceToSap()` 和 `postingVoucherForReverse()` 的 BusinessException/Exception 分支
 - **日志优化**: `JinDieSapRecordServiceImpl.stockTransElecOrderIncomeToJinDie()` 日志中 `orderId` 替换为 `lightProjectElectricOrder.getOrderNo()`
 - **涉及配置**: `application-dev.yml`, `application-prod.yml` 新增 `kingdie.postVoucherUrl`
+- **证据等级**: 代码明确证明
+
+### 农户租金个税报表及记账 (TAEI-3092, 代码明确证明, 2026-05-25~27)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` + `rrsjk-trade-service` (代继宁, 10+ commits, branch: origin/featrue-20260525-rentTaxReport/TAEI-3092)
+- **需求**: 杨越越负责，参与人: 代继宁、薛荣基
+- **新增实体**（1710行代码）:
+  - `RentTaxAmountRecord` — 租金个税明细记录
+  - `RentTaxAmountSummary` — 租金个税汇总
+  - `TaxAmountCalculateSourceData` — 个税计算源数据
+- **新服务**: `RentTaxAmountService` — 租金个税计算与报表服务（441行实现）
+- **报表功能**: 租金个税明细页面、查询列表、合计导出优化
+- **SAP记账**: 财务确认后发SAP接口
+- **前端**: `rrsjk-admin-web` 增加租金个税明细/合计页面及查询列表
+- **涉及表**: `rent_tax_amount_record`, `rent_tax_amount_summary`, `tax_amount_calculate_source_data`
+- **证据等级**: 代码明确证明
+
+### 金蝶冲销接口补充优化 (TAEI-3157, 代码明确证明, 2026-05-27)
+**来源**: `rrsjk-light-service` + `rrsjk-finance-service` (mabin, 6+ commits, branch: origin/20260527-jindieFix)
+- **放开发票冲销**: `ProjectElectricInvoiceReverseRecordServiceImpl` 冲销逻辑调整
+- **回调修复**: `dealJinDieA02PayWithOldFapCallback` 方法改为传订单号，处理前重新查询订单
+- **SAP BUKRS修复**: 金蝶SAP客户端BUKRS字段映射问题解决
+- **SAP订单号日志**: orderId参数替换为orderNo显示
+
+### 金蝶凭证过账功能 (代码明确证明, 2026-05-27)
+**来源**: `rrsjk-finance-service` (mabin, commit f4bf864, branch: origin/20250525-jindieRepeatFix)
+- **JinDieSyncFinanceModel**: 实现过账验证逻辑，先调用过账接口再执行冲销
+- **JinSapClientModel**: 新增 `postVoucherUrl` 配置注入，新增 `postingVoucherForReverse` 方法
+- **配置**: `application-dev.yml` / `application-prod.yml` 新增 `kingdie.postVoucherUrl`
+- **证据等级**: 代码明确证明
+
+### 租金个税报表(TAEI-3092) 持续推进 (2026-05-28 追加)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` (代继宁, 5+ commits, branch: origin/featrue-20260525-rentTaxReport/TAEI-3092)
+- **RentTaxRecordController** (rrsjk-admin-web): 新增Controller，提供租金个税明细/合计页面查询和记账按钮显示逻辑
+- **TaxAmountCalculateSourceDataTemp**: 新增中间临时表实体+DAO+Mapper，用于批量任务分批处理优化
+- **RentTaxAmountServiceImpl**: 确认记账接口逻辑更新
+- **LightShareJobServiceImpl**: 定时任务执行月份计算公式修正
+- **RentTaxAmountSummary**: 汇总实体字段更新
+- **前端页面**: `rentTaxAmountRecordList.ftl` (明细列表), `rentTaxAmountSummaryList.ftl` (合计列表)
+- **导出VO**: `RentTaxAmountRecordExcel`, `RentTaxAmountSummaryExcel`
 - **证据等级**: 代码明确证明

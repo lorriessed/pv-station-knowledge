@@ -275,7 +275,7 @@ rrsjk-light-service / rrsjk-light-data-service (Dubbo 提供者)
 
 ### 9.9 需求变更 — 新旧数据区分逻辑 (2026-05-22~23 代码明确证明)
 **来源**: `CmbLeasingPushApiServiceImpl.java`, `CmbLeasingStationDao.java`, `CmbLeasingStation.xml` (commits: f1a84bb3, ba806d00, lilong, branch: 20260515-alone-zhaoyin-price)
-- **新旧数据区分**: 使用 `pushTime` 字段（电站推送时间）与配置项 `cmbLeasing.fixDate`（默认 2026-05-26）比较，而非 `createAt`
+|- **新旧数据区分**: 使用 `pushTime` 字段（电站推送时间）与配置项 `cmbLeasing.fixDate`（默认 2026-05-26）比较，而非 `createAt`
   - `pushTime > fixDate`: 使用**旧版**匹配逻辑（电池类型 battery_type 维度，TechnicalSchemeEnum）
   - `pushTime <= fixDate`: 使用**新版**匹配逻辑（功率 power 维度，TechnicalSchemeEnumV2）
 - **取值方式回退**: 新数据（fixDate 之后推送）从 V2 回退到原始枚举映射：
@@ -284,4 +284,12 @@ rrsjk-light-service / rrsjk-light-data-service (Dubbo 提供者)
   - `CmbElectricPriceV2` → `CmbElectricPrice`
   - `getPriceV2()` → `getPrice()`
 - **原因推断**: 功率匹配方式可能在实际业务中不如电池类型匹配稳定，需求变更后对新增电站回退到电池类型匹配
+- **证据等级**: 代码明确证明
+
+### 9.10 招银故障和工单信息查询 (TAEI-3101相关, 代码明确证明, 2026-05-28)
+**来源**: `rrsjk-light-openapi-service` + `rrsjk-openapi-web` (mabin, branch: origin/20260528-zhaoyinErrorMsg)
+- **新增DTO**: `ZhaoYinFaultInfoDto` (故障信息), `ZhaoYinWorkOrderInfoDto` (工单信息)
+- **ZhaoYinLeaseService**: 新增故障和工单查询方法
+- **ZhaoYinLeaseServiceImpl**: 实现查询逻辑，从 ODS 表 `ods_light_station_elec` 获取数据
+- **ZhaoYinLeaseController** (rrsjk-openapi-web): 新增对应接口，增强日期参数校验
 - **证据等级**: 代码明确证明

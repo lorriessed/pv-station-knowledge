@@ -102,6 +102,16 @@
 - **分中心管理**: `/sysSubCenter/subCenterList`(列表), `/sysSubCenter/subCenterUserList`(人员), `/sysSubCenter/addSubCenterUser`(添加人员)
 - **登录**: 验证码(randomCode)已改为非必填 (2026-05-20)
 
+## Admin 认证授权 (`domains/admin-authz.md`)
+- 关键词：admin-authz、认证、授权、菜单权限、角色管理、OIDC、BFF。
+- 知识库：待创建 `domains/admin-authz.md`
+- 代码入口：
+  - `rrsjk-admin-auth-server` → `LoginController`, `SecurityConfig` (认证服务)
+  - `rrsjk-admin-authz-service` → `AuthzMenuService`, `AuthzPermissionService`, `AuthzRoleService`, `AuthzSnapshotService`, `AuthzUserService` (Dubbo 授权服务)
+  - `rrsjk-admin-bff` → `AuthController`, `AuthzController`, `AuthzAdminController`, `StationController`, `MobileAuthController` (BFF 层)
+  - `rrsjk-admin-web-next` → Vue3 新管理后台 (src/router/authz.ts, src/api/authz-admin.ts)
+- **初始化日期**: 2026-05-27 (yumiao)
+
 ## 工商业(CM) (`domains/cm-business.md`)
 - 关键词：工商业、风电、终验法、施工进度审核、收入政策、投决审核、项目立项。
 - 知识库：`domains/cm-business.md`

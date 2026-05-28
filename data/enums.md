@@ -421,3 +421,35 @@
 - **业务含义**: 服务商申请指定省/市的服务授权后，先经分中心审核，再经总部审核，审核通过后开通授权
 - **证据等级**: 代码明确证明
 
+### 租金停付管理枚举 (TAEI-3103, 代码明确证明, 2026-05-25~27)
+**来源**: `rrsjk-light-service` dev 分支 → `RentSuspendApplication.java` (sunzn, branch: origin/szn_rent_stop_20260525)
+- **StatusEnum** (9个状态):
+  - `SUSPEND_WAIT_FIRST_AUDIT` — 申请停付待初审
+  - `SUSPEND_FIRST_AUDIT_REJECTED` — 申请停付初审驳回
+  - `SUSPEND_WAIT_FINAL_AUDIT` — 申请停付待终审
+  - `SUSPEND_FINAL_AUDIT_REJECTED` — 申请停付终审驳回
+  - `SUSPEND_FINAL_AUDIT_APPROVED` — 申请停付终审通过
+  - `SUSPEND_CANCELED` — 申请停付已撤销
+  - `RESUME_WAIT_AUDIT` — 申请恢复待审核
+  - `RESUME_AUDIT_REJECTED` — 申请恢复审核驳回
+  - `RESUME_AUDIT_APPROVED` — 申请恢复审核通过
+- **RentSuspendTypeEnum** (停付类型):
+  - `OWNER_APPLY` — 业主申请
+  - `DISPUTE_SUSPEND` — 纠纷停付
+- **SourceEnum** (业务来源):
+  - `PV_OPERATOR` — 光伏运维商
+- **SuspendReasonEnum** (停付原因):
+  - `OWNER_CHANGE` — 业主变更
+  - `BLACK_ACCOUNT` — 黑户
+  - `INITIAL_INSTALL_FEE` — 初装费
+  - `RENT` — 租金
+  - `DISPUTE` — 纠纷
+  - `OTHER` — 其他原因
+- **LightUnionpayRentRecord 新增状态**: `SUSPEND` — 暂停支付
+
+### 招银金租电站状态 (TAEI-3101, 代码明确证明, 2026-05-22~23)
+**来源**: `rrsjk-light-service` → `CmbLeasingStation.java` (lilong, branch: origin/20260515-alone-zhaoyin-price)
+- **StatusEnum**: 招银金租电站状态（用于push区分）
+- **retransFlagEnum**: 重传标识枚举
+- **新旧数据区分**: 从 pushTime 改为 createdAt 作为新旧逻辑区分字段
+

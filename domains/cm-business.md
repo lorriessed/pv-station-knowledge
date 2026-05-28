@@ -112,6 +112,33 @@
 - 收入政策配置支持并行审核方案
 - 新增审核页面 `cmLightProjectIncomePolicyAudit.ftl`
 
+### 收款里程碑兼容风电 (TAEI-3107, 代码明确证明, 2026-05-21~26)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` (解钦, 7+ commits, branch: origin/feature-cm-wind-electric)
+- 收款里程碑导入收入政策要求是工程经理
+- 收入政策修改兼容新老逻辑
+- 导入收入政策增加表头校验、项目校验、业务类型判断
+- 下载模板增加对业务类型的判断
+
+### 产值收入法与终验法 (TAEI-3107, 代码明确证明, 2026-05-21~27)
+**来源**: `rrsjk-light-service` + `rrsjk-merchant-web` + `rrsjk-admin-web` + `rrsjk-finance-service` (tn_wangb/王斌, 25+ commits, branch: origin/feature-cm-wind-electric)
+- 工商业风电项目产值收入法大量实现（rrsjk-light-service 20+ commits）
+- 工商业风电项目终验法（rrsjk-admin-web, rrsjk-finance-service）
+- 产值法上收入时收入限制放开（commit 0f5c5422）
+- 工商业收款切换FAP（commit 51731715）
+- 退质保金申请驳回后不释放已选择单据（rrsjk-finance-service）
+- 新增FAP异步通知接口（rrsjk-light-service, branch: origin/20260416-fap）
+- 无纸化列表补充发票已核销状态（rrsjk-admin-web）
+|- **方案变更修改**: 方案变更逻辑适配（branch: origin/20260514-wb-planChange）
+
+### 工商业风电产值收入法更新 (2026-05-28 追加)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` (tn_wangb/王斌, branch: origin/feature-cm-wind-electric + origin/20260416-fap)
+- **CmGvsServiceImpl / CmLightUseServiceImpl**: 工商业风电项目产值收入法实现 (5/28 commits 0cd9f84/e851d42)
+- **CmConstructionPlanServiceImpl**: 产值收入法进度管控 (5/28 commit 1e66818)
+- **CmProductionValueIncomeServiceImpl**: 产值收入计算逻辑 (5/28 commit e851d42)
+- **CmLightUseController** (admin-web): 工商业风电项目终验法 (5/27 commit 66e3172)
+- **FAP异步回调**: 接收集团FAP异步回调方法 (5/28 commit 1ad8908)
+- **证据等级**: 代码明确证明
+
 ## 待确认
 
 - `CmConstructionProgressAudit` 的 `StatusEnum` 完整枚举值

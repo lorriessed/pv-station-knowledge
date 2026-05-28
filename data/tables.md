@@ -374,3 +374,25 @@
   - admin-web 前端批量修复省份授权相关显示问题（40次提交迭代）
   - 关联 `LightSpAuthorityZone` 表（授权区域），新增省份授权后同步更新
 - **证据等级**: 代码明确证明
+
+### 租金停付管理相关表 (TAEI-3103, 代码明确证明, 2026-05-25~27)
+**来源**: `rrsjk-light-service` dev 分支 (sunzn, branch: origin/szn_rent_stop_20260525)
+- **rent_suspend_application**: 租金停付申请表
+  - 字段: id, member_id, application_no, station_code, owner_name, station_status
+  - 审核: first_auditor_id/name/at/remark, final_auditor_id/name/at/remark
+  - 恢复: resume_auditor_id/name/at/remark, deduct_month_count(扣除月数)
+  - 撤销: cancel_by, cancel_at
+- **rent_suspend_application_record**: 租金停付关联记录表（关联租金计划记录）
+- **light_unionpay_rent_record**: 租金记录表（新增 `SUSPEND` 支付状态枚举）
+
+### 审核单图驳回记录表 (TAEI-3057, 代码明确证明, 2026-05-21~27)
+**来源**: `rrsjk-light-service` (wangxiran, branch: origin/feature-wxr-audit-20260519)
+- **light_audit_image_reject_record**: 审核单图驳回记录表
+  - 关联审核记录，存储单张图片驳回明细
+  - DAO: `LightAuditImageRejectRecordDao`（含 `findByAuditId` 方法）
+
+### 租金个税报表相关表 (TAEI-3092, 代码明确证明, 2026-05-25~27)
+**来源**: `rrsjk-light-service` (代继宁, branch: origin/featrue-20260525-rentTaxReport/TAEI-3092)
+- **rent_tax_amount_record**: 租金个税明细记录表
+- **rent_tax_amount_summary**: 租金个税汇总表
+- **tax_amount_calculate_source_data**: 个税计算源数据表

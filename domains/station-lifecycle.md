@@ -831,3 +831,36 @@ if (exist != null) {
 - **数据表**: `light_station_transfer_order`, `light_station_transfer_order_log`
 - **状态**: 开发中（功能分支，未合并到 master）
 - **证据等级**: 代码明确证明
+
+### 电站转单功能模块更新 (代码明确证明, 2026-05-28 追加)
+**来源**: `rrsjk-light-service` + `rrsjk-merchant-web` (德, branch: origin/station-transfer-sub-account-20260525)
+- **LightStationTransferOrder**: 新增字段 (5/28 commits 24129c2)
+- **LightStationTransferOrderServiceImpl**: 移除 `@Transactional` 注解 (commit e1ea839)
+- **单元测试**: `LightStationTransferOrderServiceImplTest` 新增 (commit 0f53159)
+- **商户端接口**: `LightStationTransferOrderController` (rrsjk-merchant-web) 新增转单详情和二级账号查询接口 (commit 1f6c580/da8dc80)
+- **导出**: `LightStationTransferOrderExcel` 新增
+- **证据等级**: 代码明确证明
+
+### 电站业主租金停付管理 (TAEI-3103, 代码明确证明, 2026-05-25~27)
+**来源**: `rrsjk-light-service` dev 分支 (sunzn/孙志男, 5+ commits, branch: origin/szn_rent_stop_20260525)
+- **需求**: 高媛负责，参与人: 魏秋阳、孙志男、李培龙
+- **核心实体**: `RentSuspendApplication` — 租金停付申请表（dev 分支新增）
+  - 字段: id, memberId, applicationNo, stationCode, ownerName, stationStatus, subCenterCode, subCenterName
+  - 业务: specialFlag(资产所属), stationType, fieldMethod(备案方式), rentSuspendType, workOrderNo
+  - 原因: suspendReason, reasonDetail, suspendDescFileUrl, ownerPhotoFileUrl
+  - 审核: firstAuditorId/Name/At/Remark, finalAuditorId/Name/At/Remark
+  - 恢复: resumeAuditorId/Name/At/Remark, deductMonthCount(扣除月数)
+  - 撤销: cancelBy, cancelAt
+- **状态机**（9个状态）:
+  ```
+  申请停付待初审 → 初审驳回/待终审 → 终审驳回/终审通过
+  终审通过 → 申请恢复待审核 → 恢复驳回/恢复通过
+  任意非终审通过 → 已撤销（终审通过后不可撤销）
+  ```
+- **关联实体**: `RentSuspendApplicationRecord` — 关联租金计划记录（新表）
+- **租金状态**: `LightUnionpayRentRecord` 新增 `SUSPEND` 支付状态枚举值
+- **业务规则**: 分中心经理初审→总部终审两级审批；终审通过后不可撤销；恢复审核需计算扣除月数
+- **停付类型**: OWNER_APPLY(业主申请), DISPUTE_SUSPEND(纠纷停付)
+- **停付原因**: OWNER_CHANGE(业主变更), BLACK_ACCOUNT(黑户), INITIAL_INSTALL_FEE(初装费), RENT(租金), DISPUTE(纠纷), OTHER(其他)
+- **状态**: 开发中（功能分支 dev，未合并到 master）
+- **证据等级**: 代码明确证明

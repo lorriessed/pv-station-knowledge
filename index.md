@@ -1,13 +1,13 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-05-27
+更新时间: 2026-05-28
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
-| 总仓库数 | 100 (PVS 72 + VPP/其他 28) |
-| 已通读 | 100/100 (第14轮) |
+| 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
+| 已通读 | 105/122 (第15轮) |
 | 知识库文件 | 70+ 个 |
 | 知识库大小 | 6.8MB+ |
 | Domain 业务文件 | 30+ 个 (340KB+) |
@@ -15,10 +15,9 @@
 
 ## 仓库通读进度
 
-### 全部 100 个仓库已通读 ✅ (第14轮，2026-05-27)
-- 所有 PVS 72 + VPP/其他 28 个仓库均已完成全量通读
-- 本轮重扫: rrsjk-merchant-h5, rrsjk-merchant-service, rrsjk-merchant-web, rrsjk-migration-member, rrsjk-migration-mix
-- **重要新增**: `domains/merchant-service.md` — 商户服务域完整文档(企业客户/押金/牛人客户/驿站/店铺/供应商/AI集成/外部调用)
+### 全部 105/122 个仓库已通读 (第15轮，2026-05-28)
+- 本轮通读 5 个: DB_TOOL, Inverter_recognition, card_extraction, infomation_iextraction, main_contract_extraction
+- **新增 domain 文件**: `domains/ai-extraction-services.md` — AI 提取服务完整文档(逆变器识别/银行卡提取/合同信息提取/主合同提取)
 
 ## 目录
 

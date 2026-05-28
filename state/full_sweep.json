@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-05-27T22:00:16.087357",
+  "last_run_at": "2026-05-28T22:00:15.921894",
   "completed_repos": [
     "base-service",
     "cbs-web",
@@ -100,7 +100,12 @@
     "vpp-template-ui",
     "vpp-thai-dashboard",
     "watermark-camera-android",
-    "watermark-camera-ios"
+    "watermark-camera-ios",
+    "DB_TOOL",
+    "Inverter_recognition",
+    "card_extraction",
+    "infomation_iextraction",
+    "main_contract_extraction"
   ],
   "repo_last_sweep": {
     "rrsjk-admin-web": "2026-05-23T22:00:35.786113",
@@ -202,7 +207,12 @@
     "nhpv_usercenter_business": "2026-05-16T22:00:20.421829",
     "rrsjk-openapi-web": "2026-05-16T22:00:20.421829",
     "vpp-template-ui": "2026-05-16T22:00:20.421829",
-    "vpp-thai-dashboard": "2026-05-16T22:00:20.421829"
+    "vpp-thai-dashboard": "2026-05-16T22:00:20.421829",
+    "DB_TOOL": "2026-05-28T22:00:00",
+    "Inverter_recognition": "2026-05-28T22:00:00",
+    "card_extraction": "2026-05-28T22:00:00",
+    "infomation_iextraction": "2026-05-28T22:00:00",
+    "main_contract_extraction": "2026-05-28T22:00:00"
   },
   "repo_activity_order": [
     "rrsjk-light-service",
@@ -307,5 +317,5 @@
     "rrsjk-mobile-h5"
   ],
   "sweep_round": 15,
-  "last_sweep_at": "2026-05-25T22:08:31.388741"
+  "last_sweep_at": "2026-05-28T22:00:00"
 }

@@ -299,3 +299,21 @@
 | `stationDayReportExecutor` | 30-30 | 300000 | 电站日发电量统计 |
 
 - **证据等级**: 代码明确证明
+
+### ADS 逆变器报表迁移 (代码明确证明, 2026-05-28)
+**来源**: `rrsjk-light-data-service` + `rrsjk-admin-web` (majinhu, branch: origin/feature/202605/ods_electroc_data)
+- **架构变更**: 逆变器图表查询从 DWS 层迁移到 ADS 报表层
+- **新增 ADS 数据源**: `MybatisConfig` 新增 ADS 数据源配置，`AbstractAdsDao` 基类
+- **5张 ADS 报表表** (ads schema, 无 id 字段):
+  - `ads.green_energy_report_light_inverter_pac_chart_day` → 替换 `report_inverter_pac_chart_day`
+  - `ads.green_energy_report_light_inverter_chart_day` → 替换 `report_inveter_chart_day`
+  - `ads.green_energy_report_light_inverter_chart_month` → 替换 `report_inveter_chart_month`
+  - `ads.green_energy_report_light_inverter_chart_year` → 替换 `report_inveter_chart_year`
+  - `ads.green_energy_report_light_inverter_chart_total` → 替换 `report_inveter_chart_total`
+- **新增实体**: `AdsReportInveterChartDay/Month/Year/Total/PacChartDay` (字段名修正: `inveter_sn` → `inverter_sn`)
+- **新增 DAO + Mapper**: 5个 ADS DAO + 5个 MyBatis XML
+- **新增 Service**: `AdsReportInveterChart*Service` 接口 + `AdsReportInveterChart*ServiceImpl` 实现 + `dwsInveterDataServiceImpl`
+- **原 Service 迁移**: `ReportInveterChart*ServiceImpl` 改为调用 ADS 层
+- **字段统一**: `inveter_sn` → `inverter_sn`, `inveterSn` → `inverterSn` (全链路拼写修正)
+- **admin-web**: `LightInveterController` 新增 ADS 数据查询接口，`inveterDetailDws.ftl` / `lightInveterListDws.ftl` 前端页面
+- **证据等级**: 代码明确证明

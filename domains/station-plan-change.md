@@ -420,4 +420,5 @@ STATION_INFO_CHANGE（电站冻结为 SUSPENDING）
 - `rrsjk-light-service` → `AbstractPolicyToDoStrategy.java`
 - `rrsjk-light-service` → `StationChangeStrategy.java` / `PlanConfigChangeStrategy.java` / `HouseTypeChangeStrategy.java`
 - `rrsjk-light-service` → `LightStationChangePlanToDo.ToDoTypeEnum`
-- 代码扫描日期: 2026-05-24
+- **代码扫描日期**: 2026-05-24
+- **2026-05-28 追加**: 屋顶尺寸图片变更检查逻辑修复、审核跳过逻辑修复 (`LightStationPlanChangeServiceImpl`, commits 0759d36/5d5effb, wangxiran)
