@@ -98,10 +98,21 @@
 - 完工节点兼容出库事务执行的逻辑变化，电站终止逻辑同步变更
 
 ## 待确认
-- 各调拨类型对应库存扣减和在途库存规则。
-- 商内调拨与普通调拨的财务/权限差异。
-- 组件订单不指定SN出库后，后续追溯和质保如何管理。
-- 发货后的快递签收与 WMS 系统交互的完整状态机。
+|- 各调拨类型对应库存扣减和在途库存规则。
+|- 商内调拨与普通调拨的财务/权限差异。
+|- 组件订单不指定SN出库后，后续追溯和质保如何管理。
+|- 发货后的快递签收与 WMS 系统交互的完整状态机。
+
+## 电站转单功能 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-light-service` → `LightStationTransferOrder.java`, `LightStationTransferOrderDao.java`, `LightStationTransferOrderServiceImpl.java`, `LightStationTransferOrder.xml`, `LightStationTransferOrderLog.xml` (commits: 德, 2026-05-29, branch: station-transfer-sub-account-20260525)
+**前端**: `nahui-pv.mobile-h5` → `src/views/apv/transferOrder/index.jsx`, `src/api/apv.js`, `src/router/modules/apv.jsx` (commits: yanghui, 2026-05-29)
+- **实体**: `LightStationTransferOrder` — 电站转单主表，包含负责人/承接商名称查询
+- **前端页面**: 移动H5新增 `/apv/transferOrder` 路由，转单管理页面（193行新增）
+- **API**: `src/api/apv.js` 新增转单相关接口（15行新增）
+- **Mapper**: 新增按负责人或承接商名称查询功能，修复id问题
+- **LightStation实体变更**: 转单功能修改涉及 `LightStation.java` 字段调整
+- **子中心查询**: 转单功能添加子中心列表查询条件
+- **证据等级**: 代码明确证明
 
 ## 关联文件
 - **下单-配货-发货全链路**: `domains/order-dispatch-delivery.md` — 方案审核通过后的下单、配货、发货、仓库、库存、额度的完整业务流程（2026-05-24 新增）

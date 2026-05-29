@@ -1868,6 +1868,11 @@
 - statements: `select:getById`, `select:findByParams`, `select:findPower`, `select:findInverter`
 - tables: `light_station_plan_config`
 
+## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartTotal.xml
+- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartTotalDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_station_chart_total`
+
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartTotal.xml
 - namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartTotalDao`
 - statements: `select:findChart`
@@ -1878,10 +1883,20 @@
 - statements: `select:findChart`
 - tables: `ads.green_energy_report_light_inverter_chart_year`
 
+## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartYear.xml
+- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartYearDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_station_chart_year`
+
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartDay.xml
 - namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartDayDao`
 - statements: `select:findChart`
 - tables: `ads.green_energy_report_light_inverter_chart_day`
+
+## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartMonth.xml
+- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartMonthDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_station_chart_month`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterPacChartDay.xml
 - namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterPacChartDayDao`
@@ -1892,6 +1907,11 @@
 - namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartMonthDao`
 - statements: `select:findChart`
 - tables: `ads.green_energy_report_light_inverter_chart_month`
+
+## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartDay.xml
+- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartDayDao`
+- statements: `select:findChart`, `select:getMinFetchAt`
+- tables: `ads.green_energy_report_light_station_chart_day`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightStationElecMonthReportNew.xml
 - namespace: `com.rrsjk.light.data.dao.local.LightStationElecMonthReportNewDao`
@@ -2066,6 +2086,11 @@
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightFirstValidThreePowerLog.xml
 - namespace: `com.rrsjk.light.data.dao.local.LightFirstValidThreePowerLogDao`
 - statements: `insert:create`
+
+## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsLightStationElec.xml
+- namespace: `com.rrsjk.light.data.dao.dws.DwsLightStationElecDao`
+- statements: `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getElecSum`
+- tables: `dws.green_energy_light_station_realtime_current`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsInveterData.xml
 - namespace: `com.rrsjk.light.data.dao.dws.DwsInveterDataDao`
@@ -4219,7 +4244,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/RentTaxAmountSummary.xml
 - namespace: `com.rrsjk.light.dao.RentTaxAmountSummaryDao`
-- statements: `select:findBy`, `select:countOf`, `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`, `update:updateConfirmStatus`, `update:updateVoucher`, `select:queryUnConfirmCompanyCodeByRentMonth`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`, `select:getByOrderNo`, `update:updateConfirmStatus`, `update:updateVoucher`, `select:queryUnConfirmCompanyCodeByRentMonth`
 - tables: `id`, `rent_tax_amount_summary`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationRepurchaseLog.xml

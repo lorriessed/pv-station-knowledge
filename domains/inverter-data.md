@@ -316,4 +316,43 @@
 - **原 Service 迁移**: `ReportInveterChart*ServiceImpl` 改为调用 ADS 层
 - **字段统一**: `inveter_sn` → `inverter_sn`, `inveterSn` → `inverterSn` (全链路拼写修正)
 - **admin-web**: `LightInveterController` 新增 ADS 数据查询接口，`inveterDetailDws.ftl` / `lightInveterListDws.ftl` 前端页面
+- **admin-web 新增接口**:
+  - `dayChartAds.do` — 查询日图表 ADS 数据 (并行 CompletableFuture 查询 pac + elec)
+  - `dayChartAdsIpvUpv.do` — 查询电压电流日图表 ADS 数据
+  - 缓存: `admin:ads:inveter_day_chart:{inveterSn}:{givenTime}` (5分钟过期)
+- **证据等级**: 代码明确证明
+
+### elecStatus 字段独立计算 (TAEI-3141, 代码明确证明, 2026-05-22)
+**来源**: `rrsjk-light-data-service` → `LightInverterCommon.java`, `LightInveterDataServiceImpl.java` (yumiao)
+|- **变更**: `elecStatus` 字段不再跟随发电数据流写入（`LightInverterCommon.java` 中注释掉相关代码）
+|- **原因**: elecStatus 改为通过"连续三天发电检查"独立计算和更新
+|- **连续三天发电检查** (`LightInveterDataServiceImpl`):
+  - 在锦浪数据拉取流程中增加重试机制
+  - 新增 `isContinue` 判断逻辑，检查逆变器连续三天发电状态
+  - 通过 `LightInveterDataDao.update()` 单独更新 elecStatus 字段
+  - 增加日志: `"逆变器三天数据，逆变器SN：{}，是否连续发电：{} ,elecStatus {}"`
+|- **关联需求**: TAEI-3141 (优化电站连续三天发电刷新逻辑) + TAEI-3145 (商务验收页面跳转逆变器详情速度优化)
+|- **证据等级**: 代码明确证明
+
+### 电站发电报表迁移到ADS层 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-light-data-service` (majinhu, branch: origin/feature/202605/ods_electroc_data)
+- **架构变更**: 电站发电报表从ADS层(AdsLightStationElec)迁移到DWS层(DwsLightStationElec)
+- **原ADS实体迁移**: `AdsLightStationElec` → `DwsLightStationElec` (R093重命名)
+- **原ADS服务迁移**: `AdsLightStationElecService` → `DwsLightStationElecService`
+- **新增DWS服务方法**:
+  - `findByPage()` — 分页查询 DwsLightStationElec
+  - `getByStationCode()` — 按电站编码查询
+  - `getStationSum()` — state统计
+  - `getStationSummary()` — status统计
+  - `getElecSum()` — 发电汇总
+- **新增ADS报表服务** (4个维度):
+  - `AdsReportStationChartDayService` — 日图表 (`getDayChartAds`, `getMinFetchAtAds`)
+  - `AdsReportStationChartMonthService` — 月图表 (`getMonthChartAds`)
+  - `AdsReportStationChartYearService` — 年图表 (`getYearChartAds`)
+  - `AdsReportStationChartTotalService` — 累计图表 (`getTotalChartAds`)
+- **新增实体**: `AdsReportStationChartDay/Month/Year/Total` (ads schema)
+- **新增DAO + Mapper**: 4个ADS报表DAO + MyBatis XML
+- **Admin-web**: `LightInveterController` 新增 `DwsInveterDataService`, `AdsReportInveterChart*Service` 依赖注入
+- **DWS查询切换**: `doListDws.do` 中 `lightInveterDataService.findByPageDws()` → `dwsInveterDataService.findByPage()`
+- **green_energy_light_station_realtime_current** 映射原来的 `light_station_elec`
 - **证据等级**: 代码明确证明

@@ -453,3 +453,18 @@
 - **retransFlagEnum**: 重传标识枚举
 - **新旧数据区分**: 从 pushTime 改为 createdAt 作为新旧逻辑区分字段
 
+### 电站转移状态 (TAEI-3058, 代码明确证明, 2026-05-26~28)
+**来源**: `rrsjk-light-service` → `LightStationTransferOrder.java`, `LightStationTransferOrderLog.java` (德/姜传德, branch: origin/station-transfer-sub-account-20260525)
+- **StatusEnum** (5个状态):
+  - `WAIT_OUT_CONFIRM` — 待确认转出
+  - `WAIT_IN_CONFIRM` — 待确认转入
+  - `COMPLETED` — 转单完成
+  - `OUT_REJECTED` — 拒绝转出
+  - `IN_REJECTED` — 拒绝转入
+- **ActionTypeEnum** (5个动作):
+  - `SUBMIT` — 发起转单
+  - `CONFIRM_OUT` — 确认转出
+  - `REJECT_OUT` — 拒绝转出
+  - `CONFIRM_IN` — 确认转入
+  - `REJECT_IN` — 拒绝转入
+

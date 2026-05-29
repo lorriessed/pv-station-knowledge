@@ -210,6 +210,41 @@ StationIncomeHandleStrategyFactory
 - Hermes MEMORY.md，2026-05-09 迁移。
 - rrsjk-finance-service 代码扫描 2026-05-10。
 
+---
+
+## 租金个税记账批量确认接口优化 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-admin-web` → `RentTaxRecordController.java`, `RentTaxAmountRecordExcel.java`, `RentTaxAmountSummaryExcel.java`, `rentTaxAmountSummaryList.ftl` (commits: 代继宁, 2026-05-29, TAEI-3092)
+- 优化租金个税记账批量确认接口，多次迭代修复
+- 增加记账信息相关字段到Excel导出
+- `rentTaxAmountSummaryList.ftl` 大幅更新（133行变更）
+- **证据等级**: 代码明确证明
+
+---
+
+## SAP记账接口多次更新 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-light-service` → `RentTaxAmountServiceImpl.java` (commits: 代继宁, 2026-05-29, TAEI-3092)
+- 记账成功后错误信息置空
+- 更新SAP记账接口字段传参，修改交易类型等传参
+- 多次迭代：更新→Revert→再次更新
+- 优化租金个税批量确认错误返回、保存逻辑
+- **证据等级**: 代码明确证明
+
+---
+
+## AI智能对账 — 多模板选择逻辑精简 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-admin-web` → `AiReconciliationHandler.java` (commits: lilong, 2026-05-29, TAEI-3110)
+- **变更**: 注释掉一个发电户号映射多个发票模板时的多模板选择逻辑（~30行注释掉）
+- **原因**: 模板映射功能有导入校验，从页面操作不会出现一个发电户号映射多个模板
+- **移除依赖**: 移除 `LightProjectElectricOrderService` 注入
+- **证据等级**: 代码明确证明
+
+---
+
+## 电费发票查询新增条件 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-admin-web` → `LightCapitalProjectElectricOrderInvoiceController.java`, `lightCapitalProjectElectricOrderInvoiceList.ftl` (commits: laowang/王金浩, 2026-05-29)
+- `doList.do` 接口新增查询条件: `invoiceStatus`(发票状态), `purchaserName`(购销方名称), `companyName`(公司名称)
+- **证据等级**: 代码明确证明
+
 ## 电站租金查询与账单 (代码明确证明)
 **来源**: `rrsjk-light-operation-service` → `StationRentDto.java`, `LightOperationStationServiceImpl.java`, `LightOperationStationElecBill.java`, `LightOperationElecBillTaskService.java` (commits afbccaf/ffc8b32, 2026-05-12)
 
@@ -1079,4 +1114,24 @@ stationParam.put("spMemberId", spMemberId);
 - **RentTaxAmountSummary**: 汇总实体字段更新
 - **前端页面**: `rentTaxAmountRecordList.ftl` (明细列表), `rentTaxAmountSummaryList.ftl` (合计列表)
 - **导出VO**: `RentTaxAmountRecordExcel`, `RentTaxAmountSummaryExcel`
+- **证据等级**: 代码明确证明
+
+### 华融上收入多1个账 (TAEI-3044, 代码明确证明, 2026-05-26)
+**来源**: `rrsjk-finance-service` (yumiao/于淼, commit cdc415b)
+- **需求**: 华融上收入时再多1个账，业务模式B43，DMBTR=收入金额(应收账款)*质量保证金比例
+- **变更**: 对账单update方法增加判空校验
+- **关联**: 于淼负责，参与人: 薛荣基
+- **状态**: 已完成
+- **证据等级**: 代码明确证明（需进一步追踪 B43 业务模式下的质量保证金记账逻辑）
+
+### 工商业风电项目终验法 (TAEI-3107, 代码明确证明, 2026-05-22~27)
+**来源**: `rrsjk-admin-web` (tn_wangb/王斌, branch: origin/feature-cm-wind-electric)
+- **需求**: 风电产值法兼容1.0，杨越越负责，参与人: 王斌、解钦、杨辉、薛荣基
+- **核心变更**: 工商业项目领用报表从4个独立比例字段合并为1个节点完成比例
+  - 移除: `majorMaterialUsePct` (领用主材比例), `auxiliaryMaterialUsePct` (领用辅材比例), `constructionServiceUsePct` (施工服务领用比例), `designServiceUsePct` (设计领用比例)
+  - 新增: `nodeFinishPct` (本次节点比例)
+  - Excel 导出列名从"领用主材比例"改为"本次节点比例"
+- **收款切换**: 工商业收款从旧模式切换为 FAP 模式 (`5173171`, 2026-05-22)
+- **发票核销**: 无纸化列表补充发票已核销状态 (`9b6f0a4`, 2026-05-27)
+- **状态**: 测试中
 - **证据等级**: 代码明确证明

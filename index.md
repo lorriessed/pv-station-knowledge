@@ -1,6 +1,6 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-05-28
+更新时间: 2026-05-29
 
 ## 概况
 
@@ -15,9 +15,9 @@
 
 ## 仓库通读进度
 
-### 全部 105/122 个仓库已通读 (第15轮，2026-05-28)
-- 本轮通读 5 个: DB_TOOL, Inverter_recognition, card_extraction, infomation_iextraction, main_contract_extraction
-- **新增 domain 文件**: `domains/ai-extraction-services.md` — AI 提取服务完整文档(逆变器识别/银行卡提取/合同信息提取/主合同提取)
+### 全部 105/122 个仓库已通读 (第15轮，2026-05-29)
+- 本轮通读 5 个: main_contract_whole_extraction, poc_extraction_without_pdf, purchase_electricity_contract, rent_extraction, rent_extraction_guding
+- **知识库更新**: `domains/ai-extraction-services.md` — 新增 5 个 AI 提取服务文档(主合同完整提取/房产证识别/购售电合同PDF增强/租赁协议文本提取/固定租赁协议丙方版)，新增端口汇总表(9个服务)
 
 ## 目录
 

@@ -33,6 +33,7 @@
 | STOP | 已终止 | 终止 |
 | REPURCHASE | 已回购 | 资方回购 |
 | SUSPENDING | 暂停 | 信息变更中冻结 |
+- **⚠️ 2026-05-29**: 龙龙在 `20260310_longlong_station_pause_status_fix` 分支移除了 LightStation 中的暂停状态枚举（commit 9b3ca19）。SUSPENDING 状态从枚举中删除，具体替代方案待确认。
 
 ### 商务状态 (businessStatus) — 独立并行字段
 
@@ -814,9 +815,9 @@ if (exist != null) {
 - 同时修复日期格式化: givenTime 从 `"2026-5-26"` 改为 `"2026-05-26"`，防止 `DateTimeParseException`
 - **证据等级**: 代码明确证明
 
-### 电站转单功能模块 (代码明确证明, 2026-05-26 新增)
-**来源**: `rrsjk-light-service` → `LightStationTransferOrder.java`, `LightStationTransferOrderService.java`, `LightStationTransferOrderServiceImpl.java`, `LightStationTransferOrder.xml` (commit 53e753e3, 姜传德/德, branch: origin/station-transfer-sub-account-20260525)
-- **业务场景**: 电站从一个子账号（服务商）转移到另一个子账号
+### 电站转移 (TAEI-3058, 代码明确证明, 2026-05-26~28 追加)
+**来源**: `rrsjk-light-service` (德/姜传德 + yumiao/于淼, branch: origin/station-transfer-sub-account-20260525)
+- **需求**: 电站支持在不同子账号之间转移，杨越越负责，参与人: 姜廷、姜传德、于淼、杨辉、张硕文、袁睿林
 - **核心实体**: `LightStationTransferOrder` — 转单订单
   - 字段: stationId, stationCode, ownerName, installedPower
   - 服务商: spId, spMemberId, spName
@@ -824,11 +825,28 @@ if (exist != null) {
   - 转入方: inSubSpMemberId, inSubSpName, inRejectReason（拒绝转入原因）
   - 状态: status, transferApplyAt
   - 日志: `LightStationTransferOrderLog` — 转单操作日志表
-- **操作流程**: 
-  1. 创建转单 (`create`) — 指定电站、转出/转入子账号
-  2. 确认转单 (`confirm`) — 转入方确认接受
-  3. 拒绝转单 (`reject`) — 转出方或转入方拒绝，填写拒绝原因
+- **状态机** (5个状态 + 5个动作):
+  ```
+  发起转单(SUBMIT) → 待确认转出(WAIT_OUT_CONFIRM)
+    ├─ 确认转出(CONFIRM_OUT) → 待确认转入(WAIT_IN_CONFIRM)
+    │   ├─ 确认转入(CONFIRM_IN) → 转单完成(COMPLETED) ✅
+    │   └─ 拒绝转入(REJECT_IN) → 拒绝转入(IN_REJECTED)
+    └─ 拒绝转出(REJECT_OUT) → 拒绝转出(OUT_REJECTED)
+  ```
+- **前置条件**: 电站状态必须在 stationCompleteBefore() 范围内（完工前的电站才能转移）
 - **数据表**: `light_station_transfer_order`, `light_station_transfer_order_log`
+- **Dubbo 服务**: `LightStationTransferOrderService` (rrsjk-light-api)
+  - `create(LightStationTransferOrderCreateDto)` — 创建转单
+  - `confirmOut(LightStationTransferOrderConfirmDto)` — 确认转出
+  - `confirmIn(LightStationTransferOrderConfirmDto)` — 确认转入
+  - `reject(LightStationTransferOrderRejectDto)` — 拒绝转单
+- **商户端**: `rrsjk-merchant-web` 新增 `LightStationTransferOrderController` — 转单详情和二级账号查询
+- **导出**: `LightStationTransferOrderExcel` 新增
+- **最新进展** (2026-05-28):
+  - 新增字段 (commit 24129c2)
+  - 移除 `@Transactional` 注解 (commit e1ea839)
+  - 单元测试新增 (commit 0f53159)
+  - 权限和校验完善 (commit 836c5a1)
 - **状态**: 开发中（功能分支，未合并到 master）
 - **证据等级**: 代码明确证明
 

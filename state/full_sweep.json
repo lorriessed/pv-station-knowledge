@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-05-28T22:00:15.921894",
+  "last_run_at": "2026-05-29T22:00:18.311168",
   "completed_repos": [
     "base-service",
     "cbs-web",
@@ -212,7 +212,12 @@
     "Inverter_recognition": "2026-05-28T22:00:00",
     "card_extraction": "2026-05-28T22:00:00",
     "infomation_iextraction": "2026-05-28T22:00:00",
-    "main_contract_extraction": "2026-05-28T22:00:00"
+    "main_contract_extraction": "2026-05-28T22:00:00",
+    "main_contract_whole_extraction": "2026-05-29T22:00:18.311168",
+    "poc_extraction_without_pdf": "2026-05-29T22:00:18.311168",
+    "purchase_electricity_contract": "2026-05-29T22:00:18.311168",
+    "rent_extraction": "2026-05-29T22:00:18.311168",
+    "rent_extraction_guding": "2026-05-29T22:00:18.311168"
   },
   "repo_activity_order": [
     "rrsjk-light-service",
@@ -317,5 +322,5 @@
     "rrsjk-mobile-h5"
   ],
   "sweep_round": 15,
-  "last_sweep_at": "2026-05-28T22:00:00"
+  "last_sweep_at": "2026-05-29T22:00:18.311168"
 }

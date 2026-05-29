@@ -1,0 +1,17 @@
+TAEI-3110: AI智能对账
+Branch: origin/20260519-alone-electricAI
+Author: lilong (李龙)
+Key commits (2026-05-22 to 2026-05-28):
+- df50ec2: 根据大数据请求参数格式修改方法 2
+- a4cf1dc: 根据大数据请求参数格式修改方法
+- c829dba: 修改下载导入失败数据按钮名称
+- f3ee965: 校验发票模板是否存在和启用
+- cecea0a: Swap 发电户号映射字段 and 模板编码 order
+- 6e4352a: 新加字段: elec_no_field
+- 22b951a: 定义请求AI接口的实体类
+- 98ee957: 字段amount、taxAmount、powerGeneration改为字符串格式
+- d4cf821: 调整页面展示样式
+- 59b22a6: 调整AI接口返回参数类型
+
+Core file: rrsjk-admin-web/controller/light/AiReconciliationHandler.java
+Dubbo service: LightProjectElectricOrderService

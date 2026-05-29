@@ -51,7 +51,7 @@ VPP (Virtual Power Plant，虚拟电厂) 是海尔新能源在光伏业务之外
 
 | 模块 | 仓库 | 职责 |
 |---|---|---|
-| 管理后台 H5 | he-vpp.admin-h5 | VPP 管理后台，含售电交易/发票管理/订单管理/审批模块 |
+| 管理后台 H5 | he-vpp.admin-h5 | VPP 管理后台，含售电交易/发票管理/订单管理/审批/**电力交易电价数据报表**模块 |
 | 湖南政策 H5 | he-vpp.hnzl-h5 | 湖南政策相关 H5 |
 | 泰国大屏 | vpp-thai-dashboard | 泰国市场数据大屏, 华为FusionSolar北向API集成, 定时采集电站/设备数据 |
 | 模板 UI | vpp-template-ui | 前端组件模板 (pnpm monorepo, 仅 pnpm-workspace.yaml) |
@@ -584,6 +584,7 @@ VPP 项目的代码模板/参考项目，包含一个完整的发票管理模块
 
 | 日期 | 更新内容 | 来源 |
 |---|---|---|
+| 2026-05-29 | VPP管理后台新增电力交易电价数据报表 | he-vpp.admin-h5, 张硕文, feat/electricity-price |
 | 2026-05-23 | 补漏第7期: GDE即采即销SAP集成 | vpp-pv-oversea, mabin, TAEI-2977 |
 | 2026-05-15 | 全量通读5个VPP仓库: crawler(爬虫)/data-platform(数据平台)/openapi(开放API)/pv-oversea(海外光伏)/template(模板) | 本节全部内容 |
 | 2026-05-14 | 全量通读5个VPP仓库: gpower(绿电收益)/km(知识管理)/meta(产品出货)/system(系统管理)/template | domains/vpp-green-electricity.md 等 |

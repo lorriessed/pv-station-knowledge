@@ -4948,6 +4948,7 @@
 - @PostMapping("/add.do")
 - @GetMapping("/export.do")
 - @GetMapping("/get.do")
+- @GetMapping("/getStationList.do")
 
 ## LightConfirmOrderController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightConfirmOrderController.java`
@@ -5593,6 +5594,13 @@
 - @PostMapping("/auditOk.do")
 - @PostMapping("/auditOkTechRectify.do")
 - @PostMapping("/auditReject.do")
+
+## RentSuspendApplicationController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/RentSuspendApplicationController.java`
+- @RequestMapping("/rentSuspendApplication")
+- @GetMapping("list.do")
+- @PostMapping("addOrUpdate.do")
+- @PostMapping("cancel.do")
 
 ## LightOverdueListDetailController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightOverdueListDetailController.java`
@@ -15933,6 +15941,7 @@
 - @RequestMapping("doList.do")
 - @RequestMapping("doListDws.do")
 - @RequestMapping("doExport.do")
+- @RequestMapping("doExportDws.do")
 - @RequestMapping("detail.html")
 - @RequestMapping("detailDws.html")
 - @GetMapping(value = "dayChart.do")

@@ -31,6 +31,8 @@
 | `/api/v1/plant/status` | POST | 电站状态查询 | 7 | ✅ 启用 |
 | `/api/v1/electricity/bill` | POST | 电站电费账单查询 | 7 | ✅ 启用 |
 | `/api/v1/inverter/real-time-power` | POST | 逆变器发电功率查询 | 7 | ❌ 已注释 |
+| `/api/v1/plant/fault-info` | POST | 电站故障信息查询 | 7 | ✅ 新增 2026-05-29 |
+| `/api/v1/plant/work-order-info` | POST | 电站工单信息查询 | 7 | ✅ 新增 2026-05-29 |
 
 ### 3.1 电站日发电量查询
 
@@ -61,6 +63,18 @@
 | 2 | 离线 |
 | 3 | 待机 |
 | 4 | 异常 |
+
+### 3.5 电站故障信息查询 (新增, 2026-05-29)
+**来源**: `rrsjk-light-openapi-service` → `ZhaoYinFaultInfoDto.java`, `ZhaoYinLeaseService.java` (commits: mabin, 2026-05-28, branch: 20260528-zhaoyinErrorMsg)
+- 招银租后新增电站故障信息查询功能
+- DTO: `ZhaoYinFaultInfoDto` — 故障信息数据传输对象
+- 服务接口: `ZhaoYinLeaseService` 新增故障查询方法
+
+### 3.6 电站工单信息查询 (新增, 2026-05-29)
+**来源**: `rrsjk-light-openapi-service` → `ZhaoYinWorkOrderInfoDto.java`, `ZhaoYinLeaseService.java` (commits: mabin, 2026-05-28, branch: 20260528-zhaoyinErrorMsg)
+- 招银租后新增电站工单信息查询功能
+- DTO: `ZhaoYinWorkOrderInfoDto` — 工单信息数据传输对象
+- 同时变更: `ZhaoYinElectricityBillDto.java` 修改
 
 ## 4. 安全与限流机制
 
