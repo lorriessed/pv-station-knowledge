@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-05-29T22:00:18.311168",
+  "last_run_at": "2026-05-30T22:00:38.965041",
   "completed_repos": [
     "base-service",
     "cbs-web",
@@ -217,7 +217,12 @@
     "poc_extraction_without_pdf": "2026-05-29T22:00:18.311168",
     "purchase_electricity_contract": "2026-05-29T22:00:18.311168",
     "rent_extraction": "2026-05-29T22:00:18.311168",
-    "rent_extraction_guding": "2026-05-29T22:00:18.311168"
+    "rent_extraction_guding": "2026-05-29T22:00:18.311168",
+    "rrs-parent": "2026-05-30T22:00:38.965041",
+    "rrsjk-admin-auth-server": "2026-05-30T22:00:38.965041",
+    "rrsjk-admin-authz-service": "2026-05-30T22:00:38.965041",
+    "rrsjk-admin-bff": "2026-05-30T22:00:38.965041",
+    "rrsjk-admin-biff": "2026-05-30T22:00:38.965041"
   },
   "repo_activity_order": [
     "rrsjk-light-service",

@@ -1,6 +1,6 @@
 # 表与字段
 
-更新时间: 2026-05-13
+更新时间: 2026-05-30
 
 ## 已确认知识
 
@@ -48,7 +48,21 @@
 - ngb_station_income_day：纳光宝日收入表
 - ngb_station_income_month：纳光宝月收入表
 - ngb_station_income_year：纳光宝年收入表
-- ngb_station_user：纳光宝电站用户权限
+|- ngb_station_user：纳光宝电站用户权限
+
+### Admin 认证授权表 (rrsjk-admin-authz-service)
+**来源**: `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml` (2026-05-30 全量通读)
+**数据库**: rrsjk_admin_authz @ pv-mysql-prod (rm-m5ebm056ct14p18zu)
+
+| 表名 | 用途 |
+|---|---|
+| authz_user | 用户主表 (userId, loginId, username, company, chainGroup, centerCode...) |
+| authz_role | 角色表 (roleId, roleCode, roleName, enabled) |
+| authz_menu | 菜单树 (menuId, menuKey, parentKey, title, path, component, menuType, sortNo, legacyUrl) |
+| authz_permission | 权限定义 (permissionId, permissionKey, permissionName, permissionType, resourceKey, enabled) |
+| authz_user_role | 用户-角色关联 (userId, roleCode) |
+| authz_role_permission | 角色-权限关联 (roleCode, clientType, permissionKey) |
+| authz_user_permission | 用户-直接权限关联 (userId, clientType, permissionKey) |
 
 ### VPP 绿证交易表 (vpp-api-gect)
 - customer：客户信息表
@@ -216,6 +230,105 @@
 - **来源**: `CompleteConfirmServiceImpl.java`, `LightStationConfirmImg.java`
 - 涉及实体: LightStationConfirmImg(电站确认图片), LightStationAudit(电站审核)
 - 业务流程: 第三方社会化电站的逆变器数据对接，通过确认图片服务(CompleteConfirmService)处理
+
+### HDS H5 新能源收入日清报表体系 (2026-05-30, 代码明确证明)
+- **前端**: `nahui-pv.hds-h5`
+- **后端**: `rrsjk-light-report-service`
+- **数据源**: Doris (SelectDB) + MySQL (rrsjk_light_report) + SAP 接口
+
+#### 报表1: 全球收入 (subchainGroup, chainGroupIncome)
+- **前端路由**: `/global` → `src/views/reports/global.vue`
+- **后端 API**: `/hdsapi/report/subchainGroup/findByDayAt` (旧) / `/hdsapi/report/chainGroupIncome/findByDayAt` (新)
+- **数据源**: Doris/ads.energy_chain_group_income + energy_chain_group_income_comment
+- **含义**: 最宏观的链群维度全球收入报表，可按产业（新能源合计/绿能/储能/智控器）和链群下钻
+- **特点**: 含预实评估（预实零差/小差/有差/大差）、环比同比、评价备注
+- **可修改**: 支持手动修改月实际收入 → 递归调整父级合计
+
+#### 报表2: 模式流程日清 (modeRiqing)
+- **前端路由**: `/modeRiqing` → `src/views/reports/modeRiqing.vue`
+- **3个Tab**: 越秀模式日清 / 中核模式日清 / BT模式日清
+- **数据源**: 后端实时统计 light_station + SAP 收入接口
+- **含义**: 按资方模式分类的日常运营驾驶舱，统计各阶段业务量（获单/安装/并网/投放/过审）
+- **中核模式日清**: 按分中心维度，含收入列（来自 SAP `sapToReportService.findZHIncomeByStationList`）
+- **BT模式日清**: 按项目公司维度，统计并网/施工完成待并网/已安装/施工中/获单等(MW)
+- **越秀模式日清**: 按整体+分中心+服务商三层，含开户/进件/签合同/安装/并网/投放/过审/通过率
+
+#### 报表3: 绿能产业日清报表 (greenEnergyDayReport)
+- **前端 API**: `/hdsapi/greenEnergyDayReport/chainGroupIncome/findList`
+- **后端**: `GreenEnergyChainGroupIncomeServiceImpl` 
+- **数据源**: MySQL (rrsjk_light_report).green_energy_chain_group_income ← 实际从 Doris 的 energy_chain_group_income 转存
+- **含义**: ②链群收入中绿能板块的重新映射，命名更简洁，增加了全月完成率维度
+- **特点**: 含链群责任人、月同比、年同比
+
+#### 核心报表关系图
+```
+Doris (ads.energy_chain_group_income) ──┬── ① 全球收入报表 (global.vue)
+                                          ├── ② 新能源链群收入报表 (chainGroupIncome)
+                                          └──→ MySQL → ③ 绿能产业日清报表 (greenEnergyDayReport)
+                                              (转存/重映射)
+MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqing)
+                                              ├── 越秀模式 (financial leasing)
+                                              ├── 中核模式 (CNNC JV, 收入来自SAP)
+                                              └── BT模式 (Build-Transfer)
+```
+
+#### Doris 表: ads.energy_chain_group_income
+- **数据库**: ads (SelectDB/Doris)
+- **连接**: selectdb-cn-1wy4d12u002.selectdbfe.rds.aliyuncs.com:9030, user=dev
+- **MCP查询**: 通过 doris MCP 或 pymysql 直连
+- **服务端**: `rrsjk-light-report-service` → `com.rrsjk.report.dao.ads.EnergyChainGroupIncomeDao`
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| id | bigint | 主键 |
+| industry | varchar | 产业（新能源合计/绿能/储能/智控器/列示） |
+| chain_group | varchar | 链群名称（小计/1.1-家庭链群/农村户用等） |
+| responsible_person | varchar | 责任人 |
+| year_target | decimal | 年目标（万） |
+| year_progress | decimal | 年进度（小数，如0.2895=28.95%） |
+| year_cumulative_target | decimal | 年累计目标（万） |
+| year_actual_income | decimal | 年实际收入（万） |
+| year_completion_rate | decimal | 年完成率（小数） |
+| year_evaluation | varchar | 年评估（预实零差/小差/有差/大差） |
+| month_target | decimal | 月目标（万） |
+| month_cumulative_target | decimal | 月累计目标（万） |
+| month_actual_income | decimal | 月实际收入（万） |
+| month_completion_rate | decimal | 月完成率（小数） |
+| entire_month_completion_rate | decimal | 全月完成率（小数） |
+| month_evaluation | varchar | 月评估 |
+| last_month_actual_income | decimal | 上月实际收入（万） |
+| month_on_month_comparison | decimal | 环比（小数，-0.4233=下降42.33%） |
+| month_on_month_evaluation | varchar | 环比评估（增长/下降/保持） |
+| last_year_actual_income | decimal | 上年实际收入（万） |
+| year_on_year_comparison | decimal | 同比（小数） |
+| day_at | date | 数据日期 |
+| sort | int | 排序 |
+| created_by | varchar | 创建人 |
+| created_at | datetime | 创建时间 |
+| updated_by | varchar | 更新人 |
+| updated_at | datetime | 更新时间 |
+
+#### MySQL 表: rrsjk_light_report.green_energy_chain_group_income
+- **数据库**: rrsjk_light_report (MySQL)
+- **服务端**: `rrsjk-light-report-service` → `com.rrsjk.report.dao.local.GreenEnergyChainGroupIncomeDao`
+- **数据来源**: 从 Doris energy_chain_group_income 转存（仅绿能板块），由 GreenEnergyChainGroupIncomeServiceImpl.create() 定时生成
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| id | bigint | 主键 |
+| chain_group | varchar | 链群（海尔绿能/1.户用/2.零碳&移动场景等） |
+| responsible_person | varchar | 责任人 |
+| year_target | decimal | 年目标（万） |
+| year_actual_income | decimal | 年实际收入（万） |
+| month_target | decimal | 月目标（万） |
+| month_actual_income | decimal | 月实际收入（万） |
+| entire_month_completion_rate | decimal | 全月完成率（百分比，如68.83=68.83%） |
+| month_on_month_comparison | decimal | 环比（百分比，如-40.25=-40.25%） |
+| year_on_year_comparison | decimal | 同比（百分比） |
+| day_at | datetime | 数据日期 |
+| sort | int | 排序 |
+| created_by | varchar | 创建人 |
+| created_at | datetime | 创建时间 |
+| updated_by | varchar | 更新人 |
+| updated_at | datetime | 更新时间 |
 
 ### HDS电费报表 (rrsjk-light-report-service, TAEI-2694, 2025-11-17 代码明确证明)
 - **来源**: 提交 92d35f09, 4abc050b, b72f8c3b

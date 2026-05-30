@@ -356,3 +356,23 @@
 - **DWS查询切换**: `doListDws.do` 中 `lightInveterDataService.findByPageDws()` → `dwsInveterDataService.findByPage()`
 - **green_energy_light_station_realtime_current** 映射原来的 `light_station_elec`
 - **证据等级**: 代码明确证明
+
+### ADS数据源创建与报表迁移 (TAEI-3146, 代码明确证明, 2026-05-28~29)
+**来源**: `rrsjk-light-data-service` (majinhu/马金虎)
+- **需求**: 发电数据取数逻辑切换大数据平台，于淼负责，参与人: 于淼、马金虎
+- **多数据源架构**: 新增 ADS 独立数据源 (`spring.ads.datasource`)，与原有 DWS 数据源并行
+  - `MybatisConfig` 新增 `getAdsDataSource()` 和 `sqlSessionAdsFactory()`
+  - 新增 `AbstractAdsDao` 基类，指定使用 `sqlSessionAdsFactory`
+  - Mapper 路径: `classpath*:/mybatis/mapper/ads/**/*.xml`
+  - 实体包: `com.rrsjk.light.data.entity.ads.**`
+- **ADS报表表映射** (6张表替换原DWS表):
+  - `ads.green_energy_report_light_inverter_pac_chart_day` ← `report_inverter_pac_chart_day`
+  - `ads.green_energy_report_light_inverter_chart_day` ← `report_inveter_chart_day`
+  - `ads.green_energy_report_light_inverter_chart_month` ← `report_inverter_chart_month`
+  - `ads.green_energy_report_light_inverter_chart_year` ← `report_inverter_chart_year`
+  - `ads.green_energy_report_light_inverter_chart_total` ← `report_inverter_chart_total`
+  - **注意**: ADS表没有 `id` 字段，其他字段与DWS一致
+- **字段名修正**: `inveter_sn` → `inverter_sn`，`inveterSn` → `inverterSn` (拼写修正)
+- **连续三天发电优化**: `isContinueThreeDayElec` 定时任务优化查询逻辑
+- **容量取数源修改**: baoxin 多次修改容量取数源 (5/27~28, 3+ commits)
+- **证据等级**: 代码明确证明

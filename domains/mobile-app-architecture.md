@@ -411,6 +411,55 @@ storeFile=key.jks
   - 交易账号: 中信一般户去除、优化建行基本户
 - **业务价值**: **高** — HDS 是运维商/分中心的核心管理平台
 
+#### HDS H5 收入日清报表体系
+
+HDS H5 中包含多张收入/日清报表页面，按路径和路由维度如下：
+
+| 页面 | 路由 | 后端 API 前缀 | 数据源 |
+|------|------|---------------|--------|
+| **全球收入** | `/global` | `/hdsapi/report/subchainGroup/` / `chainGroupIncome/` | Doris ads.energy_chain_group_income |
+| **新能源链群收入** | 同上页内切换 | `/hdsapi/report/chainGroupIncome/findByDayAt` | 同上（可手动修改） |
+| **模式流程日清** | `/modeRiqing` | `/hdsapi/report/reportZhModeStation/` + `btModeDay/` + `yuexiuDay/` | light_station + SAP |
+| **绿能产业日清** | 无独立页面（API级） | `/hdsapi/greenEnergyDayReport/chainGroupIncome/` | MySQL 转存自 Doris |
+| **电费收益报表** | `/electricityRevenue` | `/hdsapi/report/stationElecIncome/` | light_station 电费 |
+| **电站发电收益(户用)** | `/stationboard` | `/hdsapi/report/householdStation/` | 户用电站发电数据 |
+| **工商业收入报表** | `/epcIncome` | `/hdsapi/report/` (EPCO) | 工商业电站 |
+| **零碳适家日清报表** | `/zchDailyReport` | `/hdsapi/zeroCarbonReport/dayReport/` | 零碳事业部 |
+| **收入日报** | 无独立页面（API级） | `/hdsapi/report/incomeDay/` | 未知 |
+| **运营商日清** | `/operatorReport` | `/hdsapi/report/spDay/` | 服务商维度统计 |
+
+**核心报表数据流**:
+```
+Doris (ads.energy_chain_group_income)
+  ├──→ 全球收入 + 新能源链群收入报表（前端读取）
+  └──→ MySQL 转存 → 绿能产业日清报表（绿能板块专用）
+
+MySQL (rrsjk_light + rrsjk_light_report) + SAP
+  └──→ 模式流程日清（越秀/中核/BT）
+```
+
+**新能源链群收入报表（核心收入报表）**:
+- **服务端**: `EnergyChainGroupIncomeServiceImpl` (Doris DAO) + `GreenEnergyChainGroupIncomeServiceImpl` (MySQL转存)
+- **日清生成**: 每日定时任务 `autoCreateGreenEnergyChainGroupIncome()` 自动生成
+- **可编辑**: 支持手动修改收入 → 递归调整父级（如修改农村户用 → 自动调家庭链群 → 绿能小计 → 新能源合计）
+- **评估体系**: 完成率≥100%=预实零差, ≥90%=预实小差, ≥70%=预实有差, <70%=预实大差
+
+**模式流程日清**:
+- **中核模式**: `ReportZhModeStationServiceImpl.create()` 按年/月/日时间窗口统计各分中心的获单/安装(完工申请)/并网(三天发电)户数+容量+收入(SAP)
+- **BT模式**: `ReportBtModeDayServiceImpl.create()` 按项目公司统计并网/施工完成待并网/已安装/施工中/获单的容量(MW)
+- **越秀模式**: 3层维度（整体概览 + 分中心维度 + 服务商维度），含开户/进件/签合同/安装/并网/投放/过审及转换率
+- **生成方式**: 定时任务每日自动生成，查询时若当天无数据则实时生成
+
+**关键业务口径**:
+| 指标 | 口径 |
+|------|------|
+| 获单 | `order_at` 在时间区间内 |
+| 安装 | `complete_apply_at`（提交完工申请） |
+| 并网 | `first_three_power_at`（连续三天发电） |
+| 越秀过审 | `pass_through_at` |
+| 投放 | `prj_sign_at`（资方签约） |
+| 中核收入 | SAP 接口 `sapToReportService.findZHIncomeByStationList()` |
+
 ### 3.2 商户微前端 OSP (nahui-pv.merchant-micro.osp)
 
 **来源**: `nahui-pv.merchant-micro.osp` (代码明确证明, 2026-05-18 全量通读)

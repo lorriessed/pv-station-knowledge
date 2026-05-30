@@ -1,6 +1,10 @@
 # Admin 新一代认证架构
 
-更新时间: 2026-05-29
+更新时间: 2026-05-30
+
+## 详细说明已迁移
+
+本文档为概览索引，完整认证授权体系知识详见 **`domains/admin-authz.md`** (2026-05-30 全量通读创建)。
 
 ## 背景
 
@@ -11,20 +15,28 @@
 ### 1. rrsjk-admin-auth-server
 - **角色**: OAuth2/OIDC 认证服务器（Authorization Server）
 - **技术栈**: Spring Boot 3.5.14, Java 17
+- **端口**: 9000
+- **Session Cookie**: `ADMIN_AUTH_SESSION`
 - **负责人**: 于淼 (yumiao)
-- **功能**: 处理管理后台用户的登录认证、Token 签发
+- **详见**: `domains/admin-authz.md` → 第 1 节
 
 ### 2. rrsjk-admin-authz-service
 - **角色**: 授权服务（Authorization Service）
-- **技术栈**: Spring Boot 3.5.14, Java 17
+- **技术栈**: Spring Boot 2.3.3, Dubbo 2.7.4.1, MyBatis 3.5.2, Zookeeper
+- **端口**: Dubbo 服务（-1 随机端口）
+- **数据库**: `rrsjk_admin_authz` @ pv-mysql-prod (rm-m5ebm056ct14p18zu)
+- **7 张表**: authz_user, authz_role, authz_menu, authz_permission, authz_user_role, authz_role_permission, authz_user_permission
 - **负责人**: 于淼 (yumiao)
-- **功能**: 处理权限校验、角色管理、资源访问控制
+- **详见**: `domains/admin-authz.md` → 第 2 节
 
 ### 3. rrsjk-admin-bff
 - **角色**: Backend for Frontend（BFF 层）
-- **技术栈**: Spring Boot 3.5.14, Java 17, OAuth2/OIDC Client
+- **技术栈**: Spring Boot 3.5.14, Java 17, OAuth2/OIDC Client, Dubbo 3.2.15
+- **端口**: 8081
+- **Session Cookie**: `ADMIN_BFF_SESSION`
+- **业务模块**: 资产管理(13 Controller)、结算(32)、仓储(35)、电站(19)、自有财务(21) 等 17+ 模块
 - **负责人**: 于淼 (yumiao)
-- **功能**: 作为前端代理，处理 OAuth2 登录回调、Token 管理、API 路由转发
+- **详见**: `domains/admin-authz.md` → 第 3、5 节
 
 ### 4. rrsjk-admin-biff (已废弃)
 - **状态**: 拼写错误目录，pom.xml artifactId 也是 `rrsjk-admin-bff`
@@ -42,16 +54,30 @@
 | 服务 | 数据库 | 实例 |
 |------|--------|------|
 | rrsjk-admin-authz-service | rrsjk_admin_authz | pv-mysql-prod (rm-m5ebm056ct14p18zu) |
-| rrsjk-admin-auth-server | 待确认 | 可能无独立数据库 |
-| rrsjk-admin-bff | 待确认 | 可能无独立数据库 |
+| rrsjk-admin-auth-server | 无独立数据库 | OAuth2 配置内嵌 |
+| rrsjk-admin-bff | 无独立数据库 | 纯代理层 |
 
-## 相关仓库
+## OAuth2 客户端配置
 
-| 仓库 | 状态 |
-|------|------|
-| `rrsjk-admin-web` | 旧版管理后台（EasyUI + FTL） |
-| `rrsjk-admin-web-next` | 新版管理后台前端 |
-| `rrsjk-oauth2-web` | OAuth2 Web 客户端（可能相关） |
-| `rrsjk-admin-auth-server` | 认证服务器（新） |
-| `rrsjk-admin-authz-service` | 授权服务（新） |
-| `rrsjk-admin-bff` | BFF 层（新） |
+### admin-bff (管理后台 BFF)
+- client-id: `admin-bff`
+- Access Token TTL: **24 小时**
+- Refresh Token TTL: **7 天**
+- redirect-uri: `${app.bff-base-url}/login/oauth2/code/admin-bff`
+
+### admin-mobile (移动端)
+- client-id: `admin-mobile`
+- Access Token TTL: **2 小时**
+- Refresh Token TTL: **30 天**
+- PKCE: 必须 (require-proof-key: true)
+- redirect-uri: `rrsjkadmin://oauth/callback`, `com.rrsjk.admin://oauth/callback`
+
+## 权限类型 (AuthzPermissionType)
+- `PAGE` — 页面级权限
+- `MENU` — 菜单级权限（与 PAGE 同归 pagePermissions）
+- `BUTTON` — 按钮级权限
+- `API` — 接口级权限
+
+## BFF 权限校验模式
+
+所有业务 Controller 统一使用 `requirePermission(auth, permKey)` → `AuthzSnapshotService.getSnapshot(userId)` via Dubbo → 匹配 pagePermissions/buttonPermissions/apiPermissions → fail-closed（authz-service 不可达时拒绝访问）。

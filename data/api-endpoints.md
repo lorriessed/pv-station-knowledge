@@ -372,4 +372,148 @@
 | 方法 | 说明 |
 |---|---|
 | CRUD 操作 | 招投标审核管理 — 完整增删改查 |
+
+### Admin BFF 结算类 API (rrsjk-admin-bff, 2026-05-29 新增)
+**来源**: `rrsjk-admin-bff` (yumiao/于淼, 2026-05-29~30, 40+ Controllers)
+**架构**: BFF → Dubbo Client → 后端微服务，不直接操作数据库
+
+| 模块 | 关键接口 | 后端依赖 |
+|---|---|---|
+| `PvSettlementElectricIncomeController` | 电费收入查询 | rrsjk-light-api |
+| `PvSettlementElectricInvoiceController` | 电费发票管理 | rrsjk-light-api |
+| `PvSettlementUnionpayOwnerRentController` | 银联业主租金 | rrsjk-light-api |
+| `PvSettlementIncomeOrderController` | 收入订单 | rrsjk-light-api |
+| `PvSettlementSettlementSummaryController` | 结算汇总 | rrsjk-light-api |
+| `PvSettlementFapReceiptRecordController` | FAP收款记录 | rrsjk-light-api |
+| `HuadianIncomeController` | 华电收入 | rrsjk-light-api |
+| `ZhaoYinIncomeSettleController` | 招银收入结算 | rrsjk-light-api |
+| `ZhongYinIncomeSettleController` | 中银收入结算 | rrsjk-light-api |
+| `PuYinIncomeSettleController` | 普银收入结算 | rrsjk-light-api |
+| `FundSettlementIncomeController` | 资金结算收入 | rrsjk-light-api |
+| `WarehouseStockController` | 库存管理 | rrsjk-light-api |
+| `WarehouseTransferOrderController` | 调拨单 | rrsjk-light-api |
+| `LightStationController` | 电站管理 | rrsjk-light-api |
+| `LightStopStationController` | 停电站 | rrsjk-light-api |
+| `ReconciliationResultController` | 对账结果 | rrsjk-light-api |
+
+**证据等级**: 代码明确证明
+
+### Admin BFF 资产管理 API (rrsjk-admin-bff, 2026-05-30 全量通读补充)
+**来源**: `rrsjk-admin-bff` 资产管理模块 Controller 全量通读
+
+#### 招银租赁 (`CmbLeasingStationController`)
+基础路径: `/api/app/asset-management/cmb-leasing-stations`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询招银金租电站 | `asset-management.cmb-leasing-stations.view` |
+| `/{stationCode}` | GET | 电站详情+推送文件+操作日志 | 同上 |
+| `/export` | GET | Excel 导出 (3000/页) | 同上 |
+| `/close-order` | POST | 批量关单 | 同上 |
+| `/batch-audit-ok` | POST | 批量审核通过(推送招银) | 同上 |
+| `/rework-files/import` | POST | 导入返工文件(电站编码+文件名+链接) | 同上 |
+| `/pull-up-status` | POST | 异步拉取状态(fourthSyncStationInfo) | 同上 |
+
+#### BT 资产管理 (`BtAssetManagementController`)
+基础路径: `/api/app/asset-management/bt-asset-management`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询 BT 股转模式及中核资产 | `asset-management.bt-asset-management.view` |
+| `/export` | GET | Excel 导出 | `asset-management.bt-asset-management.export` |
+| `/template` | GET | 下载导入模板(.xls) | `asset-management.bt-asset-management.export` |
+| `/import` | POST | 导入数据(.xls) | `asset-management.bt-asset-management.import` |
+| `/import-failures` | GET | 导出导入失败数据 | `asset-management.bt-asset-management.import` |
+
+#### BT 基金资产投放明细 (`BtFundAssetAllocateDetailController`)
+基础路径: `/api/app/asset-management/bt-fund-asset-allocate-details`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询 | `asset-management.bt-fund-asset-allocate-details.view` |
+| `/export` | GET | Excel 导出 | `asset-management.bt-fund-asset-allocate-details.export` |
+| `/template` | GET | 导入模板 | `asset-management.bt-fund-asset-allocate-details.import` |
+| `/import` | POST | 导入数据 | `asset-management.bt-fund-asset-allocate-details.import` |
+| `/import-failures` | GET | 导出失败数据 | `asset-management.bt-fund-asset-allocate-details.import` |
+
+#### BT 基金报表 (`BtFundReportController`)
+基础路径: `/api/app/asset-management/bt-fund-reports`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询回款报表 | `asset-management.bt-fund-reports.view` |
+| `/options` | GET | 回款类型/状态下拉选项 | 同上 |
+| `/{repaymentNo}/allocate-details` | GET | 查询分配明细(按回款单号+类型) | 同上 |
+| `/{id}/records` | GET | 回款记录 | 同上 |
+| `/voucher-file` | POST | 上传回款凭证(OSS, 图片) | `asset-management.bt-fund-reports.upload` |
+| `/{id}/voucher` | POST | 提交回款凭证 | `asset-management.bt-fund-reports.upload` |
+| `/{id}/sync-fap-status` | POST | 同步 FAP 状态 | `asset-management.bt-fund-reports.view` |
+
+**回款类型**: SERVICE_FEE(服务费), EQUIPMENT_FEE(设备费)
+**回款状态**: PENDING(待回款), PARTIAL(部分回款), PENDING_CONFIRM(待确认), REPAID(已回款)
+
+#### BT 项目公司交易主数据 (`BtProjectTransactionController`)
+基础路径: `/api/app/asset-management/bt-project-transactions`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询 | `asset-management.bt-project-transactions.view` |
+| `/export` | GET | Excel 导出 | `asset-management.bt-project-transactions.export` |
+| `/template` | GET | 导入模板(含下拉校验) | `asset-management.bt-project-transactions.import` |
+| `/import` | POST | 导入数据 | `asset-management.bt-project-transactions.import` |
+| `/import-failures` | GET | 导出失败数据 | `asset-management.bt-project-transactions.import` |
+
+**资产所属**: 浦银, 招银, 中银, 越秀, 中核, LZ基金
+**交易类型**: 股转, 金租, 基金, REITS
+
+#### EAM 资产 (`LightEamAssetsController`)
+基础路径: `/api/app/asset-management/eam-assets`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询 EAM 资产详情 | `asset-management.eam-assets.view` |
+| `/export` | GET | Excel 导出(41个字段) | `asset-management.eam-assets.export` |
+| `/project-company-options` | GET | 项目公司下拉 | `asset-management.eam-assets.view` |
+
+#### EAM 年度预算 (`LightEamYearBudgetController`)
+基础路径: `/api/app/asset-management/eam-year-budgets`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询 | `asset-management.eam-year-budgets.view` |
+| `/sync` | POST | 同步年度预算数据 | `asset-management.eam-year-budgets.sync` |
+
+#### 合同管理 (`LightContractInfoController`)
+基础路径: `/api/app/asset-management/contracts`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询合同 | `asset-management.contracts.view` |
+| `/` | POST | 创建合同 | `asset-management.contracts.add` |
+| `/project-company-options` | GET | 项目公司下拉 | contracts.view 或 add |
+| `/upload-pdf` | POST | 上传合同 PDF(OSS) | `asset-management.contracts.add` |
+| `/files/download` | GET | 下载合同文件 | `asset-management.contracts.view` |
+| `/files/preview` | GET | 预览合同文件 | `asset-management.contracts.view` |
+
+#### 经营性租赁资产 (`EnergyLeasedStationAssetManagementController`)
+基础路径: `/api/app/asset-management/energy-leased-station-asset-reports`
+
+| 路径 | 方法 | 说明 | 权限 |
+|---|---|---|---|
+| `/` | GET | 分页查询 | `asset-management.energy-leased-station-asset-reports.view` |
+| `/export` | GET | Excel 导出 | `asset-management.energy-leased-station-asset-reports.export` |
+| `/template` | GET | 模板下载链接(CDN) | `asset-management.energy-leased-station-asset-reports.view` |
+| `/import` | POST | 导入数据(.xls) | `asset-management.energy-leased-station-asset-reports.import` |
+| `/{id}` | PATCH | 更新资产状态 | `asset-management.energy-leased-station-asset-reports.update` |
+| `/{id}` | DELETE | 删除记录 | `asset-management.energy-leased-station-asset-reports.delete` |
+
+#### 认证/授权 API (`AuthController`, `AuthzController`)
+基础路径: `/api/app/auth`, `/api/app/authz`
+
+| 路径 | 方法 | 说明 |
+|---|---|---|
+| `/auth/login?redirect=xxx` | GET | 触发 OAuth2 登录(保存 redirect 到 session, 302 到 OIDC) |
+| `/auth/current-user` | GET | 获取当前用户 + 权限快照 |
+| `/auth/logout` | POST | 登出(清除 SecurityContext) |
+| `/authz/snapshot` | GET | 获取权限快照(roles, menus, page/button/api permissions) |
    253|

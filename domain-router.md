@@ -103,14 +103,15 @@
 - **登录**: 验证码(randomCode)已改为非必填 (2026-05-20)
 
 ## Admin 认证授权 (`domains/admin-authz.md`)
-- 关键词：admin-authz、认证、授权、菜单权限、角色管理、OIDC、BFF。
-- 知识库：待创建 `domains/admin-authz.md`
+- 关键词：admin-authz、认证、授权、菜单权限、角色管理、OIDC、BFF、OAuth2。
+- 知识库：`domains/admin-authz.md` (✅ 已创建, 2026-05-30 全量通读)
 - 代码入口：
-  - `rrsjk-admin-auth-server` → `LoginController`, `SecurityConfig` (认证服务)
-  - `rrsjk-admin-authz-service` → `AuthzMenuService`, `AuthzPermissionService`, `AuthzRoleService`, `AuthzSnapshotService`, `AuthzUserService` (Dubbo 授权服务)
-  - `rrsjk-admin-bff` → `AuthController`, `AuthzController`, `AuthzAdminController`, `StationController`, `MobileAuthController` (BFF 层)
-  - `rrsjk-admin-web-next` → Vue3 新管理后台 (src/router/authz.ts, src/api/authz-admin.ts)
-- **初始化日期**: 2026-05-27 (yumiao)
+  - `rrsjk-admin-auth-server` → OAuth2/OIDC 认证服务器 (port 9000, Spring Boot 3.5.14)
+  - `rrsjk-admin-authz-service` → Dubbo 授权服务 (用户/角色/菜单/权限/快照, 7 张 authz 表)
+  - `rrsjk-admin-bff` → BFF 层 (port 8081, OAuth2 Client, 资产/结算/仓储等业务 Controller)
+  - `rrsjk-admin-web-next` → Vue3 新管理后台前端
+- **核心表**: `authz_user`, `authz_role`, `authz_menu`, `authz_permission`, `authz_user_role`, `authz_role_permission`, `authz_user_permission`
+- **实例**: pv-mysql-prod (rm-m5ebm056ct14p18zu)
 
 ## 工商业(CM) (`domains/cm-business.md`)
 - 关键词：工商业、风电、终验法、施工进度审核、收入政策、投决审核、项目立项。

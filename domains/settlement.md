@@ -1135,3 +1135,21 @@ stationParam.put("spMemberId", spMemberId);
 - **发票核销**: 无纸化列表补充发票已核销状态 (`9b6f0a4`, 2026-05-27)
 - **状态**: 测试中
 - **证据等级**: 代码明确证明
+
+### 租金个税报表SAP记账状态与批量确认优化 (TAEI-3092, 代码明确证明, 2026-05-28~29)
+**来源**: `rrsjk-light-service` + `rrsjk-admin-web` (代继宁, branch: origin/featrue-20260525-rentTaxReport/TAEI-3092)
+- **SAP记账状态追踪**: `RentTaxAmountSummary` 新增 `syncSapStatus` (记账状态) 和 `sapSentResult` (记账失败原因) 字段
+- **记账成功后清理**: SAP记账成功后将 `sapSentResult` 置空（commit e1861c71）
+- **批量确认接口优化**: `RentTaxRecordController.batchConfirmRecord()` 简化返回结构，统一使用 `ExecuteResult.newSuccessResult()`，区分成功/失败列表
+- **前端记账按钮**: `rentTaxAmountSummaryList.ftl` 记账按钮文案改为"批量确认记账"，增加"记账状态"和"记账失败原因"列
+- **失败重试**: 记账状态为 `WAIT` 或 `FAIL` 时均可再次点击记账
+- **SAP记账接口**: 交易类型等传参多次迭代修改（commit fd26cff/c2d171bb/009ea421）
+- **错误信息**: 批量确认错误从 `result.getMessage()` 改为 `result.getError()`
+- **证据等级**: 代码明确证明
+
+### 金蝶冲销接口优化 (TAEI-3157, 代码明确证明, 2026-05-27)
+**来源**: `rrsjk-light-service` (mabin/马斌)
+- **放开发票金蝶冲销**: `payment` 模块修复放开发票金蝶冲销逻辑（commit 4ee999f3）
+- **金蝶收款记账回调**: 修复订单查询问题（commit 558367d2）
+- **FAP回调优化**: 优化FAP回调处理逻辑并添加线程池配置（commit e7fc4302）
+- **证据等级**: 代码明确证明

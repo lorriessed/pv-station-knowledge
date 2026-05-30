@@ -137,7 +137,25 @@
 - **CmProductionValueIncomeServiceImpl**: 产值收入计算逻辑 (5/28 commit e851d42)
 - **CmLightUseController** (admin-web): 工商业风电项目终验法 (5/27 commit 66e3172)
 - **FAP异步回调**: 接收集团FAP异步回调方法 (5/28 commit 1ad8908)
-- **证据等级**: 代码明确证明
+|- **证据等级**: 代码明确证明
+
+### 产值法收入限制放开 (TAEI-3159, 代码明确证明, 2026-05-27)
+**来源**: `rrsjk-light-service` (tn_wangb/王斌, commit 0f5c5422)
+- **需求**: 放开产值确认法的收入闸口，杨越越负责，参与人: 王斌
+- **核心变更**: 注释掉 `CmProductionValueIncomeServiceImpl` 中的三项收入金额校验：
+  - `curMaterialIncome + hisMaterialIncome > pvMaterialIncome` → 注释掉（材料收入超限检查）
+  - `curConstructionIncome + hisConstructionIncome > pvConstructionIncome` → 注释掉（施工服务收入超限检查）
+  - `curDesignIncome + hisDesignIncome > pvDesignIncome` → 注释掉（设计收入超限检查）
+- **保留**: 成本超限检查仍然生效 (`curMaterialCost + hisMaterialCost > pvMaterialCost - materialUseDoneAmount`)
+- **业务含义**: 产值确认法不再限制收入金额不能超过产值设计值，允许超额上报收入
+- **状态**: 已完成 (2026-05-29)
+
+### 收款里程碑兼容风电 (TAEI-3107, 代码明确证明, 2026-05-23)
+**来源**: `rrsjk-light-service` (解钦, commit b167a0f5, branch: origin/feature-cm-wind-electric)
+- **核心变更**: `CmLightProjectServiceImpl` 收款里程碑预付校验增加风电业务类型排除
+  - 旧逻辑: `projectCode.startsWith("U") && PREPAY` → 执行预付校验
+  - 新逻辑: `projectCode.startsWith("U") && !WIND_POWER && PREPAY` → 风电项目跳过预付校验
+- **业务含义**: 风电项目的收款里程碑不执行预付款金额校验，与光伏项目区分处理
 
 ## 待确认
 
