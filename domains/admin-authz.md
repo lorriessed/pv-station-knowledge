@@ -1,6 +1,6 @@
 # Admin 认证授权体系 (新一代 OAuth2/OIDC 架构)
 
-更新时间: 2026-05-30
+更新时间: 2026-05-31
 证据等级: 代码明确证明
 
 ## 架构概览
@@ -217,7 +217,7 @@ resourceKey, enabled
 **来源**: `rrsjk-admin-bff` 全量通读 (2026-05-30)
 
 - **技术栈**: Spring Boot 3.5.14, OAuth2 Client, Dubbo 3.2.15, Java 17
-- **端口**: 8081
+- **端口**: 8081 → **18092** (2026-05-30 生产部署调整)
 - **Session Cookie**: `ADMIN_BFF_SESSION`
 - **依赖**: `rrsjk-admin-authz-api` (Dubbo 客户端)
 
@@ -416,3 +416,31 @@ AuthzSnapshotService.getSnapshot(userId) via Dubbo
   ↓
 BFF 在每个业务 Controller 用 requirePermission(auth, permKey) 校验
 ```
+
+## 7. BFF 生产部署配置 (2026-05-30)
+
+**来源**: `rrsjk-admin-bff` commits by yumiao (2026-05-30)
+**证据等级**: 配置明确证明
+
+### 7.1 端口变更
+- BFF 默认端口从 **8081** 调整为 **18092**
+- 影响文件: `application-dev.yml`, `application-prod.yml`
+
+### 7.2 Zookeeper 3.4 兼容性
+- 生产注册中心使用 ZK 3.4，与 Dubbo 默认 Curator 不兼容
+- 新增自定义实现:
+  - `Zk34CompatibleCuratorZookeeperClient` — ZK 3.4 兼容的 Curator 客户端
+  - `Zk34CompatibleCuratorZookeeperTransporter` — SPI 注册为 Dubbo 默认 ZookeeperTransporter
+  - `META-INF/dubbo/internal/org.apache.dubbo.remoting.zookeeper.ZookeeperTransporter` — SPI 配置文件
+- 通过 `pom.xml` 调整依赖版本实现兼容
+
+### 7.3 生产配置对齐
+- **Redis**: 生产环境默认 Redis 配置 (`application-prod.yml`)
+- **Dubbo 注册**: authz-service Dubbo 注册 URL 对齐，含备用注册中心 URL
+- **Trade API 依赖**: pom.xml 声明 trade API 依赖
+
+### 7.4 电站管理 API 变更
+- **移除**: `AuditImageRejectRequest` — 图片驳回开发环境专用 API 已删除
+- **修改**: `BusinessAcceptanceAuditRequest`、`TechnicalAcceptanceAuditRequest` — 审核请求结构调整
+- **新增**: 电站详情记录功能 (`LightStationDetailView`)
+- **对齐**: `LightStopStationController` 停电站字段与 master API 对齐

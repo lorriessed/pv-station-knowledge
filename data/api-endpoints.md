@@ -398,6 +398,12 @@
 
 **证据等级**: 代码明确证明
 
+**2026-05-30 更新** (yumiao):
+- `LightStationController`: 新增电站详情记录功能 (`LightStationDetailView`)，移除关联文件开发图片字段
+- `LightStopStationController`: 停电站字段与 master API 对齐
+- **删除**: `AuditImageRejectRequest` — 图片驳回开发 API 已移除
+- **修改**: `BusinessAcceptanceAuditRequest`、`TechnicalAcceptanceAuditRequest` — 审核请求结构调整
+
 ### Admin BFF 资产管理 API (rrsjk-admin-bff, 2026-05-30 全量通读补充)
 **来源**: `rrsjk-admin-bff` 资产管理模块 Controller 全量通读
 

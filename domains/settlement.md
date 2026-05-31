@@ -717,7 +717,7 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `rrsjk-light-service` (sunzn, branch: origin/szn_om51_20260527)
 - **OperationMaintenance**: 新增逻辑删除功能 (`isDeleted` 字段)
 - **OperationMaintenanceServiceImpl**: 修复冲销逻辑状态判断、维护日志关联ID设置错误、反向标识值修正、数据查询过滤逻辑删除记录
-- **HDS-Web**: `CreateOperationMaintenanceStationController` 批量更新A51数据导入、修正导入数据订单号索引错误
+- **HDS-Web**: `CreateOperationMaintenanceStationController` 批量更新A51数据导入、修正导入数据订单号索引错误 (TAEI-3163, 项目公司股转后A51/A48账单数据处理)
 - **HDS-Web**: `BusinessCooperationIntentionController` 逆变器数据查询功能扩展
 - **HDS-Web**: `EnergyJobController` 新增手动生成报表接口
 - **证据等级**: 代码明确证明
@@ -1153,3 +1153,17 @@ stationParam.put("spMemberId", spMemberId);
 - **金蝶收款记账回调**: 修复订单查询问题（commit 558367d2）
 - **FAP回调优化**: 优化FAP回调处理逻辑并添加线程池配置（commit e7fc4302）
 - **证据等级**: 代码明确证明
+
+### SAP 收入重传修复 (2026-05-30)
+**来源**: `rrsjk-finance-service` → `rrsjk-finance-impl/src/main/java/com/rrsjk/finance/sap/component/income/SyncSapIncomeHandle.java`
+**Commit**: 479ab28b/bc30a632, 开发者: baoxin, 2026-05-30
+- `SyncSapIncomeHandle` 收入重传逻辑修复（commit message: "fix:重传收入"）
+- 涉及 SAP 收入同步处理组件的收入数据重传场景
+- **证据等级**: 历史扫描推断（diff 未展示具体代码变更，仅从 commit message 和变更文件推断）
+
+### 发票重传修复 (2026-05-30)
+**来源**: `rrsjk-trade-service` → `rrsjk-trade-impl/src/main/java/com/rrsjk/trade/invoice/model/CloudInvoiceCreateModel.java`, `CloudInvoiceQueryModel.java`
+**Commit**: fc0502ec, 开发者: baoxin, 2026-05-30
+- `CloudInvoiceCreateModel`/`CloudInvoiceQueryModel` 发票重传逻辑修复（commit message: "fix:重传发票"）
+- 与 `SyncSapIncomeHandle` 同开发者同一天提交，可能为关联修复
+- **证据等级**: 历史扫描推断（diff 未展示具体代码变更）

@@ -150,6 +150,17 @@
 - **业务含义**: 产值确认法不再限制收入金额不能超过产值设计值，允许超额上报收入
 - **状态**: 已完成 (2026-05-29)
 
+### 工商业风电字段解耦: nodeFinishPct 统一进度标识 (代码明确证明, 2026-05-29)
+**来源**: `rrsjk-light-service` (tn_wangb/王斌, commit 0cd9f84, branch: origin/feature-cm-wind-electric)
+- **核心变更**: `CmGvsServiceImpl` 和 `CmLightUseServiceImpl` 中将多种材料/服务类型的专用进度字段统一为 `nodeFinishPct`
+  - `majorMaterialUsePct` → `nodeFinishPct` (主料领用占比)
+  - `auxiliaryMaterialUsePct` → `nodeFinishPct` (辅料领用占比)
+  - `constructionServiceUsePct` → `nodeFinishPct` (施工服务占比)
+  - `designServiceUsePct` → `nodeFinishPct` (设计服务占比)
+- **业务含义**: 风电项目不再按材料/服务类型分别追踪进度占比，改用统一的节点完成百分比(`nodeFinishPct`)计算收入
+- **关联需求**: TAEI-3107 (风电产值法兼容1.0) / TAEI-3159 (放开产值确认法收入闸口)
+- **⚠️ 跨仓库变更模式**: 这是一个字段解耦(field decoupling)类型变更，需同时检查 `CmLightUse` 实体类中 `nodeFinishPct` 字段定义及所有引用处
+
 ### 收款里程碑兼容风电 (TAEI-3107, 代码明确证明, 2026-05-23)
 **来源**: `rrsjk-light-service` (解钦, commit b167a0f5, branch: origin/feature-cm-wind-electric)
 - **核心变更**: `CmLightProjectServiceImpl` 收款里程碑预付校验增加风电业务类型排除
