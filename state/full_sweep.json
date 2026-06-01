@@ -1,7 +1,10 @@
 {
-  "last_run_at": "2026-05-31T22:00:05.544331",
+  "last_run_at": "2026-06-01T22:00:05.227714",
   "completed_repos": [
+    "DB_TOOL",
+    "Inverter_recognition",
     "base-service",
+    "card_extraction",
     "cbs-web",
     "esp-mag-haier-android-main",
     "esp-mag-haier-h5-portal",
@@ -9,9 +12,11 @@
     "he-pv.osp-wx.opm",
     "he-vpp.admin-h5",
     "he-vpp.hnzl-h5",
+    "infomation_iextraction",
     "item-service",
     "job-service",
     "log_report_plugin",
+    "main_contract_extraction",
     "nahui-dashboad-h5",
     "nahui-dicts-serve",
     "nahui-pv.construction-mini",
@@ -81,6 +86,8 @@
     "system-service",
     "uni-choose-file-android",
     "uni-choose-file-ios",
+    "usher-rpc",
+    "usher-stream",
     "vpp-api-auth",
     "vpp-api-common",
     "vpp-api-elecbusiness",
@@ -100,12 +107,7 @@
     "vpp-template-ui",
     "vpp-thai-dashboard",
     "watermark-camera-android",
-    "watermark-camera-ios",
-    "DB_TOOL",
-    "Inverter_recognition",
-    "card_extraction",
-    "infomation_iextraction",
-    "main_contract_extraction"
+    "watermark-camera-ios"
   ],
   "repo_last_sweep": {
     "rrsjk-admin-web": "2026-05-23T22:00:35.786113",
@@ -227,7 +229,9 @@
     "usher-common": "2026-05-31T22:00:05.544331",
     "usher-dependencies": "2026-05-31T22:00:05.544331",
     "usher-groovy-flex": "2026-05-31T22:00:05.544331",
-    "usher-protofuse": "2026-05-31T22:00:05.544331"
+    "usher-protofuse": "2026-05-31T22:00:05.544331",
+    "usher-rpc": "2026-06-01T22:04:09.414716+08:00",
+    "usher-stream": "2026-06-01T22:04:09.414716+08:00"
   },
   "repo_activity_order": [
     "rrsjk-light-service",
@@ -331,6 +335,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 15,
-  "last_sweep_at": "2026-05-29T22:00:18.311168"
+  "sweep_round": 17,
+  "last_sweep_at": "2026-06-01T22:04:09.414716+08:00"
 }

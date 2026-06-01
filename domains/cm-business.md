@@ -168,6 +168,12 @@
   - 新逻辑: `projectCode.startsWith("U") && !WIND_POWER && PREPAY` → 风电项目跳过预付校验
 - **业务含义**: 风电项目的收款里程碑不执行预付款金额校验，与光伏项目区分处理
 
+### 工商业电站写入工商业项目编码 (代码明确证明, 2026-06-01)
+**来源**: `rrsjk-light-service` → `CmLightProject.java` + `LightEpcStationModel.java`, commit 0cb5e24 (tn_wangb, 2026-06-01)
+- `CmLightProject.cmProjectCode` 字段: 在工商业电站创建时写入对应的工商业项目编码
+- `LightEpcStationModel` 中增加对 `cmProjectCode` 的赋值逻辑
+- 用途: 关联工商业电站与工商业项目，便于跨业务查询
+
 ## 待确认
 
 - `CmConstructionProgressAudit` 的 `StatusEnum` 完整枚举值

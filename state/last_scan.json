@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-05-31T23:01:15.893539",
+  "last_scan_at": "2026-06-01T23:01:10.169364",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -87,7 +87,7 @@
       "branch": "master"
     },
     "nahui-dashboad-h5": {
-      "head": "ce9af5833e971e67be4af007bbb49e1fba0a782c",
+      "head": "56ce50cd76fa5d05dc968177061939d4bab64443",
       "path": "/data/pvcode/nahui-dashboad-h5",
       "branch": "master"
     },
@@ -272,7 +272,7 @@
       "branch": "master"
     },
     "rrsjk-admin-bff": {
-      "head": "1530fdf56694ce775d26a75292b0bcbb69184049",
+      "head": "dbdc0987f7defcfe2e322850a7135c692c67dd95",
       "path": "/data/pvcode/rrsjk-admin-bff",
       "branch": "master"
     },
@@ -282,7 +282,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "7309cc9f62c0311369c784dd5b3ab8610b318d7b",
+      "head": "670bbba503356dd66adca06209f8038237a52f69",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -347,7 +347,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "c6ba892a0d6bb0339ac22fc557ed7435f94bf835",
+      "head": "40858da237a6c0ce84b94e32099e02097cb59d71",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -372,12 +372,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "4163564f6b17183bfa13029828ad7d14cdff1084",
+      "head": "1c2f7c2140c55da0f8f317ed6a4fd1ec38e92c0d",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "923c1cd1ab5146b99d90db486a0971609f1d140b",
+      "head": "feae3861fafe170d4bbe33e8d57600d43cf5b577",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -457,7 +457,7 @@
       "branch": "master"
     },
     "rrsjk-trade-service": {
-      "head": "fc0502ece8a0352ca117467cc684504e16493e9f",
+      "head": "b6611bdcf745508001e13757e73dfdd7b2f934fe",
       "path": "/data/pvcode/rrsjk-trade-service",
       "branch": "master"
     },
@@ -567,7 +567,7 @@
       "branch": "master"
     },
     "vpp-data-platform": {
-      "head": "731758e0666925ce847ed3ca216751eacad24cf7",
+      "head": "862a6abb661685b41eb84f727680b70d16fc86ae",
       "path": "/data/pvcode/vpp-data-platform",
       "branch": "master"
     },

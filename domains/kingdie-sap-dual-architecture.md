@@ -153,3 +153,19 @@ rrsjk-light-report-service（报表层）
 4. **幂等**: `syncFinance` 先查已有记录（bid+ywms），有belnr直接返回
 5. **历史数据重传**：05-14有专门commit处理5月份历史已收款收入重传金蝶
 6. **并发控制**（2026-05-19新增）：`syncFinance()` 使用 Redis 分布式锁 `jinDie:sync:finance:{bid}:{ywms}`（1分钟超时），防止同一业务单据并发同步。锁冲突时标记 flag=E 直接返回
+
+## 金蝶凭证过账功能 (TAEI-3157, 代码明确证明, 2026-05-27)
+**来源**: `rrsjk-finance-service` → `JinDieSyncFinanceModel.java`, `JinSapClientModel.java`, `application-dev/prod.yml` (commits: f4bf864/9b888ae/beadf50/c233685/e7e2c37, mabin, branch: origin/20250525-jindieRepeatFix + origin/20260527-jindieFix)
+**关联需求**: TAEI-3157 金蝶冲销接口优化
+- **核心变更**: 冲销前先调用金蝶凭证过账接口，过账成功才执行冲销
+  - `JinSapClientModel.postingVoucherForReverse(rowId, sapRecord)`: 新增方法，调用 `/xfd6/gl/gl_voucher/PostingVoucher`
+  - `JinDieSyncFinanceModel`: 修改冲销逻辑，`postResult = postingVoucherForReverse()` → true 才调 `syncFinanceToSap()`
+  - **配置**: `kingdie.postVoucherUrl` 新增（dev: `https://jintai.test.kdgalaxy.com/kapi/v2/xfd6/gl/gl_voucher/PostingVoucher`）
+- **错误处理增强**:
+  - 限制金蝶SAP同步消息长度防止数据库字段溢出（9b888ae4）
+  - 解决金蝶SAP同步中的重复校验和错误处理问题（beadf501）
+  - 优化金蝶sap同步财务记账接口异常处理（c233685b, e7e2c376）
+  - 解决金蝶SAP客户端BUKRS字段映射问题（e44ebe80，7CQ0→9002）
+- **关联变更**:
+  - `rrsjk-light-service` → `LightProjectElectricOrderServiceImpl`: 放开发票金蝶冲销（4ee999f3, mabin）
+  - `rrsjk-light-service` → `CmChangeServiceImpl`: 修复冲销逻辑中的状态判断错误（587197f8, sunzn）

@@ -152,6 +152,7 @@
 - 数据源: 爱仕维(AISWEI)接口和能控云数据拉取
 - 映射: `acOverVol1` → `overvoltageThresholdStage1`, `activePowerSet` → `outputLimit`
 - 数据处理: `LightInverterCommon` 中新增字段传递逻辑，确保 Record→Data 转换时不丢失
+- **Mapper XML 映射补充 (2026-06-01)**: `rrsjk-light-data-impl/.../LightInveter.xml` 的 `<sql id="columns">` 新增 `overvoltage_threshold_stage1`, `output_limit` 两列 (commit c362e8e5b4, sunzn)。此前 Java 实体已有字段但 local Mapper 的 columns 片段缺少映射，本次补齐。
 - **证据等级**: 代码明确证明
 
 ### 锦浪逆变器数据修复 (2026-02-10~11 代码明确证明)

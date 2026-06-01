@@ -1,6 +1,6 @@
 # Admin 认证授权体系 (新一代 OAuth2/OIDC 架构)
 
-更新时间: 2026-05-31
+更新时间: 2026-06-01
 证据等级: 代码明确证明
 
 ## 架构概览
@@ -444,3 +444,126 @@ BFF 在每个业务 Controller 用 requirePermission(auth, permKey) 校验
 - **修改**: `BusinessAcceptanceAuditRequest`、`TechnicalAcceptanceAuditRequest` — 审核请求结构调整
 - **新增**: 电站详情记录功能 (`LightStationDetailView`)
 - **对齐**: `LightStopStationController` 停电站字段与 master API 对齐
+
+## 8. BFF 操作日志审计 (2026-06-01 新增)
+
+**来源**: `rrsjk-admin-bff` commits by yumiao (2026-06-01), commit `ec6742755987115ab2bde240c85a22ab7869b45`
+**证据等级**: 代码明确证明
+
+BFF 层新增了完整的操作日志审计体系，通过 Dubbo 调用后端服务记录管理后台用户操作。
+
+### 8.1 架构
+
+```
+AuthController/AuthzAdminController
+  ↓ @OperationLog AOP 切面
+OperationLogAspect
+  ↓ 异步提交
+OperationLogAsyncConfig (线程池)
+  ↓
+AdminOperationLogClient → DubboAdminOperationLogClient
+  ↓ Dubbo
+rrsjk-light-service / rrsjk-admin-authz-service (后端记录)
+```
+
+### 8.2 核心组件
+
+| 组件 | 说明 |
+|---|---|
+| `OperationLog` | 自定义注解，标注在 Controller 方法上 |
+| `OperationLogAspect` | AOP 切面，拦截 @OperationLog 注解方法 |
+| `OperationBusinessType` | 业务类型枚举 (INSERT/UPDATE/DELETE/GRANT/OTHER 等) |
+| `OperationOperatorType` | 操作人类型枚举 |
+| `OperationLogSanitizer` | 日志内容脱敏/清理工具 |
+| `AdminLogRecordService` | 日志记录业务服务 |
+| `LoginLogRecorder` | 登录/登出日志记录器 |
+| `DubboAdminOperationLogClient` | Dubbo 客户端，调用后端日志服务 |
+| `OperationLogDubboConfig` / `OperationLogDubboProperties` | Dubbo 共享配置 |
+
+### 8.3 登录审计
+
+- **登录成功**: `AuthRedirectSuccessHandler.onAuthenticationSuccess()` → `loginLogRecorder.recordLoginSuccess()`
+- **登录失败**: `AuthRedirectFailureHandler.onAuthenticationFailure()` → `loginLogRecorder.recordLoginFailure()`
+- **登出**: `AuthController.logout()` → `loginLogRecorder.recordLogout()`
+
+### 8.4 权限管理操作日志
+
+`AuthzAdminController` 所有写操作已标注 `@OperationLog`:
+
+| 接口 | @OperationLog 标注 |
+|---|---|
+| `POST /roles` | `title="权限管理-新增角色", businessType=INSERT, saveResponseData=true` |
+| `PUT /roles/{roleCode}` | `title="权限管理-修改角色", businessType=UPDATE` |
+| `DELETE /roles/{roleCode}` | `title="权限管理-删除角色", businessType=DELETE` |
+| `PUT /roles/{roleCode}/permissions` | `title="权限管理-角色授权", businessType=GRANT` |
+
+### 8.5 依赖
+
+- `pom.xml` 新增: `spring-boot-starter-aop`、`rrsjk-admin-operation-log-api` (1.0.0-SNAPSHOT)、`rrsjk-light-data-api`
+
+## 9. BFF 数据大屏报表模块 (2026-06-01 新增)
+
+**来源**: `rrsjk-admin-bff` datadashboard 模块, commits by yumiao (2026-05-31 ~ 2026-06-01)
+**证据等级**: 代码明确证明
+
+### 9.1 报表 Controller 列表
+
+| Controller | 路径前缀 | 说明 |
+|---|---|---|
+| `EnergyCenterIncomeDayController` | `/api/app/data-dashboard/energy-center-income-days` | 能源中心收入日报 |
+| `EnergySummaryDayController` | `/api/app/data-dashboard/energy-summary-days` | 能源汇总日报 |
+| `StationReportController` | `/api/app/data-dashboard/station-reports` | 电站报表 |
+| `StationCostReportController` | `/api/app/data-dashboard/station-cost-reports` | 电站成本报表 |
+| `WarningStationDetailController` | `/api/app/data-dashboard/warning-station-details` | 超期电站详情 |
+| `SaleOrderCompanySwitchController` | `/api/app/data-dashboard/sale-order-company-switch` | 销售订单公司切换 |
+| `CustomerOperationController` | `/api/app/data-dashboard/customer-operations` | 客户运营 |
+| `CapitalTradeReportController` | `/api/app/data-dashboard/capital-trade-reports` | 资方交易报表 |
+| `CapitalTradeProjectCompanyReportController` | `/api/app/data-dashboard/capital-trade-project-company-reports` | 资方交易项目公司报表 |
+| `JointInventoryReportController` | `/api/app/data-dashboard/joint-inventory-reports` | 联合库存报表 |
+| `SubBaseDataController` | `/api/app/data-dashboard/sub-base-data` | 分中心基础数据 |
+| `SubBuildDataController` | `/api/app/data-dashboard/sub-build-data` | 分中心建设数据 |
+| `SubOperationDataController` | `/api/app/data-dashboard/sub-operation-data` | 分中心运营数据 |
+
+### 9.2 标准模式
+
+每个报表模块遵循统一的 Client/Controller/Request/View 四层结构：
+- `*Client`: Dubbo 客户端，调用后端微服务
+- `*Controller`: REST 端点，接收查询请求
+- `*QueryRequest`: 查询参数 DTO
+- `*View`: 返回视图 DTO
+
+## 10. BFF 服务商与派单管理模块 (2026-06-01 新增)
+
+**来源**: `rrsjk-admin-bff` partnermanagement 模块, commits by yumiao (2026-06-01)
+**证据等级**: 代码明确证明
+
+### 10.1 Controller 列表
+
+| Controller | 路径前缀 | 说明 | 依赖 Client |
+|---|---|---|---|
+| `ConstructionTeamController` | `/api/app/partner-management/construction-teams` | 施工队管理 | `LightConstructionTeamClient` |
+| `DispatchWorkOrderController` | `/api/app/partner-management/dispatch-work-orders` | 派单管理 | `LightWorkOrderClient` |
+| `OrderUserController` | `/api/app/partner-management/order-users` | 订单用户 | `LightOrderUserClient` |
+| `PartnerController` | `/api/app/partner-management/partners` | 合作方管理 | `LightProjectPartnerClient` |
+| `ServiceProviderStaffController` | `/api/app/partner-management/service-provider-staff` | 服务商员工 | `LightSpStaffClient` |
+| `SubServiceProviderController` | `/api/app/partner-management/sub-service-providers` | 子服务商管理 | `LightSubSpClient` |
+
+### 10.2 调用链
+
+```
+rrsjk-admin-bff (BFF, REST)
+  ↓ Dubbo Client
+rrsjk-light-service (Dubbo 服务提供者)
+  → 调用现有 light 模块的 Service 层
+```
+
+## 11. BFF 发电管理模块 (2026-06-01 恢复)
+
+**来源**: `rrsjk-admin-bff` generationmanagement 模块, commits by yumiao (2026-06-01)
+**证据等级**: 代码明确证明
+
+- **恢复**: `InverterChartClient` — 逆变器图表数据 Dubbo 客户端
+- **恢复**: `LightInveterClient` — 逆变器数据 Dubbo 客户端
+- **新增**: `WeatherClient` — 天气数据 Dubbo 客户端
+- **修改**: `InverterController` — 空状态文本处理
+- **修改**: `StationElectricityController` — 电站发电状态空值处理

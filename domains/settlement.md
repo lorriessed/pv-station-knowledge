@@ -223,11 +223,19 @@ StationIncomeHandleStrategyFactory
 
 ## SAP记账接口多次更新 (代码明确证明, 2026-05-29)
 **来源**: `rrsjk-light-service` → `RentTaxAmountServiceImpl.java` (commits: 代继宁, 2026-05-29, TAEI-3092)
-- 记账成功后错误信息置空
+- 记账成功后错误信息置空 (`.sapSentResult("")`)
 - 更新SAP记账接口字段传参，修改交易类型等传参
 - 多次迭代：更新→Revert→再次更新
 - 优化租金个税批量确认错误返回、保存逻辑
+- 租金个税批量任务统计逻辑优化，添加中间表分批处理
+- 暴露租金个税接口
+- 租金个税报表统计、各类查询接口、财务确认代码发SAP接口提交
 - **证据等级**: 代码明确证明
+
+### 租金个税定时任务执行月份优化 (TAEI-3092, 代码明确证明, 2026-05-29)
+**来源**: `rrsjk-light-service` → `RentTaxAmountServiceImpl.java` (commit 70fde56f, 代继宁)
+- 修改定时任务执行月份计算公式
+- 修复执行不存在的SQL导致报错的问题
 
 ---
 
@@ -912,6 +920,13 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `rrsjk-finance-service`, commit 9d9fca1 (tn_wangb, 2026-05-21, branch `20260521-wb-depositRefund`)
 - 推质保金增加 1QJ0 出款公司
 - 影响采购单请款、质保金退款申请流程
+
+### 服务商保证金退款 operatorId 修复 (代码明确证明, 2026-06-01)
+**来源**: `rrsjk-light-service` → `LightDepositServiceImpl.java`, commit 25f4c69336 (龙龙, 2026-06-01)
+- `LightMerchantDepositChange.setOperatorId()` 从 `Long.valueOf(opUser)` 改为 `null`
+- 原因: `opUser` 在退押金场景中可能是服务商名称等非数字字符串，直接 `Long.valueOf()` 会导致 `NumberFormatException`
+- 影响: `LightDepositServiceImpl.refundDeposit()` 方法中的保证金变更记录
+- 操作人名称(`operatorName`)仍正常记录，仅 `operatorId` 设为 null
 
 ### rrsjk-finance-service 核心业务模块速览 (2026-05-24 通读确认)
 **来源**: `rrsjk-finance-service` 全量通读

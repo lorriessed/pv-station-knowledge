@@ -50,6 +50,7 @@
 - **报表**: 年度兑现报表 `reportList.html` / `reportDatagrid.json`
 - **导出**: 月度暂估结果导出 `monthlyExport.do`
 - **780W 模块类型**: 2026-04-30 新增支持 (commit c19b3cd)
+- **790W 模块类型**: 2026-06-01 新增支持 — `rrsjk-light-service/LightEnablePolicyItem.java` (commit 87abb470, 龙龙) + `rrsjk-admin-web/lightEnablePolicyAdd.ftl` / `lightEnablePolicyEdit.ftl` (commit 30957cd0)
 
 ### 电站启用奖励 (代码明确证明)
 **来源**: `rrsjk-light-service` → `LightStationEnableRewardJobServiceImpl.java`, `LightStationEnableRewardDao.java`, `LightStationEnableReward.xml`, `EnableRewardRegisterListener.java`, `LightEnablePolicyItem.java` (commits b8731bd/f9b21b4/736f9c0/1957d32/0986922, 2026-05-12)
