@@ -859,6 +859,15 @@ if (exist != null) {
 - **导出**: `LightStationTransferOrderExcel` 新增
 - **证据等级**: 代码明确证明
 
+### 电站转单持续迭代 (代码明确证明, 2026-05-29~06-01 追加)
+**来源**: `rrsjk-light-service` + `rrsjk-merchant-web` (德, branch: origin/station-transfer-sub-account-20260525)
+- **新增街道字段**: `c7387433` (2026-06-01)
+- **按负责人/承接商名称查询**: `dfb49780` (2026-05-29)
+- **商户端权限校验**: 转出转入接口权限校验 (commit 0348069, merchant-web, 2026-06-01)
+- **转单新参数传递**: 修改入参 (commit 7b10552)
+- **ID 获取**: 添加获取转单ID功能 (commit a864ece)
+- **证据等级**: 代码明确证明
+
 ### 电站业主租金停付管理 (TAEI-3103, 代码明确证明, 2026-05-25~27)
 **来源**: `rrsjk-light-service` dev 分支 (sunzn/孙志男, 5+ commits, branch: origin/szn_rent_stop_20260525)
 - **需求**: 高媛负责，参与人: 魏秋阳、孙志男、李培龙

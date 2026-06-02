@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-01T22:00:05.227714",
+  "last_run_at": "2026-06-02T22:00:09.001485",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -171,11 +171,11 @@
     "rrsjk-merchant-service": "2026-05-27T22:00:16.087357",
     "rrsjk-migration-member": "2026-05-27T22:00:16.087357",
     "rrsjk-migration-mix": "2026-05-27T22:00:16.087357",
-    "rrsjk-mobile-h5": "2026-05-12T22:00:08.400039",
-    "rrsjk-mobile-web": "2026-05-12T22:00:08.400039",
-    "rrsjk-oauth2-web": "2026-05-12T22:00:08.400039",
-    "rrsjk-pay-service": "2026-05-12T22:00:08.400039",
-    "rrsjk-pay-web": "2026-05-12T22:00:08.400039",
+    "rrsjk-mobile-h5": "2026-06-02T22:00:09.001485",
+    "rrsjk-mobile-web": "2026-06-02T22:00:09.001485",
+    "rrsjk-oauth2-web": "2026-06-02T22:00:09.001485",
+    "rrsjk-pay-service": "2026-06-02T22:00:09.001485",
+    "rrsjk-pay-web": "2026-06-02T22:00:09.001485",
     "rrsjk-pvbusiness-job-service": "2026-05-12T22:00:08.400039",
     "rrsjk-report-web": "2026-05-12T22:00:08.400039",
     "rrsjk-system-service": "2026-05-12T22:00:08.400039",
@@ -335,6 +335,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 17,
+  "sweep_round": 18,
   "last_sweep_at": "2026-06-01T22:04:09.414716+08:00"
 }

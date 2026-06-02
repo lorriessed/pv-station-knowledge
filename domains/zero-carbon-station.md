@@ -61,7 +61,7 @@
 **需求**: TAEI-3102 【户用光伏】CBS招投标流程
 
 - **TenderManagmentAudit 实体**: 招投标管理审核，位于 `rrsjk.light.entity.tenderManagement` 包
-- **项目分类** (`projectCategory`): FD(风电) / GSY(工商业) / HYEPC(户用EPC) / YW(运维) / LTSJ(零碳世家)
+- **项目分类** (`projectCategory`): FD(风电) / GSY(工商业) / HYEPC(户用EPC) / YW(运维) / LTSJ(零碳适家) ~~零碳世家~~ (2026-06-02 重命名)
 - **审核流程**:
   1. 首次附件审核: `auditStatus` — AGREE(通过) / DISAGREE(驳回) / REJECT(拒绝)
   2. 招标文件审核: `tenderFileAuditStatus` — AGREE / DISAGREE
@@ -104,4 +104,12 @@
 - 原逻辑: `.plantCapacity(BigDecimal.valueOf(station.getPlanQuantity()).multiply(BigDecimal.valueOf(station.getPlanPower())).toString())`
 - 修复后: `.plantCapacity(station.getPlanPower().toString())`
 - **业务含义**: `planPower` 已是总装机容量(kW)，不应再乘以组件数量
+- **证据等级**: 代码明确证明
+
+### TAEI-3168 零碳适家退商材料申请流程（开发中, 2026-06-01 追加）
+**来源**: `rrsjk-light-service` (tn_wangb/王斌, branch: origin/20260601-zeroCarbonMerchantQuit/TAEI-3168)
+- **负责人**: 刘艺(PM) | **实际开发**: 王斌(tn_wangb) | **参与人**: 代继宁、薛荣基
+- **早期变更**: `CmLightProject.P6` 枚举修复空格 + `LightEpcStationModel.createOrUpdateStation()` 新增写入 `projectCode`/`projectName`
+- **业务语义**: 工商业电站创建/更新时同步写入项目编码和名称，为后续退商材料申请流程做数据准备
+- **状态**: 仅 2 条提交，核心退商材料逻辑尚未开始开发
 - **证据等级**: 代码明确证明

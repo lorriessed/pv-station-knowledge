@@ -1,23 +1,26 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-05-29
+更新时间: 2026-06-02
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
 | 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
-| 已通读 | 105/122 (第15轮) |
+| 已通读 | 110/122 (第17轮) |
 | 知识库文件 | 70+ 个 |
 | 知识库大小 | 6.8MB+ |
-| Domain 业务文件 | 30+ 个 (340KB+) |
+| Domain 业务文件 | 31+ 个 (350KB+) |
 | Source-map 索引 | 47,009+ 行 |
 
 ## 仓库通读进度
 
-### 全部 105/122 个仓库已通读 (第15轮，2026-05-29)
-- 本轮通读 5 个: main_contract_whole_extraction, poc_extraction_without_pdf, purchase_electricity_contract, rent_extraction, rent_extraction_guding
-- **知识库更新**: `domains/ai-extraction-services.md` — 新增 5 个 AI 提取服务文档(主合同完整提取/房产证识别/购售电合同PDF增强/租赁协议文本提取/固定租赁协议丙方版)，新增端口汇总表(9个服务)
+### 全部 110/122 个仓库已通读 (第17轮，2026-06-02)
+- 本轮通读 5 个: rrsjk-mobile-h5, rrsjk-mobile-web, rrsjk-oauth2-web, rrsjk-pay-service, rrsjk-pay-web
+- **知识库更新**: 
+  - **新建** `domains/payment-service.md` — 支付服务完整文档(12KB): 架构/场景/渠道/流程/表结构/API/外部依赖
+  - **追加** `domains/remaining-services-and-frontends.md` — OAuth2 大幅补充: SM2/中银登录/JWT细节/注销检查/小程序配置/表清单
+  - **追加** `domains/web-and-additional-services.md` — mobile-web 6个新模块: 工商业预测/储能小程序/顶好二类户/乐农商城/水站补贴
 
 ## 目录
 

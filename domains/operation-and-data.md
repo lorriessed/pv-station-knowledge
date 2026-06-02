@@ -631,3 +631,16 @@ rrsjk-light-data-service
 - **单价**: 户用 3.45 元/度(去税÷1.13)，多场景(含社会化/整村) 3.8 元/度(去税÷1.13)
 - **废弃API替换**: `BigDecimal.ROUND_DOWN` → `RoundingMode.DOWN`
 - **证据等级**: 代码明确证明
+
+### 巡检计划按资方和运维商筛选 (代码明确证明, 2026-06-02)
+**来源**: 
+- `rrsjk-hds-web` → `LightOperationInspectionPlanController.java` (commit 43de7a3, dengqiu, 2026-06-02)
+- `rrsjk-light-operation-service` → `LightOperationStationDao.java`, `LightOperationInspectionPlanServiceImpl.java`, `StationQuery.java`, `StationOperatorOptionDto.java` (commit 05587d8, dengqiu, 2026-06-02)
+- `nahui-pv.hds-h5` → `src/views/maintainance/inspect/plan/components/operatePlan.vue`, `src/api/maintainance.js` (commit 729e7ad, 聂晓博, 2026-06-02)
+
+- **新增接口**: `GET /light/operation/inspection/plan/operator/search` — 查询全部运维商列表（电站表去重、按名称升序）
+- **新增 DTO**: `StationOperatorOptionDto` — 运维商选项
+- **StationQuery 扩展**: 新增资方和运维商筛选字段
+- **前端**: 年度巡检计划新增资方和运维商多选功能
+- **电站中心/运维工单**: 字段调整
+- **证据等级**: 代码明确证明

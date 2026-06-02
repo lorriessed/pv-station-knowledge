@@ -2618,6 +2618,7 @@
 ## LightOperationInspectionPlanController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationInspectionPlanController.java`
 - @RequestMapping("/light/operation/inspection/plan")
+- @GetMapping("operator/search")
 - @GetMapping("page")
 - @GetMapping("get")
 - @PostMapping("create")
@@ -13974,8 +13975,13 @@
 - @RequestMapping("/oss/image/")
 - @RequestMapping(value = "upload.do", method = RequestMethod.POST)
 - @RequestMapping(value = "uploadFile.do", method = RequestMethod.POST)
+- @RequestMapping(value = "uploadFileMime.do", method = RequestMethod.POST)
 - @RequestMapping(value = "uploadVideo.do", method = RequestMethod.POST)
 - @RequestMapping(value = "uploadPdf.do", method = RequestMethod.POST)
+- @RequestMapping(value = "initiateMultipartUpload.do", method = RequestMethod.POST)
+- @RequestMapping(value = "uploadPart.do", method = RequestMethod.POST)
+- @RequestMapping(value = "completeMultipartUpload.do", method = RequestMethod.POST)
+- @RequestMapping(value = "abortMultipartUpload.do", method = RequestMethod.POST)
 
 ## EnergyElecOrderController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/EnergyElecOrderController.java`
@@ -15176,6 +15182,19 @@
 - @RequestMapping(value = "exportCnnNuclearProjectInvoice.do", method = {RequestMethod.POST})
 - @RequestMapping(value = {"/downTemplate.do"}, method = {RequestMethod.GET})
 - @RequestMapping(value = {"/importData.do"}, method = {RequestMethod.POST})
+
+## TenderManagementController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/tenderManagement/TenderManagementController.java`
+- @RequestMapping("/tenderManagement")
+- @RequestMapping("list.html")
+- @RequestMapping("doList.do")
+- @RequestMapping(value = { "add.do" }, method = { RequestMethod.POST })
+- @RequestMapping(value = { "edit.do" }, method = { RequestMethod.POST })
+- @RequestMapping(value = { "audit.do" }, method = { RequestMethod.POST })
+- @RequestMapping(value = { "detail.do" }, method = { RequestMethod.GET })
+- @RequestMapping(value = { "getLog.do" }, method = { RequestMethod.GET })
+- //    @RequestMapping(value = "/del", method = {RequestMethod.POST})
+- //    @RequestMapping(value = "/upate", method = {RequestMethod.POST})
 
 ## ConsultationDetailController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/energyStorage/ConsultationDetailController.java`

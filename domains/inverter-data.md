@@ -377,3 +377,28 @@
 - **连续三天发电优化**: `isContinueThreeDayElec` 定时任务优化查询逻辑
 - **容量取数源修改**: baoxin 多次修改容量取数源 (5/27~28, 3+ commits)
 - **证据等级**: 代码明确证明
+
+### ADS报表迁移后续优化 (TAEI-3146, 代码明确证明, 2026-06-01 追加)
+**来源**: `rrsjk-light-data-service` (majinhu/马金虎, branch: origin/2026-06-01-datajiebang + origin/feature/202605/ods_electroc_data)
+- **定时任务解绑**: 6 条提交解绑发电相关定时任务 (commits: e5a5d1e/2129c69/237a9cd/9ba3635/f3ed5d7/af417da)
+- **发电列表取自 ADS**: `LightInveterDataServiceImpl` 中新增 `monthChartProNewAds` 方法
+- **报表修改同步**: ADS 与 DWS 双数据源下的报表数据一致性维护
+- **字段映射**: `green_energy_light_station_realtime_current` 映射原 `light_station_elec`
+- **证据等级**: 代码明确证明
+
+### 电站解绑后发电绑定自动清理定时任务 (代码明确证明, 2026-06-02)
+**来源**: `rrsjk-light-data-service` → `LightInverterDataJobServiceJob.java`, `LightInveterDataDao.java`, `LightInveterData.xml`, `UnbindStationCandidate.java` (commits e5a5d1e~9ba3635, majinhu, 2026-06-01)
+
+- **新定时任务**: `flushUnbindStationInverterByNowDate()` — 每3小时执行，处理当天解绑
+- **新定时任务**: `flushUnbindStationInverterByAllDate()` — 每3小时执行，处理全部数据
+- **业务逻辑**:
+  1. 查询电站状态为 `DISABLE`(已解绑) 但发电绑定状态仍为 `YES` 的逆变器候选记录
+  2. 查询电站已重新绑定(`ENABLE`)且发电绑定(`YES`)的记录，构建排除配对集合 (stationCode|inveterSn)
+  3. 对候选记录逐一解绑发电绑定 + 记录解绑日志
+  4. 跳过当天重新绑定的逆变器（防止误解绑）
+- **核心SQL**:
+  - `findUnbindStationCandidates`: `light_station_inverter.status = 'DISABLE' AND light_inveter_data.bind_status = 'YES'`
+  - `findReStationBoundCandidates`: `light_station_inverter.status = 'ENABLE' AND light_inveter_data.bind_status = 'YES'`
+- **新实体**: `UnbindStationCandidate` — id, stationCode, inveterSn
+- **业务意义**: 解决电站解绑后发电数据仍绑定的数据不一致问题，自动清理，无需人工干预
+- **证据等级**: 代码明确证明

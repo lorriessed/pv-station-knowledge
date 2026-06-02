@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-01T23:01:10.169364",
+  "last_scan_at": "2026-06-02T23:01:28.903119",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -112,7 +112,7 @@
       "branch": "master"
     },
     "nahui-pv.hds-h5": {
-      "head": "33df1e54640b0f97516415195e1203cb7dc9d11c",
+      "head": "0be2d6b884decac7d66acf02255fb496ee3100c9",
       "path": "/data/pvcode/nahui-pv.hds-h5",
       "branch": "master"
     },
@@ -282,7 +282,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "670bbba503356dd66adca06209f8038237a52f69",
+      "head": "f8db870313f1dcd5435980a647d8bf25ae227349",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -322,7 +322,7 @@
       "branch": "master"
     },
     "rrsjk-finance-service": {
-      "head": "479ab28b2e46cda41f33e73d681cb559cdbb56da",
+      "head": "f47805926cca13fb1635b98356c71acdb5ac6c69",
       "path": "/data/pvcode/rrsjk-finance-service",
       "branch": "master"
     },
@@ -332,7 +332,7 @@
       "branch": "master"
     },
     "rrsjk-hds-web": {
-      "head": "c7cd96397346fb0a2fbf652798de148986313b9e",
+      "head": "1aac6f11a8657a52779774ec0b4383e778036242",
       "path": "/data/pvcode/rrsjk-hds-web",
       "branch": "master"
     },
@@ -347,7 +347,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "40858da237a6c0ce84b94e32099e02097cb59d71",
+      "head": "8aec6c77de8c7fee10aae776f60bf571eab48f86",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -367,7 +367,7 @@
       "branch": "master"
     },
     "rrsjk-light-operation-service": {
-      "head": "89d3dee0d757193d46377cd4f6d59e0c92f5d51f",
+      "head": "24d2822064ad8923da9b6912c0905a5956ca3994",
       "path": "/data/pvcode/rrsjk-light-operation-service",
       "branch": "master"
     },
@@ -377,7 +377,7 @@
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "feae3861fafe170d4bbe33e8d57600d43cf5b577",
+      "head": "6ece3793a0c62f3ef4a179907b537fa1d9f2030a",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -387,7 +387,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-h5": {
-      "head": "df9785c73d93c953647bd1272ff646950fe22637",
+      "head": "0286780866b44a554c82055391257500dcea4aae",
       "path": "/data/pvcode/rrsjk-merchant-h5",
       "branch": "master"
     },
@@ -602,7 +602,7 @@
       "branch": "dev"
     },
     "watermark-camera-ios": {
-      "head": "9c0d84e350069479f3a5e7d37a6bc47893d450d4",
+      "head": "094c21af713ff15f5791fbc0f6e8fa8fda812596",
       "path": "/data/pvcode/watermark-camera-ios",
       "branch": "dev"
     }

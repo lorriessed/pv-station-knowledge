@@ -41,12 +41,25 @@
     41|- 常见表：`sap_record`、业务来源表
     42|- 生产验证：按 `source_no`、`belnr` 查询。
     43|
-    44|## 租金/结算/电费
-    45|
-    46|- 关键词：租金、结算、电费账单、对账、发电收益、收款。
-    47|- 知识库：`domains/settlement.md`
-    48|- 代码入口：`LightRentService`、各资方 settle service
-    49|- 常见表：`light_rent`、`light_station_settle_sum`
+    ## 租金/结算/电费
+
+    - 关键词：租金、结算、电费账单、对账、发电收益、收款。
+    - 知识库：`domains/settlement.md`
+    - 代码入口：`LightRentService`、各资方 settle service
+    - 常见表：`light_rent`、`light_station_settle_sum`
+
+    ## 支付服务 (`domains/payment-service.md`)
+
+    - 关键词：支付单、支付渠道、微信支付、支付宝、建行、退款、支付回调、乐农钱包、水站支付、水控机支付。
+    - 知识库：`domains/payment-service.md` (✅ 已创建, 2026-06-02 全量通读)
+    - 代码入口：
+      - `rrsjk-pay-web` → REST Controller (port 8093, context: /payapi)
+      - `rrsjk-pay-service` → Dubbo Provider (PaymentService/PayService/RefundService 等 7 个接口)
+    - 路由前缀：`/payapi/pay/*`, `/payapi/payDispenser/*`, `/payapi/payWaterControl/*`, `/payapi/notify/*`
+    - 核心表：`payment` (支付记录表, 30+ 字段)
+    - 支付场景：01(商城订单)、02(子订单)、03(光伏押金)、04(水站)
+    - 支付渠道：WECHAT/ALIPAY/CCB/CCB_WALLET/BAIDU/TRANSFER/OFFLINE/COD/LN_WALLET
+    - 外部依赖：rrsjk-trade-service(订单状态)、rrsjk-light-service(光伏押金)、rrs-dispenser-service(水卡充值)
     50|
     51|## 电费收益（非户用工商业）
     52|
@@ -120,4 +133,23 @@
 - 路由前缀：`/cmConstructionProgress/`, `/cmLightProjectIncomePolicy/`
 - 核心实体：`CmConstructionProgressAudit`(施工进度审核), `CmLightProjectIncomePolicy`(收入政策), `CmLightProject`(项目)
 - 业务特征：风电与光伏区分、终验法确认收入、并行审核方案、账务信息模块
+
+## 招投标管理 (`domains/cbs-management.md` §招投标管理)
+- 关键词：招投标、招标审核、阶段上传、标书、零碳适家。
+- 知识库：`domains/cbs-management.md` (已有招投标管理段落)
+- 代码入口：
+  - `rrsjk-admin-web` → `TenderManagementController` (`/tenderManagement/list.html`, `/tenderManagement/doList.do`)
+  - `rrsjk-light-service` → `TenderManagmentAuditService`, `TenderManagmentAudit.java`
+- 核心表：推断 `tender_managment_audit`
+- 项目分类: FD(风电) / GSY(工商业) / HYEPC(户用EPC) / YW(运维) / LTSJ(零碳适家) — 原"零碳世家"已更名
+- 上传接口: `OssImageController` → `/oss/image/uploadFileMime.do`(docx等), `/oss/image/initiateMultipartUpload.do`(分片上传)
+
+## 运维巡检 (`domains/operation-and-data.md`)
+- 关键词：巡检计划、年度巡检、资方筛选、运维商筛选、故障工单。
+- 知识库：`domains/operation-and-data.md`
+- 代码入口：
+  - `rrsjk-hds-web` → `LightOperationInspectionPlanController` (`/light/operation/inspection/plan/*`)
+  - `rrsjk-light-operation-service` → `LightOperationInspectionPlanService`, `LightOperationStationService`
+- 新增接口: `GET /light/operation/inspection/plan/operator/search` — 查询运维商列表（电站表去重）
+- 前端: `nahui-pv.hds-h5` → 年度巡检新增资方/运维商多选
 

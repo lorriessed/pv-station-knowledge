@@ -452,6 +452,71 @@ appapi-web (Consumer + Adapter)
 |------------|------|
 | `PhotovoltaicController` | 光伏专区首页 |
 
+#### 工商业预测 (`/businessForecast`) — 新增补充 (代码明确证明, 2026-06-02)
+
+**来源**: `rrsjk-mobile-web` → `controller/businessforecast/*.java`
+
+| Controller | 路径 | 功能 |
+|---|---|---|
+| `BaseElectricityPriceController` | `/businessForecast/price/*` | 基础电价(工商业分时电价、24h电价、脱硫煤电价) |
+| `EmissionReduceController` | `/businessForecast/emission/reduce` | 节能减排计算(SO2/CO2/NOX/粉尘/标准煤) |
+| `ElectricityGenerationDetailController` | `/businessForecast/electricityGeneration/calculate` | 项目发电量详情计算 |
+| `ForecastProjectDetailController` | `/businessForecast/projectDetail/*` | 工商业预测项目 CRUD + 规划书生成 |
+| `ProjectCostInfoDetailController` | `/businessForecast/costInfo/createOrUpdateInfo` | 建站成本管理 |
+| `ProjectInvestmentIncomeController` | `/businessForecast/investmentIncome/calculate` | 项目投资收益计算 |
+
+这些 Controller 通过 Dubbo 调用 `nh-business-forecast-api` 服务（独立微服务）。
+
+#### 储能小程序 (`/ConsultationDetail/`, `/energyIntroduce/`, `/feeStandard/`) — 新增补充
+
+**来源**: `rrsjk-mobile-web` → `controller/energyStorage/*.java`, `controller/energy/*.java`
+
+| Controller | 路径 | 功能 |
+|---|---|---|
+| `ConsultationDetailController` | `/ConsultationDetail/add.do` | 项目咨询详情提交(生成咨询单号 ZX+日期+随机码) |
+| `InstallMaintenanceInfoController` | `/energyStorage/*` | 安装维护信息管理 |
+| `EnergyIntroduceController` | `/energyIntroduce/getIntroduceVideo.do` | 储能介绍视频查询 |
+| `FeeStandardController` | `/feeStandard/getStandardPic.do` | 收费标准图片查询 |
+| `CnDataDictController` | `/energystorage/dataDict/*` | 储能数据字典 |
+| `CnIncomeCalcInfoController` | `/energystorage/incomeCalc/*` | 储能收益计算 |
+
+#### 顶好二类户 (`/dh/secondAccount`) — 新增补充
+
+**来源**: `rrsjk-mobile-web` → `controller/dh/DhSecondClassAccountController.java`
+
+| API | 说明 |
+|---|---|
+| `/dh/secondAccount/doList` | 二类户列表(分页) |
+| `/dh/secondAccount/getById` | 二类户详情 |
+| `/dh/secondAccount/openAccount` | 二类户开户(通过进件序号) |
+| `/dh/secondAccount/queryOpenAccount` | 开户状态查询 |
+
+通过 Dubbo 调用 `DhSecondClassAccountService`。
+
+#### 乐农商城 (`/activity`, `/cart`, `/coupon`, `/cook`, `/item`, `/appimage`, `/appImg`)
+
+**来源**: `rrsjk-mobile-web` → `controller/activity/*.java`, `controller/cart/CartController.java` 等
+
+| 模块 | 关键 API | 说明 |
+|---|---|---|
+| 活动 | `/activity/*` | 抽奖(lottory)、签到(signIn)、领券(claimCoupon)、接龙(solitaire)、调查问卷(dcwj) |
+| 购物车 | `/cart/*` | 多渠道购物车(MALL/PURCHASE/GROUP/LIGHT/CN_MALL) |
+| 优惠券 | `/coupon/*` | 领券、查券、可用券 |
+| 菜谱 | `/cook/*` | 菜谱查询/创建/升级 |
+| 轮播图 | `/carousel/listCarousel.do` | 首页轮播图 |
+| 商品配置 | `/appimage/listItem.do` | 乐农小程序首页配置商品 |
+
+#### 水站冬季补贴 (`/dispenser`)
+
+**来源**: `rrsjk-mobile-web` → `controller/dispenser/DispenserSubsidyController.java`
+
+| API | 说明 |
+|---|---|
+| `/dispenser/listSubsidy.do` | 查询小顺补贴 |
+| `/dispenser/abtainSubsidy.do` | 领取补贴 |
+
+通过 Dubbo 调用 `WaterOperatorSubsidyService`。
+
 #### 乐享CP (`/ljcp`)
 | Controller | 说明 |
 |------------|------|

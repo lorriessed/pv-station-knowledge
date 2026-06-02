@@ -3433,6 +3433,7 @@
 - `CustomRebateThirdExcel` (class) `com.rrsjk.merchant.controller.settle.vo` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/settle/vo/CustomRebateThirdExcel.java`
 - `CustomRebateThirdService` (interface) `com.rrsjk.finance.settlement.service` -> `rrsjk-finance-service/rrsjk-finance-api/src/main/java/com/rrsjk/finance/settlement/service/CustomRebateThirdService.java`
 - `CustomRebateThirdServiceImpl` (class) `com.rrsjk.finance.settlement.summary.service` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/java/com/rrsjk/finance/settlement/summary/service/CustomRebateThirdServiceImpl.java`
+- `CustomReportSqlSupport` (class) `com.rrsjk.light.operation.util` -> `rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/java/com/rrsjk/light/operation/util/CustomReportSqlSupport.java`
 - `Customer` (class) `com.nahui.energy.pojo.entity.customer` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/pojo/entity/customer/Customer.java`
 - `CustomerAnalyzeController` (class) `com.rrsjk.merchant.controller.finance` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/finance/CustomerAnalyzeController.java`
 - `CustomerAreAgentEnum` (enum) `com.nahui.energy.enums` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/enums/CustomerAreAgentEnum.java`
@@ -9512,6 +9513,7 @@
 - `LightOperationChatController` (class) `com.rrsjk.merchant.controller.lightoperation.v2` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/v2/LightOperationChatController.java`
 - `LightOperationChatHistoryService` (interface) `com.rrsjk.light.operation.service.v2` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/service/v2/LightOperationChatHistoryService.java`
 - `LightOperationChatHistoryServiceImpl` (class) `com.rrsjk.light.operation.service.v2.impl` -> `rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/java/com/rrsjk/light/operation/service/v2/impl/LightOperationChatHistoryServiceImpl.java`
+- `LightOperationCustomReportDao` (class) `com.rrsjk.light.operation.dao.v2` -> `rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/java/com/rrsjk/light/operation/dao/v2/LightOperationCustomReportDao.java`
 - `LightOperationCustomReportService` (interface) `com.rrsjk.light.operation.service.v2` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/service/v2/LightOperationCustomReportService.java`
 - `LightOperationCustomReportServiceImpl` (class) `com.rrsjk.light.operation.service.v2.impl` -> `rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/java/com/rrsjk/light/operation/service/v2/impl/LightOperationCustomReportServiceImpl.java`
 - `LightOperationDashboardController` (class) `com.rrsjk.hds.controller.lightoperation.v2` -> `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationDashboardController.java`
@@ -16977,7 +16979,6 @@
 - `ReportInveterChartDay` (class) `com.rrsjk.light.data.entity.local` -> `rrsjk-light-data-service/rrsjk-light-data-api/src/main/java/com/rrsjk/light/data/entity/local/ReportInveterChartDay.java`
 - `ReportInveterChartDay` (class) `com.rrsjk.report.entity.elec` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/entity/elec/ReportInveterChartDay.java`
 - `ReportInveterChartDayDao` (class) `com.rrsjk.light.data.dao.local` -> `rrsjk-light-data-service/rrsjk-light-data-impl/src/main/java/com/rrsjk/light/data/dao/local/ReportInveterChartDayDao.java`
-- `ReportInveterChartDayDao` (class) `com.rrsjk.light.operation.dao.v2.data` -> `rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/java/com/rrsjk/light/operation/dao/v2/data/ReportInveterChartDayDao.java`
 - `ReportInveterChartDayDao` (class) `com.rrsjk.report.dao.elec` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/dao/elec/ReportInveterChartDayDao.java`
 - `ReportInveterChartDayService` (interface) `com.rrsjk.light.data.service` -> `rrsjk-light-data-service/rrsjk-light-data-api/src/main/java/com/rrsjk/light/data/service/ReportInveterChartDayService.java`
 - `ReportInveterChartDayServiceImpl` (class) `com.rrsjk.light.data.service.impl` -> `rrsjk-light-data-service/rrsjk-light-data-impl/src/main/java/com/rrsjk/light/data/service/impl/ReportInveterChartDayServiceImpl.java`
@@ -19099,6 +19100,7 @@
 - `StationNoOrderDto` (class) `com.rrsjk.report.dto` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/dto/StationNoOrderDto.java`
 - `StationNumAndPreAndQuota` (class) `com.rrsjk.report.service.acs` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/service/acs/StationNumAndPreAndQuota.java`
 - `StationNumberTop5CityDto` (class) `com.rrsjk.light.operation.dto.v2.dashboard` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/dto/v2/dashboard/StationNumberTop5CityDto.java`
+- `StationOperatorOptionDto` (class) `com.rrsjk.light.operation.dto.v2.response` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/dto/v2/response/StationOperatorOptionDto.java`
 - `StationOptionsController` (class) `com.rrsjk.adminbff.station.controller` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/StationOptionsController.java`
 - `StationPlanChangeAuditRequest` (class) `com.rrsjk.adminbff.industrialepc.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/request/StationPlanChangeAuditRequest.java`
 - `StationPlanChangeConfigView` (class) `com.rrsjk.adminbff.industrialepc.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/view/StationPlanChangeConfigView.java`
@@ -19838,6 +19840,14 @@
 - `TenantRepositoryImpl` (class) `com.nahui.energy.repository.impl` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/repository/impl/TenantRepositoryImpl.java`
 - `TenantService` (interface) `com.nahui.energy.service.system` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/service/system/TenantService.java`
 - `TenantServiceImpl` (class) `com.nahui.energy.service.system.impl` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/service/system/impl/TenantServiceImpl.java`
+- `TenderManagementController` (class) `com.rrsjk.admin.controller.tenderManagement` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/tenderManagement/TenderManagementController.java`
+- `TenderManagmentAudit` (class) `com.rrsjk.light.entity.tenderManagement` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/tenderManagement/TenderManagmentAudit.java`
+- `TenderManagmentAuditDao` (class) `com.rrsjk.light.dao.tenderManagment` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/tenderManagment/TenderManagmentAuditDao.java`
+- `TenderManagmentAuditDto` (class) `com.rrsjk.light.dto.tenderManagment` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/tenderManagment/TenderManagmentAuditDto.java`
+- `TenderManagmentAuditLog` (class) `com.rrsjk.light.entity.tenderManagement` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/tenderManagement/TenderManagmentAuditLog.java`
+- `TenderManagmentAuditLogDao` (class) `com.rrsjk.light.dao.tenderManagment` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/tenderManagment/TenderManagmentAuditLogDao.java`
+- `TenderManagmentAuditService` (interface) `com.rrsjk.light.service.TenderManagmentAudit` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/TenderManagmentAudit/TenderManagmentAuditService.java`
+- `TenderManagmentAuditServiceImpl` (class) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/TenderManagmentAuditServiceImpl.java`
 - `TerminateBiddingProjectRequest` (class) `com.rrsjk.light.operation.dto.bidding` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/dto/bidding/TerminateBiddingProjectRequest.java`
 - `Test` (class) `com` -> `cbs-web/src/test/java/com/Test.java`
 - `Test` (class) `com.haier.cbs.job.test` -> `job-service/job-impl/src/test/java/com/haier/cbs/job/test/Test.java`
@@ -20236,6 +20246,7 @@
 - `UUID` (class) `com.nahui.energy.utils.uuid` -> `vpp-openapi/vpp-openapi-biz/src/main/java/com/nahui/energy/utils/uuid/UUID.java`
 - `UUID` (class) `com.nahui.energy.utils.uuid` -> `vpp-thai-dashboard/vpp-thai-dashboard-biz/src/main/java/com/nahui/energy/utils/uuid/UUID.java`
 - `UnbindOperationLog` (class) `com.rrsjk.light.data.entity.local` -> `rrsjk-light-data-service/rrsjk-light-data-api/src/main/java/com/rrsjk/light/data/entity/local/UnbindOperationLog.java`
+- `UnbindStationCandidate` (class) `com.rrsjk.light.data.entity.local` -> `rrsjk-light-data-service/rrsjk-light-data-api/src/main/java/com/rrsjk/light/data/entity/local/UnbindStationCandidate.java`
 - `UnbindStationRequest` (class) `com.rrsjk.light.data.dto` -> `rrsjk-light-data-service/rrsjk-light-data-api/src/main/java/com/rrsjk/light/data/dto/UnbindStationRequest.java`
 - `UnbindStationRequestDto` (class) `com.rrsjk.admin.entity` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/entity/UnbindStationRequestDto.java`
 - `UniChooseFileModule` (class) `com.nky.choosefile.module` -> `uni-choose-file-android/src/main/java/com/nky/choosefile/module/UniFileModule.java`

@@ -362,7 +362,7 @@ stationParam.put("spMemberId", spMemberId);
 
 ---
 
-## 金蝶记账失败状态处理 (代码明确证明, 2026-05-19)
+### 金蝶记账失败状态处理 (代码明确证明, 2026-05-19)
 **来源**: `rrsjk-light-service` → `LightProjectElectricOrderServiceImpl.java`, `LightProjectElectricOrder.java` (commits 92fcbf81, 85bbef82, mabin, 2026-05-14~15)
 
 - 新增 `JINDIE_FAIL` 枚举值 — 标识金蝶记账失败状态
@@ -370,6 +370,34 @@ stationParam.put("spMemberId", spMemberId);
 - 金蝶返回凭证为空时正确设置失败状态和原因
 - 发票冲销失败原因保存优化 (`LightProjectElectricInvoiceReverseRecordServiceImpl`)
 - FAP查询流程优化，移除过时代码
+
+---
+
+### 金蝶SAP记账 budat 历史数据修复 (代码明确证明, 2026-06-02)
+**来源**: `rrsjk-finance-service` → `JinSapClientModel.java` (commit 0ea0e96, mabin, branch `20250525-jindieRepeatFix`, 2026-06-02)
+
+- **问题**: `syncFinanceToSap()` 原逻辑无条件覆盖 `budat` 字段为当前日期 (`sapRecord.setBudat(format.format(new Date()))`)
+- **修复**: 改为仅在 `budat` 为空时设置默认值
+  ```java
+  if (StringUtils.isBlank(sapRecord.getBudat())) {
+      sapRecord.setBudat(format.format(new Date()));
+  }
+  ```
+- **业务影响**: 修复5月18日之前的历史记账数据异常，保留原始记账日期而不是被覆盖为当天
+- **关联**: 同分支此前已加金蝶分布式锁并发控制
+
+---
+
+### 退质保金申请驳回后不释放已选择的单据 (代码明确证明, 2026-06-02)
+**来源**: `rrsjk-finance-service` → `PurchaseApplySettleDepositRefundServiceImpl.java` (commit dab8d8d, tn_wangb, 2026-06-02)
+
+- **applyDepositRefund 新增校验**: 错误信息从"请选择可结算的保证金明细"改为精确提示"电站XXX质保金非可结算状态，已被单号XXX占用"
+- **editDepositRefund 逻辑重构**:
+  - 计算新增和删除的质保金明细ID列表 (`addDepositIds` / `deleteDepositIds`)
+  - 新增的明细才修改为 `APPLY_SETTLE` 状态
+  - **删除的明细修改为 `ENABLE_SETTLE` 状态并清空 `applyNo`** — 释放占用，允许其他申请选中
+  - 异常分支新增错误返回（此前rollback后无错误提示）
+- **业务意义**: 修改质保金退款申请时，移除的明细应释放可结算状态，避免其他申请无法选中
 
 ---
 
@@ -1167,6 +1195,14 @@ stationParam.put("spMemberId", spMemberId);
 - **放开发票金蝶冲销**: `payment` 模块修复放开发票金蝶冲销逻辑（commit 4ee999f3）
 - **金蝶收款记账回调**: 修复订单查询问题（commit 558367d2）
 - **FAP回调优化**: 优化FAP回调处理逻辑并添加线程池配置（commit e7fc4302）
+- **证据等级**: 代码明确证明
+
+### 金蝶冲销接口补充优化 (TAEI-3157, 代码明确证明, 2026-05-28 追加)
+**来源**: `rrsjk-finance-service` (mabin/马斌, branch: origin/20250525-jindieRepeatFix)
+- **SAP同步日志修复**: `orderId` 替换为 `lightProjectElectricOrder.getOrderNo()`（commit 5d31ec4c）
+- **消息长度限制**: 限制金蝶SAP同步消息长度防止数据库字段溢出（commit 9b888ae4）
+- **重复校验优化**: 解决金蝶SAP同步中的重复校验和错误处理问题（commit beadf50/c233685）
+- **异常处理**: 优化金蝶SAP同步财务记账接口异常处理（commit e7e2c37）
 - **证据等级**: 代码明确证明
 
 ### SAP 收入重传修复 (2026-05-30)
