@@ -576,13 +576,44 @@
 | `ProductPriceService` | 商品价格服务 (已注释) |
 
 #### 核心业务逻辑
-- **定时任务框架**: 自研 `@SingleJob` 注解 + AOP 切面，防止并发执行
-- **仓库库龄分析**: GvsWarehouseAgeAnalysis - 从 GVS 系统同步仓库库龄数据
-- **逾期库存控制**: EnergyOverdueInventoryControl - 多维度逾期库存管控（中心/SKU/数据库）
-- **资产数据同步**: LightOwnAsset - 光伏电站自有资产数据同步
+- **定时任务框架**: 自研 `@SingleJob` 注解 + AOP 切面，分布式锁防并发 (详见下方 SingleJob 机制)
+- **仓库库龄分析**: GvsWarehouseAgeAnalysis - 从 GVS 系统同步仓库库龄数据 (库龄分段: 1-30天→3年以上)
+- **逾期库存控制**: EnergyOverdueInventoryControl - 多维度逾期库存管控（总表/中心/SKU/基础数据）
+- **资产数据同步**: LightOwnAsset - 光伏电站自有资产数据同步 (导入→推送HSCC→状态回查)
 - **SAP集成**: SapSpCenterRelation - SAP SP 中心关系数据同步
-- **Redis分布式锁**: RedisLockUtil 保证任务不重复执行
-- **数据源**: 多数据源 - light (主库), report (报表库), local (本地库)
+- **数据源**: 7个数据源 — light (主库), report (报表库), local (本地库), elec, operation, shop, finance
+
+#### SingleJob 分布式锁机制 (代码明确证明, 2026-06-03)
+**来源**: `SingleJob.java`, `SingleJobAspect.java`
+
+```java
+@SingleJob(jobName = "sampleJob", maxLockTimeMilliSeconds = 90000, skipOnLockFail = true)
+```
+
+- **Redis 分布式锁**: Key 格式 `single_job_lock_{className}.{methodName}`
+- **锁续期 (Watchdog)**: 每 maxLockTime/3 自动续期，确保长任务不丢锁
+- **skipOnLockFail 策略**:
+  - `true`(默认): 获取锁失败 → 跳过执行，60秒内最多打印一次跳过日志
+  - `false`: 获取锁失败 → 降级模式继续执行 (无锁保护)
+- **全局开关**: `${single-job.enabled:true}` 配置控制是否启用
+- **线程池隔离**: `jobExecutor` (8~40线程, CallerRunsPolicy) 执行任务体
+- **异常清理**: 无论任务成功/失败，finally 块中取消续期 + 释放锁
+
+#### LightOwnAsset 资产推送流程 (代码明确证明, 2026-06-03)
+**来源**: `LightOwnAssetServiceImpl.java`, `LightAssetInterfaceServiceImpl.java`
+
+1. **资产导入**: Excel批量导入 → 校验(合同号/租赁类型/税种/发票选项/付款类型/付款周期) → 生成CBS单号(LOA+yyyyMMdd+6位序列) → 插入 `light_own_asset`
+2. **异步推送**: 导入成功后通过 `pushAssetExecutor` 线程池异步调用 HSCC 资产系统
+   - 签名: `Application-Key + X-Yx-Nonce + X-Yx-Timestamp` → HMAC
+   - 推送成功 → 状态更新为 `TRANSFERRED`
+3. **状态回查**: `queryAssetStatusJob()` 定时拉取 `TRANSFERRED`/`WAIT_AUDIT` 状态
+   - 调用 HSCC 查询接口 → 解析审批节点/审批人/驳回原因 → 写入 `light_own_asset_status`
+
+**资产状态**: `IMPORTED` → `TRANSFERRED` → `WAIT_AUDIT` / `ERROR`
+
+**HSCC 接口**:
+- 申请: `http://hscapi.haier.net/Product/CBS-RightOfUseAsset/ApplicationInterface`
+- 查询: `http://hscapi.haier.net/Product/CBS-RightOfUseAsset/QueryInterface`
 
 #### 数据库表
 | 表名 | 说明 |
@@ -673,6 +704,15 @@
 | `CmbDashboardController` | 招行看板 |
 | `YueXiuDashboardController` | 越秀看板 |
 | `BocDashboardController` | 中行看板 |
+
+**大屏鉴权模式 (代码明确证明, 2026-06-03)**:
+- **SF_TOKEN**: 各资方大屏 (`/light/screen/{boc|cmb|cnnc|huarong|yuexiu|*`) 使用 `SF_TOKEN` 硬编码校验
+- **ASF_TOKEN**: 资产大屏 (`/light/screen/asset/*`) 使用 `ASF_TOKEN` 硬编码校验
+- **Fallback 机制**: 当指定日期无数据时，自动回退到前一天数据 (`LocalDate.now().minusDays(1)`)
+
+**新增: 工商业并网维度 (2026-03-10)**:
+- `ReportAssetScreenCmGridService` — 工商业电站月/年/累计并网数量及装机容量
+- 接口: `getCmGrid.do` → `/light/screen/asset/getCmGrid.do`
 
 **Adapter 模式**: 通过 Adapter 层聚合多个数据源
 | Adapter | 说明 |

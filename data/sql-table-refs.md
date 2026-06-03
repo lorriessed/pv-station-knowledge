@@ -90,6 +90,7 @@
 - `authz_role` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_role_permission` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
+- `authz_user_password` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user_permission` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user_role` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `bank_area` -> `rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/BankAreaMapper.xml`

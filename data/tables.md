@@ -509,3 +509,18 @@ MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqi
 - **rent_tax_amount_record**: 租金个税明细记录表
 - **rent_tax_amount_summary**: 租金个税汇总表
 - **tax_amount_calculate_source_data**: 个税计算源数据表
+
+### FAP凭证记录表 (TAEI-3021/TAEI-3022, 代码明确证明, 2026-05-18~24)
+**来源**: `rrsjk-light-service` (代继宁)
+- **light_fap_record**: FAP凭证记录表 (rrsjk_light库)
+  - 用途: 记录零碳适家/绿证交易订单收款对接FAP系统的凭证信息
+  - 2026-05-18~24变更: 移除补偿状态字段，新增凭证补偿机制、实时查询方法
+  - DAO: `LightSpOrderItemDao` (新增通过订单项目编号查询订单项目方法)
+  - Service: `LightFapRecordServiceImpl` (补偿机制、取消逻辑、批量处理)
+
+### 工商业收入政策表 (TAEI-3083/TAEI-3085, 代码明确证明, 2026-05-19~21)
+**来源**: `rrsjk-light-service` (解钦)
+- **cm_light_project_income_policy**: 工商业电站项目收入政策表 (rrsjk_light库)
+  - 用途: 管理工商业电站项目的收入政策配置和审核流程
+  - 2026-05-19~21变更: 支持并行审核方案、政策编码生成、导入校验
+  - 实体: `CmLightProjectIncomePolicy.java`

@@ -402,3 +402,14 @@
 - **新实体**: `UnbindStationCandidate` — id, stationCode, inveterSn
 - **业务意义**: 解决电站解绑后发电数据仍绑定的数据不一致问题，自动清理，无需人工干预
 - **证据等级**: 代码明确证明
+
+### DWS数据源接入 — 逆变器列表双数据源 (TAEI-3025, 代码明确证明, 2026-05-18~24)
+**来源**: `rrsjk-admin-web/LightInveterController.java`, `rrsjk-light-data-service/LightInveterDataServiceImpl.java` (yumiao, majinhu)
+**需求**: TAEI-3025 BT报表项目 (Epic2分支)
+- **新增DWS查询接口**: `doListDws.do` → `findByPageDws` (参数与旧版MySQL查询一致)
+- **新增前端页面**: `lightInveterListDws.ftl` (994行，复制自旧版 `lightInveterList.ftl`)
+- **多数据源配置**: DWS多数据源接入，`DwsInveterDataService` 代理调用
+- **三天发电优化**: `isContinueThreeDayElec` 定时任务优化，增加连续三天发电数据日志排查 (`030fa75d`, `8736e2c5`)
+- **业务语义**: 逆变器列表同时支持MySQL和DWS两种数据源，DWS用于大数据量场景
+- **⚠️ 双路径风险**: MySQL和DWS并存，需确认数据一致性和切换策略
+- **证据等级**: 代码明确证明

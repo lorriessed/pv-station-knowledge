@@ -728,6 +728,81 @@ order-service 在 2025-11 新增了 **ESAP 服务**集成，这是 SAP 接口的
 - 涉及 `DubboConfig.java` 中 zookeeper 注册中心配置 (timeout=10000ms)
 - SAP 客户端模型属性转换优化减少了类型转换错误
 
+---
+
+### 1.11 rrsjk-trade-service 补充: Hrois 海外订单/发票Job/条码/FTP支付 (代码明确证明, 2026-06-03)
+**来源**: `rrsjk-trade-service` 全量通读 (566个业务文件)
+
+#### Hrois 海外订单流程
+**来源**: `trade/order/` 下的 Hrois* 系列 Service/DTO/Entity
+
+- **创建**: `HroisOrderCreateService.create()` — 接收 HroisOrderCreateRequest (含订单明细+装箱明细) → 返回 CBS订单号+Hrois订单号
+- **状态处理**: `HroisOrderCreateService.status()` — 处理 Hrois 订单状态变更 (CANCELED/NEGOTIATE)
+- **子订单操作**: `HroisOrderItemService.operate()` — 备货(MAKE)/发货(DELIVER)
+- **装箱管理**: `HroisOrderBoxService` — 装箱信息查询/创建/更新
+- **发货修改申请**: `HroisSendInfoUpdateService` — 修改集装箱号/铅封号 → 审核(PASS/REJECT)
+- **采购单**: `HroisPurchaseOrderService` — 海外 GVS 采购单管理
+- **CBS 映射**: `HroisOrderCbsService` — Hrois 订单与 CBS 订单的关联
+- **操作日志**: `HroisOperationLogService` — 海外订单操作记录
+
+#### 发票处理 Job 体系 (InvoiceJobService)
+**来源**: `trade/job/invoice/service/InvoiceJobService.java` (20+ Job方法)
+
+| Job 方法 | 功能 | 执行方式 |
+|---|---|---|
+| `generatorInvoice()` | 生成发票信息 | 定时 |
+| `elecInvoice()` | 电子发票处理 | 定时 |
+| `vatInvoice()` | 增值税专用发票处理 | 定时 |
+| `vatInvoiceQueryResult()` | 专票结果查询 | 定时 |
+| `cloudInvoiceInvalid()` | 票税云作废红冲 | 定时 |
+| `cloudInvoiceInvalidQueryResult()` | 票税云红冲结果查询 | 定时 |
+| `elecInvoiceQueryResult()` | 电子发票结果查询 | 定时 |
+| `cloudInvoiceSapVoucherArchive()` | 票税云发票SAP凭证归档 | 定时 |
+| `vatInvoiceByOperation()` | 运维收入增值税专票合并 | 定时 |
+| `vatInvoiceByLightElec()` | 电费收益增值税专票 | **@Async** |
+| `vatInvoiceQueryResultByLightElec()` | 电费收益专票结果查询 | **@Async** |
+| `cloudInvoiceSapVoucherArchiveByLightElec()` | 电费收益SAP凭证归档 | **@Async** |
+| `vatInvoiceByMerge()` | 增值税专票合并开票 | 定时 |
+| `vatInvoiceQueryResultByMerge()` | 合并开票结果查询 | 定时 |
+| `cloudInvoiceSapVoucherArchiveByMerge()` | 合并开票SAP凭证归档 | 定时 |
+| `electricInvoiceReverse()` | 电费收益发票红冲(票税云/全电票) | 定时 |
+| `electricInvoiceReverseResultQuery()` | 电费收益红冲结果查询 | 定时 |
+
+#### 条码申请管理 (BarCodeApplyService)
+**来源**: `trade/order/service/BarCodeApplyService.java`, `BarCodeDetailService.java`
+
+- `BarCodeApply` — 条码申请主表 (申请单号/状态)
+- `BarCodeDetail` — 条码明细表 (条码号/申请单关联)
+- 功能: 条码申请 → 生码 → 单条/批量作废
+
+#### FTP 支付对账 (FtpService)
+**来源**: `trade/pay/service/FtpService.java`
+
+- `download1PG0(dateTime)` — 下载1PG0支付文件
+- `download1QJ0(dateTime)` — 下载1QJ0收款文件
+- `download4110(dateTime)` — 下载4110文件
+- `checkPayment(dateTime)` — 支付对账
+- `checkRefund(dateTime)` — 退款对账
+
+#### 零碳采购单 (LightPurchaseSalesOrderService)
+**来源**: `trade/order/service/LightPurchaseSalesOrderService.java`
+
+- `createOrder()` — 创建零碳适家采购订单
+- `confirmPay()` / `batchConfirmPay()` — 确认收款
+- `confirmReceipt()` — 确认收货 (零碳适家用)
+- `incomeToSap()` / `zeroCarbonIncomeToSap()` — 收入推 SAP
+- `uploadReceipt()` — 上传签收单
+- `confirmReceiptUrl()` — 签收单审核
+- `findSalesRevenue()` — 零碳适家销售收入报表
+- `findTouchpoint()` — 触点统计查询
+
+#### 订单推送队列
+**来源**: `LightOrderToPcsQueueService`, `LightOrderToEnergyStorageQueueService`, `PcsOrderDeliveryToLightQueueService`
+
+- `LightOrderToPcsQueue` — 订单推送到 PCS 队列
+- `LightOrderToEnergyStorageQueue` — 订单推送到储能队列
+- `PcsOrderDeliveryToLightQueue` — PCS发货回推光伏队列 (自动发货)
+
 **与现有 SAP 集成的关系**: order-service 已有成熟的 SAP 同步体系 (SyncSelfOrderToSapService, SyncFinanceToSapService, SyncInvoiceToSapService)，ESAP 是对现有 SAP 集成能力的扩展，专门面向卡奥斯平台。
 
 ---

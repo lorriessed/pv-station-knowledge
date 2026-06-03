@@ -111,6 +111,36 @@
 - **电站回退**: `ReverseUseStrategy` 兼容完工前领用不创建SO出库队列的情况
 - **越秀租金修复**: `LightYuexiuIncomeBillJobServiceImpl` 租金收益拉取+列表展示 (+110/-52行)
 
+---
+
+## A 段政策按省份区分 (代码明确证明, 2026-06-03)
+
+**来源**: `rrsjk-admin-web` → `LightInstantRewardController.java`, `LightInstantRewardPolicyController.java`, `LightInstantRewardPolicyMonthController.java` (commits by 龙龙, 2026-05-13 ~ 2026-06-03, merge #584 from `20260601_longlong_A段政策按省份区分`)
+
+### 字段变更
+
+- **"是否精确到区" → "模式"**: 字段标题从"是否精确到区"改为"模式"，显示值从"是/否"改为"单商单县/单商单省"
+  - 影响范围：列表页、新增弹窗、Excel 导入导出
+- **新增省市区字段**:
+  - `provinceId`/`provinceName`: 省
+  - `cityId`/`cityName`: 市
+  - `regionId`/`regionName`: 区
+  - 影响实体：`LightInstantRewardExcel`, `LightInstantRewardPolicyExcel`, `LightInstantRewardPolicyMonthExcel`
+- **Excel 导出**: `LightInstantRewardExcel` 新增 provinceName/cityName/regionName 三列
+- **查询筛选**: `LightInstantRewardController` 新增省市区筛选条件（支持按 provinceId/cityId/regionId 或名称模糊匹配）
+- **月度合计模式**: "月合计模式"字段完整实现（自身表存储+生成时填充）
+- **导入模板**: 模式列添加下拉框选项（单商单省/单商单县）
+- **隐藏功能**: 彻底隐藏"并网规模奖励"（JS 层面所有 show() 改为 hide()，涉及 pmAdd.ftl/pmEdit.ftl）
+- **移除功能**: 移除 Excel 导出中的下拉选项数据验证功能
+
+### 涉及 Controller
+
+| Controller | 变更 |
+|---|---|
+| `LightInstantRewardController` | Excel 导出新增省市区列，查询条件新增省市区筛选 |
+| `LightInstantRewardPolicyController` | 模式字段变更，省市区字段支持 |
+| `LightInstantRewardPolicyMonthController` | 月合计模式字段完整实现 |
+
 
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
@@ -198,3 +228,20 @@
 - 电站完工时间和签约时间大于60天才重新匹配新的区位码
 - 完工匹配政策区位码回退机制
 - 对应需求: TAEI-2967 (完工后终止电站) + 政策匹配优化
+
+### TAEI-3089 A端政策结算逻辑调整 — 政策收入批处理重构 (代码明确证明, 2026-05-28)
+**来源**: `rrsjk-light-service` (龙龙=王斌, commit: 3e7fd0baa8, 2026-05-28, branch: yyyyMMdd_longlong_fix)
+- **负责人**: 杨越越 | **实际开发**: 王斌(tn_wangb/龙龙) | **参与人**: 商轶龙
+- **核心变更**: 政策收入处理器从 `AbstractPolicyIncomeHandler` 重构为 `AbstractPolicyBatchIncomeHandler`
+  - `EnablePolicyCompleteIncomeHandlerImpl` — 已完工政策收入处理
+  - `EnablePolicyEnableIncomeHandlerImpl` — 已生效政策收入处理
+- **批处理模式新增**:
+  - `reverseIncomeSapRecord()` — 冲收入账单功能
+  - `findCompleteByNotCostVoucherByStationCode()` / `findEnableByNotCostVoucherByStationCode()` — 按电站编码批量查询
+  - `findByOrderNo()` — 按订单号查询
+  - `findByStationCodeAndNodeType()` — 返回类型从单条改为 List
+- **服务层增强**: `LightStationEnableRewardService` 新增 33 行方法
+- **Mapper XML**: `LightStationEnableReward.xml` 新增 22 行批量查询 SQL
+- **业务语义**: 政策结算从逐条处理改为批处理模式，支持冲正和历史数据兼容
+- **关联需求**: TAEI-3089 (A端政策结算逻辑调整) + 方案变更政策回退兼容 (ed4cec51d5)
+- **证据等级**: 代码明确证明

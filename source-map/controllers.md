@@ -7257,6 +7257,36 @@
 - @GetMapping("/export")
 - @GetMapping("/station-codes/export")
 
+## PartyUserController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyUserController.java`
+- @RequestMapping("/api/app/subcenter-management/party-users")
+- @GetMapping
+- @GetMapping("/options")
+- @GetMapping("/selectable-users")
+- @GetMapping("/users/{userId}")
+- @PostMapping
+- @PutMapping("/users/{userId}")
+- @PutMapping("/relations/{id}/status")
+
+## SubCenterController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/SubCenterController.java`
+- @RequestMapping("/api/app/subcenter-management/sub-centers")
+- @GetMapping
+- @GetMapping("/{subCenterId}")
+- @GetMapping("/{subCenterId}/users")
+- @GetMapping("/selectable-users")
+- @PostMapping("/{subCenterId}/users")
+- @PostMapping("/{subCenterId}/users/remove")
+
+## PartyController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyController.java`
+- @RequestMapping("/api/app/subcenter-management/parties")
+- @GetMapping
+- @GetMapping("/selectable-users")
+- @PostMapping
+- @PutMapping("/{id}")
+- @PutMapping("/{id}/status")
+
 ## SelfIncomeRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/SelfIncomeRecordController.java`
 - @RequestMapping("/api/app/self-finance/income-records")
@@ -9702,6 +9732,13 @@
 - @GetMapping
 - @GetMapping("/export")
 
+## OperationLogAdminController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogAdminController.java`
+- @RequestMapping("/api/admin/operation-logs")
+- @GetMapping("/login")
+- @GetMapping("/operation")
+- @GetMapping("/body")
+
 ## ShareQuotaController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/ShareQuotaController.java`
 - @RequestMapping("/api/app/service-provider-management/share-quotas")
@@ -10083,6 +10120,7 @@
 - @DeleteMapping("/menus/{menuKey}")
 - @GetMapping("/users")
 - @PostMapping("/users")
+- @PutMapping("/users/{userId}/password")
 - @GetMapping("/users/{userId}/roles")
 - @PutMapping("/users/{userId}/roles")
 - @GetMapping("/users/{userId}/permissions")

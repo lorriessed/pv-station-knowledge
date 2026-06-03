@@ -791,10 +791,12 @@
 - `AuthorizationServerConfig` (class) `com.rrsjk.oauth2.config` -> `rrsjk-oauth2-web/src/main/java/com/rrsjk/oauth2/config/AuthorizationServerConfig.java`
 - `AuthzAdminController` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzAdminController.java`
 - `AuthzAdminMapper` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzAdminMapper.java`
+- `AuthzClientConfig` (class) `com.rrsjk.adminauthserver.authz` -> `rrsjk-admin-auth-server/src/main/java/com/rrsjk/adminauthserver/authz/AuthzClientConfig.java`
 - `AuthzClientConfig` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzClientConfig.java`
 - `AuthzClientConfig` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-biff/src/main/java/com/rrsjk/adminbff/authz/AuthzClientConfig.java`
 - `AuthzController` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzController.java`
 - `AuthzController` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-biff/src/main/java/com/rrsjk/adminbff/authz/AuthzController.java`
+- `AuthzDubboProperties` (class) `com.rrsjk.adminauthserver.authz` -> `rrsjk-admin-auth-server/src/main/java/com/rrsjk/adminauthserver/authz/AuthzDubboProperties.java`
 - `AuthzDubboProperties` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzDubboProperties.java`
 - `AuthzDubboProperties` (class) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-biff/src/main/java/com/rrsjk/adminbff/authz/AuthzDubboProperties.java`
 - `AuthzMenu` (class) `com.rrsjk.adminauthz.domain.menu` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/java/com/rrsjk/adminauthz/domain/menu/AuthzMenu.java`
@@ -806,6 +808,7 @@
 - `AuthzMenuView` (class) `com.rrsjk.adminbff.authz.dto` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/dto/AuthzMenuView.java`
 - `AuthzMenuView` (class) `com.rrsjk.adminbff.authz.dto` -> `rrsjk-admin-biff/src/main/java/com/rrsjk/adminbff/authz/dto/AuthzMenuView.java`
 - `AuthzOidcUserService` (class) `com.rrsjk.adminbff.auth` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/auth/AuthzOidcUserService.java`
+- `AuthzPasswordCredentialDTO` (class) `com.rrsjk.adminauthz.api.dto` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-api/src/main/java/com/rrsjk/adminauthz/api/dto/AuthzPasswordCredentialDTO.java`
 - `AuthzPermission` (class) `com.rrsjk.adminauthz.domain.permission` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/java/com/rrsjk/adminauthz/domain/permission/AuthzPermission.java`
 - `AuthzPermissionClient` (interface) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzPermissionClient.java`
 - `AuthzPermissionDTO` (class) `com.rrsjk.adminauthz.api.dto` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-api/src/main/java/com/rrsjk/adminauthz/api/dto/AuthzPermissionDTO.java`
@@ -831,6 +834,7 @@
 - `AuthzSnapshotServiceImpl` (class) `com.rrsjk.adminauthz.service` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/java/com/rrsjk/adminauthz/service/AuthzSnapshotServiceImpl.java`
 - `AuthzUser` (class) `com.rrsjk.adminauthz.domain.user` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/java/com/rrsjk/adminauthz/domain/user/AuthzUser.java`
 - `AuthzUserAdminClient` (interface) `com.rrsjk.adminbff.authz` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzUserAdminClient.java`
+- `AuthzUserDetailsService` (class) `com.rrsjk.adminauthserver.authz` -> `rrsjk-admin-auth-server/src/main/java/com/rrsjk/adminauthserver/authz/AuthzUserDetailsService.java`
 - `AuthzUserIdentityDTO` (class) `com.rrsjk.adminauthz.api.dto` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-api/src/main/java/com/rrsjk/adminauthz/api/dto/AuthzUserIdentityDTO.java`
 - `AuthzUserRole` (class) `com.rrsjk.adminauthz.domain.relation` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/java/com/rrsjk/adminauthz/domain/relation/AuthzUserRole.java`
 - `AuthzUserService` (interface) `com.rrsjk.adminauthz.api` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-api/src/main/java/com/rrsjk/adminauthz/api/AuthzUserService.java`
@@ -4127,6 +4131,8 @@
 - `DubboJob` (class) `com.haier.cbs.job.buildin` -> `job-service/job-impl/src/main/java/com/haier/cbs/job/buildin/DubboJob.java`
 - `DubboJobInfo` (class) `com.rrsjk.system.task.entity` -> `rrsjk-system-service/rrsjk-system-api/src/main/java/com/rrsjk/system/task/entity/DubboJobInfo.java`
 - `DubboJobLoader` (class) `com.haier.cbs.job.buildin` -> `job-service/job-impl/src/main/java/com/haier/cbs/job/buildin/DubboJobLoader.java`
+- `DubboReferenceFactory` (class) `com.rrsjk.adminauthserver.authz` -> `rrsjk-admin-auth-server/src/main/java/com/rrsjk/adminauthserver/authz/DubboReferenceFactory.java`
+- `DubboReferenceFactory` (class) `com.rrsjk.adminbff.dubbo` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/dubbo/DubboReferenceFactory.java`
 - `DubboServiceInvocationException` (class) `com.haier.cbs.job.buildin` -> `job-service/job-impl/src/main/java/com/haier/cbs/job/buildin/DubboServiceInvocationException.java`
 - `DubboServiceInvokeUtil` (class) `` -> `base-service/base-impl/src/test/java/DubboServiceInvokeUtil.java`
 - `DubboTraceIdFilter` (class) `com.nahui.energy.filter` -> `rrsjk-light-common/rrsjk-light-base/src/main/java/com/nahui/energy/filter/DubboTraceIdFilter.java`
@@ -12936,7 +12942,7 @@
 - `LoginInfoStrategy` (class) `com.rrsjk.data.service.strategy` -> `rrsjk-migration-member/rrsjk-data-migration-impl/src/main/java/com/rrsjk/data/service/strategy/LoginInfoStrategy.java`
 - `LoginInterceptor` (class) `com.rrsjk.admin.interceptor` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/interceptor/LoginInterceptor.java`
 - `LoginInterceptor` (class) `com.rrsjk.app.interceptor` -> `rrsjk-app-web/src/main/java/com/rrsjk/app/interceptor/LoginInterceptor.java`
-- `LoginLogRecorder` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/LoginLogRecorder.java`
+- `LoginLogResult` (enum) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/LoginLogResult.java`
 - `LoginModel` (class) `com.sar.yunkuaichong.model` -> `nahuipv-hnzc-app-android/app/src/main/java/com/sar/yunkuaichong/model/LoginModel.java`
 - `LoginPresenter` (class) `com.sar.yunkuaichong.presenter` -> `nahuipv-hnzc-app-android/app/src/main/java/com/sar/yunkuaichong/presenter/LoginPresenter.java`
 - `LoginResInfo` (class) `top.uhyils.usher.pojo.DTO` -> `usher-protofuse/usher-protofuse-protocol/usher-protofuse-protocol-core/src/main/java/top/uhyils/usher/pojo/DTO/LoginResInfo.java`
@@ -14157,11 +14163,14 @@
 - `OperationInstallStationService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/OperationInstallStationService.java`
 - `OperationInstallStationServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/OperationInstallStationServiceImpl.java`
 - `OperationLog` (interface) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLog.java`
+- `OperationLogAdminController` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogAdminController.java`
 - `OperationLogAspect` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogAspect.java`
+- `OperationLogAspectLoginTest` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/test/java/com/rrsjk/adminbff/operationlog/OperationLogAspectLoginTest.java`
 - `OperationLogAsyncConfig` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogAsyncConfig.java`
 - `OperationLogDubboConfig` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogDubboConfig.java`
 - `OperationLogDubboProperties` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogDubboProperties.java`
 - `OperationLogSanitizer` (class) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogSanitizer.java`
+- `OperationLogTarget` (enum) `com.rrsjk.adminbff.operationlog` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationlog/OperationLogTarget.java`
 - `OperationLossAuditRequest` (class) `com.rrsjk.adminbff.serviceprovidermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/request/OperationLossAuditRequest.java`
 - `OperationLossBuilderDetailView` (class) `com.rrsjk.adminbff.serviceprovidermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/view/OperationLossBuilderDetailView.java`
 - `OperationLossController` (class) `com.rrsjk.adminbff.serviceprovidermanagement.controller` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/OperationLossController.java`
@@ -15177,6 +15186,18 @@
 - `PartyADepositController` (class) `com.rrsjk.adminbff.industrialepc.controller` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/PartyADepositController.java`
 - `PartyADepositQueryRequest` (class) `com.rrsjk.adminbff.industrialepc.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/request/PartyADepositQueryRequest.java`
 - `PartyADepositView` (class) `com.rrsjk.adminbff.industrialepc.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/view/PartyADepositView.java`
+- `PartyController` (class) `com.rrsjk.adminbff.subcentermanagement.controller` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyController.java`
+- `PartyQueryRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/PartyQueryRequest.java`
+- `PartySaveRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/PartySaveRequest.java`
+- `PartySelectableUserView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/PartySelectableUserView.java`
+- `PartyStatusRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/PartyStatusRequest.java`
+- `PartyUserController` (class) `com.rrsjk.adminbff.subcentermanagement.controller` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyUserController.java`
+- `PartyUserOptionsView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/PartyUserOptionsView.java`
+- `PartyUserQueryRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/PartyUserQueryRequest.java`
+- `PartyUserSaveRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/PartyUserSaveRequest.java`
+- `PartyUserStatusRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/PartyUserStatusRequest.java`
+- `PartyUserView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/PartyUserView.java`
+- `PartyView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/PartyView.java`
 - `Password` (class) `top.uhyils.usher.mysql.util` -> `usher-protofuse/usher-protofuse-protocol/usher-protofuse-protocol-mysql/src/main/java/top/uhyils/usher/mysql/util/Password.java`
 - `Password` (class) `top.uhyils.usher.pojo.entity.type` -> `usher-common/usher-common-base/src/main/java/top/uhyils/usher/pojo/entity/type/Password.java`
 - `PasswordRegexCheckUtil` (class) `com.haier.cbs.web.util` -> `cbs-web/src/main/java/com/haier/cbs/web/util/PasswordRegexCheckUtil.java`
@@ -19322,6 +19343,7 @@
 - `SubBuildDataQueryRequest` (class) `com.rrsjk.adminbff.datadashboard.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/request/SubBuildDataQueryRequest.java`
 - `SubBuildDataView` (class) `com.rrsjk.adminbff.datadashboard.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/view/SubBuildDataView.java`
 - `SubCenterAware` (interface) `com.rrsjk.light.operation.dto.v2.query` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/dto/v2/query/SubCenterAware.java`
+- `SubCenterController` (class) `com.rrsjk.adminbff.subcentermanagement.controller` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/SubCenterController.java`
 - `SubCenterDataFilter` (interface) `com.rrsjk.hds.controller.lightoperation.v2.annotation` -> `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/annotation/SubCenterDataFilter.java`
 - `SubCenterDataFilterAspect` (class) `com.rrsjk.hds.controller.lightoperation.v2.aspect` -> `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/aspect/SubCenterDataFilterAspect.java`
 - `SubCenterInfo` (class) `com.rrsjk.merchant.vo.light` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/vo/light/SubCenterInfo.java`
@@ -19332,6 +19354,12 @@
 - `SubCenterInfoService` (interface) `com.rrsjk.system.basic.service` -> `rrsjk-system-service/rrsjk-system-api/src/main/java/com/rrsjk/system/basic/service/SubCenterInfoService.java`
 - `SubCenterInfoServiceImpl` (class) `com.rrsjk.system.basic.service.impl` -> `rrsjk-system-service/rrsjk-system-impl/src/main/java/com/rrsjk/system/basic/service/impl/SubCenterInfoServiceImpl.java`
 - `SubCenterInfoServiceTest` (class) `com.rrsjk.system.basic.service.impl` -> `rrsjk-system-service/rrsjk-system-impl/src/test/java/com/rrsjk/system/basic/service/impl/SubCenterInfoServiceTest.java`
+- `SubCenterQueryRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/SubCenterQueryRequest.java`
+- `SubCenterSelectableUserView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/SubCenterSelectableUserView.java`
+- `SubCenterUserAddRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/SubCenterUserAddRequest.java`
+- `SubCenterUserRemoveRequest` (class) `com.rrsjk.adminbff.subcentermanagement.request` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/request/SubCenterUserRemoveRequest.java`
+- `SubCenterUserView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/SubCenterUserView.java`
+- `SubCenterView` (class) `com.rrsjk.adminbff.subcentermanagement.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/view/SubCenterView.java`
 - `SubCenterWorkOrderStats` (class) `com.rrsjk.light.operation.dto.v2` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/dto/v2/SubCenterWorkOrderStats.java`
 - `SubDirectoryAndFileDTO` (class) `com.nahui.energy.pojo.dto.km` -> `vpp-api-km/vpp-km-biz/src/main/java/com/nahui/energy/pojo/dto/km/SubDirectoryAndFileDTO.java`
 - `SubDirectoryAndFileQueryDTO` (class) `com.nahui.energy.pojo.dto.km` -> `vpp-api-km/vpp-km-biz/src/main/java/com/nahui/energy/pojo/dto/km/SubDirectoryAndFileQueryDTO.java`
@@ -19637,6 +19665,7 @@
 - `SysParamEnum` (enum) `top.uhyils.usher.redis.param` -> `usher-common/usher-common-data/usher-common-data-redis/src/main/java/top/uhyils/usher/redis/param/SysParamEnum.java`
 - `SysParty` (class) `com.haier.cbs.system.entity` -> `system-service/system-service/src/main/java/com/haier/cbs/system/entity/SysParty.java`
 - `SysPartyClient` (class) `com.rrsjk.adminbff.repurchasemanagement.client` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/client/SysPartyClient.java`
+- `SysPartyClient` (class) `com.rrsjk.adminbff.subcentermanagement.client` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/client/SysPartyClient.java`
 - `SysPartyController` (class) `com.haier.cbs.web.controller.sysParty` -> `cbs-web/src/main/java/com/haier/cbs/web/controller/sysParty/SysPartyController.java`
 - `SysPartyDao` (interface) `com.haier.cbs.system.dao` -> `system-service/system-impl/src/main/java/com/haier/cbs/system/dao/SysPartyDao.java`
 - `SysPartyModel` (class) `com.haier.cbs.system.model` -> `system-service/system-impl/src/main/java/com/haier/cbs/system/model/SysPartyModel.java`
@@ -19686,6 +19715,7 @@
 - `SysRoleMenuServiceImpl` (class) `com.nahui.energy.service.sys.impl` -> `vpp-api-ems/vpp-biz/src/main/java/com/nahui/energy/service/sys/impl/SysRoleMenuServiceImpl.java`
 - `SysSession` (class) `com.haier.cbs.system.entity` -> `system-service/system-service/src/main/java/com/haier/cbs/system/entity/SysSession.java`
 - `SysSessionDao` (interface) `com.haier.cbs.system.dao` -> `system-service/system-impl/src/main/java/com/haier/cbs/system/dao/SysSessionDao.java`
+- `SysSubCenterClient` (class) `com.rrsjk.adminbff.subcentermanagement.client` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/client/SysSubCenterClient.java`
 - `SysTable` (interface) `top.uhyils.usher.plan.pojo.sys` -> `usher-protofuse/usher-protofuse-plan/src/main/java/top/uhyils/usher/plan/pojo/sys/SysTable.java`
 - `SysTableEnum` (enum) `top.uhyils.usher.plan.enums` -> `usher-protofuse/usher-protofuse-plan/src/main/java/top/uhyils/usher/plan/enums/SysTableEnum.java`
 - `SysTenantController` (class) `com.nahui.energy.controller.sys` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/controller/sys/SysTenantController.java`
@@ -19720,6 +19750,7 @@
 - `SystemServiceImplTest` (class) `com.haier.cbs.system.service.impl.test` -> `system-service/system-impl/src/test/java/com/haier/cbs/system/service/impl/test/SystemServiceImplTest.java`
 - `SystemSysUserDao` (class) `com.rrsjk.migration.system.dao` -> `rrsjk-migration-mix/rrsjk-migration-mix-impl/src/main/java/com/rrsjk/migration/system/dao/SystemSysUserDao.java`
 - `SystemSysUserHandler` (class) `com.rrsjk.migration.system.handler` -> `rrsjk-migration-mix/rrsjk-migration-mix-impl/src/main/java/com/rrsjk/migration/system/handler/SystemSysUserHandler.java`
+- `SystemUserClient` (class) `com.rrsjk.adminbff.subcentermanagement.client` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/client/SystemUserClient.java`
 - `T` (class) `com.rrsjk.cms` -> `rrsjk-cms-service/rrsjk-cms-impl/src/test/java/com/rrsjk/cms/T.java`
 - `TPlant` (class) `com.rrsjk.report.entity.ods` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/entity/ods/TPlant.java`
 - `TPlantDao` (class) `com.rrsjk.report.dao.ods` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/dao/ods/TPlantDao.java`
@@ -20408,6 +20439,7 @@
 - `UserOperatorRelationJobServiceImpl` (class) `com.rrsjk.merchant.mix.job.service.impl` -> `rrsjk-merchant-service/rrsjk-merchant-impl/src/main/java/com/rrsjk/merchant/mix/job/service/impl/UserOperatorRelationJobServiceImpl.java`
 - `UserOperatorRelationService` (interface) `com.rrsjk.merchant.mix.service` -> `rrsjk-merchant-service/rrsjk-merchant-api/src/main/java/com/rrsjk/merchant/mix/service/UserOperatorRelationService.java`
 - `UserOperatorRelationServiceImpl` (class) `com.rrsjk.merchant.mix.service.impl` -> `rrsjk-merchant-service/rrsjk-merchant-impl/src/main/java/com/rrsjk/merchant/mix/service/impl/UserOperatorRelationServiceImpl.java`
+- `UserPasswordResetRequest` (class) `com.rrsjk.adminbff.authz.dto` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/dto/UserPasswordResetRequest.java`
 - `UserPost` (class) `com.nahui.energy.pojo.entity` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/pojo/entity/UserPost.java`
 - `UserPostAssembler` (class) `com.nahui.energy.assembler` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/assembler/UserPostAssembler.java`
 - `UserPostDO` (class) `com.nahui.energy.pojo.DO` -> `vpp-api-system/vpp-system-biz/src/main/java/com/nahui/energy/pojo/DO/UserPostDO.java`
@@ -22226,7 +22258,9 @@
 - `ZhongYinTradeIncomeSettleExcel` (class) `com.rrsjk.admin.controller.light.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/vo/ZhongYinTradeIncomeSettleExcel.java`
 - `ZhongYinTradeIncomeSettleService` (interface) `com.rrsjk.light.service.zhongyin` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/zhongyin/ZhongYinTradeIncomeSettleService.java`
 - `ZhongYinTradeIncomeSettleServiceImpl` (class) `com.rrsjk.light.service.zhongyin` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/zhongyin/ZhongYinTradeIncomeSettleServiceImpl.java`
+- `Zk34CompatibleCuratorZookeeperClient` (class) `com.rrsjk.adminauthserver.dubbo.zk34` -> `rrsjk-admin-auth-server/src/main/java/com/rrsjk/adminauthserver/dubbo/zk34/Zk34CompatibleCuratorZookeeperClient.java`
 - `Zk34CompatibleCuratorZookeeperClient` (class) `com.rrsjk.adminbff.dubbo.zk34` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/dubbo/zk34/Zk34CompatibleCuratorZookeeperClient.java`
+- `Zk34CompatibleCuratorZookeeperTransporter` (class) `com.rrsjk.adminauthserver.dubbo.zk34` -> `rrsjk-admin-auth-server/src/main/java/com/rrsjk/adminauthserver/dubbo/zk34/Zk34CompatibleCuratorZookeeperTransporter.java`
 - `Zk34CompatibleCuratorZookeeperTransporter` (class) `com.rrsjk.adminbff.dubbo.zk34` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/dubbo/zk34/Zk34CompatibleCuratorZookeeperTransporter.java`
 - `ZkNodeData` (class) `com.haier.cbs.job.domain.server` -> `job-service/job-impl/src/main/java/com/haier/cbs/job/domain/server/ZkNodeData.java`
 - `ZrangeRedisCommand` (class) `top.uhyils.usher.redis.pojo.cqe.command.impl` -> `usher-protofuse/usher-protofuse-protocol/usher-protofuse-protocol-redis/src/main/java/top/uhyils/usher/redis/pojo/cqe/command/impl/ZrangeRedisCommand.java`

@@ -1,9 +1,10 @@
 {
   "started_at": "2026-05-30",
-  "last_analyzed": null,
-  "traced": [],
+  "last_analyzed": "2026-06-03",
+  "traced": [
+    {"chain_group": "农村户用", "month_income": 55935, "responsible_person": "类成伟", "priority": 1, "key": "rural-household", "analyzed_at": "2026-06-03", "doc": "rural-household.md"}
+  ],
   "pending": [
-    {"chain_group": "农村户用", "month_income": 55935, "responsible_person": "类成伟", "priority": 1, "key": "rural-household"},
     {"chain_group": "光伏逆变器", "month_income": 2674, "responsible_person": "熊伟", "priority": 1, "key": "pv-inverter"},
     {"chain_group": "微慕户储", "month_income": 1795, "responsible_person": "王敏", "priority": 1, "key": "weimu-home-storage"},
     {"chain_group": "发电收入", "month_income": 1635, "responsible_person": "/", "priority": 2, "key": "power-generation-income"},

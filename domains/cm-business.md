@@ -183,3 +183,20 @@
 - 终验法的具体业务规则和触发条件
 - `CmConstructionProgressAuditService` 的完整接口定义
 - 工商业项目(`CmLightProject`)与户用电站(`LightStation`)的数据模型关系
+
+### 收入政策并行审核方案 (TAEI-3083/TAEI-3085, 代码明确证明, 2026-05-19~21)
+**来源**: `rrsjk-light-service` (解钦, branch: origin/feature-cm-wind-electric)
+- **CmLightProjectIncomePolicy**: 实体修改支持并行审核方案 (`eb6bb79b`, 3行变更)
+- **收入政策导入校验**: 新增导入时的校验逻辑 (`37a61acc`)
+- **政策编码生成**: 项目定制类型的政策编码生成 (`8a9d967c`)
+- **节点查询方法**: 提供根据业务类型查询节点的方法 (`0a5fe895`)
+- **状态修改**: 收入政策状态修改和生成的子政策字段设置 (`99e3aa9e`)
+- **设计方案修改**: 工商业风电项目扩展计收方法字段 (`db257231`, CmLightProject +10/-5行, CmLightProjectNewRequest +2行)
+- **证据等级**: 代码明确证明
+
+### 电站回退冲销兼容完工前领用 (TAEI-3083, 代码明确证明, 2026-05-19~21)
+**来源**: `rrsjk-light-service` (解钦, branch: origin/feature-cm-wind-electric)
+- **核心场景**: 电站回退重新领用时区分"完工前领用"和"完工后领用"
+- **旧逻辑缺陷**: 完工前领用不创建SO出库队列，回退冲销时未处理
+- **修复提交**: `eb8bd383`/`789fff6c`/`2fbdd007`/`e5c03619` (4次迭代修复)
+- **证据等级**: 代码明确证明

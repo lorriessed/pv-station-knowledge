@@ -109,22 +109,24 @@
 ## CBS 管理后台 (`domains/cbs-management.md`)
 - 关键词：CBS、分中心、分中心用户、后台管理、定时任务日志、登录认证、菜单管理。
 - 知识库：`domains/cbs-management.md`
-- 代码入口：`cbs-web` → `SysSubCenterController`(分中心管理), `HomeController`(登录), `JobLogController`(定时任务日志), `MenuController`(菜单)
-- 路由前缀：`/sysSubCenter/`(分中心), `/sys/login.do`(登录)
+- 代码入口：`cbs-web` → `SysSubCenterController`(分中心管理, ⚠️ 迁移中), `HomeController`(登录), `JobLogController`(定时任务日志), `MenuController`(菜单)
+- 路由前缀：`/sysSubCenter/`(分中心, ⚠️ 旧版), `/sys/login.do`(登录)
 |- 技术栈：Java + Spring MVC + Shiro + Velocity/FreeMarker
 - **分中心管理**: `/sysSubCenter/subCenterList`(列表), `/sysSubCenter/subCenterUserList`(人员), `/sysSubCenter/addSubCenterUser`(添加人员)
 - **登录**: 验证码(randomCode)已改为非必填 (2026-05-20)
+- **⚠️ 迁移提示 (2026-06-03)**: 新版分中心管理已迁移到 `rrsjk-admin-bff` → `subcentermanagement` 模块 (SubCenterController/PartyController/PartyUserController)，通过 Dubbo 调用 system-service。详见 `domains/admin-authz.md` §12。
 
 ## Admin 认证授权 (`domains/admin-authz.md`)
-- 关键词：admin-authz、认证、授权、菜单权限、角色管理、OIDC、BFF、OAuth2。
+- 关键词：admin-authz、认证、授权、菜单权限、角色管理、OIDC、BFF、OAuth2、密码重置、分中心管理迁移。
 - 知识库：`domains/admin-authz.md` (✅ 已创建, 2026-05-30 全量通读)
 - 代码入口：
   - `rrsjk-admin-auth-server` → OAuth2/OIDC 认证服务器 (port 9000, Spring Boot 3.5.14)
-  - `rrsjk-admin-authz-service` → Dubbo 授权服务 (用户/角色/菜单/权限/快照, 7 张 authz 表)
-  - `rrsjk-admin-bff` → BFF 层 (port 8081, OAuth2 Client, 资产/结算/仓储等业务 Controller)
+  - `rrsjk-admin-authz-service` → Dubbo 授权服务 (用户/角色/菜单/权限/快照, 8 张 authz 表)
+  - `rrsjk-admin-bff` → BFF 层 (port 18092, OAuth2 Client, 资产/结算/仓储/分中心等业务 Controller)
   - `rrsjk-admin-web-next` → Vue3 新管理后台前端
-- **核心表**: `authz_user`, `authz_role`, `authz_menu`, `authz_permission`, `authz_user_role`, `authz_role_permission`, `authz_user_permission`
+- **核心表**: `authz_user`, `authz_role`, `authz_menu`, `authz_permission`, `authz_user_role`, `authz_role_permission`, `authz_user_permission`, `authz_user_password` (2026-06-02 新增)
 - **实例**: pv-mysql-prod (rm-m5ebm056ct14p18zu)
+- **注意**: 认证服务器 2026-06-03 起通过 Dubbo 调用 authz-service 加载用户密码凭据，不再使用硬编码 admin/admin123
 
 ## 工商业(CM) (`domains/cm-business.md`)
 - 关键词：工商业、风电、终验法、施工进度审核、收入政策、投决审核、项目立项。
@@ -152,4 +154,11 @@
   - `rrsjk-light-operation-service` → `LightOperationInspectionPlanService`, `LightOperationStationService`
 - 新增接口: `GET /light/operation/inspection/plan/operator/search` — 查询运维商列表（电站表去重）
 - 前端: `nahui-pv.hds-h5` → 年度巡检新增资方/运维商多选
+
+## 基础系统服务 (`domains/system-infra-service.md`)
+- 关键词：银行、联行号、支行、地区、OCR、身份证识别、日历、工作日、字典、短信、邮件、定时任务、敏感词、支付账号。
+- 知识库：`domains/system-infra-service.md`
+- 代码入口：`rrsjk-system-service` → `BankService`, `RegionService`, `OcrAnalyseRecordService`, `CalendarDayService`, `MessageService`, `JobService`
+- 常见表：`bank_info`, `bank_area`, `calendar_day`, `ocr_analyse_record`, `express`, `xiaowei`, `chain_group`, `sensitive_word`
+- 注意：区分 `system-service` (CBS 基础用户/权限/菜单/团体) 和 `rrsjk-system-service` (银行/地区/OCR/字典/消息)
 

@@ -171,6 +171,26 @@ StationIncomeHandleStrategyFactory
   - 修复线下转账支付流程中的FAP记录创建逻辑 (`944d1684`)
 - **证据等级**: 代码明确证明
 
+### TAEI-3023 经营性租赁回款接FAP（开发中, 2026-06-02）
+**来源**: `rrsjk-light-service` (代继宁, branch: origin/20260602-fapPart2, commit: fb0c4c5b48, 2026-06-02)
+- **负责人**: 刘艺(PM) | **实际开发**: 代继宁 | **参与人**: 薛荣基
+- **变更**: `LightFapRecordServiceImpl` 中注释掉经营性租赁资产FAP状态同步逻辑
+  - `syncOperationalAssetFapSentStatus()` — 注释掉更新 FAP 发送状态
+  - `syncOperationalAssetFapResult()` — 注释掉 FAP 查询结果自动确认
+  - **Dubbo 配置新增**: `service.xml` 新增 `operationalAssetManagementService` 引用 → `com.rrsjk.report.service.OperationalAssetManagementService`
+- **推断**: 经营性租赁回款的FAP状态同步功能正在解耦或迁移到新的服务路径，当前暂时禁用旧同步逻辑
+- **证据等级**: 代码明确证明
+
+### TAEI-3079 电费收益相关优化（测试中, 2026-06-01）
+**来源**: `rrsjk-light-service` (tn_wangb/王斌, commits: fcc3f015/0cb5e245ba/60cd5f1b1a, 2026-06-01)
+- **负责人**: 徐晓凤 | **实际开发**: 王金浩(laowang/tn_wangb) | **参与人**: 薛荣基、商轶龙
+- **变更**:
+  - `LightProjectElectricOrder.xml`: 批量更新 `fap_cancel_status` 字段（CASE WHEN 批量更新模式）
+  - `CmLightProject.java`: 工商业电站写入工商业项目编码
+  - `LightSpOrder` 分支: 传SAP记出库、收入取主数据逻辑优化（不判断物料状态，取最后一条数据）
+- **关联表**: `light_project_electric_order` (新增 fap_cancel_status 批量更新)
+- **证据等级**: 代码明确证明
+
 ### 零碳适家安装费 — 服务重构 (代码明确证明, 2026-04-30)
 **来源**: `rrsjk-light-service` → `ZeroCarbonSpDepositServiceImpl.java` (commits 0fafc048/298da120/3a301b8d, 代继宁, 2026-04-30, branch: master_pre_prod_20260206-ZeroCarbonInstallFee)
 - 优化零碳安装费用服务实现
@@ -1218,3 +1238,27 @@ stationParam.put("spMemberId", spMemberId);
 - `CloudInvoiceCreateModel`/`CloudInvoiceQueryModel` 发票重传逻辑修复（commit message: "fix:重传发票"）
 - 与 `SyncSapIncomeHandle` 同开发者同一天提交，可能为关联修复
 - **证据等级**: 历史扫描推断（diff 未展示具体代码变更）
+
+### FAP凭证集成与补偿机制 (TAEI-3021/TAEI-3022, 代码明确证明, 2026-05-18~24)
+**来源**: `rrsjk-light-service/LightFapRecordServiceImpl.java`, `rrsjk-trade-service`, `rrsjk-admin-web`, `rrsjk-merchant-web` (代继宁)
+**需求**: TAEI-3021 零碳适家保证金/订单收款接FAP, TAEI-3022 绿证交易订单收款接FAP
+- **核心实体**: `LightFapRecord` — FAP凭证记录表 (rrsjk_light库)
+- **凭证补偿机制**: 新增物料回购、站点回购、服务押金等多种业务类型的补偿处理 (`34fc750e`, +137行)
+- **补偿状态移除**: 从 `LightFapRecord` 实体删除补偿状态枚举及字段 (`0e7e2f5e`, -54行)
+- **实时查询**: 新增 `queryFapInfoFromFapSys()` 方法从FAP系统实时查询制证状态
+- **取消逻辑优化**: 增加状态检查和本地标记机制，防止重复取消 (`dd2ef5c8`)
+- **批量处理**: FAP推送和查询定时任务增加批量处理和异常处理
+- **业务类型识别**: `isCancelProneBizType()` 识别易取消业务类型
+- **前端支持**: admin-web 新增 FAP收款记录导出、状态显示修复
+- **订单同步**: trade-service 移除未使用的FAP同步查询方法，新增凭证更新日志
+- **⚠️ 风险**: 旧补偿逻辑已完全移除，新实时查询机制需验证覆盖所有补偿场景
+- **涉及Service**: LightFapRecordService, LightSpOrderItemDao, rrsjk-trade-service订单项目同步
+- **证据等级**: 代码明确证明
+
+### 资方结算服务性能优化 (TAEI-3085, 代码明确证明, 2026-05-19)
+**来源**: `rrsjk-light-service` (解钦) — 8个资方结算ServiceImpl
+**需求**: TAEI-3085 增加上收限制
+- **优化方式**: `Assert.isTrue(msg)` → `Assert.isTrue(() -> msg)` (eager字符串拼接改为lazy Supplier)
+- **涉及Service**: HuaRongTradeIncomeSettleServiceImpl, LightFundSettleServiceImpl, LightHdIncomeServiceImpl, LightStationYuexiuSettleServiceImpl, LightZhSettleServiceImpl, PuYinTradeIncomeSettleServiceImpl, ZhaoYinTradeIncomeSettleServiceImpl, ZhongYinTradeIncomeSettleServiceImpl
+- **影响**: 避免断言通过时的无谓字符串拼接，提升批量导入性能
+- **证据等级**: 代码明确证明

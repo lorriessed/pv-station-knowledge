@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-02 23:01:28
+更新时间: 2026-06-03 23:01:37
 
 ## 仓库列表
 
@@ -21,7 +21,7 @@
 - log_report_plugin: /data/pvcode/log_report_plugin (无变更)
 - main_contract_extraction: /data/pvcode/main_contract_extraction (无变更)
 - main_contract_whole_extraction: /data/pvcode/main_contract_whole_extraction (无变更)
-- nahui-dashboad-h5: /data/pvcode/nahui-dashboad-h5 (变更)
+- nahui-dashboad-h5: /data/pvcode/nahui-dashboad-h5 (无变更)
 - nahui-dicts-serve: /data/pvcode/nahui-dicts-serve (无变更)
 - nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (无变更)
 - nahui-pv.epcb-mini: /data/pvcode/nahui-pv.epcb-mini (无变更)
@@ -57,8 +57,8 @@
 - rrs-dispenser-server: /data/pvcode/rrs-dispenser-server (无变更)
 - rrs-parent: /data/pvcode/rrs-parent (无变更)
 - rrsjk-activity-service: /data/pvcode/rrsjk-activity-service (无变更)
-- rrsjk-admin-auth-server: /data/pvcode/rrsjk-admin-auth-server (无变更)
-- rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (无变更)
+- rrsjk-admin-auth-server: /data/pvcode/rrsjk-admin-auth-server (变更)
+- rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (变更)
 - rrsjk-admin-bff: /data/pvcode/rrsjk-admin-bff (变更)
 - rrsjk-admin-biff: /data/pvcode/rrsjk-admin-biff (无变更)
 - rrsjk-admin-web: /data/pvcode/rrsjk-admin-web (变更)
@@ -118,7 +118,7 @@
 - vpp-api-system: /data/pvcode/vpp-api-system (无变更)
 - vpp-api-template: /data/pvcode/vpp-api-template (无变更)
 - vpp-crawler: /data/pvcode/vpp-crawler (无变更)
-- vpp-data-platform: /data/pvcode/vpp-data-platform (变更)
+- vpp-data-platform: /data/pvcode/vpp-data-platform (无变更)
 - vpp-openapi: /data/pvcode/vpp-openapi (无变更)
 - vpp-pv-oversea: /data/pvcode/vpp-pv-oversea (无变更)
 - vpp-template: /data/pvcode/vpp-template (无变更)

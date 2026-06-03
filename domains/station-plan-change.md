@@ -422,3 +422,8 @@ STATION_INFO_CHANGE（电站冻结为 SUSPENDING）
 - `rrsjk-light-service` → `LightStationChangePlanToDo.ToDoTypeEnum`
 - **代码扫描日期**: 2026-05-24
 - **2026-05-28 追加**: 屋顶尺寸图片变更检查逻辑修复、审核跳过逻辑修复 (`LightStationPlanChangeServiceImpl`, commits 0759d36/5d5effb, wangxiran)
+- **2026-05-24 补漏追加**: 电站图片变更检查功能完整实现 (`LightStationPlanChangeServiceImpl`, commit 4218656a, wangxiran)
+  - 新增 `checkStationImagesNoChange()` 方法 — 比较屋顶尺寸图片、模块结构图片、产权证书、载荷报告图片
+  - 新增 `normalizeImageUrl()` URL标准化方法
+  - 业务语义: 图片无变化时可跳过审核流程，减少不必要的审批
+  - 关联需求: TAEI-3093 电站图片模板组数据库存储

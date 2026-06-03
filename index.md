@@ -1,34 +1,37 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-06-02
+更新时间: 2026-06-03
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
 | 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
-| 已通读 | 110/122 (第17轮) |
+| 已通读 | 122/122 (第20轮) |
 | 知识库文件 | 70+ 个 |
 | 知识库大小 | 6.8MB+ |
-| Domain 业务文件 | 31+ 个 (350KB+) |
+| Domain 业务文件 | 45+ 个 |
 | Source-map 索引 | 47,009+ 行 |
 
 ## 仓库通读进度
 
-### 全部 110/122 个仓库已通读 (第17轮，2026-06-02)
-- 本轮通读 5 个: rrsjk-mobile-h5, rrsjk-mobile-web, rrsjk-oauth2-web, rrsjk-pay-service, rrsjk-pay-web
+### 全部 122/122 个仓库已通读 (第20轮，2026-06-03)
+- 本轮通读 5 个: rrsjk-pvbusiness-job-service, rrsjk-report-web, rrsjk-system-service, rrsjk-trade-service, system-service
 - **知识库更新**: 
-  - **新建** `domains/payment-service.md` — 支付服务完整文档(12KB): 架构/场景/渠道/流程/表结构/API/外部依赖
-  - **追加** `domains/remaining-services-and-frontends.md` — OAuth2 大幅补充: SM2/中银登录/JWT细节/注销检查/小程序配置/表清单
-  - **追加** `domains/web-and-additional-services.md` — mobile-web 6个新模块: 工商业预测/储能小程序/顶好二类户/乐农商城/水站补贴
+  - **新建** `domains/system-infra-service.md` — rrsjk-system-service 完整文档(11KB): 银行/联行号/地区/OCR/日历/字典/短信/定时任务/敏感词/支付账号
+  - **追加** `domains/cbs-management.md` — system-service CBS基础服务: 用户/角色/菜单/权限/团体组织架构/V3分中心映射/Redis缓存
+  - **追加** `domains/frontend-and-misc-services.md` — SingleJob 分布式锁详细机制/LightOwnAsset 资产推送流程/资方大屏 SF_TOKEN 鉴权/工商业并网
+  - **追加** `domains/order-and-trade.md` — Hrois海外订单流程/发票Job体系(20+方法)/条码申请/FTP支付对账/零碳采购单/订单推送队列
 
 ## 目录
 
-### domains/ — 业务域知识 (30+ 个文件)
+### domains/ — 业务域知识 (45+ 个文件)
 - **电站与运维**: station-lifecycle, inverter-data, investor-management, operation-and-data, zero-carbon-station
 - **审核审批**: approval ⭐ (CBS 三审流程完整 + Flowable 流程引擎)
 - **交易订单**: order-and-trade, settlement, inventory, policy, **order-dispatch-delivery** ⭐ (下单-配货-发货全链路)
 - **核心服务**: additional-core-services, web-and-additional-services, frontend-and-misc-services, remaining-services-and-frontends
+- **基础系统**: **system-infra-service** ⭐ (银行/地区/OCR/日历/字典/短信/定时任务/支付账号)
+- **CBS管理**: cbs-management ⭐ (用户/角色/菜单/权限/团体组织架构)
 - **资方对接**: zhaoyin-lease, guangfa-business
 - **派单管理**: dispatch-order-scheduled-tasks
 - **收入策略**: income-mode-strategies

@@ -106,10 +106,22 @@
 - **业务含义**: `planPower` 已是总装机容量(kW)，不应再乘以组件数量
 - **证据等级**: 代码明确证明
 
-### TAEI-3168 零碳适家退商材料申请流程（开发中, 2026-06-01 追加）
-**来源**: `rrsjk-light-service` (tn_wangb/王斌, branch: origin/20260601-zeroCarbonMerchantQuit/TAEI-3168)
-- **负责人**: 刘艺(PM) | **实际开发**: 王斌(tn_wangb) | **参与人**: 代继宁、薛荣基
-- **早期变更**: `CmLightProject.P6` 枚举修复空格 + `LightEpcStationModel.createOrUpdateStation()` 新增写入 `projectCode`/`projectName`
-- **业务语义**: 工商业电站创建/更新时同步写入项目编码和名称，为后续退商材料申请流程做数据准备
-- **状态**: 仅 2 条提交，核心退商材料逻辑尚未开始开发
+### TAEI-3168 零碳适家退商材料申请流程（开发中, 2026-06-02 核心逻辑开始）
+**来源**: `rrsjk-light-service` (代继宁, branch: origin/20260601-zeroCarbonMerchantQuit/TAEI-3168, commit: 40cd05611e, 2026-06-02)
+- **负责人**: 刘艺(PM) | **实际开发**: 代继宁 | **参与人**: 王斌、薛荣基
+- **新增 DTO**: `ZeroCarbonSpWithdrawalCheckResult` (rrsjk-light-api)
+  - `pass`: Boolean — 是否通过退商校验
+  - `blockMsg`: String — 阻塞信息（未签收订单或未结算费用）
+  - `warnMsg`: String — 警告信息（未消耗库存，提示5秒）
+- **新增 Dubbo 接口**: `ZeroCarbonServiceProviderService.withdrawalCheck(spId)` → `ExecuteResult<ZeroCarbonSpWithdrawalCheckResult>`
+- **校验规则**:
+  1. 检查是否有未签收的采购订单 → `light_zero_carbon_purchase_order` → 阻塞
+  2. 检查是否有未结算的安装费 → `light_zero_carbon_installation_fee` → 阻塞
+  3. 检查是否有未消耗库存 → `light_zero_material_manage.countOfUnUseStockBySpu(spId)` → 仅警告
+- **涉及 DAO 新增方法**:
+  - `LightZeroCarbonInstallationFeeDao.findDistinctOrderNos()`
+  - `LightZeroMaterialManageMapper.countOfUnUseStockBySpu(spId)`
+- **外部服务依赖**: `ZeroCarbonInstallBillService` (finance-service, Dubbo 调用)
+- **证据等级**: 代码明确证明
+- **关联表**: `light_zero_carbon_purchase_order`, `light_zero_carbon_installation_fee`, `light_zero_material_manage`
 - **证据等级**: 代码明确证明

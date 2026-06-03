@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-02T23:01:28.903119",
+  "last_scan_at": "2026-06-03T23:01:37.785704",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -262,17 +262,17 @@
       "branch": "master"
     },
     "rrsjk-admin-auth-server": {
-      "head": "28ec0e87aa70af8c6d16f3d10a7a7fcc4ebfc87c",
+      "head": "6095a9c0d26d6c938d941efd1bd9b8d0bc71a84b",
       "path": "/data/pvcode/rrsjk-admin-auth-server",
       "branch": "master"
     },
     "rrsjk-admin-authz-service": {
-      "head": "ddf9953366ab493fe840febf395789bec60673a2",
+      "head": "d9827aed0a9ec3e2ebe3774bd66bba9e5ebd5c82",
       "path": "/data/pvcode/rrsjk-admin-authz-service",
       "branch": "master"
     },
     "rrsjk-admin-bff": {
-      "head": "dbdc0987f7defcfe2e322850a7135c692c67dd95",
+      "head": "e00888cceeb242c05bbd628fb5690055ab724d98",
       "path": "/data/pvcode/rrsjk-admin-bff",
       "branch": "master"
     },
@@ -282,7 +282,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "f8db870313f1dcd5435980a647d8bf25ae227349",
+      "head": "5281e35fea6a32f61b4d4e7a78f466b9b024df4b",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -372,12 +372,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "1c2f7c2140c55da0f8f317ed6a4fd1ec38e92c0d",
+      "head": "775b3f89ded20f99cdd811de952d88180a0f62f1",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "6ece3793a0c62f3ef4a179907b537fa1d9f2030a",
+      "head": "cafdcfcab5e2f0b27ddfa5c6e16ac162cda32c59",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -457,7 +457,7 @@
       "branch": "master"
     },
     "rrsjk-trade-service": {
-      "head": "b6611bdcf745508001e13757e73dfdd7b2f934fe",
+      "head": "edb2510a503f5c899a7a06da79af8a07ea63557d",
       "path": "/data/pvcode/rrsjk-trade-service",
       "branch": "master"
     },
