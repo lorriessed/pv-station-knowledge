@@ -116,6 +116,7 @@
 ## A 段政策按省份区分 (代码明确证明, 2026-06-03)
 
 **来源**: `rrsjk-admin-web` → `LightInstantRewardController.java`, `LightInstantRewardPolicyController.java`, `LightInstantRewardPolicyMonthController.java` (commits by 龙龙, 2026-05-13 ~ 2026-06-03, merge #584 from `20260601_longlong_A段政策按省份区分`)
+**最新提交**: commit fcb2414 (龙龙, 2026-06-03) — Mapper SQL修复: columns/create/batchInsert/update 均添加 `accurate_to_region` 字段
 
 ### 字段变更
 

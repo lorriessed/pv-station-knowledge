@@ -508,7 +508,13 @@ MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqi
 **来源**: `rrsjk-light-service` (代继宁, branch: origin/featrue-20260525-rentTaxReport/TAEI-3092)
 - **rent_tax_amount_record**: 租金个税明细记录表
 - **rent_tax_amount_summary**: 租金个税汇总表
-- **tax_amount_calculate_source_data**: 个税计算源数据表
+- **tax_amount_calculate_source_data**: 个税计算源数据表（底表）
+- **tax_amount_calculate_source_data_temp**: 个税计算中间表 (2026-06-04 新增)
+  - 用途: 分批处理中间存储，减少内存占用
+  - 实体: `TaxAmountCalculateSourceDataTemp.java` (64行)
+  - DAO: `TaxAmountCalculateSourceDataTempDao`
+  - 操作: truncate → INSERT FROM light_share_bill_record → 按公司编码迭代处理
+  - 唯一键: `rentDate_stationCode` 组合
 
 ### FAP凭证记录表 (TAEI-3021/TAEI-3022, 代码明确证明, 2026-05-18~24)
 **来源**: `rrsjk-light-service` (代继宁)
@@ -524,3 +530,31 @@ MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqi
   - 用途: 管理工商业电站项目的收入政策配置和审核流程
   - 2026-05-19~21变更: 支持并行审核方案、政策编码生成、导入校验
   - 实体: `CmLightProjectIncomePolicy.java`
+
+### 工商业自持电站损益报表相关表 (TAEI-3043, 代码明确证明, 2026-05-11~17)
+**来源**: `rrsjk-light-service` (王斌/龙龙)
+- **cm_owner_station_report**: 工商业自持电站损益报表主表 (rrsjk_light库)
+  - 用途: 存储工商业自持电站的月度损益报表数据
+  - 2026-05-11~17变更: 新增第三方日志关联、毛利率除零保护、发电来源字段非必填
+- **cm_owner_station_white_list**: 工商业电站白名单表 (rrsjk_light库)
+  - 用途: 管理工商业电站项目属性（如充电桩CDZ）、发电户号映射
+  - 2026-05-11~17变更: 扩展字段支持报表二期需求
+- **cm_owner_station_report_third_log**: 工商业自持电站损益报表第三方日志表 (rrsjk_light库) **【新表】**
+  - 用途: 记录从第三方系统（大数据库）查询发电量的日志
+  - Mapper: `CmOwnerStationReportThirdLog.xml` (214行新增)
+  - 实体: `CmOwnerStationReportThirdLog.java`
+- **light_high_elec**: 高压电费表 (rrsjk_light库)
+  - 2026-05-11~17变更: 新增 `queryMonth` 参数过滤
+
+### 派单配置表 (TAEI-3078, 代码明确证明, 2026-05-11~17)
+**来源**: `rrsjk-light-service` (解钦)
+- **light_audit_dispatch_time_config**: 审核派单时间配置表 (rrsjk_light库)
+  - 用途: 配置非工作日派单时间段，支持定时任务补跑积压工单
+  - 2026-05-11~17变更: `addConfig` 返回 `Long` (configId)，查询增加 `status=1` 过滤
+- **light_station_plan_change**: 电站方案变更表 (rrsjk_light库)
+  - 2026-05-11~17变更: 新增 `NO_NEED_AUDIT` 状态枚举，支持完工前仅品牌变更自动审核
+
+### 图片验真表 (TAEI-3098, 代码明确证明, 2026-05-11~17)
+**来源**: `rrsjk-light-service` (马斌)
+- **light_image_verification**: 图片验真记录表 (rrsjk_light库)
+  - 2026-05-11~17变更: 新增 `uniqueImageKey` 重复上传检查，入库前查询已存在记录并拦截

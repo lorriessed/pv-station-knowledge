@@ -621,9 +621,9 @@ rrsjk-light-service (Dubbo 服务提供者)
 - **修改**: `InverterController` — 空状态文本处理
 - **修改**: `StationElectricityController` — 电站发电状态空值处理
 
-## 12. BFF 分中心管理迁移 (2026-06-03 新增)
+## 12. BFF 分中心管理迁移 (2026-06-03 新增, 2026-06-04 合并到 master)
 
-**来源**: `rrsjk-admin-bff` subcentermanagement 模块, commits by yumiao (2026-06-03), merge `feature/202606/subcenter-management-migration`
+**来源**: `rrsjk-admin-bff` subcentermanagement 模块, commits by yumiao (2026-06-03), merge `feature/202606/subcenter-management-migration` into master (2026-06-04)
 **证据等级**: 代码明确证明
 
 旧 CBS 分中心管理 (`cbs-web` → `SysSubCenterController`) 正在迁移到新一代 BFF 架构。

@@ -891,3 +891,28 @@ if (exist != null) {
 - **停付原因**: OWNER_CHANGE(业主变更), BLACK_ACCOUNT(黑户), INITIAL_INSTALL_FEE(初装费), RENT(租金), DISPUTE(纠纷), OTHER(其他)
 - **状态**: 开发中（功能分支 dev，未合并到 master）
 - **证据等级**: 代码明确证明
+
+### 完工前方案变更自动审核 (TAEI-3061, 代码明确证明, 2026-05-14)
+**来源**: `rrsjk-light-service` → `LightStationPlanChangeServiceImpl.java` + `LightStationPlanChange.java` (王斌/龙龙)
+
+**业务规则**：
+- 完工前方案变更（`changeNode = COMPLETE_BEFORE`），如果仅变更品牌（组件型号未变），可跳过审核流程
+- 判断条件：`changeType = STATION_PLAN_CHANGE 或 ALL` + `changeNode = COMPLETE_BEFORE` + `checkNeedAudit(oriConfigList, planConfigList) == true`（仅品牌变更）
+- 自动审核通过：`status = NO_NEED_AUDIT`, `auditBy = "王红凯"` (硬编码), `auditAt = LocalDateTime.now()`
+- 直接执行 `executePlanChangeCompleteBefore(change, auditBy)` 完成变更
+
+**新增枚举**: `LightStationPlanChange.StatusEnum.NO_NEED_AUDIT("无需审核")`
+
+**⚠️ 代码质量风险**: 审核人"王红凯"硬编码在代码中，未通过配置或系统账号管理
+
+### 共享支付账单查询 (TAEI-3086, 代码明确证明, 2026-05-11~15)
+**来源**: `rrsjk-light-operation-service` (孙志男), `rrsjk-light-service` (孙志男), `pv.osp-uni` (李培龙)
+
+**变更链路**：
+- `light-operation-service`: 共享账单记录查询逻辑重构 + 修正租用月份参数
+- `light-service`: 新增共享账单记录明细查询功能 (`LightRentBillService`)
+- `pv.osp-uni` (UniApp): 前端添加共享支付账单查询入口
+- `light-operation-service`: 电站租金记录新增备注和账单日期字段
+- `hds-web`: 修复 A51 暂估业务逻辑
+
+**涉及表**: `light_project_rent_record` (租金记录), `light_share_bill` (共享账单)

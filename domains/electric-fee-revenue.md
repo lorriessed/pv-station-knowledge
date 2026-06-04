@@ -203,3 +203,17 @@ rrsjk-light-service (Dubbo Service)
 - **关联**: 与 TAEI-3025 BT报表项目可能有重叠（同一批开发人员）
 - **证据等级**: 代码明确证明
 
+### 电费发票列表查询增强 (2026-05-29~06-04)
+**来源**: `rrsjk-admin-web` → `LightCapitalProjectElectricOrderInvoiceController.java` / `LightProjectElectricOrderController.java` (commits by laowang, 2026-05-29~06-03)
+**证据等级**: 代码明确证明
+
+- **LightCapitalProjectElectricOrderInvoiceController** 新增查询条件:
+  - `invoiceStatus` — 发票状态筛选
+  - `purchaserName` — 购销方名称筛选
+  - `companyName` — 公司名称筛选
+- **多列表新增资方(capital)筛选**:
+  - `LightProjectElectricInvoiceReverseRecordController` — 发票冲销记录
+  - `LightProjectRentController` / `LightProjectRentRecordController` — 租金/租金记录
+  - `LightWvRentController` / `LightWvRentRecordController` — 瓦沃租金
+- **业务影响**: 财务/租金列表支持按资方维度过滤，满足多资方场景下的数据隔离需求
+

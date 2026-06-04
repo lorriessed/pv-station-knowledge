@@ -106,9 +106,11 @@
 - **业务含义**: `planPower` 已是总装机容量(kW)，不应再乘以组件数量
 - **证据等级**: 代码明确证明
 
-### TAEI-3168 零碳适家退商材料申请流程（开发中, 2026-06-02 核心逻辑开始）
-**来源**: `rrsjk-light-service` (代继宁, branch: origin/20260601-zeroCarbonMerchantQuit/TAEI-3168, commit: 40cd05611e, 2026-06-02)
+### TAEI-3168 零碳适家退商材料申请流程（开发中, 2026-06-04 阻塞状态）
+**来源**: `rrsjk-light-service` (代继宁, branch: origin/20260601-zeroCarbonMerchantQuit/TAEI-3168)
 - **负责人**: 刘艺(PM) | **实际开发**: 代继宁 | **参与人**: 王斌、薛荣基
+- **最新提交**: 81c6958(更新零碳订单/逆变器销售确认收款人), 3f56411(FAP单号查询为空bug修复), e660aef(解决冲突) — 2026-06-03
+- **状态**: 阻塞 (2026-06-04 云效状态为"阻塞")
 - **新增 DTO**: `ZeroCarbonSpWithdrawalCheckResult` (rrsjk-light-api)
   - `pass`: Boolean — 是否通过退商校验
   - `blockMsg`: String — 阻塞信息（未签收订单或未结算费用）

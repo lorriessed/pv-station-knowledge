@@ -3654,6 +3654,7 @@
 - @PostMapping("manualCreateInvoice")
 - @PostMapping("invoiceOffLine")
 - @GetMapping("export")
+- @PostMapping("cbsFapRecordCreate")
 
 ## PaybackConfirmAuditLogController
 - 文件: `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/controller/fund/PaybackConfirmAuditLogController.java`
@@ -5890,6 +5891,7 @@
 - @RequestMapping("/light/lightSapPurchaseRecord/")
 - @GetMapping("list.do")
 - @GetMapping("export.do")
+- @PostMapping("doExport.do")
 
 ## LightSpecialOutboundApplyController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/wms/LightSpecialOutboundApplyController.java`
@@ -14266,6 +14268,8 @@
 - @RequestMapping(value = "/confirmPay.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "/batchConfirmPay.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "/confirmSap.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/fapRecordCreate.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/cancelFap.do", method = {RequestMethod.POST})
 
 ## ShopController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/merchant/ShopController.java`
@@ -14609,6 +14613,7 @@
 - @RequestMapping(value = "/confirmIncreaseStock.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "/batchConfirmCustomerCode.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "/batchTransferAudit.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/fapRecordCreate.do", method = {RequestMethod.POST})
 
 ## LightPurchaseSalesOrderController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/order/LightPurchaseSalesOrderController.java`
@@ -14628,6 +14633,7 @@
 - @PostMapping("/updateAddress.do")
 - @RequestMapping("selectAddressLog.do")
 - @RequestMapping(value = "/confirmReceiptUrl.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/fapRecordCreate.do", method = {RequestMethod.POST})
 
 ## DispatchReportController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/dispatch/DispatchReportController.java`
@@ -15799,6 +15805,7 @@
 - @RequestMapping("update.html")
 - @RequestMapping("update.do")
 - @PostMapping("delete.do")
+- @PostMapping("cancel.do")
 - @RequestMapping("audit.do")
 - @RequestMapping("confirmReceipt.do")
 - @GetMapping("getProjectByCode.do")
@@ -16199,6 +16206,8 @@
 - @RequestMapping("list.html")
 - @RequestMapping("doList.do")
 - @RequestMapping(value = "/transferConfirmPaid.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/cancelSap.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/fapRecordCreate.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "/confirmSap.do", method = {RequestMethod.POST})
 
 ## LightZhIncomePriceController
@@ -16840,6 +16849,7 @@
 - @RequestMapping("doExport.do")
 - @RequestMapping(value = {"/forceAudit.html"}, method = {RequestMethod.GET})
 - @PostMapping(value = {"/forceFinanceAudit.do"})
+- @RequestMapping(value = "/fapRecordCreate.do", method = {RequestMethod.POST})
 
 ## PyInvoiceController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/PyInvoiceController.java`
@@ -16893,6 +16903,16 @@
 - @RequestMapping(value = {"/importData.do"}, method = {RequestMethod.POST})
 - @RequestMapping(value = {"/downloadAmmeterError.do"}, method = {RequestMethod.GET})
 - @RequestMapping("doExport.do")
+
+## LightProjectFapRecordOfReceiptsController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightProjectFapRecordOfReceiptsController.java`
+- @RequestMapping("/lightProjectFapRecordOfReceipts/")
+- @RequestMapping("list.html")
+- @RequestMapping("doList.do")
+- @RequestMapping("doExport.do")
+- @PostMapping(value = {"/addVppFapRecord.do"})
+- @GetMapping(value = {"/queryVppFapRecord.do"})
+- @PostMapping(value = {"/cancelVppFapRecord.do"})
 
 ## LightComponentLibraryController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightComponentLibraryController.java`
@@ -17138,6 +17158,7 @@
 - @RequestMapping("doForceSoldAudit.do")
 - @RequestMapping("uploadEamFile.do")
 - @RequestMapping("doFinalForceSoldAudit.do")
+- @RequestMapping(value = "/transferConfirm/fapRecordCreate.do", method = {RequestMethod.POST})
 
 ## LightBillFunnelDataController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightBillFunnelDataController.java`
@@ -18663,6 +18684,8 @@
 - @RequestMapping("doList.do")
 - @RequestMapping(value = "/transferConfirmPaid.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "/confirmSap.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/cancelFap.do", method = {RequestMethod.POST})
+- @RequestMapping(value = "/fapRecordCreate.do", method = {RequestMethod.POST})
 - @RequestMapping("doExport.do")
 
 ## LightTransferOrderController

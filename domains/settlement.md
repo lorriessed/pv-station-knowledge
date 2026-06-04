@@ -171,14 +171,31 @@ StationIncomeHandleStrategyFactory
   - 修复线下转账支付流程中的FAP记录创建逻辑 (`944d1684`)
 - **证据等级**: 代码明确证明
 
-### TAEI-3023 经营性租赁回款接FAP（开发中, 2026-06-02）
+### TAEI-3023 经营性租赁回款接FAP（开发中, 2026-06-04 确认风险）
 **来源**: `rrsjk-light-service` (代继宁, branch: origin/20260602-fapPart2, commit: fb0c4c5b48, 2026-06-02)
 - **负责人**: 刘艺(PM) | **实际开发**: 代继宁 | **参与人**: 薛荣基
 - **变更**: `LightFapRecordServiceImpl` 中注释掉经营性租赁资产FAP状态同步逻辑
   - `syncOperationalAssetFapSentStatus()` — 注释掉更新 FAP 发送状态
   - `syncOperationalAssetFapResult()` — 注释掉 FAP 查询结果自动确认
   - **Dubbo 配置新增**: `service.xml` 新增 `operationalAssetManagementService` 引用 → `com.rrsjk.report.service.OperationalAssetManagementService`
-- **推断**: 经营性租赁回款的FAP状态同步功能正在解耦或迁移到新的服务路径，当前暂时禁用旧同步逻辑
+- **⚠️ 2026-06-04 风险确认**: `grep -rn "operationalAssetManagementService" --include="*.java"` 返回空
+  - **结论**: 旧同步逻辑已停，新服务仅在 service.xml 声明但未 @Autowired 使用
+  - **影响**: 经营性租赁回款的FAP状态同步功能当前处于**不可用状态**
+  - **建议**: 确认是否有意暂停，或需要补充 @Autowired 注入 + 调用逻辑
+- **证据等级**: 代码明确证明
+
+### TAEI-3103 电站业主租金停付管理（待测试, 2026-06-04 大量bugfix）
+**来源**: `rrsjk-light-service` (孙志男, branch: origin/szn_rent_stop_20260525, 2026-05-28~06-03)
+- **负责人**: 高媛(PM) | **实际开发**: 孙志男 | **参与人**: 魏秋阳、孙志男、李培龙
+- **状态**: 待测试 (计划完成 2026-06-04)
+- **提交量**: 20+ 条提交，集中在 2026-06-01~03
+- **核心变更**:
+  - 新增 `RentSuspendApplication` 租金停付申请实体 + 相关DAO/Mapper
+  - `RentSuspendApplicationRecord` 停付申请记录
+  - 租金暂停/恢复申请的完整状态机校验逻辑
+  - 多次迭代修复：工单状态验证、空指针异常、重复校验、恢复原因验证
+  - 新增枚举: 租金停付申请恢复原因枚举
+- **关键提交**: 4fabced(工单状态验证修复), 7876ae1(空指针修复), b8930b7(恢复申请状态检查), 789e3dd(恢复原因验证), c71e58c(恢复原因枚举), b58c338(电站状态字段)
 - **证据等级**: 代码明确证明
 
 ### TAEI-3079 电费收益相关优化（测试中, 2026-06-01）
@@ -256,6 +273,38 @@ StationIncomeHandleStrategyFactory
 **来源**: `rrsjk-light-service` → `RentTaxAmountServiceImpl.java` (commit 70fde56f, 代继宁)
 - 修改定时任务执行月份计算公式
 - 修复执行不存在的SQL导致报错的问题
+
+### 租金个税中间表分批处理优化 (TAEI-3092, 代码明确证明, 2026-06-04 扫描发现)
+**来源**: `rrsjk-light-service` → `RentTaxAmountServiceImpl.java` (commit 6a1bd48, 代继宁, 2026-05-28)
+- **核心重构**: `executeTaxCalculation()` 从内存批处理改为中间表分批处理
+- **旧逻辑**: 查询10万+条支付成功记录到内存 → 每500条查库校验 → 批量插入底表
+- **新逻辑**:
+  1. 清空中间表 `tax_amount_calculate_source_data_temp`
+  2. `INSERT INTO` 中间表（从 `light_share_bill_record` 直接导入，区分首月/普通月）
+  3. 按公司编码维度迭代：`findDistinctCompanyCodes()` → 逐公司处理
+  4. 唯一校验键从 `billRecordNo` 改为 `rentDate_stationCode` 组合
+  5. 新增 `updateInvalidStatus()` — 重复执行时标记未财务确认公司的数据为作废
+  6. 事务管理从 `@Transactional` 改为编程式 `transactionManager.getTransaction()`
+- **新增依赖**: `SapRecordService` 注入、`TaxAmountCalculateSourceDataTempDao`
+- **新增实体**: `TaxAmountCalculateSourceDataTemp`（中间表实体，64行）
+- **影响**: 税务计算性能优化（减少内存占用）+ 幂等性改进（唯一键变更）
+
+### 电站方案变更暂停状态逻辑调整 (2026-06-04 扫描发现)
+**来源**: `rrsjk-light-service` → `LightStationPlanChangeServiceImpl.java` (commits: 解钦, 2026-06-01~03)
+- **变更**: 电站暂停状态(`pauseStatus`)在方案变更流程中的管理逻辑
+- **旧逻辑**: 申请方案变更时无条件冻结电站状态(`PAUSED`)
+- **新逻辑**: 按条件分支处理 — 特定场景下不冻结，驳回时恢复暂停状态
+- **涉及提交**: b19ca01(冻结状态), 28be144(上收入导入判断暂停), bb0ed4c(移除驳回拦截), 2c55163(移除线下验收拦截), 97a648b(驳回恢复暂停)
+- **影响**: 电站状态机在方案变更/驳回流程中的行为变化，可能影响并发操作
+
+### TAEI-3174: 硬编码生产数据预警 ⚠️ (2026-06-04 扫描发现)
+**来源**: `rrsjk-light-service` → `LightStationYuexiuAccountServiceImpl.java` (commit e6fdd67, 解钦, 2026-06-02, TAEI-3174)
+- **问题**: 14个生产手机号硬编码在代码中做项目公司映射
+  - 广州越晖光伏科技有限公司(lessorCode=3093): 6个手机号
+  - 郑州华耀顺绿色新能源有限公司(lessorCode=3390): 4个手机号
+- **风险**: 业主手机号变更需重新发版，硬编码数据可能随时间过期
+- **建议**: 应改为数据库配置表或配置中心管理
+- **证据等级**: 代码明确证明
 
 ---
 
@@ -1262,3 +1311,26 @@ stationParam.put("spMemberId", spMemberId);
 - **涉及Service**: HuaRongTradeIncomeSettleServiceImpl, LightFundSettleServiceImpl, LightHdIncomeServiceImpl, LightStationYuexiuSettleServiceImpl, LightZhSettleServiceImpl, PuYinTradeIncomeSettleServiceImpl, ZhaoYinTradeIncomeSettleServiceImpl, ZhongYinTradeIncomeSettleServiceImpl
 - **影响**: 避免断言通过时的无谓字符串拼接，提升批量导入性能
 - **证据等级**: 代码明确证明
+
+### 工商业收款 cancel 作废接口 (2026-06-04 合并到 master)
+**来源**: `rrsjk-admin-web` → `CmLightProjectReceiptController.java` (分支 preProd_20260416-FapRecordOfReceipts 合并)
+**证据等级**: 代码明确证明
+- **新增接口**: `POST /cmLightProjectReceipt/cancel.do`
+- **权限**: `cmLightProjectReceipt:add`
+- **入参**: `Long id`, `HttpServletRequest`
+- **调用**: `cmLightProjectReceiptService.cancel(id, user)`
+- **业务影响**: 工商业收款记录支持独立作废操作，此前仅有 create/update/delete/audit/confirmReceipt
+- **注意**: delete 与 cancel 的区分逻辑待确认（可能 delete 是物理删除，cancel 是状态变更）
+
+### FAP 回调与现金自订单集成 (2026-04~06 持续迭代)
+**来源**: `rrsjk-finance-service` → `CashSelfOrderItemService.java` / `CashSelfOrderItemServiceImpl.java` / `SyncSapHandleSelf.java` (commits by 代继宁/mabin, 2026-04~06)
+**证据等级**: 代码明确证明
+
+- **新增接口**: `CashSelfOrderItemService.createCashSelfOrderItemForFapCallBack(Orders, OrderItem)` — FAP 回调时自动创建现金自订单项目
+  - 逻辑: 检查 `isExist(orderItemId, BillType.PAYMENT)` → 不存在则调用 `selfPaymentCheck.createCashSelfOrderItem()`
+  - 依赖: rrsjk-finance-api 新增对 rrsjk-trade-api 的依赖（引入 `Orders`/`OrderItem` 实体）
+- **新增方法**: `updateCashSelfOrderItemByOrderItemNo(CashSelfOrderItem)` — 按 orderItemNo 更新（此前只能按 id 更新）
+  - Mapper: `CashSelfOrderItem.xml` 新增 `<update id="updateByOrderItemNo">`
+- **新增 ServiceError 枚举**: `SYNC_TO_FAP("syncToFap", "同步FAP")` — 标记 FAP 同步服务的错误记录
+- **业务影响**: FAP 回调流程现在可以自动创建现金自订单记录，打通 FAP→财务对账链路
+- **关联**: `SelfPaymentCheck` 组件负责实际的现金自订单创建逻辑

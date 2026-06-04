@@ -643,5 +643,56 @@ MySQL (rrsjk_light + rrsjk_light_report) + SAP
 | 2026-05-15 | 创建: Cordova H5 桥接架构/Flutter 纳光宝 APP/插件体系 | 全量通读5个移动端仓库 |
 | 2026-05-19 | 新增: merchant-micro.zch 零碳适家微前端/osp-mini 小程序/greenergy-management-flutter 骨架 | 全量通读第6轮 |
 | 2026-05-20 | 新增: 湖南智充APP (非光伏业务)/nahuipv_greenergy_flutter DJI无人机SDK集成/nhpv_common | 全量通读第7轮 |
-| 2026-05-26 | 新增: 海尔售电决策辅助系统 (Android+iOS+H5 Portal, 非PVS光伏业务) | 每日增量扫描 |
-| 2026-05-29 | 绿能Flutter APP: 电站列表分类tab、电站监控指引、station_status枚举扩展 | 每日增量扫描, jiangting |
+|| 2026-05-26 | 新增: 海尔售电决策辅助系统 (Android+iOS+H5 Portal, 非PVS光伏业务) | 每日增量扫描 |
+|| 2026-05-29 | 绿能Flutter APP: 电站列表分类tab、电站监控指引、station_status枚举扩展 | 每日增量扫描, jiangting |
+|| 2026-06-04 | 新增: watermark-camera-android 水印相机SDK / uni-choose-file Android/iOS 文件选择SDK | 全量通读第21轮 |
+
+## 6. 原生工具 SDK
+
+### 6.1 水印相机 SDK (watermark-camera-android)
+
+**来源**: `watermark-camera-android` 仓库全量通读 (代码明确证明, 2026-06-04)
+
+- **定位**: Android 水印相机 SDK + Demo App，用于电站安装/巡检等场景的带水印照片采集
+- **包名**: `com.haier.watermarkcamera.sdk`
+- **最近活跃**: 2026-05-19 ~ 2026-05-25 (v2.0.2~v2.0.5)
+- **技术栈**: AndroidX + CameraX + 高德地图 AMap SDK
+- **模块结构**: `app/` (Demo) + `camera-sdk/` (SDK库)
+
+**水印信息字段**:
+- 照片名称、地点、天气、拍摄时间、经度、纬度、方位角
+- 支持手动输入照片名称
+- GPS定位 + 高德地图逆地理编码获取位置
+
+**水印相机UI特性**:
+- 自定义对焦框 (橙色L形四角)
+- 变焦选择器 (ZoomScalePicker)
+- 描边文字 (StrokeTextView) - 保证水印在各种背景下可读
+- 横竖屏拍照优化 (前摄/华为手机照片旋转修复)
+
+**权限要求**:
+| 权限 | 用途 |
+|---|---|
+| CAMERA | 拍照 |
+| ACCESS_FINE_LOCATION / COARSE_LOCATION | GPS定位 (水印坐标) |
+| READ_MEDIA_IMAGES (Android 13+) / READ/WRITE_EXTERNAL_STORAGE (≤Android 12) | 照片读写 |
+| FOREGROUND_SERVICE / ACCESS_BACKGROUND_LOCATION | 后台定位 |
+| ACCESS_WIFI_STATE / CHANGE_WIFI_STATE | WiFi定位辅助 |
+
+**网络状态监听** (2026-05-21 新增):
+- 全局网络状态监听
+- 断网不允许操作水印相机
+- 图片上传增加超时提醒
+
+**与 PVS 的关系**: 该 SDK 被 `nhpv_watermark_camera` Flutter 插件和 `nahuipv_greenergy_flutter` APP 引用，用于电站安装拍照、逆变器铭牌拍摄等场景。照片水印包含 GPS 坐标和时间戳，用于数据真实性校验。
+
+### 6.2 文件选择 SDK (uni-choose-file-android / uni-choose-file-ios)
+
+**来源**: `uni-choose-file-android`, `uni-choose-file-ios` 仓库全量通读 (代码明确证明, 2026-06-04)
+
+- **定位**: UniApp 跨平台文件选择原生插件 (Android + iOS)
+- **Android**: 仅 14 个资源文件 (XML 布局 + 多语言 strings)，含 BLE OTA 升级相关布局
+- **iOS**: 0 业务文件，仅初始化提交
+- **最近提交**: 2026-01-20 (初始版本)
+- **业务价值**: **极低** — 通用 UniApp 文件选择插件，无 PVS 光伏业务逻辑
+- **注意**: Android 端包含 BLE OTA (蓝牙固件升级) 相关布局文件，可能用于设备固件更新场景

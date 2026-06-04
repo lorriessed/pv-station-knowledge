@@ -165,3 +165,16 @@ public Set<String> findActiveRepurchaseStationCodes(Collection<String> stationCo
 }
 ```
 
+### 9.5 SAP 记账增加电站编码关联 (TAEI-3076, 2026-05-12~14)
+
+**来源**: `rrsjk-light-service` (解钦, commits: 72283a8, e4982fe, 2026-05-12)
+**关联需求**: TAEI-3076 【记账】政策传SAP记账带上电站编码和订单号
+
+**变更内容**:
+- **xref3 字段**: 上收入时传递 xref3 字段，携带电站编码 → SAP 记账可关联到具体电站
+- **八种模式导入收入校验**: 导入收入时校验电站状态（不同模式下电站是否允许上收入）
+- **策略工厂扩展**: `StationIncomeModeCheckStrategyFactory` 增加工厂类扩展，支持新增收入模式
+- **电站查询重构**: 重构不同收入模式的电站查询逻辑
+
+**业务意义**: SAP 记账通过 xref3 字段与电站编码关联，实现收入与电站的完整追溯链路
+

@@ -1708,6 +1708,7 @@
 - `CbsAddPurchaseOrderRequest` (class) `com.nahui.energy.facade.purchase.dto` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/facade/purchase/dto/CbsAddPurchaseOrderRequest.java`
 - `CbsBusinessException` (class) `com.nahui.energy.exception` -> `rrsjk-light-common/rrsjk-light-base/src/main/java/com/nahui/energy/exception/CbsBusinessException.java`
 - `CbsException` (class) `com.nahui.energy.exception` -> `rrsjk-light-common/rrsjk-light-base/src/main/java/com/nahui/energy/exception/CbsException.java`
+- `CbsFapRecordDTO` (class) `com.nahui.energy.pojo.dto.fap` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/pojo/dto/fap/CbsFapRecordDTO.java`
 - `CbsHroisOrderBox` (class) `com.rrsjk.trade.order.entity` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/order/entity/CbsHroisOrderBox.java`
 - `CbsHroisOrderBoxController` (class) `com.rrsjk.admin.controller.haiwai` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/haiwai/CbsHroisOrderBoxController.java`
 - `CbsHroisOrderBoxDao` (class) `com.rrsjk.trade.order.dao` -> `rrsjk-trade-service/rrsjk-trade-impl/src/main/java/com/rrsjk/trade/order/dao/CbsHroisOrderBoxDao.java`
@@ -5224,6 +5225,7 @@
 - `F57Jsjk` (class) `com.haier.wsdl.eai.TransInStockFromRRSToJDE` -> `order-service/order-impl/src/main/java/com/haier/wsdl/eai/TransInStockFromRRSToJDE/F57Jsjk.java`
 - `F57Jsys` (class) `com.haier.wsdl.eai.TransInStockFromRRSToJDE` -> `order-service/order-impl/src/main/java/com/haier/wsdl/eai/TransInStockFromRRSToJDE/F57Jsys.java`
 - `F57JsysOutType` (class) `com.haier.wsdl.eai.TransInStockFromRRSToJDE` -> `order-service/order-impl/src/main/java/com/haier/wsdl/eai/TransInStockFromRRSToJDE/F57JsysOutType.java`
+- `FAPRecordExcel` (class) `com.rrsjk.admin.controller.light.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/vo/FAPRecordExcel.java`
 - `FIleTypeEnum` (enum) `com.pvs.ops.enm` -> `repairs/repairs-api/src/main/java/com/pvs/ops/enm/FIleTypeEnum.java`
 - `FTPClientFactory` (class) `com.rrsjk.trade.pay.config` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/pay/config/FTPClientFactory.java`
 - `FTPPoolService` (interface) `com.rrsjk.trade.pay.service` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/pay/service/FTPPoolService.java`
@@ -8228,6 +8230,8 @@
 - `LightBillFunnelDataExcel` (class) `com.rrsjk.admin.controller.light.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/vo/LightBillFunnelDataExcel.java`
 - `LightBillFunnelDataService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/LightBillFunnelDataService.java`
 - `LightBillFunnelDataServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/LightBillFunnelDataServiceImpl.java`
+- `LightBocHourElec` (class) `com.rrsjk.openapi.entity.local` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/entity/local/LightBocHourElec.java`
+- `LightBocHourElecDao` (class) `com.rrsjk.openapi.dao.local` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-impl/src/main/java/com/rrsjk/openapi/dao/local/LightBocHourElecDao.java`
 - `LightBusinessCustomer` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/LightBusinessCustomer.java`
 - `LightBusinessCustomerClient` (class) `com.rrsjk.adminbff.serviceprovidermanagement.client` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/client/LightBusinessCustomerClient.java`
 - `LightBusinessCustomerController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightBusinessCustomerController.java`
@@ -8764,6 +8768,12 @@
 - `LightEvaluateFeedbackController` (class) `com.rrsjk.merchant.controller.lightEvaluate` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightEvaluate/LightEvaluateFeedbackController.java`
 - `LightExcelUploadService` (interface) `com.rrsjk.light.service.lightUpload` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/lightUpload/LightExcelUploadService.java`
 - `LightExcelUploadServiceImpl` (class) `com.rrsjk.light.service.impl.lightUpload` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/lightUpload/LightExcelUploadServiceImpl.java`
+- `LightFapRecord` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/LightFapRecord.java`
+- `LightFapRecordAddDto` (class) `com.rrsjk.light.dto.fap` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/fap/LightFapRecordAddDto.java`
+- `LightFapRecordDTO` (class) `com.nahui.energy.pojo.dto.fap` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/pojo/dto/fap/LightFapRecordDTO.java`
+- `LightFapRecordDao` (class) `com.rrsjk.light.dao` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/dao/LightFapRecordDao.java`
+- `LightFapRecordService` (interface) `com.rrsjk.light.service` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/service/LightFapRecordService.java`
+- `LightFapRecordServiceImpl` (class) `com.rrsjk.light.service.impl` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/LightFapRecordServiceImpl.java`
 - `LightFaultCode` (class) `com.rrsjk.light.operation.entity` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/entity/LightFaultCode.java`
 - `LightFaultCodeDao` (class) `com.rrsjk.light.operation.dao` -> `rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/java/com/rrsjk/light/operation/dao/LightFaultCodeDao.java`
 - `LightFaultCodeRule` (class) `com.rrsjk.light.operation.entity` -> `rrsjk-light-operation-service/rrsjk-light-operation-api/src/main/java/com/rrsjk/light/operation/entity/LightFaultCodeRule.java`
@@ -10130,6 +10140,7 @@
 - `LightProjectElectricStationOrder` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/LightProjectElectricStationOrder.java`
 - `LightProjectElectricStationOrder` (class) `com.rrsjk.openapi.entity.light` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/entity/light/LightProjectElectricStationOrder.java`
 - `LightProjectElectricStationOrderRequest` (class) `com.rrsjk.admin.controller.light.vo` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/vo/LightProjectElectricStationOrderRequest.java`
+- `LightProjectFapRecordOfReceiptsController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightProjectFapRecordOfReceiptsController.java`
 - `LightProjectFunnelAddRequest` (class) `com.rrsjk.light.dto` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/dto/LightProjectFunnelAddRequest.java`
 - `LightProjectFunnelManagement` (class) `com.rrsjk.light.entity` -> `rrsjk-light-service/rrsjk-light-api/src/main/java/com/rrsjk/light/entity/LightProjectFunnelManagement.java`
 - `LightProjectFunnelManagementController` (class) `com.rrsjk.admin.controller.light` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightProjectFunnelManagementController.java`
@@ -10403,6 +10414,7 @@
 - `LightSapPoQueueModel` (class) `com.rrsjk.light.service.model.sap` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/model/sap/LightSapPoQueueModel.java`
 - `LightSapPurchaseRecordController` (class) `com.rrsjk.merchant.controller.light` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightSapPurchaseRecordController.java`
 - `LightSapPurchaseRecordExcel` (class) `com.rrsjk.merchant.controller.light.excel` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/excel/LightSapPurchaseRecordExcel.java`
+- `LightSapPurchaseRecordExportVo` (class) `com.rrsjk.merchant.controller.vo` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/vo/LightSapPurchaseRecordExportVo.java`
 - `LightSapPurchaseRecordModel` (class) `com.rrsjk.finance.sap.model` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/java/com/rrsjk/finance/sap/model/LightSapPurchaseRecordModel.java`
 - `LightSapPurchaseRecordOperationController` (class) `com.rrsjk.merchant.controller.lightoperation` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/LightSapPurchaseRecordOperationController.java`
 - `LightSapPurchaseRecordOperationExcel` (class) `com.rrsjk.merchant.controller.lightoperation.vo` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/vo/LightSapPurchaseRecordOperationExcel.java`
@@ -14445,6 +14457,11 @@
 - `OrderItemConfirmSettlement` (class) `com.rrsjk.finance.settlement.component` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/java/com/rrsjk/finance/settlement/component/OrderItemConfirmSettlement.java`
 - `OrderItemController` (class) `com.rrsjk.merchant.controller.order` -> `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/order/OrderItemController.java`
 - `OrderItemController` (class) `com.rrsjk.mobile.controller.order` -> `rrsjk-mobile-web/src/main/java/com/rrsjk/mobile/controller/order/OrderItemController.java`
+- `OrderItemCost` (class) `com.rrsjk.trade.order.entity` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/order/entity/OrderItemCost.java`
+- `OrderItemCostDao` (class) `com.rrsjk.trade.order.dao` -> `rrsjk-trade-service/rrsjk-trade-impl/src/main/java/com/rrsjk/trade/order/dao/OrderItemCostDao.java`
+- `OrderItemCostModel` (class) `com.rrsjk.trade.order.model` -> `rrsjk-trade-service/rrsjk-trade-impl/src/main/java/com/rrsjk/trade/order/model/OrderItemCostModel.java`
+- `OrderItemCostService` (interface) `com.rrsjk.trade.order.service` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/order/service/OrderItemCostService.java`
+- `OrderItemCostServiceImpl` (class) `com.rrsjk.trade.order.service.impl` -> `rrsjk-trade-service/rrsjk-trade-impl/src/main/java/com/rrsjk/trade/order/service/impl/OrderItemCostServiceImpl.java`
 - `OrderItemCountDto` (class) `com.rrsjk.trade.order.dto` -> `rrsjk-trade-service/rrsjk-trade-api/src/main/java/com/rrsjk/trade/order/dto/OrderItemCountDto.java`
 - `OrderItemDao` (class) `com.rrsjk.activity.dao` -> `rrsjk-activity-service/rrsjk-activity-impl/src/main/java/com/rrsjk/activity/dao/OrderItemDao.java`
 - `OrderItemDao` (class) `com.rrsjk.trade.order.dao` -> `rrsjk-trade-service/rrsjk-trade-impl/src/main/java/com/rrsjk/trade/order/dao/OrderItemDao.java`
@@ -20658,6 +20675,7 @@
 - `VppConsoleLogAppender` (class) `com.nahui.energy.log` -> `vpp-api-common/vpp-api-base/src/main/java/com/nahui/energy/log/VppConsoleLogAppender.java`
 - `VppDataPermissionFilter` (class) `com.nahui.energy.filter` -> `vpp-api-common/vpp-api-permission/src/main/java/com/nahui/energy/filter/VppDataPermissionFilter.java`
 - `VppException` (class) `com.nahui.energy.exception` -> `vpp-api-common/vpp-api-base/src/main/java/com/nahui/energy/exception/VppException.java`
+- `VppFapRecordAddDto` (class) `com.rrsjk.admin.entity.dto` -> `rrsjk-admin-web/src/main/java/com/rrsjk/admin/entity/dto/VppFapRecordAddDto.java`
 - `VppLogAppender` (class) `com.nahui.energy.log` -> `vpp-api-common/vpp-api-base/src/main/java/com/nahui/energy/log/VppLogAppender.java`
 - `VppTenantPermissionFilter` (class) `com.nahui.energy.filter` -> `vpp-api-common/vpp-api-tenant/src/main/java/com/nahui/energy/filter/VppTenantPermissionFilter.java`
 - `VppTokenDto` (class) `com.nahui.energy.pojo.dto` -> `vpp-api-auth/vpp-biz/src/main/java/com/nahui/energy/pojo/dto/VppTokenDto.java`
@@ -22246,6 +22264,7 @@
 - `ZhongYinIncomeSettleView` (class) `com.rrsjk.adminbff.zhongyin.view` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zhongyin/view/ZhongYinIncomeSettleView.java`
 - `ZhongYinInverterData` (class) `com.rrsjk.openapi.dto.zhongyinLease` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-api/src/main/java/com/rrsjk/openapi/dto/zhongyinLease/ZhongYinInverterData.java`
 - `ZhongYinLeaseController` (class) `com.rrsjk.openapi.controller.zhongyin` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/controller/zhongyin/ZhongYinLeaseController.java`
+- `ZhongYinLeaseServiceTest` (class) `com.rrsjk.openapi.service.impl` -> `rrsjk-light-openapi-service/rrsjk-light-openapi-impl/src/test/java/com/rrsjk/openapi/service/impl/ZhongYinLeaseServiceTest.java`
 - `ZhongYinLightStationIncomeReverseClient` (class) `com.rrsjk.adminbff.zhongyin.client` -> `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zhongyin/client/ZhongYinLightStationIncomeReverseClient.java`
 - `ZhongYinReturn` (class) `com.rrsjk.openapi.vo.zhongyinLease` -> `rrsjk-openapi-web/src/main/java/com/rrsjk/openapi/vo/zhongyinLease/ZhongYinReturn.java`
 - `ZhongYinStationIncomeHandleStrategy` (class) `com.rrsjk.light.service.impl.income.stategy.handle` -> `rrsjk-light-service/rrsjk-light-impl/src/main/java/com/rrsjk/light/service/impl/income/stategy/handle/ZhongYinStationIncomeHandleStrategy.java`

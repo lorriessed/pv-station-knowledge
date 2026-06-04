@@ -27,10 +27,9 @@ VPP (Virtual Power Plant，虚拟电厂) 是海尔新能源在光伏业务之外
 |---|---|---|---|
 | 通用基础 | vpp-api-common | 实体/DTO/枚举/异常/Redis/日期解析/i18n | SB 3.2.2 + JDK 17 |
 | 绿证交易 | vpp-api-gect | 客户/订单/采购/发票/SAP/绿证进度/项目管理 | SB 3.2.2 + JDK 17 |
-| 认证授权 | vpp-api-auth | 用户认证、Token 管理 | 待通读 |
-| 系统管理 | vpp-api-system | 租户、部门、用户、权限 | 待通读 |
+| 认证授权 | vpp-api-auth | 用户认证、Token管理、JWT、Redis会话、Drcloud专用Token | SB 2.5.5 + JDK 8 ✅ 已通读 2026-06-04 |
+| 系统管理 | vpp-api-system | 租户、部门、用户、权限 | SB 3.2.2 + JDK 17 |
 | 电力交易 | vpp-api-elecbusiness | Drcloud数据对接/纳光宝大屏/i18n | SB 2.5.5 + JDK 8 |
-| 储能管理 | vpp-api-ems | 代理商管理/终端用户/能控 | SB 2.3.12 + JDK 8 |
 | 网关 | vpp-api-gateway | API网关/路由/JWT鉴权/跨域 | SB 2.5.5 + JDK 17 |
 | 电力市场 | vpp-api-gpower | 绿电收益管理/电网公司/MDM主数据/SAP记账 | SB 2.5.5 + JDK 8 |
 | 知识管理 | vpp-api-km | 知识库目录/文件管理/标签/权限 | SB 2.5.5 + JDK 8 |
@@ -577,16 +576,129 @@ VPP 项目的代码模板/参考项目，包含一个完整的发票管理模块
 - 销售单获取客户编码接口
 - 付款计划、销售订单和采购订单确认功能
 - SAP发票账户生成中的客户编号处理
-- 冲销接口参数接收方式改为POST
-- 对应需求: TAEI-2977 (GDE即采即销临时流程)
+|- 冲销接口参数接收方式改为POST
+|- 对应需求: TAEI-2977 (GDE即采即销临时流程)
+
+## 13. VPP 认证服务 (vpp-api-auth, 2026-06-04 全量通读 ✅)
+
+### 13.1 定位
+VPP 系统的统一认证中心，提供用户登录、注册、Token管理、会话控制等基础能力。通过 Feign 调用 `vpp-api-system` 获取用户信息和记录日志。
+
+**来源**: `vpp-api-auth` 仓库全量通读 (代码明确证明, 2026-06-04)
+
+### 13.2 技术架构
+
+| 组件 | 值 | 说明 |
+|---|---|---|
+| Spring Boot | 2.5.5 | JDK 8 |
+| 端口 | 8081 | context-path: `/auth` |
+| Nacos 服务名 | vpp-api-auth | 注册中心 + 配置中心 |
+| Redis | Lettuce RESP2 + FastJson2 序列化 | Token/登录缓存 |
+| JWT | jjwt 0.9.1 | access_token 生成 |
+| 国际化 | SessionLocaleResolver (默认简体中文) | 6语言支持 |
+| 加密 | jasypt PBEWithMD5AndDES | 配置加密 |
+
+### 13.3 Controller 路由汇总
+
+**TokenController** (`/token`):
+
+| 路由 | 方法 | 功能 | 说明 |
+|---|---|---|---|
+| `/token/getVppToken` | POST | 获取VPP专用Token | Drcloud专用，需要appId/appSecret校验 |
+| `/token/token-login` | POST | 用户名密码登录 | 含IP黑名单、密码长度、重试次数校验 |
+| `/token/logout` | DELETE | 退出登录 | 删除Redis缓存 + 记录日志 |
+| `/token/refresh` | POST | 刷新Token有效期 | 验证Token有效性后刷新 |
+| `/token/getLoginUser` | POST | 获取当前登录用户信息 | 从Redis获取LoginUser |
+| `/token/register` | POST | 用户注册 | 用户名/密码长度校验 → 调用system服务注册 |
+
+**LoginController** (`/login`):
+
+| 路由 | 方法 | 功能 | 说明 |
+|---|---|---|---|
+| `/login/login` | POST | 登录（代理） | 直接代理调用 `systemFeignClient.login()` |
+
+### 13.4 Token 管理 (TokenService)
+
+**标准 Token 创建** (`createToken`):
+1. 生成 UUID token
+2. 设置用户ID、用户名、IP地址
+3. JWT claims: `userKey`, `userId`, `userName`
+4. 返回 `access_token` + `expires_in`
+
+**VPP 专用 Token 创建** (`createVppToken`):
+1. 用于 Drcloud 第三方对接
+2. JWT claims 额外包含 `mobile` 字段
+3. `expires_in` 为标准 Token 的 **60倍** (`cacheProperties.getExpiration() * 60`)
+4. 不需要查询 sysUser 对象，直接使用传入的 userId/username/mobile
+
+**Token 刷新机制**:
+- 过期前 **120分钟** 自动刷新 (`verifyToken`)
+- 刷新后重新缓存到 Redis，key: `login_tokens:{uuid}`
+
+### 13.5 登录安全策略
+
+**密码错误锁定** (`SysPasswordService`):
+- 最大重试次数: `CacheConstants.PASSWORD_MAX_RETRY_COUNT`
+- 锁定时间: `CacheConstants.PASSWORD_LOCK_TIME` (分钟)
+- Redis key: `pwd_err_cnt:{username}`
+- 达到上限后锁定，记录登录失败日志
+
+**IP 黑名单** (`TokenController.token-login`):
+- 从 Redis 读取 `SYS_LOGIN_BLACKIPLIST` 配置
+- 使用 `IpUtils.isMatchedIp()` 校验
+- 命中黑名单直接拒绝登录
+
+**登录流程**:
+```
+1. TokenController.token-login 接收请求
+2. 校验用户名/密码长度
+3. 检查 IP 黑名单
+4. SysLoginService.login → RemoteUserService.getUserInfo (Feign → vpp-api-system)
+5. 检查用户状态 (DELETED/DISABLE)
+6. SysPasswordService.validate (密码校验 + 重试计数)
+7. 记录登录成功日志 → RemoteLogService.saveLogininfor
+8. TokenService.createToken 生成 JWT → 返回 access_token
+```
+
+### 13.6 Feign 服务依赖
+
+| Feign Client | 目标服务 | 接口 |
+|---|---|---|
+| `RemoteUserService` | vpp-api-system | getUserInfo / register / recordUserLogin |
+| `RemoteLogService` | vpp-api-system | saveLog (操作日志) / saveLogininfor (登录日志) |
+| `RemoteI18nService` | vpp-api-system | getAllMessageSource (国际化消息) |
+| `RemoteFileService` | (未配置) | upload (文件上传) |
+| `SystemFeignClient` | vpp-api-system | login (登录代理) |
+
+### 13.7 硬编码凭证 (⚠️ 安全警告)
+
+**Drcloud 对接凭证** (`TokenController.java`):
+```java
+private static final String APP_ID_DR_CLOUD = "drcloud123456";
+private static final String APP_SECRET_DR_CLOUD="drcl...qwer"; // 已截断
+```
+⚠️ appId 和 appSecret 硬编码在源码中，应迁移到 Nacos 配置中心。
+
+### 13.8 与 VPP 其他服务的关系
+
+```
+vpp-api-auth (:8081/auth)
+  ├── Feign → vpp-api-system (用户/角色/权限/日志/i18n)
+  ├── Redis ←→ Token 缓存 (login_tokens:*)
+  ├── JWT ←→ access_token 签发
+  └── ←── 前端/Drcloud 调用登录接口
+```
+
+**Drcloud 对接链路**: Drcloud → `/token/getVppToken` (appId/appSecret校验) → TokenService.createVppToken → JWT → Drcloud 使用 token 访问 VPP 资源
 
 ## 13. 知识库更新记录
 
-| 日期 | 更新内容 | 来源 |
-|---|---|---|
-| 2026-05-29 | VPP管理后台新增电力交易电价数据报表 | he-vpp.admin-h5, 张硕文, feat/electricity-price |
-| 2026-05-23 | 补漏第7期: GDE即采即销SAP集成 | vpp-pv-oversea, mabin, TAEI-2977 |
-| 2026-05-15 | 全量通读5个VPP仓库: crawler(爬虫)/data-platform(数据平台)/openapi(开放API)/pv-oversea(海外光伏)/template(模板) | 本节全部内容 |
-| 2026-05-14 | 全量通读5个VPP仓库: gpower(绿电收益)/km(知识管理)/meta(产品出货)/system(系统管理)/template | domains/vpp-green-electricity.md 等 |
-| 2026-05-13 | 重写VPP项目概述: 技术栈/业务模块/定时任务/数据库表 | 全量通读5个VPP仓库 |
-| 2026-05-12 | 创建 VPP 项目概述 | 代码仓库扫描 |
+|| 日期 | 更新内容 | 来源 |
+||---|---|---|
+|| 2026-06-04 | 全量通读5个仓库: uni-choose-file-android/ios, vpp-api-auth, watermark-camera-android/ios | vpp-api-auth 认证服务详细分析 + 移动端SDK更新 |
+|| 2026-05-29 | VPP管理后台新增电力交易电价数据报表 | he-vpp.admin-h5, 张硕文, feat/electricity-price |
+|| 2026-05-23 | 补漏第7期: GDE即采即销SAP集成 | vpp-pv-oversea, mabin, TAEI-2977 |
+|| 2026-05-15 | 全量通读5个VPP仓库: crawler(爬虫)/data-platform(数据平台)/openapi(开放API)/pv-oversea(海外光伏)/template(模板) | 本节全部内容 |
+|| 2026-05-14 | 全量通读5个VPP仓库: gpower(绿电收益)/km(知识管理)/meta(产品出货)/system(系统管理)/template | domains/vpp-green-electricity.md 等 |
+|| 2026-05-13 | 重写VPP项目概述: 技术栈/业务模块/定时任务/数据库表 | 全量通读5个VPP仓库 |
+|| 2026-05-12 | 创建 VPP 项目概述 | 代码仓库扫描 |

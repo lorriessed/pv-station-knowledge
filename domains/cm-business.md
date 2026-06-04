@@ -200,3 +200,27 @@
 - **旧逻辑缺陷**: 完工前领用不创建SO出库队列，回退冲销时未处理
 - **修复提交**: `eb8bd383`/`789fff6c`/`2fbdd007`/`e5c03619` (4次迭代修复)
 - **证据等级**: 代码明确证明
+
+### 工商业自持电站损益报表 (TAEI-3043, 代码明确证明, 2026-05-11~17)
+**来源**: `rrsjk-light-service` → `CmOwnerStationReportServiceImpl.java` + `CmOwnerStationWhiteListServiceImpl.java` (王斌/龙龙, 13+ commits)
+
+**核心变更**:
+- **新增实体**: `CmOwnerStationReportThirdLog` — 第三方日志记录表（从大数据库查询发电量的日志）
+  - Mapper XML: `CmOwnerStationReportThirdLog.xml` (214行新增)
+  - DAO: `CmOwnerStationReportThirdLogDao` (40行新增)
+- **报表核心逻辑重构**: `CmOwnerStationReportServiceImpl` 经历多次迭代（159+/47+ 行变更）
+  - 充电桩发电量查询优化：从 for 循环逐个查 `chargingStationService.getPvGenerationByMonth` 改为批量查询
+  - 新增 `queryMonth` 参数过滤高压电费查询 (`LightHighElec.xml`)
+  - 毛利率除零保护：`totalIncomeAmount == 0` 时毛利率设为 0
+- **新增枚举**: `LightStationPlanChange.StatusEnum.NO_NEED_AUDIT`（完工前方案变更，仅品牌变更无需审核）
+- **方案变更逻辑**: `LightStationPlanChangeServiceImpl` 增加 skipAudit 逻辑（仅品牌变更时自动审核通过，审核人"王红凯"硬编码）
+- **白名单扩展**: `cm_owner_station_white_list` 表扩展字段支持报表二期需求
+- **PCS 接口**: 开发环境地址更新为测试环境
+- **前端**: `rrsjk-admin-web` 新增自持电站损益报表页面 (`tn_wangb`, 6+ commits)
+
+**涉及表**: `cm_owner_station_report`, `cm_owner_station_white_list`, `cm_owner_station_report_third_log` (新), `light_high_elec`, `light_station_plan_change`
+
+**⚠️ 代码质量风险**:
+1. 审核人"王红凯"硬编码在 `LightStationPlanChangeServiceImpl` 中
+2. PCS 接口地址在 application-dev.yml 中改为了测试环境，需确认 prod 配置
+3. 毛利率除零保护是事后修复，需确认上线前是否充分测试

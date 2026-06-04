@@ -2267,7 +2267,7 @@
 
 ## vpp-api-gect/vpp-gect-biz/src/main/resources/mapper/fund/PaybackManagementInfoMapper.xml
 - namespace: `com.nahui.energy.dao.fund.PaybackManagementInfoDao`
-- statements: `update:updateBatch`, `select:findByQuery`
+- statements: `update:updateBatch`, `select:findByQuery`, `select:queryToFap`
 - tables: `id`, `invoice`, `payback_management_info`
 
 ## vpp-api-gect/vpp-gect-biz/src/main/resources/mapper/fund/PaybackConfirmAuditLogMapper.xml
@@ -2806,7 +2806,7 @@
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/Orders.xml
 - namespace: `com.rrsjk.trade.order.dao.OrdersDao`
-- statements: `insert:create`, `update:update`, `select:get`, `select:getByOrderNo`, `select:findByIdList`, `select:findByOrderNoList`, `select:findShopIdByDeliverTimeOut`, `select:getByPlatformAndTid`, `select:getLastGroupOrder`, `select:getPickUpCodeByMaxOrderId`, `select:getByPickUpCode`, `select:findByZeroWaitPay`, `select:findByCustomerName`, `select:findByMerOrderId`
+- statements: `insert:create`, `update:update`, `update:updateOrdersByOrderNo`, `select:get`, `select:getByOrderNo`, `select:findByIdList`, `select:findByOrderNoList`, `select:findShopIdByDeliverTimeOut`, `select:getByPlatformAndTid`, `select:getLastGroupOrder`, `select:getPickUpCodeByMaxOrderId`, `select:getByPickUpCode`, `select:findByZeroWaitPay`, `select:findByCustomerName`, `select:findByMerOrderId`
 - tables: `id`, `orders`
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/OrderRetryQueue.xml
@@ -2831,7 +2831,7 @@
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/OrderItem.xml
 - namespace: `com.rrsjk.trade.order.dao.OrderItemDao`
-- statements: `insert:create`, `update:update`, `update:updateOrderItemRefundStatus`, `select:get`, `select:findByOrderId`, `select:getByOrderItemNo`, `select:findByThirdTradeNo`, `select:findByPayId`, `select:countOf`, `select:findBy`, `select:findByThirdTradeNoAndRefundStatus`, `select:findRefundOrderItem`, `select:findPaymentOrderItem`, `select:findByFinished`, `select:findByClosed`, `select:findOrderInfo`, `select:findByOrderItemNoList`, `select:findByOrderIdAndItemId`, `select:getByPlatformAndOid`, `select:getByPlatformAndTid`, `select:findByPlatformAndOuterid`, `select:findByOuterid`, `select:findByMemberSkuFlowStatus`, `select:findByCustomerCode`, `select:findIdByMemberItem`, `select:findIdByMemberSku`, `select:sumQuantityMemberSku`, `select:findMealOrderByWaitSms`, `select:getOrderNumberByCreatedAt`, `select:getOrderNumberByConfirmedAt`, `select:getPayAmountByPaidAt`, `select:getListByPaidOrRefundAt`, `select:sumPayAmount`, `select:findOrderItemsByRefundStatus`
+- statements: `insert:create`, `update:update`, `update:updateByOrderItemNo`, `update:updateOrderItemRefundStatus`, `select:get`, `select:findByOrderId`, `select:getByOrderItemNo`, `select:findByThirdTradeNo`, `select:findByPayId`, `select:countOf`, `select:findBy`, `select:findByThirdTradeNoAndRefundStatus`, `select:findRefundOrderItem`, `select:findPaymentOrderItem`, `select:findByFinished`, `select:findByClosed`, `select:findOrderInfo`, `select:findByOrderItemNoList`, `select:findByOrderIdAndItemId`, `select:getByPlatformAndOid`, `select:getByPlatformAndTid`, `select:findByPlatformAndOuterid`, `select:findByOuterid`, `select:findByMemberSkuFlowStatus`, `select:findByCustomerCode`, `select:findIdByMemberItem`, `select:findIdByMemberSku`, `select:sumQuantityMemberSku`, `select:findMealOrderByWaitSms`, `select:getOrderNumberByCreatedAt`, `select:getOrderNumberByConfirmedAt`, `select:getPayAmountByPaidAt`, `select:getListByPaidOrRefundAt`, `select:sumPayAmount`, `select:findOrderItemsByRefundStatus`, `select:findOrderItemForSyncFap`
 - tables: `id`, `order_item`, `orders`
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/OrderInvoice.xml
@@ -2938,9 +2938,13 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `select:getById`, `select:findByMap`
 - tables: `id`
 
+## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/OrderItemCost.xml
+- namespace: `com.rrsjk.trade.order.dao.OrderItemCostDao`
+- statements: `insert:create`, `insert:batchCreate`, `select:getByOrderItemNo`
+
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/LightPurchaseSalesItemOrder.xml
 - namespace: `com.rrsjk.trade.order.dao.LightPurchaseSalesItemOrderDao`
-- statements: `insert:create`, `update:update`, `select:findDetail`, `select:findById`, `select:findByItemOrderNo`, `update:updateByOrderId`
+- statements: `insert:create`, `update:update`, `update:updateByItemOrderNo`, `select:findDetail`, `select:findById`, `select:findByItemOrderNo`, `update:updateByOrderId`
 - tables: `id`
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/OrderAttributeValue.xml
@@ -2950,7 +2954,7 @@
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/LightPurchaseSalesOrder.xml
 - namespace: `com.rrsjk.trade.order.dao.LightPurchaseSalesOrderDao`
-- statements: `insert:create`, `update:update`, `select:queryCountBy`, `select:findPage`, `select:findById`, `select:findByOrderNo`, `select:findByInvoiceStatus`, `select:findByMerOrderId`, `select:findByRefundOrderId`, `select:findNoToSap`, `select:countSubCenterIncome`, `select:querySubCenterIncome`, `select:countSpIncome`, `select:querySpIncome`, `select:findListForPolicyCash`, `select:findListForPolicyCashPlus`, `select:findSumPaidAmountList`, `select:findUnpaidOrdersBefore`
+- statements: `insert:create`, `update:update`, `select:queryCountBy`, `select:findPage`, `select:findById`, `select:findByOrderNo`, `select:findByInvoiceStatus`, `select:findByMerOrderId`, `select:findByRefundOrderId`, `select:findNoToSap`, `select:countSubCenterIncome`, `select:querySubCenterIncome`, `select:countSpIncome`, `select:querySpIncome`, `select:findListForPolicyCash`, `select:findListForPolicyCashPlus`, `select:findSumPaidAmountList`, `select:findUnpaidOrdersBefore`, `select:findTestEnvDataForFap`
 - tables: `id`, `light_purchase_sales_item_order`, `light_purchase_sales_order`, `rrsjk_light.zero_carbon_service_provider`, `rrsjk_light.zero_carbon_sub_new`
 
 ## rrsjk-trade-service/rrsjk-trade-impl/src/main/resources/mybatis/mapper/order/AddressOperationLogMapper.xml
@@ -3506,7 +3510,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/CmLightProjectReceipt.xml
 - namespace: `com.rrsjk.light.dao.CmLightProjectReceiptDao`
-- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findByReceiptCode`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpSettleConfig.xml
@@ -3651,7 +3655,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSparePartsDeposit.xml
 - namespace: `com.rrsjk.light.dao.LightSparePartsDepositDao`
-- statements: `select:findBy`, `select:getByDepositNo`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
+- statements: `select:findBy`, `select:getByDepositNo`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findTestEnv1PG0Data`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/YantuElectricityPriceTotal.xml
@@ -3965,7 +3969,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpOrderItem.xml
 - namespace: `com.rrsjk.light.dao.LightSpOrderItemDao`
-- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `delete:deleteByOrderId`, `update:updateByOrderId`, `select:sumNumberBySpSku`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:getByOrderItemNo`, `delete:deleteByOrderId`, `update:updateByOrderId`, `select:sumNumberBySpSku`
 - tables: `id`, `light_service_provider`, `light_sp_order`, `light_sp_order_item`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationCopy1.xml
@@ -4561,6 +4565,11 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `delete:deleteByPolicyId`
 - tables: `id`
 
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightFapRecord.xml
+- namespace: `com.rrsjk.light.dao.LightFapRecordDao`
+- statements: `select:findBy`, `select:findByPrams`, `select:countOf`, `insert:create`, `update:update`, `update:updateByOrderNo`, `insert:batchInsert`, `select:getById`, `select:getByFapOrderNo`, `select:getByOrderNo`, `select:getByOrderNoAndBizType`, `select:queryVppFapRecordByOrderNo`
+- tables: `id`
+
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightMakeOrderCbs.xml
 - namespace: `com.rrsjk.light.dao.LightMakeOrderCbsDao`
 - statements: `select:countOf`, `select:findBy`, `select:countAllOf`, `select:findAllBy`, `select:countOfAuxiliary`, `select:findAuxiliaryBy`
@@ -4900,7 +4909,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightProjectElectricOrder.xml
 - namespace: `com.rrsjk.light.dao.LightProjectElectricOrderDao`
-- statements: `insert:create`, `update:update`, `select:get`, `select:getByIds`, `select:getByOrderNo`, `select:getByElecNoAndMonthAt`, `select:getByElecNoAndMonthAtAndCustomerName`, `select:listByElecNoAndMonthRange`, `select:countByElecNoAndMonthRange`, `select:countByElecNoAndCustomerAndMonthRange`, `select:countOf`, `select:checkIdsWaitOrWaitConfirm`, `update:batchDelete`, `select:findBy`, `select:findByYx`, `select:findStationBy`, `select:countOfYx`, `select:countStationBy`, `select:countByBatchNoAndInvoiceNoNoTargetId`, `update:updateVoiceStatusByIds`, `select:findByWithTemplate`, `select:countOfWithTemplate`, `update:batchUpdateStatus`, `select:findJinDieA02Orders`, `select:findJinDieH01Orders`
+- statements: `insert:create`, `update:update`, `select:get`, `select:getByIds`, `select:getByOrderNo`, `select:getByElecNoAndMonthAt`, `select:getByElecNoAndMonthAtAndCustomerName`, `select:listByElecNoAndMonthRange`, `select:countByElecNoAndMonthRange`, `select:countByElecNoAndCustomerAndMonthRange`, `select:countOf`, `select:checkIdsWaitOrWaitConfirm`, `update:batchDelete`, `select:findBy`, `select:findByYx`, `select:findStationBy`, `select:countOfYx`, `select:countStationBy`, `select:countByBatchNoAndInvoiceNoNoTargetId`, `update:updateVoiceStatusByIds`, `select:findByWithTemplate`, `select:countOfWithTemplate`, `update:batchUpdateStatus`, `select:findJinDieA02Orders`, `select:findJinDieH01Orders`, `select:getByOrderNoIncludeDeleted`
 - tables: `id`, `light_capital_company_info`, `light_company_info`, `light_invoice_template`, `light_project_electric_order`, `light_project_electric_order_owner`, `light_station`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightServiceProvider.xml
@@ -5737,8 +5746,8 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightProjectElectricOrderFapRecord.xml
 - namespace: `com.rrsjk.light.dao.LightProjectElectricOrderFapRecordDao`
-- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
-- tables: `id`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findNewEnergyHistory`
+- tables: `id`, `light_project_electric_order_fap_record`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpWithdrawalApplication.xml
 - namespace: `com.rrsjk.light.dao.LightSpWithdrawalApplicationDao`
@@ -5979,7 +5988,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/zerocarbon/ZeroCarbonSpDeposit.xml
 - namespace: `com.rrsjk.light.dao.zerocarbon.ZeroCarbonSpDepositDao`
-- statements: `insert:create`, `update:update`, `select:countOf`, `select:findBy`, `select:getByDepositNo`, `select:findByClientId`, `select:getById`, `select:findByDepositNos`, `update:batchUpdate`
+- statements: `insert:create`, `update:update`, `update:updateByOrderNo`, `select:countOf`, `select:findBy`, `select:getByDepositNo`, `select:findByClientId`, `select:getById`, `select:findByDepositNos`, `update:batchUpdate`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/zerocarbon/ZeroCarbonMessage.xml
@@ -7200,7 +7209,7 @@
 
 ## rrsjk-finance-service/rrsjk-finance-impl/src/main/resources/mybatis/mapper/check/CashSelfOrderItem.xml
 - namespace: `com.rrsjk.finance.check.dao.CashSelfOrderItemDao`
-- statements: `insert:insert`, `update:update`, `select:isExist`, `select:findNeedSyncSap`, `select:findSyncToSap`, `select:countOf`, `select:findBy`, `select:findSumSelfOrderItemDetail`
+- statements: `insert:insert`, `update:update`, `update:updateByOrderItemNo`, `select:isExist`, `select:findNeedSyncSap`, `select:findSyncToSap`, `select:countOf`, `select:findBy`, `select:findSumSelfOrderItemDetail`
 - tables: `id`
 
 ## rrsjk-finance-service/rrsjk-finance-impl/src/main/resources/mybatis/mapper/check/SettlementThirdOrderItemCommission.xml
@@ -7268,6 +7277,11 @@
 ## rrsjk-light-openapi-service/rrsjk-light-openapi-impl/src/main/resources/mybatis/mapper/local/LightAssetApplicationLog.xml
 - namespace: `com.rrsjk.openapi.dao.local.LightAssetApplicationLogDao`
 - statements: `insert:create`, `select:get`, `select:countOf`, `select:findBy`, `insert:batchInsert`
+
+## rrsjk-light-openapi-service/rrsjk-light-openapi-impl/src/main/resources/mybatis/mapper/local/LightBocHourElec.xml
+- namespace: `com.rrsjk.openapi.dao.local.LightBocHourElecDao`
+- statements: `insert:create`, `select:get`, `update:update`, `select:findBy`, `select:findByElec`
+- tables: `id`
 
 ## rrsjk-light-openapi-service/rrsjk-light-openapi-impl/src/main/resources/mybatis/mapper/ods/OdsLightStationElec.xml
 - namespace: `com.rrsjk.openapi.dao.ods.OdsLightStationElecDao`
