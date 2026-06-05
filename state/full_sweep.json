@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-04T22:00:51.895231",
+  "last_run_at": "2026-06-05T22:00:53.082618",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -119,11 +119,11 @@
     "rrsjk-light-service": "2026-05-26T22:00:58.451955",
     "rrsjk-merchant-web": "2026-05-27T22:00:16.087357",
     "rrsjk-light-report-service": "2026-05-26T22:00:58.451955",
-    "vpp-api-common": "2026-05-13T22:00:25.437143",
-    "vpp-api-elecbusiness": "2026-05-13T22:00:25.437143",
-    "vpp-api-ems": "2026-05-13T22:00:25.437143",
-    "vpp-api-gateway": "2026-05-13T22:00:25.437143",
-    "vpp-api-gect": "2026-05-13T22:00:25.437143",
+    "vpp-api-common": "2026-06-05T22:00:53.082618",
+    "vpp-api-elecbusiness": "2026-06-05T22:00:53.082618",
+    "vpp-api-ems": "2026-06-05T22:00:53.082618",
+    "vpp-api-gateway": "2026-06-05T22:00:53.082618",
+    "vpp-api-gect": "2026-06-05T22:00:53.082618",
     "he-pv.osp-wx.opm": "2026-05-17T22:04:02.245506",
     "item-service": "2026-05-17T22:04:07.718471",
     "job-service": "2026-05-17T22:04:07.718471",
@@ -335,6 +335,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 21,
+  "sweep_round": 22,
   "last_sweep_at": "2026-06-04T22:06:51.406075"
 }

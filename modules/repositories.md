@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-04 23:01:49
+更新时间: 2026-06-05 23:01:58
 
 ## 仓库列表
 
@@ -58,7 +58,7 @@
 - rrs-parent: /data/pvcode/rrs-parent (无变更)
 - rrsjk-activity-service: /data/pvcode/rrsjk-activity-service (无变更)
 - rrsjk-admin-auth-server: /data/pvcode/rrsjk-admin-auth-server (变更)
-- rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (无变更)
+- rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (变更)
 - rrsjk-admin-bff: /data/pvcode/rrsjk-admin-bff (变更)
 - rrsjk-admin-biff: /data/pvcode/rrsjk-admin-biff (无变更)
 - rrsjk-admin-web: /data/pvcode/rrsjk-admin-web (变更)
@@ -74,7 +74,7 @@
 - rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (变更)
 - rrsjk-item-service: /data/pvcode/rrsjk-item-service (无变更)
 - rrsjk-light-common: /data/pvcode/rrsjk-light-common (无变更)
-- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (无变更)
+- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (变更)
 - rrsjk-light-iot-service: /data/pvcode/rrsjk-light-iot-service (无变更)
 - rrsjk-light-message-service: /data/pvcode/rrsjk-light-message-service (无变更)
 - rrsjk-light-openapi-service: /data/pvcode/rrsjk-light-openapi-service (变更)
@@ -95,9 +95,9 @@
 - rrsjk-pay-web: /data/pvcode/rrsjk-pay-web (无变更)
 - rrsjk-pvbusiness-job-service: /data/pvcode/rrsjk-pvbusiness-job-service (无变更)
 - rrsjk-report-web: /data/pvcode/rrsjk-report-web (无变更)
-- rrsjk-system-service: /data/pvcode/rrsjk-system-service (无变更)
+- rrsjk-system-service: /data/pvcode/rrsjk-system-service (变更)
 - rrsjk-trade-service: /data/pvcode/rrsjk-trade-service (变更)
-- system-service: /data/pvcode/system-service (无变更)
+- system-service: /data/pvcode/system-service (变更)
 - uni-choose-file-android: /data/pvcode/uni-choose-file-android (无变更)
 - uni-choose-file-ios: /data/pvcode/uni-choose-file-ios (无变更)
 - usher-common: /data/pvcode/usher-common (无变更)

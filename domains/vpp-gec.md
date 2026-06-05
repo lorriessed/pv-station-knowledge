@@ -297,6 +297,20 @@
 | `/income/year` | 年收入 | EchartsData |
 | `/income/all` | 全生命周期收入 | EchartsData |
 
+### 4.3 vpp-api-gect 绿证/采购/发票定时任务
+
+**来源**: `vpp-api-gect-biz/src/main/java/com/nahui/energy/schedule/`
+
+| JobHandler | 所在文件 | 说明 |
+|---|---|---|
+| `queryGreenCertificateProgressDealHandler` | LightStationGreenCertificateProgressSchedule | 绿证进度初始创建版 (支持startDate/endDate/stationCode/createOrUpdateFlag参数, 租户权限控制: progressgreen_flag) |
+| `queryGreenCertificateProgressEverydayHandler` | LightStationGreenCertificateProgressSchedule | 绿证进度每天更新版 |
+| `queryCBSFapResultProgressEverydayHandler` | LightStationGreenCertificateProgressSchedule | 查询CBS系统FAP制证结果每天更新版 |
+| `CBSFapRecordCreateProgressEverydayHandler` | LightStationGreenCertificateProgressSchedule | CBS系统FAP创建每天更新版 |
+| `queryPurchaseApplySettleStatusAndDealHandler` | GecPurchaseSchedule | 查询CBS系统请款申请单据状态并处理业务(状态更新/记账操作), 逐条事务处理, 租户权限控制: queryPurchase_flag |
+| `sendInvoiceJobHandler` | InvoiceJobSchedule | 发票发送定时任务 |
+| `queryInvoiceResultJobHandler` | InvoiceJobSchedule | 发票查询定时任务 |
+
 ## 5. Drcloud 平台数据对接
 
 **来源**: `vpp-api-elecbusiness-biz/src/main/java/com/nahui/energy/controller/vpp/DrcloudController.java`
@@ -364,7 +378,120 @@
 - 阳台2.0故障: 充电MOSFET损坏/散热器温度过高/充电过流等23种
 - 英威腾并网故障: PV电压/总线电压/逆变过流/温度异常等100+种故障码
 
-## 9. 知识库更新记录
+## 9. FAP 凭证管理 (NEW — 2026-06-05 补充)
+
+**来源**: `vpp-api-gect-biz/src/main/java/com/nahui/energy/pojo/dto/fap/` + `PaybackManagementInfoServiceImpl.java` + `LightStationGreenCertificateProgressSchedule.java`
+
+### 9.1 FAP 记录业务模型
+
+FAP (Financial Accounting Platform) 是 CBS 系统的财务制证平台。vpp-api-gect 通过 HTTP 接口与 CBS 交互，管理 FAP 凭证的创建、查询和取消。
+
+**LightFapRecordDTO** (代码明确证明: `LightFapRecordDTO.java`):
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| orderNo | String | 单号 |
+| amount | BigDecimal | 金额(元) |
+| bizType | String | 业务模式 |
+| status | String | FAP状态 (见下方枚举) |
+| accountStatus | String | 记账状态 |
+| accountAt | LocalDateTime | 记账时间 |
+| companyCode/companyName | String | 公司编码/名称 |
+| customerCode/customerName | String | 客户编码/名称 |
+| expenseId/expenseName | String | 费用项目 |
+| fapOrderNo | String | 传FAP单号 |
+| sentAt | LocalDateTime | 推送FAP时间 |
+| sentResult | String | 推送FAP结果 |
+| fapRespVchrStatus | String | FAP返回制证状态 (1/2/3) |
+| fapRespVchrCode | String | FAP返回凭证码 |
+| fapRespVchrBy | String | FAP返回制证人 |
+| fapRespVchrDate | String | FAP返回制证日期 |
+| fapRespVchrFailMsg | String | FAP返回制证错误信息 |
+| fapRespBankTxnSn | String | FAP返回银行流水号 |
+| syncResultFlag | Integer | 是否同步记账结果 (0-未同步 1-已同步) |
+| fapCancelAt | LocalDateTime | FAP作废时间 |
+| fapCancelDesc | String | FAP作废描述 |
+| fapRespReconcileStatus | String | FAP对账状态 (NO/YES) |
+| payMode | String | 收款类型 |
+| invoiceNo/invoiceNumber | String/Integer | 发票序号/数量 |
+| invoiceCustomer | String | 发票对象 |
+| electricMonth | String | 电费月份 |
+
+**FAP 状态枚举** (`LightFapRecordDTO.StatusEnum`):
+
+| 值 | 描述 |
+|---|---|
+| WAIT_SENT | 待传FAP |
+| SENT | 已传FAP |
+| SUCCESS | 已记账 |
+| FAIL | 记账失败 |
+| CANCEL | 已作废 |
+
+**FAP 制证响应状态** (`LightFapRecordDTO.FapRespVchrStatusEnum`):
+
+| 值 | 描述 |
+|---|---|
+| 1 | 制证成功 |
+| 2 | 制证失败 |
+| 3 | 冲销成功 |
+
+### 9.2 FAP 与 CBS 交互接口
+
+**配置** (`PaybackManagementInfoServiceImpl.java`):
+
+| 配置Key | 用途 |
+|---|---|
+| `cbs.fap.addFapRecordUrl` | CBS新增FAP记录接口 |
+| `cbs.fap.queryFapRecordUrl` | CBS查询FAP记录接口 |
+| `cbs.fap.cancelFapRecordUrl` | CBS取消FAP记录接口 |
+
+**核心方法** (`PaybackManagementInfoServiceImpl.java`):
+
+| 方法 | 说明 |
+|---|---|
+| `cbsFapRecordCreate(Long id)` | 通过回款管理ID创建FAP记录，调用CBS addFapRecordUrl |
+| `cancelVppFapRecord(String orderNo)` | 取消指定订单的FAP记录，调用CBS cancelFapRecordUrl |
+| `queryCBSFapResultProgressEverydayJob()` | 每日查询CBS FAP制证结果并更新本地状态 |
+| `CBSFapRecordCreateProgressEverydayJob()` | 每日创建FAP记录进度任务 |
+
+**业务集成点**:
+- **回款管理**: 上传打款凭证后，触发 `cbsFapRecordCreate` 创建FAP记录
+- **订单管理**: `OrderManagementInfo` 中有 `cancelVppFapRecord(orderNo)` 方法，在订单作废/取消时调用
+- **绿证进度**: `LightStationGreenCertificateProgressService` 也有 FAP 相关定时任务
+
+### 9.3 FAP 相关 XXL-JOB 定时任务
+
+**来源**: `vpp-api-gect-biz/src/main/java/com/nahui/energy/schedule/LightStationGreenCertificateProgressSchedule.java`
+
+| JobHandler | 说明 | 触发方式 |
+|---|---|---|
+| `CBSFapRecordCreateProgressEverydayHandler` | CBS系统FAP创建每天更新版 | XXL-JOB 定时 |
+| `queryCBSFapResultProgressEverydayHandler` | 查询CBS系统FAP制证结果每天更新版 | XXL-JOB 定时 |
+| `queryGreenCertificateProgressDealHandler` | 绿证进度初始创建版 (支持 startDate/endDate/stationCode/createOrUpdateFlag 参数) | XXL-JOB 定时 |
+| `queryGreenCertificateProgressEverydayHandler` | 绿证进度每天更新版 | XXL-JOB 定时 |
+
+**权限控制**: 绿证进度和FAP相关定时任务均通过 `ConfigUtil.getConfigByKey("progressgreen_flag", "false")` 控制租户权限。
+
+### 9.4 GecPurchaseSchedule 采购请款定时任务
+
+**来源**: `vpp-api-gect-biz/src/main/java/com/nahui/energy/schedule/GecPurchaseSchedule.java`
+
+| JobHandler | 说明 |
+|---|---|
+| `queryPurchaseApplySettleStatusAndDealHandler` | 查询CBS系统请款申请单据状态并处理业务(状态更新/记账操作)。遍历所有未出款的采购申请结算单据(`findNoPaid()`)，逐条查询CBS并处理，每条独立事务。 |
+
+**权限控制**: `ConfigUtil.getConfigByKey("queryPurchase_flag", "false")`
+
+### 9.5 InvoiceJobSchedule 发票定时任务
+
+**来源**: `vpp-api-gect-biz/src/main/java/com/nahui/energy/schedule/InvoiceJobSchedule.java`
+
+| JobHandler | 说明 |
+|---|---|
+| `sendInvoiceJobHandler` | 发票发送定时任务，调用 `invoiceService.sendInvoiceJob()` |
+| `queryInvoiceResultJobHandler` | 发票查询定时任务，调用 `invoiceService.queryInvoiceResultJob()` |
+
+## 10. 知识库更新记录
 
 | 日期 | 更新内容 | 来源 |
 |---|---|---|
@@ -376,3 +503,7 @@
 | 2026-05-13 | 新增VPP Gateway网关架构 | vpp-api-gateway |
 | 2026-05-13 | 新增VPP EMS能控系统 | vpp-api-ems |
 | 2026-05-13 | 新增设备故障码国际化对照表 | vpp-api-elecbusiness lang/*.properties |
+| **2026-06-05** | **新增FAP凭证管理完整业务逻辑** (状态枚举/CBS交互/定时任务/回款集成) | vpp-api-gect 重扫 |
+| **2026-06-05** | **新增GecPurchaseSchedule采购请款定时任务** | vpp-api-gect GecPurchaseSchedule.java |
+| **2026-06-05** | **新增InvoiceJobSchedule发票定时任务** | vpp-api-gect InvoiceJobSchedule.java |
+| **2026-06-05** | **新增绿证进度XXL-JOB (4个handler)** | vpp-api-gect LightStationGreenCertificateProgressSchedule.java |

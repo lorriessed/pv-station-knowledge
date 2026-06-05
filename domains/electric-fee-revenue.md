@@ -217,3 +217,21 @@ rrsjk-light-service (Dubbo Service)
   - `LightWvRentController` / `LightWvRentRecordController` — 瓦沃租金
 - **业务影响**: 财务/租金列表支持按资方维度过滤，满足多资方场景下的数据隔离需求
 
+### 电费发票冲销查询方法变更 (2026-06-05)
+**来源**: `rrsjk-admin-web` → `LightProjectElectricInvoiceReverseRecordController.java` (commit by laowang, 2026-06-05)
+**证据等级**: 代码明确证明
+
+- `LightCapitalCompanyInfoService.findProjectCompanyCodesByCapital(capital)` → `findProjectCompanyNamesByCapital(capital)`
+- 列表查询和导出均从按"项目公司编码"改为按"项目名称"过滤
+- 可能是资方筛选逻辑优化，更适配用户界面的名称展示
+
+### 原材料财务审核 FAP 校验变更 (2026-06-05)
+**来源**: `rrsjk-admin-web` → `LightSpOrderFinanceController.java` / `lightSpOrderFinanceList.ftl` (commit by 代继宁, 2026-06-05)
+**证据等级**: 代码明确证明
+
+- 原材料订单确认收款校验从 `PayTypeEnum.TRANSFER` 判断改为 `fapStatus` 非空判断
+- 旧逻辑: 转账汇款订单提示"FAP自动处理，无需确认收款"
+- 新逻辑: `fapStatus` 非空则提示"FAP处理，无需手动确认"
+- 前端模板同步修改回购确认收款按钮权限
+- 反映 FAP 自动化流程持续推进，从单一支付方式覆盖到更广泛的订单状态
+

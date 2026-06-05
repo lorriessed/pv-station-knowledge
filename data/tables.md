@@ -92,9 +92,10 @@
 - invoice：发票表
 - invoice_item：发票详情表
 - invoice_attachment：发票附件表
-- gec_invoice_check：绿证发票校验表
-- sap_record：SAP记账记录
-- sap_item_record：SAP记账子记录
+|- gec_invoice_check：绿证发票校验表
+|- sap_record：SAP记账记录
+|- sap_item_record：SAP记账子记录
+|- light_fap_record：FAP制证记录表 (2026-06-05新增, 关联CBS财务制证平台, 状态: WAIT_SENT/SENT/SUCCESS/FAIL/CANCEL)
 
 ### VPP 系统基础表 (vpp-api-common)
 - sys_user：用户表

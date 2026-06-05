@@ -296,6 +296,81 @@ storeFile=key.jks
 - **状态**: 空壳仓库，自初始化以来无实际业务代码
 - **业务价值**: **极低** — 模板/骨架项目，尚未开始业务开发
 
+### 2.9 海尔绿能通 Flutter APP (greenergy-management)
+
+**来源**: `greenergy-management` 仓库全量通读 (代码明确证明, 2026-06-05)
+
+- **应用名**: 海尔绿能通（分中心 App）
+- **包名**: `com.haier.greenergy.management`
+- **iOS App ID**: `6742817613`
+- **版本**: `0.0.1+202****2501`
+- **技术栈**: Flutter 3.27.4 (fvm) + Riverpod + GoRouter + Retrofit + Freezed
+- **本地路径**: `/root/greenergy-management`
+- **仓库地址**: `git@codeup.aliyun.com:5ede241b405cdab50f4001e7/mobile/greenergy-management/greenergy-management.git`
+- **提交数**: 53 (截至 2026-06-05)
+- **状态**: **积极开发中** — 基础架构已完成，业务页面规划中
+
+#### 2.9.1 架构特征
+
+| 特征 | 说明 |
+|---|---|
+| 架构模式 | MVVM + Riverpod + GoRouter |
+| 依赖方向 | `ui → domain ← data` |
+| 状态管理 | Riverpod 2.6.1 + riverpod_generator |
+| 网络层 | Dio 5.7.0 + Retrofit 4.4.1（声明式 API） |
+| 数据模型 | Freezed + json_serializable |
+| 路由 | GoRouter 14.6.2（StatefulShellRoute.indexedStack） |
+| 日志 | logger 2.5.0（封装在 `lib/utils/app_logger.dart`） |
+
+#### 2.9.2 API 对接
+
+| 环境 | Base URL |
+|---|---|
+| 测试 | `https://apitest.nahuipv.com` |
+| 生产 | `https://api.nahuipv.com` |
+
+- **认证**: OAuth2 Password Grant (`POST /oauth2/oauth/login`)
+- **Client ID**: `nh_app`
+- **User-Agent**: `NH_APP_GREENERGY/ANDROID`
+- 环境切换：通过 SharedPreferences 持久化，Profile 页面可运行时切换
+
+#### 2.9.3 当前已实现模块
+
+| 模块 | 状态 | 说明 |
+|---|---|---|
+| 鉴权 | ✅ 完成 | 登录、账号自动补全、Token 持久化、GoRouter 路由守卫 |
+| 首页 | ✅ 基础 | HomePage + ViewModel |
+| 工作台 | ✅ 基础 | WorkspacePage |
+| 我的页 | ✅ 完成 | ProfilePage + 环境切换 + 版本更新 |
+| WebView | ✅ 完成 | WebView 容器 + JS Bridge |
+| 加载系统 | ✅ 完成 | AsyncState + Skeleton + LoadingButton |
+| 主题系统 | ✅ 完成 | AppDimens + AppColorsTokens + AppTextStyles |
+| 国际化 | ✅ 完成 | intl + ARB 翻译 |
+
+#### 2.9.4 规划中功能（路由已注册）
+
+- 数据分析（`/analytics`）
+- 签到（`/check-in`）
+- 告警（`/warning`）
+- 项目漏斗（`/project-funnel`）
+- 验收（`/acceptance`）
+- 电站（`/station`）
+- 水印相机（`/watermark-camera`）
+
+#### 2.9.5 与已有 Flutter App 的对比
+
+| 对比项 | nahuipv_greenergy_flutter (海尔绿能) | greenergy-management (绿能通) |
+|---|---|---|
+| 定位 | 终端用户/运维 APP | 分中心管理 APP |
+| 技术栈 | Riverpod + Dio + **Fluro** | Riverpod + Dio + **GoRouter** |
+| 路由 | Fluro（老旧） | GoRouter（现代化，支持 StatefulShellRoute） |
+| 架构 | 模块化（Git 依赖多个 package） | 单仓库（无外部 package 依赖） |
+| 代码生成 | 部分 | 全面（*.g.dart, *.freezed.dart 进 git） |
+| 规范 | 较宽松 | 严格（OpenSpec 工作流、禁止魔法值、编码标准文档） |
+| 特色 | DJI 无人机 SDK、水印相机 | JS Bridge、WebView 容器、防抖/节流 |
+
+**⚠️ 注意**: 这是两个不同的 APP，定位和技术选型有显著差异。greenergy-management 采用更现代的架构（GoRouter 替代 Fluro、单仓库替代多 package 依赖、OpenSpec 工作流）。
+
 ### 2.4 纳光宝与 VPP 后端的关系
 
 根据代码分析，纳光宝 APP 通过以下方式与 VPP 后端交互：
@@ -631,7 +706,8 @@ MySQL (rrsjk_light + rrsjk_light_report) + SAP
 | 湖南智充 Android | ⚠️ 非光伏业务 | ykccn.com 后端 | 充电桩运营 |
 | 湖南智充 iOS | ⚠️ 非光伏业务 | ykccn.com 后端 | 充电桩运营 |
 | 湖南 RN (vpp-hnzl) | ⚠️ 空壳 | 待开发 | VPP 移动端 |
-| 分中心APP (greenergy-management) | ⚠️ 骨架项目 | 待确认 | 待开发 |
+| 分中心APP (greenergy-management-flutter) | ⚠️ 骨架项目 | 待确认 | 待开发 |
+| **分中心APP (greenergy-management)** | **分中心管理人员** | **`apitest.nahuipv.com`** | **分中心管理（积极开发中）** |
 | 零碳适家商户端 (nahui-pv.merchant-micro.zch) | 零碳适家商户 | 待确认 | 零碳适家/结算 |
 | OSP运维小程序 (nahui-pv.osp-mini) | 运维服务人员 | 待确认 | 运维/备件 |
 | 移动端H5 (nahui-pv.mobile-h5) | 移动用户 | 待确认 | 综合 |
@@ -645,7 +721,8 @@ MySQL (rrsjk_light + rrsjk_light_report) + SAP
 | 2026-05-20 | 新增: 湖南智充APP (非光伏业务)/nahuipv_greenergy_flutter DJI无人机SDK集成/nhpv_common | 全量通读第7轮 |
 || 2026-05-26 | 新增: 海尔售电决策辅助系统 (Android+iOS+H5 Portal, 非PVS光伏业务) | 每日增量扫描 |
 || 2026-05-29 | 绿能Flutter APP: 电站列表分类tab、电站监控指引、station_status枚举扩展 | 每日增量扫描, jiangting |
-|| 2026-06-04 | 新增: watermark-camera-android 水印相机SDK / uni-choose-file Android/iOS 文件选择SDK | 全量通读第21轮 |
+||| 2026-06-04 | 新增: watermark-camera-android 水印相机SDK / uni-choose-file Android/iOS 文件选择SDK | 全量通读第21轮 |
+||| **2026-06-05** | **新增: greenergy-management 海尔绿能通 Flutter APP（分中心管理端），完整架构分析 + 与已有 Flutter APP 对比** | **仓库全量通读** |
 
 ## 6. 原生工具 SDK
 

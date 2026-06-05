@@ -7124,13 +7124,13 @@
 
 ## LightStationZhongheWhiteListController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightStationZhongheWhiteListController.java`
-- @RequestMapping("/api/app/asset-management/zhonghe-transactions")
+- @RequestMapping("/api/admin/asset-management/zhonghe-transactions")
 - @GetMapping
 - @GetMapping("/export")
 
 ## LightOwnAssetController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightOwnAssetController.java`
-- @RequestMapping("/api/app/asset-management/own-assets")
+- @RequestMapping("/api/admin/asset-management/own-assets")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -7140,7 +7140,7 @@
 
 ## LightContractInfoController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightContractInfoController.java`
-- @RequestMapping("/api/app/asset-management/contracts")
+- @RequestMapping("/api/admin/asset-management/contracts")
 - @GetMapping
 - @PostMapping
 - @GetMapping("/project-company-options")
@@ -7150,7 +7150,7 @@
 
 ## BtFundReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/BtFundReportController.java`
-- @RequestMapping("/api/app/asset-management/bt-fund-reports")
+- @RequestMapping("/api/admin/asset-management/bt-fund-reports")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{repaymentNo}/allocate-details")
@@ -7161,7 +7161,7 @@
 
 ## BtProjectTransactionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/BtProjectTransactionController.java`
-- @RequestMapping("/api/app/asset-management/bt-project-transactions")
+- @RequestMapping("/api/admin/asset-management/bt-project-transactions")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -7170,7 +7170,7 @@
 
 ## CmbLeasingStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/CmbLeasingStationController.java`
-- @RequestMapping("/api/app/asset-management/cmb-leasing-stations")
+- @RequestMapping("/api/admin/asset-management/cmb-leasing-stations")
 - @GetMapping
 - @GetMapping("/{stationCode}")
 - @GetMapping("/export")
@@ -7181,7 +7181,7 @@
 
 ## BtFundAssetAllocateDetailController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/BtFundAssetAllocateDetailController.java`
-- @RequestMapping("/api/app/asset-management/bt-fund-asset-allocate-details")
+- @RequestMapping("/api/admin/asset-management/bt-fund-asset-allocate-details")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -7190,7 +7190,7 @@
 
 ## BtAssetManagementController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/BtAssetManagementController.java`
-- @RequestMapping("/api/app/asset-management/bt-asset-management")
+- @RequestMapping("/api/admin/asset-management/bt-asset-management")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -7199,13 +7199,13 @@
 
 ## LightStationWhiteListController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightStationWhiteListController.java`
-- @RequestMapping("/api/app/asset-management/puyin-transactions")
+- @RequestMapping("/api/admin/asset-management/puyin-transactions")
 - @GetMapping
 - @GetMapping("/export")
 
 ## OperationalPaymentReceiptController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/OperationalPaymentReceiptController.java`
-- @RequestMapping("/api/app/asset-management/operational-payment-receipts")
+- @RequestMapping("/api/admin/asset-management/operational-payment-receipts")
 - @GetMapping
 - @GetMapping("/{paymentReceiptCode}/asset-details")
 - @PostMapping(value = "/voucher-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -7215,7 +7215,7 @@
 
 ## EnergyLeasedStationAssetManagementController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/EnergyLeasedStationAssetManagementController.java`
-- @RequestMapping("/api/app/asset-management/energy-leased-station-asset-reports")
+- @RequestMapping("/api/admin/asset-management/energy-leased-station-asset-reports")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -7225,19 +7225,19 @@
 
 ## BtFundAssetManagementReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/BtFundAssetManagementReportController.java`
-- @RequestMapping("/api/app/asset-management/bt-fund-asset-management-reports")
+- @RequestMapping("/api/admin/asset-management/bt-fund-asset-management-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## LightEamYearBudgetController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightEamYearBudgetController.java`
-- @RequestMapping("/api/app/asset-management/eam-year-budgets")
+- @RequestMapping("/api/admin/asset-management/eam-year-budgets")
 - @GetMapping
 - @PostMapping("/sync")
 
 ## OperationalAssetManagementController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/OperationalAssetManagementController.java`
-- @RequestMapping("/api/app/asset-management/operational-asset-details")
+- @RequestMapping("/api/admin/asset-management/operational-asset-details")
 - @GetMapping
 - @GetMapping("/template")
 - @PostMapping("/import")
@@ -7246,14 +7246,14 @@
 
 ## LightEamAssetsController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightEamAssetsController.java`
-- @RequestMapping("/api/app/asset-management/eam-assets")
+- @RequestMapping("/api/admin/asset-management/eam-assets")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/project-company-options")
 
 ## LightStationImageDownloadController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/assetmanagement/controller/LightStationImageDownloadController.java`
-- @RequestMapping("/api/app/asset-management/station-image-downloads")
+- @RequestMapping("/api/admin/asset-management/station-image-downloads")
 - @GetMapping
 - @PostMapping
 - @GetMapping("/export")
@@ -7261,7 +7261,7 @@
 
 ## PartyUserController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyUserController.java`
-- @RequestMapping("/api/app/subcenter-management/party-users")
+- @RequestMapping("/api/admin/subcenter-management/party-users")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/selectable-users")
@@ -7272,7 +7272,7 @@
 
 ## SubCenterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/SubCenterController.java`
-- @RequestMapping("/api/app/subcenter-management/sub-centers")
+- @RequestMapping("/api/admin/subcenter-management/sub-centers")
 - @GetMapping
 - @GetMapping("/{subCenterId}")
 - @GetMapping("/{subCenterId}/users")
@@ -7282,7 +7282,7 @@
 
 ## PartyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyController.java`
-- @RequestMapping("/api/app/subcenter-management/parties")
+- @RequestMapping("/api/admin/subcenter-management/parties")
 - @GetMapping
 - @GetMapping("/selectable-users")
 - @PostMapping
@@ -7291,14 +7291,14 @@
 
 ## SelfIncomeRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/SelfIncomeRecordController.java`
-- @RequestMapping("/api/app/self-finance/income-records")
+- @RequestMapping("/api/admin/self-finance/income-records")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## NoPaperAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/NoPaperAuditController.java`
-- @RequestMapping("/api/app/self-finance/no-paper-audits")
+- @RequestMapping("/api/admin/self-finance/no-paper-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/form-options")
@@ -7308,7 +7308,7 @@
 
 ## FrozenPurchaseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/FrozenPurchaseController.java`
-- @RequestMapping("/api/app/self-finance/frozen-purchases")
+- @RequestMapping("/api/admin/self-finance/frozen-purchases")
 - @GetMapping
 - @GetMapping("/batch-total")
 - @GetMapping("/purchase-options")
@@ -7322,7 +7322,7 @@
 
 ## SapPurchaseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/SapPurchaseController.java`
-- @RequestMapping("/api/app/self-finance/sap-purchases")
+- @RequestMapping("/api/admin/self-finance/sap-purchases")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -7331,7 +7331,7 @@
 
 ## PurchaseSettleApplicationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/PurchaseSettleApplicationController.java`
-- @RequestMapping("/api/app/self-finance/purchase-settle-applications")
+- @RequestMapping("/api/admin/self-finance/purchase-settle-applications")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/export")
@@ -7352,7 +7352,7 @@
 
 ## DepositRefundAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/DepositRefundAuditController.java`
-- @RequestMapping("/api/app/self-finance/deposit-refund-audits")
+- @RequestMapping("/api/admin/self-finance/deposit-refund-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/audit")
@@ -7360,7 +7360,7 @@
 
 ## PayAccountConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/PayAccountConfigController.java`
-- @RequestMapping("/api/app/self-finance/pay-account-configs")
+- @RequestMapping("/api/admin/self-finance/pay-account-configs")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/pay-banks")
@@ -7373,7 +7373,7 @@
 
 ## RetentionPaymentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/RetentionPaymentController.java`
-- @RequestMapping("/api/app/self-finance/retention-payments")
+- @RequestMapping("/api/admin/self-finance/retention-payments")
 - @GetMapping
 - @GetMapping("/application")
 - @GetMapping("/export")
@@ -7381,7 +7381,7 @@
 
 ## PurchaseFinanceAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/PurchaseFinanceAuditController.java`
-- @RequestMapping("/api/app/self-finance/purchase-finance-audits")
+- @RequestMapping("/api/admin/self-finance/purchase-finance-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/application")
@@ -7391,7 +7391,7 @@
 
 ## QuotaAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/QuotaAuditController.java`
-- @RequestMapping("/api/app/self-finance/quota-audits")
+- @RequestMapping("/api/admin/self-finance/quota-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/service-providers")
@@ -7403,13 +7403,13 @@
 
 ## YbzPayoutLogController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/YbzPayoutLogController.java`
-- @RequestMapping("/api/app/self-finance/ybz-payout-logs")
+- @RequestMapping("/api/admin/self-finance/ybz-payout-logs")
 - @GetMapping
 - @GetMapping("/export")
 
 ## FinanceInvoiceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/FinanceInvoiceController.java`
-- @RequestMapping("/api/app/self-finance/invoices")
+- @RequestMapping("/api/admin/self-finance/invoices")
 - @GetMapping("/self")
 - @GetMapping("/self/export")
 - @GetMapping("/seller")
@@ -7417,7 +7417,7 @@
 
 ## CustomerCommissionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/CustomerCommissionController.java`
-- @RequestMapping("/api/app/self-finance/customer-commissions")
+- @RequestMapping("/api/admin/self-finance/customer-commissions")
 - @GetMapping("/details")
 - @GetMapping("/details/export")
 - @GetMapping("/summary")
@@ -7425,46 +7425,46 @@
 
 ## ZeroCarbonSettleAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/ZeroCarbonSettleAuditController.java`
-- @RequestMapping("/api/app/self-finance/zero-carbon-settle-audits")
+- @RequestMapping("/api/admin/self-finance/zero-carbon-settle-audits")
 - @GetMapping
 - @GetMapping("/export")
 
 ## QuotaReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/QuotaReportController.java`
-- @RequestMapping("/api/app/self-finance/quota-reports")
+- @RequestMapping("/api/admin/self-finance/quota-reports")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## ManualIncomeRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/ManualIncomeRecordController.java`
-- @RequestMapping("/api/app/self-finance/manual-income-records")
+- @RequestMapping("/api/admin/self-finance/manual-income-records")
 - @GetMapping
 - @PostMapping
 - @PostMapping("/import")
 
 ## InvoiceSharedAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/InvoiceSharedAuditController.java`
-- @RequestMapping("/api/app/self-finance/invoice-shared-audits")
+- @RequestMapping("/api/admin/self-finance/invoice-shared-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/{applyNo}/check")
 
 ## DepositRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/DepositRecordController.java`
-- @RequestMapping("/api/app/self-finance/deposit-records")
+- @RequestMapping("/api/admin/self-finance/deposit-records")
 - @GetMapping
 - @GetMapping("/export")
 
 ## RealtimeIncomeDetailController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/RealtimeIncomeDetailController.java`
-- @RequestMapping("/api/app/self-finance/realtime-income-details")
+- @RequestMapping("/api/admin/self-finance/realtime-income-details")
 - @GetMapping
 - @GetMapping("/export")
 
 ## InvoiceCheckController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/InvoiceCheckController.java`
-- @RequestMapping("/api/app/self-finance/invoice-checks")
+- @RequestMapping("/api/admin/self-finance/invoice-checks")
 - @GetMapping
 - @PostMapping(value = "/files", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 - @PostMapping(value = "/xml-files", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -7481,24 +7481,24 @@
 
 ## BccRebateController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/BccRebateController.java`
-- @RequestMapping("/api/app/self-finance/bcc-rebates")
+- @RequestMapping("/api/admin/self-finance/bcc-rebates")
 - @GetMapping
 - @GetMapping("/export")
 
 ## CashSelfOrderItemController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/CashSelfOrderItemController.java`
-- @RequestMapping("/api/app/self-finance/cash-details")
+- @RequestMapping("/api/admin/self-finance/cash-details")
 - @GetMapping
 - @GetMapping("/export")
 
 ## UppRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/selffinance/controller/UppRecordController.java`
-- @RequestMapping("/api/app/self-finance/upp-records")
+- @RequestMapping("/api/admin/self-finance/upp-records")
 - @GetMapping
 
 ## ZeroCarbonOrderPolicyCashController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonOrderPolicyCashController.java`
-- @RequestMapping("/api/app/zero-carbon-home/order-policy-cashes")
+- @RequestMapping("/api/admin/zero-carbon-home/order-policy-cashes")
 - @GetMapping
 - @GetMapping("/statuses")
 - @GetMapping("/{id}/details")
@@ -7506,14 +7506,14 @@
 
 ## ZeroCarbonMaterialFlowController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonMaterialFlowController.java`
-- @RequestMapping("/api/app/zero-carbon-home/material-flows")
+- @RequestMapping("/api/admin/zero-carbon-home/material-flows")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## LightZeroCarbonStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/LightZeroCarbonStockController.java`
-- @RequestMapping("/api/app/zero-carbon-home/stocks")
+- @RequestMapping("/api/admin/zero-carbon-home/stocks")
 - @GetMapping
 - @GetMapping("/changes")
 - @GetMapping("/export")
@@ -7521,20 +7521,20 @@
 
 ## ZeroCarbonRecruitmentReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonRecruitmentReportController.java`
-- @RequestMapping("/api/app/zero-carbon-home/recruitment-reports")
+- @RequestMapping("/api/admin/zero-carbon-home/recruitment-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ZeroCarbonTouchpointReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonTouchpointReportController.java`
-- @RequestMapping("/api/app/zero-carbon-home/touchpoint-reports")
+- @RequestMapping("/api/admin/zero-carbon-home/touchpoint-reports")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## ZeroCarbonCorporateClientController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonCorporateClientController.java`
-- @RequestMapping("/api/app/zero-carbon-home/corporate-clients")
+- @RequestMapping("/api/admin/zero-carbon-home/corporate-clients")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -7553,7 +7553,7 @@
 
 ## LightZeroMerchantNoticeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/LightZeroMerchantNoticeController.java`
-- @RequestMapping("/api/app/zero-carbon-home/merchant-notices")
+- @RequestMapping("/api/admin/zero-carbon-home/merchant-notices")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -7563,14 +7563,14 @@
 
 ## ZeroCarbonMaterialPurchaseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonMaterialPurchaseController.java`
-- @RequestMapping("/api/app/zero-carbon-home/material-purchases")
+- @RequestMapping("/api/admin/zero-carbon-home/material-purchases")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## ZeroCarbonShopController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonShopController.java`
-- @RequestMapping("/api/app/zero-carbon-home/shops")
+- @RequestMapping("/api/admin/zero-carbon-home/shops")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/regions")
@@ -7580,7 +7580,7 @@
 
 ## LightZeroCarbonPlanOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/LightZeroCarbonPlanOrderController.java`
-- @RequestMapping("/api/app/zero-carbon-home/e-station-plan-orders")
+- @RequestMapping("/api/admin/zero-carbon-home/e-station-plan-orders")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/regions")
@@ -7593,7 +7593,7 @@
 
 ## LightZeroCarbonCampaignController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/LightZeroCarbonCampaignController.java`
-- @RequestMapping("/api/app/zero-carbon-home/campaigns")
+- @RequestMapping("/api/admin/zero-carbon-home/campaigns")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -7603,14 +7603,14 @@
 
 ## ZeroCarbonStationPolicyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonStationPolicyController.java`
-- @RequestMapping("/api/app/zero-carbon-home/station-policies")
+- @RequestMapping("/api/admin/zero-carbon-home/station-policies")
 - @GetMapping
 - @GetMapping("/{id}/details")
 - @PostMapping("/{id}/audit")
 
 ## LightZeroCarbonEStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/LightZeroCarbonEStationController.java`
-- @RequestMapping("/api/app/zero-carbon-home/e-stations")
+- @RequestMapping("/api/admin/zero-carbon-home/e-stations")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/regions")
@@ -7623,7 +7623,7 @@
 
 ## ZeroCarbonDepositController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonDepositController.java`
-- @RequestMapping("/api/app/zero-carbon-home/deposits")
+- @RequestMapping("/api/admin/zero-carbon-home/deposits")
 - @GetMapping
 - @PostMapping("/{id}/confirm-pay")
 - @PostMapping("/batch-confirm-pay")
@@ -7631,7 +7631,7 @@
 
 ## ZeroCarbonComponentPurchaseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonComponentPurchaseController.java`
-- @RequestMapping("/api/app/zero-carbon-home/component-purchases")
+- @RequestMapping("/api/admin/zero-carbon-home/component-purchases")
 - @GetMapping
 - @GetMapping("/template")
 - @PostMapping("/import")
@@ -7639,7 +7639,7 @@
 
 ## ZeroCarbonTechnicalAcceptanceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonTechnicalAcceptanceController.java`
-- @RequestMapping("/api/app/zero-carbon-home/technical-acceptances")
+- @RequestMapping("/api/admin/zero-carbon-home/technical-acceptances")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/regions")
@@ -7650,7 +7650,7 @@
 
 ## ZeroCarbonRetailRegistrationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonRetailRegistrationController.java`
-- @RequestMapping("/api/app/zero-carbon-home/retail-registrations")
+- @RequestMapping("/api/admin/zero-carbon-home/retail-registrations")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/audit-detail")
@@ -7661,7 +7661,7 @@
 
 ## ZeroCarbonOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonOrderController.java`
-- @RequestMapping("/api/app/zero-carbon-home/orders")
+- @RequestMapping("/api/admin/zero-carbon-home/orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -7673,7 +7673,7 @@
 
 ## ZeroCarbonBusinessAcceptanceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonBusinessAcceptanceController.java`
-- @RequestMapping("/api/app/zero-carbon-home/business-acceptances")
+- @RequestMapping("/api/admin/zero-carbon-home/business-acceptances")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/regions")
@@ -7684,7 +7684,7 @@
 
 ## ZeroCarbonInstallationFeeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonInstallationFeeController.java`
-- @RequestMapping("/api/app/zero-carbon-home/installation-fees")
+- @RequestMapping("/api/admin/zero-carbon-home/installation-fees")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/batch-confirm")
@@ -7692,14 +7692,14 @@
 
 ## ZeroCarbonIncomeReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonIncomeReportController.java`
-- @RequestMapping("/api/app/zero-carbon-home/income-reports")
+- @RequestMapping("/api/admin/zero-carbon-home/income-reports")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## ZeroCarbonOrderPolicyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonOrderPolicyController.java`
-- @RequestMapping("/api/app/zero-carbon-home/order-policies")
+- @RequestMapping("/api/admin/zero-carbon-home/order-policies")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -7709,7 +7709,7 @@
 
 ## ZeroCarbonSkuController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonSkuController.java`
-- @RequestMapping("/api/app/zero-carbon-home/skus")
+- @RequestMapping("/api/admin/zero-carbon-home/skus")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
@@ -7719,20 +7719,20 @@
 
 ## ZeroCarbonMaterialController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonMaterialController.java`
-- @RequestMapping("/api/app/zero-carbon-home/materials")
+- @RequestMapping("/api/admin/zero-carbon-home/materials")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ZeroCarbonInverterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonInverterController.java`
-- @RequestMapping("/api/app/zero-carbon-home/inverters")
+- @RequestMapping("/api/admin/zero-carbon-home/inverters")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/unbind")
 
 ## LightZeroCarbonStoreController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/LightZeroCarbonStoreController.java`
-- @RequestMapping("/api/app/zero-carbon-home/stores")
+- @RequestMapping("/api/admin/zero-carbon-home/stores")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/regions")
@@ -7747,7 +7747,7 @@
 
 ## ZeroCarbonPurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zerocarbon/controller/ZeroCarbonPurchaseOrderController.java`
-- @RequestMapping("/api/app/zero-carbon-home/purchase-orders")
+- @RequestMapping("/api/admin/zero-carbon-home/purchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{purchaseOrderNo}")
@@ -7758,18 +7758,18 @@
 
 ## HuadianIncomeReverseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huadian/controller/HuadianIncomeReverseController.java`
-- @RequestMapping("/api/app/huadian-trade/income-reverses")
+- @RequestMapping("/api/admin/huadian-trade/income-reverses")
 - @GetMapping
 - @GetMapping("/{id}/detail")
 
 ## HuadianPriceConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huadian/controller/HuadianPriceConfigController.java`
-- @RequestMapping("/api/app/huadian-trade/price-configs")
+- @RequestMapping("/api/admin/huadian-trade/price-configs")
 - @GetMapping
 
 ## HuadianIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huadian/controller/HuadianIncomeController.java`
-- @RequestMapping("/api/app/huadian-trade/incomes")
+- @RequestMapping("/api/admin/huadian-trade/incomes")
 - @GetMapping
 - @GetMapping("/template")
 - @PostMapping("/import")
@@ -7779,7 +7779,7 @@
 
 ## JointInventoryReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/JointInventoryReportController.java`
-- @RequestMapping("/api/app/data-dashboard/joint-inventory-reports")
+- @RequestMapping("/api/admin/data-dashboard/joint-inventory-reports")
 - @GetMapping
 - @GetMapping("/export")
 
@@ -7791,7 +7791,7 @@
 
 ## StationCostReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/StationCostReportController.java`
-- @RequestMapping("/api/app/data-dashboard/station-cost-reports")
+- @RequestMapping("/api/admin/data-dashboard/station-cost-reports")
 - @GetMapping
 - @GetMapping("/special-flags")
 - @GetMapping("/regions/provinces")
@@ -7800,32 +7800,32 @@
 
 ## EnergyCenterIncomeDayController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/EnergyCenterIncomeDayController.java`
-- @RequestMapping("/api/app/data-dashboard/energy-center-income-days")
+- @RequestMapping("/api/admin/data-dashboard/energy-center-income-days")
 - @GetMapping
 - @GetMapping("/export")
 
 ## StationReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/StationReportController.java`
-- @RequestMapping("/api/app/data-dashboard/station-reports")
+- @RequestMapping("/api/admin/data-dashboard/station-reports")
 - @GetMapping
 - @GetMapping("/sub-centers")
 - @GetMapping("/export")
 
 ## EnergySummaryDayController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/EnergySummaryDayController.java`
-- @RequestMapping("/api/app/data-dashboard/energy-summary-days")
+- @RequestMapping("/api/admin/data-dashboard/energy-summary-days")
 - @GetMapping
 - @GetMapping("/export")
 
 ## CustomerOperationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/CustomerOperationController.java`
-- @RequestMapping("/api/app/data-dashboard/customer-operations")
+- @RequestMapping("/api/admin/data-dashboard/customer-operations")
 - @GetMapping
 - @GetMapping("/export")
 
 ## SubBaseDataController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/SubBaseDataController.java`
-- @RequestMapping("/api/app/data-dashboard/sub-base-data")
+- @RequestMapping("/api/admin/data-dashboard/sub-base-data")
 - @GetMapping
 - @GetMapping("/service-providers")
 - @GetMapping("/sub-providers")
@@ -7834,13 +7834,13 @@
 
 ## CapitalTradeReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/CapitalTradeReportController.java`
-- @RequestMapping("/api/app/data-dashboard/capital-trade-reports")
+- @RequestMapping("/api/admin/data-dashboard/capital-trade-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## SubOperationDataController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/SubOperationDataController.java`
-- @RequestMapping("/api/app/data-dashboard/sub-operation-data")
+- @RequestMapping("/api/admin/data-dashboard/sub-operation-data")
 - @GetMapping
 - @GetMapping("/service-providers")
 - @GetMapping("/sub-providers")
@@ -7849,7 +7849,7 @@
 
 ## SubBuildDataController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/SubBuildDataController.java`
-- @RequestMapping("/api/app/data-dashboard/sub-build-data")
+- @RequestMapping("/api/admin/data-dashboard/sub-build-data")
 - @GetMapping
 - @GetMapping("/service-providers")
 - @GetMapping("/sub-providers")
@@ -7858,49 +7858,49 @@
 
 ## CapitalTradeProjectCompanyReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/CapitalTradeProjectCompanyReportController.java`
-- @RequestMapping("/api/app/data-dashboard/capital-trade-project-company-reports")
+- @RequestMapping("/api/admin/data-dashboard/capital-trade-project-company-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## SaleOrderCompanySwitchController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/datadashboard/controller/SaleOrderCompanySwitchController.java`
-- @RequestMapping("/api/app/data-dashboard/sale-orders-company-switch")
+- @RequestMapping("/api/admin/data-dashboard/sale-orders-company-switch")
 - @GetMapping
 - @GetMapping("/template")
 - @PostMapping("/import")
 
 ## ReconciliationExceptionWarningController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/reconciliation/controller/ReconciliationExceptionWarningController.java`
-- @RequestMapping("/api/app/reconciliation/exception-warnings")
+- @RequestMapping("/api/admin/reconciliation/exception-warnings")
 - @GetMapping
 
 ## ReconciliationResultController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/reconciliation/controller/ReconciliationResultController.java`
-- @RequestMapping("/api/app/reconciliation/results")
+- @RequestMapping("/api/admin/reconciliation/results")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ReconciliationOutBusinessController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/reconciliation/controller/ReconciliationOutBusinessController.java`
-- @RequestMapping("/api/app/reconciliation/out-business-details")
+- @RequestMapping("/api/admin/reconciliation/out-business-details")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ReconciliationUncashController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/reconciliation/controller/ReconciliationUncashController.java`
-- @RequestMapping("/api/app/reconciliation/uncash-details")
+- @RequestMapping("/api/admin/reconciliation/uncash-details")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ThirdPartyBillController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/reconciliation/controller/ThirdPartyBillController.java`
-- @RequestMapping("/api/app/reconciliation/third-party-bills")
+- @RequestMapping("/api/admin/reconciliation/third-party-bills")
 - @GetMapping("/{channel}")
 - @GetMapping("/{channel}/export")
 
 ## FundSettlementIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/fundsettlement/controller/FundSettlementIncomeController.java`
-- @RequestMapping("/api/app/fund-settlement/incomes")
+- @RequestMapping("/api/admin/fund-settlement/incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -7914,7 +7914,7 @@
 
 ## CmSignInfoController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmSignInfoController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/sign-infos")
+- @RequestMapping("/api/admin/industrial-epc-construction/sign-infos")
 - @GetMapping
 - @GetMapping("/nodes")
 - @GetMapping("/project")
@@ -7927,7 +7927,7 @@
 
 ## CmIncomeConfirmController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmIncomeConfirmController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/income-confirms")
+- @RequestMapping("/api/admin/industrial-epc-construction/income-confirms")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/confirm")
@@ -7935,7 +7935,7 @@
 
 ## CmChangeAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmChangeAuditController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/change-audits")
+- @RequestMapping("/api/admin/industrial-epc-construction/change-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
@@ -7943,7 +7943,7 @@
 
 ## CmIncomePolicyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmIncomePolicyController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/income-policies")
+- @RequestMapping("/api/admin/industrial-epc-construction/income-policies")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/edit-context")
@@ -7958,7 +7958,7 @@
 
 ## CmStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmStockController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/stocks")
+- @RequestMapping("/api/admin/industrial-epc-construction/stocks")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/changes")
@@ -7966,7 +7966,7 @@
 
 ## CmProgressAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmProgressAuditController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/progress-audits")
+- @RequestMapping("/api/admin/industrial-epc-construction/progress-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/project")
@@ -7975,7 +7975,7 @@
 
 ## CmNodeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmNodeController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/nodes")
+- @RequestMapping("/api/admin/industrial-epc-construction/nodes")
 - @GetMapping
 - @PostMapping
 - @PostMapping("/{id}/enable")
@@ -7983,7 +7983,7 @@
 
 ## CmConstructionPlanController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmConstructionPlanController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/construction-plans")
+- @RequestMapping("/api/admin/industrial-epc-construction/construction-plans")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
@@ -7991,7 +7991,7 @@
 
 ## CmStoreController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepcconstruction/controller/CmStoreController.java`
-- @RequestMapping("/api/app/industrial-epc-construction/stores")
+- @RequestMapping("/api/admin/industrial-epc-construction/stores")
 - @GetMapping
 - @PostMapping
 - @GetMapping("/options/provinces")
@@ -7999,7 +7999,7 @@
 
 ## WarehouseAuxiliaryPurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseAuxiliaryPurchaseOrderController.java`
-- @RequestMapping("/api/app/warehouse/auxiliary-purchase-orders")
+- @RequestMapping("/api/admin/warehouse/auxiliary-purchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{auxiliaryPurchaseOrderNo}")
@@ -8007,19 +8007,19 @@
 
 ## WarehouseStockChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseStockChangeController.java`
-- @RequestMapping("/api/app/warehouse/stock-changes")
+- @RequestMapping("/api/admin/warehouse/stock-changes")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseInventoryTurnoverSubCenterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseInventoryTurnoverSubCenterController.java`
-- @RequestMapping("/api/app/warehouse/inventory-turnover-sub-centers")
+- @RequestMapping("/api/admin/warehouse/inventory-turnover-sub-centers")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseStoreController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseStoreController.java`
-- @RequestMapping("/api/app/warehouse/stores")
+- @RequestMapping("/api/admin/warehouse/stores")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping
@@ -8033,13 +8033,13 @@
 
 ## WarehouseStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseStockController.java`
-- @RequestMapping("/api/app/warehouse/stocks")
+- @RequestMapping("/api/admin/warehouse/stocks")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseTransferSpApplicationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseTransferSpApplicationController.java`
-- @RequestMapping("/api/app/warehouse/transfer-sp-applications")
+- @RequestMapping("/api/admin/warehouse/transfer-sp-applications")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -8056,19 +8056,19 @@
 
 ## WarehouseSapStockChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSapStockChangeController.java`
-- @RequestMapping("/api/app/warehouse/sap-stock-changes")
+- @RequestMapping("/api/admin/warehouse/sap-stock-changes")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseOverdueInventorySkuController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOverdueInventorySkuController.java`
-- @RequestMapping("/api/app/warehouse/overdue-inventory-sku")
+- @RequestMapping("/api/admin/warehouse/overdue-inventory-sku")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseConfirmOrderAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseConfirmOrderAuditController.java`
-- @RequestMapping("/api/app/warehouse/confirm-order-audits")
+- @RequestMapping("/api/admin/warehouse/confirm-order-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -8079,14 +8079,14 @@
 
 ## WarehouseRoboAdvisorOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseRoboAdvisorOrderController.java`
-- @RequestMapping("/api/app/warehouse/robo-advisor-orders")
+- @RequestMapping("/api/admin/warehouse/robo-advisor-orders")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/audit")
 
 ## WarehouseMakeOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseMakeOrderController.java`
-- @RequestMapping("/api/app/warehouse/make-orders")
+- @RequestMapping("/api/admin/warehouse/make-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/make-stock/validate")
@@ -8109,13 +8109,13 @@
 
 ## WarehouseSpecialOutboundSapMaterialController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSpecialOutboundSapMaterialController.java`
-- @RequestMapping("/api/app/warehouse/special-outbound-sap-materials")
+- @RequestMapping("/api/admin/warehouse/special-outbound-sap-materials")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehousePreOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehousePreOrderController.java`
-- @RequestMapping("/api/app/warehouse/pre-orders")
+- @RequestMapping("/api/admin/warehouse/pre-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/purchase-order-export")
@@ -8128,31 +8128,31 @@
 
 ## WarehouseOverdueInventorySubCenterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOverdueInventorySubCenterController.java`
-- @RequestMapping("/api/app/warehouse/overdue-inventory-sub-centers")
+- @RequestMapping("/api/admin/warehouse/overdue-inventory-sub-centers")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseInternalTransferStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseInternalTransferStockController.java`
-- @RequestMapping("/api/app/warehouse/internal-transfer-stocks")
+- @RequestMapping("/api/admin/warehouse/internal-transfer-stocks")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseModuleSnController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseModuleSnController.java`
-- @RequestMapping("/api/app/warehouse/module-sns")
+- @RequestMapping("/api/admin/warehouse/module-sns")
 - @GetMapping
 - @PostMapping("/{id}/delete")
 
 ## WarehouseSecondClassStoreController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSecondClassStoreController.java`
-- @RequestMapping("/api/app/warehouse/second-class-stores")
+- @RequestMapping("/api/admin/warehouse/second-class-stores")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseInventoryAgeSpReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseInventoryAgeSpReportController.java`
-- @RequestMapping("/api/app/warehouse/inventory-age-sp-reports")
+- @RequestMapping("/api/admin/warehouse/inventory-age-sp-reports")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/trigger-task")
@@ -8161,7 +8161,7 @@
 
 ## WarehouseOrderForecastSubmissionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOrderForecastSubmissionController.java`
-- @RequestMapping("/api/app/warehouse/order-forecast-submissions")
+- @RequestMapping("/api/admin/warehouse/order-forecast-submissions")
 - @GetMapping
 - @GetMapping("/{id}/details")
 - @PostMapping
@@ -8175,46 +8175,46 @@
 
 ## WarehouseInventoryTurnoverSkuController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseInventoryTurnoverSkuController.java`
-- @RequestMapping("/api/app/warehouse/inventory-turnover-sku")
+- @RequestMapping("/api/admin/warehouse/inventory-turnover-sku")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseAuxiliaryMaterialPlanConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseAuxiliaryMaterialPlanConfigController.java`
-- @RequestMapping("/api/app/warehouse/auxiliary-material-plan-configs")
+- @RequestMapping("/api/admin/warehouse/auxiliary-material-plan-configs")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
 
 ## WarehouseInventoryTurnoverSpController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseInventoryTurnoverSpController.java`
-- @RequestMapping("/api/app/warehouse/inventory-turnover-sp")
+- @RequestMapping("/api/admin/warehouse/inventory-turnover-sp")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseAuxiliaryPreOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseAuxiliaryPreOrderController.java`
-- @RequestMapping("/api/app/warehouse/auxiliary-pre-orders")
+- @RequestMapping("/api/admin/warehouse/auxiliary-pre-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/purchase-orders")
 
 ## WarehousePurchaseAppealAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehousePurchaseAppealAuditController.java`
-- @RequestMapping("/api/app/warehouse/purchase-appeal-audits")
+- @RequestMapping("/api/admin/warehouse/purchase-appeal-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/audit")
 
 ## WarehouseThirdPartyStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseThirdPartyStockController.java`
-- @RequestMapping("/api/app/warehouse/third-party-stocks")
+- @RequestMapping("/api/admin/warehouse/third-party-stocks")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseStoreAddressController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseStoreAddressController.java`
-- @RequestMapping("/api/app/warehouse/store-addresses")
+- @RequestMapping("/api/admin/warehouse/store-addresses")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/audit")
@@ -8223,7 +8223,7 @@
 
 ## WarehousePurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehousePurchaseOrderController.java`
-- @RequestMapping("/api/app/warehouse/purchase-orders")
+- @RequestMapping("/api/admin/warehouse/purchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/{purchaseOrderId}/audit")
@@ -8232,19 +8232,19 @@
 
 ## WarehouseTransitStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseTransitStockController.java`
-- @RequestMapping("/api/app/warehouse/transit-stocks")
+- @RequestMapping("/api/admin/warehouse/transit-stocks")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseSapStockController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSapStockController.java`
-- @RequestMapping("/api/app/warehouse/sap-stocks")
+- @RequestMapping("/api/admin/warehouse/sap-stocks")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseOrderForecastAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOrderForecastAuditController.java`
-- @RequestMapping("/api/app/warehouse/order-forecast-audits")
+- @RequestMapping("/api/admin/warehouse/order-forecast-audits")
 - @GetMapping
 - @GetMapping("/{id}/details")
 - @PostMapping("/audit")
@@ -8252,26 +8252,26 @@
 
 ## WarehouseOptionsController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOptionsController.java`
-- @RequestMapping("/api/app/warehouse/options")
+- @RequestMapping("/api/admin/warehouse/options")
 - @GetMapping("/provinces")
 - @GetMapping("/regions")
 - @GetMapping("/suppliers")
 
 ## WarehouseOverdueInventorySummaryController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOverdueInventorySummaryController.java`
-- @RequestMapping("/api/app/warehouse/overdue-inventory-summary")
+- @RequestMapping("/api/admin/warehouse/overdue-inventory-summary")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseSpecialOutboundSapServiceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSpecialOutboundSapServiceController.java`
-- @RequestMapping("/api/app/warehouse/special-outbound-sap-services")
+- @RequestMapping("/api/admin/warehouse/special-outbound-sap-services")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseSpecialOutboundApplicationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSpecialOutboundApplicationController.java`
-- @RequestMapping("/api/app/warehouse/special-outbound-applications")
+- @RequestMapping("/api/admin/warehouse/special-outbound-applications")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -8279,33 +8279,33 @@
 
 ## WarehouseOrderForecastServiceReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOrderForecastServiceReportController.java`
-- @RequestMapping("/api/app/warehouse/order-forecast-sp-reports")
+- @RequestMapping("/api/admin/warehouse/order-forecast-sp-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseAgeAnalysisController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseAgeAnalysisController.java`
-- @RequestMapping("/api/app/warehouse/age-analysis")
+- @RequestMapping("/api/admin/warehouse/age-analysis")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/pull")
 
 ## WarehouseStockTakingSummaryController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseStockTakingSummaryController.java`
-- @RequestMapping("/api/app/warehouse/stock-taking-summaries")
+- @RequestMapping("/api/admin/warehouse/stock-taking-summaries")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/analysis-export")
 
 ## WarehouseOrderForecastSubCenterReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOrderForecastSubCenterReportController.java`
-- @RequestMapping("/api/app/warehouse/order-forecast-sub-center-reports")
+- @RequestMapping("/api/admin/warehouse/order-forecast-sub-center-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseStockTakingController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseStockTakingController.java`
-- @RequestMapping("/api/app/warehouse/stock-takings")
+- @RequestMapping("/api/admin/warehouse/stock-takings")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping
@@ -8325,7 +8325,7 @@
 
 ## WarehouseMaterialPackageController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseMaterialPackageController.java`
-- @RequestMapping("/api/app/warehouse/material-packages")
+- @RequestMapping("/api/admin/warehouse/material-packages")
 - @GetMapping
 - @GetMapping("/{packageNo}")
 - @PostMapping
@@ -8338,7 +8338,7 @@
 
 ## WarehouseComponentLibraryPurchaseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseComponentLibraryPurchaseController.java`
-- @RequestMapping("/api/app/warehouse/component-library-purchases")
+- @RequestMapping("/api/admin/warehouse/component-library-purchases")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -8346,14 +8346,14 @@
 
 ## WarehouseInventoryAgeTotalReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseInventoryAgeTotalReportController.java`
-- @RequestMapping("/api/app/warehouse/inventory-age-total-reports")
+- @RequestMapping("/api/admin/warehouse/inventory-age-total-reports")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/trigger-task")
 
 ## WarehouseSkuController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseSkuController.java`
-- @RequestMapping("/api/app/warehouse/skus")
+- @RequestMapping("/api/admin/warehouse/skus")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
@@ -8369,7 +8369,7 @@
 
 ## WarehousePlanAuxiliaryPurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehousePlanAuxiliaryPurchaseOrderController.java`
-- @RequestMapping("/api/app/warehouse/plan-auxiliary-purchase-orders")
+- @RequestMapping("/api/admin/warehouse/plan-auxiliary-purchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{purchaseOrderNo}")
@@ -8381,13 +8381,13 @@
 
 ## WarehouseOverdueInventoryBaseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseOverdueInventoryBaseController.java`
-- @RequestMapping("/api/app/warehouse/overdue-inventory-base")
+- @RequestMapping("/api/admin/warehouse/overdue-inventory-base")
 - @GetMapping
 - @GetMapping("/export")
 
 ## WarehouseTransferOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseTransferOrderController.java`
-- @RequestMapping("/api/app/warehouse/transfer-orders")
+- @RequestMapping("/api/admin/warehouse/transfer-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -8413,7 +8413,7 @@
 
 ## WarehouseAuxiliaryConfirmOrderAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warehouse/controller/WarehouseAuxiliaryConfirmOrderAuditController.java`
-- @RequestMapping("/api/app/warehouse/auxiliary-confirm-order-audits")
+- @RequestMapping("/api/admin/warehouse/auxiliary-confirm-order-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -8426,9 +8426,19 @@
 - @GetMapping("/stores/{id}")
 - @PostMapping("/direct-stock")
 
+## SystemDictionaryAdminController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/system/dictionary/SystemDictionaryAdminController.java`
+- @RequestMapping("/api/admin/system/dictionaries")
+- @GetMapping("/types")
+- @PostMapping("/types")
+- @PutMapping("/types/{typeId}")
+- @GetMapping("/types/{typeId}/values")
+- @PostMapping("/types/{typeId}/values")
+- @PutMapping("/values/{valueId}")
+
 ## LightStopStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStopStationController.java`
-- @RequestMapping("/api/app/station/stops")
+- @RequestMapping("/api/admin/station/stops")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{stationId}/detail")
@@ -8436,14 +8446,14 @@
 
 ## LightModulePartCompleteApplyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightModulePartCompleteApplyController.java`
-- @RequestMapping("/api/app/station/module-completions")
+- @RequestMapping("/api/admin/station/module-completions")
 - @GetMapping
 - @GetMapping("/{applyId}/detail")
 - @PutMapping("/{applyId}/approve")
 
 ## LightMasterHtRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightMasterHtRecordController.java`
-- @RequestMapping("/api/app/station/master-contract-recognition")
+- @RequestMapping("/api/admin/station/master-contract-recognition")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/import-template")
@@ -8451,7 +8461,7 @@
 
 ## PowerPurchaseManagementController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/PowerPurchaseManagementController.java`
-- @RequestMapping("/api/app/station/power-purchasers")
+- @RequestMapping("/api/admin/station/power-purchasers")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/import-template")
@@ -8463,7 +8473,7 @@
 
 ## LightStationPlanChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationPlanChangeController.java`
-- @RequestMapping("/api/app/station/plan-changes")
+- @RequestMapping("/api/admin/station/plan-changes")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{changeId}/detail")
@@ -8474,46 +8484,46 @@
 
 ## WholeVillageTogetherController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/WholeVillageTogetherController.java`
-- @RequestMapping("/api/app/station/whole-village-groups")
+- @RequestMapping("/api/admin/station/whole-village-groups")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{serialNumber}/detail")
 
 ## LightStationRefactorController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationRefactorController.java`
-- @RequestMapping("/api/app/station/grid-times")
+- @RequestMapping("/api/admin/station/grid-times")
 - @GetMapping
 - @GetMapping("/export")
 
 ## LightStationForwordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationForwordController.java`
-- @RequestMapping("/api/app/station/appointments")
+- @RequestMapping("/api/admin/station/appointments")
 - @GetMapping
 - @GetMapping("/export")
 
 ## StationOptionsController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/StationOptionsController.java`
-- @RequestMapping("/api/app/station/options")
+- @RequestMapping("/api/admin/station/options")
 - @GetMapping("/provinces")
 - @GetMapping("/regions")
 - @GetMapping("/sub-centers")
 
 ## OffLingFlowController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/OffLingFlowController.java`
-- @RequestMapping("/api/app/station/offline-acceptance-audits")
+- @RequestMapping("/api/admin/station/offline-acceptance-audits")
 - @GetMapping
 - @GetMapping("/{stationId}/detail")
 - @PutMapping("/{stationId}/approve")
 
 ## StationFileUploadController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/StationFileUploadController.java`
-- @RequestMapping("/api/app/station/files")
+- @RequestMapping("/api/admin/station/files")
 - @PostMapping("/upload-image")
 - @PostMapping("/upload-file")
 
 ## LightSupplierContractsController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightSupplierContractsController.java`
-- @RequestMapping("/api/app/station/supplier-contracts")
+- @RequestMapping("/api/admin/station/supplier-contracts")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/import-template")
@@ -8523,13 +8533,13 @@
 
 ## LightCalculateIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightCalculateIncomeController.java`
-- @RequestMapping("/api/app/station/calculations")
+- @RequestMapping("/api/admin/station/calculations")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ReviewMaterialController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/ReviewMaterialController.java`
-- @RequestMapping("/api/app/station/review-materials")
+- @RequestMapping("/api/admin/station/review-materials")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{stationId}/detail")
@@ -8537,7 +8547,7 @@
 
 ## LightStationSkillController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationSkillController.java`
-- @RequestMapping("/api/app/station/technical-acceptances")
+- @RequestMapping("/api/admin/station/technical-acceptances")
 - @GetMapping
 - @PutMapping("/{stationId}/approve")
 - @GetMapping("/{stationId}/last-reject-reason")
@@ -8546,7 +8556,7 @@
 
 ## LightStationBusinessController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationBusinessController.java`
-- @RequestMapping("/api/app/station/business-acceptances")
+- @RequestMapping("/api/admin/station/business-acceptances")
 - @GetMapping
 - @GetMapping("/{stationCode}/audit-snapshot")
 - @GetMapping("/export")
@@ -8556,14 +8566,14 @@
 
 ## LightStationPartCompleteApplyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationPartCompleteApplyController.java`
-- @RequestMapping("/api/app/station/bracket-completions")
+- @RequestMapping("/api/admin/station/bracket-completions")
 - @GetMapping
 - @GetMapping("/{applyId}/detail")
 - @PutMapping("/{applyId}/approve")
 
 ## LightStationContractRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationContractRecordController.java`
-- @RequestMapping("/api/app/station/contracts")
+- @RequestMapping("/api/admin/station/contracts")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{recordId}/latest-link")
@@ -8577,13 +8587,13 @@
 
 ## LightStationPersonInfoAuthController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationPersonInfoAuthController.java`
-- @RequestMapping("/api/app/station/puyin-authorizations")
+- @RequestMapping("/api/admin/station/puyin-authorizations")
 - @GetMapping
 - @GetMapping("/export")
 
 ## SwitchModeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/SwitchModeController.java`
-- @RequestMapping("/api/app/station/migrations")
+- @RequestMapping("/api/admin/station/migrations")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/import-template")
@@ -8595,7 +8605,7 @@
 
 ## LightUnionpayUserController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightUnionpayUserController.java`
-- @RequestMapping("/api/app/station/unionpay-signings")
+- @RequestMapping("/api/admin/station/unionpay-signings")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/project-company-options")
@@ -8604,7 +8614,7 @@
 
 ## LightStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationController.java`
-- @RequestMapping("/api/app/station")
+- @RequestMapping("/api/admin/station")
 - @GetMapping("/list")
 - @GetMapping("/project-company-options")
 - @GetMapping("/plan-audits")
@@ -8646,7 +8656,7 @@
 
 ## LightElecHtRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightElecHtRecordController.java`
-- @RequestMapping("/api/app/station/electric-contract-recognition")
+- @RequestMapping("/api/admin/station/electric-contract-recognition")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/import-template")
@@ -8654,7 +8664,7 @@
 
 ## StationChangeOperationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/StationChangeOperationController.java`
-- @RequestMapping("/api/app/station/change-audits")
+- @RequestMapping("/api/admin/station/change-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}/detail")
@@ -8662,20 +8672,20 @@
 
 ## LightOrderInfoController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightOrderInfoController.java`
-- @RequestMapping("/api/app/station/order-info")
+- @RequestMapping("/api/admin/station/order-info")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/service-provider-options")
 
 ## CmProjectPvReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialproductionvalue/controller/CmProjectPvReportController.java`
-- @RequestMapping("/api/app/industrial-production-value/reports")
+- @RequestMapping("/api/admin/industrial-production-value/reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## CmProductionValueIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialproductionvalue/controller/CmProductionValueIncomeController.java`
-- @RequestMapping("/api/app/industrial-production-value/incomes")
+- @RequestMapping("/api/admin/industrial-production-value/incomes")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/add-pre-info")
@@ -8688,7 +8698,7 @@
 
 ## CmProductionValueController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialproductionvalue/controller/CmProductionValueController.java`
-- @RequestMapping("/api/app/industrial-production-value/production-values")
+- @RequestMapping("/api/admin/industrial-production-value/production-values")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/add-pre-info")
@@ -8715,23 +8725,28 @@
 - @RequestMapping("/api/mobile/permission")
 - @GetMapping("/snapshot")
 
+## HomeSummaryController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/home/HomeSummaryController.java`
+- @RequestMapping("/api/admin/home")
+- @GetMapping("/summary")
+
 ## BasicInfoUpdateLogController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/ownerinfo/controller/BasicInfoUpdateLogController.java`
-- @RequestMapping("/api/app/owner-info/basic-info-update-logs")
+- @RequestMapping("/api/admin/owner-info/basic-info-update-logs")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}/detail")
 
 ## BasicInfoUpdateHeadquarterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/ownerinfo/controller/BasicInfoUpdateHeadquarterController.java`
-- @RequestMapping("/api/app/owner-info/basic-info-update-headquarter")
+- @RequestMapping("/api/admin/owner-info/basic-info-update-headquarter")
 - @GetMapping
 - @GetMapping("/{id}/detail")
 - @PutMapping("/{id}/headquarter-audit")
 
 ## StationImageChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/ownerinfo/controller/StationImageChangeController.java`
-- @RequestMapping("/api/app/owner-info/station-image-changes")
+- @RequestMapping("/api/admin/owner-info/station-image-changes")
 - @GetMapping
 - @GetMapping("/{id}/detail")
 - @PutMapping("/{id}/audit")
@@ -8739,7 +8754,7 @@
 
 ## BankCardChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/ownerinfo/controller/BankCardChangeController.java`
-- @RequestMapping("/api/app/owner-info/bank-card-changes")
+- @RequestMapping("/api/admin/owner-info/bank-card-changes")
 - @GetMapping
 - @GetMapping("/export")
 - @PutMapping("/{id}/first-audit")
@@ -8747,25 +8762,25 @@
 
 ## BasicInfoUpdateSubcenterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/ownerinfo/controller/BasicInfoUpdateSubcenterController.java`
-- @RequestMapping("/api/app/owner-info/basic-info-update-subcenter")
+- @RequestMapping("/api/admin/owner-info/basic-info-update-subcenter")
 - @GetMapping
 - @GetMapping("/{id}/detail")
 - @PutMapping("/{id}/subcenter-audit")
 
 ## UseQueueExceptionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warningmanagement/controller/UseQueueExceptionController.java`
-- @RequestMapping("/api/app/warning-management/use-queue-exceptions")
+- @RequestMapping("/api/admin/warning-management/use-queue-exceptions")
 - @GetMapping
 
 ## StationWarningController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/warningmanagement/controller/StationWarningController.java`
-- @RequestMapping("/api/app/warning-management/station-warnings")
+- @RequestMapping("/api/admin/warning-management/station-warnings")
 - @GetMapping
 - @GetMapping("/export")
 
 ## CompanyPolicyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/projectcompany/controller/CompanyPolicyController.java`
-- @RequestMapping("/api/app/project-company/policies")
+- @RequestMapping("/api/admin/project-company/policies")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/logs")
@@ -8781,7 +8796,7 @@
 
 ## FourItemCompanyPolicyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/projectcompany/controller/FourItemCompanyPolicyController.java`
-- @RequestMapping("/api/app/project-company/four-item-policies")
+- @RequestMapping("/api/admin/project-company/four-item-policies")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/logs")
@@ -8796,7 +8811,7 @@
 
 ## RegionMaintenanceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/projectcompany/controller/RegionMaintenanceController.java`
-- @RequestMapping("/api/app/project-company/regions")
+- @RequestMapping("/api/admin/project-company/regions")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/areas")
@@ -8813,7 +8828,7 @@
 
 ## CompanyConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/projectcompany/controller/CompanyConfigController.java`
-- @RequestMapping("/api/app/project-company/configs")
+- @RequestMapping("/api/admin/project-company/configs")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
@@ -8834,7 +8849,7 @@
 
 ## OtherMaterialPolicyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/projectcompany/controller/OtherMaterialPolicyController.java`
-- @RequestMapping("/api/app/project-company/other-material-policies")
+- @RequestMapping("/api/admin/project-company/other-material-policies")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
@@ -8849,7 +8864,7 @@
 
 ## ZhongYinIncomeSettleController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zhongyin/controller/ZhongYinIncomeSettleController.java`
-- @RequestMapping("/api/app/zhongyin-trade/incomes")
+- @RequestMapping("/api/admin/zhongyin-trade/incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -8861,7 +8876,7 @@
 
 ## ZhongYinIncomeReverseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zhongyin/controller/ZhongYinIncomeReverseController.java`
-- @RequestMapping("/api/app/zhongyin-trade/income-reverses")
+- @RequestMapping("/api/admin/zhongyin-trade/income-reverses")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}/detail")
@@ -8873,14 +8888,14 @@
 
 ## PaymentMilestoneAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/PaymentMilestoneAuditController.java`
-- @RequestMapping("/api/app/industrial-epc/payment-milestone-audits")
+- @RequestMapping("/api/admin/industrial-epc/payment-milestone-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
 
 ## CmPreOrderVtController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmPreOrderVtController.java`
-- @RequestMapping("/api/app/industrial-epc/purchase-orders-vt")
+- @RequestMapping("/api/admin/industrial-epc/purchase-orders-vt")
 - @GetMapping
 - @GetMapping("/{id}/price")
 - @PostMapping("/{id}/confirm")
@@ -8890,14 +8905,14 @@
 
 ## ProjectVoteAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/ProjectVoteAuditController.java`
-- @RequestMapping("/api/app/industrial-epc/project-vote-audits")
+- @RequestMapping("/api/admin/industrial-epc/project-vote-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
 
 ## PaymentApplyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/PaymentApplyController.java`
-- @RequestMapping("/api/app/industrial-epc/payment-applies")
+- @RequestMapping("/api/admin/industrial-epc/payment-applies")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/audit-detail")
@@ -8912,7 +8927,7 @@
 
 ## CmLightProjectReceiptController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmLightProjectReceiptController.java`
-- @RequestMapping("/api/app/industrial-epc/receipts")
+- @RequestMapping("/api/admin/industrial-epc/receipts")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/project")
@@ -8924,14 +8939,14 @@
 
 ## CmSettlementConfirmController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmSettlementConfirmController.java`
-- @RequestMapping("/api/app/industrial-epc/settlement-confirms")
+- @RequestMapping("/api/admin/industrial-epc/settlement-confirms")
 - @GetMapping
 - @PostMapping("/{id}/confirm")
 - @PostMapping(value = "/upload-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
 ## CompletionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CompletionController.java`
-- @RequestMapping("/api/app/industrial-epc/completions")
+- @RequestMapping("/api/admin/industrial-epc/completions")
 - @GetMapping
 - @GetMapping("/project-data")
 - @PostMapping("/accounting-data")
@@ -8947,7 +8962,7 @@
 
 ## CmPreOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmPreOrderController.java`
-- @RequestMapping("/api/app/industrial-epc/purchase-orders")
+- @RequestMapping("/api/admin/industrial-epc/purchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/transit-stores")
@@ -8959,13 +8974,13 @@
 
 ## ProjectProgressReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/ProjectProgressReportController.java`
-- @RequestMapping("/api/app/industrial-epc/project-progress-reports")
+- @RequestMapping("/api/admin/industrial-epc/project-progress-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## EpcServiceProviderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/EpcServiceProviderController.java`
-- @RequestMapping("/api/app/industrial-epc/service-providers")
+- @RequestMapping("/api/admin/industrial-epc/service-providers")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/quarters")
@@ -8976,7 +8991,7 @@
 
 ## FinalAcceptanceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/FinalAcceptanceController.java`
-- @RequestMapping("/api/app/industrial-epc/final-acceptance-incomes")
+- @RequestMapping("/api/admin/industrial-epc/final-acceptance-incomes")
 - @GetMapping
 - @GetMapping("/project-data")
 - @PostMapping("/accounting-data")
@@ -8991,7 +9006,7 @@
 
 ## CmLightProjectIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmLightProjectIncomeController.java`
-- @RequestMapping("/api/app/industrial-epc/incomes")
+- @RequestMapping("/api/admin/industrial-epc/incomes")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/project")
@@ -9004,7 +9019,7 @@
 
 ## OwnerStationMasterDataController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/OwnerStationMasterDataController.java`
-- @RequestMapping("/api/app/industrial-epc/owner-station-master-data")
+- @RequestMapping("/api/admin/industrial-epc/owner-station-master-data")
 - @GetMapping
 - @GetMapping("/template")
 - @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -9012,20 +9027,20 @@
 
 ## PartyADepositController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/PartyADepositController.java`
-- @RequestMapping("/api/app/industrial-epc/party-a-deposits")
+- @RequestMapping("/api/admin/industrial-epc/party-a-deposits")
 - @GetMapping
 - @GetMapping("/export")
 
 ## GrossMarginChangeAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/GrossMarginChangeAuditController.java`
-- @RequestMapping("/api/app/industrial-epc/gross-margin-change-audits")
+- @RequestMapping("/api/admin/industrial-epc/gross-margin-change-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
 
 ## LightCmEpcStationTechController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/LightCmEpcStationTechController.java`
-- @RequestMapping("/api/app/industrial-epc/station-tech-audits")
+- @RequestMapping("/api/admin/industrial-epc/station-tech-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/{id}/audit")
@@ -9033,7 +9048,7 @@
 
 ## InvoiceApplyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/InvoiceApplyController.java`
-- @RequestMapping("/api/app/industrial-epc/invoice-applies")
+- @RequestMapping("/api/admin/industrial-epc/invoice-applies")
 - @GetMapping
 - @GetMapping("/pre-info")
 - @GetMapping("/invoice-info")
@@ -9053,14 +9068,14 @@
 
 ## LightCmEpcStationBusinessController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/LightCmEpcStationBusinessController.java`
-- @RequestMapping("/api/app/industrial-epc/station-business-audits")
+- @RequestMapping("/api/admin/industrial-epc/station-business-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/{id}/audit")
 
 ## LightCmEpcStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/LightCmEpcStationController.java`
-- @RequestMapping("/api/app/industrial-epc/stations")
+- @RequestMapping("/api/admin/industrial-epc/stations")
 - @GetMapping
 - @GetMapping("/installers")
 - @GetMapping("/{id}/inverters")
@@ -9068,7 +9083,7 @@
 
 ## StationPlanChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/StationPlanChangeController.java`
-- @RequestMapping("/api/app/industrial-epc/station-plan-changes")
+- @RequestMapping("/api/admin/industrial-epc/station-plan-changes")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/audit-detail")
@@ -9076,7 +9091,7 @@
 
 ## SimplePreOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/SimplePreOrderController.java`
-- @RequestMapping("/api/app/industrial-epc/simple-pre-orders")
+- @RequestMapping("/api/admin/industrial-epc/simple-pre-orders")
 - @GetMapping
 - @GetMapping("/project")
 - @GetMapping("/sku-types")
@@ -9088,13 +9103,13 @@
 
 ## ProjectSummaryReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/ProjectSummaryReportController.java`
-- @RequestMapping("/api/app/industrial-epc/project-summary-reports")
+- @RequestMapping("/api/admin/industrial-epc/project-summary-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## CmLightProjectController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmLightProjectController.java`
-- @RequestMapping("/api/app/industrial-epc/projects")
+- @RequestMapping("/api/admin/industrial-epc/projects")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/engineering-info")
@@ -9102,32 +9117,32 @@
 
 ## IncomeItemReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/IncomeItemReportController.java`
-- @RequestMapping("/api/app/industrial-epc/income-item-reports")
+- @RequestMapping("/api/admin/industrial-epc/income-item-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ProjectPreAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/ProjectPreAuditController.java`
-- @RequestMapping("/api/app/industrial-epc/project-pre-audits")
+- @RequestMapping("/api/admin/industrial-epc/project-pre-audits")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
 
 ## CmLightUseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmLightUseController.java`
-- @RequestMapping("/api/app/industrial-epc/material-uses")
+- @RequestMapping("/api/admin/industrial-epc/material-uses")
 - @GetMapping
 - @GetMapping("/export")
 
 ## IncomeProgressReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/IncomeProgressReportController.java`
-- @RequestMapping("/api/app/industrial-epc/income-progress-reports")
+- @RequestMapping("/api/admin/industrial-epc/income-progress-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## EnergyOfflineIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/EnergyOfflineIncomeController.java`
-- @RequestMapping("/api/app/industrial-epc/grid-income-displays")
+- @RequestMapping("/api/admin/industrial-epc/grid-income-displays")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/edit-detail")
@@ -9142,7 +9157,7 @@
 
 ## ElectricEpcWhitelistController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/ElectricEpcWhitelistController.java`
-- @RequestMapping("/api/app/industrial-epc/electric-epc-whitelists")
+- @RequestMapping("/api/admin/industrial-epc/electric-epc-whitelists")
 - @GetMapping
 - @PostMapping
 - @GetMapping("/template")
@@ -9151,7 +9166,7 @@
 
 ## SimpleProjectController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/SimpleProjectController.java`
-- @RequestMapping("/api/app/industrial-epc/simple-projects")
+- @RequestMapping("/api/admin/industrial-epc/simple-projects")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/{id}/edit-detail")
@@ -9167,14 +9182,14 @@
 
 ## AuthController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/auth/AuthController.java`
-- @RequestMapping("/api/app/auth")
+- @RequestMapping("/api/auth")
 - @GetMapping("/login")
 - @GetMapping("/current-user")
 - @PostMapping("/logout")
 
 ## PvSettlementAwardAppealController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementAwardAppealController.java`
-- @RequestMapping("/api/app/pv-settlement/award-appeals")
+- @RequestMapping("/api/admin/pv-settlement/award-appeals")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{orderNo}")
@@ -9184,21 +9199,21 @@
 
 ## PvSettlementFapReceiptRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementFapReceiptRecordController.java`
-- @RequestMapping("/api/app/pv-settlement/fap-receipt-records")
+- @RequestMapping("/api/admin/pv-settlement/fap-receipt-records")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## PvSettlementEstimatedElectricFeeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementEstimatedElectricFeeController.java`
-- @RequestMapping("/api/app/pv-settlement/estimated-electric-fees")
+- @RequestMapping("/api/admin/pv-settlement/estimated-electric-fees")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
 
 ## PvSettlementStationIncomeMonthlySummaryController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementStationIncomeMonthlySummaryController.java`
-- @RequestMapping("/api/app/pv-settlement/station-income-monthly-summaries")
+- @RequestMapping("/api/admin/pv-settlement/station-income-monthly-summaries")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
@@ -9207,7 +9222,7 @@
 
 ## PvSettlementProjectRentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementProjectRentController.java`
-- @RequestMapping("/api/app/pv-settlement/project-rents")
+- @RequestMapping("/api/admin/pv-settlement/project-rents")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9215,14 +9230,14 @@
 
 ## PvSettlementSettlementSummaryController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementSettlementSummaryController.java`
-- @RequestMapping("/api/app/pv-settlement/settlement-summaries")
+- @RequestMapping("/api/admin/pv-settlement/settlement-summaries")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## PvSettlementOwnerRentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementOwnerRentController.java`
-- @RequestMapping("/api/app/pv-settlement/owner-rents")
+- @RequestMapping("/api/admin/pv-settlement/owner-rents")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9232,20 +9247,20 @@
 
 ## PvSettlementElectricInvoiceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricInvoiceController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-invoices")
+- @RequestMapping("/api/admin/pv-settlement/electric-invoices")
 - @GetMapping
 - @GetMapping("/export")
 
 ## PvSettlementGebLedgerPlanController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementGebLedgerPlanController.java`
-- @RequestMapping("/api/app/pv-settlement/geb-ledger-plans")
+- @RequestMapping("/api/admin/pv-settlement/geb-ledger-plans")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## PvSettlementHighVoltageElectricPaymentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementHighVoltageElectricPaymentController.java`
-- @RequestMapping("/api/app/pv-settlement/high-voltage-electric-payments")
+- @RequestMapping("/api/admin/pv-settlement/high-voltage-electric-payments")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9256,14 +9271,14 @@
 
 ## PvSettlementStationIncomeDetailController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementStationIncomeDetailController.java`
-- @RequestMapping("/api/app/pv-settlement/station-income-details")
+- @RequestMapping("/api/admin/pv-settlement/station-income-details")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## PvSettlementHighVoltageAmmeterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementHighVoltageAmmeterController.java`
-- @RequestMapping("/api/app/pv-settlement/high-voltage-ammeters")
+- @RequestMapping("/api/admin/pv-settlement/high-voltage-ammeters")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -9272,7 +9287,7 @@
 
 ## PvSettlementWholeVillageRentRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementWholeVillageRentRecordController.java`
-- @RequestMapping("/api/app/pv-settlement/whole-village-rent-records")
+- @RequestMapping("/api/admin/pv-settlement/whole-village-rent-records")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/confirm")
@@ -9280,14 +9295,14 @@
 
 ## PvSettlementElectricSubsidyMonthlySummaryController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricSubsidyMonthlySummaryController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-subsidy-monthly-summaries")
+- @RequestMapping("/api/admin/pv-settlement/electric-subsidy-monthly-summaries")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## PvSettlementElectricInvoiceTemplateController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricInvoiceTemplateController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-invoice-templates")
+- @RequestMapping("/api/admin/pv-settlement/electric-invoice-templates")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/change")
@@ -9301,7 +9316,7 @@
 
 ## PvSettlementProjectRentRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementProjectRentRecordController.java`
-- @RequestMapping("/api/app/pv-settlement/project-rent-records")
+- @RequestMapping("/api/admin/pv-settlement/project-rent-records")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/confirm")
@@ -9309,7 +9324,7 @@
 
 ## PvSettlementCompanyPurchasePriceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementCompanyPurchasePriceController.java`
-- @RequestMapping("/api/app/pv-settlement/company-purchase-prices")
+- @RequestMapping("/api/admin/pv-settlement/company-purchase-prices")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
@@ -9321,7 +9336,7 @@
 
 ## PvSettlementProjectCompanyAccountController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementProjectCompanyAccountController.java`
-- @RequestMapping("/api/app/pv-settlement/project-company-accounts")
+- @RequestMapping("/api/admin/pv-settlement/project-company-accounts")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/add")
@@ -9331,7 +9346,7 @@
 
 ## PvSettlementIncomeOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementIncomeOrderController.java`
-- @RequestMapping("/api/app/pv-settlement/income-orders")
+- @RequestMapping("/api/admin/pv-settlement/income-orders")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping
@@ -9340,7 +9355,7 @@
 
 ## PvSettlementUnionpayOwnerRentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementUnionpayOwnerRentController.java`
-- @RequestMapping("/api/app/pv-settlement/unionpay-owner-rents")
+- @RequestMapping("/api/admin/pv-settlement/unionpay-owner-rents")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9348,7 +9363,7 @@
 
 ## PvSettlementElectricSubsidyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricSubsidyController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-subsidies")
+- @RequestMapping("/api/admin/pv-settlement/electric-subsidies")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/month")
@@ -9356,7 +9371,7 @@
 
 ## PvSettlementSpDedicatedQuotaController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementSpDedicatedQuotaController.java`
-- @RequestMapping("/api/app/pv-settlement/sp-dedicated-quotas")
+- @RequestMapping("/api/admin/pv-settlement/sp-dedicated-quotas")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9367,7 +9382,7 @@
 
 ## PvSettlementRewardCacheOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementRewardCacheOrderController.java`
-- @RequestMapping("/api/app/pv-settlement/reward-cache-orders")
+- @RequestMapping("/api/admin/pv-settlement/reward-cache-orders")
 - @GetMapping
 - @GetMapping("/items")
 - @PostMapping("/deal")
@@ -9378,7 +9393,7 @@
 
 ## PvSettlementElectricInvoiceReverseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricInvoiceReverseController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-invoice-reverses")
+- @RequestMapping("/api/admin/pv-settlement/electric-invoice-reverses")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9399,13 +9414,13 @@
 
 ## PvSettlementElectricIncomeByStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricIncomeByStationController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-incomes-by-station")
+- @RequestMapping("/api/admin/pv-settlement/electric-incomes-by-station")
 - @GetMapping
 - @GetMapping("/export")
 
 ## PvSettlementWholeVillageRentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementWholeVillageRentController.java`
-- @RequestMapping("/api/app/pv-settlement/whole-village-rents")
+- @RequestMapping("/api/admin/pv-settlement/whole-village-rents")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9413,7 +9428,7 @@
 
 ## PvSettlementElectricIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementElectricIncomeController.java`
-- @RequestMapping("/api/app/pv-settlement/electric-incomes")
+- @RequestMapping("/api/admin/pv-settlement/electric-incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9444,7 +9459,7 @@
 
 ## PvSettlementSpQuotaController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementSpQuotaController.java`
-- @RequestMapping("/api/app/pv-settlement/sp-quotas")
+- @RequestMapping("/api/admin/pv-settlement/sp-quotas")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9455,7 +9470,7 @@
 
 ## PvSettlementManualIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementManualIncomeController.java`
-- @RequestMapping("/api/app/pv-settlement/manual-incomes")
+- @RequestMapping("/api/admin/pv-settlement/manual-incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9467,7 +9482,7 @@
 
 ## PvSettlementIncentiveController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementIncentiveController.java`
-- @RequestMapping("/api/app/pv-settlement/incentives")
+- @RequestMapping("/api/admin/pv-settlement/incentives")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9486,14 +9501,14 @@
 
 ## PvSettlementStationIncomeDailySummaryController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementStationIncomeDailySummaryController.java`
-- @RequestMapping("/api/app/pv-settlement/station-income-daily-summaries")
+- @RequestMapping("/api/admin/pv-settlement/station-income-daily-summaries")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## PvSettlementAccountController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementAccountController.java`
-- @RequestMapping("/api/app/pv-settlement/accounts")
+- @RequestMapping("/api/admin/pv-settlement/accounts")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/add")
@@ -9503,7 +9518,7 @@
 
 ## PvSettlementUnionpayRentDeductionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/pvsettlement/controller/PvSettlementUnionpayRentDeductionController.java`
-- @RequestMapping("/api/app/pv-settlement/unionpay-rent-deductions")
+- @RequestMapping("/api/admin/pv-settlement/unionpay-rent-deductions")
 - @GetMapping
 - @GetMapping("/batch-count")
 - @GetMapping("/export")
@@ -9514,13 +9529,13 @@
 
 ## ProjectOwnerAccountController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/ProjectOwnerAccountController.java`
-- @RequestMapping("/api/app/rent-management/project-owner-accounts")
+- @RequestMapping("/api/admin/rent-management/project-owner-accounts")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ShareBillRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/ShareBillRecordController.java`
-- @RequestMapping("/api/app/rent-management/share-bill-records")
+- @RequestMapping("/api/admin/rent-management/share-bill-records")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
@@ -9529,21 +9544,21 @@
 
 ## RentPaymentRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/RentPaymentRecordController.java`
-- @RequestMapping("/api/app/rent-management/rent-payment-records")
+- @RequestMapping("/api/admin/rent-management/rent-payment-records")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## UnionpayBillRecordDetailController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/UnionpayBillRecordDetailController.java`
-- @RequestMapping("/api/app/rent-management/unionpay-bill-record-details")
+- @RequestMapping("/api/admin/rent-management/unionpay-bill-record-details")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## ShareBillPayFailController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/ShareBillPayFailController.java`
-- @RequestMapping("/api/app/rent-management/share-bill-pay-fails")
+- @RequestMapping("/api/admin/rent-management/share-bill-pay-fails")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/check-repay")
@@ -9552,7 +9567,7 @@
 
 ## ShareBillController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/ShareBillController.java`
-- @RequestMapping("/api/app/rent-management/share-bills")
+- @RequestMapping("/api/admin/rent-management/share-bills")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/finance-audit")
@@ -9561,7 +9576,7 @@
 
 ## UnionpayBillRecordController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/UnionpayBillRecordController.java`
-- @RequestMapping("/api/app/rent-management/unionpay-bill-records")
+- @RequestMapping("/api/admin/rent-management/unionpay-bill-records")
 - @GetMapping
 - @GetMapping("/options")
 - @PostMapping("/repay")
@@ -9569,7 +9584,7 @@
 
 ## ShareProjectPaymentAccountController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/ShareProjectPaymentAccountController.java`
-- @RequestMapping("/api/app/rent-management/share-project-payment-accounts")
+- @RequestMapping("/api/admin/rent-management/share-project-payment-accounts")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -9577,7 +9592,7 @@
 
 ## UnionpayBillController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/UnionpayBillController.java`
-- @RequestMapping("/api/app/rent-management/unionpay-bills")
+- @RequestMapping("/api/admin/rent-management/unionpay-bills")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/balance")
@@ -9588,7 +9603,7 @@
 
 ## SpUnionpayRentController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/rentmanagement/controller/SpUnionpayRentController.java`
-- @RequestMapping("/api/app/rent-management/sp-unionpay-rents")
+- @RequestMapping("/api/admin/rent-management/sp-unionpay-rents")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/wait-visit-export")
@@ -9598,13 +9613,13 @@
 
 ## TechAuditDispatchAuditTimelinessReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/techauditdispatch/controller/TechAuditDispatchAuditTimelinessReportController.java`
-- @RequestMapping("/api/app/tech-audit-dispatch/audit-timeliness-reports")
+- @RequestMapping("/api/admin/tech-audit-dispatch/audit-timeliness-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## TechAuditDispatchTimeConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/techauditdispatch/controller/TechAuditDispatchTimeConfigController.java`
-- @RequestMapping("/api/app/tech-audit-dispatch/time-configs")
+- @RequestMapping("/api/admin/tech-audit-dispatch/time-configs")
 - @GetMapping
 - @PostMapping
 - @PostMapping("/{configId}/terminate")
@@ -9612,7 +9627,7 @@
 
 ## TechAuditDispatchAuditorController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/techauditdispatch/controller/TechAuditDispatchAuditorController.java`
-- @RequestMapping("/api/app/tech-audit-dispatch/auditors")
+- @RequestMapping("/api/admin/tech-audit-dispatch/auditors")
 - @GetMapping
 - @PostMapping
 - @PutMapping("/{auditorId}/status")
@@ -9621,19 +9636,19 @@
 
 ## TechAuditDispatchClosedRateReportController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/techauditdispatch/controller/TechAuditDispatchClosedRateReportController.java`
-- @RequestMapping("/api/app/tech-audit-dispatch/closed-rate-reports")
+- @RequestMapping("/api/admin/tech-audit-dispatch/closed-rate-reports")
 - @GetMapping
 - @GetMapping("/export")
 
 ## HuarongFileController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuarongFileController.java`
-- @RequestMapping("/api/app/huarong-trade/files")
+- @RequestMapping("/api/admin/huarong-trade/files")
 - @GetMapping
 - @GetMapping("/export")
 
 ## HuarongSyncInfoController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuarongSyncInfoController.java`
-- @RequestMapping("/api/app/huarong-trade/sync-infos")
+- @RequestMapping("/api/admin/huarong-trade/sync-infos")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}")
@@ -9646,7 +9661,7 @@
 
 ## HuaRongIncomeSettleController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuaRongIncomeSettleController.java`
-- @RequestMapping("/api/app/huarong-trade/incomes")
+- @RequestMapping("/api/admin/huarong-trade/incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -9660,7 +9675,7 @@
 
 ## HuarongPriceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuarongPriceController.java`
-- @RequestMapping("/api/app/huarong-trade/prices")
+- @RequestMapping("/api/admin/huarong-trade/prices")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -9671,21 +9686,21 @@
 
 ## HuarongStationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuarongStationController.java`
-- @RequestMapping("/api/app/huarong-trade/stations")
+- @RequestMapping("/api/admin/huarong-trade/stations")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## HuarongOwnerPreAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuarongOwnerPreAuditController.java`
-- @RequestMapping("/api/app/huarong-trade/owner-pre-audits")
+- @RequestMapping("/api/admin/huarong-trade/owner-pre-audits")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## HuaRongQualityGuaranteeIncomeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/huarong/controller/HuaRongQualityGuaranteeIncomeController.java`
-- @RequestMapping("/api/app/huarong-trade/quality-guarantee-incomes")
+- @RequestMapping("/api/admin/huarong-trade/quality-guarantee-incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -9699,38 +9714,38 @@
 
 ## OrderUserController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/constructionrolemanagement/controller/OrderUserController.java`
-- @RequestMapping("/api/app/construction-role-management/order-users")
+- @RequestMapping("/api/admin/construction-role-management/order-users")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ConstructionTeamController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/constructionrolemanagement/controller/ConstructionTeamController.java`
-- @RequestMapping("/api/app/construction-role-management/construction-teams")
+- @RequestMapping("/api/admin/construction-role-management/construction-teams")
 - @GetMapping
 - @GetMapping("/export")
 
 ## PartnerController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/constructionrolemanagement/controller/PartnerController.java`
-- @RequestMapping("/api/app/construction-role-management/partners")
+- @RequestMapping("/api/admin/construction-role-management/partners")
 - @GetMapping
 - @PostMapping("/audit-ok")
 - @PostMapping("/audit-reject")
 
 ## DispatchWorkOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/constructionrolemanagement/controller/DispatchWorkOrderController.java`
-- @RequestMapping("/api/app/construction-role-management/dispatch-work-orders")
+- @RequestMapping("/api/admin/construction-role-management/dispatch-work-orders")
 - @GetMapping
 - @GetMapping("/export")
 
 ## SubServiceProviderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/constructionrolemanagement/controller/SubServiceProviderController.java`
-- @RequestMapping("/api/app/construction-role-management/sub-service-providers")
+- @RequestMapping("/api/admin/construction-role-management/sub-service-providers")
 - @GetMapping
 - @GetMapping("/export")
 
 ## ServiceProviderStaffController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/constructionrolemanagement/controller/ServiceProviderStaffController.java`
-- @RequestMapping("/api/app/construction-role-management/service-provider-staff")
+- @RequestMapping("/api/admin/construction-role-management/service-provider-staff")
 - @GetMapping
 - @GetMapping("/export")
 
@@ -9739,11 +9754,12 @@
 - @RequestMapping("/api/admin/operation-logs")
 - @GetMapping("/login")
 - @GetMapping("/operation")
+- @GetMapping("/app-auth")
 - @GetMapping("/body")
 
 ## ShareQuotaController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/ShareQuotaController.java`
-- @RequestMapping("/api/app/service-provider-management/share-quotas")
+- @RequestMapping("/api/admin/service-provider-management/share-quotas")
 - @GetMapping
 - @GetMapping("/{orderNo}")
 - @PostMapping("/{orderNo}/audit/{type}")
@@ -9752,7 +9768,7 @@
 
 ## OperationLossController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/OperationLossController.java`
-- @RequestMapping("/api/app/service-provider-management/operation-losses")
+- @RequestMapping("/api/admin/service-provider-management/operation-losses")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/builder-details")
@@ -9767,7 +9783,7 @@
 
 ## WithdrawalVoucherController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/WithdrawalVoucherController.java`
-- @RequestMapping("/api/app/service-provider-management/withdrawal-vouchers")
+- @RequestMapping("/api/admin/service-provider-management/withdrawal-vouchers")
 - @GetMapping
 - @GetMapping("/{id}")
 - @GetMapping("/export")
@@ -9775,7 +9791,7 @@
 
 ## FreezeSettlementController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/FreezeSettlementController.java`
-- @RequestMapping("/api/app/service-provider-management/freeze-settlements")
+- @RequestMapping("/api/admin/service-provider-management/freeze-settlements")
 - @GetMapping
 - @PostMapping
 - @GetMapping("/{id}")
@@ -9786,7 +9802,7 @@
 
 ## BusinessCustomerController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/BusinessCustomerController.java`
-- @RequestMapping("/api/app/service-provider-management/business-customers")
+- @RequestMapping("/api/admin/service-provider-management/business-customers")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
@@ -9800,7 +9816,7 @@
 
 ## FourItemPlanConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/FourItemPlanConfigController.java`
-- @RequestMapping("/api/app/service-provider-management/four-item-plan-configs")
+- @RequestMapping("/api/admin/service-provider-management/four-item-plan-configs")
 - @GetMapping
 - @GetMapping("/options/service-providers")
 - @GetMapping("/share-quota/check")
@@ -9833,7 +9849,7 @@
 
 ## WithdrawalApplicationController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/WithdrawalApplicationController.java`
-- @RequestMapping("/api/app/service-provider-management/withdrawal-applications")
+- @RequestMapping("/api/admin/service-provider-management/withdrawal-applications")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
@@ -9845,7 +9861,7 @@
 
 ## DepositController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/serviceprovidermanagement/controller/DepositController.java`
-- @RequestMapping("/api/app/service-provider-management/deposits")
+- @RequestMapping("/api/admin/service-provider-management/deposits")
 - @GetMapping
 - @PostMapping("/{id}/confirm-paid")
 - @PostMapping("/{id}/confirm-sap")
@@ -9853,7 +9869,7 @@
 
 ## RawMaterialRepurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/RawMaterialRepurchaseOrderController.java`
-- @RequestMapping("/api/app/repurchase-management/raw-material-repurchase-orders")
+- @RequestMapping("/api/admin/repurchase-management/raw-material-repurchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -9870,7 +9886,7 @@
 
 ## ProductSalePriceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/ProductSalePriceController.java`
-- @RequestMapping("/api/app/repurchase-management/product-sale-prices")
+- @RequestMapping("/api/admin/repurchase-management/product-sale-prices")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/template")
@@ -9882,33 +9898,33 @@
 
 ## TransferConfirmController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/TransferConfirmController.java`
-- @RequestMapping("/api/app/repurchase-management/transfer-confirms")
+- @RequestMapping("/api/admin/repurchase-management/transfer-confirms")
 - @GetMapping
 - @GetMapping("/export")
 - @PostMapping("/{id}/finance-confirm")
 
 ## DepositDeductionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/DepositDeductionController.java`
-- @RequestMapping("/api/app/repurchase-management/deposit-deductions")
+- @RequestMapping("/api/admin/repurchase-management/deposit-deductions")
 - @GetMapping
 - @GetMapping("/export")
 
 ## RepurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/RepurchaseOrderController.java`
-- @RequestMapping("/api/app/repurchase-management/repurchase-orders")
+- @RequestMapping("/api/admin/repurchase-management/repurchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/sub-centers")
 
 ## DeductionController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/DeductionController.java`
-- @RequestMapping("/api/app/repurchase-management/deductions")
+- @RequestMapping("/api/admin/repurchase-management/deductions")
 - @GetMapping
 - @GetMapping("/export")
 
 ## DepositConfirmController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/DepositConfirmController.java`
-- @RequestMapping("/api/app/repurchase-management/deposit-confirms")
+- @RequestMapping("/api/admin/repurchase-management/deposit-confirms")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{spId}/deposit-balance")
@@ -9916,7 +9932,7 @@
 
 ## StationRepurchaseOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/StationRepurchaseOrderController.java`
-- @RequestMapping("/api/app/repurchase-management/station-repurchase-orders")
+- @RequestMapping("/api/admin/repurchase-management/station-repurchase-orders")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -9937,7 +9953,7 @@
 
 ## RawMaterialFinanceAuditController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/repurchasemanagement/controller/RawMaterialFinanceAuditController.java`
-- @RequestMapping("/api/app/repurchase-management/raw-material-finance-audits")
+- @RequestMapping("/api/admin/repurchase-management/raw-material-finance-audits")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/{id}")
@@ -9950,21 +9966,21 @@
 
 ## LightOperationDepositController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationmanagement/controller/LightOperationDepositController.java`
-- @RequestMapping("/api/app/operation-management/operation-deposits")
+- @RequestMapping("/api/admin/operation-management/operation-deposits")
 - @GetMapping
 - @PostMapping("/{id}/confirm-paid")
 - @PostMapping("/{id}/confirm-sap")
 
 ## LightSparePartsDepositController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationmanagement/controller/LightSparePartsDepositController.java`
-- @RequestMapping("/api/app/operation-management/spare-parts-deposits")
+- @RequestMapping("/api/admin/operation-management/spare-parts-deposits")
 - @GetMapping
 - @PostMapping("/{id}/confirm-paid")
 - @PostMapping("/{id}/confirm-sap")
 
 ## LightElectTargetController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationmanagement/controller/LightElectTargetController.java`
-- @RequestMapping("/api/app/operation-management/elect-targets")
+- @RequestMapping("/api/admin/operation-management/elect-targets")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping
@@ -9974,7 +9990,7 @@
 
 ## TheoryElectHourController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/operationmanagement/controller/TheoryElectHourController.java`
-- @RequestMapping("/api/app/operation-management/theory-elect-hours")
+- @RequestMapping("/api/admin/operation-management/theory-elect-hours")
 - @GetMapping
 - @GetMapping("/{id}")
 - @PutMapping("/{id}")
@@ -9983,7 +9999,7 @@
 
 ## LightBatchUploadController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/puyin/controller/LightBatchUploadController.java`
-- @RequestMapping("/api/app/puyin-trade/image-uploads")
+- @RequestMapping("/api/admin/puyin-trade/image-uploads")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -9993,7 +10009,7 @@
 
 ## PuYinIncomeSettleController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/puyin/controller/PuYinIncomeSettleController.java`
-- @RequestMapping("/api/app/puyin-trade/incomes")
+- @RequestMapping("/api/admin/puyin-trade/incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -10007,7 +10023,7 @@
 
 ## PyInvoiceController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/puyin/controller/PyInvoiceController.java`
-- @RequestMapping("/api/app/puyin-trade/invoices")
+- @RequestMapping("/api/admin/puyin-trade/invoices")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -10021,14 +10037,14 @@
 
 ## PuYinIncomeReverseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/puyin/controller/PuYinIncomeReverseController.java`
-- @RequestMapping("/api/app/puyin-trade/income-reverses")
+- @RequestMapping("/api/admin/puyin-trade/income-reverses")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}/detail")
 
 ## PuYinPriceConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/puyin/controller/PuYinPriceConfigController.java`
-- @RequestMapping("/api/app/puyin-trade/price-configs")
+- @RequestMapping("/api/admin/puyin-trade/price-configs")
 - @GetMapping
 - @GetMapping("/options")
 - @PutMapping("/{id}/status")
@@ -10041,7 +10057,7 @@
 
 ## ZhaoYinIncomeSettleController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zhaoyin/controller/ZhaoYinIncomeSettleController.java`
-- @RequestMapping("/api/app/zhaoyin-trade/incomes")
+- @RequestMapping("/api/admin/zhaoyin-trade/incomes")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/template")
@@ -10055,7 +10071,7 @@
 
 ## ZhaoYinIncomeReverseController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/zhaoyin/controller/ZhaoYinIncomeReverseController.java`
-- @RequestMapping("/api/app/zhaoyin-trade/income-reverses")
+- @RequestMapping("/api/admin/zhaoyin-trade/income-reverses")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}/detail")
@@ -10067,7 +10083,7 @@
 
 ## StationElectricityController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/generationmanagement/controller/StationElectricityController.java`
-- @RequestMapping("/api/app/generation-management/station-electricities")
+- @RequestMapping("/api/admin/generation-management/station-electricities")
 - @GetMapping
 - @GetMapping("/summary")
 - @GetMapping("/{stationCode}/detail")
@@ -10082,14 +10098,14 @@
 
 ## ElectricUnusualController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/generationmanagement/controller/ElectricUnusualController.java`
-- @RequestMapping("/api/app/generation-management/electric-unusuals")
+- @RequestMapping("/api/admin/generation-management/electric-unusuals")
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/export")
 
 ## InverterController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/generationmanagement/controller/InverterController.java`
-- @RequestMapping("/api/app/generation-management/inverters")
+- @RequestMapping("/api/admin/generation-management/inverters")
 - @GetMapping
 - @GetMapping("/export")
 - @GetMapping("/unbind-count")
@@ -10130,8 +10146,14 @@
 
 ## AuthzController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzController.java`
-- @RequestMapping("/api/app/authz")
+- @RequestMapping("/api/authz")
 - @GetMapping("/snapshot")
+
+## AppOnlineUserAdminController
+- 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/appsession/AppOnlineUserAdminController.java`
+- @RequestMapping("/api/admin/app/online-users")
+- @GetMapping
+- @PostMapping("/{sessionId}/kick")
 
 ## InvoiceController
 - 文件: `vpp-template/vpp-template-biz/src/main/java/com/nahui/energy/controller/InvoiceController.java`

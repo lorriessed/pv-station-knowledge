@@ -89,10 +89,12 @@
 - `authz_permission` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_role` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_role_permission` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
+- `authz_sub_center` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user_password` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user_permission` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `authz_user_role` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
+- `authz_user_sub_center` -> `rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml`
 - `bank_area` -> `rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/BankAreaMapper.xml`
 - `bank_info` -> `rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/BankAreaMapper.xml`, `rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/BankInfoMapper.xml`
 - `base_url_dict` -> `rrsjk-energystorage-service/rrsjk-energystorage-impl/src/main/resources/mybatis/mapper/BaseUrlDict.xml`
@@ -743,6 +745,8 @@
 - `sys_role` -> `system-service/system-impl/src/main/resources/system-sql-mapper/SysRoleMapper.xml`, `system-service/system-impl/src/main/resources/system-sql-mapper/SysUserMapper.xml`, `vpp-api-system/vpp-system-biz/src/main/resources/mapper/MenuMapper.xml`, `vpp-api-system/vpp-system-biz/src/main/resources/mapper/UserRoleMapper.xml`
 - `sys_role_menu` -> `vpp-api-system/vpp-system-biz/src/main/resources/mapper/MenuMapper.xml`, `vpp-api-system/vpp-system-biz/src/main/resources/mapper/RoleMenuMapper.xml`
 - `sys_session` -> `system-service/system-impl/src/main/resources/system-sql-mapper/SysSessionMapper.xml`
+- `sys_sub_center` -> `system-service/system-impl/src/main/resources/system-sql-mapper/SysSubCenterMapper.xml`
+- `sys_sub_center_user` -> `system-service/system-impl/src/main/resources/system-sql-mapper/SysSubCenterUserMapper.xml`
 - `sys_user` -> `rrsjk-migration-mix/rrsjk-migration-mix-impl/src/main/resources/mybatis/mapper/system/SystemSysUser.xml`, `system-service/system-impl/src/main/resources/system-sql-mapper/SysPartyUserMapper.xml`, `system-service/system-impl/src/main/resources/system-sql-mapper/SysUserMapper.xml`, `vpp-api-system/vpp-system-biz/src/main/resources/mapper/MenuMapper.xml`
 - `sys_user_role` -> `system-service/system-impl/src/main/resources/system-sql-mapper/SysRoleMapper.xml`, `system-service/system-impl/src/main/resources/system-sql-mapper/SysUserMapper.xml`, `system-service/system-impl/src/main/resources/system-sql-mapper/SysUserRoleMapper.xml`, `vpp-api-system/vpp-system-biz/src/main/resources/mapper/MenuMapper.xml`, `vpp-api-system/vpp-system-biz/src/main/resources/mapper/UserRoleMapper.xml`
 - `t_product` -> `vpp-api-meta/vpp-biz/src/main/resources/mapper/ProductMapper.xml`, `vpp-api-meta/vpp-biz/src/main/resources/mapper/ShipmentLogMapper.xml`

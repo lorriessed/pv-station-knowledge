@@ -1692,10 +1692,20 @@
 - statements: `select:find`, `select:findCount`, `select:findByUrl`, `select:findByActKey`, `select:get`, `insert:create`, `update:update`
 - tables: `id`, `sys_action`, `sys_menu`
 
+## system-service/system-impl/src/main/resources/system-sql-mapper/SysSubCenterMapper.xml
+- namespace: `com.haier.cbs.system.dao.SysSubCenterDao`
+- statements: `select:getById`, `select:getByIds`, `select:getByCode`, `select:findAll`, `select:count`, `select:findByPager`
+- tables: `sys_sub_center`
+
 ## system-service/system-impl/src/main/resources/system-sql-mapper/V3BranchRegionMapper.xml
 - namespace: `com.haier.cbs.system.dao.V3BranchRegionDao`
 - statements: `select:getByRegionId`, `select:getRegionByBranchCode`, `select:getRegionByRegionList`, `select:getRegionByBranchCodeList`, `select:getByRegionCode`
 - tables: `v3_branch_region`
+
+## system-service/system-impl/src/main/resources/system-sql-mapper/SysSubCenterUserMapper.xml
+- namespace: `com.haier.cbs.system.dao.SysSubCenterUserDao`
+- statements: `insert:insert`, `update:update`, `select:count`, `select:findByPager`, `select:getById`, `select:getByUserId`, `select:getBySubCenterId`, `select:getUserIdsBySubCenterId`, `select:countBySubCenterIdAndUserId`, `update:batchDeleteBySubCenterIdAndUserIds`, `update:deleteByUserId`, `select:getBySubCenterIds`
+- tables: `id`, `sys_sub_center_user`
 
 ## system-service/system-impl/src/main/resources/system-sql-mapper/SysMenuMapper.xml
 - namespace: `com.haier.cbs.system.dao.SysMenuDao`
@@ -2121,7 +2131,7 @@
 
 ## rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/DictTypeMapper.xml
 - namespace: `com.rrsjk.system.basic.dao.DictTypeDao`
-- statements: `insert:create`, `select:getById`, `update:updateById`, `select:getByCode`
+- statements: `select:listAll`, `insert:create`, `select:getById`, `update:updateById`, `select:getByCode`
 - tables: `dict_type`, `id`
 
 ## rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/DhMatchRegion.xml
@@ -2144,7 +2154,7 @@
 
 ## rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/DictValueMapper.xml
 - namespace: `com.rrsjk.system.basic.dao.DictValueDao`
-- statements: `insert:create`, `update:updateById`, `select:getById`, `select:getByTypeId`
+- statements: `insert:create`, `update:updateById`, `select:getById`, `select:getByTypeId`, `select:listByTypeId`
 - tables: `dict_value`, `id`
 
 ## rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/token/AccessToken.xml
@@ -8509,8 +8519,8 @@
 
 ## rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml
 - namespace: `com.rrsjk.adminauthz.mapper.AuthzRepositoryMapper`
-- statements: `select:findUser`, `select:listAllUsers`, `update:updateUser`, `insert:insertUser`, `select:findPasswordCredential`, `update:updateUserPassword`, `insert:insertUserPassword`, `select:listRoleCodesByUser`, `select:listRolesByCodes`, `select:listAllRoles`, `insert:insertRole`, `update:updateRole`, `delete:deleteRole`, `delete:deleteRolePermissions`, `delete:deleteUserRolesByRole`, `delete:deleteUserRoles`, `insert:insertUserRole`, `select:listPermissionsByRole`, `select:listAllPermissions`, `select:listByPermissionKeys`, `insert:insertPermission`, `update:updatePermission`, `delete:deletePermission`, `delete:deleteRolePermissionsByPermission`, `delete:deleteUserPermissionsByPermission`, `delete:deleteRoleClientPermissions`, `insert:insertRolePermission`, `delete:deleteUserClientPermissions`, `insert:insertUserPermission`, `select:listRolePermissionKeysByUser`, `select:listDirectPermissionKeysByUser`, `select:listAllMenus`, `update:updateMenu`, `insert:insertMenu`, `delete:deleteMenu`
-- tables: `authz_menu`, `authz_permission`, `authz_role`, `authz_role_permission`, `authz_user`, `authz_user_password`, `authz_user_permission`, `authz_user_role`, `id`
+- statements: `select:findUser`, `select:listAllUsers`, `update:updateUser`, `insert:insertUser`, `select:findPasswordCredential`, `update:updateUserPassword`, `insert:insertUserPassword`, `select:listRoleCodesByUser`, `select:listRolesByCodes`, `select:listAllRoles`, `insert:insertRole`, `update:updateRole`, `delete:deleteRole`, `delete:deleteRolePermissions`, `delete:deleteUserRolesByRole`, `delete:deleteUserRoles`, `insert:insertUserRole`, `select:listPermissionsByRole`, `select:listAllPermissions`, `select:listAllPermissionsForClient`, `select:listByPermissionKeys`, `select:listByPermissionKeysForClient`, `insert:insertPermission`, `update:updatePermission`, `delete:deletePermission`, `delete:deletePermissionForClient`, `delete:deleteRolePermissionsByPermission`, `delete:deleteRoleClientPermissionsByPermission`, `delete:deleteUserPermissionsByPermission`, `delete:deleteUserClientPermissionsByPermission`, `delete:deleteRoleClientPermissions`, `insert:insertRolePermission`, `delete:deleteUserClientPermissions`, `insert:insertUserPermission`, `select:listRolePermissionKeysByUser`, `select:listDirectPermissionKeysByUser`, `select:listSubCentersByUser`, `select:listAllMenus`, `select:listAllMenusForClient`, `update:updateMenu`, `insert:insertMenu`, `delete:deleteMenu`, `delete:deleteMenuForClient`
+- tables: `authz_menu`, `authz_permission`, `authz_role`, `authz_role_permission`, `authz_sub_center`, `authz_user`, `authz_user_password`, `authz_user_permission`, `authz_user_role`, `authz_user_sub_center`, `id`
 
 ## vpp-api-km/vpp-km-biz/src/main/resources/mapper/km/KnowledgeFileMapper.xml
 - namespace: `com.nahui.energy.dao.km.KnowledgeFileMapper`

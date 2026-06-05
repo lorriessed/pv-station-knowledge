@@ -13,7 +13,21 @@
 ### 税率
 政策收入相关税率为 9%，电费相关税率为 13%。
 
-### 营销奖励类型
+## 营销奖励漏斗功能下线 (TAEI-3176/3177, 代码明确证明, 2026-06-04)
+**来源**: `rrsjk-light-service/LightStationEnableRewardJobServiceImpl.java` (龙龙/商轶龙, commit: 0f1fa502fd)
+- **下线范围**: 营销奖励暂缓单、分段( PROP1/PROP2 双节点)、漏斗三个功能全部下线
+- **修改位置**: `LightStationEnableRewardJobServiceImpl.java`
+  - 注释掉 `billFunnelCacheService.checkIfPendingListNeeded()` 漏斗检查逻辑
+  - 注释掉 `intoCache()` 暂缓单生成逻辑（金额检查+缓存单）
+  - 新奖励直接生成 100% 比例的 COMPLETED 节点奖励
+  - 保留 `confirmEnableNode()` 和 `intoCache()` 方法本身，用于处理历史已分段数据
+- **历史兼容**: 旧代码注释保留（不删除），`confirmEnableNode` 方法完整保留处理历史 ENABLE 分段数据
+- **修改人**: 商轶龙（需求TAEI-3176注释标注），龙龙提交代码
+- **分支**: `origin/20260520_longlong_pub_build_policy`
+
+---
+
+## 营销奖励政策类型
 营销奖励包括 MONTH_POWER、BN_AGEING、BN_AGEING_PROJECT、BN_AGEING_NEGATIVE、INSTALL_ADVANCE。
 
 ### 防重
