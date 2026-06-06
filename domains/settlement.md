@@ -193,10 +193,26 @@ StationIncomeHandleStrategyFactory
   - **建议**: 确认是否有意暂停，或需要补充 @Autowired 注入 + 调用逻辑
 - **证据等级**: 代码明确证明
 
-### TAEI-3103 电站业主租金停付管理（待测试, 2026-06-04 大量bugfix）
+### TAEI-3117 运维商押金/备件押金上线集团FAP（开发中, 2026-06-05 新增FAP集成）
+**来源**: `rrsjk-light-service` (孙志男 sunzn, commit 1a5e72e8b3, 2026-06-05) + `rrsjk-admin-web` (sunzn) + `rrsjk-light-report-service` (sunzn)
+- **负责人**: 高媛(PM) | **实际开发**: 孙志男 | **参与人**: 魏秋阳、孙志男
+- **状态**: 开发中
+- **核心变更**:
+  - `LightFapRecord.BizTypeEnum` 新增 `OPERATION_DEPOSIT("运维保证金", "TY010031", "收-保证金-其他应付款（先收后退）")` — 与 SPARE_PARTS_DEPOSIT 使用相同业务编码
+  - `LightOperationDeposit` 实体新增 `fapStatus` 字段 + `FapStatusEnum` (WAIT_SENT/SENT/CANCEL)
+  - `LightOperationDeposit.Status` 新增 `CANCEL("已作废")` 状态
+  - `LightOperationDepositService` 新增 `cancelDepositOrder()` 作废订单 + `fapRecordCreate()` 手动创建FAP汇总
+  - `LightFapRecordServiceImpl` 新增 `syncOperationDepositFapSentStatus()` 和 `syncOperationDepositFapResult()` 双向同步
+  - **调用链**: FAP回调 → `LightFapRecordServiceImpl.syncOperationDepositFapResult()` → 更新 `LightOperationDeposit` status=CONFIRMED + accountStatus=YES + accountVoucher/accountAt/confirmAt/thirdTradeNo
+  - **业务意义**: 运维商押金/备件保证金正式接入集团FAP财务制证平台，实现从"线下确认"到"FAP自动记账"的升级
+- **关键文件**: `LightFapRecord.java:272`, `LightOperationDeposit.java:72/102/148`, `LightOperationDepositServiceImpl.java`
+- **证据等级**: 代码明确证明
+- **扫描日期**: 2026-06-06
+
+### TAEI-3103 电站业主租金停付管理（测试中, 2026-06-04 大量bugfix）
 **来源**: `rrsjk-light-service` (孙志男, branch: origin/szn_rent_stop_20260525, 2026-05-28~06-03)
 - **负责人**: 高媛(PM) | **实际开发**: 孙志男 | **参与人**: 魏秋阳、孙志男、李培龙
-- **状态**: 待测试 (计划完成 2026-06-04)
+- **状态**: 测试中 (updateStatusAt 2026-06-05)
 - **提交量**: 20+ 条提交，集中在 2026-06-01~03
 - **核心变更**:
   - 新增 `RentSuspendApplication` 租金停付申请实体 + 相关DAO/Mapper
@@ -204,6 +220,7 @@ StationIncomeHandleStrategyFactory
   - 租金暂停/恢复申请的完整状态机校验逻辑
   - 多次迭代修复：工单状态验证、空指针异常、重复校验、恢复原因验证
   - 新增枚举: 租金停付申请恢复原因枚举
+  - **本周修复**: b8930b7(恢复申请状态检查: 添加 RESUME_AUDIT_REJECTED 状态允许重新提交), 789e3dd(恢复原因验证逻辑), 4fabced(工单状态验证和扣除月数校验)
 - **关键提交**: 4fabced(工单状态验证修复), 7876ae1(空指针修复), b8930b7(恢复申请状态检查), 789e3dd(恢复原因验证), c71e58c(恢复原因枚举), b58c338(电站状态字段)
 - **证据等级**: 代码明确证明
 

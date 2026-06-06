@@ -406,9 +406,7 @@
 - `FormType` -> `repairs/repairs-impl/src/main/java/com/pvs/ops/flowable/config/common/enums/FormType.java`
 - `FlowComment` -> `repairs/repairs-impl/src/main/java/com/pvs/ops/flowable/config/common/enums/FlowComment.java`
 - `BusinessNameEnum` -> `repairs/repairs-impl/src/main/java/com/pvs/ops/flowable/enm/BusinessNameEnum.java`
-|- `ProvinceEnum` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/constant/ProvinceEnum.java`
-|- `PermissionEnum` -> `watermark-camera-android/camera-sdk/src/main/java/com/haier/watermarkcamera/sdk/util/PermissionEnum.java`
-|- `PriceRulesStatus` -> `item-service/item-service/src/main/java/com/haier/cbs/item/util/PriceRulesStatus.java`
-|- `DatabaseType` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/enums/DatabaseType.java`
-|- `LightFapRecordDTO.StatusEnum` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/pojo/dto/fap/LightFapRecordDTO.java` (WAIT_SENT/SENT/SUCCESS/FAIL/CANCEL)
-|- `LightFapRecordDTO.FapRespVchrStatusEnum` -> `vpp-api-gect/vpp-gect-biz/src/main/java/com/nahui/energy/pojo/dto/fap/LightFapRecordDTO.java` (1制证成功/2制证失败/3冲销成功)
+- `ProvinceEnum` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/constant/ProvinceEnum.java`
+- `PermissionEnum` -> `watermark-camera-android/camera-sdk/src/main/java/com/haier/watermarkcamera/sdk/util/PermissionEnum.java`
+- `PriceRulesStatus` -> `item-service/item-service/src/main/java/com/haier/cbs/item/util/PriceRulesStatus.java`
+- `DatabaseType` -> `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/enums/DatabaseType.java`

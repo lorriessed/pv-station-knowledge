@@ -12,11 +12,11 @@
 | vpp-api-gateway | /data/pvcode/vpp-api-gateway | 2026-05-13 全量通读 ✅ | Spring Cloud Gateway/JWT鉴权/跨域/异常处理 |
 | vpp-api-gect | /data/pvcode/vpp-api-gect | 2026-05-13 全量通读 ✅ | 绿证交易(客户/订单/采购/发票/SAP), JDK 17 |
 | vpp-api-auth | /data/pvcode/vpp-api-auth | 待通读 | 认证授权服务 |
-| vpp-api-gpower | /data/pvcode/vpp-api-gpower | 2026-05-14 全量通读 ✅ | 绿电收益管理/电网公司/MDM主数据/SAP记账 |
-| vpp-api-km | /data/pvcode/vpp-api-km | 2026-05-14 全量通读 ✅ | 知识库目录/文件管理/标签/权限控制 |
-| vpp-api-meta | /data/pvcode/vpp-api-meta | 2026-05-14 全量通读 ✅ | 产品管理/出货日志/Excel导入 |
-| vpp-api-system | /data/pvcode/vpp-api-system | 2026-05-14 全量通读 ✅ | 用户/部门/角色/菜单/租户/字典/i18n/SSO, JDK 17 |
-| vpp-api-template | /data/pvcode/vpp-api-template | 2026-05-15 全量通读 ✅ | 发票管理模板 (Invoice 模块, JDK 8) |
+| vpp-api-gpower | /data/pvcode/vpp-api-gpower | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 绿电收益管理/电网公司/MDM主数据/SAP记账/电价数据报表(新增) |
+| vpp-api-km | /data/pvcode/vpp-api-km | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 知识库目录/文件管理/标签/权限控制 (JDK 17升级) |
+| vpp-api-meta | /data/pvcode/vpp-api-meta | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 产品管理/出货日志/Excel导入 |
+| vpp-api-system | /data/pvcode/vpp-api-system | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 用户/部门/角色/菜单/租户/字典/i18n/SSO, JDK 17 |
+| vpp-api-template | /data/pvcode/vpp-api-template | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 模板项目(无业务逻辑, JDK 8) |
 | vpp-openapi | /data/pvcode/vpp-openapi | 2026-05-15 全量通读 ✅ | 开放API网关/AK-SK管理/Drcloud数据推送, JDK 17 |
 | vpp-pv-oversea | /data/pvcode/vpp-pv-oversea | 2026-05-15 全量通读 ✅ | 海外光伏/电站管理/采购销售/付款计划/SAP/云报账, JDK 17 |
 

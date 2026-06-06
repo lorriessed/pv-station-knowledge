@@ -5019,6 +5019,7 @@
 - @GetMapping("/stationListYt.do")
 - @GetMapping("/waitAuditStationList.do")
 - @GetMapping("toBeSurveyedListExport.do")
+- @GetMapping("findAllCenter.do")
 
 ## LightModuleSnController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightModuleSnController.java`
@@ -5330,6 +5331,14 @@
 - @PostMapping("/auditBySpPlan.do")
 - @PostMapping("/auditOKBySp.do")
 - @PostMapping("/auditFailBySp.do")
+
+## LightSpServiceProvinceController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightSpServiceProvinceController.java`
+- @RequestMapping("/light/spServiceProvince/")
+- @GetMapping("list.do")
+- @PostMapping("apply.do")
+- @PostMapping("update.do")
+- @GetMapping("findApprovedList.do")
 
 ## DatabaseManagementController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/DatabaseManagementController.java`
@@ -11613,6 +11622,17 @@
 - //	@RequestMapping(value = "/subCenterTimeIntervalMap.html")
 - //    @RequestMapping(value = "/cardDetail.html", method = RequestMethod.GET)
 
+## SysSubCenterController
+- 文件: `cbs-web/src/main/java/com/haier/cbs/web/controller/subCenter/SysSubCenterController.java`
+- @RequestMapping("/sysSubCenter")
+- @RequestMapping(value = "subCenter.html", method = { RequestMethod.GET })
+- @RequestMapping(value = "subCenterUser.html", method = { RequestMethod.GET })
+- @RequestMapping(value = "/subCenterList", method = { RequestMethod.GET })
+- @RequestMapping(value = "/subCenterUserList", method = { RequestMethod.GET })
+- @RequestMapping(value = "/addSubCenterUser", method = { RequestMethod.POST })
+- @RequestMapping(value = "/removeSubCenterUser", method = { RequestMethod.POST })
+- @RequestMapping(value = "/getSubCenterById", method = { RequestMethod.GET })
+
 ## GovernmentAppUserController
 - 文件: `cbs-web/src/main/java/com/haier/cbs/web/controller/governmentApp/GovernmentAppUserController.java`
 - @RequestMapping(value = "userList.html", method = { RequestMethod.GET })
@@ -16399,6 +16419,7 @@
 - @RequestMapping(value = {"changeOpSum.do"}, method = {RequestMethod.POST})
 - @RequestMapping("spAuthRegion.html")
 - @RequestMapping("spRegionList.do")
+- @RequestMapping("spRegionExport.do")
 - @RequestMapping(value = {"/showRegionContract.do"}, method = {RequestMethod.GET})
 - @RequestMapping(value = {"auditRegionOk.do"}, method = {RequestMethod.POST})
 - @RequestMapping(value = {"auditRegionFail.do"}, method = {RequestMethod.POST})
@@ -17468,6 +17489,15 @@
 - @RequestMapping(value = "/confirmPaidAll.do", method = {RequestMethod.POST})
 - @RequestMapping(value = {"/downTemplate.do"}, method = {RequestMethod.GET})
 - @RequestMapping(value = {"/importData.do"}, method = {RequestMethod.POST})
+
+## LightSpServiceProvinceController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightSpServiceProvinceController.java`
+- @RequestMapping("/lightSpServiceProvince/")
+- @RequestMapping("list.html")
+- @RequestMapping("doList.do")
+- @PostMapping("audit.do")
+- @RequestMapping("doExport.do")
+- @RequestMapping(value = {"/logList.do"}, method = {RequestMethod.GET})
 
 ## DatabaseManagementController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/DatabaseManagementController.java`
@@ -18582,6 +18612,7 @@
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightStationController.java`
 - @RequestMapping("/lightStation")
 - @RequestMapping("list.html")
+- @RequestMapping("citySubCenters.do")
 - @RequestMapping("doList.do")
 - @RequestMapping("doListRefactor.do")
 - @RequestMapping("sttionInervers.do")
@@ -18639,7 +18670,6 @@
 - @GetMapping("queryBankNo.do")
 - @GetMapping("queryModuleSn.do")
 - @RequestMapping("stationAuditList.html")
-- @RequestMapping("stationAuditList.do")
 
 ## LightCapitalCompanyInfoController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightCapitalCompanyInfoController.java`

@@ -574,6 +574,15 @@
 - **分支**: `origin/feature-wangxiran-changePlan`, `origin/feature-wxr-audit-20260519`
 - **证据等级**: 代码明确证明
 
+### 审核图片驳回 reject_flag 逻辑修复 (代码明确证明, 2026-06-04)
+**来源**: `rrsjk-light-service` → `GfLightStationConfirmImg.xml`, `LightStationConfirmImg.xml` (wangxiran, commit 05e32c106e, 2026-06-04)
+**关联需求**: TAEI-3057 方案审核/技术审核/商务审核 驳回支持按单张图片驳回
+- **Bug**: `markReject` 方法中 `reject_flag` 设置错误（标记驳回时应设为 0，之前错误设为 1）；`clearRejectByAuditType`/`clearRejectById` 清除驳回时应设为 1（表示已清除），且 WHERE 条件应匹配 `reject_flag = 0` 的记录
+- **修复**: 修正了 3 个 Mapper 方法中的 reject_flag 逻辑（GfLightStationConfirmImg.xml + LightStationConfirmImg.xml）
+- **影响范围**: 电站确认图片和GF电站确认图片两张表的审核驳回标记
+- **风险**: 此 Bug 在 2026-06-03~04 期间存在，可能影响审核驳回功能的正确性。已在一周内修复。
+- **证据等级**: 代码明确证明
+
 ### 审核图片驳回扩展 — 支持现场图片驳回 (TAEI-3057 扩展, 2026-05-25 代码明确证明)
 **来源**: `rrsjk-light-service` → `AuditImageRejectDto.java`, `LightAuditImageRejectRecord.java`, `LightAuditImageRejectServiceImpl.java` (commits: 6997cea/e0250e9b/873488c3, wangxiran, branch: origin/feature-wxr-audit-20260519)
 **关联需求**: TAEI-3057 方案审核/技术审核/商务审核 驳回支持按单张图片驳回

@@ -31,8 +31,8 @@ VPP (Virtual Power Plant，虚拟电厂) 是海尔新能源在光伏业务之外
 | 系统管理 | vpp-api-system | 租户、部门、用户、权限 | SB 3.2.2 + JDK 17 |
 | 电力交易 | vpp-api-elecbusiness | Drcloud数据对接/纳光宝大屏/i18n | SB 2.5.5 + JDK 8 |
 | 网关 | vpp-api-gateway | API网关/路由/JWT鉴权/跨域 | SB 2.5.5 + JDK 17 |
-| 电力市场 | vpp-api-gpower | 绿电收益管理/电网公司/MDM主数据/SAP记账 | SB 2.5.5 + JDK 8 |
-| 知识管理 | vpp-api-km | 知识库目录/文件管理/标签/权限 | SB 2.5.5 + JDK 8 |
+| 电力市场 | vpp-api-gpower | 绿电收益管理/电网公司/MDM主数据/SAP记账/**电价数据报表**(2026-05-28新增,ADS数据源) | SB 2.5.5 + JDK 8 ✅ 2026-06-06重扫 |
+| 知识管理 | vpp-api-km | 知识库目录/文件管理/标签/权限 | SB 3.2.2 + JDK 17 (2026-05-21升级) ✅ 2026-06-06重扫 |
 | 元数据 | vpp-api-meta | 产品管理/出货日志/Excel导入 | SB 2.5.5 + JDK 8 |
 | 系统管理 | vpp-api-system | 用户/部门/角色/菜单/租户/字典/i18n/SSO | SB 3.2.2 + JDK 17 |
 | 模板 | vpp-api-template | 发票管理模板 (Invoice 模块) | SB 2.5.5 + JDK 8 |

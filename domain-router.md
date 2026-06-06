@@ -18,12 +18,14 @@
     18|- 常见表：`light_station_audit`、`light_station`、`light_service_provider`
     19|- 生产验证：查审核记录倒序。
     20|
-    21|## 服务商与区域授权
-    22|
-    23|- 关键词：服务商、授权区域、冻结、运营中、员工、token、分中心。
-    24|- 知识库：`domains/approval.md`、`data/tables.md`
-    25|- 代码入口：`LightSpStaffServiceImpl`、`LightServiceProvider`
-    26|- 常见表：`light_service_provider`、`light_sub_sp_region`、`light_sp_authority_zone`
+    ## 服务商与区域授权
+
+    - 关键词：服务商、授权区域、冻结、运营中、员工、token、分中心、省份授权。
+    - 知识库：`domains/approval.md`、`data/tables.md`、`domains/cbs-management.md` §服务商省份授权
+    - 代码入口：
+      - `LightSpStaffServiceImpl`、`LightServiceProvider`
+      - **`LightSpServiceProvinceController`** (`rrsjk-admin-web`, 2026-06-06 regionUnlimit 新增) — 服务商省份授权管理，路由 `/light/lightSpServiceProvince/`
+    - 常见表：`light_service_provider`、`light_sub_sp_region`、`light_sp_authority_zone`
     27|
     28|## 订单与辅材
     29|

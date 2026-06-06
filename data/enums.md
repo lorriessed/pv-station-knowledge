@@ -468,3 +468,12 @@
   - `CONFIRM_IN` — 确认转入
   - `REJECT_IN` — 拒绝转入
 
+### 运维保证金 FAP 状态 (TAEI-3117, 代码明确证明, 2026-06-05)
+**来源**: `rrsjk-light-service` → `LightOperationDeposit.java` (sunzn, commit 1a5e72e8b3)
+- **FapStatusEnum**:
+  - `WAIT_SENT` — 待传FAP
+  - `SENT` — 已传FAP
+  - `CANCEL` — 已作废
+- **Status 新增**: `CANCEL("已作废")` — 保证金订单作废状态
+- **LightFapRecord.BizTypeEnum 新增**: `OPERATION_DEPOSIT("运维保证金", "TY010031", "收-保证金-其他应付款（先收后退）")`
+

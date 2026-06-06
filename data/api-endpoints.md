@@ -523,3 +523,21 @@
 | `/auth/logout` | POST | 登出(清除 SecurityContext) |
 | `/authz/snapshot` | GET | 获取权限快照(roles, menus, page/button/api permissions) |
    253|
+
+## VPP API 端点
+
+### vpp-api-gpower — 电价数据报表 (2026-05-28 新增)
+**来源**: `vpp-api-gpower/vpp-gpower-biz/src/main/java/com/nahui/energy/controller/ElectricityPriceDataReportController.java`
+基础路径: `/electricityPriceDataReport`
+
+| 路径 | 方法 | 说明 |
+|---|---|---|
+| `/nodeHourlyAvg/page` | GET | 分页查询节点小时均价报表 |
+| `/nodeHourlyAvg/export` | GET | 导出节点小时均价报表 (Excel) |
+| `/spotHourlyAvg/page` | GET | 分页查询出清小时均价报表 |
+| `/spotHourlyAvg/export` | GET | 导出出清小时均价报表 (Excel) |
+| `/filterOptions` | GET | 查询筛选项 (区域/价格类型/城市/节点) |
+
+**数据源**: ADS (AnalyticDB for MySQL), 独立于主业务库
+**Mapper**: `ElectricityPriceDataReportMapper` (包路径: `com.nahui.energy.mapper.ads`)
+**价格类型**: `day_ahead`(日前), `real_time`(实时)

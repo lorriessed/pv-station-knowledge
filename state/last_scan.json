@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-05T23:01:58.027866",
+  "last_scan_at": "2026-06-06T23:01:18.639973",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -22,7 +22,7 @@
       "branch": "master"
     },
     "cbs-web": {
-      "head": "b8a91db203a7ec94422ca8ec2823215f5d5f13ab",
+      "head": "e651a0a01476df7204e22aeeef62cdf6ef8ff9ab",
       "path": "/data/pvcode/cbs-web",
       "branch": "master"
     },
@@ -282,7 +282,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "4d1738122caa8f2f67c2b59b9600955aa1806d45",
+      "head": "078ef9e85062786376adb82cc5c69680772b1845",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -372,12 +372,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "fced157ead9cd64aed304c4aaae461f4dd50d82d",
+      "head": "a99ff7e9541cb18a1226fa45936fb18ca7681c9b",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "cc6727d42eb1bafbe136ab64b7ef990c88739d65",
+      "head": "7b3190746e17dbbd55f35cb1100ea4ecb368806a",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -387,7 +387,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-h5": {
-      "head": "f41788812f5abec948f85e90fb0e6af75bcc0d1d",
+      "head": "9a35d0ff100f00149f8bee392a112130d7f1fb54",
       "path": "/data/pvcode/rrsjk-merchant-h5",
       "branch": "master"
     },
@@ -397,7 +397,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "c93b0247d6d4fb29c077530b9079d35051ed1fb9",
+      "head": "9b2b36304250031afff2f15efd18608d3da7ebaf",
       "path": "/data/pvcode/rrsjk-merchant-web",
       "branch": "master"
     },

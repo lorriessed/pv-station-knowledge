@@ -185,3 +185,23 @@
 | 日期 | 更新内容 | 来源 |
 |---|---|---|
 | 2026-05-14 | 创建知识管理完整业务文档 | vpp-api-km 全量通读 |
+| 2026-06-06 | 技术栈升级: JDK 8 → JDK 17, Spring Boot 2.5.5 → 3.2.2, Jakarta EE 10, 新增 jaxws-rt/jakarta.validation 兼容依赖 | vpp-api-km 重扫 delta (commits 2026-05-21 JDK17升级) |
+
+## 8. JDK 17 升级变更 (2026-05-21)
+
+**来源**: `vpp-api-km/pom.xml`, `vpp-km-biz/pom.xml`, `vpp-km-biz/src/main/java/com/nahui/energy/config/MybatisPlusConfig.java`
+
+| 变更项 | 旧值 | 新值 |
+|---|---|---|
+| JDK 版本 | 1.8 | 17 |
+| Spring Boot | 2.5.5 | 3.2.2 |
+| Spring Cloud | 2020.0.4 | 2023.0.0 |
+| Spring Cloud Alibaba | 2021.1 | 2022.0.0.2 |
+| MySQL Connector | (默认) | 8.0.33 (显式指定) |
+| MyBatis-Plus | 3.5.3.1 | 3.5.5 |
+| javax.servlet | javax.servlet-api | jakarta.servlet-api |
+| javax.validation | validation-api | jakarta.validation-api |
+| javax.xml.ws | (无) | jakarta.xml.ws-api + jaxws-rt (临时兼容旧版SAP) |
+| TypeAliasesPackage | 原有配置 | 简化为 `com.nahui.energy.pojo` (JDK17反射权限限制) |
+| 二级缓存 | 开启 | 关闭 (避免JDK17反射权限问题) |
+| MPJ 插件传递 | 单参数 | 数组封装 `mybatisPlusInterceptor(), new MPJInterceptor()` (原写法导致类型异常) |

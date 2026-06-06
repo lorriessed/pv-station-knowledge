@@ -3515,7 +3515,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/City.xml
 - namespace: `com.rrsjk.light.dao.CityDao`
-- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:getByCityId`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:getByCityId`, `select:getListByCityId`, `select:findAll`, `select:findDistinctSubCenters`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/CmLightProjectReceipt.xml
@@ -4010,6 +4010,11 @@
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpQuotaConfig.xml
 - namespace: `com.rrsjk.light.dao.LightSpQuotaConfigDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
+- tables: `id`
+
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpServiceProvince.xml
+- namespace: `com.rrsjk.light.dao.LightSpServiceProvinceDao`
+- statements: `insert:create`, `update:update`, `select:getById`, `select:countOf`, `select:findBy`, `select:findApprovedList`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/CmNodeAttachmentTemplate.xml
@@ -5588,6 +5593,11 @@
 - namespace: `com.rrsjk.light.dao.LightConfirmOrderDao`
 - statements: `insert:create`, `update:update`, `select:get`, `select:countOf`, `select:findBy`, `delete:delete`, `select:countOfMainProvider`, `select:findMainProviderBy`, `select:findAllBy`, `select:countOfAll`
 - tables: `id`, `light_confirm_order`, `light_sp_auclon_store`
+
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpServiceProvinceAuditLog.xml
+- namespace: `com.rrsjk.light.dao.LightSpServiceProvinceAuditLogDao`
+- statements: `insert:create`, `update:update`, `select:findBySpServiceProvinceId`
+- tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightUseOrder.xml
 - namespace: `com.rrsjk.light.dao.LightUseOrderDao`
@@ -8930,7 +8940,7 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/City.xml
 - namespace: `com.rrsjk.report.dao.light.CityDao`
-- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findSettledCityList`, `select:findByCodes`, `select:findZHStationSubCenterByTime`, `select:findOneByCityCode`, `select:getAllCenter`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findSettledCityList`, `select:findByCodes`, `select:findZHStationSubCenterByTime`, `select:findOneByCityCode`, `select:getAllCenter`, `select:getAllGroupSubCenter`
 - tables: `city`, `id`, `light_station`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightStationInverter.xml
@@ -9208,7 +9218,7 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightSpStore.xml
 - namespace: `com.rrsjk.report.dao.light.LightSpStoreDao`
-- statements: `select:findByParams`, `select:findBySubSpId`, `select:findByStoreCodes`, `select:findByIds`
+- statements: `select:findByParams`, `select:findBySubSpId`, `select:findByStoreCodes`, `select:findByIds`, `select:findAllStore`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightCompanyInfo.xml
 - namespace: `com.rrsjk.report.dao.light.LightCompanyInfoDao`
@@ -9599,7 +9609,7 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/EnergyInventoryTurnoverControlSubCenter.xml
 - namespace: `com.rrsjk.report.dao.local.EnergyInventoryTurnoverControlSubCenterDao`
-- statements: `insert:create`, `select:get`, `select:countOf`, `select:findBy`, `insert:batchInsert`, `select:getSumSomeDays`
+- statements: `insert:create`, `select:get`, `select:countOf`, `select:findBy`, `select:list`, `insert:batchInsert`, `select:getSumSomeDays`
 - tables: `energy_inventory_turnover_control_sub_center`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/EnergyYuexiuSubCenterData.xml
@@ -10050,6 +10060,11 @@
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ReportAssetScreenRent.xml
 - namespace: `com.rrsjk.report.dao.local.ReportAssetScreenRentDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findByParams`
+- tables: `id`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/EnergyLightEstimateOffStationTest.xml
+- namespace: `com.rrsjk.report.dao.local.EnergyLightEstimateOffStationTestDao`
+- statements: `insert:create`, `insert:batchInsert`, `update:update`, `select:findListForOff`
 - tables: `id`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ReportMGrid.xml
