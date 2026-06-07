@@ -137,6 +137,7 @@
 ### 关键字段
 - first_three_power_at：首次连续三天发电时间，是业务"并网"口径的重要字段。
 - enable_at：电站启用时间。
+- sub_center_name / sub_center_name_new：**TAEI-3053「一商做全国」上线后，新分中心数据直接写入 `sub_center_name`，`sub_center_name_new` 废弃（始终为 NULL）**。报表、聚合、关联 `energy_summary_target` 时必须用 `sub_center_name`，用 `sub_center_name_new` 会导致数据全被过滤。（2026-06-07 生产故障验证）
 
 ### VPP 海外光伏表 (vpp-pv-oversea, 2026-05-15)
 - pv_station_info：电站数据主表 (pv_code, pv_status, pv_type, pay_status, invoice_status)

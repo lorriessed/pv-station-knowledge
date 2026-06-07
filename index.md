@@ -1,13 +1,13 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-06-03
+更新时间: 2026-06-07
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
 | 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
-| 已通读 | 122/122 (第20轮) |
+| 已通读 | 122/122 (第23轮) |
 | 知识库文件 | 70+ 个 |
 | 知识库大小 | 6.8MB+ |
 | Domain 业务文件 | 45+ 个 |
@@ -15,13 +15,12 @@
 
 ## 仓库通读进度
 
-### 全部 122/122 个仓库已通读 (第20轮，2026-06-03)
-- 本轮通读 5 个: rrsjk-pvbusiness-job-service, rrsjk-report-web, rrsjk-system-service, rrsjk-trade-service, system-service
-- **知识库更新**: 
-  - **新建** `domains/system-infra-service.md` — rrsjk-system-service 完整文档(11KB): 银行/联行号/地区/OCR/日历/字典/短信/定时任务/敏感词/支付账号
-  - **追加** `domains/cbs-management.md` — system-service CBS基础服务: 用户/角色/菜单/权限/团体组织架构/V3分中心映射/Redis缓存
-  - **追加** `domains/frontend-and-misc-services.md` — SingleJob 分布式锁详细机制/LightOwnAsset 资产推送流程/资方大屏 SF_TOKEN 鉴权/工商业并网
-  - **追加** `domains/order-and-trade.md` — Hrois海外订单流程/发票Job体系(20+方法)/条码申请/FTP支付对账/零碳采购单/订单推送队列
+### 全部 122/122 个仓库已通读 (第23轮，2026-06-07)
+- 本轮通读 5 个: vpp-crawler, vpp-data-platform, vpp-openapi, vpp-pv-oversea, vpp-template
+- **重扫发现**: 
+  - **vpp-data-platform**: 时序数据新增 toNameList 设备名称筛选; TsKvServiceImpl 支持三组外部 API 凭证降级 (zhijia@haier/qdsg@shougang/zhjt2025@cnnc); TsKvDO 改为 BaseDO 不再需要租户隔离
+  - **vpp-pv-oversea**: SAP 发票记账凭证功能; 即采即销单付款计划验证; SAP 销售订单计费作业优化(空指针修复/重试调整); 电站信息并发安全修复
+  - **vpp-crawler/openapi/template**: 无新提交，知识库已完整覆盖
 
 ## 目录
 

@@ -1,6 +1,6 @@
 # VPP 项目概述与架构
 
-最后更新: 2026-05-13
+最后更新: 2026-06-07
 
 ## 1. 项目定位
 
@@ -691,10 +691,86 @@ vpp-api-auth (:8081/auth)
 
 **Drcloud 对接链路**: Drcloud → `/token/getVppToken` (appId/appSecret校验) → TokenService.createVppToken → JWT → Drcloud 使用 token 访问 VPP 资源
 
-## 13. 知识库更新记录
+## 14. vpp-data-platform 新增功能 (2026-06-07 重扫补充)
+
+### 14.1 时序数据查询支持设备名称筛选 (代码明确证明)
+
+**来源**: `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/pojo/dto/TsKvPageQueryDTO.java` (commit 4619d59, 宋欣儒, 2026-06-01)
+
+`TsKvPageQueryDTO` 新增 `toNameList` 字段:
+```java
+@ApiModelProperty(value = "设备名称筛选列表。传入后先通过外部设备关系API按toName筛选设备，再查询命中的设备数据", example = "[\"储能柜2\", \"逆变器1\"]")
+private List<String> toNameList;
+```
+
+**查询流程**: 当传入 `toNameList` 时，先调用外部设备关系 API (`hnzliot.nahuipv.com/api/relations/info`) 获取设备名称映射，过滤出匹配的设备 ID，再用这些 ID 查询时序数据。
+
+### 14.2 外部设备 API 三组凭证降级 (代码明确证明)
+
+**来源**: `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/service/impl/TsKvServiceImpl.java`
+
+`TsKvServiceImpl` 中 `getDeviceNameMap()` 方法支持 **3 组凭证** 逐级降级获取设备名称映射:
+
+| 凭证组 | 用户名 | 说明 |
+|---|---|---|
+| 第1组 | `zhijia@haier.com` | 主凭证 |
+| 第2组 | `qdsg@shougang.com` | 首钢凭证 |
+| 第3组 | `zhjt2025@cnnc.com` | 中核凭证 |
+
+每组凭证先尝试 login 获取 token，再调用 relations/info API。如果某组凭证返回空结果或请求失败，自动降级到下一组。三组都失败则抛出异常。
+
+⚠️ **安全警告**: 用户名和密码硬编码在 `@Value` 注解中，应迁移到 Nacos 配置中心并加密。
+
+### 14.3 BaseDO 替代 AbstractTenantDO (代码明确证明)
+
+**来源**: `vpp-data-platform/.../TsKvDO.java` (commit 575ba78, 宋欣儒, 2026-05-26)
+
+`TsKvDO` 继承基类从 `AbstractTenantDO` 改为 `BaseDO`，说明时序数据表 `ts_kv_cf` 不再需要租户隔离（物联网设备数据跨租户共享）。
+
+## 15. vpp-pv-oversea 新增功能 (2026-06-07 重扫补充)
+
+### 15.1 SAP 发票记账凭证功能 (代码明确证明)
+
+**来源**: `vpp-pv-oversea` (commit bff9678, mabin, 2026-05-29)
+
+新增 SAP 发票记账凭证功能支持，配合即采即销业务流程。涉及:
+- 发票记账凭证生成与提交
+- 与 SAP GVS/ESAP 接口对接
+
+### 15.2 即采即销单付款计划验证 (代码明确证明)
+
+**来源**: `vpp-pv-oversea` (commit 5970ad4, mabin, 2026-05-29)
+
+为即采即销单 (`DIRECT_PURCHASE_SALES_ORDER`) 新增付款计划验证功能:
+- 验证付款计划状态是否满足 SAP 记账条件
+- 付款计划确认状态 (`confirm_status`) 校验
+
+### 15.3 即采即销单据状态验证与重试优化 (代码明确证明)
+
+**来源**: `vpp-pv-oversea` (commit 67302a9, mabin, 2026-05-29)
+
+- 新增即采即销单据状态验证逻辑
+- 优化 SAP 相关操作的重试机制（移除不必要的重试限制条件，调整队列重试次数）
+
+### 15.4 SAP 销售订单计费作业优化 (代码明确证明)
+
+**来源**: `vpp-pv-oversea` (commit f0c45f3, mabin, 2026-05-09 + e3b6720, mabin, 2026-05-08)
+
+- 优化销售订单计费作业中的交货信息处理
+- 修复计费作业中的空指针异常
+- 调整队列重试配置 (commit 79b4215, 2026-05-08)
+
+### 15.5 电站信息添加并发安全修复 (代码明确证明)
+
+**来源**: `vpp-pv-oversea` (commit c64d2d5, mabin, 2026-04-24)
+
+修复电站信息 (`PvStationInfo`) 添加时的并发安全问题，同时新增设备类型支持。
+
+## 16. 知识库更新记录
 
 || 日期 | 更新内容 | 来源 |
 ||---|---|---|
+|| 2026-06-07 | 第23轮全量通读重扫: vpp-data-platform(时序数据设备名称筛选/三组凭证降级), vpp-pv-oversea(SAP发票记账/即采即销付款计划验证/SAP计费优化), vpp-crawler/openapi/template无新变更 | domains/vpp-overview.md §§14-15 |
 || 2026-06-04 | 全量通读5个仓库: uni-choose-file-android/ios, vpp-api-auth, watermark-camera-android/ios | vpp-api-auth 认证服务详细分析 + 移动端SDK更新 |
 || 2026-05-29 | VPP管理后台新增电力交易电价数据报表 | he-vpp.admin-h5, 张硕文, feat/electricity-price |
 || 2026-05-23 | 补漏第7期: GDE即采即销SAP集成 | vpp-pv-oversea, mabin, TAEI-2977 |

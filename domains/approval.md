@@ -581,6 +581,10 @@
 - **修复**: 修正了 3 个 Mapper 方法中的 reject_flag 逻辑（GfLightStationConfirmImg.xml + LightStationConfirmImg.xml）
 - **影响范围**: 电站确认图片和GF电站确认图片两张表的审核驳回标记
 - **风险**: 此 Bug 在 2026-06-03~04 期间存在，可能影响审核驳回功能的正确性。已在一周内修复。
+- **前端补充修复** (2026-06-03~04, `rrsjk-admin-web`): 
+  - `2c4f004` 添加审核驳回功能支持（FTL模板）
+  - `71ed662`/`43522e9` 修复审核驳回面板渲染（reset selection, align flag rendering）
+  - `84d4aee` 适配电站审核关联图片驳回
 - **证据等级**: 代码明确证明
 
 ### 审核图片驳回扩展 — 支持现场图片驳回 (TAEI-3057 扩展, 2026-05-25 代码明确证明)

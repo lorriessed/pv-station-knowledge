@@ -180,17 +180,22 @@ StationIncomeHandleStrategyFactory
   - 修复线下转账支付流程中的FAP记录创建逻辑 (`944d1684`)
 - **证据等级**: 代码明确证明
 
-### TAEI-3023 经营性租赁回款接FAP（开发中, 2026-06-04 确认风险）
-**来源**: `rrsjk-light-service` (代继宁, branch: origin/20260602-fapPart2, commit: fb0c4c5b48, 2026-06-02)
+### TAEI-3023 经营性租赁回款接FAP（开发中, 2026-06-05 修复风险）
+**来源**: `rrsjk-light-service` (代继宁, branch: origin/20260602-fapPart2, commit: fb0c4c5b48 → d5c920c634, 2026-06-02~05)
 - **负责人**: 刘艺(PM) | **实际开发**: 代继宁 | **参与人**: 薛荣基
-- **变更**: `LightFapRecordServiceImpl` 中注释掉经营性租赁资产FAP状态同步逻辑
-  - `syncOperationalAssetFapSentStatus()` — 注释掉更新 FAP 发送状态
-  - `syncOperationalAssetFapResult()` — 注释掉 FAP 查询结果自动确认
-  - **Dubbo 配置新增**: `service.xml` 新增 `operationalAssetManagementService` 引用 → `com.rrsjk.report.service.OperationalAssetManagementService`
-- **⚠️ 2026-06-04 风险确认**: `grep -rn "operationalAssetManagementService" --include="*.java"` 返回空
-  - **结论**: 旧同步逻辑已停，新服务仅在 service.xml 声明但未 @Autowired 使用
-  - **影响**: 经营性租赁回款的FAP状态同步功能当前处于**不可用状态**
-  - **建议**: 确认是否有意暂停，或需要补充 @Autowired 注入 + 调用逻辑
+- **变更历史**:
+  - **2026-06-02**: 注释掉经营性租赁资产FAP状态同步逻辑 (`syncOperationalAssetFapSentStatus`/`syncOperationalAssetFapResult`)
+  - **2026-06-04 风险确认**: 旧逻辑已停、新服务 `operationalAssetManagementService` 仅在 service.xml 声明但未 @Autowired 使用
+  - **✅ 2026-06-05 修复** (commit d5c920c634): 解注释经营性租赁FAP同步逻辑 + 新增基金FAP同步
+    - `syncOperationalAssetFapSentStatus()` — **恢复启用**，直接调用 `operationalAssetManagementService.udpateByPaymentReceiptCode(param)`
+    - `syncOperationalAssetFapResult()` — **恢复启用**，改用 `Map<String,Object>` 参数调用 `operationalAssetManagementService.autoConfirmByPaymentReceiptCode(param)`
+    - **新增基金FAP**: 注入 `BtFundAssetRepaymentRecordService`，实现 `syncLightFundFapSentStatus()` + `syncLightFundFapResult()` 双向同步
+    - **新增经营性租赁场景**: `fb0c4c5b48` 添加经营性租赁 BizType 场景到 FAP 回调
+    - **新增商城订单制证时间**: `8b9b3fb94c`/`0adab14604` 商城订单增加制证时间字段
+    - **新增凭证回传**: `932014f687` 凭证获取后回传备件系统收款状态
+    - **零碳退商校验**: `40cd05611e` 添加退商校验结果DTO
+- **调用链**: FAP回调 → `LightFapRecordServiceImpl` → 根据 BizTypeEnum 分发到对应 Service (经营性租赁→`operationalAssetManagementService`, 基金→`btFundAssetRepaymentRecordService`, 商城→trade-service)
+- **⚠️ 注意**: `operationalAssetManagementService` 是 `@Lazy` 注入，需确认 `rrsjk-light-report-service` 中的 `OperationalAssetManagementService` 实现已就绪
 - **证据等级**: 代码明确证明
 
 ### TAEI-3117 运维商押金/备件押金上线集团FAP（开发中, 2026-06-05 新增FAP集成）
@@ -224,7 +229,45 @@ StationIncomeHandleStrategyFactory
 - **关键提交**: 4fabced(工单状态验证修复), 7876ae1(空指针修复), b8930b7(恢复申请状态检查), 789e3dd(恢复原因验证), c71e58c(恢复原因枚举), b58c338(电站状态字段)
 - **证据等级**: 代码明确证明
 
-### TAEI-3079 电费收益相关优化（测试中, 2026-06-01）
+### TAEI-3110 AI智能对账（待测试, 2026-06-05 大量开发）
+**来源**: `rrsjk-admin-web` (李龙 lilong, branch: origin/20260519-alone-electricAI, 2026-06-05, 10+ commits)
+- **负责人**: 徐晓凤 | **实际开发**: 李龙 | **参与人**: 陈国栋、薛荣基、商轶龙
+- **状态**: 待测试 (updateStatusAt 2026-06-07)
+- **核心变更**:
+  - admin-web 新增AI图片识别接口对接（PDF版账单识别）
+  - 实体类适配AI识别结果展示在列表
+  - 确认账单后自动入系统逻辑
+  - 弃用接口处理: `btFundAssetRepaymentRecordService.syncFapStatus` 标记为弃用
+  - 多次本地测试迭代（修改1~6），PDF识别接口适配
+- **关联**: 同时涉及 `rrsjk-light-service` (lilong 的 syncFapStatus 弃用处理)
+- **证据等级**: 代码明确证明
+
+### TAEI-3114 A段政策精确到区→模式改造（测试中, 2026-06-03）
+**来源**: `rrsjk-admin-web` (龙龙/王斌, branch: origin/20260601_longlong_A段政策按省份区分, 2026-06-01~03)
+- **负责人**: 杨越越(PM) | **实际开发**: 龙龙(王斌) | **参与人**: 薛荣基、商轶龙
+- **核心变更**:
+  - `LightInstantRewardPolicyController`: 导入模板"是否精确到区"→"模式"，添加Excel下拉数据验证（单商单省/单商单县）
+  - `LightInstantRewardPolicyMonthController`: 导出时将 `accurateToRegion` YES/NO 映射为 "单商单县"/"单商单省"
+  - `LightInstantRewardPolicyMonthExcel`: VO字段 `accurateToRegion` 从布尔值改为字符串模式描述
+  - **JS层面隐藏**: `ca17659`/`885529a`/`94c6a0d` 多处强制隐藏"并网规模奖励"（!important + JS hide()）
+  - **公共建筑政策**: `6915eb4` 添加提示文案 + 隐藏B段政策
+  - **790W模块**: `30957cd` 添加790W组件类型支持
+- **证据等级**: 代码明确证明
+
+### TAEI-3158 中核老租金接口复用及电站数据推送（已完成, 2026-06-02）
+**来源**: `rrsjk-light-service` (王斌 tn_wangb, 2026-05-27~06-02)
+- **负责人**: 刘艺(PM) | **实际开发**: 王斌 | **参与人**: 薛荣基
+- **变更**: 复用中核老租金接口，电站数据推送逻辑调整
+- **关联提交**: `rrsjk-finance-service` 退质保金申请驳回后不释放已选择的单据 (tn_wangb, 2026-06-01~02)
+- **证据等级**: 代码明确证明
+
+### TAEI-3167 原材料回购传SAP优化（已完成, 2026-06-02）
+**来源**: `rrsjk-light-service` (王斌 tn_wangb, 2026-06-02)
+- **负责人**: 杨越越(PM) | **实际开发**: 王斌 | **参与人**: 王斌
+- **变更**: 传SAP记出库/收入取主数据逻辑优化 — 不再判断物料状态，取该物料最后一条数据
+- **证据等级**: 代码明确证明
+
+### TAEI-3079 电费收益相关优化（已完成, 2026-06-01~06）
 **来源**: `rrsjk-light-service` (tn_wangb/王斌, commits: fcc3f015/0cb5e245ba/60cd5f1b1a, 2026-06-01)
 - **负责人**: 徐晓凤 | **实际开发**: 王金浩(laowang/tn_wangb) | **参与人**: 薛荣基、商轶龙
 - **变更**:
@@ -1360,3 +1403,63 @@ stationParam.put("spMemberId", spMemberId);
 - **新增 ServiceError 枚举**: `SYNC_TO_FAP("syncToFap", "同步FAP")` — 标记 FAP 同步服务的错误记录
 - **业务影响**: FAP 回调流程现在可以自动创建现金自订单记录，打通 FAP→财务对账链路
 - **关联**: `SelfPaymentCheck` 组件负责实际的现金自订单创建逻辑
+
+### TAEI-3023 FAP Part2 修复 — 基金+经营性租赁FAP回调接口启用（2026-06-05 已修复）
+**来源**: `rrsjk-light-service/LightFapRecordServiceImpl.java` (代继宁, commit d5c920c634, 2026-06-05) + `rrsjk-light-report-service` (代继宁) + `rrsjk-trade-service` (代继宁) + `rrsjk-admin-web` (代继宁)
+**证据等级**: 代码明确证明
+- **背景**: 2026-06-03 扫描发现 `syncOperationalAssetFapSentStatus()` 和 `syncOperationalAssetFapResult()` 被注释掉，新 Dubbo 服务仅声明未使用（FAP同步解耦反模式）
+- **修复内容** (d5c920c634, 2026-06-05):
+  - `syncOperationalAssetFapSentStatus()` — **恢复启用**，直接调用 `operationalAssetManagementService.udpateByPaymentReceiptCode(param)`
+  - `syncOperationalAssetFapResult()` — **恢复启用**，改用 `Map<String,Object>` 参数调用 `operationalAssetManagementService.autoConfirmByPaymentReceiptCode(param)`
+  - **新增基金FAP**: 注入 `BtFundAssetRepaymentRecordService` (`@Autowired @Lazy`)，实现 `syncLightFundFapSentStatus()` + `syncLightFundFapResult()` 双向同步
+  - `rrsjk-light-report-service`: 新增基金对接FAP状态更新接口、凭证更新接口 (commit 9dba429)
+  - `rrsjk-trade-service`: 商城订单增加记账状态/凭证/时间，解决记账时间转型错误 (commits by 代继宁, 2026-06-04/05)
+  - `rrsjk-finance-service`: 根据更新fap收款记账凭证 (commit 76ba7bc)
+- **完整FAP回调路由架构** (修复后):
+  - 经营性租赁 → `OperationalAssetManagementService` (rrsjk-light-report-service)
+  - 基金 → `BtFundAssetRepaymentRecordService` (rrsjk-light-report-service)
+  - 商城 → trade-service
+  - 运维保证金/备件保证金 → `LightOperationDepositService` (rrsjk-light-service)
+- **⚠️ 风险已消除**: 之前"旧逻辑注释+新服务未启用"的断档状态已修复，所有FAP业务类型回调链路完整
+- **扫描日期**: 2026-06-08
+
+### TAEI-3079 电费收益FAP优化 + 历史数据迁移（2026-06-01~05）
+**来源**: `rrsjk-light-service` (王斌 tn_wangb, 2026-06-01~05, 7 commits)
+**证据等级**: 代码明确证明
+- **核心变更**:
+  - 电费收益批量修改FAP取消状态 (`fcc3f01`)
+  - 电费收益发票红冲后修改状态增加FAP取消状态的更新 (`da8a9e3`)
+  - 工商业记账成本中心值写入 (`da8a9e3`)
+  - 工商业电站写入工商业项目编码 (`0cb5e24`)
+  - FAP历史数据迁移代码 (`7e206af`, `0d558cf`)
+  - 集团FAP相关优化 (`8453c0b`)
+  - 电费收益作废修改 (`e6de280`)
+- **业务意义**: 完善电费收益从FAP制证到取消/红冲的完整生命周期管理
+- **扫描日期**: 2026-06-08
+
+### 审核图片驳回 flag 值颠倒 Bug 修复（2026-06-04 已修复）
+**来源**: `rrsjk-light-service` (王希然 wangxiran, commit 4977ea54, 2026-06-04) + `rrsjk-admin-web` (wangxiran) + `rrsjk-merchant-h5` (张硕文)
+**证据等级**: 代码明确证明
+- **Bug 根因**: 图片审核拒绝标记 `reject_flag` 的 mark/clear 成对方法 flag 值完全颠倒
+  - `LightStationRelateFile.getRejectFlagStr()`: Boolean.TRUE 应返回"1"却返回了"0"
+  - `AcceptanceConfirmServiceImpl.isRejectedConfirmImg()`: 判断 `"1".equals()` 应为 `"0".equals()`
+  - `LightStationCompleteImgServiceImpl`: 无驳回记录时设置 rejectFlag="0" 应为 "1"
+- **修复**: 全面反转 flag 逻辑（Boolean/字符串/"1"/"0" 全部翻转）
+- **关联需求**: TAEI-3126 商户通查看图片支持旋转 + 电站照片驳回编辑
+- **前端配套**:
+  - `rrsjk-admin-web`: 审核驳回功能支持 (wangxiran, 6 commits 2026-06-01~04)
+  - `rrsjk-merchant-h5`: 单张驳回逻辑、图片组驳回接入 (张硕文, 10+ commits 2026-06-01~04)
+- **扫描日期**: 2026-06-08
+
+### 电站方案变更暂停状态修复（2026-06-02~05）
+**来源**: `rrsjk-light-service/LightStationPlanChangeServiceImpl.java` (解钦, 2026-06-02~05, 6 commits)
+**证据等级**: 代码明确证明
+- **Bug**: 完工前审核通过之后不更新电站暂停状态 (commit 20f0499, TAEI-3183)
+- **修复**: 审核通过后显式设置 `pauseStatus = PauseStatusEnum.NORMAL`
+- **完整状态流转**:
+  - 方案变更驳回时恢复电站暂停状态 (97a648b)
+  - 移除驳回和提交方案时的暂停状态拦截 (bb0ed4c)
+  - 上收入导入结算数据判断暂停状态 + 兼容电站回退重新上收入的跳过暂停校验 (985997b)
+  - 移除线下验收审核时的暂停状态拦截 (2c55163)
+- **关联需求**: TAEI-3183 电站变更未卡住审核导致完工后变更方案
+- **扫描日期**: 2026-06-08

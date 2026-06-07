@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-06 23:01:18
+更新时间: 2026-06-07 23:01:35
 
 ## 仓库列表
 
@@ -8,7 +8,7 @@
 - Inverter_recognition: /data/pvcode/Inverter_recognition (无变更)
 - base-service: /data/pvcode/base-service (无变更)
 - card_extraction: /data/pvcode/card_extraction (无变更)
-- cbs-web: /data/pvcode/cbs-web (变更)
+- cbs-web: /data/pvcode/cbs-web (无变更)
 - esp-mag-haier-android-main: /data/pvcode/esp-mag-haier-android-main (无变更)
 - esp-mag-haier-h5-portal: /data/pvcode/esp-mag-haier-h5-portal (无变更)
 - esp-mag-haier-ios-main: /data/pvcode/esp-mag-haier-ios-main (无变更)
@@ -57,9 +57,9 @@
 - rrs-dispenser-server: /data/pvcode/rrs-dispenser-server (无变更)
 - rrs-parent: /data/pvcode/rrs-parent (无变更)
 - rrsjk-activity-service: /data/pvcode/rrsjk-activity-service (无变更)
-- rrsjk-admin-auth-server: /data/pvcode/rrsjk-admin-auth-server (变更)
-- rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (变更)
-- rrsjk-admin-bff: /data/pvcode/rrsjk-admin-bff (变更)
+- rrsjk-admin-auth-server: /data/pvcode/rrsjk-admin-auth-server (无变更)
+- rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (无变更)
+- rrsjk-admin-bff: /data/pvcode/rrsjk-admin-bff (无变更)
 - rrsjk-admin-biff: /data/pvcode/rrsjk-admin-biff (无变更)
 - rrsjk-admin-web: /data/pvcode/rrsjk-admin-web (变更)
 - rrsjk-admin-web-next: /data/pvcode/rrsjk-admin-web-next (无变更)
@@ -69,16 +69,16 @@
 - rrsjk-cms-service: /data/pvcode/rrsjk-cms-service (无变更)
 - rrsjk-echannel-service: /data/pvcode/rrsjk-echannel-service (无变更)
 - rrsjk-energystorage-service: /data/pvcode/rrsjk-energystorage-service (无变更)
-- rrsjk-finance-service: /data/pvcode/rrsjk-finance-service (变更)
+- rrsjk-finance-service: /data/pvcode/rrsjk-finance-service (无变更)
 - rrsjk-flowable-service: /data/pvcode/rrsjk-flowable-service (无变更)
 - rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (无变更)
 - rrsjk-item-service: /data/pvcode/rrsjk-item-service (无变更)
 - rrsjk-light-common: /data/pvcode/rrsjk-light-common (无变更)
-- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (变更)
+- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (无变更)
 - rrsjk-light-iot-service: /data/pvcode/rrsjk-light-iot-service (无变更)
 - rrsjk-light-message-service: /data/pvcode/rrsjk-light-message-service (无变更)
 - rrsjk-light-openapi-service: /data/pvcode/rrsjk-light-openapi-service (无变更)
-- rrsjk-light-operation-service: /data/pvcode/rrsjk-light-operation-service (变更)
+- rrsjk-light-operation-service: /data/pvcode/rrsjk-light-operation-service (无变更)
 - rrsjk-light-report-service: /data/pvcode/rrsjk-light-report-service (变更)
 - rrsjk-light-service: /data/pvcode/rrsjk-light-service (变更)
 - rrsjk-member-service: /data/pvcode/rrsjk-member-service (无变更)
@@ -95,8 +95,8 @@
 - rrsjk-pay-web: /data/pvcode/rrsjk-pay-web (无变更)
 - rrsjk-pvbusiness-job-service: /data/pvcode/rrsjk-pvbusiness-job-service (无变更)
 - rrsjk-report-web: /data/pvcode/rrsjk-report-web (无变更)
-- rrsjk-system-service: /data/pvcode/rrsjk-system-service (变更)
-- rrsjk-trade-service: /data/pvcode/rrsjk-trade-service (变更)
+- rrsjk-system-service: /data/pvcode/rrsjk-system-service (无变更)
+- rrsjk-trade-service: /data/pvcode/rrsjk-trade-service (无变更)
 - system-service: /data/pvcode/system-service (无变更)
 - uni-choose-file-android: /data/pvcode/uni-choose-file-android (无变更)
 - uni-choose-file-ios: /data/pvcode/uni-choose-file-ios (无变更)

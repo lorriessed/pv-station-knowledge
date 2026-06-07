@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-06T22:05:26.927273",
+  "last_run_at": "2026-06-07T22:00:30.902752",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -195,11 +195,11 @@
     "vpp-api-meta": "2026-06-06T22:05:26.927273",
     "vpp-api-system": "2026-06-06T22:05:26.927273",
     "vpp-api-template": "2026-06-06T22:05:26.927273",
-    "vpp-crawler": "2026-05-15T15:33:29.175351",
-    "vpp-data-platform": "2026-05-15T15:33:29.175351",
-    "vpp-openapi": "2026-05-15T15:33:29.175351",
-    "vpp-pv-oversea": "2026-05-15T15:33:29.175351",
-    "vpp-template": "2026-05-15T15:33:29.175351",
+    "vpp-crawler": "2026-06-07T22:00:30.902752",
+    "vpp-data-platform": "2026-06-07T22:00:30.902752",
+    "vpp-openapi": "2026-06-07T22:00:30.902752",
+    "vpp-pv-oversea": "2026-06-07T22:00:30.902752",
+    "vpp-template": "2026-06-07T22:00:30.902752",
     "esp-mag-haier-android-main": "2026-05-15T22:00:14.498422",
     "esp-mag-haier-h5-portal": "2026-05-15T22:00:14.498422",
     "esp-mag-haier-ios-main": "2026-05-15T22:00:14.498422",
@@ -335,6 +335,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 23,
+  "sweep_round": 24,
   "last_sweep_at": "2026-06-06T22:05:26.927273"
 }
