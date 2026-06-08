@@ -235,3 +235,14 @@ rrsjk-light-service (Dubbo Service)
 - 前端模板同步修改回购确认收款按钮权限
 - 反映 FAP 自动化流程持续推进，从单一支付方式覆盖到更广泛的订单状态
 
+### FAP 作废状态枚举变更 (2026-06-05)
+**来源**: `rrsjk-light-service` → `LightProjectElectricOrderServiceImpl.java` (commit e6de280, tn_wangb/龙龙, 2026-06-05)
+**证据等级**: 代码明确证明
+**关联需求**: TAEI-3079 电费收益相关优化
+
+- **枚举值变更**:
+  - `FapStatusEnum.WAIT_SENT_OLD` → `FapStatusEnum.SENT_OLD` (旧集团FAP已发送)
+  - `FapStatusEnum.WAIT_SENT` → `FapStatusEnum.SENT` (新FAP已发送)
+- **影响**: 电费收益作废流程中，判断条件从 `WAIT_SENT_OLD`/`WAIT_SENT` 改为 `SENT_OLD`/`SENT`
+- **业务意义**: FAP 状态语义从"待发送"改为"已发送"，更准确反映实际状态
+

@@ -1,13 +1,13 @@
      1|# PVS 知识索引
      2|
-更新时间: 2026-06-07
+更新时间: 2026-06-08
 
 ## 概况
 
 | 指标 | 数值 |
 |---|---|
 | 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
-| 已通读 | 122/122 (第23轮) |
+| 已通读 | 122/122 (第24轮) |
 | 知识库文件 | 70+ 个 |
 | 知识库大小 | 6.8MB+ |
 | Domain 业务文件 | 45+ 个 |
@@ -15,12 +15,15 @@
 
 ## 仓库通读进度
 
-### 全部 122/122 个仓库已通读 (第23轮，2026-06-07)
-- 本轮通读 5 个: vpp-crawler, vpp-data-platform, vpp-openapi, vpp-pv-oversea, vpp-template
+### 全部 122/122 个仓库已通读 (第24轮，2026-06-08)
+- 本轮通读 5 个: esp-mag-haier-android-main, esp-mag-haier-h5-portal, esp-mag-haier-ios-main, nahuipv_business_flutter, nhpv_common_business
 - **重扫发现**: 
-  - **vpp-data-platform**: 时序数据新增 toNameList 设备名称筛选; TsKvServiceImpl 支持三组外部 API 凭证降级 (zhijia@haier/qdsg@shougang/zhjt2025@cnnc); TsKvDO 改为 BaseDO 不再需要租户隔离
-  - **vpp-pv-oversea**: SAP 发票记账凭证功能; 即采即销单付款计划验证; SAP 销售订单计费作业优化(空指针修复/重试调整); 电站信息并发安全修复
-  - **vpp-crawler/openapi/template**: 无新提交，知识库已完整覆盖
+  - **esp-mag-haier-android-main**: 海尔 Cordova H5 桥接 Android 应用，已于 2026-05-15 完整记录在 `mobile-app-architecture.md`。34个文件（AndroidManifest、Cordova插件配置、登录UI、网络层OkHttp+RxJava3），无新业务逻辑。
+  - **esp-mag-haier-h5-portal**: Vue 2 + Cordova H5 空壳，0 业务文件，已记录。
+  - **esp-mag-haier-ios-main**: iOS Cordova H5 桥接，2个 config.xml，与 Android 插件对称，已记录。
+  - **nahuipv_business_flutter**: 纳光宝 Flutter APP，已于 2026-05-15 完整记录。13个配置/build文件，无新Dart源码。
+  - **nhpv_common_business**: Flutter 通用业务组件库，已于 2026-05-15 完整记录。3个配置文件，无新业务逻辑。
+  - **结论**: 本轮 5 个仓库全部为移动端/框架仓库，无 PVS 后端业务逻辑新增。`mobile-app-architecture.md` 已完整覆盖。
 
 ## 目录
 
