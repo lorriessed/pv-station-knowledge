@@ -281,6 +281,11 @@
 - **报表服务**: `rrsjk-report-web` - `/reportapi/*`
 - **数据源**: `rrsjk-light-web` (light-service) 的 Dubbo 服务
 
+#### 2026-06-01 变更
+- **globalCapital 组件大规模删除**: `src/components/globalCapital/` 整个目录删除（约 2,500+ 行），包括 Complete/Core/Coverage/CutEmissions/SellData/Statistics/assetCoverage/assetSituation/electricityTrading 等 8+ 个全局资本组件。同时删除了大量全局样式文件（globalCapital.less、globalAssetCalc.less 等）。
+- **资方数据运算修复**: `src/components/capital/sellDataScroll.vue` 修复资方数据计算逻辑。
+- **推断**: globalCapital（全球资本/全球收入）模块可能被迁移到独立大屏或新架构中。
+
 ---
 
 ### 5. nahui-dicts-serve - 字典服务

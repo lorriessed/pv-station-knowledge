@@ -934,3 +934,13 @@ if (exist != null) {
 - **负责人**: 于淼 | **参与人**: 孙志男
 - **变更**: DWS/ADS 数据取数逻辑优化（majinhu 同时期提交），修复数据时间为空导致的图表处理异常
 - **证据等级**: 代码明确证明
+
+### TAEI-3183 电站变更审核通过后暂停状态修复 (代码明确证明, 2026-06-05)
+**来源**: `rrsjk-light-service/LightStationPlanChangeServiceImpl.java` (解钦, commits: 20f0499d/bb947c75, 2026-06-05)
+**关联需求**: TAEI-3183 电站变更未卡住审核导致完工后变更方案，业务数据异常处理 | 负责人: 解钦 | 参与人: 解钦, 商轶龙
+- **核心变更**:
+  - 方案审核通过后，新增电站暂停状态更新为 `NORMAL`（`LightStation.PauseStatusEnum.NORMAL.value()`）
+  - 技术审核通过后，同步新增电站暂停状态更新为 `NORMAL`
+  - 涉及 `LightStationPlanChangeServiceImpl` 两处审核通过分支（line 2304, line 2392）
+- **业务意义**: 修复完工前变更审核通过后电站暂停状态未更新的问题，确保方案变更完成时电站状态恢复正常
+- **证据等级**: 代码明确证明

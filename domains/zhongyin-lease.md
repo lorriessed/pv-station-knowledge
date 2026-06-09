@@ -24,6 +24,24 @@ TAEI-3084: **【户用光伏】中银租后接口对接**
 | `/powerStationList` | POST | 电站日发电量查询（按电站维度） | 7 | ✅ 启用 |
 | `/queryDailyGenerationSummary` | POST | 电站总发电量查询（汇总） | 7 | ✅ 启用 |
 
+### 2.0 响应加密 (ReponseEncrypt)
+
+**来源**: `rrsjk-openapi-web` → `ReponseEncrypt.java`, `ZhongYinLeaseController.java` (2026-05-25 通读, 代码明确证明)
+
+中银租赁 API 的所有接口都标注了 `@ReponseEncrypt(clientId = "zhong_yin_lease")` 注解, 对响应数据进行加密后返回:
+
+```java
+@ReponseEncrypt(clientId = "zhong_yin_lease")
+@RequestLimiter(key = "powerStationQuery", qps = 7)
+@PostMapping("/powerStationList")
+public ZhongYinReturn<List<ZhongYinElecByStationDto>> stationDailyPowerQuery(...)
+```
+
+- **加密切面**: `ReponseEncryptAspect` (`com.rrsjk.openapi.aspect.ReponseEncryptAspect`)
+- **clientId**: `zhong_yin_lease` (用于标识加密密钥)
+- **招银租赁 API 未使用此加密**, 仅中银租赁启用
+- 相关提交: `feat(openapi): 添加响应数据加密功能` (mabin, 2026-05-25), `fix(security): 修复响应加密功能中的参数错误和逻辑缺陷` (mabin, 2026-06-02)
+
 ### 2.1 电站日发电量查询
 
 - **请求**: `powerStationRequest` — `powerNo`(电站编号, 逗号分隔), `date`(YYYYMMDD格式)

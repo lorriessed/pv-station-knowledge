@@ -236,6 +236,19 @@
 - 使用同一个 `kafkaTemplate3` 实例，发送到不同 topic
 - **证据等级**: 代码明确证明
 
+### Kafka 省份 Topic 路由机制 (代码明确证明, TAEI-3198/TAEI-3146, 2026-06-08)
+**来源**: `rrsjk-light-data-service` → `KafkaDoubleWriteProperties.java`, `application-prod.yml` (commits: dc429d6f/09422568/majinhu, 2026-06-08)
+- 发电数据按逆变器SN对应的省份code区分不同Kafka topic发送
+- `KafkaDoubleWriteProperties.enableProvinceTopic` — 开关（生产环境已设为 true）
+- `provinceTopicSuffix` — 省份 Topic 后缀，默认 `-vpp-electric`，生产环境改为 `-vpp-electric-prod`
+- `fallbackTopic` — 兜底 Topic（SN未配置省份编码时使用），生产环境为 `unknown-vpp-electric-prod`
+- 注释掉 `unknownRecords` 处理逻辑，改为不发送并记录日志
+- 新增 `DwsLightStationElecDayReportNewService` 服务
+- 新增 `AdsReportInveterChartMonthMap.findByStationCode()` 方法
+- **分支**: `origin/20260608-kafka`
+- **⚠️ 风险**: 下游消费者需按省份订阅新topic，如只订阅旧topic将收不到数据
+- **证据等级**: 代码明确证明
+
 ### 逆变器列表异步数据获取与缓存 (代码明确证明, 2026-05-26)
 **来源**: `rrsjk-admin-web` → `LightInveterController.java` (commit b644eafd/majinhu, 2026-05-26)
 - 逆变器详情页实现异步数据获取和缓存机制 (267行变更)
