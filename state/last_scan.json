@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-09T23:01:16.897016",
+  "last_scan_at": "2026-06-10T23:01:34.183359",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -112,12 +112,12 @@
       "branch": "master"
     },
     "nahui-pv.hds-h5": {
-      "head": "bf777a67e782c2dc444911c41d1068975e97b9f5",
+      "head": "28429888ea65fca5785010c93465f4e903d65661",
       "path": "/data/pvcode/nahui-pv.hds-h5",
       "branch": "master"
     },
     "nahui-pv.merchant-micro.osp": {
-      "head": "f12e6f029bbfdcdae5696f92f6cc47481ebd4022",
+      "head": "9943b67773094190e388b69b579fa47b7fcc99ba",
       "path": "/data/pvcode/nahui-pv.merchant-micro.osp",
       "branch": "master"
     },
@@ -247,7 +247,7 @@
       "branch": "master"
     },
     "repairs": {
-      "head": "86e28eb881fde0dd9fa337f7242a5dc578cd80df",
+      "head": "0454de1bb03d3734c72dea3aa39fb9bc38e42e90",
       "path": "/data/pvcode/repairs",
       "branch": "master"
     },
@@ -282,7 +282,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "d2d55549a29f4edfc5d538ab8e72e8368ef1d2a9",
+      "head": "de1448dac7b22660b4b54b971a92920a1d4ad72c",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -322,7 +322,7 @@
       "branch": "master"
     },
     "rrsjk-finance-service": {
-      "head": "7ac591aa0ebc2f75e1d2fa14ec209c73a8969f52",
+      "head": "84c660869e5e6581e926df9dbf3f35d5350db4cf",
       "path": "/data/pvcode/rrsjk-finance-service",
       "branch": "master"
     },
@@ -332,7 +332,7 @@
       "branch": "master"
     },
     "rrsjk-hds-web": {
-      "head": "6747261164ecfa5bee20b3f7eb58f20f86e86183",
+      "head": "c94ea135447184bab3b26e8da046132cd6eeea11",
       "path": "/data/pvcode/rrsjk-hds-web",
       "branch": "master"
     },
@@ -347,7 +347,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "ea66cd42532a29626b390d754cd3de288ff4d65d",
+      "head": "6de6029fc8ae3dc015a2c4b2e43784c544c893c9",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -372,12 +372,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "7094937b942fc9061dc6fa8f7d9cbcc597371072",
+      "head": "3dfbaae8b1e2f267cc82e76d9984f6150c3eae77",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "b3954201c2b062fc3aecdcac7d25984b4418d423",
+      "head": "003a086e9424f9728636ba60959ef065a0a16aca",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -457,7 +457,7 @@
       "branch": "master"
     },
     "rrsjk-trade-service": {
-      "head": "0cf414c8122053a2a6560d974c8b563bdecb7baf",
+      "head": "c785b81d7b0457cd3a15bf8feda1263fa912eec5",
       "path": "/data/pvcode/rrsjk-trade-service",
       "branch": "master"
     },

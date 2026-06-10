@@ -247,6 +247,7 @@
 - 新增 `AdsReportInveterChartMonthMap.findByStationCode()` 方法
 - **分支**: `origin/20260608-kafka`
 - **⚠️ 风险**: 下游消费者需按省份订阅新topic，如只订阅旧topic将收不到数据
+- **逻辑调整** (commit 7a2f3bda, 2026-06-09): 省份 Topic 双写从 `doubleWriteProperties.isEnabled()` 条件块内移出，改为独立判断 `enableProvinceTopic`，即使未开启双写也发送省份 Topic
 - **证据等级**: 代码明确证明
 
 ### 逆变器列表异步数据获取与缓存 (代码明确证明, 2026-05-26)
@@ -425,4 +426,17 @@
 - **三天发电优化**: `isContinueThreeDayElec` 定时任务优化，增加连续三天发电数据日志排查 (`030fa75d`, `8736e2c5`)
 - **业务语义**: 逆变器列表同时支持MySQL和DWS两种数据源，DWS用于大数据量场景
 - **⚠️ 双路径风险**: MySQL和DWS并存，需确认数据一致性和切换策略
+- **证据等级**: 代码明确证明
+
+### ⚠️ DWS报表回退 (代码明确证明, 2026-06-10)
+**来源**: `rrsjk-admin-web/LightInveterController.java`, `LightStationElecDwsController.java`, `spring-config/service.xml` (commit ac97c90c, majinhu, 2026-06-10)
+- **变更**: DWS逆变器列表和DWS电站发电报表被**整体回退** — 相关 `@Autowired` 服务注入被注释掉
+  - `DwsInveterDataService` → 注释
+  - `AdsReportInveterChartDayService/MonthService/YearService/TotalService` → 注释
+  - `AdsReportInveterPacChartDayService` → 注释
+  - `doListDws.do` 方法 → 整体注释
+  - `LightStationElecDwsController` 整个 Controller → 1476行被注释/回退
+  - `service.xml` 中 24 行 DWS 相关 bean 定义变更
+- **影响**: 逆变器列表 DWS 查询入口 (`listDws.html` + `doListDws.do`) 虽然页面文件仍存在，但后端 Controller 方法已不可用
+- **原因推断**: DWS 数据源可能存在问题或业务决策回退到纯 MySQL 查询
 - **证据等级**: 代码明确证明

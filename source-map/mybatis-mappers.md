@@ -1784,51 +1784,6 @@
 - statements: `select:getById`, `select:findByParams`, `select:findPower`, `select:findInverter`
 - tables: `light_station_plan_config`
 
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartTotal.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartTotalDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_station_chart_total`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartTotal.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartTotalDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_inverter_chart_total`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartYear.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartYearDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_inverter_chart_year`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartYear.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartYearDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_station_chart_year`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartDay.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartDayDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_inverter_chart_day`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartMonth.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartMonthDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_station_chart_month`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterPacChartDay.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterPacChartDayDao`
-- statements: `select:findChart`
-- tables: `ads.green_energy_report_light_inverter_pac_chart_day`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartMonth.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportInveterChartMonthDao`
-- statements: `select:findChart`, `select:findChartPro`
-- tables: `ads.green_energy_report_light_inverter_chart_month`, `dws.green_energy_inverter_current`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartDay.xml
-- namespace: `com.rrsjk.light.data.dao.ads.AdsReportStationChartDayDao`
-- statements: `select:findChart`, `select:getMinFetchAt`
-- tables: `ads.green_energy_report_light_station_chart_day`
-
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightStationElecMonthReportNew.xml
 - namespace: `com.rrsjk.light.data.dao.local.LightStationElecMonthReportNewDao`
 - statements: `select:findBy`, `select:countOfSum`, `select:findBySum`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findByGroupByStationCode`, `update:updateByStationCode`
@@ -1901,7 +1856,7 @@
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/ReportInveterPacChartDay.xml
 - namespace: `com.rrsjk.light.data.dao.local.ReportInveterPacChartDayDao`
-- statements: `insert:create`, `insert:batchUpsert`, `update:update`, `select:getById`, `select:findByParams`, `select:findChart`, `select:findChartPro`, `select:getHourZero`, `select:listRange`, `select:getPacCountByStationCode`
+- statements: `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`, `select:findByParams`, `select:findChart`, `select:findChartPro`, `select:getHourZero`, `select:listRange`, `select:getPacCountByStationCode`
 - tables: `id`, `light_inveter_data`, `pac`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/ReportStationChartYear.xml
@@ -1936,7 +1891,7 @@
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/ReportStationChartMonth.xml
 - namespace: `com.rrsjk.light.data.dao.local.ReportStationChartMonthDao`
-- statements: `insert:create`, `update:update`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getElecMonth`, `select:findChart`, `select:getElecReport`, `select:getElecCount`, `select:queryInvertersElectric`, `select:queryPowerDaysInRange`, `select:queryMonthlyElecIn12Months`, `select:queryLastPowerDate`, `select:queryYearTotalElec`, `select:queryMonthTotalElecByYear`, `select:queryDayElecByYearMonth`, `select:queryCityDayAvgElec`, `select:queryStationAvgFullHourInRange`, `select:queryStationMonthAvgFullHourByYear`
+- statements: `insert:create`, `insert:batchCreateIfAbsent`, `update:update`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getElecMonth`, `select:findChart`, `select:getElecReport`, `select:getElecCount`, `select:queryInvertersElectric`, `select:queryPowerDaysInRange`, `select:queryMonthlyElecIn12Months`, `select:queryLastPowerDate`, `select:queryYearTotalElec`, `select:queryMonthTotalElecByYear`, `select:queryDayElecByYearMonth`, `select:queryCityDayAvgElec`, `select:queryStationAvgFullHourInRange`, `select:queryStationMonthAvgFullHourByYear`
 - tables: `id`, `report_problem_station`, `report_station_chart_month`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightInveterAlarm.xml
@@ -1996,7 +1951,7 @@
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightStationElec.xml
 - namespace: `com.rrsjk.light.data.dao.local.LightStationElecDao`
-- statements: `insert:create`, `insert:batchInsert`, `update:update`, `update:updateElectricity`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:findByOpIdNull`, `select:getElecSum`, `select:findNoFirstThreePowerAt`, `select:findCount2StationCode`, `select:countOfForCBSExport`, `select:findByForCBSExport`, `select:countOfForHdsExport`, `select:findByForHdsExport`, `select:countOfForHdsExportInCmb`, `select:findByForHdsExportInCmb`, `update:makeZero`, `select:countOfForHdsExportNew`, `select:findByForHdsExportNew`, `select:findByZHStationCode`, `select:findByForHdsExportNewNew`, `select:getGroupByStationCode`, `delete:deleteInvalidData`
+- statements: `insert:create`, `insert:batchInsert`, `update:update`, `update:updateElectricity`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:findByOpIdNull`, `select:getElecSum`, `select:findNoFirstThreePowerAt`, `select:findCount2StationCode`, `select:countOfForCBSExport`, `select:findByForCBSExport`, `select:countOfForHdsExport`, `select:findByForHdsExport`, `select:countOfForHdsExportInCmb`, `select:findByForHdsExportInCmb`, `update:makeZero`, `select:countOfForHdsExportNew`, `select:findByForHdsExportNew`, `select:getGroupByStationCode`, `delete:deleteInvalidData`
 - tables: `cmb_leasing_station`, `id`, `light_inveter`, `light_inveter_data`, `light_station`, `light_station_elec`, `light_station_elec_day_report_new`, `light_station_plan_config`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightInveterSmall.xml
@@ -2007,21 +1962,6 @@
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/local/LightFirstValidThreePowerLog.xml
 - namespace: `com.rrsjk.light.data.dao.local.LightFirstValidThreePowerLogDao`
 - statements: `insert:create`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsLightStationElecDayReportNew.xml
-- namespace: `com.rrsjk.light.data.dao.dws.DwsLightStationElecDayReportNewDao`
-- statements: `select:findChartPro`, `select:countOfSum`, `select:findBySum`, `select:findBy`, `select:countOfSum`, `select:findBySum`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findByGroupByStationCode`, `update:updateByStationCode`
-- tables: `dws.green_energy_light_station_daily_current`, `id`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsLightStationElec.xml
-- namespace: `com.rrsjk.light.data.dao.dws.DwsLightStationElecDao`
-- statements: `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getElecSum`
-- tables: `dws.green_energy_light_station_realtime_current`, `ods.green_energy_light_station`
-
-## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsInveterData.xml
-- namespace: `com.rrsjk.light.data.dao.dws.DwsInveterDataDao`
-- statements: `select:countByPage`, `select:findByPage`, `select:getBySn`, `select:findByParams`
-- tables: `dws.green_energy_inverter_current`, `light_station_white_list`, `ods.green_energy_light_station`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/ods/OdsLightStationElec.xml
 - namespace: `com.rrsjk.light.data.dao.ods.OdsLightStationElecDao`

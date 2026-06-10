@@ -1463,3 +1463,52 @@ stationParam.put("spMemberId", spMemberId);
   - 移除线下验收审核时的暂停状态拦截 (2c55163)
 - **关联需求**: TAEI-3183 电站变更未卡住审核导致完工后变更方案
 - **扫描日期**: 2026-06-08
+
+### FAP 回调路由架构扩展（2026-06-05~09，代继宁，TAEI-3023）
+**来源**: `rrsjk-light-service/LightFapRecordServiceImpl.java` (代继宁, commits d5c920c/b803392 等, 2026-06-05~09)
+**证据等级**: 代码明确证明
+- **FAP 回调中心**: `LightFapRecordServiceImpl` 作为 FAP 回调统一入口，根据 `LightFapRecord.BizTypeEnum` 分发到不同 Dubbo Service
+- **新增路由**:
+  - 基金 → `BtFundAssetRepaymentRecordService` (rrsjk-light-report-service) — `@Autowired @Lazy` 注入
+  - 经营性租赁 → `OperationalAssetManagementService` (rrsjk-light-report-service) — 解注释旧方法 + 修复参数传递（`autoConfirmByPaymentReceiptCode` 从 entity 改为 Map 参数）
+  - 运维保证金/备件保证金 → `LightOperationDepositService` (rrsjk-light-service)
+  - 商城 → trade-service
+  - 零碳保证金 → `LightOperationDepositService`
+- **FAP 撤销推送入口** (`doRevocation`, commit b803392, 2026-06-09):
+  - 接口: `LightFapRecordService.doRevocation(String orderNo, String userName)`
+  - 逻辑: WAIT_SENT/SENT 状态 → 本地标记 CANCEL + 调用 `fapApi.cancelToNewEnergyFap()` → 业务单变为手动确认
+  - 拦截: SUCCESS 状态不允许撤销
+  - 新增字段: `cancelBy`（取消操作人）
+- **FAP 状态枚举变更**:
+  - `WAIT_SENT_OLD` → `SENT_OLD`，`WAIT_SENT` → `SENT`（语义从"待发送"改为"已发送"）
+  - 新增 `CANCEL` 状态（撤销标记）
+- **基金 FAP 自动确认** (`syncLightFundFapResult`): 新增 `btFundAssetRepaymentRecordService.autoConfirmFromFapStatus(param)` 调用
+- **待确认**: `BtFundAssetRepaymentRecordService` 的 `udpateByFapStatusByRecordNo` 和 `autoConfirmFromFapStatus` 方法实现需在 light-report-service 中验证
+- **扫描日期**: 2026-06-10
+
+### 租金个税报表（代继宁，TAEI-3092，2026-06-04~09）
+**来源**: `rrsjk-light-service/RentTaxAmountServiceImpl.java` + `RentTaxAmountSummary.xml` (代继宁, 2026-06-04~09)
+**证据等级**: 代码明确证明
+- **查询过滤**: 新增 `totalTaxAmountNotZero` 参数，只查询 `total_tax_amount > 0` 的数据（避免空值显示）
+- **导出增强**: 租金个税明细、合计、导出增加单号字段
+- **新增查询参数**: `rentMonth` 支持按月查询
+- **批次号**: 个税合计增加批次号字段
+- **前端配套**: `rrsjk-admin-web` 新增 `rentMonth` 查询参数（代继宁, commit aa00bdcf）
+- **扫描日期**: 2026-06-10
+
+### 服务商/零碳/备件保证金 FAP 自动确认（代继宁，2026-06-09，分支 `20260609-fapDepositAutoConfirm`）
+**来源**: `rrsjk-light-service` (代继宁, commit f1c4396b, 2026-06-09)
+**证据等级**: 代码明确证明
+- 服务商保证金、零碳保证金、备件保证金更新 FAP 凭证后，调用手动确认接口自动更新确认收款状态
+- 闭环：FAP 记账成功 → 自动触发确认收款 → 无需人工操作
+- **扫描日期**: 2026-06-10
+
+### Admin 保证金/租金报表权限修复 (代码明确证明, 2026-06-10)
+**来源**: `rrsjk-admin-web` (代继宁, commits 4363e21f/4e55661c/f0578d0c, 2026-06-10)
+- **`LightDepositController.cancelFap`**: 权限标识从 `lightDeposit:write:confirmSap` 修正为 `lightDeposit:write:cancel`
+  - 影响: 保证金作废操作的权限控制，之前错误复用了 SAP 记收款权限
+- **`LightSparePartsDepositController`**: 权限标识修复（同上模式）
+- **`CorporateClientDepositController`**: 权限标识修复（同上模式）
+- **`RentTaxRecordController`**: 导出按钮权限标识错误修复
+  - `rentTaxAmountRecordList.ftl`、`rentTaxAmountSummaryList.ftl` 模板中导出按钮权限标识修正
+- **扫描日期**: 2026-06-10

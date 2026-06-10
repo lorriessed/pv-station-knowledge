@@ -600,15 +600,40 @@
 
 ---
 
-## 15. 近期变更记录 (2026-05)
+## 15. 近期变更记录 (2026-05~06)
 
 | 日期 | 变更 | 提交人 |
 |------|------|--------|
+| 2026-06-10 | 借件订单分页查询增加分中心查询条件 (`warehouseName`、`centerList` 移入 condition SQL fragment) | A0026566/徐勇 |
+| 2026-06-10 | 备件订单申请校验中保证金余额逻辑修复：替代件遍历完未找到时明确返回"预付款不足" | A0026566 |
 | 2026-05-21 | 发货查询使用强制索引提高效率 | A0026566 |
 | 2026-05-13 | 工单备件网单号字段类型修改 String | A0026566 |
 | 2026-05-12 | woPart.id 字段从 long 改为 String，解决 long 值转 String 丢失精度 | A0026566 |
 | 2026-05-07 | 订单入库添加 null 值检查 | A0026566 |
 | 2026-04-29 | 下发日日顺的组件订单不指定 SN 出库 | A0026566 |
+
+---
+
+## 16. 借件订单查询条件变更 (2026-06-10, 代码明确证明)
+
+**来源**: `repairs/repairs-impl/src/main/resources/mybatis/mapper/order/SpOrderBorrow.xml` (commits bf9d7626/0454de1b, A0026566/徐勇, 2026-06-10)
+
+### 分中心查询条件重构
+- **变更前**: `warehouseName` 和 `centerList` 查询条件写在 `findBy` select 语句中（`<include refid="condition"/>` 之后），导致 `getListInfo` 和 `countOfListInfo` 无法使用这两个过滤条件
+- **变更后**: 将 `warehouseName` 和 `centerList` 移入 `<sql id="condition">` 内部，三个查询（`findBy`、`getListInfo`、`countOfListInfo`）统一复用
+- **新增查询参数**:
+  - `warehouseName`: 仓库名称模糊查询 (`wh.warehouse_name like concat('%',#{warehouseName},'%')`)
+  - `centerList`: 分中心编码列表 IN 查询 (`borrow.center_code in (...)`)
+- **业务意义**: 支持按分中心过滤借件订单列表，满足分中心权限隔离需求
+
+### 备件订单保证金余额逻辑修复
+**来源**: `repairs/repairs-impl/src/main/java/com/pvs/ops/repairs/order/service/impl/WoPartServiceImpl.java` (commit 735cf345, A0026566, 2026-06-10)
+
+- **Bug**: 在 `outboundInformationJudgment2` 方法中，当中心仓/供应商的替代件遍历完仍未找到满足预付款的替代件时，代码会**穿透**到 `return headquartersWaitingForGoods(cdMaterial)`，错误地返回"待货信息"而非"预付款不足"
+- **修复**: 在两个 else 分支（中心仓/供应商）的替代件循环结束后，增加 `return ExecuteResult.newErrorResult("服务商备件预付款不足！")` 
+- **影响路径**:
+  1. 中心仓库存不足 → 查询替代件 → 替代件预付款也不足 → **现在正确返回预付款不足**
+  2. 供应商库存不足 → 查询替代件 → 替代件预付款也不足 → **现在正确返回预付款不足**
 
 ---
 
