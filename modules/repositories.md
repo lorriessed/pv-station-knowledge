@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-10 23:01:34
+更新时间: 2026-06-11 23:01:53
 
 ## 仓库列表
 
@@ -23,7 +23,7 @@
 - main_contract_whole_extraction: /data/pvcode/main_contract_whole_extraction (无变更)
 - nahui-dashboad-h5: /data/pvcode/nahui-dashboad-h5 (无变更)
 - nahui-dicts-serve: /data/pvcode/nahui-dicts-serve (变更)
-- nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (无变更)
+- nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (变更)
 - nahui-pv.epcb-mini: /data/pvcode/nahui-pv.epcb-mini (无变更)
 - nahui-pv.greenenergy-mini: /data/pvcode/nahui-pv.greenenergy-mini (无变更)
 - nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (变更)
@@ -43,7 +43,7 @@
 - nhpv_login_business: /data/pvcode/nhpv_login_business (无变更)
 - nhpv_usercenter: /data/pvcode/nhpv_usercenter (无变更)
 - nhpv_usercenter_business: /data/pvcode/nhpv_usercenter_business (无变更)
-- nhpv_watermark_camera: /data/pvcode/nhpv_watermark_camera (变更)
+- nhpv_watermark_camera: /data/pvcode/nhpv_watermark_camera (无变更)
 - order-service: /data/pvcode/order-service (无变更)
 - poc_extraction_without_pdf: /data/pvcode/poc_extraction_without_pdf (无变更)
 - purchase_electricity_contract: /data/pvcode/purchase_electricity_contract (无变更)
@@ -82,13 +82,13 @@
 - rrsjk-light-report-service: /data/pvcode/rrsjk-light-report-service (变更)
 - rrsjk-light-service: /data/pvcode/rrsjk-light-service (变更)
 - rrsjk-member-service: /data/pvcode/rrsjk-member-service (无变更)
-- rrsjk-merchant-h5: /data/pvcode/rrsjk-merchant-h5 (无变更)
+- rrsjk-merchant-h5: /data/pvcode/rrsjk-merchant-h5 (变更)
 - rrsjk-merchant-service: /data/pvcode/rrsjk-merchant-service (无变更)
 - rrsjk-merchant-web: /data/pvcode/rrsjk-merchant-web (变更)
 - rrsjk-migration-member: /data/pvcode/rrsjk-migration-member (无变更)
 - rrsjk-migration-mix: /data/pvcode/rrsjk-migration-mix (无变更)
 - rrsjk-mobile-h5: /data/pvcode/rrsjk-mobile-h5 (无变更)
-- rrsjk-mobile-web: /data/pvcode/rrsjk-mobile-web (无变更)
+- rrsjk-mobile-web: /data/pvcode/rrsjk-mobile-web (变更)
 - rrsjk-oauth2-web: /data/pvcode/rrsjk-oauth2-web (无变更)
 - rrsjk-openapi-web: /data/pvcode/rrsjk-openapi-web (无变更)
 - rrsjk-pay-service: /data/pvcode/rrsjk-pay-service (无变更)
@@ -111,8 +111,8 @@
 - vpp-api-elecbusiness: /data/pvcode/vpp-api-elecbusiness (无变更)
 - vpp-api-ems: /data/pvcode/vpp-api-ems (无变更)
 - vpp-api-gateway: /data/pvcode/vpp-api-gateway (无变更)
-- vpp-api-gect: /data/pvcode/vpp-api-gect (无变更)
-- vpp-api-gpower: /data/pvcode/vpp-api-gpower (无变更)
+- vpp-api-gect: /data/pvcode/vpp-api-gect (变更)
+- vpp-api-gpower: /data/pvcode/vpp-api-gpower (变更)
 - vpp-api-km: /data/pvcode/vpp-api-km (无变更)
 - vpp-api-meta: /data/pvcode/vpp-api-meta (无变更)
 - vpp-api-system: /data/pvcode/vpp-api-system (无变更)

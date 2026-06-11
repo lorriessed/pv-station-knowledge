@@ -944,3 +944,24 @@ if (exist != null) {
   - 涉及 `LightStationPlanChangeServiceImpl` 两处审核通过分支（line 2304, line 2392）
 - **业务意义**: 修复完工前变更审核通过后电站暂停状态未更新的问题，确保方案变更完成时电站状态恢复正常
 - **证据等级**: 代码明确证明
+
+### 电站转移分中心权限与派工单取消（德/姜传德, TAEI-3058, 2026-06-04~10）
+**来源**: `rrsjk-light-service` (德/jiangchuande@haier.com, commits: 14e25cea/b4cb1599/15ccb908/7474e39e, 2026-06-04~10)
+**证据等级**: 代码明确证明
+- **分中心权限**: `LightStationTransferOrder.xml` 新增 `sub_center_code IN (branchList)` 过滤条件
+- **完工状态校验**: 新增 `LightStation.stationCompleteAuditBefore()` 静态方法，返回10种允许转移的电站状态（INIT/WAIT_AUDIT/WAIT_THIRD_AUDIT/AUDIT_REJECT/WAIT_CONFIG/WAIT_ORDER/ROADWORKING/ROADWORK_CONFIRM/ROADWORK_REJECT）
+- **派工单取消**: 新增 `LightStationDao.deleteOrderTeam()` + 注入 `LightWorkOrderDao`/`LightWorkOrderOperateLogDao`，转单时取消原派工单
+- **服务商直接转出**: 支持服务商直接转出流程
+- **扫描日期**: 2026-06-11
+
+### 电站转单管理 CBS 后台页面 (2026-06-04~11)
+**来源**: `rrsjk-admin-web` (德/jcd, commits: 71878d1/1c52ce4/c77a95d, 2026-06-04~08)
+**证据等级**: 代码明确证明
+- **新增 Controller**: `LightStationTransferOrderController.java` → 路由 `/light/lightStationTransferOrder/`
+- **新增页面**: `lightStationTransferOrderList.ftl` (124行) — 电站转单管理列表页
+- **新增 Excel 导出**: `LightStationTransferOrderExcel.java` (40行)
+- **spring-config/service.xml**: 新增转单相关 service bean 注册
+- **前端配套**: `nahui-pv.mobile-h5` → `src/views/apv/transferOrder/index.jsx` (193行) + 路由注册
+- **Flutter 配套**: `nahuipv_greenergy_flutter` → `feature-station-transfer` 分支，日期选择器优化
+- **前端字典**: `nahui-dicts-serve/src/data/apv/station/transStationstatus.js` (41行，5个状态)
+- **扫描日期**: 2026-06-11

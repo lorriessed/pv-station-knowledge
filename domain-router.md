@@ -16,9 +16,22 @@
     16|- 知识库：`domains/approval.md`
     17|- 代码入口：`LightStationServiceImpl`、各资方 `StationHandleStrategy`
     18|- 常见表：`light_station_audit`、`light_station`、`light_service_provider`
-    19|- 生产验证：查审核记录倒序。
-    20|
-    ## 服务商与区域授权
+    |- 生产验证：查审核记录倒序。
+
+    ## 电站转单管理
+
+    - 关键词：电站转移、转单、转出、转入、分中心权限迁移、派工单取消。
+    - 知识库：`domains/station-lifecycle.md` §电站转移功能
+    - 代码入口：
+      - `rrsjk-light-service` → `LightStationTransferOrderServiceImpl`、`LightStationTransferOrder.xml`
+      - `rrsjk-admin-web` → `LightStationTransferOrderController` (`/light/lightStationTransferOrder/`，2026-06-04 新增)
+      - `nahui-pv.mobile-h5` → `src/views/apv/transferOrder/index.jsx` (H5 前端)
+      - `nahuipv_greenergy_flutter` → `feature-station-transfer` 分支
+    - 常见表：`light_station_transfer_order`、`light_station_person_info_auth`、`light_station_contract_record`
+    - 前端字典：`nahui-dicts-serve/src/data/apv/station/transStationstatus.js`
+    - 生产验证：按 `station_code` 查转单记录和状态流转。
+
+        21|## 服务商与区域授权
 
     - 关键词：服务商、授权区域、冻结、运营中、员工、token、分中心、省份授权。
     - 知识库：`domains/approval.md`、`data/tables.md`、`domains/cbs-management.md` §服务商省份授权

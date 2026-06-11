@@ -2854,6 +2854,7 @@
 - @PostMapping("/zxjlApproval")
 - @PostMapping("/zbApproval")
 - @GetMapping("/orderBorrow/export")
+- @PostMapping("/centerBorrowSapToSparePart")
 
 ## SpAdvanceClearController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/repairs/SpAdvanceClearController.java`
@@ -4823,6 +4824,19 @@
 - @PostMapping("/uploadCompleteInfo.do")
 - @PostMapping("/editUploadCompleteInfo.do")
 
+## LightStationTransferOrderController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightStationTransferOrderController.java`
+- @RequestMapping("/lightStationTransferOrder/")
+- @GetMapping("/list.do")
+- @PostMapping("/add.do")
+- @PostMapping("/confirmOut.do")
+- @PostMapping("/rejectOut.do")
+- @PostMapping("/confirmIn.do")
+- @PostMapping("/rejectIn.do")
+- @GetMapping("/export.do")
+- @GetMapping("/get.do")
+- @GetMapping("/getStationList.do")
+
 ## LightConfirmOrderController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightConfirmOrderController.java`
 - @RequestMapping("/light/order/confirm/")
@@ -5246,6 +5260,7 @@
 - @PostMapping("editRegion.do")
 - @GetMapping("getSubSp.do")
 - @GetMapping("findSubSpNoSecondClassStore.do")
+- @GetMapping("getSecondSubSp.do")
 
 ## LightEnablePolicyController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightEnablePolicyController.java`
@@ -15998,6 +16013,13 @@
 - @RequestMapping(value = "/confirmPaid.do", method = {RequestMethod.POST})
 - @RequestMapping(value = "cmReceiptIncomeView.html", method = {RequestMethod.GET})
 - @RequestMapping(value = "/confirmIncome.do", method = {RequestMethod.POST})
+
+## LightStationTransferOrderController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightStationTransferOrderController.java`
+- @RequestMapping("/lightStationTransferOrder")
+- @RequestMapping("list.html")
+- @RequestMapping("doList.do")
+- @RequestMapping("doExport.do")
 
 ## EnergyInventoryTurnoverControlController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/EnergyInventoryTurnoverControlController.java`

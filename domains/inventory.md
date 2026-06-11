@@ -118,6 +118,21 @@
 - **下单-配货-发货全链路**: `domains/order-dispatch-delivery.md` — 方案审核通过后的下单、配货、发货、仓库、库存、额度的完整业务流程（2026-05-24 新增）
 - 调拨类型/状态机/审核状态机仍保留在本文件
 
+### 备件借件订单自提与无组件SN原因 (2026-06-10)
+**来源**: `nahui-pv.merchant-micro.osp` (A0026566, commits: dfab290/cfb5b2a/3a2f266, 2026-06-10)
+**证据等级**: 前端配置证明
+- **组件订单详情**: 新增 `是否自提` 字段展示、`特殊原因` 字段展示
+- **组件订单保存**: 建站商和中心仓出库都可以录入无组件SN原因
+- **借件订单**: 新增保存取分中心逻辑调整
+- **涉及页面**: `src/views/ospSpare/orderManage/lendOrder/details.vue`、`addEditPop.vue`
+- **配套后端**: `repairs` 同步新增中心仓出库备件 SAP 记账重传接口（见 `domains/settlement.md`）
+
+### HDS 借件订单自提字段与报表下载 (2026-06-10)
+**来源**: `nahui-pv.hds-h5` (李培龙/A0026566, commits: d00f9f0/2dd10cd/6b36f5e, 2026-06-10)
+**证据等级**: 前端配置证明
+- **借件订单详情**: 增加 `是否自提` 字段展示 (`sparePartMonitor/lendOrderAudit/components/detailComponent.vue`)
+- **报表**: 新增户用业绩报表下载、优化报表展示与下载逻辑 (`reports/board.vue`)
+
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
 - repairs 代码扫描 2026-05-10，日日顺出库和备件网单号变更。

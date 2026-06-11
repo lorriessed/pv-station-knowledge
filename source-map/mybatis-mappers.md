@@ -3245,6 +3245,10 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findByPreOrderNo`
 - tables: `id`
 
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightAuditImageRejectRecord.xml
+- namespace: `com.rrsjk.light.dao.LightAuditImageRejectRecordDao`
+- statements: `insert:create`, `select:findByAuditId`, `delete:deleteByAuditId`, `delete:deleteByStationAuditType`, `select:findLatestGridCertByStation`, `select:findLatestFieldImageByStation`
+
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightOverduePolicyArea.xml
 - namespace: `com.rrsjk.light.dao.LightOverduePolicyAreaDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`
@@ -3788,6 +3792,11 @@
 - statements: `insert:create`, `update:update`, `select:get`, `select:countOf`, `select:findBy`, `select:getByDayNo`
 - tables: `id`
 
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationTransferOrder.xml
+- namespace: `com.rrsjk.light.dao.LightStationTransferOrderDao`
+- statements: `insert:create`, `insert:batchCreate`, `update:update`, `select:get`, `select:getForUpdate`, `select:findProcessingByStationCodes`, `select:findBy`, `select:countOf`
+- tables: `id`, `light_station_transfer_order`
+
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightWorkOrderDto.xml
 - namespace: `com.rrsjk.light.dao.LightWorkOrderDtoDao`
 - statements: `select:queryListBy`, `select:queryCountBy`
@@ -4114,7 +4123,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/lightModuleSn.xml
 - namespace: `com.rrsjk.light.dao.LightModuleSnDao`
-- statements: `select:findBy`, `select:findList`, `select:countOf`, `insert:create`, `update:update`, `update:updateBySn`, `update:disableModule`, `insert:batchInsert`, `select:getById`, `delete:batchDeleteByStationId`, `delete:batchDeleteByStationCode`, `delete:batchDeleteSpTypeByStationCode`, `delete:batchDeleteOpTypeByStationCode`, `delete:batchDeleteOutTypeByStationCode`
+- statements: `select:findBy`, `select:findList`, `select:countOf`, `insert:create`, `update:update`, `update:updateBySn`, `update:disableModule`, `insert:batchInsert`, `select:getById`, `delete:batchDeleteByStationId`, `delete:batchDeleteByStationCode`, `delete:batchDeleteSpTypeByStationCode`, `delete:batchDeleteOpTypeByStationCode`, `delete:batchDeleteOutTypeByStationCode`, `update:updateByStationCode`
 - tables: `id`, `light_station`, `light_sub_sp`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightCityRentPrice.xml
@@ -4339,7 +4348,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/GfLightStationConfirmImg.xml
 - namespace: `com.rrsjk.light.dao.GfLightStationConfirmImgDao`
-- statements: `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:findSimpleByParams`, `delete:delete`, `update:deleteByStationCode`, `update:updateStationIdToMinus`, `update:updateConfirmImgToNull`, `update:updateCompleteImgToNull`, `delete:deleteByTypeAndSortNum`, `delete:deleteByType`, `delete:deleteByTypeAndStationCode`, `select:getByImaNameAndType`, `select:getByImaNameAndTypeAndStationCode`, `select:getByImaNameAndStationCode`, `select:getByImgNameAndStationCodes`, `select:getListByImaNameAndType`, `select:getListByImaNameAndTypeAndStationCode`, `select:findByStationCodeAndTypeNoFilter`, `select:getGsyAppStationImg`, `select:findByStationIdAndTypeNoFilter`, `select:getByIds`, `select:getByStationCode`
+- statements: `insert:create`, `insert:batchInsert`, `update:update`, `update:markReject`, `update:clearRejectByAuditType`, `update:clearRejectById`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:findSimpleByParams`, `delete:delete`, `update:deleteByStationCode`, `update:updateStationIdToMinus`, `update:updateConfirmImgToNull`, `update:updateCompleteImgToNull`, `delete:deleteByTypeAndSortNum`, `delete:deleteByType`, `delete:deleteByTypeAndStationCode`, `select:getByImaNameAndType`, `select:getByImaNameAndTypeAndStationCode`, `select:getByImaNameAndStationCode`, `select:getByImgNameAndStationCodes`, `select:getListByImaNameAndType`, `select:getListByImaNameAndTypeAndStationCode`, `select:findByStationCodeAndTypeNoFilter`, `select:getGsyAppStationImg`, `select:findByStationIdAndTypeNoFilter`, `select:getByIds`, `select:getByStationCode`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/ChannelYuexiuLog.xml
@@ -4836,7 +4845,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationConfirmImg.xml
 - namespace: `com.rrsjk.light.dao.LightStationConfirmImgDao`
-- statements: `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:findSimpleByParams`, `update:delete`, `update:deleteByStationCode`, `update:updateStationIdToMinus`, `update:updateConfirmImgToNull`, `update:updateCompleteImgToNull`, `update:deleteByTypeAndSortNum`, `update:deleteByType`, `update:deleteByTypeAndStationCode`, `select:getByImaNameAndType`, `select:getByImaNameAndTypeAndStationCode`, `select:getByImaNameAndStationCode`, `select:getByImgNameAndStationCodes`, `select:getListByImaNameAndType`, `select:getListByImaNameAndTypeAndStationCode`, `select:findByStationCodeAndTypeNoFilter`, `select:getGsyAppStationImg`, `select:findByStationIdAndTypeNoFilter`, `select:getByIds`, `select:getByStationCode`
+- statements: `insert:create`, `insert:batchInsert`, `update:update`, `update:markReject`, `update:clearRejectByAuditType`, `update:clearRejectById`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:findSimpleByParams`, `update:delete`, `update:deleteByStationCode`, `update:updateStationIdToMinus`, `update:updateConfirmImgToNull`, `update:updateCompleteImgToNull`, `update:deleteByTypeAndSortNum`, `update:deleteByType`, `update:deleteByTypeAndStationCode`, `select:getByImaNameAndType`, `select:getByImaNameAndTypeAndStationCode`, `select:getByImaNameAndStationCode`, `select:getByImgNameAndStationCodes`, `select:getListByImaNameAndType`, `select:getListByImaNameAndTypeAndStationCode`, `select:findByStationCodeAndTypeNoFilter`, `select:getGsyAppStationImg`, `select:findByStationIdAndTypeNoFilter`, `select:getByIds`, `select:getByStationCode`
 - tables: `id`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSubSp.xml
@@ -5480,6 +5489,11 @@
 - namespace: `com.rrsjk.light.dao.LightCompanyInfoDao`
 - statements: `insert:create`, `update:update`, `select:getById`, `select:findByName`, `select:getByCompanyCodes`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getByName`, `select:getByCompanyCode`, `select:getEnableByCompanyCode`, `select:findByBusinessCode`, `select:findByBusinessCodeList`, `update:updateframe`, `update:finance`
 - tables: `id`
+
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationTransferOrderLog.xml
+- namespace: `com.rrsjk.light.dao.LightStationTransferOrderLogDao`
+- statements: `insert:create`, `insert:batchCreate`, `select:findByTransferOrderId`
+- tables: `light_station_transfer_order_log`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/RegionModifyAudit.xml
 - namespace: `com.rrsjk.light.dao.RegionModifyAuditDao`

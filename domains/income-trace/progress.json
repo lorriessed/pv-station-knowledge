@@ -1,12 +1,12 @@
 {
   "started_at": "2026-05-30",
-  "last_analyzed": "2026-06-07",
+  "last_analyzed": "2026-06-11",
   "traced": [
     {"chain_group": "农村户用", "month_income": 55935, "responsible_person": "类成伟", "priority": 1, "key": "rural-household", "analyzed_at": "2026-06-03", "doc": "rural-household.md"},
-    {"chain_group": "光伏逆变器", "month_income": 2674, "responsible_person": "熊伟", "priority": 1, "key": "pv-inverter", "analyzed_at": "2026-06-07", "doc": "pv-inverter.md"}
+    {"chain_group": "光伏逆变器", "month_income": 2674, "responsible_person": "熊伟", "priority": 1, "key": "pv-inverter", "analyzed_at": "2026-06-07", "doc": "pv-inverter.md"},
+    {"chain_group": "微慕户储", "month_income": 1795, "responsible_person": "王敏", "priority": 1, "key": "weimu-home-storage", "analyzed_at": "2026-06-11", "doc": "weimu-home-storage.md"}
   ],
   "pending": [
-    {"chain_group": "微慕户储", "month_income": 1795, "responsible_person": "王敏", "priority": 1, "key": "weimu-home-storage"},
     {"chain_group": "发电收入", "month_income": 1635, "responsible_person": "/", "priority": 2, "key": "power-generation-income"},
     {"chain_group": "运维服务", "month_income": 1102, "responsible_person": "方雪鹏", "priority": 2, "key": "ops-service"},
     {"chain_group": "工商业链群", "month_income": 1953, "responsible_person": "奚亚青", "priority": 2, "key": "cm-chain-group"},

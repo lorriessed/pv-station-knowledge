@@ -303,6 +303,7 @@
 - `apv/station/convergingStatusList.js` — 汇聚状态
 - `apv/station/convergingStationStatusList.js` — 汇聚电站状态
 - `apv/station/personInfoAuthStatusList.js` — 个人信息授权状态
+- `apv/station/transStationstatus.js` — 电站转单状态（WAIT_OUT_CONFIRM待确认转出 / WAIT_IN_CONFIRM待确认转入 / COMPLETED转单完成 / OUT_REJECTED拒绝转出 / IN_REJECTED拒绝转入）(2024-11-21 创建, 前端配置证明)
 
 ### 电站基础信息
 - `apv/station/beiAnType.js` — 备案类型
@@ -398,6 +399,15 @@
 - `osp/hds/importTaskOperation.js` — 导入任务操作（CONFIRMED确认暂估 / CONFIRM_INCOME确认实际 / BATCH_COVER批量覆盖 / ALL_STATION_DETAIL / A48_STATION_DETAIL / A51_STATION_DETAIL）
 - `osp/hds/importTaskStatus.js` — 导入任务状态（PROCESSING/COMPLETED/FAILED）
 - `osp/hds/houseType.js` — 房屋类型
+
+### 运维通用 (osp/general) — 停付管理字典 (2026-06-01~08 前端配置证明)
+> 以下字典对应后端 `RentSuspendApplication` 停付管理功能 (TAEI-3103)。后端枚举已在上方"租金停付管理枚举"章节记录，此处为前端展示层字典。
+- `osp/general/stopPayOwnerReason.js` — 业主申请停付原因（OWNER_CHANGE业主变更 / BLACK_ACCOUNT黑户 / OTHER其他原因）
+- `osp/general/stopPayOwnerR.js` — 业主申请恢复原因（TRANSFER_SUCCESSFUL换户成功 / OTHER其他原因）
+- `osp/general/stopPayReason.js` — 停付原因（空文件，可能已废弃）
+- `osp/general/stopPayRecoverReason.js` — 停付恢复原因（空文件，可能已废弃）
+- `osp/general/stopPayStatus.js` — 租金停付状态（对应后端 StatusEnum 9个状态）
+- `osp/general/stopPayType.js` — 租金停付类型（OWNER_APPLY业主申请 / DISPUTE_SUSPEND纠纷停付）
 
 ### 华融 (hr)
 - `hr/userInfoStatus.js` — 华融用户信息登记状态

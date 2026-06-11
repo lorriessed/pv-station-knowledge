@@ -1512,3 +1512,56 @@ stationParam.put("spMemberId", spMemberId);
 - **`RentTaxRecordController`**: 导出按钮权限标识错误修复
   - `rentTaxAmountRecordList.ftl`、`rentTaxAmountSummaryList.ftl` 模板中导出按钮权限标识修正
 - **扫描日期**: 2026-06-10
+
+### 基金/经营性租赁 FAP 回调路由（代继宁, TAEI-3023, 2026-06-05 修复完成）
+**来源**: `rrsjk-light-service/LightFapRecordServiceImpl.java` (代继宁, commit d5c920c634, 2026-06-05)
+**证据等级**: 代码明确证明
+- **背景**: 此前存在"解耦反模式"——旧同步方法被注释掉但新Service未注入。此commit修复该问题
+- **变更**:
+  - 解注释 `syncOperationalAssetFapSentStatus()` → 调用 `operationalAssetManagementService.udpateByPaymentReceiptCode()`
+  - 解注释 `syncOperationalAssetFapResult()` → 调用 `operationalAssetManagementService.autoConfirmByPaymentReceiptCode()`
+  - 新增 `@Autowired @Lazy BtFundAssetRepaymentRecordService` 注入
+  - 实现 `syncLightFundFapSentStatus()` → `btFundAssetRepaymentRecordService.udpateByFapStatusByRecordNo()`
+  - 实现 `syncLightFundFapResult()` → `btFundAssetRepaymentRecordService.autoConfirmFromFapStatus(param)`
+- **回调路由架构**: `LightFapRecordServiceImpl` 根据 `BizTypeEnum` 分发 → 经营性租赁→`OperationalAssetManagementService`(rrsjk-light-report-service)、基金→`BtFundAssetRepaymentRecordService`(rrsjk-light-report-service)、商城→trade-service、运维保证金→`LightOperationDepositService`(rrsjk-light-service)
+- **扫描日期**: 2026-06-11
+
+### 金蝶 SAP 收入状态检查注释（mabin, 2026-06-09）
+**来源**: `rrsjk-finance-service/JinDieSapClient.java` (mabin, commit ac5dd71e, 2026-06-09, branch origin/20260604-jindie)
+**证据等级**: 代码明确证明
+|- 注释掉 `incomeStatus == NO && auditAt != null → budat = "2026-05-31"` 判断逻辑
+- 保留业务模式联合主键设置功能
+- **风险预警**: 需确认是否为临时调试代码。若为正式变更，电费收益 SAP 记账的 budat 字段不再受控为固定日期
+
+### 中心仓出库备件 SAP 记账供应商编码变更 (2026-06-11)
+**来源**: `repairs/SpTranSnServiceImpl.java` (A0026566, commit 5d6c10b, 2026-06-11)
+**证据等级**: 代码明确证明
+- **变更**: `lendSapToSparePart()` 方法中 SAP SO 发货接口的 `XREF2`（业务伙伴参考码）字段
+  - 变更前: `gvsSoHeader.setXREF2(orderBorrow.getCenterCode())` — 传运维商V码
+  - 变更后: `gvsSoHeader.setXREF2(RRS_SUPPLIER_CODE)` — 固定传 `"V98666"`（日日顺供应商编码）
+  - 代码注释: `//20260611落实财务中心仓出库备件传日日顺供应商编码`
+- **影响范围**: 仅影响 `borrowWarehouse = "0"`（中心仓出库）的借件备件订单的 SAP 运维成本记账
+- **关联变更**: 同时新增 `centerBorrowSapToSparePart()` 重传接口（见下方）
+
+### 中心仓出库备件 SO 发货失败重传接口 (2026-06-11)
+**来源**: `repairs` + `rrsjk-hds-web` (A0026566, commits: 5d6c10b/16bbaae, 2026-06-11)
+**证据等级**: 代码明确证明
+- **repairs 端**:
+  - `SpOrderBorrowService.centerBorrowSapToSparePart(String orderNo)` — 入参校验：订单存在、`borrowWarehouse="0"`（中心仓）、`accountingStatus="0"`（记账失败）
+  - `SpTranSnService.centerBorrowSapToSparePart(SpOrderBorrow)` → 委托 `lendSapToSparePart()` 重新推送 SAP SO 发货
+- **rrsjk-hds-web 端**:
+  - `SpOrderBorrowController` 新增对应 Controller 接口，提供 HDS 前端调用入口
+- **业务场景**: 中心仓出库备件创建 SO 发货失败后（记账状态为失败），支持手工触发重传
+- **扫描日期**: 2026-06-11
+
+### 租金支付摘要带单号 (2026-06-11)
+**来源**: `rrsjk-finance-service/LightRentPaymentRecordServiceImpl.java` (tn_wangb, commit 6a82215, 2026-06-11)
+**证据等级**: 代码明确证明
+- `createLightRentPaymentRecord()` 中 `setSummary()` 从 `"光伏收益"` 改为 `"光伏收益-" + relationNo`
+- **业务意义**: 支付摘要带上业务关联单号，便于财务对账时快速定位具体电站/租金记录
+
+### 无纸化请款事务传播方式变更 (2026-06-11)
+**来源**: `rrsjk-finance-service/SapFinanceAndOrderServiceImpl.java` (tn_wangb, commit e83b755, 2026-06-11)
+**证据等级**: 代码明确证明
+- `createPurchaseApplySettle()` 和 `updatePurchaseApplySettle()` 两处事务传播从 `PROPAGATION_REQUIRED` 改为 `PROPAGATION_NESTED`
+- **业务意义**: 嵌套事务允许子事务独立回滚而不影响外层事务，优化无纸化请款业务的事务隔离

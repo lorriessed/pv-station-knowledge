@@ -440,3 +440,14 @@
 - **影响**: 逆变器列表 DWS 查询入口 (`listDws.html` + `doListDws.do`) 虽然页面文件仍存在，但后端 Controller 方法已不可用
 - **原因推断**: DWS 数据源可能存在问题或业务决策回退到纯 MySQL 查询
 - **证据等级**: 代码明确证明
+
+### AISWEI 历史数据优先级处理与 PAC Chart 内联同步（yumiao, TAEI-3198, 2026-06-10）
+**来源**: `rrsjk-light-data-service/LightInverterCommon.java` (yumiao, commits 6de6029f/7ae22b7c/3f9156a3/df82257e, 2026-06-10)
+**证据等级**: 代码明确证明
+- **AISWEI 优先级**: 新增 `prioritizeAisweiReportRecords()` 方法 — 在处理批次记录前优先排序 AISWEI 历史报表记录
+- **PAC Chart 内联同步**: AISWEI 历史数据的 `countInveterPacChartSync()` 从异步 subTaskFutures 改为 `runHistoryBatchSubTaskInline()` 内联同步执行
+  - 原逻辑：PAC chart 通过 `submitHistoryBatchSubTask()` 异步提交到 `historyBatchExecutor`
+  - 新逻辑：AISWEI 历史数据直接 inline 同步处理，非 AISWEI 数据仍走异步
+- **常量**: 新增 `AISWEI_HISTORY_JOB_LOG_KEY = "AISWEI_HISTORY_JOB"`
+- **业务意义**: 优化 AISWEI 逆变器数据入库顺序和 PAC 图表处理时序，确保历史报表数据优先处理且 PAC 图表同步完成
+- **扫描日期**: 2026-06-11
