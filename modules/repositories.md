@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-11 23:01:53
+更新时间: 2026-06-12 23:01:13
 
 ## 仓库列表
 
@@ -26,8 +26,8 @@
 - nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (变更)
 - nahui-pv.epcb-mini: /data/pvcode/nahui-pv.epcb-mini (无变更)
 - nahui-pv.greenenergy-mini: /data/pvcode/nahui-pv.greenenergy-mini (无变更)
-- nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (变更)
-- nahui-pv.merchant-micro.osp: /data/pvcode/nahui-pv.merchant-micro.osp (变更)
+- nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (无变更)
+- nahui-pv.merchant-micro.osp: /data/pvcode/nahui-pv.merchant-micro.osp (无变更)
 - nahui-pv.merchant-micro.zch: /data/pvcode/nahui-pv.merchant-micro.zch (无变更)
 - nahui-pv.merchant-monorepo-h5: /data/pvcode/nahui-pv.merchant-monorepo-h5 (无变更)
 - nahui-pv.mobile-h5: /data/pvcode/nahui-pv.mobile-h5 (变更)

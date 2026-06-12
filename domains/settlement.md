@@ -1565,3 +1565,109 @@ stationParam.put("spMemberId", spMemberId);
 **证据等级**: 代码明确证明
 - `createPurchaseApplySettle()` 和 `updatePurchaseApplySettle()` 两处事务传播从 `PROPAGATION_REQUIRED` 改为 `PROPAGATION_NESTED`
 - **业务意义**: 嵌套事务允许子事务独立回滚而不影响外层事务，优化无纸化请款业务的事务隔离
+
+---
+
+## TAEI-3092 经营性租赁租金个税报表 — FAP集成 + 保证金自动确认 (代码明确证明, 2026-06-09~11)
+**来源**: `rrsjk-light-service`, `rrsjk-admin-web` (代继宁, branch: featrue-20260525-rentTaxReport/TAEI-3092)
+- **负责人**: 徐晓凤 | **实际开发**: 代继宁 | **参与人**: 魏秋阳, 薛荣基
+- **分支**: `featrue-20260525-rentTaxReport/TAEI-3092`
+
+### 租金个税报表
+- 租金个税只查询大于0的数据（过滤无效记录）
+- 使用注解事务替代编程式事务（@Transactional）
+- 更新表清理语句优化
+
+### FAP保证金自动确认 (20260609-fapDepositAutoConfirm)
+- 服务商保证金、零碳保证金、备件保证金：更新凭证后调用手动确认接口更新确认收款状态
+- FAP增加撤销推送入口（fapSentRevocation 分支）
+- 电站回购确认收款FAP校验条件修改（存在Revert后又重新修改的情况）
+- 经营性租赁完善FAP状态格式化映射
+- 电力交易对接FAP
+
+### 已知问题
+- FAP校验条件反复修改（Revert→重改），可能说明校验逻辑存在设计缺陷
+- 建议确认最终版本并检查遗漏的校验场景
+- **证据等级**: 代码明确证明
+
+---
+
+## FAP回调路由架构更新 (2026-06-09)
+**来源**: `rrsjk-light-service` (代继宁)
+- `LightFapRecordServiceImpl` 作为FAP回调中心路由
+- 根据 `LightFapRecord.BizTypeEnum` 分发到不同 Dubbo Service:
+  - 经营性租赁 → `OperationalAssetManagementService` (rrsjk-light-report-service)
+  - 基金 → `BtFundAssetRepaymentRecordService` (rrsjk-light-report-service)
+  - 商城 → trade-service
+  - 运维保证金/备件保证金 → `LightOperationDepositService` (rrsjk-light-service)
+- 所有 Service 均为 `@Lazy` 注入
+- 新增撤销推送入口（fapSentRevocation）
+- **证据等级**: 代码明确证明
+
+---
+
+## FAP 撤销功能完整逻辑 (2026-06-12)
+**来源**: `rrsjk-light-service/LightFapRecordServiceImpl.java` (代继宁, commits b803392/d4ea220/68472b1, 2026-06-09~12) + `rrsjk-admin-web/LightProjectFapRecordOfReceiptsController.java` (2bee0f9/55c34e6, 2026-06-09~10)
+**证据等级**: 代码明确证明
+
+### 接口层 (rrsjk-admin-web)
+- **入口**: `POST /doRevocation.do`
+- **权限**: `@RequiresPermissions("receipts:operate:sentRevocation")`
+- **参数**: `@RequestBody List<String> orderNos` — 支持批量撤销
+- **返回**: `{successCount, failCount, successList, failList[{orderNo, error}]}`
+- **前端**: `lightProjectFapRecordOfReceiptsList.ftl` 新增撤销按钮和确认弹窗 (+93行)
+
+### 服务层 (rrsjk-light-service)
+- **接口**: `LightFapRecordService.doRevocation(String orderNo, String userName)`
+- **核心逻辑**:
+  1. 查 `lightFapRecordDao.getByOrderNo(orderNo)`，无记录返回"无此单号"
+  2. 状态=SUCCESS → 拒绝("FAP已记账，不允许撤销")
+  3. 状态=CANCEL → 拒绝("已经是取消状态")
+  4. 状态=SENT → 调用 `fapApi.cancelToNewEnergyFap(lightFapRecord)` 向新能源FAP系统发起作废
+     - 作废失败 → 更新 fapCancelDesc 为失败原因，返回错误
+  5. 更新 FAP 记录: status=CANCEL, fapCancelAt=now, fapCancelDesc="撤销FAP推送，业务单变为手动确认", cancelBy=userName
+  6. 调用 `updateBizOrderFapStatusToNull(lightFapRecord)` 清空业务订单的 fapStatus
+
+### 覆盖 11 种业务类型的 fapStatus 清空
+| BizType | 清空方法 | 目标表/实体 |
+|---|---|---|
+| MATERIAL_REPURCHASE | `updateMaterialRepurchaseFapStatusToNull` | LightSpOrder.fapStatus="" |
+| STATION_REPURCHASE | `updateStationRepurchaseFapStatusToNull` | LightStationRepurchase.fapStatus="" |
+| SERVICE_DEPOSIT | `updateServiceDepositFapStatusToNull` | LightDeposit.fapStatus="" |
+| SPARE_PARTS_DEPOSIT | `updateSparePartsDepositFapStatusToNull` | LightSparePartsDeposit.fapStatus="" |
+| INVERTER_SALE | `handleLightPurchaseSalesOrderFapStatusToNull` | LightPurchaseSalesOrder + ItemOrder |
+| MALL_ORDER | `updateMallOrderFapStatusToNull` | OrderItem.fapStatus="" |
+| ZERO_CARBON_DEPOSIT | `updateZeroCarbonDepositFapStatusToNull` | ZeroCarbonSpDeposit.fapStatus="" |
+| ZERO_CARBON_ORDER | `handleLightPurchaseSalesOrderFapStatusToNull` | LightPurchaseSalesOrder + ItemOrder |
+| VPP_ORDER | `updateVppOrderFapStatusToNull` | 空操作（VPP定时来查，不需主动更新） |
+| EPC_RECEIPT | `updateEpcReceiptFapStatusToNull` | CmLightProjectReceipt.fapStatus="" |
+| ELECTRIC_ORDER | `updateElectricOrderFapStatusToNull` | LightProjectElectricOrder.fapStatus="" |
+
+### 业务意义
+- FAP 已推送 (SENT) 但未记账 (非 SUCCESS) 的单据可被人工撤销
+- 撤销后向新能源 FAP 系统发起作废请求，并清空业务订单 fapStatus
+- 清空后业务订单回到"未推送FAP"状态，允许重新触发 FAP 推送
+- **注意**: 已记账 (SUCCESS) 的单据不可撤销，需走其他流程
+
+---
+
+## 电费收益导入改用项目公司名称查询公司编码 (2026-06-12)
+**来源**: `rrsjk-light-service/LightProjectElectricOrderServiceImpl.java` (laowang, commit b2fa7c3b, 2026-06-12)
+**证据等级**: 代码明确证明
+- 重构 126 行，将公司编码查询逻辑从原方式改为"用项目公司名称查询公司编码"
+- 修复了电费收益导入时公司编码匹配不准确的问题
+
+## 租金支付摘要字段带上单号 (2026-06-11)
+**来源**: `rrsjk-finance-service/YbzApi.java` + `LightRentPaymentRecordServiceImpl.java` (tn_wangb, commit 6a822152, 2026-06-11)
+**证据等级**: 代码明确证明
+- 租金支付摘要字段增加单号信息，便于财务对账
+
+## 零碳订单发货记账处理 (2026-06-11)
+**来源**: `rrsjk-trade-service/LightPurchaseSalesPurchaseOrderServiceImpl.java` (baoxin, commit 1618daf6, 2026-06-11)
+**证据等级**: 代码明确证明
+- 零碳适家订单发货时的 SAP 记账处理逻辑修复
+
+## VPP 发票项目名称和税收分类编码更新 (2026-06-12)
+**来源**: `vpp-api-gect/InvoiceItemAssembler.java` (龙龙, commit 999b7b8e, 2026-06-12)
+**证据等级**: 代码明确证明
+- 更新发票项目名称映射和税收分类编码

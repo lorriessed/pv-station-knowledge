@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-11T23:01:53.891202",
+  "last_scan_at": "2026-06-12T23:01:13.568308",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -92,12 +92,12 @@
       "branch": "master"
     },
     "nahui-dicts-serve": {
-      "head": "f1778aff9753d9aa1d2ba46338f5f1c439e6a11d",
+      "head": "38cf31bd7b201936d17dfa0412820575a20d4ed9",
       "path": "/data/pvcode/nahui-dicts-serve",
       "branch": "master"
     },
     "nahui-pv.construction-mini": {
-      "head": "fd674bf46f8312391003e5bc54969ddd6f0dd3c9",
+      "head": "95d0228eab0a5c26290386922142ed138c0e13d2",
       "path": "/data/pvcode/nahui-pv.construction-mini",
       "branch": "master"
     },
@@ -282,7 +282,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "8382ca09440cb7f68487245503f3d3f13b788a79",
+      "head": "8873bcc4718b3b5b6bee8d75596b1c9879edf759",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -347,7 +347,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "47f394c7b4eb9e8097d8f94c2d438323ecad4b16",
+      "head": "211dd2daf6d93e307b8285456f843592d768334b",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -377,7 +377,7 @@
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "18758440c715ec981f40c85ee253209846435bc8",
+      "head": "8bd5c2aa67d8eb667e4f5edc90dbaff0ddb08b89",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -397,7 +397,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "8a591bc6241faf41dcc0305a95b34a75e0e2544d",
+      "head": "73c19247267e1fa39bcf97987ae151071a5ac6d8",
       "path": "/data/pvcode/rrsjk-merchant-web",
       "branch": "master"
     },
@@ -532,7 +532,7 @@
       "branch": "master"
     },
     "vpp-api-gect": {
-      "head": "e193fcd7c1ef98ed8b0e7296d9b9003e58d5a64c",
+      "head": "999b7b8e472a98f867d5711f93918e6475dc7f4a",
       "path": "/data/pvcode/vpp-api-gect",
       "branch": "master"
     },

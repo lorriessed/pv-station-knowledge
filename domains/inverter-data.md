@@ -451,3 +451,62 @@
 - **常量**: 新增 `AISWEI_HISTORY_JOB_LOG_KEY = "AISWEI_HISTORY_JOB"`
 - **业务意义**: 优化 AISWEI 逆变器数据入库顺序和 PAC 图表处理时序，确保历史报表数据优先处理且 PAC 图表同步完成
 - **扫描日期**: 2026-06-11
+
+---
+
+### AISWEI 逆变器数据缓存大幅扩容与降级策略 (2026-06-12)
+**来源**: `rrsjk-light-data-service/ConsumerMessageService.java` (yumiao, commit ace26201, 2026-06-12)
+**证据等级**: 代码明确证明
+
+#### 缓存参数变更
+| 缓存 | 原容量 | 新容量 | 原TTL | 新TTL |
+|---|---|---|---|---|
+| monthEnergyCache | 15,000 | 250,000 | 5min | 4h |
+| yearEnergyCache | 15,000 | 250,000 | 5min | 4h |
+| inveterRecordCache | 8,000 | 250,000 | 2min | 5min |
+| ThreadLocal缓存 | 无上限 | 4,096 (AISWEI_THREAD_LOCAL_CACHE_MAX_SIZE) | - | - |
+
+#### 业务背景
+- 生产 AISWEI 当前约 **12.4 万个逆变器 SN**
+- 原缓存容量 (15K/8K) 远小于 SN 总量，高峰期频繁 cache miss 打爆 DB
+- 新容量按全量 SN + 跨月/跨年窗口预留，TTL 参考上能缓存策略
+
+#### 新增降级方法
+- `fillEnergyDataFastFallback(List<LightInveterRecord>)` — 快速降级填充发电数据
+  - 按 SN+日期 缓存最新记录 (`latestBySnAndDate` Map)
+  - 调用 `setEnergyDataFromLatest()` 从最新记录推算月/年发电量
+  - 异常时调用 `setEnergyDataFallbackOnly()` 纯降级
+- `setEnergyDataFromLatest(record, latest, fetchAt)`:
+  - eMonth = latest.eMonth - latest.eToday + record.eToday (同月)
+  - eYear = latest.eYear - latest.eToday + record.eToday (同年)
+  - 2022年及以前: eYear = eTotal
+- `setEnergyDataFallbackOnly(record)`:
+  - eMonth = eToday, eYear = eToday (或 eTotal if ≤2022)
+
+#### ThreadLocal 缓存安全
+- `putThreadLocalCache()` 方法增加 `AISWEI_THREAD_LOCAL_CACHE_MAX_SIZE` 上限检查
+- 防止 ThreadLocal 无限增长导致内存泄漏
+
+### Dubbo payload 增大至 16MB (2026-06-12)
+**来源**: `rrsjk-light-service/service.xml`, `rrsjk-light-data-service/service.xml`, `rrsjk-merchant-web/service.xml` (yumiao, 2026-06-12)
+**证据等级**: 配置明确证明
+
+**变更**: 为以下 Dubbo 引用添加 `<dubbo:parameter key="payload" value="16777216"/>`:
+- `lightStationService` (rrsjk-light-service + rrsjk-merchant-web)
+- `lightInveterDataService` (rrsjk-light-data-service + rrsjk-merchant-web)
+
+**原因**: 逆变器数据批量传输时超过默认 Dubbo payload (8MB)，导致序列化失败。增大到 16MB (16777216 bytes)。
+
+### 逆变器列表权限参数 Bug 修复 (2026-06-12)
+**来源**: `rrsjk-merchant-web/LightInveterController.java` (sunzn, commit 342d0a77, 2026-06-12)
+**证据等级**: 代码明确证明
+
+**Bug**: `lightStationService.findBySht(stationParams)` 使用了新创建的空 `stationParams` Map，而非已通过 `buildNewAuthoritiesCondition(params)` 填充了权限条件的 `params`。导致分中心权限过滤失效，服务商可看到不属于自己区域的电站。
+
+**修复**: 改为 `lightStationService.findBySht(params)`，确保权限条件正确传递。
+
+### 逆变器支持水印相机拍摄 (2026-06-11)
+**来源**: `nahui-pv.mobile-h5/src/views/apv/inverterMaintenance/index.jsx` + `inverterMaintenanceGf/index.jsx` (yanghui, commit b9dbb872, 2026-06-11)
+**证据等级**: 前端配置证明
+- 逆变器运维页面（户用 + 工商业版）新增水印相机拍摄功能
+- 配合 `nhpv_watermark_camera` SDK 使用

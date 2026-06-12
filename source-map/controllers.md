@@ -16998,6 +16998,7 @@
 - @PostMapping(value = {"/addVppFapRecord.do"})
 - @GetMapping(value = {"/queryVppFapRecord.do"})
 - @PostMapping(value = {"/cancelVppFapRecord.do"})
+- @RequestMapping(value = "/doRevocation.do", method = {RequestMethod.POST})
 
 ## LightComponentLibraryController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/LightComponentLibraryController.java`

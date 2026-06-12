@@ -487,3 +487,13 @@
 - **Status 新增**: `CANCEL("已作废")` — 保证金订单作废状态
 - **LightFapRecord.BizTypeEnum 新增**: `OPERATION_DEPOSIT("运维保证金", "TY010031", "收-保证金-其他应付款（先收后退）")`
 
+### 审核影像驳回标记语义变更 (TAEI-3127, 代码明确证明, 2026-06-08)
+**来源**: `rrsjk-light-service` → `LightStationRelateFile.java`, `AcceptanceConfirmServiceImpl.java`, `CompleteConfirmServiceImpl.java` (王希然, commit 930ffb2dae + 855dca0451)
+- **变更前**: 三态驳回 — `null=未初始化, "1"=驳回, "0"=未驳回`（基于白名单判定）
+- **变更后**: 二态驳回 — `null=未驳回, "0"=驳回`
+- **Boolean映射** (855dca0451修复):
+  - `Boolean.TRUE` → `"0"` (驳回) [原为"1"]
+  - `Boolean.FALSE` → `"1"` (未驳回) [原为"0"]
+- **影响范围**: 方案审核、完工审核、技术审核的所有影像驳回逻辑
+- **注意**: 历史数据中 `reject_flag="1"` 的记录需确认语义迁移
+

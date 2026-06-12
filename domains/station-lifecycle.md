@@ -965,3 +965,40 @@ if (exist != null) {
 - **Flutter 配套**: `nahuipv_greenergy_flutter` → `feature-station-transfer` 分支，日期选择器优化
 - **前端字典**: `nahui-dicts-serve/src/data/apv/station/transStationstatus.js` (41行，5个状态)
 - **扫描日期**: 2026-06-11
+
+---
+
+## TAEI-3127 完工/技术驳回「修改技术影像」暂存 — 三态→二态重构 (代码明确证明, 2026-06-04~11)
+**来源**: `rrsjk-light-service`, `rrsjk-merchant-web` (王希然/wangxiran, 杨辉, 姜廷, 顾祥娣)
+- **负责人**: 徐晓凤 | **实际开发**: 王希然, 杨辉, 姜廷, 顾祥娣
+- **参与人**: 姜廷, 魏秋阳, 杨辉, 王希然, 顾祥娣, 袁睿林
+
+### 核心重构：三态驳回 → 二态驳回
+**commit 930ffb2dae (王希然, 2026-06-08)**:
+- 移除审核影像的三态白名单逻辑，简化为：`null=未驳回, 0=驳回`
+- 删除 `AcceptanceConfirmServiceImpl.applyConfirmImgWhitelist` (31行)
+- 删除 `CompleteConfirmServiceImpl.applyConfirmImgWhitelist` (36行)
+- 重构 `LightStationServiceImpl` 中的三态处理逻辑 (-64行 → +15行)
+- 涉及 `initRelateFileRejectFlags`, `fillStationFieldImageRejectInfo`, `resolveStationFieldReject` 方法
+- 影响 `getYxStationById` confirmImg list 处理
+
+### ⚠️ Bug修复：reject_flag 值颠倒
+**commit 855dca0451 (王希然, 2026-06-04)**:
+- `LightStationRelateFile.resolveRejectFlag()`: Boolean.TRUE 从映射 "1" 改为映射 "0"
+- `AcceptanceConfirmServiceImpl.isRejectedConfirmImg()`: 从 `"1".equals()` 改为 `"0".equals()`
+- `CompleteConfirmServiceImpl`: 同样修正
+- `LightStationCompleteImgServiceImpl`: 同样修正
+- 涉及 5 个文件 20 行修改
+
+### 新增功能
+- 技术审核驳回重提图片同步 (`feat(confirm): 添加技术审核驳回重提图片同步功能`)
+- 施工图纸单张驳回 + 驳回原因回填 (`feat(audit): 施工图纸单张驳回支持`)
+- 非驳回图片允许编辑 (`fix: allow editing non-rejected confirm images`)
+- 越秀业务字段驳回信息填充 (`fix: include yuexiu business field rejects`)
+- 完工/验收驳回草稿缓存 (`fix: handle complete reject draft cache`)
+- 电站提交后清除审核驳回缓存
+
+### 风险预警
+- reject_flag 语义从三态(0/1/null)变为二态(null/0)，历史数据中的 "1" 值需确认是否正确迁移
+- 前端页面需要适配新的驳回标记语义
+- **证据等级**: 代码明确证明

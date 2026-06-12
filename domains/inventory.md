@@ -136,3 +136,21 @@
 ## 来源
 - Hermes MEMORY.md，2026-05-09 迁移。
 - repairs 代码扫描 2026-05-10，日日顺出库和备件网单号变更。
+
+---
+
+### 中心仓出库备件供应商编码改日日顺 + SO发货失败重传 (2026-06-11)
+**来源**: `repairs/SpOrderBorrowServiceImpl.java` + `SpTranSnServiceImpl.java` (A0026566, commit 5d6c10b7, 2026-06-11) + `rrsjk-hds-web/SpOrderBorrowController.java` (16bbaaef, 2026-06-11)
+**证据等级**: 代码明确证明
+
+**变更**:
+1. **供应商编码**: 中心仓出库备件创建 SO 发货时，供应商编码从原值改为传**日日顺编码**
+   - 涉及: `SpOrderBorrowService.java`, `SpTranSnService.java` 及其 Impl
+2. **SO发货失败重传接口**: 新增手工重传接口，用于 SO 发货失败后重新提交
+   - HDS 端入口: `SpOrderBorrowController` 新增重传 endpoint
+   - 业务场景: SAP 记账失败后运维人员可手动触发重传，无需开发介入
+
+### 逆变器变更控制器权限优化 (2026-06-11)
+**来源**: `rrsjk-hds-web/LightStationInverterChangeController.java` (sunzn/于淼, commits d0370d9/b7ecaab, 2026-06-11)
+**证据等级**: 代码明确证明
+- 优化用户权限处理逻辑，移除未使用代码

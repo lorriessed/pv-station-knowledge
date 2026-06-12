@@ -260,3 +260,41 @@
 - **业务语义**: 政策结算从逐条处理改为批处理模式，支持冲正和历史数据兼容
 - **关联需求**: TAEI-3089 (A端政策结算逻辑调整) + 方案变更政策回退兼容 (ed4cec51d5)
 - **证据等级**: 代码明确证明
+
+---
+
+## TAEI-3190 营销政策预测报表 — 新增预测报表体系 (代码明确证明, 2026-06-11)
+**来源**: `rrsjk-light-report-service`, `rrsjk-light-service`, `rrsjk-admin-web` (龙龙=王斌, 28 commits, 2026-06-10~11)
+- **负责人**: 薛荣基 | **实际开发**: 王斌(tn_wangb/龙龙)
+- **分支**: `origin/20260610_longlong_taei_3190_report_config`
+- **业务背景**: 新增营销政策预测报表，支持政策区域快照、低效区域标记、发电汇总报表、Excel导出
+- **架构设计**: ODS读 + local写模式，预测数据存储在local库（rrsjk_light_local）而非light主库
+
+### 一期：报表配置管理
+- 4个报表配置页面（FTL+JS+Controller）
+- `ReportConfigQueryDao` — 报表配置查询DAO（light库）
+- Excel DTO + 模板下载 + 省市区ID转换（RegionService）
+- Dubbo服务注册到 service.xml
+- 20个方法添加 @RequiresPermissions 权限控制
+
+### 二期：市/区发电汇总报表
+- Entity/Dao/Mapper/Service/Job 完整链路
+- 数据库映射移到local库
+- 补充低效区域标记逻辑（regionUnlimit 分支合并）
+- 修复代码审计问题：Entity风格、DAO风格、@Transactional、Date→LocalDate
+
+### 三期：营销政策预测报表核心
+- **新增实体**: `ReportPolicyForecast` — 政策预测报表实体（local库，127行）
+- **新增服务**: `ReportPolicyForecastService` + `ReportPolicyForecastServiceImpl`（353行）
+- **新增DAO**: `ReportPolicyForecastDao`（local库，31行）
+- **新增Mapper**: `ReportPolicyForecastMapper.xml`（104行SQL）
+- **新增定时任务**: `PolicyForecastJob` — 预测报表计算Job
+- **内部类**: `ProvinceCityInfo` — 省市区信息封装
+
+### 四期：导出与权限分离
+- Phase2导出功能
+- 预测报表Excel公式导出
+- 权限分离
+
+**数据流**: 政策数据从ODS层读取 → 写入local库 → PolicyForecastJob定时计算 → 前端报表展示/Excel导出
+- **证据等级**: 代码明确证明

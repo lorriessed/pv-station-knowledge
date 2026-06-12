@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-11T22:00:48.340594",
+  "last_run_at": "2026-06-12T22:00:07.649455",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -145,11 +145,11 @@
     "log_report_plugin": "2026-06-11T22:00:48.340594",
     "nahui-dashboad-h5": "2026-06-11T22:00:48.340594",
     "nahui-dicts-serve": "2026-06-11T22:00:48.340594",
-    "nahui-pv.construction-mini": "2026-05-18T22:00:35.460277",
-    "nahui-pv.epcb-mini": "2026-05-18T22:00:35.460277",
-    "nahui-pv.greenenergy-mini": "2026-05-18T22:00:35.460277",
-    "nahui-pv.hds-h5": "2026-05-18T22:00:35.460277",
-    "nahui-pv.merchant-micro.osp": "2026-05-18T22:00:35.460277",
+    "nahui-pv.construction-mini": "2026-06-12T22:00:07.649455",
+    "nahui-pv.epcb-mini": "2026-06-12T22:00:07.649455",
+    "nahui-pv.greenenergy-mini": "2026-06-12T22:00:07.649455",
+    "nahui-pv.hds-h5": "2026-06-12T22:00:07.649455",
+    "nahui-pv.merchant-micro.osp": "2026-06-12T22:00:07.649455",
     "nahui-pv.merchant-micro.zch": "2026-05-19T22:00:41.521524",
     "nahui-pv.merchant-monorepo-h5": "2026-05-19T22:00:41.521524",
     "nahui-pv.mobile-h5": "2026-05-19T22:00:41.521524",
@@ -350,6 +350,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 28,
+  "sweep_round": 29,
   "last_sweep_at": "2026-06-09T22:04:08.435667"
 }
