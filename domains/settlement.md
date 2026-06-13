@@ -172,6 +172,31 @@ StationIncomeHandleStrategyFactory
   - 修复 FAP 状态设置逻辑错误 (`414880c0`)
   - 修复 FAP 记录检查逻辑错误 (`a4dcb786`)
 - **FAP查询定时任务**: 更新FAP查询定时任务逻辑 (`d2505003/d7449276`)
+
+### FAP 集成加速 — VPP电力交易 + 保证金自动确认 + 撤销推送 (代码明确证明, 2026-06-09~12)
+**来源**: `rrsjk-light-service` → `LightFapRecordServiceImpl.java`, `LightDepositServiceImpl.java`, `LightSparePartsDepositServiceImpl.java`, `ZeroCarbonSpDepositServiceImpl.java` (commits f1c4396b/53e189a5/68472b17/b8033925, 代继宁, 2026-06-09~12)
+**关联需求**: FAP财务平台持续对接（TAEI-3117运维保证金、TAEI-3023经营性租赁、TAEI-3021零碳、TAEI-3022绿证、TAEI-3079电费收益之后继续扩展）
+
+- **VPP电力交易对接FAP** (commit 53e189a5, 分支 20260611-fapForVppElec):
+  - `LightFapRecord.BizTypeEnum` 新增 `VPP_ORDER("绿证", "TY010029", "收-其他应收款（130）")`
+  - ⚠️ **代码质量风险**: diff中出现两行完全相同的 `VPP_ORDER` 枚举定义（重复行），可能导致编译警告或运行时歧义
+  - 新增接口 `cancelFapOrderByOrderNoAndBizType(orderNo, bizType)` — 按业务单号+业务模式作废FAP订单，防止不同业务模块单号冲突
+  - 新增接口 `queryVppFapRecordByOrderNoAndBizType(orderNo, bizType)` — VPP FAP数据查询
+
+- **保证金自动确认** (commit f1c4396b, 分支 20260609-fapDepositAutoConfirm):
+  - 服务商保证金(`LightDepositServiceImpl`)、零碳保证金(`ZeroCarbonSpDepositServiceImpl`)、备件保证金(`LightSparePartsDepositServiceImpl`)
+  - 更新凭证后 → 调用手动确认接口 → 更新FAP确认收款状态
+  - `LightFapRecordServiceImpl` 新增55行逻辑处理保证金确认回调
+
+- **FAP撤销推送入口** (commit b8033925, 分支 20260609-fapSentRevocation):
+  - 新增FAP撤销推送入口，允许主动撤销已发送的FAP单据
+  - commit 68472b17 修改撤销接口逻辑（+3行）
+
+- **租金个税报表** (commits 5771c88f/987e7a25/7e376831, 分支 featrue-20260525-rentTaxReport/TAEI-3092):
+  - 个税合计增加批次号字段
+  - 租金个税只查询大于0的数据
+  - 跳过已确认公司并修复统计计数
+  - 使用注解事务替代编程式事务
 - **电费单据**: 更新电费单据作废摘要并添加凭证状态枚举 (`2ade7d1d`)
 - **Trade Service FAP集成**: 
   - 移除 `LightFapRecordService` 的 Dubbo 服务配置 (`c487affb`)

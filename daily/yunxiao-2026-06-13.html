@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云效代码学习日报 2026-06-13</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 24px; color: #38bdf8; margin-bottom: 8px; }
+h2 { font-size: 18px; color: #818cf8; margin: 24px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+h3 { font-size: 15px; color: #a78bfa; margin: 16px 0 8px; }
+.subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 12px 0; }
+.card { background: #1e293b; border-radius: 8px; padding: 16px; border: 1px solid #334155; }
+.card .num { font-size: 28px; font-weight: bold; color: #38bdf8; }
+.card .label { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; }
+th { background: #1e293b; color: #94a3b8; text-align: left; padding: 8px 10px; font-weight: 600; }
+td { padding: 8px 10px; border-bottom: 1px solid #1e293b; }
+tr:hover td { background: #1e293b44; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.tag-done { background: #065f46; color: #6ee7b7; }
+.tag-dev { background: #1e3a5f; color: #7dd3fc; }
+.tag-risk { background: #7f1d1d; color: #fca5a5; }
+.tag-new { background: #4c1d95; color: #c4b5fd; }
+.tag-info { background: #374151; color: #d1d5db; }
+.code { background: #0f172a; border: 1px solid #334155; border-radius: 4px; padding: 8px 12px; font-family: 'Fira Code', monospace; font-size: 12px; color: #a5f3fc; overflow-x: auto; margin: 4px 0; white-space: pre-wrap; }
+.section { background: #1e293b; border-radius: 8px; padding: 16px; margin: 12px 0; border: 1px solid #334155; }
+.risk-box { background: #451a1a; border: 1px solid #7f1d1d; border-radius: 8px; padding: 12px; margin: 8px 0; }
+.risk-box .title { color: #fca5a5; font-weight: 600; font-size: 13px; }
+.risk-box .desc { color: #fda4af; font-size: 12px; margin-top: 4px; }
+.person-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.person { background: #334155; padding: 3px 10px; border-radius: 12px; font-size: 12px; }
+.person .commits { color: #38bdf8; font-weight: 600; }
+.footer { text-align: center; color: #475569; font-size: 11px; margin-top: 32px; padding-top: 16px; border-top: 1px solid #1e293b; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📅 云效驱动代码学习日报 — 2026-06-13</h1>
+<p class="subtitle">扫描窗口: 2026-06-06 ~ 2026-06-13 | 组织: 光伏链群研发 (TAEI) | 自动生成 by Hermes Agent</p>
+
+<div class="grid">
+<div class="card"><div class="num">20</div><div class="label">云效需求（近期）</div></div>
+<div class="card"><div class="num">407</div><div class="label">Git 提交</div></div>
+<div class="card"><div class="num">14</div><div class="label">涉及开发人员</div></div>
+<div class="card"><div class="num">3</div><div class="label">知识库文件更新</div></div>
+</div>
+
+<h2>📊 开发人员提交统计</h2>
+<div class="person-list">
+<span class="person">王希然 <span class="commits">97</span></span>
+<span class="person">于淼(yumiao) <span class="commits">66</span></span>
+<span class="person">马金虎 <span class="commits">42</span></span>
+<span class="person">包鑫 <span class="commits">38</span></span>
+<span class="person">龙龙/商轶龙 <span class="commits">37</span></span>
+<span class="person">代继宁 <span class="commits">27</span></span>
+<span class="person">李培龙 <span class="commits">22</span></span>
+<span class="person">孙志男 <span class="commits">21</span></span>
+<span class="person">laowang/王金浩 <span class="commits">19</span></span>
+<span class="person">解钦 <span class="commits">14</span></span>
+<span class="person">德/姜传德 <span class="commits">10</span></span>
+<span class="person">张硕文 <span class="commits">8</span></span>
+<span class="person">马斌 <span class="commits">8</span></span>
+<span class="person">tn_wangb <span class="commits">3</span></span>
+</div>
+
+<h2>📋 需求 → 代码关联</h2>
+<table>
+<tr><th>需求号</th><th>标题</th><th>状态</th><th>负责人</th><th>参与人</th><th>代码关联</th></tr>
+<tr><td>TAEI-3207</td><td>HDS/电费管理：新增"电费报表(电站)"</td><td><span class="tag tag-dev">开发中</span></td><td>高媛</td><td>魏秋阳, 孙志男, 李培龙</td><td>sunzn 22 commits → rrsjk-light-operation-service, rrsjk-hds-web</td></tr>
+<tr><td>TAEI-3198</td><td>逆变器SN省份code区分topic发送发电数据到kafka</td><td><span class="tag tag-done">已完成</span></td><td>马金虎</td><td>马金虎</td><td>majinhu 8 commits → rrsjk-light-data-service (KafkaProducerService)</td></tr>
+<tr><td>TAEI-3201</td><td>【M站】报表</td><td><span class="tag tag-done">已完成</span></td><td>杨越越</td><td>包鑫</td><td>baoxin 38 commits → rrsjk-light-service (政策区域快照)</td></tr>
+<tr><td>TAEI-3190</td><td>营销政策预测报表</td><td><span class="tag tag-dev">开发中</span></td><td>—</td><td>龙龙</td><td>龙龙 37 commits → rrsjk-light-service (报表配置/RegionService)</td></tr>
+<tr><td>TAEI-3193</td><td>【零碳适家】优化施工页面，不同品牌组件/逆变器混用</td><td><span class="tag tag-dev">开发中</span></td><td>刘艺</td><td>姜传德, 魏秋阳, 薛荣基, 袁睿林</td><td>德 10 commits → rrsjk-light-service (零碳完工多组件)</td></tr>
+<tr><td>TAEI-3222</td><td>【建站】发电户号变更</td><td><span class="tag tag-dev">开发中</span></td><td>徐晓凤</td><td>王金浩, 商轶龙</td><td>—</td></tr>
+<tr><td>TAEI-3211</td><td>【零碳适家】企业客户入驻纳税人类型</td><td><span class="tag tag-dev">开发中</span></td><td>刘艺</td><td>魏秋阳, 包鑫</td><td>—</td></tr>
+<tr><td>TAEI-3208</td><td>浦银发电大屏发电数据转移到大数据平台</td><td><span class="tag tag-dev">开发中</span></td><td>于淼</td><td>马斌</td><td>majinhu/yumiao → ADS/DWS报表迁移</td></tr>
+<tr><td>TAEI-3206</td><td>light-service核心类加@Lazy注解</td><td><span class="tag tag-info">待处理</span></td><td>于淼</td><td>商轶龙</td><td>—</td></tr>
+<tr><td>TAEI-3191</td><td>【租金】公建租金付款流程搭建</td><td><span class="tag tag-info">待评审</span></td><td>徐晓凤</td><td>薛荣基, 马斌</td><td>tn_wangb 3 commits → rrsjk-finance-service</td></tr>
+</table>
+
+<h2>🔍 业务链分析</h2>
+
+<div class="section">
+<h3>1. FAP 财务平台集成持续加速 — 代继宁 (27 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-service, rrsjk-finance-service</p>
+<p><strong>核心分支</strong>: 20260609-fapDepositAutoConfirm, 20260609-fapSentRevocation, 20260611-fapForVppElec, featrue-20260525-rentTaxReport/TAEI-3092, 20260602-fapPart2</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">LightFapRecord.BizTypeEnum 新增:
+  VPP_ORDER("绿证", "TY010029", "收-其他应收款（130）")
+
+新增 Dubbo 接口:
+  cancelFapOrderByOrderNoAndBizType(orderNo, bizType) → 按业务单号+模式作废FAP
+  queryVppFapRecordByOrderNoAndBizType(orderNo, bizType) → VPP FAP查询
+
+保证金自动确认链路:
+  更新凭证 → LightDepositServiceImpl/LightSparePartsDepositServiceImpl/ZeroCarbonSpDepositServiceImpl
+  → LightFapRecordServiceImpl 手动确认接口 → 更新FAP确认收款状态</div>
+<p><strong>知识库更新</strong>: ✅ 已追加到 <code>domains/settlement.md</code> — FAP 集成加速章节</p>
+</div>
+
+<div class="section">
+<h3>2. ADS/DWS 报表迁移 + Kafka 省份分发 — 马金虎 (42 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-data-service, rrsjk-light-service, rrsjk-finance-service</p>
+<p><strong>核心分支</strong>: 20260608-kafka, 20260610-tuishang, master-20260610-dws</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">TAEI-3198 (已完成): Kafka省份Topic分发
+  KafkaProducerService → 根据逆变器SN省份code路由到不同topic
+  配置项: enable-province-topic
+  支持启动全量刷新 + 定时刷新省份映射
+
+ADS报表迁移 (持续):
+  light_station_elec → ads.green_energy_light_station_realtime_current
+  6张逆变器报表 → ads.green_energy_report_light_inverter_*
+  Doris语法适配: ANY_VALUE() 取分组内任意值
+
+退商负激励SAP异步化:
+  LightSpWithdrawalApplicationServiceImpl → 异步执行创建负激励传SAP
+  回退退商负激励逻辑 → createLightSpInspire直接调用生成SAP单据</div>
+<p><strong>知识库更新</strong>: ✅ 已追加到 <code>domains/inverter-data.md</code> — Kafka省份分发 + ADS迁移进展</p>
+</div>
+
+<div class="section">
+<h3>3. 审核图片驳回功能 — 王希然 (97 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-admin-web</p>
+<p><strong>核心分支</strong>: feature-wxr-20260521-audit</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">方案审核/商务审核/材料审核 → 图片审核驳回功能
+  - 单图驳回、批量驳回、拖拽交互
+  - 审核图片忽略功能
+  - 驳回框样式和位置修复
+  - 负荷报告链接地址修正
+  - 临时禁用图片驳回功能(调试)
+  - 发票检查页面注释代码清理</div>
+<p><strong>分析</strong>: 这是一个持续3周的大型前端功能开发，覆盖admin-web审核模块的多个场景。97次提交说明迭代频繁，交互细节多。</p>
+</div>
+
+<div class="section">
+<h3>4. 电站转移/转单功能迭代 — 德/商轶龙 (10 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-service</p>
+<p><strong>核心分支</strong>: station-transfer-sub-account-20260525, zero_carbon_multi_module_20260421</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">LightStationTransferOrderServiceImpl:
+  - 电站转单派工单转移逻辑修改 (+24行)
+  - 电站转单派工单取消
+  - 服务商直接转出
+  - 电站转移完工状态校验逻辑修改
+  - 修改转出商信息展示 + 新增日志和事务
+
+零碳完工:
+  - 多组件多逆变器支持 (TAEI-3193)</div>
+<p><strong>知识库更新</strong>: ✅ 已追加到 <code>domains/station-lifecycle.md</code> — 电站转移更新章节</p>
+</div>
+
+<div class="section">
+<h3>5. TAEI-3190 营销政策预测报表 — 龙龙 (37 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-service</p>
+<p><strong>核心分支</strong>: 20260610_longlong_taei_3190_report_config</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">一期补: 竞品/组件价格/组件切换导入加去重校验
+  LightReportConfigServiceImpl +58行 → 导入数据去重校验逻辑
+
+一期:
+  - 注册Dubbo服务到service.xml
+  - 删除Service层4个未使用的export空方法
+  - 新增省市区名称→ID转换 (RegionService)
+  - 完善导入校验和Service接口
+  - 报表配置服务代码格式重构</div>
+</div>
+
+<div class="section">
+<h3>6. 电站电费报表 — 孙志男 (21 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-operation-service, rrsjk-hds-web</p>
+<p><strong>核心分支</strong>: szn_station_elec_report_20260611</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">rrsjk-light-operation-service:
+  LightOperationTaskService → 新增 stationElecTasks 方法
+  LightOperationTaskServiceImpl → 电站电费报表定时任务
+    - 生成/更新公司备案电站电费报表
+    - 生成/更新户用备案电站电费报表
+
+rrsjk-hds-web:
+  添加电站电费报表功能 (前端页面)
+
+rrsjk-light-operation-service:
+  添加电站电费报表相关DTO类</div>
+</div>
+
+<div class="section">
+<h3>7. 爱士惟/中核发电数据修复 — 于淼 (66 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-data-service, rrsjk-light-service</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">rrsjk-light-data-service:
+  - 爱士惟发电数据修复 (15+ commits, 6/10~6/12)
+  - 中核发电数据修复 + 暂时注释掉中核
+  - 发电数据优化 (10+ commits)
+  - Dubbo payload增大 (increase inverter data dubbo payload)
+  - 爱士惟消费优化
+  - 堆内存大小调整
+
+rrsjk-light-service:
+  - 电站迁移合同创建人赋值问题
+  - 初审分中心
+  - 分中心切换问题
+  - dubbo xml文件合并</div>
+</div>
+
+<div class="section">
+<h3>8. 政策区域快照 — 包鑫 (38 commits)</h3>
+<p><strong>涉及仓库</strong>: rrsjk-light-service</p>
+<p><strong>核心分支</strong>: v2026-06-05-bx-policyRegion</p>
+<p><strong>变更内容</strong>:</p>
+<div class="code">LightCompanyManageRegionServiceImpl:
+  新增政策区域快照功能 (5 commits, 6/8~6/10)
+  — 支持政策关联区域快照，用于政策生效范围追溯</div>
+</div>
+
+<h2>⚠️ 风险预警</h2>
+
+<div class="risk-box">
+<div class="title">🔴 VPP_ORDER 枚举重复定义</div>
+<div class="desc">
+<strong>位置</strong>: rrsjk-light-service → LightFapRecord.java (commit 53e189a5, 代继宁)<br>
+<strong>问题</strong>: diff中出现两行完全相同的 <code>VPP_ORDER("绿证", "TY010029", "收-其他应收款（130）")</code> 枚举定义。<br>
+<strong>风险</strong>: Java枚举不允许重复名称，编译应报错。如果是 merge 残留，可能导致编译失败或运行时异常。<br>
+<strong>建议</strong>: 确认是否已修复，检查 master 分支当前状态。
+</div>
+</div>
+
+<div class="risk-box">
+<div class="title">🟡 FAP集成密度过高，回调路由复杂度上升</div>
+<div class="desc">
+<strong>观察</strong>: 本周新增 VPP_ORDER 后，LightFapRecord.BizTypeEnum 已覆盖 10+ 种业务类型（运维保证金、经营性租赁、基金、商城、零碳保证金、零碳订单、绿证/VPP、备件保证金、电费收益等）。<br>
+<strong>风险</strong>: LightFapRecordServiceImpl 作为 FAP 回调中心，switch/if-else 分支越来越多，每次新增业务类型都需要修改核心类。<br>
+<strong>建议</strong>: 考虑策略模式重构，将 FAP 回调路由从单一 Service 分散到各业务 Service 自注册。
+</div>
+</div>
+
+<div class="risk-box">
+<div class="title">🟡 爱士惟发电数据密集修复 (15+ commits/3天)</div>
+<div class="desc">
+<strong>观察</strong>: yumiao 在 6/10~6/12 连续提交 15+ 次修复爱士惟发电数据，说明该逆变器品牌的数据采集链路存在持续性问题。<br>
+<strong>风险</strong>: 频繁热修可能引入回归问题，且堆内存调整暗示可能存在内存压力。<br>
+<strong>建议</strong>: 排查爱士惟数据采集链路的根因（MQTT消费？数据格式？），而非逐条热修。
+</div>
+</div>
+
+<h2>📚 知识库更新记录</h2>
+<table>
+<tr><th>操作</th><th>文件</th><th>新增内容</th></tr>
+<tr><td><span class="tag tag-new">追加</span></td><td>domains/settlement.md</td><td>FAP 集成加速 — VPP电力交易 + 保证金自动确认 + 撤销推送 + 租金个税报表</td></tr>
+<tr><td><span class="tag tag-new">追加</span></td><td>domains/station-lifecycle.md</td><td>电站转移 2026-06-09~12 更新 — 派工单转移/取消、服务商直接转出、完工校验</td></tr>
+<tr><td><span class="tag tag-new">追加</span></td><td>domains/inverter-data.md</td><td>Kafka 省份 Topic 分发 (TAEI-3198) + ADS 报表迁移进展</td></tr>
+</table>
+
+<h2>📈 趋势观察</h2>
+<div class="section">
+<p><strong>FAP 集成趋势</strong>: 自 2026-04 以来，FAP 财务平台对接持续加速。本周新增 VPP 电力交易、保证金自动确认、撤销推送三大能力。FAP 已覆盖押金/保证金/订单/电费/绿证/运维/经营性租赁/基金/商城等 10+ 业务类型。回调路由复杂度显著上升。</p>
+<p><strong>ADS/DWS 迁移趋势</strong>: 马金虎持续推进报表从 MySQL/DWS 迁移到 ADS 层。本周完成 Kafka 省份 topic 分发（TAEI-3198），电站发电报表迁移到 ADS。DWS 双数据源并行模式仍在运行。</p>
+<p><strong>审核功能大版本</strong>: 王希然在 admin-web 持续3周开发图片审核驳回功能，97次提交覆盖方案审核/商务审核/材料审核多场景。这是 admin-web-next 的重要功能升级。</p>
+</div>
+
+<div class="footer">
+Hermes Agent · 云效驱动代码学习 · 2026-06-13 03:00 · 知识库: /root/agent-knowledge/pv-station/
+</div>
+</div>
+</body>
+</html>

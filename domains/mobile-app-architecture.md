@@ -398,7 +398,9 @@ storeFile=key.jks
   - 相机拍照: 逆变器铭牌图拍摄 + 验真逻辑（隐藏验真逻辑、水印验真优化）
   - 水印管理: 唯一码增加渠道标识、水印像素优化、方位节流效果
   - 图片处理: 原图保存信息、相册预览模式、二维码大小调整
+  - **图片驳回查看** (2026-06-12): `upimg_yx` 页面增强，支持单张图片单独查看驳回原因
 - **关键 API**: `miniprogram/wxapi/main.js`, `miniprogram/wxapi/request.js`, `miniprogram/utils/_data.js`
+- **关键页面**: `miniprogram/pages/engin/information/upimg_yx/` — 图片上传与驳回原因展示
 - **业务价值**: 中 — 施工环节影像采集，逆变器铭牌验真涉及数据真实性校验
 
 ### 2.5.2 绿能小程序 (nahui-pv.greenenergy-mini)
@@ -615,6 +617,18 @@ MySQL (rrsjk_light + rrsjk_light_report) + SAP
   - **数据库页面删除**: `src/views/apv/dataBase/index/index1.jsx` 删除（268行）。
   - **API 清理**: `src/api/apv.js` 删除 15 行 API 定义。
 - **业务价值**: **高** — 移动端核心H5入口，日常活跃开发
+
+#### Upload 公共组件架构演进 (2026-06-09 补充)
+**来源**: `nahui-pv.mobile-h5/src/components/common/Upload.jsx` (杨辉/yanghui, 代码明确证明)
+
+- **新增 `isNeedCamera` 属性** (Boolean, 默认 false):
+  - 控制是否调用水印相机（通过 Flutter inappwebview bridge 的 `openCamera` handler）
+  - **与 `scanQrCode` 解耦**: 旧版本用 `scanQrCode` 同时控制扫码验真和水印相机，新版本拆分为两个独立属性
+  - `scanQrCode`: 控制是否扫码验真（二维码识别）
+  - `isNeedCamera`: 控制是否调用水印相机拍摄
+- **"只拍摄不验真"逻辑**: 当 `isNeedCamera=true` 但 `scanQrCode=false` 时，调用水印相机拍摄但不进行二维码验真
+- **验真结果处理修复**: `data.result === '1'` 时硬编码为 `"1"` 传给 `onUploadChange`，失败时传 `"0"`（之前传 `data.result || "0"` 可能导致非标准值）
+- **使用场景**: 逆变器铭牌照片拍摄（`inverterMaintenance/index.jsx` + `inverterMaintenanceGf/index.jsx`）
 
 ### 3.5 OSP 运维服务小程序 (nahui-pv.osp-mini)
 

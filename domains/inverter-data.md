@@ -179,6 +179,25 @@
 - **问题修复**:
   - DWS SqlSessionFactory 开启 `mapUnderscoreToCamelCase` (下划线→驼峰映射)
   - DWS表无id字段: 移除实体和mapper中的id引用，`COUNT(id)` 改为 `COUNT(1)`
+
+### Kafka 省份 Topic 分发 — 发电数据按省份路由 (代码明确证明, 2026-06-08~10, TAEI-3198已完成)
+**来源**: `rrsjk-light-data-service` → `KafkaProducerService.java` (commits 7a2f3bda/dc429d6f/a9325a86/3e56dff2/225623264e, majinhu, 2026-06-08~10)
+**关联需求**: TAEI-3198 根据逆变器sn对应的省份code区分不同的topic发送发电数据到kafka (已完成)
+
+- **核心变更**: 发电数据发送到 Kafka 时，根据逆变器SN对应的省份code路由到不同的 topic
+- **配置项**: `enable-province-topic` — 控制是否启用省份 topic 分发
+- **省份写入位置**: 修改为 `kafkaTemplate3SendMessageWrapper`（从原来的位置迁移）
+- **全量刷新**: 支持启动时全量刷新省份映射 + 定时刷新
+- **测试/生产区分**: 通过配置参数区分测试环境和生产环境的 topic
+
+### ADS 报表迁移进展 — 电站发电报表 (代码明确证明, 2026-06-01~12, 持续中)
+**来源**: `rrsjk-light-data-service` (commits 32d66889/e5c4c431/18229da3/7ddcee25/96347257, majinhu, 2026-05-29~06-01)
+**关联需求**: ADS层报表迁移（持续迭代）
+
+- **电站发电报表迁移**: `light_station_elec` → `ads.green_energy_light_station_realtime_current`
+- **逆变器报表迁移**: 6张逆变器报表从 `report_*` 迁移到 `ads.green_energy_report_light_inverter_*`
+- **Doris语法适配**: `ANY_VALUE` 取分组内任意值（Doris不支持无聚合的 GROUP BY 字段）
+- **跨库查询**: 支持 ADS + MySQL 跨库查询场景
   - 修正 `DwsDataConverter` 引用已删除的 `getId()` 方法
 - **证据等级**: 代码明确证明
 
@@ -508,5 +527,7 @@
 ### 逆变器支持水印相机拍摄 (2026-06-11)
 **来源**: `nahui-pv.mobile-h5/src/views/apv/inverterMaintenance/index.jsx` + `inverterMaintenanceGf/index.jsx` (yanghui, commit b9dbb872, 2026-06-11)
 **证据等级**: 前端配置证明
-- 逆变器运维页面（户用 + 工商业版）新增水印相机拍摄功能
-- 配合 `nhpv_watermark_camera` SDK 使用
+- 逆变器运维页面（户用 + 工商业版）的逆变器铭牌照片 Upload 组件新增 `isNeedCamera` 属性
+- 配合 `nhpv_watermark_camera` SDK 使用，通过 Flutter inappwebview bridge 调用原生水印相机
+- **架构变更**: Upload 组件的 `isNeedCamera` 与 `scanQrCode` 解耦 — 前者控制水印相机拍摄，后者控制二维码验真。逆变器铭牌拍摄场景为 `isNeedCamera=true, scanQrCode=true`（既用水印相机又扫码验真）
+- **关联**: Upload 组件演进详见 `domains/mobile-app-architecture.md` § 3.4 Upload 公共组件架构演进

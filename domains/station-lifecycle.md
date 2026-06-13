@@ -834,6 +834,12 @@ if (exist != null) {
     └─ 拒绝转出(REJECT_OUT) → 拒绝转出(OUT_REJECTED)
   ```
 - **前置条件**: 电站状态必须在 stationCompleteBefore() 范围内（完工前的电站才能转移）
+- **2026-06-09~12 更新** (commits aa781069/15ccb908/7474e39e/14e25ceace, 德/商轶龙):
+  - 电站转单派工单转移逻辑修改 (`LightStationTransferOrderServiceImpl` +24行)
+  - 电站转单派工单取消功能
+  - 服务商直接转出功能
+  - 电站转移完工状态校验逻辑修改
+  - 修改转出商信息展示 + 新增日志和事务
 - **数据表**: `light_station_transfer_order`, `light_station_transfer_order_log`
 - **Dubbo 服务**: `LightStationTransferOrderService` (rrsjk-light-api)
   - `create(LightStationTransferOrderCreateDto)` — 创建转单
@@ -997,6 +1003,25 @@ if (exist != null) {
 - 越秀业务字段驳回信息填充 (`fix: include yuexiu business field rejects`)
 - 完工/验收驳回草稿缓存 (`fix: handle complete reject draft cache`)
 - 电站提交后清除审核驳回缓存
+
+### 前端实现细节 (2026-06-08~11 补充)
+**来源**: `nahui-pv.mobile-h5` (杨辉/yanghui, 代码明确证明)
+
+#### techRejectFlag 字段
+- **触发条件**: 当 `lightStation.status === 'TECH_CHECK_REJECT'` 时，前端设置 `techRejectFlag: 1`
+- **用途**: 标识当前电站处于技术审核驳回状态，用于前端UI控制和数据提交
+- **位置**: `completeAffirm/index.jsx` 和 `completeAffirmGf/index.jsx` 的 `getInfo` 方法
+
+#### cacheEnable 缓存策略变更
+- **旧逻辑**: `cacheEnable: edit ? 0 : 1` — 编辑模式不读缓存
+- **新逻辑**: `cacheEnable: orderId ? 0 : 1` + `if (edit) cacheEnable = 1` — 编辑模式强制读缓存
+- **业务含义**: 驳回后编辑时，始终从缓存（草稿）加载数据，确保用户之前暂存的内容不丢失
+- **影响页面**: 完工确认（户用 + 工商业版）、验收确认
+
+#### 存草稿按钮权限变更
+- **旧逻辑**: `{edit != '1' && <Button>存草稿</Button>}` — 编辑模式下不显示存草稿按钮
+- **新逻辑**: `{<Button>存草稿</Button>}` — 始终显示；在 orderTeamId 模式下，编辑时也显示存草稿按钮
+- **业务含义**: 驳回后修改技术影像时，支持中途暂存，避免大量图片上传过程中数据丢失
 
 ### 风险预警
 - reject_flag 语义从三态(0/1/null)变为二态(null/0)，历史数据中的 "1" 值需确认是否正确迁移
