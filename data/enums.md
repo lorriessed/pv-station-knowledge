@@ -404,8 +404,8 @@
 > 以下字典对应后端 `RentSuspendApplication` 停付管理功能 (TAEI-3103)。后端枚举已在上方"租金停付管理枚举"章节记录，此处为前端展示层字典。
 - `osp/general/stopPayOwnerReason.js` — 业主申请停付原因（OWNER_CHANGE业主变更 / BLACK_ACCOUNT黑户 / OTHER其他原因）
 - `osp/general/stopPayOwnerR.js` — 业主申请恢复原因（TRANSFER_SUCCESSFUL换户成功 / OTHER其他原因）
-- `osp/general/stopPayReason.js` — 停付原因（空文件，可能已废弃）
-- `osp/general/stopPayRecoverReason.js` — 停付恢复原因（空文件，可能已废弃）
+- `osp/general/stopPayDisputeReason.js` — 纠纷停付原因（原 stopPayReason.js, 2026-06-01 R070 重命名）
+- `osp/general/stopPayDisputeR.js` — 纠纷恢复原因（原 stopPayRecoverReason.js, 2026-06-03 R062 重命名）
 - `osp/general/stopPayStatus.js` — 租金停付状态（对应后端 StatusEnum 9个状态）
 - `osp/general/stopPayType.js` — 租金停付类型（OWNER_APPLY业主申请 / DISPUTE_SUSPEND纠纷停付）
 

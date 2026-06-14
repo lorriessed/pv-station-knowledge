@@ -121,6 +121,7 @@ Codeup 子目录中的 light-data 脚本会按 `light.Application` 或 `light.da
 
 - **rrsjk-admin-web**: 2026-05-07 生产环境 (jk-prod profile) 最大堆内存从 2048M 提升到 **4096M** (commit 2771790, yumiao)
 - 开发环境 (jk-dev) 保持 512M 不变
+- **rrsjk-light-message-service**: 2026-06-14 JVM 堆内存从 **Xms=4G/Xmx=10G** 调整为 **Xms=6G/Xmx=6G** (固定堆内存, commit a4310b9)。优化 GC 行为，减少堆内存波动。
 
 ## 发版脚本共性
 

@@ -291,10 +291,17 @@
 - **新增定时任务**: `PolicyForecastJob` — 预测报表计算Job
 - **内部类**: `ProvinceCityInfo` — 省市区信息封装
 
-### 四期：导出与权限分离
+### 四期：导出与权限分离 + 组件/逆变器成本核算修正
 - Phase2导出功能
 - 预测报表Excel公式导出
 - 权限分离
+- **组件/逆变器成本核算逻辑修正** (commit d40275d9, 2026-06-12):
+  - 时间前置规则：预测5月报表 → 取4月数据（`dataMonth = forecastMonth - 1`）
+  - **场景A（有组件切换的省）**: 从 `light_report_component_switch` 取品牌型号均价
+  - **场景B（无组件切换的区域）**: 从 `light_report_component_price` × 装机量加权平均
+  - **逆变器成本**: (型号最新采购价 × 使用数量) / 总装机量，取上月数据
+  - 新增 `findComponentSwitchBy` DAO方法 + Mapper SQL
+  - `calcComponentAndInverterCost` 方法签名从 `(stations, houseType)` 改为 `(provinceId, cityId, regionId, dataMonth)`
 
 **数据流**: 政策数据从ODS层读取 → 写入local库 → PolicyForecastJob定时计算 → 前端报表展示/Excel导出
 - **证据等级**: 代码明确证明

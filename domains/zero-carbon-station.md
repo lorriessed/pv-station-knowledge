@@ -127,3 +127,15 @@
 - **证据等级**: 代码明确证明
 - **关联表**: `light_zero_carbon_purchase_order`, `light_zero_carbon_installation_fee`, `light_zero_material_manage`
 - **证据等级**: 代码明确证明
+## 零碳完工确认支持多组件多逆变器序列号 (代码明确证明, 2026-06-11)
+**来源**: `rrsjk-light-service` (德=姜传德, commit a8e7186, branch: origin/zero_carbon_multi_module_20260421)
+- **变更内容**: 零碳完工确认从"单一类型汇总数量校验"改为"按SKU逐个校验序列号"
+- **旧逻辑**: `moduleList`/`inverterList` 类型为 `List<LightZeroCarbonSkuRequest>`, 只校验总数量 == 方案配置总量
+- **新逻辑**:
+  - `moduleList`/`inverterList` 类型改为 `List<LightZeroCarbonCompleteSkuRequest>`（含 `skuCode` + `snList`）
+  - 遍历 `LightZeroCarbonStationPlanConfig`，按 SKU 匹配对应的序列号列表
+  - 每个 SKU 独立校验：序列号数量 == 该 SKU 方案配置数量
+  - 所有 SKU 的 SN 合并到 `moduleSnList`/`inverterSnList` 用于后续入库
+- **关键代码**: `ZeroCarbonCompleteConfirmServiceImpl.java` 第 534~635 行
+- **业务意义**: 支持零碳电站使用多种型号组件/逆变器混合完工，每种型号独立提交序列号
+- **证据等级**: 代码明确证明

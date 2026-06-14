@@ -215,12 +215,12 @@ storeFile=key.jks
 
 ⚠️ **安全警告**: 签名密码明文存储在仓库中，存在安全风险。
 
-### 2.6 海尔绿能 Flutter APP (nahuipv_greenergy_flutter) 2026-05-20 更新
+### 2.6 海尔绿能 Flutter APP (nahuipv_greenergy_flutter) 2026-06-14 更新
 
-**来源**: `nahuipv_greenergy_flutter` (代码明确证明, 2026-05-20 第7轮全量通读)
+**来源**: `nahuipv_greenergy_flutter` (代码明确证明, 2026-05-20 第7轮全量通读, 2026-06-14 第30轮重扫增量)
 
 - **应用名**: 海尔绿能
-- **版本**: 2.2.2+202****1901 (上次记录为 2.2.1+202****1401)
+- **版本**: 2.2.4+202****1101 (上次记录为 2.2.2+202****1901)
 - **技术栈**: Flutter + Riverpod (状态管理) + Dio (网络) + Retrofit (API) + Fluro (路由)
 - **SDK 版本**: Dart >=3.3.4 <4.0.0
 
@@ -257,6 +257,57 @@ storeFile=key.jks
 - **水印相机 SDK 更换**: 修复二维码白边和 logo 问题
 - **电站列表项优化**: `opt-station-list-item` 分支
 - **广发业务**: `feat_gf` 分支 (与 domains/guangfa-business.md 相关)
+
+#### 2.6.2a 版本演进与新增功能 (2026-05-20 ~ 2026-06-14 增量)
+
+**版本**: 2.2.2 → 2.2.4 (33 commits since last sweep)
+
+**🆕 电站转单功能 (feature-station-transfer)** — 2026-06-09 ~ 2026-06-11 合并
+
+**来源**: `nahuipv_greenergy_flutter/lib/pages/station_transfer/`, `lib/model/station_transfer_model.dart`, `lib/http/nh_api.dart` (代码明确证明, 2026-06-14 第30轮通读)
+
+电站转单是将电站管理权从一个分中心转移到另一个分中心的业务流程。
+
+**状态机** (`StationTransferStatus`):
+| 状态值 | 含义 | 说明 |
+|---|---|---|
+| `WAIT_OUT_CONFIRM` | 待确认转出 | 转出方需确认 |
+| `WAIT_IN_CONFIRM` | 待确认转入 | 转入方需确认 |
+| `OUT_REJECTED` | 拒绝转出 | 转出方拒绝 |
+| `IN_REJECTED` | 拒绝转入 | 转入方拒绝 |
+| `COMPLETED` | 转单完成 | 流程结束 |
+
+**后端 API** (通过 merchant-web 域名):
+| 接口 | 路径 | 方法 |
+|---|---|---|
+| 转单列表 | `/merchant/lightStationTransferOrder/list.do` | GET |
+| 确认转出 | `/merchant/lightStationTransferOrder/confirmOut.do` | POST |
+| 拒绝转出 | `/merchant/lightStationTransferOrder/rejectOut.do` | POST |
+| 确认转入 | `/merchant/lightStationTransferOrder/confirmIn.do` | POST |
+| 拒绝转入 | `/merchant/lightStationTransferOrder/rejectIn.do` | POST |
+
+**数据模型** (`StationTransferModel`):
+- 电站信息: stationId, stationCode, ownerName, phone, 省/市/区/街道/地址, 经纬度
+- 组件信息: componentModel, componentQuantity, installedPower (装机容量)
+- 服务商: spId, spMemberId, spName
+- 分中心: outSubSpMemberId/outSubSpName (转出方), inSubSpMemberId/inSubSpName (转入方)
+- 流程: status, outRejectReason, inRejectReason, remark, transferApplyAt
+
+**UI 页面**:
+- `station_transfer_page.dart` — 主页面
+- `station_transfer_list.dart` — 列表 (SmartRefresher 下拉刷新/上拉加载)
+- `station_transfer_list_item.dart` — 列表项
+- `station_transfer_search_page.dart` — 搜索页
+- `station_transfer_search_list.dart` — 搜索结果列表
+- `station_transfer_apply_dialog.dart` — 申请对话框 (支持多行理由输入, 可动态增减)
+
+**其他增量**:
+- 电站列表优化: 移除功能指引, 筛选全部tab刷新, 新增列表指引, 修改默认电站模式
+- 电站监控功能位置调整
+- 图片预览新增旋转/缩放
+- 相机 SDK 多次更换/回滚 (camera-sdk-release.aar)
+- 组件时间选择范围优化
+- 搜索历史标签适配
 
 #### 2.6.3 Git 依赖模块
 

@@ -1696,3 +1696,43 @@ stationParam.put("spMemberId", spMemberId);
 **来源**: `vpp-api-gect/InvoiceItemAssembler.java` (龙龙, commit 999b7b8e, 2026-06-12)
 **证据等级**: 代码明确证明
 - 更新发票项目名称映射和税收分类编码
+
+## 电站电费报表定时任务独立触发 (代码明确证明, 2026-06-12)
+**来源**: `rrsjk-light-operation-service` (sunzn=孙志男, commit 74f49910, branch: origin/szn_station_elec_report_20260611)
+- **新增接口**: `LightOperationTaskService.stationElecTasks()` — 电站电费报表定时任务独立触发
+- **实现逻辑**:
+  1. `generateOrUpdateCompanyStationElecReport()` — 生成/更新公司备案电站电费报表
+  2. `generateOrUpdateHouseholdStationElecReport()` — 生成/更新户用备案电站电费报表
+- **配套前端**: `rrsjk-hds-web` (sunzn, commit 8abc575) — 添加电站电费报表功能页面
+- **业务意义**: 电站电费报表从批量任务中独立出来，支持单独触发执行
+- **证据等级**: 代码明确证明
+
+## FAP 撤销空指针防护 (代码明确证明, 2026-06-12)
+**来源**: `rrsjk-light-service` (代继宁, commit 68472b17)
+- **变更**: `LightFapRecordServiceImpl.doRevocation()` 新增 null 检查
+- **旧逻辑**: 直接调用 `lightFapRecord.getStatus()` — 当 record 为 null 时 NPE
+- **新逻辑**: `if(lightFapRecord == null) return ExecuteResult.newErrorResult("无此单号")`
+- **证据等级**: 代码明确证明
+
+## 租金支付摘要字段带上单号 (代码明确证明, 2026-06-14)
+**来源**: `rrsjk-finance-service` (commit 6a822152, 2026-06-14)
+- commit message: "租金支付摘要字段带上单号"
+- **业务含义**: 租金支付相关的财务摘要增加单号字段，便于对账追溯
+- **证据等级**: 历史扫描推断（commit message，未读源码）
+
+## 运维收入暂估逻辑修复 (代码明确证明, 2026-06-14)
+**来源**: `rrsjk-light-report-service` (commit 394b1517, 2026-06-14)
+- commit message: "fix:修改暂估逻辑"
+- **业务含义**: 运维收入暂估计算逻辑修复（具体字段/逻辑待源码验证）
+- **证据等级**: 历史扫描推断（commit message）
+
+## SAP 客户端模型属性转换优化 (代码明确证明, 2026-06-14)
+**来源**: `order-service` (commit a08e535de, 2026-06-14)
+- commit message: "refactor(order): 优化SAP客户端模型中的属性转换调用"
+- **证据等级**: 历史扫描推断（commit message）
+
+## EAI 接口迁移 — 供应商接口 (代码明确证明, 2026-06-14)
+**来源**: `rrsjk-merchant-service` (commit c10af9f, 2026-06-14)
+- commit message: "EAI接口迁移 - 供应商接口"
+- **业务含义**: 供应商相关接口从旧 EAI 迁移到新架构
+- **证据等级**: 历史扫描推断（commit message）
