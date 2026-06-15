@@ -1736,3 +1736,49 @@ stationParam.put("spMemberId", spMemberId);
 - commit message: "EAI接口迁移 - 供应商接口"
 - **业务含义**: 供应商相关接口从旧 EAI 迁移到新架构
 - **证据等级**: 历史扫描推断（commit message）
+
+## AI对账单识别优化 — 日期容错 + 千分符解析 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-admin-web` → `AiReconciliationHandler.java` (commits: e9073d9f, ae156570, lilong/李龙, 2026-06-13, 分支 origin/20260519-alone-electricAI)
+**关联需求**: TAEI-3110 AI智能对账
+
+### 变更内容
+1. **日期解析容错**: 原来日期解析失败会直接抛异常导致整个对账单识别失败，现在用 try-catch 包裹，失败时抛出业务异常 `BusinessException("对账单日期识别失败")`，提供更友好的错误提示
+2. **千分符金额解析**: 新增 `parseThousandStrToBigDecimal(String numStr)` 静态方法
+   - 处理带千分逗号的金额字符串（如 "12,345.67"、"-1,000"、" 99,999 "）
+   - 逻辑: trim → 去除逗号 → BigDecimal 构造
+   - 空值返回 BigDecimal.ZERO
+
+### 业务含义
+AI 识别的对账单格式多样，日期和金额格式不统一。此优化增强了对各种格式的兼容性，减少因格式问题导致的识别失败。
+
+## ⚠️ FAP同步调用被注释 — 基金回款 (风险预警, 2026-06-15)
+**来源**: `rrsjk-admin-web` → `BtFundReportController.java` (commit e9073d9f, lilong/李龙, 2026-06-13)
+**关联需求**: 基金对接FAP (TAEI-3117 三方联合流程走查中)
+
+### 变更内容
+- `BtFundReportController.syncFapStatus()` 方法体中的 `btFundAssetRepaymentRecordService.syncFapStatus(repaymentId, operator)` 被注释掉
+- 接口端点 `/syncFapStatus.do` 仍然存在，但调用后不会实际执行 FAP 状态同步
+- 底层 Service 实现 (`BtFundAssetRepaymentRecordServiceImpl.syncFapStatus`) 在 rrsjk-light-report-service 中仍然存在且未被修改
+
+### 风险评估
+- **可能原因**: 正在调试/切换 FAP 同步方式（从主动拉取改为 FAP 回调推送）
+- **风险**: 如果前端仍依赖此接口触发同步，则基金回款的 FAP 状态将不会更新
+- **建议**: 确认是否有替代的 FAP 状态同步机制（如 FAP 回调自动触发），否则需恢复此调用
+
+## 共享账单Job线程池释放优化 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-light-service` (commits: 922eda28, e2346aaa, liuchunwei/刘春伟, 2026-06-13, 分支 origin/liuchunwei/performance)
+
+### 变更内容
+1. **InputStream 资源泄漏修复** (11 files, +230/-196 lines):
+   - 所有 `url.openStream()` 调用改为 `try-with-resources` 模式
+   - 涉及: CmInvoiceApplyServiceImpl(工商业发票), DccSignedCallbackServiceImpl(DCC签章回调), LightSpOrderServiceImpl(服务商工单), LightStationContractServiceImpl(电站合同), LightStationRepurchaseServiceImpl(电站回购), LightStationYuexiuServiceImpl(越秀), LightStopStationServiceImpl(停站), SettleConfirmServiceImpl(结算确认), LightZeroCarbonInstallationFeeServiceImpl(零碳安装费), OssPdfFileUtil(OSS工具)
+   - **模式**: `InputStream in = url.openStream()` → `try (InputStream in = url.openStream()) { ... }`
+
+2. **线程池未关闭修复** (2 files, +99/-72 lines):
+   - LightShareJobServiceImpl.createBillByTargetList(): ExecutorService 提到 try 外部声明，finally 中 shutdown()
+   - LightSpGridAwardOrderJobServiceImpl: 4个方法 (commonGridAwardJobByMonth, negativeAwardJobByStartTimeAndEndTime, negativeAwardJobByMonth 等) 统一添加 finally { executorService.shutdown(); }
+   - **模式**: `ExecutorService executorService = null; try { ... executorService = new ThreadPoolExecutor(...); ... } finally { executorService.shutdown(); }`
+
+### 业务影响
+- 修复前: 高并发场景下（批量发票回调、签章回调、共享账单生成、并网奖励计算）可能导致文件句柄泄漏和线程池资源耗尽
+- 修复后: 资源在异常情况下也能正确释放，提升系统稳定性
