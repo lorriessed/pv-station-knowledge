@@ -274,3 +274,29 @@
 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
 ```
 年份格式 `yyy` (3位) 应为 `yyyy` (4位)，但 `LocalDate.parse()` 在 4 位年份输入时仍能正常工作 (宽松解析)。建议修复为标准格式。
+
+## 事务超时与连接池优化 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-light-service` (commits: b448d0a8, 2f8edeab, 8b154ae6, adbd1180, aa76061d, c13ccc0f, liuchunwei/刘春伟, 2026-06-10~13)
+
+### 变更内容
+1. **全局事务超时**: `spring.transaction.default-timeout=30s`（小于数据库行锁超时 60s，防止死锁）
+2. **连接池空闲检测**: `timeBetweenEvictionRunsMillis` 从 60000ms 调整为 30000ms（更频繁检测空闲连接）
+3. **连接保活时间**: 调整为 1 分钟
+4. **事务执行时间监测**: 新增事务执行时间监控
+5. **事务异常回滚修复**: 部分事务捕获异常后无法触发回滚的问题修复
+
+### 配置变更
+```yaml
+# application.yml
+spring:
+  transaction:
+    default-timeout: 30s
+
+# application-prod.yml
+spring.datasource.druid:
+  timeBetweenEvictionRunsMillis: 30000  # 原 60000
+```
+
+### 设计原则
+- 事务超时(30s) < 数据库行锁超时(60s) → 防止应用层事务持有锁超过数据库自动释放时间
+- 更频繁的空闲连接检测 → 减少因网络中断导致的僵尸连接

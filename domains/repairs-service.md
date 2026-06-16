@@ -92,6 +92,7 @@
 | `approvalLightLend()` | 建站服务商确认 |
 | `cancel()` | 取消借件订单 |
 | `repairsToRrsOrder()` | 传日日顺订单信息 |
+| `centerBorrowSapToSparePart()` | **中心仓出库SAP重传** (2026-06-11新增) — 按订单号重传SO发货，仅限中心仓出库+记账失败订单 |
 
 ---
 
@@ -600,10 +601,14 @@
 
 ---
 
-## 15. 近期变更记录 (2026-05~06)
+## 15. 近期变更记录 (2026-04~06)
 
 | 日期 | 变更 | 提交人 |
 |------|------|--------|
+| 2026-06-11 | **中心仓出库备件SO发货供应商编码变更**: `SpTranSnServiceImpl` 中 `gvsSoHeader.setXREF2()` 从传 `orderBorrow.getCenterCode()`(运维商编码) 改为传固定常量 `RRS_SUPPLIER_CODE = "V98666"`(日日顺供应商编码)。财务中心要求中心仓出库备件传日日顺供应商编码。同时新增 `centerBorrowSapToSparePart()` 方法 — SO发货失败重传接口，仅允许操作中心仓出库(`borrowWarehouse=0`)且记账失败(`accountingStatus=0`)的订单 | A0026566 |
+| 2026-06-08 | **旧件判责接收状态更新**: `SpOldbackListsDetailServiceImpl.judgeResponsibilitySubmit()` 判责后新增 `receiveStatus=2`(已接收) 和 `receiveDate` 赋值；判责完成后调用 `judgeOldbackStatus()` 判断更新回退主单状态 | A0026566 |
+| 2026-06-08 | **旧件核销防重复销账修复**: `SpOldbackListsServiceImpl` 中备件款流水 `partsPaymentFlow()` 的 `sourceId` 参数从传回退主单ID(`id`) 改为传回退明细主键ID(`spOldbackListsDetail.getId()`)，防止同一明细被重复销账；魔法值 `"5"` 替换为 `OldbackOrderStatusEnum.WXTF.getCode()`(无需退返) | A0026566 |
+| 2026-06-08 | **工单备件列表增加取消字段**: `OrderWoPart` 实体新增 `cancelReason`/`cancelTime` 字段，WoPart.xml 查询增加对应列返回 | A0026566 |
 | 2026-06-10 | 借件订单分页查询增加分中心查询条件 (`warehouseName`、`centerList` 移入 condition SQL fragment) | A0026566/徐勇 |
 | 2026-06-10 | 备件订单申请校验中保证金余额逻辑修复：替代件遍历完未找到时明确返回"预付款不足" | A0026566 |
 | 2026-05-21 | 发货查询使用强制索引提高效率 | A0026566 |
@@ -639,6 +644,6 @@
 
 ## 来源
 
-- `repairs` 全量通读 2026-05-22 (第9轮)
+- `repairs` 全量通读 2026-05-22 (第9轮), 重扫 2026-06-16 (第32轮)
 - 代码明确证明: `repairs-api/` 下所有 Service 接口、Entity 类、Enum 类
 - 证据等级: **代码明确证明** (直接读取源代码)

@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-15T22:00:51.542853",
+  "last_run_at": "2026-06-16T22:00:12.956961",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -165,11 +165,11 @@
     "order-service": "2026-06-15T22:00:51.542853",
     "pv-certificates": "2026-06-15T22:00:51.542853",
     "pv.osp-uni": "2026-06-15T22:00:51.542853",
-    "pv.ospboard-h5": "2026-05-22T22:00:31.980403",
-    "r_upgrade": "2026-05-22T22:00:31.980403",
-    "repairs": "2026-05-22T22:00:31.980403",
-    "rrs-dispenser-server": "2026-05-22T22:00:31.980403",
-    "rrsjk-activity-service": "2026-05-22T22:00:31.980403",
+    "pv.ospboard-h5": "2026-06-16T22:03:32.024299",
+    "r_upgrade": "2026-06-16T22:03:32.024299",
+    "repairs": "2026-06-16T22:03:32.024299",
+    "rrs-dispenser-server": "2026-06-16T22:03:32.024299",
+    "rrsjk-activity-service": "2026-06-16T22:03:32.024299",
     "rrsjk-echannel-service": "2026-05-24T22:00:36.348771",
     "rrsjk-energystorage-service": "2026-05-24T22:00:36.348771",
     "rrsjk-flowable-service": "2026-05-24T22:00:36.348771",
@@ -350,6 +350,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 32,
-  "last_sweep_at": "2026-06-09T22:04:08.435667"
+  "sweep_round": 33,
+  "last_sweep_at": "2026-06-16T22:03:32.024299"
 }

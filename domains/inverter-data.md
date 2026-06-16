@@ -531,3 +531,33 @@
 - 配合 `nhpv_watermark_camera` SDK 使用，通过 Flutter inappwebview bridge 调用原生水印相机
 - **架构变更**: Upload 组件的 `isNeedCamera` 与 `scanQrCode` 解耦 — 前者控制水印相机拍摄，后者控制二维码验真。逆变器铭牌拍摄场景为 `isNeedCamera=true, scanQrCode=true`（既用水印相机又扫码验真）
 - **关联**: Upload 组件演进详见 `domains/mobile-app-architecture.md` § 3.4 Upload 公共组件架构演进
+
+## 消息服务 SnailJob 迁移 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-light-message-service` (commits: 356b40e, 9d466ce, 416fafe, ee68828, 解钦, 2026-06-12)
+
+### 变更内容
+1. **从 XXL-JOB 迁移到 SnailJob**: 引入 `com.aizuda:snail-job-client-starter:2.0.0` + `snail-job-client-job-core:2.0.0`
+2. **配置**: `snail-job.server.host=10.2.192.145`, `snail-job.server.port=8080`, `snail-job.group=rrsjk-light-message-service`
+3. **首批迁移任务**: `OverdueStationNotifyExecutor` (超期未完工通知) — 使用 `@JobExecutor(name="overdueStationNotifyExecutor")` 注解
+4. **JDK8 兼容**: 使用 SnailJob 官方 JDK8 兼容版本 `1.9.0-jdk8`（后改为 2.0.0）
+5. **SLS 日志集成**: 新增 traceId 支持，引入新版本 protobuf
+6. **端口调整**: 业务服务端口修改
+
+### 技术特征
+- SnailJob 注解: `@JobExecutor(name = "xxx")`
+- 返回类型: `com.aizuda.snailjob.model.dto.ExecuteResult`
+- 服务端口: 修改（具体端口待确认）
+- 日志: SLS + traceId 全链路追踪
+
+## 爱士惟/中核发电数据修复 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-light-data-service` (commits: 47f394c7~ace26201, yumiao/于淼, 2026-06-11~12)
+
+### 变更内容
+1. **爱士惟发电数据**: 9+ 次迭代修复（commit messages 均为 "fix:爱士惟发电数据"）
+2. **中核发电数据**: 修复 + 暂时注释（commit: e8ee73a4, 32732c6c）
+3. **Dubbo payload 优化**: `increase inverter data dubbo payload` — 调整 service.xml 中的 Dubbo 配置（payload 大小）
+4. ** backlog 场景优化**: `optimize aiswei energy fill under backlog` — 积压场景下的爱士惟电量填充逻辑
+
+### 风险观察
+- 中核发电数据被"暂时注释掉"，需确认是否为临时方案
+- Dubbo payload 调整可能影响其他大数据量接口
