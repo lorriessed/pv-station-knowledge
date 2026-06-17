@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-16T22:00:12.956961",
+  "last_run_at": "2026-06-17T22:00:36.341244",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -125,11 +125,11 @@
     "watermark-camera-ios"
   ],
   "repo_last_sweep": {
-    "rrsjk-admin-web": "2026-05-23T22:00:35.786113",
-    "rrsjk-app-web": "2026-05-23T22:00:35.786113",
-    "rrsjk-appapi-web": "2026-05-23T22:00:35.786113",
-    "rrsjk-async-import-export": "2026-05-23T22:00:35.786113",
-    "rrsjk-cms-service": "2026-05-23T22:00:35.786113",
+    "rrsjk-admin-web": "2026-06-17T22:00:36.341244",
+    "rrsjk-app-web": "2026-06-17T22:00:36.341244",
+    "rrsjk-appapi-web": "2026-06-17T22:00:36.341244",
+    "rrsjk-async-import-export": "2026-06-17T22:00:36.341244",
+    "rrsjk-cms-service": "2026-06-17T22:00:36.341244",
     "rrsjk-finance-service": "2026-05-24T22:00:36.348771",
     "rrsjk-light-service": "2026-05-26T22:00:58.451955",
     "rrsjk-merchant-web": "2026-05-27T22:00:16.087357",
@@ -350,6 +350,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 33,
+  "sweep_round": 34,
   "last_sweep_at": "2026-06-16T22:03:32.024299"
 }

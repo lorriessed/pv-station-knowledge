@@ -1,23 +1,24 @@
-     1|# PVS 知识索引
-     2|
-更新时间: 2026-06-08
+     # PVS 知识索引
 
-## 概况
+     更新时间: 2026-06-17
 
-| 指标 | 数值 |
-|---|---|
-| 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
-| 已通读 | 122/122 (第24轮) |
-| 知识库文件 | 70+ 个 |
-| 知识库大小 | 6.8MB+ |
-| Domain 业务文件 | 45+ 个 |
-| Source-map 索引 | 47,009+ 行 |
+     ## 概况
 
-## 仓库通读进度
+     | 指标 | 数值 |
+     |---|---|
+     | 总仓库数 | 122 (PVS 97 + VPP/其他 25) |
+     | 已通读 | 122/122 (第34轮) |
+     | 知识库文件 | 70+ 个 |
+     | 知识库大小 | 6.8MB+ |
+     | Domain 业务文件 | 45+ 个 |
+     | Source-map 索引 | 47,009+ 行 |
 
-### 全部 122/122 个仓库已通读 (第24轮，2026-06-08)
-- 本轮通读 5 个: esp-mag-haier-android-main, esp-mag-haier-h5-portal, esp-mag-haier-ios-main, nahuipv_business_flutter, nhpv_common_business
-- **重扫发现**: 
+     ## 仓库通读进度
+
+     ### 全部 122/122 个仓库已通读 (第34轮，2026-06-17)
+     - 本轮通读 5 个: rrsjk-admin-web, rrsjk-app-web, rrsjk-appapi-web, rrsjk-async-import-export, rrsjk-cms-service
+     - **全部零提交跳过**: 5个仓库自上次通读以来均无新提交
+     - 3个外围陈旧仓库确认为非PVS业务（健康水站/乐农CMS）
   - **esp-mag-haier-android-main**: 海尔 Cordova H5 桥接 Android 应用，已于 2026-05-15 完整记录在 `mobile-app-architecture.md`。34个文件（AndroidManifest、Cordova插件配置、登录UI、网络层OkHttp+RxJava3），无新业务逻辑。
   - **esp-mag-haier-h5-portal**: Vue 2 + Cordova H5 空壳，0 业务文件，已记录。
   - **esp-mag-haier-ios-main**: iOS Cordova H5 桥接，2个 config.xml，与 Android 插件对称，已记录。
