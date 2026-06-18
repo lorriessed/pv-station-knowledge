@@ -300,3 +300,19 @@ spring.datasource.druid:
 ### 设计原则
 - 事务超时(30s) < 数据库行锁超时(60s) → 防止应用层事务持有锁超过数据库自动释放时间
 - 更频繁的空闲连接检测 → 减少因网络中断导致的僵尸连接
+
+---
+
+## HaierEnergy Job Admin — 分布式任务调度管理台 (代码明确证明, 2026-06-18 通读)
+
+**来源**: `haier-energy-job-admin` 仓库全量通读 (2026-06-18)
+**性质**: 开源项目 Snail Job (gitee: aizuda/snail-job) 的**品牌定制版**，将 Snail Job 品牌替换为 "HaierEnergy"
+**技术栈**: Vue 3.5 + Naive UI 2.42 + Vite 7 + TypeScript + pnpm monorepo + UnoCSS
+**功能模块**:
+- **工作流管理** (workflow/): 任务编排、批量任务、表单设计
+- **通知配置** (notify/config/): 邮件/企微/钉钉/飞书/Webhook 多渠道通知
+- **通知接收人** (notify/recipient/): 多渠道接收人管理
+- **登录/权限**: 基于 Soybean Admin 框架的 RBAC 权限
+**最近更新** (2026-06): 解钦品牌定制 — 登录页重新设计、Snail Job→HaierEnergy 品牌替换
+**与 PVS 关系**: 这是 PVS 微服务使用的分布式任务调度平台的**管理后台前端**。后端服务 (Snail Job Server) 不在此仓库。PVS 各服务通过 Snail Job SDK 注册和执行定时任务。
+**业务价值**: 中 — 基础设施管理工具，不包含光伏业务逻辑，但是 PVS 定时任务运维的入口

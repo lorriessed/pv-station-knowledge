@@ -201,6 +201,29 @@
   - 修正 `DwsDataConverter` 引用已删除的 `getId()` 方法
 - **证据等级**: 代码明确证明
 
+### ADS 报表迁移进展 — 电站发电报表扩展 + DWS 新增 (代码明确证明, 2026-06-18 扫描)
+**来源**: `rrsjk-light-data-service` (commit range: 211dd2d..e27eb48, 29 commits)
+
+**新增 ADS 电站报表实体（9个）**:
+- `AdsReportStationChartDay` / `Month` / `Year` / `Total` — 电站发电日报/月报/年报/汇总
+- `AdsReportInveterChartDay` / `Month` / `Year` / `Total` — 逆变器图表（补充）
+- `AdsReportInveterPacChartDay` — 逆变器功率日图表
+
+**新增 DWS 实体和服务（3个）**:
+- `DwsInveterData` + `DwsInveterDataService` — DWS 逆变器数据
+- `DwsLightStationElec` + `DwsLightStationElecService` — DWS 电站发电数据
+- `DwsLightStationElecDayReportNewService` — DWS 电站发电日报（新）
+
+**关键变更**:
+- 发电列表数据源切换: 从原报表查询改为取 ADS 报表 (`feat: 发电列表取自ads报表`)
+- 月报表新增 `monthChartProNewAds` 方法
+- Doris `ANY_VALUE` 语法适配: 不写 `sum(elec_today)` 避免 Doris 报错
+- 新增 `findByStationCode` / `findByStationCodeHistory` 方法
+- `AbstractDwsDao` 修改，跨库查询支持
+- 新增 604 行 `DwsLightStationElecDayReportNew.xml` Mapper
+
+**DWS 报表重新上线**: `rrsjk-admin-web` 中 `feat: 打开注释，DWS报表重新上线` — 此前被注释掉的 DWS 报表功能重新启用
+
 ### DWS逆变器列表导出排序修复 (代码明确证明, 2026-05-23)
 **来源**: `rrsjk-light-data-service` (commits 7e16693/03d26bf, yumiao), `rrsjk-admin-web` (commits e9aecc7/a132fbe/edc3ec0/a6aaac5, yumiao)
 - **问题**: 逆变器列表DWS数据源导出时排序不正确

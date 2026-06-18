@@ -1823,3 +1823,50 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 - 经营性租赁 / 基金回款
 - 商城订单
 - **VPP 绿证** (新增)
+
+### FAP BizTypeEnum 扩展 + 指数退避轮询 (代码明确证明, 2026-06-18 扫描)
+
+**来源**: `rrsjk-light-api/.../LightFapRecord.java` (commit range: 39dbcef..5cd36d9, rrsjk-light-service)
+
+**新增枚举值**:
+- `OPERATIONAL_ASSET("经营性租赁", "TY010004", "货款-应收账款")` — 订单号开头 ZCPC
+- `LIGHT_FUND("基金", "TY010004", "货款-应收账款")` — 设备费子订单号开头 SBR，服务费子订单号开头 FWR
+
+**新增字段（指数退避轮询机制）**:
+- `nextQueryAt` (LocalDateTime) — 下次查询时间，用于 FAP 状态轮询的指数退避
+- `queryCount` (Integer) — 已查询次数，配合 nextQueryAt 实现退避策略
+
+**订单号前缀分配表（代码注释明确）**:
+| 业务 | 前缀 |
+|---|---|
+| 服务商发货保证金 | A |
+| 材料回购 | MSO |
+| 逆变器销售 | LPSOI |
+| 工商业EPC收款 | ER |
+| 运维收款 | OM/BF/LOS |
+| 备件保证金 | BJ |
+| 运维保证金 | A |
+| 绿证 | C |
+| 商城订单 | LNE(子订单) |
+| 电站回购 | RP |
+| 电力交易 | DL |
+| 经营性租赁 | ZCPC |
+| 基金 | SBR(设备费)/FWR(服务费) |
+
+### BT基金 FAP 对接深化 (代码明确证明, 2026-06-18 扫描)
+
+**来源**: `rrsjk-light-report-service` (commit range: 394b151..3dbda92)
+
+**BtFundAssetRepaymentRecord 新增字段**:
+- `accountTime` (LocalDateTime) — 记账时间
+- `recordNo` (String) — 明细单号
+- `customerCode`/`customerName` — 客户编码/名称
+- `accountStatus` (String) — 记账状态 YES/NO
+
+**BtFundAssetRepaymentRecordService 接口变更**:
+- `syncFapStatus(Long repaymentId, String operator)` → 替换为:
+  - `fapRecordCreate(BtFundAssetRepayment param)` — 创建 FAP record
+  - `udpateByFapStatusByRecordNo(String recordNo)` — 按单号更新 FAP 状态
+  - `autoConfirmFromFapStatus(Map<String,Object> param)` — 自动确认 FAP 状态
+
+**风险观察**: report-service 中 FAP 推送代码被暂时注释 (`chore: 因生产没有流水，暂时注释掉发fap代码，后续经过fap联调后重新放开`)，说明基金 FAP 联调尚未完成。

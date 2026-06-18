@@ -524,6 +524,20 @@
 | `/authz/snapshot` | GET | 获取权限快照(roles, menus, page/button/api permissions) |
    253|
 
+#### 业主基本信息修改总部审核 (`BasicInfoUpdateHeadquarterController`, 2026-06-18 新增)
+基础路径: `/api/admin/owner-info/basic-info-update-headquarter`
+**来源**: `autotest` 测试用例揭示 (commit 690be560, 李艺, 2026-06-17; 测试代码证明)
+**业务含义**: 业主基本信息修改申请 → 总部审核流程，存在"待片长审核"状态节点
+
+| 路径 | 方法 | 说明 |
+|---|---|---|
+| `/` | GET | 分页查询修改申请列表 (page, size) |
+| `/` | GET | 按服务商名/电站编号/状态筛选 |
+| `/{update_id}` | GET | 修改申请详情 |
+| `/{update_id}/headquarter-audit` | PUT | 总部审核 (auditStatus: 1=通过, auditRemark) |
+
+**审核状态校验**: "当前数据不是待片长审核状态，请刷新后重试" (AUDIT_FAILED)
+
 ## VPP API 端点
 
 ### vpp-api-gpower — 电价数据报表 (2026-05-28 新增)

@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-17T22:00:36.341244",
+  "last_run_at": "2026-06-18T22:00:45.736106",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -122,7 +122,12 @@
     "vpp-template-ui",
     "vpp-thai-dashboard",
     "watermark-camera-android",
-    "watermark-camera-ios"
+    "watermark-camera-ios",
+    "app_aiwork_flutter",
+    "autotest",
+    "date_extraction",
+    "degree_measurement",
+    "haier-energy-job-admin"
   ],
   "repo_last_sweep": {
     "rrsjk-admin-web": "2026-06-17T22:00:36.341244",
@@ -246,7 +251,12 @@
     "usher-groovy-flex": "2026-05-31T22:00:05.544331",
     "usher-protofuse": "2026-05-31T22:00:05.544331",
     "usher-rpc": "2026-06-01T22:04:09.414716+08:00",
-    "usher-stream": "2026-06-01T22:04:09.414716+08:00"
+    "usher-stream": "2026-06-01T22:04:09.414716+08:00",
+    "app_aiwork_flutter": "2026-06-18T22:04:51.787887",
+    "autotest": "2026-06-18T22:04:51.787887",
+    "date_extraction": "2026-06-18T22:04:51.787887",
+    "degree_measurement": "2026-06-18T22:04:51.787887",
+    "haier-energy-job-admin": "2026-06-18T22:04:51.787887"
   },
   "repo_activity_order": [
     "rrsjk-light-service",
@@ -350,6 +360,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 34,
-  "last_sweep_at": "2026-06-16T22:03:32.024299"
+  "sweep_round": 35,
+  "last_sweep_at": "2026-06-18T22:04:51.787887"
 }

@@ -644,3 +644,29 @@ rrsjk-light-data-service
 - **前端**: 年度巡检计划新增资方和运维商多选功能
 - **电站中心/运维工单**: 字段调整
 - **证据等级**: 代码明确证明
+
+### 巡检工单运维商一致性刷新 + 招银电站故障/工单查询 (代码明确证明, 2026-06-18 扫描)
+**来源**: `rrsjk-light-operation-service` (commit range: 4b69cc6..d5ad67a, 7 commits)
+
+**新增定时任务**: `refreshUnfinishedInspectionWorkOrdersOperator()`
+- 每天凌晨执行，刷新运维商与电站不一致的未完成巡检工单
+- 新增 `findUnfinishedWithOperatorMismatch` DAO 方法（分页查询，minId 游标）
+- **业务场景**: 电站更换运维商后，历史未完成的巡检工单运维商字段未同步更新
+
+**不运维电站过滤**:
+- 新增 `isNoOpStation(stationCode)` 方法 — 判断电站是否属于不运维电站
+- 系统创建工单时跳过不运维电站
+- Dubbo 调用异常时返回 false（按不过滤处理，保证容错）
+
+**招银接口（6.5/6.6）**:
+- `findStationFaultInfo(WorkOrderQuery)` — 电站故障信息查询（招银对接）
+- `findStationWorkOrderInfo(WorkOrderQuery)` — 电站工单信息查询（招银对接）
+- WorkOrderQuery 新增 `stationCodeList` (Set<String>) 字段 — 支持批量电站查询
+
+**工单查询修复**:
+- 修正同步巡检工单资方字段的问题
+- 工单查询中订单编号拼接逻辑修复
+
+**线程栈内存调优**:
+- report-service: `-Xss` 从 20m 调整为 10m（金租大屏栈溢出修复后）
+- operation-service: `-Xss` 从 5m 调整为 2m（观察两天无异常后）

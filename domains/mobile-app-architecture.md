@@ -347,7 +347,7 @@ storeFile=key.jks
 - **状态**: 空壳仓库，自初始化以来无实际业务代码
 - **业务价值**: **极低** — 模板/骨架项目，尚未开始业务开发
 
-### 2.9 海尔绿能通 Flutter APP (greenergy-management)
+### 2.9 海尔绿能通 Flutter APP (app_aiwork_flutter, 原 greenergy-management)
 
 **来源**: `greenergy-management` 仓库全量通读 (代码明确证明, 2026-06-05)
 
