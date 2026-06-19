@@ -177,3 +177,11 @@
 - 常见表：`bank_info`, `bank_area`, `calendar_day`, `ocr_analyse_record`, `express`, `xiaowei`, `chain_group`, `sensitive_word`
 - 注意：区分 `system-service` (CBS 基础用户/权限/菜单/团体) 和 `rrsjk-system-service` (银行/地区/OCR/字典/消息)
 
+## IoT 设备管理 (`domains/iot-service.md`)
+- 关键词：IoT、设备接入、逆变器监控、抖音云玺、Kafka 消费。
+- 知识库：`domains/iot-service.md`
+- 代码入口：`rrsjk-light-iot-service` → 包路径 `com.rrsjk.light.iot`
+- 基础架构：Spring Boot + Dubbo + Kafka + Redis + OSS + Prometheus
+- 状态：2026-06-19 初始化，尚未有业务 Controller/Service
+- 待确认：`dtyunxi` 工具包对接的具体 IoT 平台
+

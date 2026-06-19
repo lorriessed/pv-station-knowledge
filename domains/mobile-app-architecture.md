@@ -347,19 +347,31 @@ storeFile=key.jks
 - **状态**: 空壳仓库，自初始化以来无实际业务代码
 - **业务价值**: **极低** — 模板/骨架项目，尚未开始业务开发
 
-### 2.9 海尔绿能通 Flutter APP (app_aiwork_flutter, 原 greenergy-management)
+### 2.9 海尔 Aiwork Flutter APP (app_aiwork_flutter, 原 greenergy-management / 绿能通)
 
-**来源**: `greenergy-management` 仓库全量通读 (代码明确证明, 2026-06-05)
+**来源**: `greenergy-management` 仓库全量通读 (代码明确证明, 2026-06-05); 重命名确认 (2026-06-19 增量扫描)
 
-- **应用名**: 海尔绿能通（分中心 App）
+- **应用名**: Aiwork（原"海尔绿能通"，2026-06-16 重命名）
+  - pubspec.yaml: `name: greenergy` → `name: aiwork`
+  - AndroidManifest.xml: `android:label="绿能通"` → `"Aiwork"`
 - **包名**: `com.haier.greenergy.management`
 - **iOS App ID**: `6742817613`
-- **版本**: `0.0.1+202****2501`
-- **技术栈**: Flutter 3.27.4 (fvm) + Riverpod + GoRouter + Retrofit + Freezed
-- **本地路径**: `/root/greenergy-management`
+- **版本**: `0.0.1+260****2501` (原 202****2501)
+- **技术栈**: Flutter 3.27.4 (fvm) + Riverpod + GoRouter + Retrofit + Freezed + TDesign
+- **本地路径**: `/data/pvcode/app_aiwork_flutter` (原 `/root/greenergy-management`)
 - **仓库地址**: `git@codeup.aliyun.com:5ede241b405cdab50f4001e7/mobile/greenergy-management/greenergy-management.git`
-- **提交数**: 53 (截至 2026-06-05)
+- **提交数**: 53+ (截至 2026-06-19)
 - **状态**: **积极开发中** — 基础架构已完成，业务页面规划中
+
+#### 2026-06-14~16 技术升级 (增量扫描发现)
+- **全量 Retrofit 迁移**: 所有 ApiService/Repository 从手写 Dio 迁移到 Retrofit + 强类型 DTO
+- **CancelToken 全链路取消**: 新增 `CancellationException` 语义化异常，支持请求取消
+- **预警管理 API 集成**: 新增 warning API (getWarningStationReport/getOverdueStationPage/getInventoryDetail 等)
+- **HeLineChart 折线图组件**: 新增 `he_components/src/widgets/he_line_chart.dart`，支持十字指示线交互
+- **TDesign UI 库集成**: 引入 `tdesign_flutter: ^0.2.7`，替换 url_launcher
+- **CBS BFF API 迁移**: 从旧 API 迁移到 CBS BFF 接口
+- **AsyncNotifier 范式**: HomeViewModel 迁移到 AsyncNotifier
+- **Mock 数据体系**: 新增 `assets/mock_data/` 目录，含首页/资产/预警/业务等完整 mock JSON
 
 #### 2.9.1 架构特征
 

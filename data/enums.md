@@ -370,6 +370,10 @@
 - `apv/base/spWhitelist.js` — 服务商白名单（769行）
 - `apv/store/serviceProviderTypeList.js` — 服务商类型
 - `apv/store/useStatusList.js` — 物料领用状态（完工前领用）
+- `apv/store/signStoreStatus.js` — 光伏调拨签收单状态（WAIT_AUDIT待审核/AUDIT_OK已审核/AUDIT_REJECT已驳回/CONTRACT_SIGNED已签/CONTRACT_NOT_SIGNED未签）(2026-06-09 新增, 前端配置证明)
+- `apv/store/storeStatus.js` — 光伏调拨仓库状态（ALL/WAIT_SEND_GOODS待发货/WAIT_DELIVERY待上传送货单/WAIT_IN待签收/FINISHED已签收/CANCELED已取消）(2026-06-09 新增, 前端配置证明)
+- `apv/store/transferStatusList.js` — 光伏调拨单状态（WAIT_TRANSFER待调出/TRANSFERED已调出/COMPLETED调拨完成/CANCELED已取消）(2026-06-09 新增, 前端配置证明)
+- `apv/store/transferTypeList.js` — 光伏调拨单类型（ORDINARY_TRANSFER普通调拨/FROM_TRANSIT中转仓发货）(2026-06-09 新增, 前端配置证明)
 
 ### 零碳适家 (zch)
 - `zch/base/businessModelTypeList.js` — 业务模式类型（LIGHT_STORAGE光储 / E_STATION零碳E站）

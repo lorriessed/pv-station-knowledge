@@ -154,3 +154,30 @@
 **来源**: `rrsjk-hds-web/LightStationInverterChangeController.java` (sunzn/于淼, commits d0370d9/b7ecaab, 2026-06-11)
 **证据等级**: 代码明确证明
 - 优化用户权限处理逻辑，移除未使用代码
+
+### 光伏调拨入库前端字典体系 (前端配置证明, 2026-06-09)
+**来源**: `nahui-dicts-serve/src/data/apv/store/` (yuanruilin, commit 77cef18, 2026-06-09)
+**新增 4 个字典文件**，对应光伏仓储调拨模块的前端展示层：
+
+**调拨签收单状态** (`signStoreStatus.js`):
+- WAIT_AUDIT 待审核 → AUDIT_OK 已审核 / AUDIT_REJECT 已驳回 → CONTRACT_SIGNED 已签 / CONTRACT_NOT_SIGNED 未签
+
+**调拨仓库状态** (`storeStatus.js`):
+- WAIT_SEND_GOODS 待发货 → WAIT_DELIVERY 待上传送货单 → WAIT_IN 待签收 → FINISHED 已签收 (可 CANCELED 已取消)
+
+**调拨单状态** (`transferStatusList.js`):
+- WAIT_TRANSFER 待调出 → TRANSFERED 已调出 → COMPLETED 调拨完成 (可 CANCELED 已取消)
+
+**调拨单类型** (`transferTypeList.js`):
+- ORDINARY_TRANSFER 普通调拨
+- FROM_TRANSIT 中转仓发货
+
+> 注: 后端调拨类型已知 5 种 (ORDINARY_TRANSFER/FROM_TRANSIT/FROM_TRANSIT_TO_TRANSIT/REPAIR_TRANSFER/INTERNAL_TRANSFER)，前端此处仅展示 2 种，说明光伏调拨入库模块当前仅支持普通调拨和中转仓发货两种场景。
+
+### 零碳采购单 SKU 类型枚举 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-trade-service/LightPurchaseSalesPurchaseOrder.java` (包鑫, commit 96324f57, 2026-06-15)
+- **SkuTypeEnum** — 零碳采购销售单 SKU 类型:
+  - MODULE 组件 / INVERTER 逆变器 / OPTIMIZER 优化器 / INTELLIGENT_SOCKET 智能插座
+  - STORAGE_BATTERY 储能 / AUXILIARY_MATERIAL_PACKAGE 辅材包 / DATA_GATEWAY 数据网关
+  - REVERSE_FLOW_METER 防逆流电表 / CHARGING_PILE 充电桩
+- **新增字段**: customerCode/customerName (客户), subCenterCode/subCenterName (分中心)

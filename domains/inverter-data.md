@@ -584,3 +584,17 @@
 ### 风险观察
 - 中核发电数据被"暂时注释掉"，需确认是否为临时方案
 - Dubbo payload 调整可能影响其他大数据量接口
+
+### 三天发电判断 DWS 日志类型区分 (代码明确证明, 2026-06-18)
+
+**来源**: `rrsjk-light-data-service` (commits: 72ac84a4/d8b64b3c/c05397cf/2ea6ddc6, majinhu/马金虎, 2026-06-18)
+**关联需求**: TAEI-3146 (发电数据取数逻辑切换大数据平台)
+**分支**: origin/2026-06-17-threedayelec
+
+**变更**:
+- `LightFirstThreePowerLog` 和 `LightFirstValidThreePowerLog` 新增 `type` 字段: 1=原始日志, 2=DWS同步日志
+- 新增 `infoDws()` 方法，与原有 `info()` 方法区分 DWS 来源的日志
+- `calculateFirstDayDws` 同步逻辑：只更新大数据的表
+- 新增"三天发电量作业到大数据DWS相关表"功能
+
+**架构意义**: 于淼/马金虎正在将"连续三天发电"判断从 MySQL 实时计算切换到 DWS 层。通过 type 字段区分数据来源，便于灰度对比和回滚。

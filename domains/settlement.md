@@ -1870,3 +1870,37 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
   - `autoConfirmFromFapStatus(Map<String,Object> param)` — 自动确认 FAP 状态
 
 **风险观察**: report-service 中 FAP 推送代码被暂时注释 (`chore: 因生产没有流水，暂时注释掉发fap代码，后续经过fap联调后重新放开`)，说明基金 FAP 联调尚未完成。
+
+### 临时暂停结算机制 (代码明确证明, 2026-06-18)
+
+**来源**: `rrsjk-light-service/LightFinancePurchaseModel.java` (commit: fc68099aa5, 龙龙, 2026-06-18)
+**关联需求**: TAEI-3251 (广发模式重庆奉节相关商暂停结算)
+
+**实现方式**:
+- 使用 `TempConstants.stopCostSpIdList`（硬编码服务商ID列表）
+- 在后50%安装费采购单结算逻辑中，检查 `lightStation.getSpId()` 是否在暂停列表中
+- 匹配则直接返回 `ExecuteResult.newSuccessResult(true)` 跳过结算
+- 同时引入 `LightSapLedgerQueue` 依赖（但未在此方法中使用）
+
+**风险**: 硬编码临时方案，服务商变更需重新发版。建议后续改为数据库配置。
+
+### SAP 收入成本凭证拉取 (代码明确证明, 2026-06-18)
+
+**来源**: `rrsjk-light-report-service` (commit: a0a66c57b, 解钦, 2026-06-18)
+**关联需求**: TAEI-3207 (HDS电费报表), TAEI-2872 (运维收入成本记账优化)
+
+**新增文件**:
+- `SapRevenueCostPullRequest.java` — 请求DTO: bukrsList(公司代码) + cpudtFrom/cpudtEnd(日期范围)，默认拉前一天
+- `SapRevenueCostPullResponse.java` — 响应DTO: total/inserted/updated/message/success
+- `DwdSapRevenueCostVoucher.java` — DWD层实体(124行)，含 SAP 标准字段 bukrs/gjahr/belnr 等
+- `AbstractDataDwdDao.java` — DWD 数据源 DAO 基类（独立于 light 主库）
+- `SapRevenueCostDataService.java` — 接口: pullSapRevenueCostVouchers()
+
+**架构意义**: report-service 引入 DWD（数据仓库明细层）数据源，与 DWS/ADS 共同构成多层大数据架构。
+
+### 商城订单取消同步作废 FAP (代码明确证明, 2026-06-18)
+
+**来源**: `rrsjk-trade-service/StrategyCancelOrder.java` (commit: 4bbdcc1d, 代继宁, 2026-06-18)
+
+**逻辑**: 取消订单时检查 `orderItem.getFapStatus()`，非空则查询 LightFapRecord 并调用 `cancelFapOrder(fapOrderNo)`。
+**风险**: 当 FAP 状态为 SUCCESS（已记账）时仅打 log 但仍尝试作废，可能调用失败。建议已记账订单走冲红流程。

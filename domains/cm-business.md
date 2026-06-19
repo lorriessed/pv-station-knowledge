@@ -224,3 +224,97 @@
 1. 审核人"王红凯"硬编码在 `LightStationPlanChangeServiceImpl` 中
 2. PCS 接口地址在 application-dev.yml 中改为了测试环境，需确认 prod 配置
 3. 毛利率除零保护是事后修复，需确认上线前是否充分测试
+
+---
+
+## 工商业项目收益预测服务 (nh-business-forecast-service)
+
+**代码明确证明** | 通读日期: 2026-06-19 | 最后提交: 2024-04-20
+
+### 概述
+**来源**: `nh-business-forecast-service` (com.nahui.businessforecast)
+独立微服务，为**工商业光伏项目**提供投资可行性预测和收益测算。通过 Dubbo 暴露接口给前端 (rrsjk-mobile-web 的 businessforecast Controller) 调用。
+
+**技术栈**: Spring Boot + MyBatis + Dubbo (Zookeeper) + Redis + Aliyun OSS + iTextPDF
+**数据库**: `db003.rrsjk.internal` (生产), MySQL
+**包路径**: `com.nahui.businessforecast`
+
+### 三种投资模式 (代码明确证明)
+**来源**: `nh-business-forecast-api/.../enums/InvestmentModelEnum.java`
+
+| 值 | 模式 | 模板名 | 核心计算逻辑 |
+|---|---|---|---|
+| 0 | EMC (合同能源管理) | EMC_TEMPLATE | 折扣电价或固定电价 → 年节能收益 |
+| 1 | 业主自投 | SELF_INVESTMENT_TEMPLATE | 发电收入 - 投资成本 → 回本时间 |
+| 2 | 融资租赁 | FINANCIAL_LEASE_TEMPLATE | 融资金额(=开发成本) × 利率 × 年限 → 每年本息 → 累计结余 |
+
+### 发电量计算 (代码明确证明)
+**来源**: `nh-business-forecast-impl/.../ElectricityGenerationDetailServiceImpl.java`
+
+**核心公式**: `年发电量 = 装机容量(kW) × 光照时长(h) × 年效率系数`
+
+**25年效率衰减曲线**:
+```
+Year 1: 100%, Year 2: 98%, Year 3: 97.4%, Year 4: 96.8%, Year 5: 96.2%
+Year 6: 95.6%, Year 7: 95%, Year 8: 94.4%, Year 9: 93.8%, Year 10: 93.2%
+... 每年递减 0.6% ... Year 25: 86.6%
+```
+
+**光照时长来源**: `install_dip_angle_info_region` 表，按省+市+倾角类型(最佳倾角/平铺)查询
+
+### 电价体系 (代码明确证明)
+
+**分时电价类型** (`ElectricityPriceTypeEnum`): 尖(POINT)、峰(PEAK)、平(FLAT)、谷(VALLEY)、深谷(DEEP_VALLEY)
+
+**用电类型1** (`TouElectricityPriceTypeOneEnum`): CN=一般工商业, BI=大工业
+
+**用电类型2** (`TouElectricityPriceTypeTwoEnum`): UNITARY=单一制, TWOP=两部制
+
+**电压等级** (`VoltageLevelEnum`): 不满1kV / 1-10(20)kV / 35-110kV / 110-220kV / 220kV以上
+
+**EMC电价模式** (`ElectrictiyPriceModelEnum`):
+- 0=折扣电价: `实际电价 = 平均电价 × (1 - 折扣比例/100)`
+- 1=固定电价: `实际电价 = 固定电价`
+
+### 节能减排系数 (代码明确证明)
+**来源**: `nh-business-forecast-api/.../EmissionReductionEnum.java`
+
+每 MWh 发电量对应的减排量:
+| 指标 | 系数 | 单位 |
+|---|---|---|
+| 标准煤 | 300.7 kg | 每MWh |
+| 烟尘 | 0.017 kg | 每MWh |
+| SO₂ | 0.083 kg | 每MWh |
+| CO₂ | 824 kg | 每MWh |
+| NOx | 0.133 kg | 每MWh |
+
+### 项目建站成本校验规则 (代码明确证明)
+**来源**: `nh-business-forecast-impl/.../ProjectCostInfoDetailServiceImpl.java`
+
+| 参数 | 范围 |
+|---|---|
+| 项目运行年限 | 1~25年 |
+| 每瓦电力成本 | 2.5~5 元 |
+| 每瓦运维成本单价 | 0.03~0.05 元 |
+| 配储比例 | 0~20% |
+| 配储价格 | 1~2.5 元/瓦 |
+
+### PDF 项目规划书生成 (代码明确证明)
+**来源**: `nh-business-forecast-impl/.../ForecastProjectDetailServiceImpl.java` + `OssPdfFileUtil.java`
+
+**流程**: 查询项目详情 → 反射填充字段到 Map → 根据投资模式选模板(EMC_TEMPLATE/SELF_INVESTMENT_TEMPLATE/FINANCIAL_LEASE_TEMPLATE) → iTextPDF 渲染 → 上传 OSS → 返回 CDN URL
+
+**OSS 配置**: `oss-cn-qingdao.aliyuncs.com`, bucket=`pvs-public`, CDN=`cdn01.rrsjk.com`
+
+### 核心数据库表
+
+| 表名 | 用途 |
+|---|---|
+| `forecast_project_detail` | 预测项目主表 (projectCode, 地址, 装机容量, 投资模式, 发电量, 成本, 规划书URL) |
+| `electricity_generation_detail` | 发电量详情 (year1~year25 发电量字段, 总/年均发电量) |
+| `project_cost_info_detail` | 建站成本 (电力成本/运维/配储/开发成本/总投资) |
+| `project_investment_income` | 投资收益 (EMC折扣/自投回本时间/融资租赁利率) |
+| `electricity_price_of_coal` | 脱硫煤标杆电价 (按省份) |
+| `tou_electricity_price` | 分时电价 (按省份+用电类型+电压等级, 尖/峰/平/谷/深谷) |
+| `electricity_price_summary_diff_period` | 分时电价时段汇总 (按省份+小时+月份, 12个月×24时段) |
+| `install_dip_angle_info_region` | 各地区安装倾角光照信息 (省/市/最佳倾角/平铺光照时长) |

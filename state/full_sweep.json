@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-18T22:00:45.736106",
+  "last_run_at": "2026-06-19T22:00:06.862593",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -127,7 +127,12 @@
     "autotest",
     "date_extraction",
     "degree_measurement",
-    "haier-energy-job-admin"
+    "haier-energy-job-admin",
+    "haier-energy-job-service",
+    "nahui-itd-docs",
+    "nh-business-forecast-service",
+    "recipt_extraction",
+    "recipt_extraction_pdf"
   ],
   "repo_last_sweep": {
     "rrsjk-admin-web": "2026-06-17T22:00:36.341244",
@@ -256,7 +261,12 @@
     "autotest": "2026-06-18T22:04:51.787887",
     "date_extraction": "2026-06-18T22:04:51.787887",
     "degree_measurement": "2026-06-18T22:04:51.787887",
-    "haier-energy-job-admin": "2026-06-18T22:04:51.787887"
+    "haier-energy-job-admin": "2026-06-18T22:04:51.787887",
+    "haier-energy-job-service": "2026-06-19T22:03:13.220803",
+    "nahui-itd-docs": "2026-06-19T22:03:13.220803",
+    "nh-business-forecast-service": "2026-06-19T22:03:13.220803",
+    "recipt_extraction": "2026-06-19T22:03:13.220803",
+    "recipt_extraction_pdf": "2026-06-19T22:03:13.220803"
   },
   "repo_activity_order": [
     "rrsjk-light-service",
@@ -361,5 +371,5 @@
     "rrsjk-mobile-h5"
   ],
   "sweep_round": 35,
-  "last_sweep_at": "2026-06-18T22:04:51.787887"
+  "last_sweep_at": "2026-06-19T22:03:13.220803"
 }

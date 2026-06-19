@@ -139,3 +139,21 @@
 - **关键代码**: `ZeroCarbonCompleteConfirmServiceImpl.java` 第 534~635 行
 - **业务意义**: 支持零碳电站使用多种型号组件/逆变器混合完工，每种型号独立提交序列号
 - **证据等级**: 代码明确证明
+
+### 退商流程事务原子性修复 (代码明确证明, 2026-06-17)
+
+**来源**: `rrsjk-light-service/ZeroCarbonServiceProviderServiceImpl.java` (commit: ccb83b0e0a, 代继宁, 2026-06-17)
+**关联需求**: TAEI-3185 (退商流程优化)
+
+**修复内容**:
+- 修复前: 退商申请创建(`zeroCarbonSpWithdrawalDao.create`) 和 服务商状态更新(`setStatus(QUITING)`) 在不同事务中
+- 修复后: 使用编程式事务 (`TransactionManager.getTransaction/commit/rollback`) 保证原子性
+- 附件保存也纳入同一事务
+- 同时修复了审核拒绝时的状态恢复逻辑
+
+### 零碳智能投站服务接口 (代码明确证明, 2026-06-17)
+
+**来源**: `rrsjk-light-service` (commit: 363306511d, mabin/马斌, 2026-06-17)
+**分支**: origin/20260615-zeroSmart
+
+**新增**: 零碳智能投站服务接口（具体接口定义需进一步确认）。马斌参与零碳模块开发。
