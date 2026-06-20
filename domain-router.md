@@ -185,3 +185,14 @@
 - 状态：2026-06-19 初始化，尚未有业务 Controller/Service
 - 待确认：`dtyunxi` 工具包对接的具体 IoT 平台
 
+## Admin App 移动端服务 (`domains/admin-app-service.md`)
+- 关键词：分中心APP、移动端登录、会话管理、Token轮换、在线用户、推送事件、操作日志
+- 知识库：`domains/admin-app-service.md`
+- 代码入口：
+  - `rrsjk-admin-app-bff` (port 8082) → `AppAuthController`, `TokenRefreshController`, `OnlineUserController`, `AppPermissionController`
+  - `rrsjk-admin-app-service` → `AppSessionService`, `AdminPushEventService`, `AppConfigService`, `LightStationService`, `LightStationElecService`, `ElecWarningStationService`
+  - `rrsjk-admin-operation-log-service` → `AdminOperationLogService`
+- 常见表：`admin_oper_log`, `admin_login_log`, `admin_log_body_detail`
+- 数据库：`rrsjk_admin_operation_log`
+- 注意：与 Web 端 `rrsjk-admin-bff` (port 8081) 平行但独立，共享 auth-server 和 authz-service
+

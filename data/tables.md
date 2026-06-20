@@ -560,3 +560,9 @@ MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqi
 **来源**: `rrsjk-light-service` (马斌)
 - **light_image_verification**: 图片验真记录表 (rrsjk_light库)
   - 2026-05-11~17变更: 新增 `uniqueImageKey` 重复上传检查，入库前查询已存在记录并拦截
+
+### Admin 操作日志表 (代码明确证明, 2026-06-20)
+**来源**: `rrsjk-admin-operation-log-service`, 数据库 `rrsjk_admin_operation_log`
+- **admin_oper_log**: 后台操作日志 (log_id PK, title, business_type, method, request_method, oper_name, user_id, oper_url, oper_ip, oper_param longtext, json_result longtext, status, error_msg, cost_time, trace_id, oper_time)
+- **admin_login_log**: 后台登录日志 (info_id PK, user_id, user_name, status, ipaddr, login_location, browser, os, msg, login_type APP/WEB, trace_id, login_time)
+- **admin_log_body_detail**: 日志正文详情 (detail_id PK, parent_type LOGIN/OPERATION, parent_id, request_body longtext, response_body longtext, request/response_body_size, request/response_truncated)

@@ -555,3 +555,23 @@
 **数据源**: ADS (AnalyticDB for MySQL), 独立于主业务库
 **Mapper**: `ElectricityPriceDataReportMapper` (包路径: `com.nahui.energy.mapper.ads`)
 **价格类型**: `day_ahead`(日前), `real_time`(实时)
+
+---
+
+## Admin App BFF (分中心移动端) (代码明确证明, 2026-06-20)
+
+**来源**: rrsjk-admin-app-bff, port 8082
+
+| 路由 | 方法 | 功能 | 认证 |
+|---|---|---|---|
+| `/api/app/auth/login-config` | GET | OAuth2 登录配置 | 公开 |
+| `/api/app/auth/login-url` | POST | 生成 PKCE 授权 URL | 公开 |
+| `/api/app/auth/login` | POST | 密码登录 | 公开 |
+| `/api/app/auth/code-exchange` | POST | 授权码换 Token | 公开 |
+| `/api/app/auth/token-refresh` | POST | 刷新 Token | 公开 |
+| `/api/app/auth/current-user` | GET | 当前用户信息+权限+组织 | JWT |
+| `/api/app/auth/logout` | POST | 登出 | JWT |
+| `/api/app/client/context` | POST | 更新客户端上下文 (设备/推送Token) | JWT |
+| `/api/app/online-users` | GET | 查询在线用户列表 | JWT |
+| `/api/app/permission/snapshot` | GET | 权限快照 (菜单+页面/按钮/API权限) | JWT |
+| `/api/app/menus` | GET | 菜单树 | JWT |

@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-19T22:00:06.862593",
+  "last_run_at": "2026-06-20T22:00:27.904803",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -132,7 +132,12 @@
     "nahui-itd-docs",
     "nh-business-forecast-service",
     "recipt_extraction",
-    "recipt_extraction_pdf"
+    "recipt_extraction_pdf",
+    "rrs-dispenser-operator-android3",
+    "rrs-dispenser-operator-ios3",
+    "rrsjk-admin-app-bff",
+    "rrsjk-admin-app-service",
+    "rrsjk-admin-operation-log-service"
   ],
   "repo_last_sweep": {
     "rrsjk-admin-web": "2026-06-17T22:00:36.341244",
@@ -266,7 +271,12 @@
     "nahui-itd-docs": "2026-06-19T22:03:13.220803",
     "nh-business-forecast-service": "2026-06-19T22:03:13.220803",
     "recipt_extraction": "2026-06-19T22:03:13.220803",
-    "recipt_extraction_pdf": "2026-06-19T22:03:13.220803"
+    "recipt_extraction_pdf": "2026-06-19T22:03:13.220803",
+    "rrs-dispenser-operator-android3": "2026-06-20T22:05:53.517938",
+    "rrs-dispenser-operator-ios3": "2026-06-20T22:05:53.517938",
+    "rrsjk-admin-app-bff": "2026-06-20T22:05:53.517938",
+    "rrsjk-admin-app-service": "2026-06-20T22:05:53.517938",
+    "rrsjk-admin-operation-log-service": "2026-06-20T22:05:53.517938"
   },
   "repo_activity_order": [
     "rrsjk-light-service",
@@ -370,6 +380,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 35,
-  "last_sweep_at": "2026-06-19T22:03:13.220803"
+  "sweep_round": 36,
+  "last_sweep_at": "2026-06-20T22:05:53.517938"
 }
