@@ -1033,3 +1033,29 @@ echannel-service (Provider + Consumer)
 ```
 后台配置(轮播/文章/直播) → Dubbo暴露 → mobile-web调用 → APP/M站展示
 ```
+
+### 6. shoppingmall-member-web — 海尔商城会员门户 (外围遗留系统)
+
+**分类**: 外围遗留系统，非PVS核心业务 (2026-06-21 全量通读确认)
+- **仓库**: `shoppingmall-member-web` (`/data/pvcode/shoppingmall-member-web`)
+- **最后提交**: 2024-05-27 (添加滑动验证码)，2025-01-01至今零提交
+- **技术栈**: Spring MVC 5.2.3 + Freemarker + WAR (非Spring Boot，老旧架构)
+- **包路径**: `com.ehaier.shoppingmall.member.web`
+- **业务定位**: 海尔商城(ehaier.com)前端会员门户，面向C端消费者
+- **核心Controller**:
+  - `MemberController`: 会员注册/登录/注销/个人中心/账号注销
+  - `MemberAddressController`: 收货地址CRUD
+  - `MemberAfterSaleController`: 售后申请(退货/换货/维修)
+  - `MemberCorpController`: 企业账户/理货商入驻申请(审核状态: 0待审核/1启用/2停用/3驳回)
+  - `MemberCorpBlpController`: 不良品管理
+  - `MemberCorpSaleController`: 分销管理(理货商→网点销售记录)
+  - `MemberCorpStockController`: 理货商库存查询/导出
+  - `MemberOrderController`: 订单管理
+  - `MemberInvoiceController`/`MemberVatInvoiceController`: 发票/增值税发票
+  - `MemberRepairController`: 维修申请
+  - `SsoLoginController`: SSO统一登录
+  - `CaptchaController`: 验证码(kaptcha + 滑动验证码 tianai-captcha)
+- **PVS关联**: 仅通过Dubbo引用 `rrsjk-system-api`(PageHtmlService公共头尾) 和 `rrsjk-member-api`(LoginInfo登录信息)，**不含光伏业务逻辑**
+- **数据库表**: LoginInfo, Members, MemberAuth, MemberAddress, MemberCorp, MemberCorpBlp, MemberCorpSale, MemberCorpStock, AfterSaleApplications, AfterSaleAuditInfo
+- **外部依赖**: MongoDB(文件存储), Redis(验证码/Session), Zookeeper(Dubbo注册), QQ互联(第三方登录)
+- **结论**: 这是海尔集团通用电商平台的会员前端，与光伏电站业务无关。仅需了解其存在及与rrsjk-system-api/rrsjk-member-api的Dubbo调用关系。
