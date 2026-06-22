@@ -605,6 +605,9 @@
 
 | 日期 | 变更 | 提交人 |
 |------|------|--------|
+| 2026-06-22 | **备件保证金回调接口日志改造**: `SpAdvancePaymentServiceImpl.receivePayStatus()` 日志记录提前到方法入口，无论成功/失败都写入 `sp_interface_log`；新增 `updateInterfaceLog()` 私有方法统一更新日志返回结果。接口枚举: `InterfaceNameEnum.BDY_QT` / `InterfaceMethodNameEnum.BJKHD` | A0026566 |
+| 2026-06-22 | **旧件回退 confirmReturn Bug 修复**: `SpOldbackListsServiceImpl.confirmReturn()` 中报废件类型校验从 `spOldbackLists.getBackType()` (入参) 改为 `oldbackLists.getBackType()` (数据库查询结果)，修复入参未传 backType 导致校验失效的问题 | A0026566 |
+| 2026-06-22 | **旧件签收 coreReceipt2 防重复销账修复**: `SpOldbackListsServiceImpl.coreReceipt2()` (单条签收) 中 `spForegift` 查询的 `sourceId` 从 `spOldbackLists.getId()` (主单ID) 改为 `spOldbackListsDetail.getId()` (明细ID)，`partsPaymentFlow()` 第二个参数同步修改。与 2026-06-08 修复模式一致，本次覆盖 coreReceipt2 方法 | A0026566 |
 | 2026-06-11 | **中心仓出库备件SO发货供应商编码变更**: `SpTranSnServiceImpl` 中 `gvsSoHeader.setXREF2()` 从传 `orderBorrow.getCenterCode()`(运维商编码) 改为传固定常量 `RRS_SUPPLIER_CODE = "V98666"`(日日顺供应商编码)。财务中心要求中心仓出库备件传日日顺供应商编码。同时新增 `centerBorrowSapToSparePart()` 方法 — SO发货失败重传接口，仅允许操作中心仓出库(`borrowWarehouse=0`)且记账失败(`accountingStatus=0`)的订单 | A0026566 |
 | 2026-06-08 | **旧件判责接收状态更新**: `SpOldbackListsDetailServiceImpl.judgeResponsibilitySubmit()` 判责后新增 `receiveStatus=2`(已接收) 和 `receiveDate` 赋值；判责完成后调用 `judgeOldbackStatus()` 判断更新回退主单状态 | A0026566 |
 | 2026-06-08 | **旧件核销防重复销账修复**: `SpOldbackListsServiceImpl` 中备件款流水 `partsPaymentFlow()` 的 `sourceId` 参数从传回退主单ID(`id`) 改为传回退明细主键ID(`spOldbackListsDetail.getId()`)，防止同一明细被重复销账；魔法值 `"5"` 替换为 `OldbackOrderStatusEnum.WXTF.getCode()`(无需退返) | A0026566 |

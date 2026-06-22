@@ -86,6 +86,30 @@
 | `LightSpOpsNegativeIacController` | 负激励IAC |
 | `LightSpOpsSettleIacController` | 结算IAC |
 
+#### 服务商激励管理 (`/lightSpInspire/`) — 2026-06-22 更新
+
+**来源**: `rrsjk-admin-web` → `LightSpInspireController.java` (wangxiran, commits f2753f4f~9a7b2bd9, 2026-06-17~22)
+
+| API | 方法 | 说明 |
+|-----|------|------|
+| `/lightSpInspire/list.html` | GET | 激励列表页面 |
+| `/lightSpInspire/doList.do` | GET | 分页查询 |
+| `/lightSpInspire/add.do` | POST | 新增激励 |
+| `/lightSpInspire/del.do` | POST | 删除激励 |
+| `/lightSpInspire/batchAudit.do` | POST | 批量审核 |
+| `/lightSpInspire/importData.do` | POST | Excel导入 (xls) |
+| `/lightSpInspire/businessTypes.do` | GET/POST | 业务类型下拉 (2026-06-17 新增) |
+| `/lightSpInspire/secondCategories.do` | GET/POST | 二级类别下拉 (2026-06-17 新增) |
+
+**审核流程 (四级, 2026-06-22 更新)**:
+1. 一审 (`lightSpInspire:auditOne`) — 直线审核
+2. 市场总监审核 (`lightSpInspire:auditMarket`) — **2026-06-22 新增**
+3. 二审 (`lightSpInspire:auditTwo`) — 链群主审核
+4. 财务审核 (`lightSpInspire:auditThree`) — 财务审核
+
+**导入模板字段**: 激励类型、描述、服务商名称、金额、电站编码、激励原因
+**导入必填参数**: businessType (业务类型), secondCategoryCode (二级类别), xiaowei (小微), 见证性资料 (最多3张)
+
 #### 电站电费管理 (`/light/operation/station-elec-bill`)
 | API | 说明 |
 |-----|------|

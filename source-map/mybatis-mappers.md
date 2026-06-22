@@ -4876,6 +4876,10 @@
 - statements: `insert:create`, `update:update`, `select:getById`, `select:queryListBy`, `select:queryCountBy`, `select:findByParams`
 - tables: `id`
 
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightSpInspireCategoryConfig.xml
+- namespace: `com.rrsjk.light.dao.LightSpInspireCategoryConfigDao`
+- statements: `select:findBy`
+
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/TaxAmountCalculateSourceData.xml
 - namespace: `com.rrsjk.light.dao.TaxAmountCalculateSourceDataDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`, `select:findValidBillRecordNosByRentMonth`, `select:findValidBillRecordNos`, `select:findProcessedUniqueCheckKeys`, `update:updateValidByBatchNo`, `update:updateValidByRentMonth`, `update:updateValidByRentMonthAndCompanyCodes`
