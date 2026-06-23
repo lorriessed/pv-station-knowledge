@@ -181,3 +181,36 @@
   - STORAGE_BATTERY 储能 / AUXILIARY_MATERIAL_PACKAGE 辅材包 / DATA_GATEWAY 数据网关
   - REVERSE_FLOW_METER 防逆流电表 / CHARGING_PILE 充电桩
 - **新增字段**: customerCode/customerName (客户), subCenterCode/subCenterName (分中心)
+
+---
+
+## 旧件回退整合接口 updateAndConfirmReturn (代码明确证明, 2026-06-23)
+
+**来源**: `repairs` → `SpOldbackListsServiceImpl.java` (commit: 1b39807, A0026566, 2026-06-23)
+
+### 接口定义
+`SpOldbackListsService.updateAndConfirmReturn(SpOldbackLists, String userName)` → `ExecuteResult`
+
+### 业务流程
+将"编辑物流信息"和"确认退返"合并为单一事务接口，减少前端调用次数。
+
+1. **基础校验**: 订单ID非空
+2. **物流信息校验**: 快递单号 6~32 字符
+3. **回退单类型校验**: backType ∈ {1(旧件回退), 7(旧件报废), 9(无旧件返还)}
+4. **回退单状态校验**: backStatus ∈ {0(初始), 4}
+5. **明细校验**: 实际退返数量 ≤ 应退返数量
+6. **服务商报废校验** (backType=7): 确认回退数量 ≥ 应回退数量
+7. **快递100推送**: 物流公司+单号非空时推送快递订阅，记录 expressDate/expressErult/expressStatus
+8. **事务操作**:
+   - 更新回退单明细（支持传入明细或使用数据库已有明细）
+   - 更新主单: backStatus=2(已退返), backDate, backapplyDate
+   - backType=7 时调用 `coreReceipt2()` 备件退返签收
+
+### 关键变更
+- **注释掉库存删除逻辑**: 原 `confirmReturn` 中按仓库id+备件id+旧件唯一码查询库存并删除（备份至 sp_storeage_del）的逻辑被注释掉。新接口不再在确认退返时直接删除库存。
+- **前端配合**: `nahui-pv.merchant-micro.osp` 的 `returnStockOut/addEditPop.vue` 同步新增保存并提交功能
+
+### 相关表
+- `sp_oldback_lists` — 旧件回退单主表
+- `sp_oldback_lists_detail` — 旧件回退单明细
+- `sp_storeage` / `sp_storeage_del` — 库存表 / 库存删除备份表

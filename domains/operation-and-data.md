@@ -596,7 +596,8 @@ rrsjk-light-data-service
 #### Trace 上下文
 - **TraceContext**: 线程本地存储，管理 `thraceId` (Long) 和 `rpcId` (List<Integer>)
 - **RPC Header**: `RPC_HEADER_TRACE_ID` 和 `RPC_HEADER_RPC_ID`，通过 HTTP Header 传递链路追踪 ID
-- **防共享**: `TraceContext.clean()` 在每个请求开始时清空，防止线程池复用导致 traceId 污染
+- **防共享**: `TraceContext.clean()` 在每个请求开始前清空，防止线程池复用导致 traceId 污染
+- **Spring Boot 3 兼容 (2026-06-17 新增)**: `WebTraceAutoConfiguration` + `WebTraceIdFilter` — 为 Spring Boot 3 (jakarta.servlet) 项目提供入口 traceId 过滤器。通过 `@ConditionalOnClass(name = "jakarta.servlet.Filter")` 条件装配，仅在 SB3 项目生效；SB2 项目不受影响。依赖 `jakarta.servlet-api:5.0.0` (optional+provided，不传递到老项目)。开关: `nahui.trace.web.enabled=false` 可关闭。commit: f6ab440a (解钦, 2026-06-17)
 
 #### Manifold 编译期扩展
 - 使用 Manifold 2025.1.9 实现 Java 编译期元编程（运算符重载、属性扩展等）

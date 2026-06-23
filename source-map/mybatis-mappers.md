@@ -1065,6 +1065,11 @@
 - statements: `insert:create`, `update:update`, `select:getById`, `select:findBy`, `select:countOf`, `select:findByBankId`, `select:countByBankId`, `delete:delete`
 - tables: `id`, `light_operation_question_bank`
 
+## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/v2/LightOperationStationElecReport.xml
+- namespace: `com.rrsjk.light.operation.dao.v2.LightOperationStationElecReportDao`
+- statements: `select:findByPage`, `select:countByQuery`, `select:listForExport`, `insert:saveOrUpdate`, `insert:saveOrUpdateBatch`
+- tables: `station_id`
+
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/v2/LightOperationReportConfigRole.xml
 - namespace: `com.rrsjk.light.operation.dao.v2.LightOperationReportConfigRoleDao`
 - statements: `insert:batchCreate`, `delete:deleteByReportConfigId`, `select:findByReportConfigId`, `select:findByRoleCode`, `select:findConfigIdsByRoleCode`
@@ -1111,7 +1116,7 @@
 
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/v2/LightOperationStationElecBill.xml
 - namespace: `com.rrsjk.light.operation.dao.v2.LightOperationStationElecBillDao`
-- statements: `insert:create`, `insert:createBatch`, `update:update`, `update:updateBatch`, `select:getById`, `select:findBy`, `select:countOf`, `select:findStationBillBy`, `select:findStationBill`, `select:getStationSummaryByStationCodes`, `select:countStationBillOf`, `select:findByStationIdAndBillDate`, `select:findByStationCodeAndBillDate`, `delete:delete`, `select:getLastPeriodElecBillSummary`, `select:getTotalElecBillSummary`, `select:getStationElecBillSummaryByStationCode`, `select:findByProvinceIdAndBillMonth`, `select:findZeroAmountElecNos`, `select:findZeroAmountBillsByElecNos`, `select:findStationsWithoutElecBills`, `select:findByBaseElecNoAndBillMonth`, `select:findExistingBillMonthsByStationCodes`, `select:findZeroAmountBillsByFieldMethod`, `select:findZeroAmountBillsBySpecialFlag`, `select:findByElecNosAndMonths`, `select:findFullByElecNoAndMonth`, `select:findByStationCodesAndMonths`, `select:findDistinctStationCodes`, `select:subCenterSummary`, `select:countOfSubCenter`, `select:projectCompanySummary`, `select:countOfProjectCompany`, `select:specialFlagSummary`, `select:countOfSpecialFlag`, `select:projectCompanySubstationGroupPage`, `select:countOfProjectCompanySubstation`, `select:projectCompanySubstationMonthlyByGroupKeys`, `select:listProjectCompanySubstationReportMonths`, `select:findZeroSettlementElecNos`, `select:findZeroSettlementByElecNos`, `select:findSubStationNameAndInvoiceNumber`, `select:findSubStationNameAndInvoiceNumberByElecNos`, `select:listAllSubstationNames`, `update:updateStationMigration`, `update:batchUpdateElecPrice`, `update:batchUpdateElec`, `update:syncProjectCompanyNameFromStationForUnconfirmedBills`, `update:syncStationGroupFromStationForUnconfirmedBills`
+- statements: `insert:create`, `insert:createBatch`, `update:update`, `update:updateBatch`, `select:getById`, `select:findBy`, `select:countOf`, `select:findStationBillBy`, `select:findStationBill`, `select:getStationSummaryByStationCodes`, `select:countStationBillOf`, `select:findByStationIdAndBillDate`, `select:findByStationCodeAndBillDate`, `delete:delete`, `select:getLastPeriodElecBillSummary`, `select:getTotalElecBillSummary`, `select:getStationElecBillSummaryByStationCode`, `select:findByProvinceIdAndBillMonth`, `select:findZeroAmountElecNos`, `select:findZeroAmountBillsByElecNos`, `select:findStationsWithoutElecBills`, `select:findByBaseElecNoAndBillMonth`, `select:findExistingBillMonthsByStationCodes`, `select:findZeroAmountBillsByFieldMethod`, `select:findZeroAmountBillsBySpecialFlag`, `select:findByElecNosAndMonths`, `select:findFullByElecNoAndMonth`, `select:findByStationCodesAndMonths`, `select:findDistinctStationCodes`, `select:subCenterSummary`, `select:countOfSubCenter`, `select:projectCompanySummary`, `select:countOfProjectCompany`, `select:specialFlagSummary`, `select:countOfSpecialFlag`, `select:projectCompanySubstationGroupPage`, `select:countOfProjectCompanySubstation`, `select:projectCompanySubstationMonthlyByGroupKeys`, `select:listProjectCompanySubstationReportMonths`, `select:findZeroSettlementElecNos`, `select:findZeroSettlementByElecNos`, `select:findSubStationNameAndInvoiceNumber`, `select:findSubStationNameAndInvoiceNumberByElecNos`, `select:listAllSubstationNames`, `update:updateStationMigration`, `update:batchUpdateElecPrice`, `update:batchUpdateElec`, `update:syncProjectCompanyNameFromStationForUnconfirmedBills`, `update:syncStationGroupFromStationForUnconfirmedBills`, `select:findDistinctStationCodesByFieldMethod`, `select:findByStationCodeAndFieldMethod`, `select:aggregateReportMetrics`
 - tables: `id`, `light_operation_station`, `light_operation_station_elec_bill`, `rrsjk_light_operation.light_operation_station`, `rrsjk_light_operation.light_operation_station_elec_bill`
 
 ## rrsjk-light-operation-service/rrsjk-light-operation-impl/src/main/resources/mybatis/mapper/v2/LightOperationStationTag.xml
@@ -1322,19 +1327,74 @@
 - statements: `insert:create`, `update:update`, `select:get`, `select:findCount`, `select:find`
 - tables: `id`
 
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/report/EnergyAppOverdueInventoryMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.report.EnergyAppOverdueInventoryMapper`
+- statements: `select:findBySubCenter`, `select:findSpRank`, `select:countSpRank`, `select:findDetail`, `select:countDetail`
+- tables: `energy_app_overdue_inventory`
+
 ## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/LightStationMapper.xml
 - namespace: `com.rrsjk.adminapp.mapper.light.LightStationMapper`
-- statements: `select:selectById`, `select:selectByStationCode`, `select:selectList`, `select:count`, `insert:insert`, `update:updateById`
-- tables: `id`, `light_station`
+- statements: `select:selectById`, `select:selectByStationCode`, `select:selectList`, `select:count`, `insert:insert`, `update:updateById`, `select:findNoSignStationList`, `select:findNoSignStationCount`, `select:findNoInstallStationList`, `select:findNoInstallStationCount`, `select:findTechNoRectifiedStationList`, `select:findTechNoRectifiedStationCount`, `select:findBusinessNoRectifiedStationList`, `select:findBusinessNoRectifiedStationCount`, `select:findNoGridStationList`, `select:findNoGridStationCount`, `select:findOverdueSpRank`, `select:countOverdueSpRank`
+- tables: `id`, `light_station`, `light_station_audit`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/LightGridCertMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.LightGridCertMapper`
+- statements: `select:selectLatestByStationCodeAndImageUrl`
+- tables: `light_grid_cert`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/CompleteConfirmMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.CompleteConfirmMapper`
+- statements: `select:selectStationById`, `select:selectInverterByStationCode`, `select:selectMajorPlanConfig`, `select:selectConfirmImgByStationCode`, `select:selectModuleSnByStationId`, `select:selectEpcByStationId`, `select:selectEpcFilesByStationId`, `select:selectProjectByProjectCode`, `select:selectPlanDesignByStationId`, `select:selectLatestGridCertRejectRecord`, `select:getLatestRejectReason`
+- tables: `light_audit_image_reject_record`, `light_module_sn`, `light_project_management`, `light_station`, `light_station_audit`, `light_station_confirm_img`, `light_station_epc`, `light_station_epc_file`, `light_station_inverter`, `light_station_plan_config`, `light_station_plan_design`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/ApprovalReview.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.ApprovalReviewMapper`
+- statements: `select:countReviewMaterials`, `select:selectReviewMaterials`
+- tables: `light_station`, `light_station_audit`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/GfConfirmImgMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.GfConfirmImgMapper`
+- statements: `select:selectByStationCode`, `select:selectByStationCodeAndType`
+- tables: `gf_light_station_confirm_img`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/InverterOcrMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.InverterOcrMapper`
+- statements: `select:selectLatestByInverter`
+- tables: `light_station_inverter_ocr`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/ShipGoodsApprovalMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.ShipGoodsApprovalMapper`
+- statements: `select:countConfirmOrders`, `select:findConfirmOrders`
+- tables: `light_confirm_order`, `light_sp_auclon_store`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/ModuleAngleOcrMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.ModuleAngleOcrMapper`
+- statements: `select:selectLatestByAngle`
+- tables: `light_station_module_angle_ocr`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/LightPurchaseOrderMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.LightPurchaseOrderMapper`
+- statements: `select:findOver7UnsignedSummary`, `select:findOver7UnsignedSpRank`, `select:countOver7UnsignedSpRank`, `select:findOver7UnsignedDetail`, `select:countOver7UnsignedDetail`
+- tables: `light_purchase_order`, `light_service_provider`, `light_sp_store`
+
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/light/BusinessAnalysisMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.light.BusinessAnalysisMapper`
+- statements: `select:subCenterOverview`, `select:spRankList`, `select:spRankCount`, `select:cityRankList`, `select:cityRankCount`, `select:stationStatusOverview`, `select:stationSpRankList`, `select:stationSpRankCount`, `select:stationPageList`, `select:stationPageCount`
+- tables: `light_station`
 
 ## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/elec/LightStationElecMapper.xml
 - namespace: `com.rrsjk.adminapp.mapper.elec.LightStationElecMapper`
 - statements: `select:selectById`, `select:selectByStationCode`, `select:selectList`, `select:count`, `insert:insert`, `update:updateById`
 - tables: `id`, `light_station_elec`
 
+## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/elec/AssetManagementMapper.xml
+- namespace: `com.rrsjk.adminapp.mapper.elec.AssetManagementMapper`
+- statements: `select:countByStatus`, `select:spRankByStatus`, `select:spRankByStatusCount`, `select:alarmStationList`, `select:alarmStationCount`, `select:stationChartDay`, `select:stationElecDayReport`, `select:countGroupBySpAndStatus`, `select:snapshotCountByStatus`, `select:snapshotBySpAndStatus`, `insert:batchUpsertSnapshot`, `select:inverterListByStationCode`, `select:inverterHistoryByStationCode`, `select:inverterElecAggregation`, `select:inverterAlarmsByStationCode`
+- tables: `count`, `light_inveter`, `light_inveter_data`, `light_station`, `light_station_elec`, `light_station_elec_day_report`, `light_station_inverter`, `sp_station_status_snapshot`
+
 ## rrsjk-admin-app-service/rrsjk-admin-app-impl/src/main/resources/mybatis/mapper/ads/ElecWarningStationMapper.xml
 - namespace: `com.rrsjk.adminapp.mapper.ads.ElecWarningStationMapper`
-- statements: `select:selectByKey`, `select:selectList`, `select:count`, `select:findNoElecStationList`, `insert:insert`, `update:updateByKey`
+- statements: `select:selectByKey`, `select:selectList`, `select:count`, `select:findNoElecStationList`, `select:countNoElecStationPage`, `select:findNoElecSpRank`, `select:countNoElecSpRank`, `insert:insert`, `update:updateByKey`
 - tables: `elec_warning_station`, `id`
 
 ## rrsjk-async-import-export/src/main/resources/mapper/task/AsyncImportExportTaskMapper.xml
@@ -2450,8 +2510,8 @@
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsLightStationElec.xml
 - namespace: `com.rrsjk.light.data.dao.dws.DwsLightStationElecDao`
-- statements: `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getElecSum`
-- tables: `dws.green_energy_light_station_realtime_current`, `ods.green_energy_light_station`
+- statements: `select:queryListBy`, `select:queryCountBy`, `select:findByParams`, `select:getElecSum`, `update:updateFirstThreePowerAtByStationCode`, `update:updateFirstValidThreePowerAtByStationCode`
+- tables: `dws.green_energy_light_station_realtime_current`, `id`, `ods.green_energy_light_station`
 
 ## rrsjk-light-data-service/rrsjk-light-data-impl/src/main/resources/mybatis/mapper/dws/DwsInveterData.xml
 - namespace: `com.rrsjk.light.data.dao.dws.DwsInveterDataDao`
@@ -2787,8 +2847,8 @@
 
 ## rrsjk-admin-operation-log-service/rrsjk-admin-operation-log-impl/src/main/resources/mybatis/mapper/AdminOperationLogMapper.xml
 - namespace: `com.rrsjk.adminoplog.mapper.AdminOperationLogMapper`
-- statements: `insert:insertOperationLog`, `insert:insertLoginLog`, `insert:insertLogBody`, `select:selectLogBody`, `select:countLoginLogs`, `select:selectLoginLogs`, `select:countOperationLogs`, `select:selectOperationLogs`
-- tables: `admin_log_body_detail`, `admin_login_log`, `admin_oper_log`
+- statements: `insert:insertOperationLog`, `insert:insertLoginLog`, `insert:insertLogBody`, `select:selectLogBody`, `select:countLoginLogs`, `select:selectLoginLogs`, `select:countOperationLogs`, `select:selectOperationLogs`, `insert:insertAssistantSession`, `update:updateAssistantSession`, `select:selectAssistantSession`, `select:countAssistantSessions`, `select:selectAssistantSessions`, `update:softDeleteAssistantSession`, `insert:insertAssistantMessage`, `select:selectAssistantMessages`
+- tables: `admin_assistant_message`, `admin_assistant_session`, `admin_log_body_detail`, `admin_login_log`, `admin_oper_log`, `id`
 
 ## rrsjk-merchant-service/rrsjk-merchant-impl/src/main/resources/mybatis/mapper/shop/YzzGuide.xml
 - namespace: `com.rrsjk.merchant.shop.dao.YzzGuideDao`
@@ -4887,7 +4947,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStation.xml
 - namespace: `com.rrsjk.light.dao.LightStationDao`
-- statements: `insert:create`, `update:update`, `select:get`, `select:getForUpdate`, `select:findByElecNo`, `select:findByElecNoRightLike`, `select:findByElecNosRightLike`, `select:getByStationCode`, `select:getByStationCodes`, `select:findByMemberId`, `select:findByOpMemberId`, `select:countOf`, `select:getMaxId`, `select:getMaxIdCondition`, `select:countForCBSExport`, `select:countOfByAllRefactor`, `select:countOfByAll`, `select:queryLightStationViewCountOf`, `select:findByForCBSExport`, `select:findByForCBSExportNew`, `select:findByForCBSExportPage`, `select:findByRefactor`, `select:findLatestOneByParams`, `select:findByAllOfColumns`, `select:findBy`, `select:queryLightStationView`, `select:queryPyInfos`, `select:findByNoPage`, `select:findOverdueStationsForNotify`, `select:findBySht`, `select:findByOpIdNull`, `select:countReviewMaterialOf`, `select:findReviewMaterialBy`, `select:countFinalFirstOf`, `select:findFinalFirstBy`, `select:getCheckByCode`, `select:findChangeStation`, `select:findStationSum`, `select:findBuildStationSum`, `select:findNoLonLatList`, `select:countReportData`, `select:listReportData`, `select:listReportDataBind`, `select:countReportDataBind`, `update:updateSignStatusByIdCardNumber`, `select:findByMobile`, `select:selectAllStationWithoutPs`, `update:updatePsById`, `select:findAuditOkFinalFirst`, `select:findByStationCode`, `select:findFirstAuditAt`, `select:getByStationCodeAndUserName`, `update:addChuiYangImage`, `select:countOfPlanAudit`, `select:findByForPlanAudit`, `select:findSkillCountOf`, `select:findSkillBy`, `select:findBusinessCountOf`, `select:findBusinessBy`, `select:getAllStationCodeByMemberId`, `select:getSubCenterByCity`, `select:getSubCenterByCityPro`, `select:findEpcStationCountOf`, `select:findEpcStation`, `select:getInstallerList`, `select:getGsyStationBy`, `select:getStationCodeBy`, `select:countGsyStationBy`, `select:getStationsByIds`, `select:getPvStationBAZ`, `select:queryZhongheStation`, `select:queryZhongheStationInfo`, `select:countOfZhongheStationInfo`, `select:findByHds`, `select:countOfHds`, `select:exportByHds`, `select:findNoPath`, `update:updatePath`, `update:changeUnionpayOrSharePayTypeById`, `update:changeUnionpayOrSharePayTypeByCode`
+- statements: `insert:create`, `update:update`, `select:get`, `select:getForUpdate`, `select:findByElecNo`, `select:findByElecNoRightLike`, `select:findByElecNosRightLike`, `select:findByElecNos`, `select:getByStationCode`, `select:getByStationCodes`, `select:findByMemberId`, `select:findByOpMemberId`, `select:countOf`, `select:getMaxId`, `select:getMaxIdCondition`, `select:countForCBSExport`, `select:countOfByAllRefactor`, `select:countOfByAll`, `select:queryLightStationViewCountOf`, `select:findByForCBSExport`, `select:findByForCBSExportNew`, `select:findByForCBSExportPage`, `select:findByRefactor`, `select:findLatestOneByParams`, `select:findByAllOfColumns`, `select:findBy`, `select:queryLightStationView`, `select:queryPyInfos`, `select:findByNoPage`, `select:findOverdueStationsForNotify`, `select:findBySht`, `select:findByOpIdNull`, `select:countReviewMaterialOf`, `select:findReviewMaterialBy`, `select:countFinalFirstOf`, `select:findFinalFirstBy`, `select:getCheckByCode`, `select:findChangeStation`, `select:findStationSum`, `select:findBuildStationSum`, `select:findNoLonLatList`, `select:countReportData`, `select:listReportData`, `select:listReportDataBind`, `select:countReportDataBind`, `update:updateSignStatusByIdCardNumber`, `select:findByMobile`, `select:selectAllStationWithoutPs`, `update:updatePsById`, `select:findAuditOkFinalFirst`, `select:findByStationCode`, `select:findFirstAuditAt`, `select:getByStationCodeAndUserName`, `update:addChuiYangImage`, `select:countOfPlanAudit`, `select:findByForPlanAudit`, `select:findSkillCountOf`, `select:findSkillBy`, `select:findBusinessCountOf`, `select:findBusinessBy`, `select:getAllStationCodeByMemberId`, `select:getSubCenterByCity`, `select:getSubCenterByCityPro`, `select:findEpcStationCountOf`, `select:findEpcStation`, `select:getInstallerList`, `select:getGsyStationBy`, `select:getStationCodeBy`, `select:countGsyStationBy`, `select:getStationsByIds`, `select:getPvStationBAZ`, `select:queryZhongheStation`, `select:queryZhongheStationInfo`, `select:countOfZhongheStationInfo`, `select:findByHds`, `select:countOfHds`, `select:exportByHds`, `select:findNoPath`, `update:updatePath`, `update:changeUnionpayOrSharePayTypeById`
 - tables: `boc_leasing_light_station`, `change_station_tmp`, `chd_light_station`, `city`, `cm_contract_manage`, `cm_light_project`, `id`, `light_limit_final_check`, `light_operation_provider`, `light_project_management`, `light_rent`, `light_service_provider`, `light_sp_staff`, `light_staging_records`, `light_station`, `light_station_audit`, `light_station_bank`, `light_station_confirm_img`, `light_station_contract_record`, `light_station_epc`, `light_station_plan_config`, `light_station_white_list`, `light_station_white_list_simple`, `light_station_yuexiu`, `light_sub_sp`, `light_unionpay_user`, `light_zero_carbon_station`, `zero_carbon_station_relate_file`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/GfLightStationConfirmImg.xml
@@ -7168,6 +7228,11 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:getByStationCode`, `delete:deleteByStationCode`, `delete:deleteByStationCodeAndFileName`
 - tables: `id`
 
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/electric/LightStationElecTemplateMapping.xml
+- namespace: `com.rrsjk.light.dao.electric.LightStationElecTemplateMappingDao`
+- statements: `insert:create`, `insert:batchInsert`, `update:update`, `select:get`, `select:getByIds`, `select:findAll`, `select:findBy`, `select:countOf`, `select:findByStationElecNo`, `select:exportBy`, `select:getByStationElecNoAndTemplateCode`, `select:findByStationElecNos`, `delete:deleteById`, `delete:deleteByStationElecNos`
+- tables: `id`, `light_invoice_template`
+
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/hrflc/HrflcProjectReform.xml
 - namespace: `com.rrsjk.light.dao.hrflc.HrflcProjectReformDao`
 - statements: `select:getById`, `insert:create`, `update:updateById`, `insert:batchInsert`, `select:countOf`, `select:findBy`, `select:findByCode`
@@ -9147,7 +9212,7 @@
 
 ## rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml
 - namespace: `com.rrsjk.adminauthz.mapper.AuthzRepositoryMapper`
-- statements: `select:findUser`, `select:listAllUsers`, `update:updateUser`, `insert:insertUser`, `select:findPasswordCredential`, `update:updateUserPassword`, `insert:insertUserPassword`, `select:listRoleCodesByUser`, `select:listRolesByCodes`, `select:listAllRoles`, `insert:insertRole`, `update:updateRole`, `delete:deleteRole`, `delete:deleteRolePermissions`, `delete:deleteUserRolesByRole`, `delete:deleteUserRoles`, `insert:insertUserRole`, `select:listPermissionsByRole`, `select:listAllPermissions`, `select:listAllPermissionsForClient`, `select:listByPermissionKeys`, `select:listByPermissionKeysForClient`, `insert:insertPermission`, `update:updatePermission`, `delete:deletePermission`, `delete:deletePermissionForClient`, `delete:deleteRolePermissionsByPermission`, `delete:deleteRoleClientPermissionsByPermission`, `delete:deleteUserPermissionsByPermission`, `delete:deleteUserClientPermissionsByPermission`, `delete:deleteRoleClientPermissions`, `insert:insertRolePermission`, `delete:deleteUserClientPermissions`, `insert:insertUserPermission`, `select:listRolePermissionKeysByUser`, `select:listDirectPermissionKeysByUser`, `select:listSubCentersByUser`, `select:listAllMenus`, `select:listAllMenusForClient`, `update:updateMenu`, `insert:insertMenu`, `delete:deleteMenu`, `delete:deleteMenuForClient`
+- statements: `select:findUser`, `select:listAllUsers`, `select:listUsersByClient`, `update:updateUser`, `insert:insertUser`, `select:findPasswordCredential`, `update:updateUserPassword`, `insert:insertUserPassword`, `select:listRoleCodesByUser`, `select:listRoleCodesByUserForClient`, `select:listRolesByCodes`, `select:listAllRoles`, `select:listAllRolesForClient`, `select:countByRoleCode`, `insert:insertRole`, `update:updateRole`, `delete:deleteRole`, `delete:deleteRolePermissions`, `delete:deleteUserRolesByRole`, `delete:deleteUserRoles`, `delete:deleteUserRolesForClient`, `insert:insertUserRole`, `select:listPermissionsByRole`, `select:listAllPermissions`, `select:listAllPermissionsForClient`, `select:listByPermissionKeys`, `select:listByPermissionKeysForClient`, `select:listEffectivePermissionsByUser`, `insert:insertPermission`, `update:updatePermission`, `delete:deletePermission`, `delete:deletePermissionForClient`, `delete:deleteRolePermissionsByPermission`, `delete:deleteRoleClientPermissionsByPermission`, `delete:deleteUserPermissionsByPermission`, `delete:deleteUserClientPermissionsByPermission`, `delete:deleteRoleClientPermissions`, `insert:insertRolePermission`, `delete:deleteUserClientPermissions`, `delete:deleteUserPermissions`, `insert:insertUserPermission`, `select:listRolePermissionKeysByUser`, `select:listDirectPermissionKeysByUser`, `select:listSubCentersByUser`, `select:listAllMenus`, `select:listAllMenusForClient`, `update:updateMenu`, `insert:insertMenu`, `delete:deleteMenu`, `delete:deleteMenuForClient`, `delete:deleteUser`
 - tables: `authz_menu`, `authz_permission`, `authz_role`, `authz_role_permission`, `authz_sub_center`, `authz_user`, `authz_user_password`, `authz_user_permission`, `authz_user_role`, `authz_user_sub_center`, `id`
 
 ## vpp-api-km/vpp-km-biz/src/main/resources/mapper/km/KnowledgeFileMapper.xml

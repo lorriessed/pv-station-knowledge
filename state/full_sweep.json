@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-22T22:00:10.817601",
+  "last_run_at": "2026-06-23T22:00:31.922140",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -190,11 +190,11 @@
     "rrsjk-energystorage-service": "2026-06-22T22:04:48.885760",
     "rrsjk-flowable-service": "2026-06-22T22:04:48.885760",
     "rrsjk-hds-web": "2026-06-22T22:04:48.885760",
-    "rrsjk-item-service": "2026-05-25T22:08:31.388741",
-    "rrsjk-light-common": "2026-05-25T22:08:31.388741",
-    "rrsjk-light-data-service": "2026-05-25T22:08:31.388741",
-    "rrsjk-light-iot-service": "2026-05-25T22:08:31.388741",
-    "rrsjk-light-message-service": "2026-05-25T22:08:31.388741",
+    "rrsjk-item-service": "2026-06-23T22:00:31.922140",
+    "rrsjk-light-common": "2026-06-23T22:00:31.922140",
+    "rrsjk-light-data-service": "2026-06-23T22:00:31.922140",
+    "rrsjk-light-iot-service": "2026-06-23T22:00:31.922140",
+    "rrsjk-light-message-service": "2026-06-23T22:00:31.922140",
     "rrsjk-light-openapi-service": "2026-05-26T22:00:58.451955",
     "rrsjk-light-operation-service": "2026-05-26T22:00:58.451955",
     "rrsjk-member-service": "2026-05-26T22:00:58.451955",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 38,
-  "last_sweep_at": "2026-06-22T22:04:48.885760"
+  "sweep_round": 39,
+  "last_sweep_at": "2026-06-23T22:05:42.796603"
 }

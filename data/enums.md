@@ -501,3 +501,40 @@
 - **影响范围**: 方案审核、完工审核、技术审核的所有影像驳回逻辑
 - **注意**: 历史数据中 `reject_flag="1"` 的记录需确认语义迁移
 
+---
+
+### HDS 终止状态字典 (前端配置证明, 2026-06-15)
+**来源**: `nahui-dicts-serve` → `src/data/osp/hds/stopStatus.js` (commit: 5470ae4, 李培龙, 2026-06-15)
+- HDS 业务终止状态字典，48行，用于前端展示 HDS 电站/业务的终止状态选项
+
+### ContractStatusEnum — 合同签署状态 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-admin-app-service` → `ContractStatusEnum.java` (commit: 948c19d, lilong, 2026-06-15)
+| 枚举值 | 描述 | 说明 |
+|---|---|---|
+| INIT | 初始 | |
+| WAIT_CONFIRM | 待确认 | |
+| WAIT_SIGN | 待签合同 | 电站录单可能生成两份合同(master+共建)，两份都签署才变 FINISHED |
+| WAIT_USER_SIGN | 待签合同 | CBS签订合同中间状态（服务商确认信息自动签合同后去掉该状态） |
+| WAIT_COMPANY_SIGN | 待项目公司签合同 | 中核电站的中间态 |
+| WAIIT_SERVICE_SING | 待服务商签合同 | 注意拼写: WAIIT (双I) |
+| FINISHED | 已完成 | |
+| DISABLE | 作废 | |
+
+### HouseTypeEnum — 屋顶类型 (代码明确证明, 2026-06-15)
+**来源**: `rrsjk-admin-app-service` → `HouseTypeEnum.java` (commit: 948c19d, lilong, 2026-06-15)
+| 枚举值 | 描述 | 适用模式 | 有分组图 |
+|---|---|---|---|
+| flat | 平顶屋 | 全部 | 否 |
+| slope | 斜屋顶 | 全部 | 否 |
+| ground | 院内地面 | 全部 | 是 |
+| ground_double_slope | 院内地面双坡 | 全部 | 是 |
+| hwdm | 户外地面 | HR/ZH/EPC | 否 |
+| yghb | 渔光互补 | HR/ZH/EPC | 否 |
+| nghb | 农光互补 | HR/ZH/EPC | 否 |
+| ygf | 阳光房 | 全部 | 否 |
+| epcSteel | 彩钢瓦 | HR/ZH/EPC | 否 |
+| epcBeton | 混凝土 | HR/ZH/EPC | 否 |
+| epcFloor | 地面 | HR/ZH/EPC | 否 |
+| enterprise_one | 企业厂房-彩钢瓦屋顶 | HR/ZH/EPC | 否 |
+| double_slope | 双面坡 | 全部 | 否 |
+

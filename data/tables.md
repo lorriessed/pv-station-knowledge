@@ -566,3 +566,10 @@ MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqi
 - **admin_oper_log**: 后台操作日志 (log_id PK, title, business_type, method, request_method, oper_name, user_id, oper_url, oper_ip, oper_param longtext, json_result longtext, status, error_msg, cost_time, trace_id, oper_time)
 - **admin_login_log**: 后台登录日志 (info_id PK, user_id, user_name, status, ipaddr, login_location, browser, os, msg, login_type APP/WEB, trace_id, login_time)
 - **admin_log_body_detail**: 日志正文详情 (detail_id PK, parent_type LOGIN/OPERATION, parent_id, request_body longtext, response_body longtext, request/response_body_size, request/response_truncated)
+
+### 发电数据省份路由表 (代码明确证明, 2026-06-23)
+**来源**: `rrsjk-light-data-service` → `SnProvinceConfig.java`, `SnProvinceConfigDao.java`
+- **sn_province_config**: 逆变器SN-省份编码映射表 (rrsjk_light_data库)
+  - `id` Long PK, `inverter_sn` String 逆变器SN码, `province_code` String 省份编码(如440000), `province_name` String 省份名称, `created_at` datetime, `updated_at` datetime
+  - 用途: Kafka省份Topic双写时按SN查询省份编码，分组发送到`{provinceCode}-vpp-electric` topic
+  - 关联: `KafkaProducerService.sendToProvinceDoubleWriteQueue()` 批量查询

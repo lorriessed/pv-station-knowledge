@@ -598,3 +598,48 @@
 - 新增"三天发电量作业到大数据DWS相关表"功能
 
 **架构意义**: 于淼/马金虎正在将"连续三天发电"判断从 MySQL 实时计算切换到 DWS 层。通过 type 字段区分数据来源，便于灰度对比和回滚。
+
+### SN-省份编码映射表 (代码明确证明, 2026-06-23 通读)
+
+**来源**: `rrsjk-light-data-service` → `SnProvinceConfig.java`, `SnProvinceConfigService.java`, `SnProvinceConfigDao.java` (代码明确证明)
+
+**表名**: `sn_province_config`
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `id` | Long | 主键 |
+| `inverter_sn` | String | 逆变器 SN 码 |
+| `province_code` | String | 省份编码 (如 440000, 330000, 320000) |
+| `province_name` | String | 省份名称 (如 广东省, 浙江省, 江苏省) |
+| `created_at` | LocalDateTime | 创建时间 |
+| `updated_at` | LocalDateTime | 更新时间 |
+
+**业务用途**: Kafka 省份 Topic 双写时，根据逆变器 SN 查询所属省份编码，按省份分组发送到不同 topic。
+- Topic 命名规则: `{provinceCode}-vpp-electric` (如 `440000-vpp-electric`)
+- 由 `KafkaProducerService.sendToProvinceDoubleWriteQueue()` 批量查询 SN→省份映射，分组后发送
+- 配置开关: `doubleWriteProperties.isEnableProvinceTopic()`
+- 无省份编码的 SN 数据被跳过（兜底方案: 不发送，仅记录日志）
+
+**数据流**: `LightInveterRecord` → 收集 SN 列表 → `snProvinceConfigService.getProvinceCodeMap(snList)` → 按省份分组 → `kafkaTemplate3.send(topic, value)`
+
+### 爱士惟数据处理线程池架构 (代码明确证明, 2026-06-23 通读)
+
+**来源**: `rrsjk-light-data-service` → `ThreadPoolExecutorConfig.java` (代码明确证明)
+
+爱士惟(Aiswei)逆变器数据处理有 5 个专用线程池，体现了数据流水线的分阶段设计:
+
+| 线程池名 | 核心/最大 | 队列容量 | 用途 |
+|---|---|---|---|
+| `aishiweiHandleElectricData` | 96/256 | 100,000 | 爱士惟发电数据处理主线程 |
+| `aishiweiRealtimeDataExecutor` | 32/96 | 20,000 | 爱士惟实时 Data 更新 |
+| `aisweiInveterHistoryBatchThreadPoolExecutor` | 8/16 | 2,000 | 爱士惟历史逆变器批次处理 |
+| `aisweiInveterDataBuildThreadPoolExecutor` | 4,096/8,192 | 65,536 | 爱士惟历史逆变器 Data 构建 (最大线程池) |
+| `aisweiInveterHistoryJobExecutor` | (配置见源码) | - | 爱士惟历史数据定时任务 |
+
+**其他关键线程池**:
+- `pyExecutor` (256/4096, 100K队列) — 浦银推送发电数据
+- `zhExecutor` (256/4096, 100K队列) — 中核推送发电数据
+- `inveterDataBuildThreadPoolExecutor` (4,000/40,000, 4K队列) — 通用逆变器 Data 构建
+- `inveterHistoryBatchThreadPoolExecutor` (2,000/10,000, 2K队列) — 通用历史逆变器批次处理
+
+**设计特征**: 所有线程池使用 `CallerRunsPolicy` 拒绝策略，确保高负载时不丢数据。
