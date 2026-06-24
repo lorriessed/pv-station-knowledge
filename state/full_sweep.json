@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-23T22:00:31.922140",
+  "last_run_at": "2026-06-24T22:00:52.325979",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -147,9 +147,9 @@
     "rrsjk-async-import-export": "2026-06-17T22:00:36.341244",
     "rrsjk-cms-service": "2026-06-17T22:00:36.341244",
     "rrsjk-finance-service": "2026-06-22T22:04:48.885760",
-    "rrsjk-light-service": "2026-05-26T22:00:58.451955",
+    "rrsjk-light-service": "2026-06-24T22:02:37",
     "rrsjk-merchant-web": "2026-05-27T22:00:16.087357",
-    "rrsjk-light-report-service": "2026-05-26T22:00:58.451955",
+    "rrsjk-light-report-service": "2026-06-24T22:02:37",
     "vpp-api-common": "2026-06-05T22:00:53.082618",
     "vpp-api-elecbusiness": "2026-06-05T22:00:53.082618",
     "vpp-api-ems": "2026-06-05T22:00:53.082618",
@@ -195,9 +195,9 @@
     "rrsjk-light-data-service": "2026-06-23T22:00:31.922140",
     "rrsjk-light-iot-service": "2026-06-23T22:00:31.922140",
     "rrsjk-light-message-service": "2026-06-23T22:00:31.922140",
-    "rrsjk-light-openapi-service": "2026-05-26T22:00:58.451955",
-    "rrsjk-light-operation-service": "2026-05-26T22:00:58.451955",
-    "rrsjk-member-service": "2026-05-26T22:00:58.451955",
+    "rrsjk-light-openapi-service": "2026-06-24T22:02:37",
+    "rrsjk-light-operation-service": "2026-06-24T22:02:37",
+    "rrsjk-member-service": "2026-06-24T22:02:37",
     "rrsjk-merchant-h5": "2026-05-27T22:00:16.087357",
     "rrsjk-merchant-service": "2026-05-27T22:00:16.087357",
     "rrsjk-migration-member": "2026-05-27T22:00:16.087357",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 39,
-  "last_sweep_at": "2026-06-23T22:05:42.796603"
+  "sweep_round": 41,
+  "last_sweep_at": "2026-06-24T22:02:37"
 }

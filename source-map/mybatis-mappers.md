@@ -9695,7 +9695,8 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightCompanyPolicy.xml
 - namespace: `com.rrsjk.report.dao.light.LightCompanyPolicyDao`
-- statements: `select:findPrice`, `select:findYgfPrice`, `select:findByPolicyAndTime`
+- statements: `select:findPrice`, `select:findYgfPrice`, `select:findByPolicyAndTime`, `select:findDistinctDimensions`
+- tables: `light_company_manage_region`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/PuYinTradeIncomeSettle.xml
 - namespace: `com.rrsjk.report.dao.light.PuYinTradeIncomeSettleDao`
@@ -9731,7 +9732,7 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightCompanyManageRegion.xml
 - namespace: `com.rrsjk.report.dao.light.LightCompanyManageRegionDao`
-- statements: `select:findEnabledRegions`
+- statements: `select:findEnabledRegions`, `select:findByDimensions`
 - tables: `light_company_manage_region`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightElectricMonthSum.xml
@@ -9886,8 +9887,8 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightEnablePolicy.xml
 - namespace: `com.rrsjk.report.dao.light.LightEnablePolicyDao`
-- statements: `select:findEnabledByRegion`, `select:findItemByPolicyId`
-- tables: `light_enable_policy`, `light_enable_policy_item`
+- statements: `select:findEnabledByRegion`, `select:findItemByPolicyId`, `select:findAllNPolicyWithItems`
+- tables: `light_enable_policy`, `light_enable_policy_area`, `light_enable_policy_item`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightCompanyPower.xml
 - namespace: `com.rrsjk.report.dao.light.LightCompanyPowerDao`
@@ -9906,8 +9907,8 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightEnablePolicyItem.xml
 - namespace: `com.rrsjk.report.dao.light.LightEnablePolicyItemDao`
-- statements: `select:findItemBy`
-- tables: `light_enable_policy_item`
+- statements: `select:findItemBy`, `select:findByPolicyAndRegion`
+- tables: `light_enable_policy`, `light_enable_policy_area`, `light_enable_policy_item`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightStationSettleSumQueue.xml
 - namespace: `com.rrsjk.report.dao.light.LightStationSettleSumQueueDao`
@@ -10954,8 +10955,8 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ods/ReportConfigQueryOdsMapper.xml
 - namespace: `com.rrsjk.report.dao.ods.ReportConfigQueryOdsDao`
-- statements: `select:findStationPlanConfigs`, `select:findUseOrderBySkuAndStation`, `select:findStationIdsByRegion`
-- tables: `green_energy_light_station`, `green_energy_light_station_plan_config`, `green_energy_light_use_order`
+- statements: `select:findStationPlanConfigs`, `select:findUseOrderBySkuAndStation`, `select:findStationIdsByRegion`, `select:findModuleCostByRegion`, `select:findInverterCostByRegion`
+- tables: `green_energy_light_station`, `green_energy_light_station_plan_config`, `green_energy_light_use_order`, `green_energy_product_price`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ods/ChargingStationTOrderSettlenfo.xml
 - namespace: `com.rrsjk.report.dao.ods.ChargingStationTOrderSettlenfoDao`

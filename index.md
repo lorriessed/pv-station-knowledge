@@ -1,13 +1,13 @@
      # PVS 知识索引
 
-     更新时间: 2026-06-21
+     更新时间: 2026-06-25
 
      ## 概况
 
      | 指标 | 数值 |
      |---|---|
      | 总仓库数 | 138 (PVS 97 + VPP/其他 41) |
-     | 已通读 | 138/138 (第37轮) ✅ 全覆盖 |
+     | 已通读 | 138/138 (第41轮) ✅ 全覆盖 |
      | 知识库文件 | 70+ 个 |
      | 知识库大小 | 6.8MB+ |
      | Domain 业务文件 | 46+ 个 |
@@ -15,9 +15,9 @@
 
      ## 仓库通读进度
 
-     ### 全部 138/138 个仓库已通读 (第37轮，2026-06-21) 🎉
+     ### 全部 138/138 个仓库已通读 (第41轮，2026-06-25) 🎉
      - **里程碑**: 全部仓库100%覆盖，后续均为重扫(re-sweep)，采用delta discovery策略
-     - 本轮通读 1 个: shoppingmall-member-web
+     - 当前轮次通读 5 个: rrsjk-light-openapi-service, rrsjk-light-operation-service, rrsjk-light-report-service, rrsjk-light-service, rrsjk-member-service (全部零提交跳过)
      - **shoppingmall-member-web**: 海尔商城会员门户(外围遗留系统)，最后提交2024-05-27，2025至今零提交。Spring MVC + Freemarker WAR架构，与光伏业务无关，仅通过Dubbo引用rrsjk-system-api和rrsjk-member-api。已分类记录在 `domains/web-and-additional-services.md`。
 
 ## 目录

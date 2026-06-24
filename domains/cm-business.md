@@ -318,3 +318,8 @@ Year 6: 95.6%, Year 7: 95%, Year 8: 94.4%, Year 9: 93.8%, Year 10: 93.2%
 | `tou_electricity_price` | 分时电价 (按省份+用电类型+电压等级, 尖/峰/平/谷/深谷) |
 | `electricity_price_summary_diff_period` | 分时电价时段汇总 (按省份+小时+月份, 12个月×24时段) |
 | `install_dip_angle_info_region` | 各地区安装倾角光照信息 (省/市/最佳倾角/平铺光照时长) |
+
+### 工商业项目生命周期报表逻辑更改 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-light-service` (tn_wangb, commit aa5b45f4, 2026-06-24)
+- **变更文件**: `CmConstructionProgressAuditServiceImpl.java` (66行减少，逻辑精简), `CmReportServiceImpl.java` (微调)
+- **业务含义**: 工商业施工进度审核和报表服务的生命周期管理逻辑调整

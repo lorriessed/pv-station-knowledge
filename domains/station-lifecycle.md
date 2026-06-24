@@ -1027,3 +1027,13 @@ if (exist != null) {
 - reject_flag 语义从三态(0/1/null)变为二态(null/0)，历史数据中的 "1" 值需确认是否正确迁移
 - 前端页面需要适配新的驳回标记语义
 - **证据等级**: 代码明确证明
+
+### 电站审核图片校验 — 新增逆变器OCR和组件倾角OCR (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-admin-bff` → `LightStationController.java` (yumiao, commit c58a8bdd, 2026-06-24)
+
+- **新增OCR客户端注入**:
+  - `LightStationInverterOcrClient` — 逆变器OCR识别客户端，实体 `com.rrsjk.light.entity.baiduAI.LightStationInverterOcr`
+  - `LightStationModuleAngleOcrClient` — 组件倾角OCR识别客户端，实体 `com.rrsjk.light.entity.baiduAI.LightStationModuleAngleOcr`
+- **业务含义**: 电站详情页(`LightStationDetailImageView`)现在暴露逆变器OCR和组件倾角OCR的校验元数据，用于审核图片验证
+- **已有OCR**: 房产证OCR (`LightStationHouseCertificateOcr`)、电表OCR (`LightElecOcr`)、并网证OCR (`LightGridCert`)
+- **证据等级**: 代码明确证明

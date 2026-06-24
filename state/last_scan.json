@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-23T23:01:35.309238",
+  "last_scan_at": "2026-06-24T23:01:57.668103",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -12,7 +12,7 @@
       "branch": "master"
     },
     "app_aiwork_flutter": {
-      "head": "bc741ebdd32e814d994c237efe7791b0b726a772",
+      "head": "1640f6f592ce5986360c8cc41bf2e1ea344bca2e",
       "path": "/data/pvcode/app_aiwork_flutter",
       "branch": "master"
     },
@@ -167,7 +167,7 @@
       "branch": "master"
     },
     "nahui-pv.mobile-h5": {
-      "head": "e0f24494ef8f5e5594cf857110635db29d7d4497",
+      "head": "adc2d6ee860c9d822197ccabea68332eb9f11646",
       "path": "/data/pvcode/nahui-pv.mobile-h5",
       "branch": "master"
     },
@@ -342,7 +342,7 @@
       "branch": "master"
     },
     "rrsjk-admin-bff": {
-      "head": "2672e1c5a0693040640c000cea9d5b717f7f1d83",
+      "head": "c58a8bdd6cc9067efb2f6b31e67408e1fc96b620",
       "path": "/data/pvcode/rrsjk-admin-bff",
       "branch": "master"
     },
@@ -357,7 +357,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "05ce3906d9df90d0e6d8a8813621d9c7dbf77039",
+      "head": "c6bd01ae29b932c0a02e3db6445ea67b86be1546",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -397,7 +397,7 @@
       "branch": "master"
     },
     "rrsjk-finance-service": {
-      "head": "893fab29226f9368192e6914aa9f85c05845a58e",
+      "head": "13b04b10d7878442cb8637a1b58f4b5ac9836116",
       "path": "/data/pvcode/rrsjk-finance-service",
       "branch": "master"
     },
@@ -422,7 +422,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "c446b670cd4f951092696a67001ea6a4e772370b",
+      "head": "b88be40820c8c091c7c8f56674a481d59483bbc8",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -447,12 +447,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "f0f9f4b9149fc4a299855f59e93983b538883873",
+      "head": "26d6b986a3acf3e67dde7df2517f6b6c0b0778af",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "674f547cf3631ff4824658bfe1d088302a80cc49",
+      "head": "82853225bea7768c38809fec6fa92d038a9bef78",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -502,7 +502,7 @@
       "branch": "master"
     },
     "rrsjk-openapi-web": {
-      "head": "714c10011d3adf3b79308cc3a7f09026ca8a6861",
+      "head": "797cf10a353348b55576b91905b37bdbf424ae19",
       "path": "/data/pvcode/rrsjk-openapi-web",
       "branch": "master"
     },
@@ -657,7 +657,7 @@
       "branch": "master"
     },
     "vpp-pv-oversea": {
-      "head": "1feb85b6609ba81105cf77fa628b7d35183b46bd",
+      "head": "76f37cdefc2ecbbc77b2d617361de995c75cb6d8",
       "path": "/data/pvcode/vpp-pv-oversea",
       "branch": "master"
     },

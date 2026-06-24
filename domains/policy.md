@@ -305,3 +305,30 @@
 
 **数据流**: 政策数据从ODS层读取 → 写入local库 → PolicyForecastJob定时计算 → 前端报表展示/Excel导出
 - **证据等级**: 代码明确证明
+
+### 五期：核心算法重构 — 维度来源变更 + 批量预加载 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-light-report-service` → `ReportPolicyForecastServiceImpl.java` (龙龙, 10+ commits, 分支 20260610_longlong_taei_3190_report_config, 2026-06-23~24)
+**配套前端**: `rrsjk-admin-web` → 6个报表页面地区级联重构 + `ReportConfigController` 新增省市区接口
+
+**核心变更**:
+- **维度来源变更**: 从 `company_manage_region` (按province+city分组) 改为 `light_company_policy` (按时间+两件套过滤，取 province_name + policy_code + company_code 去重)
+- **N政策批量预加载**: `findAllNPolicyWithItems()` 一次性加载所有ENABLE的IMMEDIATE_INCENTIVE政策+item+area，按(provinceId, cityId, nationwide)建HashMap索引
+- **A政策批量预加载**: `findEnableByTime()` 一次查所有ENABLE的A政策，按provinceId建索引 + 全国策略(nationwide=YES)单独收集
+- **组件/逆变器成本预加载**: `findComponentSwitchBy` 和 `findComponentPriceBy` 按省份分组预加载，避免逐城市循环查询
+- **组件/逆变器成本新增ODS查询**: `findModuleCostByRegion` (按brand+power+省市区分组算SUM(capacity))、`findInverterCostByRegion` (按brand+sku+省市区分组算COUNT+关联product_price)
+
+**新增DAO方法**:
+- `LightCompanyPolicyDao.findDistinctDimensions()` — 从light_company_policy获取去重维度
+- `LightEnablePolicyDao.findAllNPolicyWithItems()` — 一次性加载所有N政策(policy+area+item)
+- `LightEnablePolicyItemDao.findByPolicyAndRegion()` — 按政策和区域查N政策明细
+- `LightCompanyManageRegionDao.findByDimensions()` — 按维度查管理区域
+- `ReportConfigQueryOdsDao.findModuleCostByRegion()` — 组件成本ODS查询
+- `ReportConfigQueryOdsDao.findInverterCostByRegion()` — 逆变器成本ODS查询
+
+**前端配套** (`rrsjk-admin-web`, 龙龙, 2026-06-24):
+- `ReportConfigController` 新增 `/listProvince.do` 和 `/listRegion.do` 接口 (使用 `RegionService`)
+- 6个报表页面(purchasePrice/competitorPrice/componentPrice/componentSwitch/policyForecast/cityPowerSummary/regionPowerSummary)地区级联选择重构
+- 统一搜索函数命名、优化数据过滤逻辑、修复数据序列化和展示问题
+
+**物料维度变更** (德, commit 5a9d71d0, 2026-06-24):
+- `InventoryTurnoverControlSkuModel` + `EnergyInventoryTurnoverControlSku.xml` — 库存周转报表物料维度移除中转仓和第三方仓库数据

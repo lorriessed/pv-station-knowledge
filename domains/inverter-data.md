@@ -643,3 +643,8 @@
 - `inveterHistoryBatchThreadPoolExecutor` (2,000/10,000, 2K队列) — 通用历史逆变器批次处理
 
 **设计特征**: 所有线程池使用 `CallerRunsPolicy` 拒绝策略，确保高负载时不丢数据。
+
+### AISWEI API限流和重试机制 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-light-data-service` (sunzn, commit 1d1a89be, 2026-06-24, 分支 szn_fix_inverter_list_2026612)
+- **变更文件**: `AisweiApi.java` (213行重构), `AisweiApiProperties.java` (新增限流配置属性), `ThreadPoolConfig.java` (新增线程池配置)
+- **业务含义**: 爱仕维逆变器数据接入API增加限流保护和重试机制，提升数据拉取稳定性，避免因API频率限制导致数据缺失

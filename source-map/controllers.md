@@ -16340,6 +16340,8 @@
 - @RequestMapping("/competitorPrice/list.html")
 - @RequestMapping("/componentPrice/list.html")
 - @RequestMapping("/componentSwitch/list.html")
+- @RequestMapping(value = { "/listProvince.do" })
+- @RequestMapping(value = { "/listRegion.do" })
 - @RequestMapping("/purchasePrice/list")
 - @RequestMapping("/purchasePrice/delete")
 - @RequestMapping("/purchasePrice/export")

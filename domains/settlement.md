@@ -1938,3 +1938,22 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 
 **逻辑**: 取消订单时检查 `orderItem.getFapStatus()`，非空则查询 LightFapRecord 并调用 `cancelFapOrder(fapOrderNo)`。
 **风险**: 当 FAP 状态为 SUCCESS（已记账）时仅打 log 但仍尝试作废，可能调用失败。建议已记账订单走冲红流程。
+
+### FAP回调注销金蝶记账处理 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-light-service` → `LightProjectElectricOrderServiceImpl.java` (tn_wangb, commit 416c930e, 2026-06-24)
+- **变更**: 集团FAP回调时注销掉金蝶记账处理
+- **业务含义**: FAP回调流程不再触发金蝶记账，FAP和金蝶记账进一步解耦
+
+### 电网奖励订单采购功能 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-light-service` → `LightSapServiceImpl.java` (龙龙, commit f7164cae, 2026-06-24)
+- **变更**: 在 `LightSapServiceImpl` 中添加电网奖励订单采购功能
+- **业务含义**: SAP集成新增电网奖励相关的采购订单处理
+
+### 浦银BFF修复 (代码明确证明, 2026-06-23~24)
+**来源**: `rrsjk-admin-bff` (mabin, commits 85a169a3/63db48f0, 2026-06-23~24)
+- **PuYinPriceConfigController**: 导入Excel时房屋类型不再做 `toHouseTypeValue()` 转换，直接使用原始值 → 修正配置中的房屋类型设置
+- **PuYinIncomeReverseController**: 收入冲正日志节点文本直接取 `log.getNode()` 而非通过 `NodeEnum.of()` 枚举转换 → 修复日志节点文本显示问题
+
+### GTMS返款修复 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-finance-service` → `GtmsRebateThirdOrderHandleLine.java` (baoxin, commit 1c0a27fc, 2026-06-24)
+- **变更**: 修改GTMS返款第三方订单处理行逻辑
