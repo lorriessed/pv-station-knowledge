@@ -157,3 +157,23 @@
 **分支**: origin/20260615-zeroSmart
 
 **新增**: 零碳智能投站服务接口（具体接口定义需进一步确认）。马斌参与零碳模块开发。
+
+### 零碳套餐库存管理 (代码明确证明, 2026-06-17/25)
+
+**来源**: `rrsjk-merchant-web` → `ZeroCarbonItemSetMealStockController.java` (commit: 1815c2503, 代继宁, 2026-06-17; d616bd29e, 2026-06-18)
+
+**新增接口** (2026-06-17):
+- `GET /zerocarbon/itemSetMealStock/getSetMealInfoByKeyword?keyword=` — 关键字查询套餐库存（按名称模糊搜索）
+- `POST /zerocarbon/itemSetMealStock/reduceStock` — 手动下调套餐库存（ body: `SetMealStockParamDto`，含 setMealCode）
+  - 关联需求: TAEI-3144 (套餐计划库存下调)
+  - 订单号生成规则: 手动下调时使用特定规则生成订单号
+
+**业务说明**: 零碳适家服务商可通过商户通后台手动下调套餐库存（如库存损坏/报损场景），并通过关键字快速检索套餐信息。
+
+### 零碳套餐库存扣减类型扩展 (代码明确证明, 2026-06-17~25, TAEI-3144)
+**来源**: `rrsjk-item-service` → `ZeroCarbonItemSetMealStockServiceImpl.java`, `ZeroCarbonItemSetMealStockService.java`, `ZeroCarbonItemSetMealStockDao.java`, `ZeroCarbonItemSetMealStockMapper.xml` (代继宁, commits 37d98614/1f1d160b/f4e601d8, 2026-06-17~25)
+- **changeType 扩展**: `updateStock()` 的 `changeType` 从仅支持 `1`（正常扣减）扩展为支持 `1` 和 `3`（新增扣减类型）
+- **新增接口**: `findGroupByKeyword(Map<String, Object> params)` — 按套餐编码分组查询可用库存汇总，支持套餐编码/标题模糊查询
+- **新增校验**: 套餐数量不能为负数（`changeStock <= 0` → RS0008）
+- **重复操作处理**: 幂等检查命中时返回明确错误信息 RS0009（"已更新过零碳适家套餐库存，请勿再重复执行"）
+- **流水记录**: `changeLog.setChangeType()` 从硬编码 `1` 改为使用 `setMealStockParamDto.getChangeType()`，支持记录不同类型的扣减

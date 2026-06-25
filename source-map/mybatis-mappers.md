@@ -126,7 +126,7 @@
 
 ## rrsjk-item-service/rrsjk-item-impl/src/main/resources/mybatis/mapper/ZeroCarbonItemSetMealStockMapper.xml
 - namespace: `com.rrsjk.item.dao.ZeroCarbonItemSetMealStockDao`
-- statements: `insert:created`, `insert:batchInsert`, `update:updated`, `delete:deleteById`, `select:selectById`, `select:findList`, `select:selectByCondition`, `select:count`, `select:findCount`, `select:findPage`, `select:getAvailableStockByCode`, `select:selectByPlanStockCode`, `update:updateStockById`, `update:recoverStock`
+- statements: `insert:created`, `insert:batchInsert`, `update:updated`, `delete:deleteById`, `select:selectById`, `select:findList`, `select:selectByCondition`, `select:count`, `select:findCount`, `select:findPage`, `select:getAvailableStockByCode`, `select:selectByPlanStockCode`, `update:updateStockById`, `update:recoverStock`, `select:findGroupByKeyword`
 - tables: `id`, `zero_carbon_item_set_meal_stock`
 
 ## rrsjk-item-service/rrsjk-item-impl/src/main/resources/mybatis/mapper/ShopTypeSaleChannel.xml
@@ -3847,7 +3847,7 @@
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightAuditImageRejectRecord.xml
 - namespace: `com.rrsjk.light.dao.LightAuditImageRejectRecordDao`
-- statements: `insert:create`, `select:findByAuditId`, `delete:deleteByAuditId`, `delete:deleteByStationAuditType`, `select:findLatestGridCertByStation`, `select:findLatestFieldImageByStation`
+- statements: `insert:create`, `select:findByAuditId`, `delete:deleteByAuditId`, `delete:deleteByStationAuditType`, `delete:deleteByTarget`, `select:findLatestGridCertByStation`, `select:findLatestFieldImageByStation`, `select:findInverterImageRejects`
 
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightOverduePolicyArea.xml
 - namespace: `com.rrsjk.light.dao.LightOverduePolicyAreaDao`
@@ -10047,13 +10047,38 @@
 - namespace: `com.rrsjk.report.dao.elec.LightStationElecDao`
 - statements: `select:getById`, `select:queryListBy`, `select:queryDistinctListBy`, `select:queryCountBy`, `select:findByParams`, `select:findElecSum`, `select:findElecSumProvince`
 
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartTotal.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportStationChartTotalDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_station_chart_total`
+
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/ZeroCarbonDayReport.xml
 - namespace: `com.rrsjk.report.dao.ads.ZeroCarbonDayReportDao`
 - statements: `select:findBy`
 
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartTotal.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportInveterChartTotalDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_inverter_chart_total`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartYear.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportInveterChartYearDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_inverter_chart_year`
+
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/EnergyChainGroupIncomeComment.xml
 - namespace: `com.rrsjk.report.dao.ads.EnergyChainGroupIncomeCommentDao`
 - statements: `select:findBy`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartYear.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportStationChartYearDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_station_chart_year`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartDay.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportInveterChartDayDao`
+- statements: `select:findChart`, `select:countHourElec`
+- tables: `ads.green_energy_report_light_inverter_chart_day`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/RealTimeStationElecChartMonth.xml
 - namespace: `com.rrsjk.report.dao.ads.RealTimeStationElecChartMonthDao`
@@ -10068,6 +10093,26 @@
 - namespace: `com.rrsjk.report.dao.ads.EnergyChainGroupIncomeDao`
 - statements: `update:update`, `select:findBy`, `select:findOne`
 - tables: `energy_chain_group_income`, `id`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartMonth.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportStationChartMonthDao`
+- statements: `select:findChart`, `select:queryDayElectricForPuyinByCode`
+- tables: `ads.green_energy_report_light_station_chart_month`, `ods.green_energy_light_station_white_list_simple`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterPacChartDay.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportInveterPacChartDayDao`
+- statements: `select:findChart`
+- tables: `ads.green_energy_report_light_inverter_pac_chart_day`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportInveterChartMonth.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportInveterChartMonthDao`
+- statements: `select:findChart`, `select:findChartPro`
+- tables: `ads.green_energy_report_light_inverter_chart_month`, `dws.green_energy_inverter_current`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsReportStationChartDay.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsReportStationChartDayDao`
+- statements: `select:findChart`, `select:getMinFetchAt`
+- tables: `ads.green_energy_report_light_station_chart_day`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/ElecWarningStation.xml
 - namespace: `com.rrsjk.report.dao.ads.ElecWarningStationDao`
@@ -10170,6 +10215,7 @@
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ReportPolicyForecastMapper.xml
 - namespace: `com.rrsjk.report.dao.local.ReportPolicyForecastDao`
 - statements: `select:findByPage`, `select:countByPage`, `delete:deleteByForecastMonth`, `insert:batchInsert`
+- tables: `rrsjk_light_report.report_policy_forecast`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ReportZhModeStation.xml
 - namespace: `com.rrsjk.report.dao.local.ReportZhModeStationDao`
@@ -10922,6 +10968,16 @@
 - namespace: `com.rrsjk.report.dao.finance.LightIncomeRecordDao`
 - statements: `select:findByMode`
 - tables: `light_income_record`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dws/DwsLightStationElectricDayReportNew.xml
+- namespace: `com.rrsjk.report.dao.dws.DwsLightStationElectricDayReportNewDao`
+- statements: `select:findBy`, `select:countOf`, `select:findByGroupByStationCode`, `select:getElectricSum`, `select:getElectricAndIncome`, `select:queryDayElectric`, `select:queryBocDayElectric`, `select:queryCnncDayElectric`, `select:queryYueXiuDayElectric`, `select:getElectricAndIncomeByCode`, `select:getBocElectricAndIncomeByCode`, `select:getCnncElectricAndIncomeByCode`, `select:getYueXiuElectricAndIncomeByCode`, `select:queryDayElectricByCode`, `select:queryBocDayElectricByCode`, `select:queryCnncDayElectricByCode`, `select:queryYueXiuDayElectricByCode`, `select:findDaysElectric`, `select:findStationColumnByCmb`, `select:findStationColumnByBoc`, `select:findStationColumnByCnnc`, `select:findStationColumnByYueXiu`, `select:queryTotalElectricByCompanyCode`, `select:getElectricAndIncomeForPuyin`, `select:getElectricAndIncomeForPuyinByCode`, `select:getElectricAndIncomeByCodeInAssert`, `select:queryDayElectricByCodeInAssert`, `select:queryChartMonthElecByMonth`, `select:getPuyinElectricAndIncome`
+- tables: `ads.green_energy_report_light_station_chart_month`, `boc_leasing_light_station`, `cmb_leasing_station`, `cnnc_leasing_light_station`, `dws.green_energy_light_station_daily_current`, `energy_leased_station_asset_management`, `light_city_elec_price`, `light_station`, `light_station_elec_day_report_new`, `light_station_white_list_simple`, `ods.energy_leased_station_asset_management`, `ods.green_energy_cmb_leasing_station`, `ods.green_energy_light_city_elec_price`, `ods.green_energy_light_station_white_list`, `ods.green_energy_light_station_white_list_simple`, `report_station_chart_month`, `yuexiu_leasing_light_station`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dws/GreenEnergyInverterCurrent.xml
+- namespace: `com.rrsjk.report.dao.dws.GreenEnergyInverterCurrentDao`
+- statements: `select:getPuyinRealtimePower`, `select:findPuyinDashBoardCountData`, `select:findSnByStationCode`, `select:listInveterError`, `select:listInveterErrorNow`
+- tables: `ads.green_energy_report_light_inverter_chart_day`, `base_stations`, `cond1_count`, `dws.green_energy_inverter_current`, `dws.green_energy_light_station_daily_current`, `elec_today_val`, `ods.green_energy_light_station`, `ods.green_energy_light_station_inverter`, `ods.green_energy_light_station_white_list_simple`, `offline_old_count`, `offline_today_count`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dwt/ZeroCarbonHomeStationDetails.xml
 - namespace: `com.rrsjk.report.dao.dwt.ZeroCarbonHomeStationDetailsDao`

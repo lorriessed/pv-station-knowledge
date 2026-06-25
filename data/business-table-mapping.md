@@ -1,6 +1,6 @@
 # PVS 业务 → 数据库表映射
 
-> 自动生成于 2026-06-24，基于 3,402+ 个 MyBatis Mapper XML 扫描
+> 自动生成于 2026-06-25，基于 3,402+ 个 MyBatis Mapper XML 扫描
 > 核心库: rrsjk_light(805表), rrsjk_finance(196), rrsjk_light_report(171),
 > rrsjk_light_operation(124), rrsjk_trade(82), pvs_repairs(98) 等
 
@@ -12,18 +12,18 @@
 
 | 表名 | 库 | 说明 | Mapper引用数 |
 |------|-----|------|-------------|
-| `light_station` | rrsjk_light |  | 167 |
+| `light_station` | rrsjk_light |  | 168 |
 | `light_station_plan_config` | rrsjk_light |  | 33 |
 | `light_station_audit` | rrsjk_light |  | 27 |
 | `light_station_white_list` | rrsjk_light |  | 22 |
 | `light_station_yuexiu` | rrsjk_light |  | 20 |
 | `light_inveter_data` | rrsjk_light |  | 17 |
 | `light_station_inverter` | rrsjk_light |  | 16 |
+| `light_station_white_list_simple` | rrsjk_light |  | 15 |
 | `light_station_contract_record` | rrsjk_light |  | 14 |
-| `light_station_white_list_simple` | rrsjk_light |  | 14 |
 | `light_station_epc` | rrsjk_light |  | 13 |
+| `light_station_elec_day_report_new` | rrsjk_light |  | 9 |
 | `light_station_elec` | rrsjk_light |  | 8 |
-| `light_station_elec_day_report_new` | rrsjk_light |  | 8 |
 | `light_station_elec_day_report` | rrsjk_light |  | 7 |
 | `light_inveter` | rrsjk_light |  | 7 |
 | `light_station_operate_log` | rrsjk_light |  | 6 |
@@ -54,16 +54,16 @@
 | `light_station_baiduai_log` | rrsjk_light |  | 2 |
 | `light_station_info_update_log` | rrsjk_light |  | 2 |
 | `light_station_master_contract_ocr` | rrsjk_light |  | 2 |
-| `light_station_insurance` | rrsjk_light |  | 2 |
 | `light_station_yuexiu_exchange` | rrsjk_light |  | 2 |
+| `light_station_insurance` | rrsjk_light |  | 2 |
 | `light_station_register_draft` | rrsjk_light |  | 2 |
 | `light_station_info_update` | rrsjk_light |  | 2 |
 | `light_station_contract_info` | rrsjk_light |  | 2 |
 | `light_station_nanny_user` | rrsjk_light |  | 2 |
 | `light_station_yuexiu_settle` | rrsjk_light |  | 2 |
 | `light_station_nanny` | rrsjk_light |  | 2 |
-| `light_station_plan_design` | rrsjk_light |  | 1 |
 | `light_station_epc_file` | rrsjk_light |  | 1 |
+| `light_station_plan_design` | rrsjk_light |  | 1 |
 | `light_station_transfer_order` | rrsjk_light |  | 1 |
 | `light_station_other_material_policy` | rrsjk_light |  | 1 |
 | `light_station_transfer_order_log` | rrsjk_light |  | 1 |
@@ -74,8 +74,8 @@
 
 | 表名 | 库 | 说明 | Mapper引用数 |
 |------|-----|------|-------------|
-| `cmb_leasing_station` | rrsjk_light |  | 32 |
-| `boc_leasing_light_station` | rrsjk_light |  | 12 |
+| `cmb_leasing_station` | rrsjk_light |  | 33 |
+| `boc_leasing_light_station` | rrsjk_light |  | 13 |
 
 ## 服务商体系
 
@@ -132,19 +132,19 @@
 | `light_operation_region_block_release` | rrsjk_light_operation |  | 2 |
 | `light_operation_rating_point` | rrsjk_light_operation |  | 2 |
 | `light_operation_rating_item` | rrsjk_light_operation |  | 2 |
-| `light_operation_region_block` | rrsjk_light_operation |  | 2 |
 | `light_operation_region_block_area` | rrsjk_light_operation |  | 2 |
+| `light_operation_region_block` | rrsjk_light_operation |  | 2 |
 | `light_operation_work_order_fault_info` | rrsjk_light_operation |  | 2 |
-| `light_operation_report_data_field` | rrsjk_light_operation |  | 2 |
 | `light_operation_report_config` | rrsjk_light_operation |  | 2 |
+| `light_operation_report_data_field` | rrsjk_light_operation |  | 2 |
 | `light_operation_inspection_plan` | rrsjk_light_operation |  | 2 |
 | `light_operation_exam_answer` | rrsjk_light_operation |  | 2 |
 | `light_operation_station_elec_bill` | rrsjk_light_operation |  | 2 |
 | `light_operation_station_tag` | rrsjk_light_operation |  | 2 |
 | `light_operation_solution_category` | rrsjk_light_operation |  | 2 |
 | `light_operation_fault` | rrsjk_light_operation |  | 2 |
-| `light_operation_question_category` | rrsjk_light_operation |  | 2 |
 | `light_operation_question` | rrsjk_light_operation |  | 2 |
+| `light_operation_question_category` | rrsjk_light_operation |  | 2 |
 | `light_operation_fault_code` | rrsjk_light_operation |  | 2 |
 | `light_operation_external_inverter_inefficiency_diagnosis_results` | rrsjk_light_operation |  | 2 |
 | `light_operation_loss_management` | rrsjk_light_operation |  | 2 |
@@ -202,42 +202,44 @@
 
 | 表名 | 库 | 说明 | Mapper引用数 |
 |------|-----|------|-------------|
-| `green_energy_light_station` |  |  | 9 |
+| `green_energy_light_station` |  |  | 10 |
 | `green_energy_light_station_elec_day_report_new` |  |  | 8 |
+| `green_energy_cmb_leasing_station` |  |  | 5 |
 | `green_energy_boc_leasing_light_station` |  |  | 5 |
-| `green_energy_cmb_leasing_station` |  |  | 4 |
+| `green_energy_light_station_white_list_simple` |  |  | 5 |
+| `green_energy_light_city_elec_price` |  |  | 5 |
+| `green_energy_report_light_station_chart_month` |  |  | 4 |
+| `green_energy_inverter_current` |  |  | 4 |
 | `green_energy_light_station_operate_log` |  |  | 4 |
-| `green_energy_light_city_elec_price` |  |  | 4 |
-| `green_energy_yuexiu_leasing_light_station` |  |  | 4 |
-| `green_energy_cnnc_leasing_light_station` |  |  | 4 |
 | `green_energy_energy_leased_station_asset_management` |  |  | 4 |
-| `green_energy_report_light_station_chart_month` |  |  | 2 |
-| `green_energy_inverter_current` |  |  | 2 |
+| `green_energy_cnnc_leasing_light_station` |  |  | 4 |
+| `green_energy_yuexiu_leasing_light_station` |  |  | 4 |
+| `green_energy_report_light_inverter_chart_day` |  |  | 3 |
+| `green_energy_light_station_daily_current` |  |  | 3 |
+| `green_energy_report_light_station_chart_total` |  |  | 2 |
+| `green_energy_report_light_inverter_chart_total` |  |  | 2 |
+| `green_energy_report_light_inverter_chart_year` |  |  | 2 |
+| `green_energy_report_light_station_chart_year` |  |  | 2 |
+| `green_energy_report_light_inverter_pac_chart_day` |  |  | 2 |
+| `green_energy_report_light_inverter_chart_month` |  |  | 2 |
+| `green_energy_report_light_station_chart_day` |  |  | 2 |
 | `green_energy_light_inveter_data` |  |  | 2 |
-| `green_energy_light_station_white_list_simple` |  |  | 2 |
 | `green_energy_chain_group` |  |  | 2 |
 | `green_energy_sign_and_grid_scale_target` |  |  | 2 |
 | `green_energy_market_scale_target` |  |  | 2 |
 | `green_energy_chain_group_income` |  |  | 2 |
 | `green_energy_hrflc_sync_pv_info` |  |  | 2 |
-| `green_energy_sap_purchase_record` |  |  | 2 |
 | `green_energy_light_sp_grid_award_order` |  |  | 2 |
-| `green_energy_light_sp_inspire` |  |  | 2 |
-| `green_energy_light_sub_sp_region` |  |  | 2 |
+| `green_energy_sap_purchase_record` |  |  | 2 |
 | `green_energy_light_sub_sp` |  |  | 2 |
 | `green_energy_light_sp_authority_zone` |  |  | 2 |
-| `green_energy_report_light_station_chart_total` |  |  | 1 |
-| `green_energy_report_light_inverter_chart_total` |  |  | 1 |
-| `green_energy_report_light_inverter_chart_year` |  |  | 1 |
-| `green_energy_report_light_station_chart_year` |  |  | 1 |
-| `green_energy_report_light_inverter_chart_day` |  |  | 1 |
-| `green_energy_report_light_inverter_pac_chart_day` |  |  | 1 |
-| `green_energy_report_light_inverter_chart_month` |  |  | 1 |
-| `green_energy_report_light_station_chart_day` |  |  | 1 |
-| `green_energy_light_station_daily_current` |  |  | 1 |
+| `green_energy_light_sp_inspire` |  |  | 2 |
+| `green_energy_light_sub_sp_region` |  |  | 2 |
 | `green_energy_light_station_realtime_current` |  |  | 1 |
-| `green_energy_product_price` |  |  | 1 |
+| `green_energy_light_station_white_list` |  |  | 1 |
+| `green_energy_light_station_inverter` |  |  | 1 |
 | `green_energy_light_use_order` |  |  | 1 |
+| `green_energy_product_price` |  |  | 1 |
 | `green_energy_light_station_plan_config` |  |  | 1 |
 
 ## 政策
@@ -280,18 +282,18 @@
 | `cd_material` |  |  | 22 |
 | `sj_workflow` |  |  | 18 |
 | `sj_job` |  |  | 16 |
-| `report_station_chart_month` |  |  | 14 |
+| `report_station_chart_month` |  |  | 15 |
+| `energy_leased_station_asset_management` |  |  | 15 |
 | `hrflc_sync_pv_info` |  |  | 14 |
-| `energy_leased_station_asset_management` |  |  | 14 |
 | `user_message_relations` |  |  | 10 |
 | `city` |  |  | 10 |
 | `light_company_info` |  |  | 9 |
 | `cd_dict_data` |  |  | 9 |
+| `yuexiu_leasing_light_station` |  |  | 9 |
+| `cnnc_leasing_light_station` |  |  | 9 |
 | `sj_retry` |  |  | 8 |
 | `sj_server_node` |  |  | 8 |
 | `sp_tran_sn` |  |  | 8 |
-| `cnnc_leasing_light_station` |  |  | 8 |
-| `yuexiu_leasing_light_station` |  |  | 8 |
 | `vomproductdata` |  |  | 7 |
 | `light_module_sn` |  |  | 7 |
 | `sj_retry_summary` |  |  | 7 |
@@ -305,8 +307,8 @@
 | `cm_simple_project` | rrsjk_light |  | 7 |
 | `gvs_warehouse_age_analysis` |  |  | 7 |
 | `sp_tran` |  |  | 7 |
-| `light_unionpay_bill_record` |  |  | 6 |
 | `light_yuexiu_income_bill` |  |  | 6 |
+| `light_unionpay_bill_record` |  |  | 6 |
 | `light_electric_order` | rrsjk_light |  | 6 |
 | `light_staging_records` |  |  | 6 |
 | `sap_item_record` |  |  | 6 |
@@ -325,9 +327,10 @@
 | `sap_sp_center_relation` |  |  | 5 |
 | `energy_overdue_inventory_control_summary` |  |  | 5 |
 | `invoices` |  |  | 5 |
-| `rrsv3_store` |  |  | 5 |
 | `orderrepairs` |  |  | 5 |
+| `rrsv3_store` |  |  | 5 |
 | `sp_express_company` |  |  | 5 |
+| `light_city_elec_price` |  |  | 5 |
 | `item` |  |  | 4 |
 | `station_code` |  |  | 4 |
 | `report_inveter_chart_month` |  |  | 4 |
@@ -343,8 +346,8 @@
 | `light_limit_final_check` |  |  | 4 |
 | `change_station_tmp` |  |  | 4 |
 | `light_rent` |  |  | 4 |
-| `cm_payment_milestone_audit` | rrsjk_light |  | 4 |
 | `light_manual_income` |  |  | 4 |
+| `cm_payment_milestone_audit` | rrsjk_light |  | 4 |
 | `light_unionpay_rent_record` |  |  | 4 |
 | `light_yue_xiu_income_bill_exception` |  |  | 4 |
 | `light_purchase_pre` | rrsjk_light |  | 4 |
@@ -358,9 +361,9 @@
 | `sub_goal` |  |  | 4 |
 | `hrflc_station_elec_push_now` |  |  | 4 |
 | `light_annual_scale_policy` |  |  | 4 |
-| `out_business_fee` |  |  | 4 |
-| `bill` |  |  | 4 |
 | `cash_self_order_item` |  |  | 4 |
+| `bill` |  |  | 4 |
+| `out_business_fee` |  |  | 4 |
 | `sap_purchase_record` |  |  | 4 |
 | `light_income_record` |  |  | 4 |
 | `memberinvoices` |  |  | 4 |
@@ -368,9 +371,8 @@
 | `regions` |  |  | 4 |
 | `sp_nsco_trace` |  |  | 4 |
 | `sp_tran_detail` |  |  | 4 |
-| `sp_oldback_lists` |  |  | 4 |
 | `sp_oldback_lists_detail` |  |  | 4 |
-| `light_city_elec_price` |  |  | 4 |
+| `sp_oldback_lists` |  |  | 4 |
 | `obs_order` |  |  | 4 |
 | `sp_sub_build_evaluate_dashboard` |  |  | 4 |
 | `vom_product_price` |  |  | 3 |
@@ -395,22 +397,22 @@
 | `wo_part` |  |  | 3 |
 | `category` |  |  | 2 |
 | `socialization_station` |  |  | 2 |
-| `light_repair_order` |  |  | 2 |
 | `light_cs_order` |  |  | 2 |
+| `light_repair_order` |  |  | 2 |
 | `inverter_error_dict` |  |  | 2 |
 | `report_inveter_chart_total` |  |  | 2 |
 | `total_evaluators` |  |  | 2 |
 | `item_score` |  |  | 2 |
+| `report_screen_month_elec` |  |  | 2 |
 | `report_screen_grid` |  |  | 2 |
 | `report_asset_screen_work_order` |  |  | 2 |
 | `report_screen_county` |  |  | 2 |
-| `report_screen_month_elec` |  |  | 2 |
 | `light_wv_rent_record` |  |  | 2 |
 | `station_stats` |  |  | 2 |
 | `mv_station_power_trend_daily` |  |  | 2 |
 | `inverter_inefficiency_diagnosis_results` |  |  | 2 |
-| `daily_station_stats` |  |  | 2 |
 | `monthly_station_stats` |  |  | 2 |
+| `daily_station_stats` |  |  | 2 |
 | `t_product` |  |  | 2 |
 | `sj_retry_scene_config` |  |  | 2 |
 | `sj_workflow_task_batch` |  |  | 2 |
@@ -439,9 +441,9 @@
 | `yuexiu_interactive_log` |  |  | 2 |
 | `light_project_sp_partner` | rrsjk_light |  | 2 |
 | `light_project_authority_sp` | rrsjk_light |  | 2 |
-| `innodb_locks` |  |  | 2 |
-| `innodb_trx` |  |  | 2 |
 | `processlist` |  |  | 2 |
+| `innodb_trx` |  |  | 2 |
+| `innodb_locks` |  |  | 2 |
 | `light_project_funnel_management` | rrsjk_light |  | 2 |
 | `light_commodity` |  |  | 2 |
 | `light_benefit_conversion` |  |  | 2 |
@@ -473,8 +475,8 @@
 | `light_op_contract_config` |  |  | 2 |
 | `light_enable_policy_sp` |  |  | 2 |
 | `light_ocr_xls` |  |  | 2 |
-| `light_overdue_list_detail_reject_other` |  |  | 2 |
 | `light_overdue_list_detail` |  |  | 2 |
+| `light_overdue_list_detail_reject_other` |  |  | 2 |
 | `operation` |  |  | 2 |
 | `light_stock` |  |  | 2 |
 | `light_store_address` |  |  | 2 |
@@ -488,10 +490,10 @@
 | `chui_yang_request_log` |  |  | 2 |
 | `cm_invoice_apply` | rrsjk_light |  | 2 |
 | `zero_carbon_message` |  |  | 2 |
-| `zero_carbon_sp_deposit` |  |  | 2 |
-| `zero_carbon_order_policy_service_provider` |  |  | 2 |
-| `zero_carbon_order_policy` |  |  | 2 |
 | `zero_carbon_sp_business_model` |  |  | 2 |
+| `zero_carbon_order_policy_service_provider` |  |  | 2 |
+| `zero_carbon_sp_deposit` |  |  | 2 |
+| `zero_carbon_order_policy` |  |  | 2 |
 | `light_zero_merchant_notice` | rrsjk_light |  | 2 |
 | `zero_carbon_order_policy_cash` |  |  | 2 |
 | `light_zero_merchant_notice_operate_log` | rrsjk_light |  | 2 |
@@ -539,11 +541,11 @@
 | `joint_company_order_refund` |  |  | 2 |
 | `sap_self_account` |  |  | 2 |
 | `invoicechangelogs` |  |  | 2 |
+| `express_record` |  |  | 2 |
 | `packageproducts` |  |  | 2 |
 | `couponreceivedbyorderlogs` |  |  | 2 |
-| `express_record` |  |  | 2 |
-| `storages` |  |  | 2 |
 | `producttypes` |  |  | 2 |
+| `storages` |  |  | 2 |
 | `products` |  |  | 2 |
 | `orderandopextattr` |  |  | 2 |
 | `reservationshipping` |  |  | 2 |
@@ -576,8 +578,8 @@
 | `sp_sub_operation_evaluate_dashboard` |  |  | 2 |
 | `energy_light_estimate_test` |  |  | 2 |
 | `light_tech_audit_time_liness_report` |  |  | 2 |
-| `sp_sub_base_data_dashboard` |  |  | 2 |
 | `sub_center_code` |  |  | 2 |
+| `sp_sub_base_data_dashboard` |  |  | 2 |
 | `energy_inventory_turnover_control_sub_center` |  |  | 2 |
 | `energy_grid_income_target` |  |  | 2 |
 | `energy_inventory_turnover_control_sku` |  |  | 2 |
@@ -599,10 +601,10 @@
 | `energy_capital_data_detail` |  |  | 2 |
 | `energy_jinan_sp_leader` |  |  | 2 |
 | `energy_center_network_build_target` |  |  | 2 |
-| `vm_order` |  |  | 2 |
 | `vm_order_bill` |  |  | 2 |
-| `product_breakeven_price_change_notice_obs` |  |  | 1 |
+| `vm_order` |  |  | 2 |
 | `product_breakeven_price` |  |  | 1 |
+| `product_breakeven_price_change_notice_obs` |  |  | 1 |
 | `zero_carbon_item_set_meal_stock_change_log` |  |  | 1 |
 | `zero_carbon_item_set_meal_stock` |  |  | 1 |
 | `front_category_top_item` |  |  | 1 |
@@ -612,8 +614,8 @@
 | `product_order` |  |  | 1 |
 | `security_user` |  |  | 1 |
 | `organization` |  |  | 1 |
-| `energy_elec_price_report_province` |  |  | 1 |
 | `energy_elec_price_report_region` |  |  | 1 |
+| `energy_elec_price_report_province` |  |  | 1 |
 | `light_estimate_city_elec_price` |  |  | 1 |
 | `station_id` |  |  | 1 |
 | `t_product_image` |  |  | 1 |
@@ -651,10 +653,10 @@
 | `order_voucher_audit_log` |  |  | 1 |
 | `payback_management_info` |  |  | 1 |
 | `payback_confirm_audit_log` |  |  | 1 |
-| `admin_oper_log` |  |  | 1 |
-| `admin_log_body_detail` |  |  | 1 |
 | `admin_login_log` |  |  | 1 |
 | `admin_assistant_message` |  |  | 1 |
+| `admin_log_body_detail` |  |  | 1 |
+| `admin_oper_log` |  |  | 1 |
 | `admin_assistant_session` |  |  | 1 |
 | `shop` |  |  | 1 |
 | `expert_customer` |  |  | 1 |
@@ -672,12 +674,12 @@
 | `electricity_price_of_coal` |  |  | 1 |
 | `electricity_price_summary_diff_period` |  |  | 1 |
 | `dev_forecast` |  |  | 1 |
-| `lan_id` |  |  | 1 |
 | `i18n_message` |  |  | 1 |
+| `lan_id` |  |  | 1 |
 | `ngb_station_user` |  |  | 1 |
 | `device_info` |  |  | 1 |
-| `electricity_price_data_spot_hourly_avg` |  |  | 1 |
 | `electricity_price_data_node_hourly_avg` |  |  | 1 |
+| `electricity_price_data_spot_hourly_avg` |  |  | 1 |
 | `coupon` |  |  | 1 |
 | `stock_report` |  |  | 1 |
 | `hrois_order_box` |  |  | 1 |
@@ -685,13 +687,13 @@
 | `light_purchase_sales_item_order` | rrsjk_light |  | 1 |
 | `address_operation_log` |  |  | 1 |
 | `light_purchase_sales_purchase_order` | rrsjk_light |  | 1 |
-| `activity_pic` |  |  | 1 |
 | `activity` |  |  | 1 |
+| `activity_pic` |  |  | 1 |
 | `net_pay_log` |  |  | 1 |
-| `rank_card` |  |  | 1 |
-| `order_invoice` |  |  | 1 |
-| `member_benefit` |  |  | 1 |
 | `benefit_consumer` |  |  | 1 |
+| `order_invoice` |  |  | 1 |
+| `rank_card` |  |  | 1 |
+| `member_benefit` |  |  | 1 |
 | `benefit` |  |  | 1 |
 | `benefit_package_detail` |  |  | 1 |
 | `cm_owner_station_report` | rrsjk_light |  | 1 |
@@ -719,37 +721,37 @@
 | `deposit_record` |  |  | 1 |
 | `hp_record` |  |  | 1 |
 | `http_interface_info` |  |  | 1 |
-| `order2ths` |  |  | 1 |
 | `sapproofs` |  |  | 1 |
-| `invoiceelectriclogs` |  |  | 1 |
 | `invoiceapilogs` |  |  | 1 |
-| `order4invoices` |  |  | 1 |
 | `posproofs` |  |  | 1 |
+| `order4invoices` |  |  | 1 |
+| `order2ths` |  |  | 1 |
+| `invoiceelectriclogs` |  |  | 1 |
 | `menu_tree` |  |  | 1 |
 | `presale` |  |  | 1 |
 | `stock_wly_sku` |  |  | 1 |
-| `jde_orderrecord` |  |  | 1 |
 | `op2jdesharing` |  |  | 1 |
-| `manage_forecast` |  |  | 1 |
-| `forecast_order` |  |  | 1 |
+| `jde_orderrecord` |  |  | 1 |
 | `forecast_order_detail` |  |  | 1 |
 | `manage_forecast_detail` |  |  | 1 |
+| `manage_forecast` |  |  | 1 |
+| `forecast_order` |  |  | 1 |
 | `jdeoffsettask` |  |  | 1 |
 | `company_extras` |  |  | 1 |
 | `order_relation` |  |  | 1 |
 | `express_register` |  |  | 1 |
 | `rrsv3_freezestock` |  |  | 1 |
 | `orderoperatelogs` |  |  | 1 |
-| `ord_wf_exception_config` |  |  | 1 |
 | `ord_wf_order_exception` |  |  | 1 |
+| `ord_wf_exception_config` |  |  | 1 |
 | `branch_id` |  |  | 1 |
 | `cmt_comment_order_products` |  |  | 1 |
 | `storageproducts` |  |  | 1 |
 | `hp_regions_info` |  |  | 1 |
 | `internal_buy` |  |  | 1 |
 | `order_relation_queue` |  |  | 1 |
-| `month_amount` |  |  | 1 |
 | `income_forecast` |  |  | 1 |
+| `month_amount` |  |  | 1 |
 | `income_actual` |  |  | 1 |
 | `rrsv3_store_city` |  |  | 1 |
 | `lesqueues` |  |  | 1 |
@@ -760,16 +762,16 @@
 | `stock_frozen_queues` |  |  | 1 |
 | `order_queues` |  |  | 1 |
 | `target` |  |  | 1 |
-| `ecological_income_cate_name2019` |  |  | 1 |
 | `rrs_income_data_finance` |  |  | 1 |
+| `ecological_income_cate_name2019` |  |  | 1 |
 | `rrs_income_data_finance2019` |  |  | 1 |
 | `orderrepairlesqueues` |  |  | 1 |
 | `internal_buy_order` |  |  | 1 |
 | `hp_bcc_pay` |  |  | 1 |
 | `ehaierqueues` |  |  | 1 |
 | `sap_reverse_record` |  |  | 1 |
-| `service_income_record_detail` |  |  | 1 |
 | `service_income_record` |  |  | 1 |
+| `service_income_record_detail` |  |  | 1 |
 | `netpoints` |  |  | 1 |
 | `rrsv3_stock_record` |  |  | 1 |
 | `jde_yb_product` |  |  | 1 |
@@ -778,22 +780,22 @@
 | `video` |  |  | 1 |
 | `cookbook` |  |  | 1 |
 | `cook_day` |  |  | 1 |
-| `authz_user_sub_center` |  |  | 1 |
-| `authz_user_role` |  |  | 1 |
-| `authz_menu` |  |  | 1 |
-| `authz_user_permission` |  |  | 1 |
-| `authz_user` |  |  | 1 |
 | `authz_permission` |  |  | 1 |
-| `authz_role_permission` |  |  | 1 |
-| `authz_role` |  |  | 1 |
-| `authz_sub_center` |  |  | 1 |
 | `authz_user_password` |  |  | 1 |
+| `authz_user_role` |  |  | 1 |
+| `authz_role` |  |  | 1 |
+| `authz_menu` |  |  | 1 |
+| `authz_user` |  |  | 1 |
+| `authz_sub_center` |  |  | 1 |
+| `authz_user_sub_center` |  |  | 1 |
+| `authz_role_permission` |  |  | 1 |
+| `authz_user_permission` |  |  | 1 |
 | `knowledge_user` |  |  | 1 |
 | `sp_reserve_allocation_order_detail` |  |  | 1 |
 | `sp_inverter_service_sn` |  |  | 1 |
 | `sp_supplier_parts_cost` |  |  | 1 |
-| `wf_deploy_form` |  |  | 1 |
 | `wf_form` |  |  | 1 |
+| `wf_deploy_form` |  |  | 1 |
 | `sp_express_routing` |  |  | 1 |
 | `sp_foregift` |  |  | 1 |
 | `sp_warehouse_attach` |  |  | 1 |
@@ -801,10 +803,16 @@
 | `cd_warehouse_route` |  |  | 1 |
 | `light_report_purchase_price` |  |  | 1 |
 | `light_report_competitor_price` |  |  | 1 |
-| `light_report_component_price` |  |  | 1 |
 | `light_report_component_switch` |  |  | 1 |
+| `light_report_component_price` |  |  | 1 |
 | `light_instant_grid_reward_policy` |  |  | 1 |
 | `light_tech_auditor_operation_log` |  |  | 1 |
+| `report_policy_forecast` |  |  | 1 |
+| `offline_today_count` |  |  | 1 |
+| `cond1_count` |  |  | 1 |
+| `base_stations` |  |  | 1 |
+| `elec_today_val` |  |  | 1 |
+| `offline_old_count` |  |  | 1 |
 | `charging_station_t_order_charging_history` |  |  | 1 |
 | `charging_station_t_order_settle_info` |  |  | 1 |
 | `haier_energy_t_self_report_metric` |  |  | 1 |

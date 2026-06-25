@@ -1037,3 +1037,12 @@ if (exist != null) {
 - **业务含义**: 电站详情页(`LightStationDetailImageView`)现在暴露逆变器OCR和组件倾角OCR的校验元数据，用于审核图片验证
 - **已有OCR**: 房产证OCR (`LightStationHouseCertificateOcr`)、电表OCR (`LightElecOcr`)、并网证OCR (`LightGridCert`)
 - **证据等级**: 代码明确证明
+
+### 电站列表新增"三天发电时间"查询条件 (代码明确证明, 2026-06-25)
+**来源**: `rrsjk-admin-web` → `LightStationController.java`, `StationListExport.java`, `lightStationList.ftl` (wangxiran, commit 27506189, 2026-06-25)
+- **新增参数**: `firstThreePowerAtStart` / `firstThreePowerAtEnd` — 按"首次三天发电时间"范围筛选
+- **影响接口**:
+  - `doListRefactor.do` — 电站列表查询（重构版）新增两个参数
+  - `doExport.do` — 电站列表导出新增两个参数
+- **buildParams 方法**: 签名从 6 参数扩展为 8 参数，新增 `firstThreePowerAtStart/End` 的时间解析逻辑
+- **业务含义**: 支持按电站首次实现连续三天发电的时间范围进行筛选和导出

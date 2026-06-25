@@ -218,7 +218,16 @@
 - **PCS 接口**: 开发环境地址更新为测试环境
 - **前端**: `rrsjk-admin-web` 新增自持电站损益报表页面 (`tn_wangb`, 6+ commits)
 
-**涉及表**: `cm_owner_station_report`, `cm_owner_station_white_list`, `cm_owner_station_report_third_log` (新), `light_high_elec`, `light_station_plan_change`
+### 自持电站损益报表 — 成本取数逻辑重构 (代码明确证明, 2026-06-24)
+**来源**: `rrsjk-light-service` → `CmOwnerStationReportServiceImpl.java` (tn_wangb, commit f29bacff, 2026-06-23)
+- **变更**: 成本计算从单表 `LightSpOpsSettleIac` 改为多表联合:
+  - 新增注入: `OperationSettlementDataDao`, `LightSpOpsNegativeIacDao`, `LightSpOpsPositiveIacDao`
+  - 成本拆分为: 基础费用(basicAmount) + 正向调整(positive1/2) - 负向调整(negative1~4 + lastMonthNegativeView)
+  - 所有金额做价税分离: ÷ 1.06 后保留2位小数(RoundHalfUp)
+  - 新增月中/月初定时刷新历史数据逻辑
+- **业务含义**: 自持电站运营成本计算精度提升，从粗粒度汇总改为细粒度分项计算
+
+**涉及表**: `cm_owner_station_report`, `cm_owner_station_white_list`, `cm_owner_station_report_third_log` (新), `light_high_elec`, `light_station_plan_change`, `operation_settlement_data` (新增引用), `light_sp_ops_negative_iac` (新增引用), `light_sp_ops_positive_iac` (新增引用)
 
 **⚠️ 代码质量风险**:
 1. 审核人"王红凯"硬编码在 `LightStationPlanChangeServiceImpl` 中

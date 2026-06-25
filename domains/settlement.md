@@ -1957,3 +1957,10 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 ### GTMS返款修复 (代码明确证明, 2026-06-24)
 **来源**: `rrsjk-finance-service` → `GtmsRebateThirdOrderHandleLine.java` (baoxin, commit 1c0a27fc, 2026-06-24)
 - **变更**: 修改GTMS返款第三方订单处理行逻辑
+
+### 租金个税统计增强 (代码明确证明, 2026-06-23, TAEI-3255)
+**来源**: `rrsjk-admin-web` → `RentTaxRecordController.java`, `RentTaxAmountRecordExcel.java`, `RentTaxAmountSummaryExcel.java`, `rentTaxAmountRecordList.ftl`, `rentTaxAmountSummaryList.ftl` (代继宁, commits f10d06f1/0ef268c8/657fffbe/905b551e/b446878c, 2026-06-23~25)
+- **新增字段**: 手机号、记账状态、所属公司
+- **业务逻辑**: 根据所属公司区分海尔/金泰记账接口调用
+- **导出增强**: 明细和汇总均支持新字段查询和导出
+- **页面修复**: 解决 `rentTaxAmountSummaryList.ftl` 页面布局显示异常 bug

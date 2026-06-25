@@ -492,3 +492,18 @@ ProductOrderAppraise → Comment + CommentImage:
 | `shop_carousel` | merchant-service | 店铺轮播图 |
 | `shop_customer` | merchant-service | 店铺客户 |
 | `shop_express` | merchant-service | 店铺快递设置 |
+
+---
+
+## 7. 知识库更新记录
+
+### 2026-06-25 第41轮重扫
+
+**仓库状态**:
+- `rrsjk-merchant-service`: 最后提交 2025-10-23，无新变更，跳过
+- `rrsjk-merchant-h5`: 最后提交 2026-06-25，仅 openspec 配置文件变更，无业务逻辑
+- `rrsjk-merchant-web`: 最后提交 2026-06-25，活跃开发中。新增 `RentSuspendApplicationController`(已记录在 station-lifecycle.md)，`ZeroCarbonItemSetMealStockController` 新增2个接口（已记录在 zero-carbon-station.md）
+- `rrsjk-migration-member`: 最后提交 2025-04-07，无新变更，跳过
+- `rrsjk-migration-mix`: 最后提交 2025-04-07，无新变更，跳过
+
+**merchant-web 控制器统计**: 349 个 Controller 文件，覆盖光伏核心(light/)、零碳(zerocarbon/)、运维(lightoperation/)、维修(repairs/)、报表(report/)、订单(order/)、商城(shop/item/cart/coupon/)、OSS/文件管理、工作流等全部业务域。已有 351 条路由索引在 source-map/controllers.md 中。

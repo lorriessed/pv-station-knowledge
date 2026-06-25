@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-24T22:00:52.325979",
+  "last_run_at": "2026-06-25T22:00:13.046520",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -148,7 +148,7 @@
     "rrsjk-cms-service": "2026-06-17T22:00:36.341244",
     "rrsjk-finance-service": "2026-06-22T22:04:48.885760",
     "rrsjk-light-service": "2026-06-24T22:02:37",
-    "rrsjk-merchant-web": "2026-05-27T22:00:16.087357",
+    "rrsjk-merchant-web": "2026-06-25T22:05:52.730634",
     "rrsjk-light-report-service": "2026-06-24T22:02:37",
     "vpp-api-common": "2026-06-05T22:00:53.082618",
     "vpp-api-elecbusiness": "2026-06-05T22:00:53.082618",
@@ -198,10 +198,10 @@
     "rrsjk-light-openapi-service": "2026-06-24T22:02:37",
     "rrsjk-light-operation-service": "2026-06-24T22:02:37",
     "rrsjk-member-service": "2026-06-24T22:02:37",
-    "rrsjk-merchant-h5": "2026-05-27T22:00:16.087357",
-    "rrsjk-merchant-service": "2026-05-27T22:00:16.087357",
-    "rrsjk-migration-member": "2026-05-27T22:00:16.087357",
-    "rrsjk-migration-mix": "2026-05-27T22:00:16.087357",
+    "rrsjk-merchant-h5": "2026-06-25T22:05:52.730634",
+    "rrsjk-merchant-service": "2026-06-25T22:05:52.730634",
+    "rrsjk-migration-member": "2026-06-25T22:05:52.730634",
+    "rrsjk-migration-mix": "2026-06-25T22:05:52.730634",
     "rrsjk-mobile-h5": "2026-06-02T22:00:09.001485",
     "rrsjk-mobile-web": "2026-06-02T22:00:09.001485",
     "rrsjk-oauth2-web": "2026-06-02T22:00:09.001485",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 41,
-  "last_sweep_at": "2026-06-24T22:02:37"
+  "sweep_round": 42,
+  "last_sweep_at": "2026-06-25T22:05:52.730634"
 }

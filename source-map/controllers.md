@@ -4479,6 +4479,8 @@
 - @GetMapping("/findPage")
 - @GetMapping("/queryStockChangeLog")
 - @GetMapping("/getAllBySetMealCode")
+- @GetMapping("/getSetMealInfoByKeyword")
+- @PostMapping("/reduceStock")
 
 ## LightZeroCarbonStockController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/zerocarbon/LightZeroCarbonStockController.java`
@@ -15745,6 +15747,7 @@
 - @RequestMapping("doList.do")
 - @RequestMapping("add.do")
 - @RequestMapping("editStatus.do")
+- @RequestMapping("delete.do")
 - @GetMapping("getLogList.do")
 - @RequestMapping("doExport.do")
 - @GetMapping("findValidAuditor.do")
@@ -21344,3 +21347,8 @@
 - 文件: `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/controller/CrawlerDataController.java`
 - @RequestMapping("/crawlerData")
 - @PostMapping("/pushData")
+
+## AssetQueryController
+- 文件: `vpp-data-platform/vpp-data-platform-biz/src/main/java/com/nahui/energy/controller/AssetQueryController.java`
+- @RequestMapping("/platform/asset")
+- @PostMapping("/query")
