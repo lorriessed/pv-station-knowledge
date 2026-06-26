@@ -332,3 +332,18 @@
 
 **物料维度变更** (德, commit 5a9d71d0, 2026-06-24):
 - `InventoryTurnoverControlSkuModel` + `EnergyInventoryTurnoverControlSku.xml` — 库存周转报表物料维度移除中转仓和第三方仓库数据
+
+### 六期：政策预测终版报表 + 区县筛选 (代码明确证明, 2026-06-26)
+**来源**: `rrsjk-admin-web` → `ReportPolicyForecastFinalController.java` (335行新增), `ReportPolicyForecastController.java` (修改), `policyForecastFinalList.ftl` (114行), `policyForecastFinalList.js` (170行), `service.xml` (龙龙, commit a8ca120b/1d500998, 分支 20260610_longlong_taei_3190_report_config, 2026-06-26)
+
+**新增模块**:
+- **`ReportPolicyForecastFinalController`** (335行) — 政策预测终版报表Controller，路由前缀推断为 `/reportPolicyForecastFinal/`
+- **前端页面**: `policyForecastFinalList.ftl` + `policyForecastFinalList.js` — 完整 EasyUI DataGrid 页面
+- **Dubbo配置**: `service.xml` 新增政策预测最终报告服务引用
+
+**现有模块增强**:
+- `ReportPolicyForecastController` 导出接口改用 `buildParams(request)` 统一构建参数，新增 `regionId` 区县筛选
+- `cityPowerSummaryList` 新增区县筛选功能 (ftl + js)
+- `policyForecastList` 前端 JS 重构 (104行变更)
+
+**业务含义**: 政策预测报表体系从"初版预测"扩展到"终版预测"，终版可能在初版基础上经过人工调整或审批确认。两个Controller并存，分别对应不同阶段的预测数据。

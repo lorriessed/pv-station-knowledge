@@ -16318,6 +16318,15 @@
 - @RequestMapping("doList.do")
 - @RequestMapping(value = { "/gfCompleteInputPiece.html" }, method = {RequestMethod.GET})
 
+## ReportPolicyForecastFinalController
+- 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/report/ReportPolicyForecastFinalController.java`
+- @RequestMapping("/policyForecastFinal")
+- @RequestMapping("/list.html")
+- @RequestMapping("/list")
+- @RequestMapping("/import")
+- @RequestMapping("/export")
+- @RequestMapping("/downloadTemplate")
+
 ## ReportPolicyForecastController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/report/ReportPolicyForecastController.java`
 - @RequestMapping("/policyForecast")

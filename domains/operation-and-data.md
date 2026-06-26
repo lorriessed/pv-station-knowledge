@@ -671,3 +671,23 @@ rrsjk-light-data-service
 **线程栈内存调优**:
 - report-service: `-Xss` 从 20m 调整为 10m（金租大屏栈溢出修复后）
 - operation-service: `-Xss` 从 5m 调整为 2m（观察两天无异常后）
+
+## 资方大屏从大数据平台迁移到 DWS/ADS 直查 (代码明确证明, 2026-06-24~25)
+
+**关联需求**: TAEI-3293 (各资方大屏发电量单位调整)
+**开发者**: majinhu (马金hu)
+**分支**: `origin/20260622-dapin-huarong-cmb-cnnc-boc-yuexiu`
+
+**迁移范围** (5 个资方大屏):
+- 越秀大屏: `YueXiuDashboardImpl`, `ReportScreenDashboardYueXiuServiceImpl`
+- 招银大屏: `CmbDashboardImpl`
+- 华容大屏: `HuaRongDashboardImpl`
+- CNNC大屏: `CnncDashboardImpl`
+- BOC大屏: `BocDashboardImpl`
+
+**技术特征**:
+- 新增 DAO: `AdsReportStationChartMonthDao` (ADS层), `DwsLightStationElectricDayReportNewDao` (DWS层), `GreenEnergyInverterCurrentDao` (DWS层)
+- 替换原有大数据平台 API 调用为直接 MySQL/DWS 查询
+- 与 ADS 迁移模式一致（参见 `references/ads-migration-pattern.md`）
+
+**影响面**: 5 个资方大屏的发电量、逆变器实时功率等核心指标数据来源变更

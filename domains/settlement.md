@@ -1964,3 +1964,47 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 - **业务逻辑**: 根据所属公司区分海尔/金泰记账接口调用
 - **导出增强**: 明细和汇总均支持新字段查询和导出
 - **页面修复**: 解决 `rentTaxAmountSummaryList.ftl` 页面布局显示异常 bug
+
+## 统众发票批量导入 (代码明确证明, 2026-06-25)
+
+**关联需求**: TAEI-3266 (统众导入发票号及连接)
+**开发者**: 代继宁
+**分支**: `origin/20260625-invoiceInfoImport/TAEI-3266`
+
+**业务逻辑**:
+- 统众电站管理 → 电费发票列表 → 新增"下载发票模版"和"批量导入发票"
+- 导入模板字段: 批次号、开票序号、发票号、开票时间、文件链接
+- 匹配规则: 批次号+开票序号匹配导入，链接为压缩包/PDF时转化为我司 OSS 链接
+- 导入结果: 提示成功X条/失败X条，失败时展示失败的开票序号
+
+**新增实体/DTO**:
+- `LightInvoiceImportTask` (75行) — 发票导入任务实体
+- `InvoiceImportDTO` — 导入行数据
+- `ImportFailDTO` — 失败记录
+- `ImportProgressDTO` — 导入进度
+
+**发票下载命名规则**: 点击下载命名为 "#开票单号"
+
+### 华融收入结算质保金优化 (代码明确证明, 2026-06-26)
+**来源**: `rrsjk-admin-web` → `HuaRongTradeIncomeSettleController.java`, `HuaRongTradeIncomeSettleExcel.java`, `huaRongTradeIncomeSettleList.ftl` (yumao/baoxin, commit 64bedc87, 分支 feature/202606/huarongupgrade, 2026-06-16~26)
+
+**新增质保金字段** (Excel导出 + 页面展示):
+- `qualityGuaranteeRatio` — 质保金比例
+- `qualityGuaranteeAmount` — 质保金金额
+- `qualityGuaranteeVoucher` / `qualityGuaranteeVoucherYear` / `qualityGuaranteeVoucherAt` — 质保金凭证/年度/日期
+- `qualityGuaranteeReverseVoucher` / `qualityGuaranteeReverseAt` — 质保金冲销凭证/日期
+
+**冲销逻辑重构** (核心变更):
+- **旧逻辑**: Controller 直接依赖 `SyncFinanceToSapService` + `SapRecordService`，手动构建 bid 前缀(HRI/A/B/C/D/E)，查 sap_record 再调 `reverseFinanceToSap()`
+- **新逻辑**: Controller 仅调用 `huaRongTradeIncomeSettleService.incomeReverse(stationCode)`，SAP 细节封装到 Service 层
+- **删除方法**: `reInomeBidPrefix()` — bid 前缀生成逻辑下沉到 Service
+- **删除依赖**: Controller 不再 import `SapRecord`、`SapRecordService`、`SyncFinanceToSapService`
+- **业务含义**: 华融收入冲销从"Controller编排SAP调用"改为"Service封装完整冲销流程"，Controller 只负责结果展示
+
+### SAP总账记账模型清理 — 移除临时常量依赖 (代码明确证明, 2026-06-26)
+**来源**: `rrsjk-finance-service` → `LightSapLedgerCoinLineModel.java`, `LightSapLedgerLineModel.java`, `LightSapLedgerServiceBeforeModel.java`, `LightSapLedgerSubsidyLineModel.java`, `LightSapLedgerTempLineModel.java`, `LightSapLedgerUseServiceModel.java` (龙龙, commit 724881d1, 2026-06-26)
+
+- **移除**: `import com.nahui.energy.constant.TempConstants` — 不再引用外部临时常量类
+- **注释掉**: `TempConstants.stopCostSpIdList.contains(...)` — 临时暂停结算服务商逻辑被注释（6个模型类均受影响）
+- **内联常量**: `PRCTR="0000830004"`(利润中心)、`KOSTL="A205010202"`(成本中心)、`XIAOWEI="水站"` 从 TempConstants 移入类内 static final
+- **业务含义**: `TempConstants.stopCostSpIdList` 是临时暂停某些服务商SAP记账的开关，此次清理说明该临时逻辑已不再需要，或将在 Service 层统一管控

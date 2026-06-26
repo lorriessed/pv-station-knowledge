@@ -44,3 +44,20 @@ sources:
 - 新增 `inspection` 包（entity + dao + mapper），独立于现有业务模块
 - 使用 MyBatis Mapper XML 定义 SQL
 - 分页查询支持（具体分页参数待确认）
+
+## 巡检记录增加省市区字段 (代码明确证明, 2026-06-25)
+
+**关联需求**: TAEI-3130 (技术部巡检需求)
+**开发者**: laowang (王金浩)
+**分支**: `origin/20260604-wjh-jsxj`
+
+**变更内容**:
+- 巡检记录实体增加省市区字段及主要区域查询
+- 巡检问题关联记录及报告字段
+- 巡检记录导出 DTO 属性补充
+- 前端新增巡检记录和巡检问题维护页面 (rrsjk-admin-web)
+- 修改巡检记录功能并注释安装信息转换
+
+**涉及文件**:
+- rrsjk-light-service: PatrolInspectionServiceImpl (重构导入语句)
+- rrsjk-admin-web: 新增巡检记录/问题维护页面

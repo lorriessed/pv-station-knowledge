@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-25T22:00:13.046520",
+  "last_run_at": "2026-06-26T22:00:33.645366",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -241,11 +241,11 @@
     "rrsjk-openapi-web": "2026-06-09T22:04:08.435667",
     "vpp-template-ui": "2026-06-09T22:04:08.435667",
     "vpp-thai-dashboard": "2026-06-09T22:04:08.435667",
-    "DB_TOOL": "2026-05-28T22:00:00",
-    "Inverter_recognition": "2026-05-28T22:00:00",
-    "card_extraction": "2026-05-28T22:00:00",
-    "infomation_iextraction": "2026-05-28T22:00:00",
-    "main_contract_extraction": "2026-05-28T22:00:00",
+    "DB_TOOL": "2026-06-26T22:00:33.645366",
+    "Inverter_recognition": "2026-06-26T22:00:33.645366",
+    "card_extraction": "2026-06-26T22:00:33.645366",
+    "infomation_iextraction": "2026-06-26T22:00:33.645366",
+    "main_contract_extraction": "2026-06-26T22:00:33.645366",
     "main_contract_whole_extraction": "2026-05-29T22:00:18.311168",
     "poc_extraction_without_pdf": "2026-05-29T22:00:18.311168",
     "purchase_electricity_contract": "2026-05-29T22:00:18.311168",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 42,
+  "sweep_round": 43,
   "last_sweep_at": "2026-06-25T22:05:52.730634"
 }

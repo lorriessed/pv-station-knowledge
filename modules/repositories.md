@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-25 23:01:18
+更新时间: 2026-06-26 23:01:38
 
 ## 仓库列表
 
@@ -19,7 +19,7 @@
 - haier-energy-job-admin: /data/pvcode/haier-energy-job-admin (无变更)
 - haier-energy-job-service: /data/pvcode/haier-energy-job-service (无变更)
 - he-pv.osp-wx.opm: /data/pvcode/he-pv.osp-wx.opm (无变更)
-- he-vpp.admin-h5: /data/pvcode/he-vpp.admin-h5 (无变更)
+- he-vpp.admin-h5: /data/pvcode/he-vpp.admin-h5 (变更)
 - he-vpp.hnzl-h5: /data/pvcode/he-vpp.hnzl-h5 (无变更)
 - infomation_iextraction: /data/pvcode/infomation_iextraction (无变更)
 - item-service: /data/pvcode/item-service (无变更)
@@ -33,8 +33,8 @@
 - nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (无变更)
 - nahui-pv.epcb-mini: /data/pvcode/nahui-pv.epcb-mini (无变更)
 - nahui-pv.greenenergy-mini: /data/pvcode/nahui-pv.greenenergy-mini (无变更)
-- nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (无变更)
-- nahui-pv.merchant-micro.osp: /data/pvcode/nahui-pv.merchant-micro.osp (无变更)
+- nahui-pv.hds-h5: /data/pvcode/nahui-pv.hds-h5 (变更)
+- nahui-pv.merchant-micro.osp: /data/pvcode/nahui-pv.merchant-micro.osp (变更)
 - nahui-pv.merchant-micro.zch: /data/pvcode/nahui-pv.merchant-micro.zch (无变更)
 - nahui-pv.merchant-monorepo-h5: /data/pvcode/nahui-pv.merchant-monorepo-h5 (无变更)
 - nahui-pv.mobile-h5: /data/pvcode/nahui-pv.mobile-h5 (变更)
@@ -89,7 +89,7 @@
 - rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (变更)
 - rrsjk-item-service: /data/pvcode/rrsjk-item-service (变更)
 - rrsjk-light-common: /data/pvcode/rrsjk-light-common (无变更)
-- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (变更)
+- rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (无变更)
 - rrsjk-light-iot-service: /data/pvcode/rrsjk-light-iot-service (无变更)
 - rrsjk-light-message-service: /data/pvcode/rrsjk-light-message-service (无变更)
 - rrsjk-light-openapi-service: /data/pvcode/rrsjk-light-openapi-service (无变更)
@@ -105,7 +105,7 @@
 - rrsjk-mobile-h5: /data/pvcode/rrsjk-mobile-h5 (无变更)
 - rrsjk-mobile-web: /data/pvcode/rrsjk-mobile-web (无变更)
 - rrsjk-oauth2-web: /data/pvcode/rrsjk-oauth2-web (无变更)
-- rrsjk-openapi-web: /data/pvcode/rrsjk-openapi-web (变更)
+- rrsjk-openapi-web: /data/pvcode/rrsjk-openapi-web (无变更)
 - rrsjk-pay-service: /data/pvcode/rrsjk-pay-service (无变更)
 - rrsjk-pay-web: /data/pvcode/rrsjk-pay-web (无变更)
 - rrsjk-pvbusiness-job-service: /data/pvcode/rrsjk-pvbusiness-job-service (无变更)
