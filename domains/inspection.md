@@ -61,3 +61,11 @@ sources:
 **涉及文件**:
 - rrsjk-light-service: PatrolInspectionServiceImpl (重构导入语句)
 - rrsjk-admin-web: 新增巡检记录/问题维护页面
+
+### 巡检报告汇总扩展 (2026-06-27 代码明确证明)
+- **来源**: `rrsjk-light-service/rrsjk-light-api/.../inspection/PatrolInspectionTaskWordDto.java` (commit: eff2e0c383, laowang/王金浩, 2026-06-26)
+- **关联需求**: TAEI-3130
+- **变更**: PatrolInspectionTaskWordDto 大幅扩展 +458 行，新增电站抽检明细、巡检报告汇总数据结构
+- **新增字段**: PatrolInspectionRecord 新增 `detailAddress` 详细地址字段
+- **questionDetail**: 新增 `serialVersionUID`，规范化序列化
+- **业务意义**: 巡检报告从简单记录升级为结构化汇总报告，支持 Word 导出（TaskWordDto 命名暗示）

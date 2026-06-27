@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-26T23:01:38.970386",
+  "last_scan_at": "2026-06-27T23:01:57.976278",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -447,12 +447,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "280de185100a6fa3ae2c6ea8a83c08581c655527",
+      "head": "0fcf50092cfaf8fa2eabdae01770c1d132e56549",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "28906f4ee9803a087bb7bc0d7ae91d169b98da35",
+      "head": "0c7ec4c8527ffcf058d92477415911c0084d2cd3",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -472,7 +472,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "e0a582b2c8157ae1d23a645e916bb4ff4a1a12fb",
+      "head": "fc3a6108cff15ac9a120f3ad50a53127af0f5c16",
       "path": "/data/pvcode/rrsjk-merchant-web",
       "branch": "master"
     },

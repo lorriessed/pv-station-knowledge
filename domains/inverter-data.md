@@ -648,3 +648,10 @@
 **来源**: `rrsjk-light-data-service` (sunzn, commit 1d1a89be, 2026-06-24, 分支 szn_fix_inverter_list_2026612)
 - **变更文件**: `AisweiApi.java` (213行重构), `AisweiApiProperties.java` (新增限流配置属性), `ThreadPoolConfig.java` (新增线程池配置)
 - **业务含义**: 爱仕维逆变器数据接入API增加限流保护和重试机制，提升数据拉取稳定性，避免因API频率限制导致数据缺失
+
+### 并网报表数据源回退: DWS层 → V3业务层 (代码明确证明, 2026-06-27)
+**来源**: `rrsjk-light-report-service` → `ReportMGridServiceImpl.java` (commit 0fcf5009), `ReportScreenGridServiceImpl.java` (commit ae9a9d21) (yumiao, 2026-06-27)
+- **变更内容**: 手机端并网报表(`ReportMGridServiceImpl`)和智慧大屏并网报表(`ReportScreenGridServiceImpl`)中，所有 `dwsLightInveterDataService.listXxxStationCodeGrid()` 调用替换为 `lightInveterDataService.listXxxStationCodeGrid()`
+- **影响方法**: `listTotalStationCodeGrid`, `listYearStationCodeGrid`, `listMonthStationCodeGrid`, `listDayStationCodeGrid`
+- **业务含义**: 并网报表的电站编码查询数据源从DWS数仓层回退到V3业务库(`LightInveterData`表)直接查询。可能原因: DWS层数据延迟或准确性问题导致并网统计偏差
+- **证据等级**: 代码明确证明

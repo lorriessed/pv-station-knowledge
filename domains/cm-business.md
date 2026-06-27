@@ -332,3 +332,10 @@ Year 6: 95.6%, Year 7: 95%, Year 8: 94.4%, Year 9: 93.8%, Year 10: 93.2%
 **来源**: `rrsjk-light-service` (tn_wangb, commit aa5b45f4, 2026-06-24)
 - **变更文件**: `CmConstructionProgressAuditServiceImpl.java` (66行减少，逻辑精简), `CmReportServiceImpl.java` (微调)
 - **业务含义**: 工商业施工进度审核和报表服务的生命周期管理逻辑调整
+
+### CmPolicyDto.policyGroup 字段 (2026-06-27 代码明确证明)
+- **来源**: `rrsjk-light-service/rrsjk-light-api/.../CmPolicyDto.java` (commit: 4abc714eaa, tn_wangb, 2026-06-26)
+- **字段**: `policyGroup` — 组别分类
+- **枚举值**: `GF`-光伏组, `CN`-储能组, `CDZ`-充电桩组
+- **使用位置**: `CmLightProjectIncomePolicyServiceImpl` 在3处设置该字段（普通政策/高压加固政策/产值法政策）
+- **业务意义**: 工商业收入政策按组别分类，支持光伏/储能/充电桩不同业务线的政策独立管理和收入计算

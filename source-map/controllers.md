@@ -6413,6 +6413,11 @@
 - @PostMapping("status.do")
 - @PostMapping("orderModify.do")
 
+## AgentTokenController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/agent/AgentTokenController.java`
+- @RequestMapping("/api/agent/token")
+- @GetMapping("/getAgentToken")
+
 ## TransitStoreController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/transit/TransitStoreController.java`
 - @RequestMapping(value = "/light/transit/", produces = {"application/xml;"})

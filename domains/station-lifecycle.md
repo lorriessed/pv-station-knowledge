@@ -1046,3 +1046,9 @@ if (exist != null) {
   - `doExport.do` — 电站列表导出新增两个参数
 - **buildParams 方法**: 签名从 6 参数扩展为 8 参数，新增 `firstThreePowerAtStart/End` 的时间解析逻辑
 - **业务含义**: 支持按电站首次实现连续三天发电的时间范围进行筛选和导出
+- **证据等级**: 代码明确证明
+
+### 电站列表导出新增租赁模式+营业状态筛选 (代码明确证明, 2026-06-26)
+**来源**: `rrsjk-admin-web` → `StationListExport.java` (wangxiran, commit fa22487d, 2026-06-26)
+- **新增参数**: 租赁模式(leaseMode) + 营业状态 — 电站列表导出支持按资方模式和营业状态筛选
+- **证据等级**: 代码明确证明

@@ -6625,6 +6625,11 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `select:getById`, `select:getAll`
 - tables: `id`
 
+## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/AgentTokenViewMapper.xml
+- namespace: `com.rrsjk.light.mapper.AgentTokenViewMapper`
+- statements: `select:selectByPrimaryKey`, `insert:insertSelective`, `update:updateByPrimaryKeySelective`, `select:selectByParam`
+- tables: `agent_token_view`, `id`
+
 ## rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/LightStationAuditReport.xml
 - namespace: `com.rrsjk.light.dao.LightStationAuditReportDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`

@@ -266,7 +266,15 @@
    234|| 路径 | 说明 |
    235||---|---|
    236|| imageNum.do | 图像AI识别太阳板数量 |
-   237|
+
+   238|### 智能体Token API (rrsjk-merchant-web, 2026-06-27新增)
+   239|**来源**: `AgentTokenController.java` (commit 4a124096, mabin, 2026-06-27, 代码明确证明)
+   240|基础路径: `/api/agent/token`
+   241|
+   242|| 路径 | 方法 | 说明 |
+   243||---|---|---|
+   244|| `/api/agent/token/getAgentToken` | GET | 查询智能体Token数据 (参数: agentNo, type=detail/daily, date) |
+
    238|## 来源
    239|- rrsjk-admin-web 代码扫描 2026-05-10。
    240|

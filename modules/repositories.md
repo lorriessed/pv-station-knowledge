@@ -1,6 +1,6 @@
 # 代码仓库索引
 
-更新时间: 2026-06-26 23:01:38
+更新时间: 2026-06-27 23:01:57
 
 ## 仓库列表
 
@@ -27,7 +27,7 @@
 - log_report_plugin: /data/pvcode/log_report_plugin (无变更)
 - main_contract_extraction: /data/pvcode/main_contract_extraction (无变更)
 - main_contract_whole_extraction: /data/pvcode/main_contract_whole_extraction (无变更)
-- nahui-dashboad-h5: /data/pvcode/nahui-dashboad-h5 (变更)
+- nahui-dashboad-h5: /data/pvcode/nahui-dashboad-h5 (无变更)
 - nahui-dicts-serve: /data/pvcode/nahui-dicts-serve (无变更)
 - nahui-itd-docs: /data/pvcode/nahui-itd-docs (无变更)
 - nahui-pv.construction-mini: /data/pvcode/nahui-pv.construction-mini (无变更)
@@ -37,7 +37,7 @@
 - nahui-pv.merchant-micro.osp: /data/pvcode/nahui-pv.merchant-micro.osp (变更)
 - nahui-pv.merchant-micro.zch: /data/pvcode/nahui-pv.merchant-micro.zch (无变更)
 - nahui-pv.merchant-monorepo-h5: /data/pvcode/nahui-pv.merchant-monorepo-h5 (无变更)
-- nahui-pv.mobile-h5: /data/pvcode/nahui-pv.mobile-h5 (变更)
+- nahui-pv.mobile-h5: /data/pvcode/nahui-pv.mobile-h5 (无变更)
 - nahui-pv.osp-mini: /data/pvcode/nahui-pv.osp-mini (无变更)
 - nahuipv-greenergy-management-flutter: /data/pvcode/nahuipv-greenergy-management-flutter (无变更)
 - nahuipv-hnzc-app-android: /data/pvcode/nahuipv-hnzc-app-android (无变更)
@@ -73,7 +73,7 @@
 - rrsjk-admin-app-service: /data/pvcode/rrsjk-admin-app-service (无变更)
 - rrsjk-admin-auth-server: /data/pvcode/rrsjk-admin-auth-server (无变更)
 - rrsjk-admin-authz-service: /data/pvcode/rrsjk-admin-authz-service (无变更)
-- rrsjk-admin-bff: /data/pvcode/rrsjk-admin-bff (变更)
+- rrsjk-admin-bff: /data/pvcode/rrsjk-admin-bff (无变更)
 - rrsjk-admin-biff: /data/pvcode/rrsjk-admin-biff (无变更)
 - rrsjk-admin-operation-log-service: /data/pvcode/rrsjk-admin-operation-log-service (无变更)
 - rrsjk-admin-web: /data/pvcode/rrsjk-admin-web (变更)
@@ -86,8 +86,8 @@
 - rrsjk-energystorage-service: /data/pvcode/rrsjk-energystorage-service (无变更)
 - rrsjk-finance-service: /data/pvcode/rrsjk-finance-service (变更)
 - rrsjk-flowable-service: /data/pvcode/rrsjk-flowable-service (无变更)
-- rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (变更)
-- rrsjk-item-service: /data/pvcode/rrsjk-item-service (变更)
+- rrsjk-hds-web: /data/pvcode/rrsjk-hds-web (无变更)
+- rrsjk-item-service: /data/pvcode/rrsjk-item-service (无变更)
 - rrsjk-light-common: /data/pvcode/rrsjk-light-common (无变更)
 - rrsjk-light-data-service: /data/pvcode/rrsjk-light-data-service (无变更)
 - rrsjk-light-iot-service: /data/pvcode/rrsjk-light-iot-service (无变更)
@@ -97,7 +97,7 @@
 - rrsjk-light-report-service: /data/pvcode/rrsjk-light-report-service (变更)
 - rrsjk-light-service: /data/pvcode/rrsjk-light-service (变更)
 - rrsjk-member-service: /data/pvcode/rrsjk-member-service (无变更)
-- rrsjk-merchant-h5: /data/pvcode/rrsjk-merchant-h5 (变更)
+- rrsjk-merchant-h5: /data/pvcode/rrsjk-merchant-h5 (无变更)
 - rrsjk-merchant-service: /data/pvcode/rrsjk-merchant-service (无变更)
 - rrsjk-merchant-web: /data/pvcode/rrsjk-merchant-web (变更)
 - rrsjk-migration-member: /data/pvcode/rrsjk-migration-member (无变更)
@@ -134,9 +134,9 @@
 - vpp-api-system: /data/pvcode/vpp-api-system (无变更)
 - vpp-api-template: /data/pvcode/vpp-api-template (无变更)
 - vpp-crawler: /data/pvcode/vpp-crawler (无变更)
-- vpp-data-platform: /data/pvcode/vpp-data-platform (变更)
+- vpp-data-platform: /data/pvcode/vpp-data-platform (无变更)
 - vpp-openapi: /data/pvcode/vpp-openapi (无变更)
-- vpp-pv-oversea: /data/pvcode/vpp-pv-oversea (变更)
+- vpp-pv-oversea: /data/pvcode/vpp-pv-oversea (无变更)
 - vpp-template: /data/pvcode/vpp-template (无变更)
 - vpp-template-ui: /data/pvcode/vpp-template-ui (无变更)
 - vpp-thai-dashboard: /data/pvcode/vpp-thai-dashboard (无变更)

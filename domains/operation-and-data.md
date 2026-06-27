@@ -691,3 +691,11 @@ rrsjk-light-data-service
 - 与 ADS 迁移模式一致（参见 `references/ads-migration-pattern.md`）
 
 **影响面**: 5 个资方大屏的发电量、逆变器实时功率等核心指标数据来源变更
+
+### 政策预测报表终模块 ReportPolicyForecastFinal (2026-06-27 代码明确证明)
+- **来源**: `rrsjk-light-report-service/rrsjk-light-report-api/.../entity/local/ReportPolicyForecastFinal.java` (commit: aa7f4d08d, 龙龙, 2026-06-26)
+- **关联需求**: TAEI-3190
+- **架构**: ODS读+local写模式 — 实体在 `entity/local/` 包下，数据写入 rrsjk_light_local 库
+- **字段**: forecastMonth(预测月份), provinceId, cityId, regionId(区县), mode(模式), 多个预测指标
+- **功能**: 区县三级联动（省→市→区县）+ 完整导入导出 + Dubbo服务暴露
+- **关联实体**: 与已有的 ReportPolicyForecast（预测初版）并存，"终"版支持手动导入修正

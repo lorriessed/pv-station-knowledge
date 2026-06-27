@@ -87,6 +87,7 @@
 - `admin_log_body_detail` -> `rrsjk-admin-operation-log-service/rrsjk-admin-operation-log-impl/src/main/resources/mybatis/mapper/AdminOperationLogMapper.xml`
 - `admin_login_log` -> `rrsjk-admin-operation-log-service/rrsjk-admin-operation-log-impl/src/main/resources/mybatis/mapper/AdminOperationLogMapper.xml`
 - `admin_oper_log` -> `rrsjk-admin-operation-log-service/rrsjk-admin-operation-log-impl/src/main/resources/mybatis/mapper/AdminOperationLogMapper.xml`
+- `agent_token_view` -> `rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/AgentTokenViewMapper.xml`
 - `api_open` -> `rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/ApiOpenMapper.xml`
 - `approval_message` -> `rrsjk-light-message-service/rrsjk-light-message-impl/src/main/resources/mybatis/mapper/approvalMessageService.xml`, `rrsjk-light-message-service/rrsjk-light-message-impl/src/main/resources/mybatis/mapper/userMessageRelationService.xml`
 - `area_info` -> `rrsjk-system-service/rrsjk-system-impl/src/main/resources/mybatis/mapper/basic/AreaInfoMapper.xml`
