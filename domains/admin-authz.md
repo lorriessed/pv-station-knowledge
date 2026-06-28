@@ -22,9 +22,10 @@
 
 **来源**: `rrsjk-admin-auth-server` 全量通读 (2026-05-30) + 增量更新 (2026-06-02~03)
 
-- **技术栈**: Spring Boot 3.5.14, Spring Security 6, OAuth2 Authorization Server, Java 17
+- **技术栈**: Spring Boot 3.5.14, Spring Security 6, OAuth2 Authorization Server, **Java 21** (2026-06-15 从 Java 17 升级)
 - **端口**: 9000
 - **Session Cookie**: `ADMIN_AUTH_SESSION`
+- **Session 存储**: Redis (spring-session-data-redis, namespace: `rrsjk:admin-auth-server:session`, TTL: 24h)
 - **部署**: JSW (Java Service Wrapper) tar.gz 打包
 
 ### 1.0 认证用户加载方式变更 (2026-06-02~03)
@@ -111,12 +112,97 @@ OAuth2 登录 → AuthzUserDetailsService.loadUserByUsername(username)
 | dev | `https://cbstest.haier-energy.com` | `https://cbstest.haier-energy.com` | `https://cbstest.haier-energy.com` |
 | prod | `https://cbs.haier-energy.com` | `https://cbs.haier-energy.com` | `https://cbs.haier-energy.com` |
 
+### 1.4 Redis OAuth2 Authorization Store (2026-06 新增)
+
+**来源**: `rrsjk-admin-auth-server/.../config/RedisOAuth2AuthorizationService.java`
+**证据等级**: 代码明确证明
+
+OAuth2 Authorization 对象（authorization code, access token, refresh token, id token 等）**存储在 Redis** 而非内存/数据库：
+
+- **Key 前缀**: `rrsjk:admin-auth-server:oauth2:authorization:`
+- **主键**: `id:{authorizationId}` → OAuth2Authorization 对象 (JDK 序列化)
+- **索引键**: `token:{tokenType}:{sha256(tokenValue)}` → OAuth2Authorization (支持按 token 反查)
+- **TTL**: 取所有 token 中最晚的 expiresAt + 5 分钟 grace；无 token 时默认 1 天
+- **Token 类型索引**: state, code, access_token, id_token, refresh_token, device_code, user_code
+- **安全**: token 值经 SHA-256 哈希后作为 Redis key，不暴露原始 token
+
+### 1.5 RSA JWK 密钥管理
+
+**来源**: `SecurityConfig.java` → `jwkSource()` / `loadOrCreateRsaKey()`
+**证据等级**: 代码明确证明
+
+- JWT 签名用的 RSA JWK 密钥对**存储在 Redis** (`rrsjk:admin-auth-server:oauth2:jwk:rsa`)
+- 首次启动时自动生成 2048-bit RSA 密钥对，存入 Redis
+- 后续启动从 Redis 加载，确保多实例共享同一签名密钥
+- 算法: RS256, keyUse: SIGNATURE, keyID: UUID
+
+### 1.6 App Password Token 接口 (2026-06-08 新增)
+
+**来源**: `rrsjk-admin-auth-server/.../controller/AppPasswordTokenController.java`
+**证据等级**: 代码明确证明
+
+App 端原生登录页 → app-bff → auth-server 内部接口，复用 Web 端同一套账号密码校验：
+
+| 端点 | 方法 | 说明 |
+|---|---|---|
+| `POST /api/app/auth/password-token` | passwordToken | 用户名密码换 OAuth2 token |
+
+**请求体**: `{ username, password, clientId?, scope? }`
+**响应**: `{ access_token, refresh_token?, expires_in, token_type: "Bearer", scope }`
+
+**关键逻辑**:
+- 默认 clientId = `admin-mobile`（如不传）
+- 复用 `UserDetailsService` + `PasswordEncoder`，确保 App 与 Web 使用同一套校验
+- 自定义 grant type: `urn:rrsjk:params:oauth:grant-type:app_password`
+- 通过 Spring Authorization Server 的 `OAuth2TokenGenerator` 生成 token（非手写 JWT）
+- 保存 `OAuth2Authorization` 到 Redis 供后续 refresh token 轮换
+
+### 1.7 海尔 IDM 员工登录 (2026-06 新增)
+
+**来源**: `rrsjk-admin-auth-server/.../haier/HaierIdmLoginController.java`
+**证据等级**: 代码明确证明
+
+海尔集团员工统一身份认证 (IdM) 集成，支持海尔员工通过集团账号登录 CBS：
+
+| 端点 | 说明 |
+|---|---|
+| `GET /login?provider=haier&return_to=...` | 发起海尔 IdM OAuth2 登录 |
+| `GET /login?provider=haier-callback&code=...&state=...` | IdM 回调，换取用户身份 |
+
+**流程**:
+1. 用户点击"海尔员工登录" → 生成 state → 重定向到 `https://iama.haier.net/login/`
+2. 用户在海尔 IdM 完成认证 → 回调带 code + state
+3. `HaierIdmClient.loadAccountByCode(code)` → 获取员工号 (employeeNo)
+4. `AuthzUserService.getUserIdentity(employeeNo)` → 查找 CBS 账号
+5. 校验账号启用状态 → 创建 Spring Security Authentication → 存入 HttpSession
+6. 重定向到 return_to (默认: `${bffBaseUrl}/oauth2/authorization/admin-bff`)
+
+**配置**:
+| 环境 | IdM Login URL | Auth Host | Redirect URI |
+|---|---|---|---|
+| dev/prod | `https://iama.haier.net/login/` | `https://iama.haier.net/api` | `${auth-server-base-url}/login?provider=haier-callback` |
+
+**安全**:
+- state 存储在 HttpSession，一次性使用后立即删除
+- return_to 参数做白名单校验（只允许跳转到 bffBaseUrl 下的路径）
+- 员工号必须在 authz-service 中已创建 CBS 账号，否则拒绝
+
+### 1.8 Session 共享 (2026-06-23)
+
+**来源**: commit `7b751d7` "fix(auth): share login sessions through redis"
+**证据等级**: 代码明确证明
+
+- `spring.session.store-type: redis`
+- Session namespace: `rrsjk:admin-auth-server:session`
+- TTL: 24 小时 (`PT24H`)
+- 目的: 多实例部署时共享登录状态，避免用户被负载均衡到不同实例时需要重新登录
+
 ## 2. rrsjk-admin-authz-service (授权服务)
 
-**来源**: `rrsjk-admin-authz-service` 全量通读 (2026-05-30)
+**来源**: `rrsjk-admin-authz-service` 全量通读 (2026-05-30) + 增量更新 (2026-06-28)
 
-- **技术栈**: Spring Boot 2.3.3, Dubbo 2.7.4.1, MyBatis 3.5.2, Zookeeper 注册中心
-- **Java 版本**: Java 8 (构建时 strip Java 9 wrapper args)
+- **技术栈**: Spring Boot 3.5.14, Dubbo 3.2.15, MyBatis 3.5.19, Zookeeper 注册中心
+- **Java 版本**: **Java 21** (2026-06-15 从旧版升级，pom.xml 确认)
 - **模块**: `rrsjk-admin-authz-api` (接口) + `rrsjk-admin-authz-impl` (实现)
 - **数据库**: `rrsjk_admin_authz` (生产: `rm-m5ebm056ct14p18zu.mysql.rds.aliyuncs.com`)
 - **部署**: JSW, dev: 1024M-2048M, prod: 1024M-2048M
@@ -442,7 +528,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.1 招银租赁 (CmbLeasingStationController)
 
-**路径前缀**: `/api/app/asset-management/cmb-leasing-stations`
+**路径前缀**: `/api/admin/asset-management/cmb-leasing-stations` (注: 2026-06 从 `/api/app/` 统一改为 `/api/admin/`)
 
 | 路径 | 方法 | 说明 | 权限 |
 |---|---|---|---|
@@ -458,7 +544,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.2 BT 资产管理 (BtAssetManagementController)
 
-**路径前缀**: `/api/app/asset-management/bt-asset-management`
+**路径前缀**: `/api/admin/asset-management/bt-asset-management`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -472,7 +558,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.3 BT 基金资产投放明细 (BtFundAssetAllocateDetailController)
 
-**路径前缀**: `/api/app/asset-management/bt-fund-asset-allocate-details`
+**路径前缀**: `/api/admin/asset-management/bt-fund-asset-allocate-details`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -486,7 +572,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.4 BT 基金报表 (BtFundReportController)
 
-**路径前缀**: `/api/app/asset-management/bt-fund-reports`
+**路径前缀**: `/api/admin/asset-management/bt-fund-reports`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -503,7 +589,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.5 BT 项目公司交易主数据 (BtProjectTransactionController)
 
-**路径前缀**: `/api/app/asset-management/bt-project-transactions`
+**路径前缀**: `/api/admin/asset-management/bt-project-transactions`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -518,7 +604,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.6 EAM 资产 (LightEamAssetsController)
 
-**路径前缀**: `/api/app/asset-management/eam-assets`
+**路径前缀**: `/api/admin/asset-management/eam-assets`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -530,7 +616,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.7 EAM 年度预算 (LightEamYearBudgetController)
 
-**路径前缀**: `/api/app/asset-management/eam-year-budgets`
+**路径前缀**: `/api/admin/asset-management/eam-year-budgets`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -539,7 +625,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.8 合同管理 (LightContractInfoController)
 
-**路径前缀**: `/api/app/asset-management/contracts`
+**路径前缀**: `/api/admin/asset-management/contracts`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -552,7 +638,7 @@ BFF 层构建了完整的当前用户上下文体系：
 
 ### 5.9 经营性租赁资产 (EnergyLeasedStationAssetManagementController)
 
-**路径前缀**: `/api/app/asset-management/energy-leased-station-asset-reports`
+**路径前缀**: `/api/admin/asset-management/energy-leased-station-asset-reports`
 
 | 路径 | 说明 | 权限 |
 |---|---|---|
@@ -815,3 +901,105 @@ system-service (SysPartyService, SystemService, V3BranchRegionService)
 - **新增**: `OperationLogTarget.LOGIN` — 登录审计目标类型
 - **新增**: `LoginLogResult` — 登录结果枚举 (SUCCESS/FAILURE)
 - **新增**: `OperationLogAdminController` — 操作日志查询管理端点
+
+## 9. CBS Vue3 页面迁移进度 (authz 菜单迁移记录)
+
+**来源**: `rrsjk-admin-authz-impl/src/main/resources/db/migration_202606*.sql` (2026-06-08~12, yumiao)
+**证据等级**: 代码明确证明 (SQL 迁移脚本)
+
+CBS 管理后台正在将旧版 FTL/EasyUI 页面迁移到 Vue3 SPA。每个页面迁移通过更新 `authz_menu` 表的 `component` 字段（从 null/LEGACY_LINK 改为 Vue3 组件路径）和 `menu_type`（改为 PAGE）来完成。
+
+### 9.1 已迁移到 Vue3 的页面 (截至 2026-06-28)
+
+#### 越秀电站管理 (admin.yuexiu-station, 12 个子页面)
+| 菜单 key | 页面 | Vue3 组件路径 | 迁移日期 |
+|---|---|---|---|
+| `admin.yuexiu-station.stations` | 越秀电站管理 | `yuexiu-station/stations/index` | 2026-06-08 |
+| `admin.yuexiu-station.accounts` | 越秀二类户列表 | `yuexiu-station/accounts/index` | 2026-06-08 |
+| `admin.yuexiu-station.account-cancels` | 越秀二类户销户 | `yuexiu-station/account-cancels/index` | 2026-06-08 |
+| `admin.yuexiu-station.settlements` | 越秀结算 | `yuexiu-station/settlements/index` | 2026-06-08 |
+| `admin.yuexiu-station.receipt-confirms` | 越秀确认收款 | `yuexiu-station/receipt-confirms/index` | 2026-06-08 |
+| `admin.yuexiu-station.contracts` | 越秀合同管理 | `yuexiu-station/contracts/index` | 2026-06-08 |
+| `admin.yuexiu-station.owner-rents` | 业主租金列表（越秀） | `yuexiu-station/owner-rents/index` | 2026-06-08 |
+| `admin.yuexiu-station.interactive-logs` | 越秀电站交互日志 | `yuexiu-station/interactive-logs/index` | 2026-06-08 |
+| `admin.yuexiu-station.owner-exchanges` | 越秀股转业主预审管理 | `yuexiu-station/owner-exchanges/index` | 2026-06-08 |
+| `admin.yuexiu-station.electricity-bills` | 越秀电费 | `yuexiu-station/electricity-bills/index` | 2026-06-08 |
+| `admin.yuexiu-station.insurance-renewals` | 越秀续保管理 | `yuexiu-station/insurance-renewals/index` | 2026-06-08 |
+| `admin.yuexiu-station.income-bill-exceptions` | 越秀租金支付异常列表 | `yuexiu-station/income-bill-exceptions/index` | 2026-06-08 |
+
+#### 商品管理（新）(admin.item)
+| 菜单 key | 页面 | Vue3 组件路径 | 迁移日期 |
+|---|---|---|---|
+| `admin.item.breakeven-prices` | 保本价管理 | `item/breakeven-prices/index` | 2026-06-12 |
+| `admin.item.categories` | 类目管理 | `item/categories/index` | 2026-06-12 |
+
+#### 仍为 LEGACY_LINK 的页面 (尚未迁移)
+- 商品管理（新）下约 20 个子页面（产品主数据、产品价格、商品SPU、商品列表等）
+- 财务管理（新）下约 15 个子页面（优惠券、订单、发票、内采等）
+- 以上页面在 `authz_menu` 中 `menu_type = 'LEGACY_LINK'`，`legacy_url` 指向旧版 FTL 路径
+
+### 9.2 迁移模式
+每个页面迁移涉及:
+1. `authz_menu` 更新: `component` 设为 Vue3 组件路径, `menu_type` 改为 `PAGE`
+2. `authz_permission` 插入: 对应的 PAGE/BUTTON/API 权限记录
+3. `authz_role_permission` 继承: 已有页面权限的角色自动继承对应 API 权限
+4. `authz_user_permission` 继承: 已有页面权限的用户自动继承对应 API 权限
+
+### 9.3 authz_sub_center 表 (分中心主数据)
+
+**来源**: `migration_20260604_authz_sub_center_scope.sql`
+**证据等级**: 代码明确证明
+
+| 表名 | 用途 |
+|---|---|
+| `authz_sub_center` | 分中心主数据 (从 `ehaier_system.sys_sub_center` 同步) |
+| `authz_user_sub_center` | 用户-分中心数据范围 (含 clientType WEB/APP 维度) |
+
+- 数据源: 从旧库 `ehaier_system.sys_sub_center` + `sys_sub_center_user` 迁移
+- 关联: `authz_user.login_id` ↔ `sys_user.login_id` ↔ `sys_sub_center_user.user_id`
+- 目的: authz 侧独立管理分中心权限范围，不再依赖旧 `ehaier_system` 库
+
+## 10. BFF 模块全景 (2026-06-28 更新)
+
+**来源**: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/` 目录结构
+**证据等级**: 代码明确证明
+
+BFF 层共 **376 个 Controller**，分布在 **48 个业务模块**：
+
+| 模块 | 包名 | 业务域 |
+|---|---|---|
+| 资产管理 | `assetmanagement` | BT股转/基金/招银金租/经营性租赁/EAM/合同 |
+| App 会话管理 | `appsession` | App 在线用户查看/踢下线 |
+| AI 助手 | `assistant` | Admin AI 对话助手 |
+| 认证/授权 | `auth`, `authz`, `authorization` | 登录/登出/权限快照 |
+| 施工队管理 | `constructionrolemanagement` | 施工队/派工单 |
+| 数据大屏 | `datadashboard` | 报表/大屏数据 |
+| 财务 | `finance`, `selffinance`, `fundsettlement`, `pvsettlement` | 财务/自有财务/基金结算/光伏结算 |
+| 发电管理 | `generationmanagement` | 发电数据管理 |
+| 首页 | `home` | 首页汇总 |
+| 华电 | `huadian` | 华电业务 |
+| 华融 | `huarong` | 华融业务 |
+| 工商业 EPC | `industrialepc`, `industrialepcconstruction` | 工商业 EPC |
+| 工业产值 | `industrialproductionvalue` | 工业产值 |
+| 商品 | `item` | 商品管理 |
+| 移动端 | `mobile` | 移动端接口 |
+| 操作日志 | `operationlog` | 操作日志查询 |
+| 运维管理 | `operationmanagement` | 运维 |
+| 业主信息 | `ownerinfo` | 业主信息 |
+| 项目公司 | `projectcompany` | 项目公司管理 |
+| 普银 | `puyin` | 普银业务 |
+| 收款管理 | `receiptmanagement` | 收款 |
+| 对账 | `reconciliation` | 对账 |
+| 租金管理 | `rentmanagement` | 租金/共享报账 |
+| 回购管理 | `repurchasemanagement` | 回购 |
+| 服务商管理 | `serviceprovidermanagement` | 服务商 |
+| 电站 | `station` | 电站核心业务 |
+| 分中心管理 | `subcentermanagement` | 分中心/团队 |
+| 系统 | `system` | 字典/配置 |
+| 技术审核派单 | `techauditdispatch` | 技术审核派单 |
+| 仓储 | `warehouse` | 仓储/调拨 |
+| 预警管理 | `warningmanagement` | 预警 |
+| 越秀电站 | `yuexiustation` | 越秀电站管理 |
+| 零碳 | `zerocarbon` | 零碳电站 |
+| 招银 | `zhaoyin` | 招银业务 |
+| 中银 | `zhongyin` | 中银业务 |

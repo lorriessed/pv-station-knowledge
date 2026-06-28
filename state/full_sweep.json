@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-27T22:00:54.244148",
+  "last_run_at": "2026-06-28T22:00:16.570815",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -251,11 +251,11 @@
     "purchase_electricity_contract": "2026-06-27T22:00:54.244148",
     "rent_extraction": "2026-06-27T22:00:54.244148",
     "rent_extraction_guding": "2026-06-27T22:00:54.244148",
-    "rrs-parent": "2026-05-30T22:00:38.965041",
-    "rrsjk-admin-auth-server": "2026-05-30T22:00:38.965041",
-    "rrsjk-admin-authz-service": "2026-05-30T22:00:38.965041",
-    "rrsjk-admin-bff": "2026-05-30T22:00:38.965041",
-    "rrsjk-admin-biff": "2026-05-30T22:00:38.965041",
+    "rrs-parent": "2026-06-28T22:00:16.570815",
+    "rrsjk-admin-auth-server": "2026-06-28T22:00:16.570815",
+    "rrsjk-admin-authz-service": "2026-06-28T22:00:16.570815",
+    "rrsjk-admin-bff": "2026-06-28T22:00:16.570815",
+    "rrsjk-admin-biff": "2026-06-28T22:00:16.570815",
     "rrsjk-admin-web-next": "2026-05-31T22:00:05.544331",
     "usher-common": "2026-05-31T22:00:05.544331",
     "usher-dependencies": "2026-05-31T22:00:05.544331",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 42,
+  "sweep_round": 43,
   "last_sweep_at": "2026-06-27T22:00:54"
 }

@@ -14,29 +14,31 @@
 
 ### 1. rrsjk-admin-auth-server
 - **角色**: OAuth2/OIDC 认证服务器（Authorization Server）
-- **技术栈**: Spring Boot 3.5.14, Java 17
+- **技术栈**: Spring Boot 3.5.14, **Java 21** (2026-06-15 升级)
 - **端口**: 9000
-- **Session Cookie**: `ADMIN_AUTH_SESSION`
+- **Session 存储**: Redis (spring-session-data-redis)
 - **负责人**: 于淼 (yumiao)
 - **详见**: `domains/admin-authz.md` → 第 1 节
 
 ### 2. rrsjk-admin-authz-service
 - **角色**: 授权服务（Authorization Service）
-- **技术栈**: Spring Boot 2.3.3, Dubbo 2.7.4.1, MyBatis 3.5.2, Zookeeper
+- **技术栈**: Spring Boot 3.5.14, Dubbo 3.2.15, MyBatis 3.5.19, Zookeeper
+- **Java 版本**: **Java 21** (2026-06-15 升级)
 - **端口**: Dubbo 服务（-1 随机端口）
 - **数据库**: `rrsjk_admin_authz` @ pv-mysql-prod (rm-m5ebm056ct14p18zu)
-- **7 张表**: authz_user, authz_role, authz_menu, authz_permission, authz_user_role, authz_role_permission, authz_user_permission
+- **10 张表**: authz_user, authz_role, authz_menu, authz_permission, authz_user_role, authz_role_permission, authz_user_permission, authz_user_password, authz_sub_center, authz_user_sub_center
 - **负责人**: 于淼 (yumiao)
 - **详见**: `domains/admin-authz.md` → 第 2 节
 
 ### 3. rrsjk-admin-bff
 - **角色**: Backend for Frontend（BFF 层）
-- **技术栈**: Spring Boot 3.5.14, Java 17, OAuth2/OIDC Client, Dubbo 3.2.15
+- **技术栈**: Spring Boot 3.5.14, **Java 21**, OAuth2/OIDC Client, Dubbo 2.7.4.1
 - **端口**: 8081
 - **Session Cookie**: `ADMIN_BFF_SESSION`
-- **业务模块**: 资产管理(13 Controller)、结算(32)、仓储(35)、电站(19)、自有财务(21) 等 17+ 模块
+- **业务模块**: **48 个模块, 376 个 Controller** — 资产管理、结算、仓储、电站、自有财务、商品、财务、越秀、零碳、招银、中银、华电、华融、工商业EPC 等
+- **API 前缀**: `/api/admin/` (2026-06 从 `/api/app/` 统一改为 `/api/admin/`)
 - **负责人**: 于淼 (yumiao)
-- **详见**: `domains/admin-authz.md` → 第 3、5 节
+- **详见**: `domains/admin-authz.md` → 第 3、5、10 节
 
 ### 4. rrsjk-admin-biff (已废弃)
 - **状态**: 拼写错误目录，pom.xml artifactId 也是 `rrsjk-admin-bff`

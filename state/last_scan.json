@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-27T23:01:57.976278",
+  "last_scan_at": "2026-06-28T23:01:19.049546",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -517,14 +517,14 @@
       "branch": "master"
     },
     "rrsjk-pvbusiness-job-service": {
-      "head": "fa67f619c672e414891e8d3e00199f7d0b603a2b",
+      "head": "91c1ad2d8ef3ee2b69f0c57de9e761ca25760408",
       "path": "/data/pvcode/rrsjk-pvbusiness-job-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-report-web": {
-      "head": "f6b092c06018bb4e4e195fc9ef936e4c2f8e7864",
+      "head": "6cf8b12d00dd2bab8ae78d74b236b2c93afb4cb4",
       "path": "/data/pvcode/rrsjk-report-web",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-system-service": {
       "head": "463eb6417ec5ae4acc37dfe94ee2605d13da63d3",

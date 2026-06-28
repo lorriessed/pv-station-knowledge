@@ -2008,3 +2008,24 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 - **注释掉**: `TempConstants.stopCostSpIdList.contains(...)` — 临时暂停结算服务商逻辑被注释（6个模型类均受影响）
 - **内联常量**: `PRCTR="0000830004"`(利润中心)、`KOSTL="A205010202"`(成本中心)、`XIAOWEI="水站"` 从 TempConstants 移入类内 static final
 - **业务含义**: `TempConstants.stopCostSpIdList` 是临时暂停某些服务商SAP记账的开关，此次清理说明该临时逻辑已不再需要，或将在 Service 层统一管控
+
+### 收入成本报表汇总导出功能 (代码明确证明, 2026-06-27)
+**来源**: `rrsjk-admin-web` → `IncomeCostReportController.java`, `IncomeCostSummaryExcel.java`, `incomeCostReport.ftl` (解钦, commit 6cdd55b8f0, 2026-06-27)
+
+**新增接口**:
+- `GET /doSummaryExport.do` — 汇总导出（EasyExcel），权限 `report:incomeCost:export`
+- 导出文件名: `收入成本报表.xlsx`
+
+**新增VO**: `IncomeCostSummaryExcel`
+- 字段: nodeName(节点), targetIncome(目标销售收入万元), targetProfit(目标销售毛利万元), incomeAmount(月累收入万元), costAmount(月累成本万元), grossMargin(毛利率%)
+- 树形结构按层级缩进: L1不缩进, L2缩进2空格, L3缩进4空格, L4缩进6空格
+
+**重构**:
+- `summary()` 和 `summaryExport()` 共用 `loadSummaryWithTarget(reportDate)` 方法
+- 数据来源: ADS层 `ads_sap_revenue_cost_summary` + `dim_sap_revenue_cost_target` 补填目标值
+
+**默认日期变更**:
+- 旧: `LocalDate.now()` (当天)
+- 新: `LocalDate.now().minusDays(1)` (前一天)
+- 原因: 当天数据可能尚未完成打标/汇总
+- 前端同步: datebox 默认值改为 `defaultReportDate()` (前一天)

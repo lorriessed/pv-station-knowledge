@@ -456,17 +456,29 @@ rrsjk-merchant-web (REST)                rrsjk-light-service (Dubbo Provider)
                                           └──────────────────────────────────┘
 ```
 
-### 7类AI智能体 (AgentNoEnum)
+### 12类AI智能体 (AgentNoEnum) — 7类OCR + 5类业务 (代码明确证明, 2026-06-28 更新)
 
-| 枚举值 | 描述 | inputToken基准 | outputToken除数 | 对应OCR服务 |
-|---|---|---|---|---|
-| PROPERTY_CERT_RECOGNITION | 房产证识别 | 500+random(500) | /2 | LightStationHouseCertificateOcrServiceImpl |
-| PV_TILT_RECOGNITION | 组件倾角识别 | 1500+random(700) | /4 | LightStationModuleAngleOcrServiceImpl |
-| INVERTER_RECOGNITION | 逆变器识别 | 2000+random(700) | /2 | LightStationInverterOcrServiceImpl |
-| CONTRACT_RECOGNITION | 合同识别 | 20000+random(7000) | /2 | LightStationMasterContractOcrServiceImpl |
-| BANK_CARD_RECOGNITION | 银行卡识别 | 1000+random(500) | /4 | LightStationBankCardChangeServiceImpl |
-| LEASE_RECOGNITION | 租赁识别 | 10000+random(5000) | /2 | LightMasterHtRecordServiceImpl |
-| CONTRACT_DATE_RECOGNITION | 合同日期识别 | 20000+random(7000) | /4 | LightElecHtRecordServiceImpl |
+**A. 智能验收OCR类 (7个)** — 有token统计逻辑
+
+| 枚举值 | agentNo | 描述 | inputToken基准 | outputToken除数 | 对应OCR服务 |
+|---|---|---|---|---|---|
+| PROPERTY_CERT_RECOGNITION | 0006 | 房产证识别 | 500+random(500) | /2 | LightStationHouseCertificateOcrServiceImpl |
+| PV_TILT_RECOGNITION | 0007 | 组件倾角识别 | 1500+random(700) | /4 | LightStationModuleAngleOcrServiceImpl |
+| INVERTER_RECOGNITION | 0008 | 逆变器识别 | 2000+random(700) | /2 | LightStationInverterOcrServiceImpl |
+| CONTRACT_RECOGNITION | 0009 | 合同识别 | 20000+random(7000) | /2 | LightStationMasterContractOcrServiceImpl |
+| BANK_CARD_RECOGNITION | 0010 | 银行卡识别 | 1000+random(500) | /4 | LightStationBankCardChangeServiceImpl |
+| LEASE_RECOGNITION | 0011 | 租赁识别 | 10000+random(5000) | /2 | LightMasterHtRecordServiceImpl |
+| CONTRACT_DATE_RECOGNITION | 0012 | 合同日期识别 | 20000+random(7000) | /4 | LightElecHtRecordServiceImpl |
+
+**B. 业务AI助手类 (5个)** — 2026-06-28 新增，尚无token统计逻辑，仅注册编号
+
+| 枚举值 | agentNo | 描述 | 状态 |
+|---|---|---|---|
+| CBS_ASSISTANT | 0001 | 新能源：CBS智能助手 | 已上线 |
+| EMS_ASSISTANT | 0002 | 新能源：储能EMS智能助手 | 已上线 |
+| HAIGLOW_ASSISTANT | 0003 | 新能源：Haiglow智能助手 | 已上线 |
+| MARKETING_ASSISTANT | 0004 | 新能源：营销智能体 | 已上线 |
+| ELECTRICITY_TRADING_ASSISTANT | 0005 | 新能源：电力交易智能体 | 在建 |
 
 ### Token计算逻辑
 
