@@ -9217,7 +9217,7 @@
 
 ## rrsjk-admin-authz-service/rrsjk-admin-authz-impl/src/main/resources/mybatis/mapper/AuthzRepositoryMapper.xml
 - namespace: `com.rrsjk.adminauthz.mapper.AuthzRepositoryMapper`
-- statements: `select:findUser`, `select:listAllUsers`, `select:listUsersByClient`, `update:updateUser`, `insert:insertUser`, `select:findPasswordCredential`, `update:updateUserPassword`, `insert:insertUserPassword`, `select:listRoleCodesByUser`, `select:listRoleCodesByUserForClient`, `select:listRolesByCodes`, `select:listAllRoles`, `select:listAllRolesForClient`, `select:countByRoleCode`, `insert:insertRole`, `update:updateRole`, `delete:deleteRole`, `delete:deleteRolePermissions`, `delete:deleteUserRolesByRole`, `delete:deleteUserRoles`, `delete:deleteUserRolesForClient`, `insert:insertUserRole`, `select:listPermissionsByRole`, `select:listAllPermissions`, `select:listAllPermissionsForClient`, `select:listByPermissionKeys`, `select:listByPermissionKeysForClient`, `select:listEffectivePermissionsByUser`, `insert:insertPermission`, `update:updatePermission`, `delete:deletePermission`, `delete:deletePermissionForClient`, `delete:deleteRolePermissionsByPermission`, `delete:deleteRoleClientPermissionsByPermission`, `delete:deleteUserPermissionsByPermission`, `delete:deleteUserClientPermissionsByPermission`, `delete:deleteRoleClientPermissions`, `insert:insertRolePermission`, `delete:deleteUserClientPermissions`, `delete:deleteUserPermissions`, `insert:insertUserPermission`, `select:listRolePermissionKeysByUser`, `select:listDirectPermissionKeysByUser`, `select:listSubCentersByUser`, `select:listAllMenus`, `select:listAllMenusForClient`, `update:updateMenu`, `insert:insertMenu`, `delete:deleteMenu`, `delete:deleteMenuForClient`, `delete:deleteUser`
+- statements: `select:findUser`, `select:listAllUsers`, `select:listUsersByClient`, `update:updateUser`, `insert:insertUser`, `select:findPasswordCredential`, `update:updateUserPassword`, `insert:insertUserPassword`, `select:listRoleCodesByUser`, `select:listRoleCodesByUserForClient`, `select:listRolesByCodes`, `select:listAllRoles`, `select:listAllRolesForClient`, `select:countByRoleCode`, `insert:insertRole`, `update:updateRole`, `delete:deleteRole`, `delete:deleteRolePermissions`, `delete:deleteUserRolesByRole`, `delete:deleteUserRoles`, `delete:deleteUserRolesForClient`, `insert:insertUserRole`, `select:listPermissionsByRole`, `select:listAllPermissions`, `select:listAllPermissionsForClient`, `select:listByPermissionKeys`, `select:listByPermissionKeysForClient`, `select:listEffectivePermissionsByUser`, `insert:insertPermission`, `update:updatePermission`, `delete:deletePermission`, `delete:deletePermissionForClient`, `delete:deleteRolePermissionsByPermission`, `delete:deleteRoleClientPermissionsByPermission`, `delete:deleteUserPermissionsByPermission`, `delete:deleteUserClientPermissionsByPermission`, `delete:deleteRoleClientPermissions`, `insert:insertRolePermission`, `delete:deleteUserClientPermissions`, `delete:deleteUserPermissions`, `insert:insertUserPermission`, `select:listRolePermissionKeysByUser`, `select:listDirectPermissionKeysByUser`, `select:listSubCentersByUser`, `select:listAllMenus`, `select:listAllMenusForClient`, `update:updateMenu`, `insert:insertMenu`, `delete:deleteMenu`, `delete:deleteMenuForClient`, `delete:deleteUser`, `select:listEnabledUnassignedUsersByName`, `select:listUsersBySubCenterCode`, `select:listSubCenters`, `select:countSubCenters`, `select:findSubCenterByCode`, `select:listSubCentersByUserId`, `insert:batchInsertUserSubCenters`, `select:listUsersByIds`, `delete:batchDeleteUserSubCenters`, `select:listSubCentersByCodes`, `select:listUnassignedSubCentersByUserId`, `delete:deleteUserSubCenters`
 - tables: `authz_menu`, `authz_permission`, `authz_role`, `authz_role_permission`, `authz_sub_center`, `authz_user`, `authz_user_password`, `authz_user_permission`, `authz_user_role`, `authz_user_sub_center`, `id`
 
 ## vpp-api-km/vpp-km-biz/src/main/resources/mapper/km/KnowledgeFileMapper.xml
@@ -9598,6 +9598,15 @@
 - statements: `select:findBy`, `select:findLastMonthPrice`
 - tables: `light_operation_elec_price`
 
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dwd/DwdSapRevenueCostVoucherDao.xml
+- namespace: `com.rrsjk.report.dao.dwd.DwdSapRevenueCostVoucherDao`
+- statements: `insert:upsertBatch`, `select:queryForReport`, `select:findTaggedPageByCondition`, `select:countTaggedByCondition`
+- tables: `bukrs`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/item/ProductPrice.xml
+- namespace: `com.rrsjk.report.dao.item.ProductPriceDao`
+- statements: `select:find`
+
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/CmConstructionProgressAudit.xml
 - namespace: `com.rrsjk.report.dao.light.CmConstructionProgressAuditDao`
 - statements: `select:listAuditWithProject`
@@ -9767,6 +9776,10 @@
 - statements: `select:findByStationId`
 - tables: `light_station_epc`
 
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightZeroCarbonStockChange.xml
+- namespace: `com.rrsjk.report.dao.light.LightZeroCarbonStockChangeDao`
+- statements: `select:findBy`
+
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightStation.xml
 - namespace: `com.rrsjk.report.dao.light.LightStationDao`
 - statements: `update:update`, `select:get`, `select:getByStationCode`, `select:getByStationCodes`, `select:findStationSum1`, `select:findStationSum`, `select:findStationSumUpgrade`, `select:findStationRegionSum`, `select:findAllStationRegionSum`, `select:findStationCode`, `select:findStationCodeYearMonth`, `select:findByParams`, `select:findStationByParams`, `select:findAreaSum`, `select:findProvince`, `select:findStationCodeByProvince`, `select:findHouseHoldProvince`, `select:findHouseHoldStation`, `select:findMultiProvince`, `select:findMultiStation`, `select:findIndustryProvince`, `select:findIndustryStation`, `select:findSocialProvince`, `select:findSocialStation`, `select:findWholeProvince`, `select:findWholeStation`, `select:findStationIdByProvince`, `select:findMulti`, `select:findIndustry`, `select:findSocial`, `select:findWhole`, `select:findGridHouseNum`, `select:findGridHouseNumBySubNameList`, `select:findInstallHouseNum`, `select:findInstallHouseNumBySubNameList`, `select:findOrderHouseNum`, `select:findOrderHouseNumBySubNameList`, `select:findGridQuota`, `select:findGridQuotaBySubNameList`, `select:findHouseholdGridQuota`, `select:findPublicBuildingsGridQuota`, `select:findHouseholdGridQuotaBT`, `select:findPublicBuildingsGridQuotaBT`, `select:findHouseholdGridQuotaYX`, `select:findPublicBuildingsGridQuotaYX`, `select:findHouseholdGridQuotaZH`, `select:findPublicBuildingsGridQuotaZH`, `select:findMultiGridQuota`, `select:findIndustryGridQuota`, `select:findSocialGridQuota`, `select:findWholeGridQuota`, `select:findInstallQuota`, `select:findInstallQuotaBySubNameList`, `select:findOrderQuota`, `select:findOrderQuotaBySubNameList`, `select:findEfNetTotal`, `select:findSpTodayInstall`, `select:findSpFirstInstall`, `select:findSpMonthInstall`, `select:findOrderSpId`, `select:findGridByCenter`, `select:findGridByCityId`, `select:findGridQuotaByCityId`, `select:findHouseholdGridQuotaByCityId`, `select:findPublicBuildingsGridQuotaByCityId`, `select:findMultiGridQuotaByCityId`, `select:findIndustryGridQuotaByCityId`, `select:findInstallHouseNumByCityId`, `select:findOrderHouseNumByCityId`, `select:findInstallQuotaByCityId`, `select:findOrderQuotaByCityId`, `select:findEfNetTotalByCityId`, `select:findSpMonthInstallByCityId`, `select:findOrderSpIdByCityId`, `select:findGridBySpId`, `select:findGridQuotaBySpId`, `select:findInstallHouseNumBySpId`, `select:findOrderHouseNumBySpId`, `select:findInstallQuotaBySpId`, `select:findOrderQuotaBySpId`
@@ -9890,6 +9903,10 @@
 - statements: `select:getListLightStationYuexiu`, `select:yxPartsSpName`, `select:yxPartsSubCenterName`, `select:yxPartsSubCenterNameCity`, `select:yxPutInSpName`, `select:yxPutInSubCenterName`, `select:yxPutInSubCenterNameCity`, `select:yxClassIiCard`, `select:yxClassIiCardCity`, `select:getByStationCodes`
 - tables: `light_station_yuexiu`, `light_station_yuexiu_account`
 
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightZeroCarbonStock.xml
+- namespace: `com.rrsjk.report.dao.light.LightZeroCarbonStockDao`
+- statements: `select:findBy`, `select:findByStoreType`
+
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightEnablePolicy.xml
 - namespace: `com.rrsjk.report.dao.light.LightEnablePolicyDao`
 - statements: `select:findEnabledByRegion`, `select:findItemByPolicyId`, `select:findAllNPolicyWithItems`
@@ -9907,8 +9924,8 @@
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightStationNew.xml
 - namespace: `com.rrsjk.report.dao.light.LightStationNewDao`
-- statements: `select:getTeamReportCount`, `select:getTeamBusinessOperationReport`, `select:getTeamAreaReportCount`, `select:getTeamAreaBusinessOperationReport`, `select:getTeamOpDetailCount`, `select:getTeamOpOrderData`, `select:getTeamOpSignData`, `select:getTeamOpCompleteData`, `select:getTeamOpGridData`
-- tables: `light_sp_staff`, `light_station`, `light_sub_sp`
+- statements: `select:getTeamReportCount`, `select:getTeamBusinessOperationReport`, `select:getTeamAreaReportCount`, `select:getTeamAreaBusinessOperationReport`, `select:getTeamOpDetailCount`, `select:getTeamOpOrderData`, `select:getTeamOpSignData`, `select:getTeamOpCompleteData`, `select:getTeamOpGridData`, `select:getAreaOpTotalReportCount`, `select:getAreaOpTotalReport`, `select:getAreaOpTeamReportCount`, `select:getAreaOpTeamReport`, `select:getWorkTeamList`, `select:getWorkOrderReprotCount`, `select:getWorkOrderReport`, `select:getWorkdetailReprotCount`, `select:getWorkdetailReport`
+- tables: `light_construction_team`, `light_station`, `light_work_order`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightEnablePolicyItem.xml
 - namespace: `com.rrsjk.report.dao.light.LightEnablePolicyItemDao`
@@ -10070,6 +10087,10 @@
 - namespace: `com.rrsjk.report.dao.ads.AdsReportInveterChartYearDao`
 - statements: `select:findChart`
 - tables: `ads.green_energy_report_light_inverter_chart_year`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/AdsSapRevenueCostSummaryDao.xml
+- namespace: `com.rrsjk.report.dao.ads.AdsSapRevenueCostSummaryDao`
+- statements: `select:findByDate`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ads/EnergyChainGroupIncomeComment.xml
 - namespace: `com.rrsjk.report.dao.ads.EnergyChainGroupIncomeCommentDao`
@@ -10285,6 +10306,11 @@
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/VmOrder.xml
 - namespace: `com.rrsjk.report.dao.local.VmOrderDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `insert:batchInsert`, `update:update`, `select:getById`
+- tables: `id`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ZeroCarbonWarehouseAgeAnalysis.xml
+- namespace: `com.rrsjk.report.dao.local.ZeroCarbonWarehouseAgeAnalysisDao`
+- statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `update:batchUpdate`, `select:getById`, `select:findByDate`
 - tables: `id`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ReportScreenDashboardCnnc.xml
@@ -10564,6 +10590,11 @@
 - namespace: `com.rrsjk.report.dao.local.LightElectTargetYearReportDao`
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `select:getByStationCodeAndDayAt`, `select:sumOfElectHourYear`, `select:countOfGenElect`
 - tables: `id`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/SapRevenueCostVoucherDao.xml
+- namespace: `com.rrsjk.report.dao.local.SapRevenueCostVoucherDao`
+- statements: `insert:upsertBatch`, `select:queryForReport`, `select:findPageByCondition`, `select:countByCondition`
+- tables: `bukrs`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/ReportHuarongScreenMonthElectric.xml
 - namespace: `com.rrsjk.report.dao.local.ReportHuarongScreenMonthElectricDao`
@@ -10973,6 +11004,16 @@
 - statements: `select:findBy`, `select:countOf`, `insert:create`, `update:update`, `insert:batchInsert`, `select:getById`, `select:findUnlinked`, `select:findUnlinkedGroupBy`, `select:findByGroupKeys`, `update:updateRepaymentNo`, `select:findByStationCodes`
 - tables: `id`
 
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dim/DimSplitNodeDao.xml
+- namespace: `com.rrsjk.report.dao.dim.DimSplitNodeDao`
+- statements: `select:findAll`
+- tables: `dim_sap_split_node`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dim/DimSapRevenueCostTargetDao.xml
+- namespace: `com.rrsjk.report.dao.dim.DimSapRevenueCostTargetDao`
+- statements: `select:findByYearMonth`
+- tables: `dim_sap_revenue_cost_target`
+
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/finance/LightIncomeRecord.xml
 - namespace: `com.rrsjk.report.dao.finance.LightIncomeRecordDao`
 - statements: `select:findByMode`
@@ -10999,6 +11040,10 @@
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dwt/ZeroCarbonEsStationDetails.xml
 - namespace: `com.rrsjk.report.dao.dwt.ZeroCarbonEsStationDetailsDao`
 - statements: `select:findCount`, `select:findBy`
+
+## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ods/OdsSapRevenueCostVoucherDao.xml
+- namespace: `com.rrsjk.report.dao.ods.OdsSapRevenueCostVoucherDao`
+- statements: `select:findPageByCondition`, `select:countByCondition`
 
 ## rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/ods/ChargingStationTOrderChargingHistory.xml
 - namespace: `com.rrsjk.report.dao.ods.ChargingStationTOrderChargingHistoryDao`

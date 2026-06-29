@@ -1469,6 +1469,13 @@
 - @GetMapping("queryReportBody")
 - @GetMapping("/export")
 
+## SysEvaluateController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/system/SysEvaluateController.java`
+- @RequestMapping("/sysEvaluate/")
+- @GetMapping("get.do")
+- @PostMapping("/add.do")
+- @GetMapping("list.do")
+
 ## MenuController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/system/MenuController.java`
 - @RequestMapping("/system/menu/")
@@ -1584,6 +1591,13 @@
 - @GetMapping("/lightElectricUnusual/closed")
 - @GetMapping("/lightElectricUnusual/updateDays")
 
+## EvaluateController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/evaluate/EvaluateController.java`
+- @RequestMapping("/evaluate/")
+- @GetMapping("get.do")
+- @PostMapping("/add.do")
+- @GetMapping("list.do")
+
 ## BocLightStationController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/boc/BocLightStationController.java`
 - @RequestMapping("/bocLightStation")
@@ -1697,8 +1711,8 @@
 - @PostMapping("importDataFive.do")
 - @PostMapping("importFixSettle.do")
 - @PostMapping("importFixMOSettle.do")
-- //	@PostMapping("importErrorOperationMaintenance.do")
 - @PostMapping("importSpecialFlagA51.do")
+- @PostMapping("importErrorOperationMaintenance.do")
 
 ## LightUnionpayBillRecordCmbController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/light/LightUnionpayBillRecordCmbController.java`
@@ -1983,6 +1997,7 @@
 - @PostMapping("change")
 - @PostMapping("batchDel.do")
 - @PostMapping("del.do")
+- @PostMapping("importDataForXiaoXiang.do")
 
 ## LightSpOpsSettleController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/spops/LightSpOpsSettleController.java`
@@ -2007,6 +2022,7 @@
 - @GetMapping("/downTemplate")
 - @PostMapping("importData.do")
 - @PostMapping("change")
+- @PostMapping("importDataForXiaoXiang.do")
 
 ## LightSpOpsNegativeIacController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/spops/LightSpOpsNegativeIacController.java`
@@ -2018,6 +2034,7 @@
 - @GetMapping("/downTemplate")
 - @PostMapping("importData.do")
 - @PostMapping("change")
+- @PostMapping("importDataForXiaoXiang.do")
 
 ## LightSpOpsPositiveExcitationController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/spops/LightSpOpsPositiveExcitationController.java`
@@ -2032,6 +2049,7 @@
 - @GetMapping("/downTemplate")
 - @PostMapping("importData.do")
 - @PostMapping("change")
+- @PostMapping("importDataForXiaoXiang.do")
 
 ## LightSpOpsSettleIacController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/spops/LightSpOpsSettleIacController.java`
@@ -2535,6 +2553,22 @@
 - @PostMapping("delete")
 - @GetMapping("list")
 
+## LightOperationStationTagDefinitionController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationStationTagDefinitionController.java`
+- @RequestMapping("/light/operation/stationTag/definitions")
+- @GetMapping("page")
+- @GetMapping("list")
+- @GetMapping("available")
+- @GetMapping("{id}")
+- @PostMapping
+- @PostMapping("edit")
+- @PostMapping("updateStatus")
+- @GetMapping("check-name")
+- @GetMapping("{id}/records")
+- @PostMapping("bind")
+- @PostMapping("delete")
+- @GetMapping("export")
+
 ## LightOperationWorkOrderZhaoYinController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationWorkOrderZhaoYinController.java`
 - @RequestMapping("/light/operation/workOrder/zhaoYin")
@@ -2597,6 +2631,18 @@
 - @PostMapping("/import")
 - @GetMapping("/downloadTemplate")
 - @GetMapping("/appeal/getRoleList")
+
+## LightOperationStationInsuranceController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationStationInsuranceController.java`
+- @RequestMapping("/light/operation/station-insurance")
+- @GetMapping("/page")
+- @GetMapping("/list")
+- @PostMapping("/create")
+- @PostMapping("/edit")
+- @PostMapping("/delete")
+- @GetMapping("/export")
+- @PostMapping("/import")
+- @GetMapping("/downloadTemplate")
 
 ## LightOperationExamController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationExamController.java`
@@ -2748,6 +2794,20 @@
 - @PostMapping("/migration/import")
 - @GetMapping("/migration/template")
 
+## LightOperationStationAnnualGuaranteeController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationStationAnnualGuaranteeController.java`
+- @RequestMapping("/light/operation/annual-guarantee")
+- @GetMapping("/page")
+- @GetMapping("/stat")
+- @GetMapping("/page/export")
+- @GetMapping("/history")
+- @GetMapping("/history/export")
+- @GetMapping("/third-party/page")
+- @GetMapping("/third-party/stat")
+- @GetMapping("/third-party/page/export")
+- @GetMapping("/third-party/history")
+- @GetMapping("/third-party/history/export")
+
 ## LightOperationStationController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationStationController.java`
 - @RequestMapping("/light/operation/station")
@@ -2832,6 +2892,15 @@
 - @GetMapping("list")
 - @PostMapping("delete")
 
+## LightOperationZeroCarbonEStationController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationZeroCarbonEStationController.java`
+- @RequestMapping("/light/operation/zero-carbon/station/e")
+- @GetMapping("page")
+- @GetMapping("getByStationCode")
+- @GetMapping("sku/list")
+- @GetMapping("weather-radiation-data")
+- @GetMapping("weather")
+
 ## LightOperationDictController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationDictController.java`
 - @RequestMapping("/light/operation/dict")
@@ -2876,6 +2945,21 @@
 - @GetMapping("statistics/total")
 - @GetMapping("count")
 - @GetMapping("/export")
+
+## LightOperationEnergyStorageStationController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationEnergyStorageStationController.java`
+- @RequestMapping("/light/operation/energy-storage/station")
+- @GetMapping("page")
+- @GetMapping("summary")
+- @GetMapping("details")
+- @GetMapping("data-stat")
+- @GetMapping("core-metric")
+- @GetMapping("pcs/list")
+- @GetMapping("device-cluster")
+- @GetMapping("curve")
+- @GetMapping("alarm/page")
+- @GetMapping("battery/analysis")
+- @GetMapping("weather")
 
 ## LightOperationPracticeController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationPracticeController.java`
@@ -2929,6 +3013,22 @@
 - @GetMapping("/my-config-list")
 - @PostMapping("/get-by-config")
 - @PostMapping("/export")
+
+## LightOperationZeroCarbonStationController
+- 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationZeroCarbonStationController.java`
+- @RequestMapping("/light/operation/zero-carbon/station")
+- @GetMapping("page")
+- @GetMapping("generation/page")
+- @GetMapping("summary")
+- @GetMapping("details")
+- @GetMapping("sku/list")
+- @GetMapping("device/fault/list")
+- @GetMapping("device/fault/stat")
+- @GetMapping("device/fault/stat/monthly-last12")
+- @GetMapping("inverter/realtime")
+- @GetMapping("inverter/curve")
+- @GetMapping("weather-radiation-data")
+- @GetMapping("weather")
 
 ## LightOperationStationElecReportController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/lightoperation/v2/LightOperationStationElecReportController.java`
@@ -3097,6 +3197,7 @@
 - @RequestMapping("/repairs/repairsAndRrs")
 - @PostMapping(value = "/receiveRrsOrderInfo",
 - @PostMapping("/repairsToRrsTest")
+- @PostMapping(value = "/receiveRrsOrderInfoTest")
 
 ## CdDictDateController
 - 文件: `rrsjk-hds-web/src/main/java/com/rrsjk/hds/controller/repairs/CdDictDateController.java`
@@ -4658,6 +4759,16 @@
 - @PostMapping("/requestAssignment.do")
 - @PostMapping("/processingTheAssignment.do")
 
+## ZeroCarbonMerchantQuitApplyController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/zerocarbon/ZeroCarbonMerchantQuitApplyController.java`
+- @RequestMapping("/zeroCarbon/merchantQuit")
+- @RequestMapping("/withdrawalCheck")
+- @RequestMapping(value = "/applyWithdrawal", method = RequestMethod.POST)
+- @RequestMapping("/getWithdrawalBaseInfo")
+- @RequestMapping(value = "/editWithdrawal", method = RequestMethod.POST)
+- @RequestMapping("/getWithdrawalDetail")
+- @RequestMapping(value = "/findWithdrawalPage", method = RequestMethod.POST)
+
 ## LightZeroMaterialPurchaseController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/zerocarbon/LightZeroMaterialPurchaseController.java`
 - @RequestMapping(value ="/light/zeroCarbon/materialPurchase/", produces = {"application/json;"})
@@ -4677,6 +4788,17 @@
 - @GetMapping("/getList.do")
 - @GetMapping("/getDetail.do")
 - @PostMapping("/delete.do")
+
+## ZeroCarbonSmartInvestStationController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/zerocarbon/ZeroCarbonSmartInvestStationController.java`
+- @RequestMapping("/light/zeroCarbon/smartInvest/")
+- @GetMapping("getImgTemplate.do")
+- @PostMapping("/draft.do")
+- @PostMapping("/submit.do")
+- @PostMapping("/resubmit.do")
+- @GetMapping("/list.do")
+- @GetMapping("/getDetailById.do")
+- @GetMapping("/export.do")
 
 ## ZeroCarbonInstallationFeeController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/zerocarbon/ZeroCarbonInstallationFeeController.java`
@@ -4821,10 +4943,10 @@
 ## RegionBusinessReportController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/report/RegionBusinessReportController.java`
 - @RequestMapping("/report")
-- @GetMapping("/regionOperationReport/query")
-- @GetMapping("/regionOperationReport/export")
-- @GetMapping("/regionOperationTeamReport/query")
-- @GetMapping("/regionOperationTeamReport/export")
+- @GetMapping("/regionOpTotalReport/query")
+- @GetMapping("/regionOpTotalReport/export")
+- @GetMapping("/regionOpTeamReport/query")
+- @GetMapping("/regionOpTeamReport/export")
 - @GetMapping("/regionOperationReport/queryOrderDetail")
 - @GetMapping("/regionOperationReport/exportOrderDetail")
 - @GetMapping("/regionOperationReport/querySignDetail")
@@ -4855,6 +4977,15 @@
 - @GetMapping("/teamBusinessOperationAreaReport/exportCompleteDetail")
 - @GetMapping("/teamBusinessOperationAreaReport/queryGridDetail")
 - @GetMapping("/teamBusinessOperationAreaReport/exportGridDetail")
+
+## WorkOrderReportController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/report/WorkOrderReportController.java`
+- @RequestMapping("/report")
+- @GetMapping("/findWorkTeam")
+- @GetMapping("/workOrderReport/query")
+- @GetMapping("/workOrderReport/export")
+- @GetMapping("/workOrderDetailReport/query")
+- @GetMapping("/workOrderDetailReport/export")
 
 ## AppPolicyReportController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/report/app/AppPolicyReportController.java`
@@ -5050,6 +5181,7 @@
 - @GetMapping("find1QJ0Item.do")
 - @GetMapping("find1QJ0ItemDetail.do")
 - @GetMapping("findZeroCarbonEStationItem.do")
+- @GetMapping("findZeroCarbonItem.do")
 - @GetMapping("findAuxiliaryMaterialItem.do")
 - @GetMapping("findAuxiliaryMaterialItemDetail.do")
 
@@ -5239,6 +5371,15 @@
 - @GetMapping("/findAvailableTypeEnum")
 - @GetMapping("/checkSpDoFourItem")
 
+## SpConfirmController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/SpConfirmController.java`
+- @RequestMapping("/light/spConfirm/")
+- @GetMapping("/page.do")
+- @GetMapping("/detail.do")
+- @GetMapping("/confirmDetail.do")
+- @PostMapping("/pass.do")
+- @PostMapping("/reject.do")
+
 ## LightStationNannyController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/LightStationNannyController.java`
 - @RequestMapping("/light/station/nanny/")
@@ -5299,6 +5440,7 @@
 - @PostMapping("/confirm.do")
 - @PostMapping("/quitOrder.do")
 - @PostMapping("/create.do")
+- @PostMapping("/verify.do")
 
 ## CmPreOrderController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/light/CmPreOrderController.java`
@@ -6413,6 +6555,25 @@
 - @PostMapping("status.do")
 - @PostMapping("orderModify.do")
 
+## PatrolInspectionController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/patrolinspection/PatrolInspectionController.java`
+- @RequestMapping("/patrolInspection/")
+- @GetMapping("/findPatrolInspectionTaskPage")
+- @GetMapping("/findPatrolInspectionTaskDetail")
+- @GetMapping("/findRecordByNameOrInverterSn")
+- @GetMapping("/findStationCodeByNameOrInverterSn")
+- @GetMapping("/findTaskStausNums")
+- @GetMapping("/findNameBySpName")
+- @GetMapping("/findStationImgAndRecord")
+- @PostMapping("/addQuestion")
+- @GetMapping("/findQuestionMode")
+- @GetMapping("/findAllQuestionMode")
+- @PostMapping("/addPatrolInspectionRecord")
+- @PostMapping("/updatePatrolInspectionRecord")
+- @GetMapping("/findPatrolInspectionRecord")
+- @GetMapping("/findPatrolInspectionRecordDetail")
+- @GetMapping("/findPatrolInspectionLog")
+
 ## AgentTokenController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/agent/AgentTokenController.java`
 - @RequestMapping("/api/agent/token")
@@ -6422,20 +6583,23 @@
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/transit/TransitStoreController.java`
 - @RequestMapping(value = "/light/transit/", produces = {"application/xml;"})
 - @PostMapping("/post.do")
+- @PostMapping("/zeroCarbon/post.do")
 - @PostMapping("/sku.do")
+- @PostMapping("/zeroCarbon/sku.do")
 - @PostMapping("/post1.do")
 
 ## GhAccountOpenCallBackController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/gh/GhAccountOpenCallBackController.java`
-- @RequestMapping("/gh/account")
-- @RequestMapping(value = "/openCallback")
+- //@RequestMapping("/gh/account")
+- //    @RequestMapping(value = "/openCallback")
+- //    @RequestMapping(value = "/withdrawCallback")
 
 ## GhSecondClassAccountController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/gh/GhSecondClassAccountController.java`
-- @RequestMapping("/gh/account/")
-- @GetMapping("list")
-- @GetMapping("doExport.do")
-- @PostMapping("unbinding")
+- //@RequestMapping("/gh/account/")
+- //    @GetMapping("list")
+- //    @GetMapping("doExport.do")
+- //    @PostMapping("unbinding")
 
 ## GtmsNotifyController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/gtms/GtmsNotifyController.java`
@@ -6776,6 +6940,12 @@
 - @PostMapping("addProcess.do")
 - @PostMapping("createAppeal.do")
 
+## LightOpStationContractController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/LightOpStationContractController.java`
+- @RequestMapping("/lightOpStationContract")
+- @GetMapping("list.do")
+- @GetMapping("viewContract.do")
+
 ## PurchaseApplySettleNoPaperOperationController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/PurchaseApplySettleNoPaperOperationController.java`
 - @RequestMapping("/operation/purchaseApplySettleNoPaper/")
@@ -6808,6 +6978,7 @@
 - @GetMapping("/downTemplate")
 - @PostMapping("importData.do")
 - @PostMapping("del")
+- @PostMapping("importDataForXiaoXiang.do")
 
 ## LightStationInverterChangeController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/LightStationInverterChangeController.java`
@@ -7780,11 +7951,11 @@
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/SubCenterController.java`
 - @RequestMapping("/api/admin/subcenter-management/sub-centers")
 - @GetMapping
-- @GetMapping("/{subCenterId}")
-- @GetMapping("/{subCenterId}/users")
+- @GetMapping("/{subCenterCode}")
+- @GetMapping("/{subCenterCode}/users")
 - @GetMapping("/selectable-users")
-- @PostMapping("/{subCenterId}/users")
-- @PostMapping("/{subCenterId}/users/remove")
+- @PostMapping("/{subCenterCode}/users")
+- @PostMapping("/{subCenterCode}/users/remove")
 
 ## PartyController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/subcentermanagement/controller/PartyController.java`
@@ -7884,6 +8055,7 @@
 - @GetMapping("/options")
 - @GetMapping("/pay-banks")
 - @PostMapping
+- @PostMapping("/update")
 - @PostMapping("/freeze")
 - @PostMapping("/unfreeze")
 - @PostMapping("/cancel")
@@ -9081,6 +9253,7 @@
 - @GetMapping("/export")
 - @GetMapping("/{stationId}/detail")
 - @PutMapping("/{stationId}/approve")
+- @GetMapping("/{stationId}/last-reject-reason")
 
 ## LightStationSkillController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/station/controller/LightStationSkillController.java`
@@ -9746,6 +9919,9 @@
 - @GetMapping
 - @GetMapping("/{id}")
 - @PostMapping("/{id}/audit")
+- @PostMapping("/gross-margin")
+- @PutMapping("/{id}")
+- @PostMapping(value = "/upload-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
 ## CmPreOrderVtController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/CmPreOrderVtController.java`
@@ -9788,6 +9964,7 @@
 - @PostMapping
 - @PostMapping("/{id}")
 - @PostMapping("/{id}/delete")
+- @PostMapping("/{id}/cancel")
 - @PostMapping("/{id}/audit")
 - @PostMapping(value = "/upload-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
@@ -9837,6 +10014,7 @@
 - @RequestMapping("/api/admin/industrial-epc/service-providers")
 - @GetMapping
 - @GetMapping("/{id}")
+- @GetMapping("/sub-centers")
 - @GetMapping("/quarters")
 - @GetMapping("/provinces")
 - @GetMapping("/contract")
@@ -9897,6 +10075,7 @@
 - @RequestMapping("/api/admin/industrial-epc/station-tech-audits")
 - @GetMapping
 - @GetMapping("/export")
+- @GetMapping("/{id}/detail")
 - @PostMapping("/{id}/audit")
 - @PostMapping("/opinion")
 
@@ -9925,6 +10104,7 @@
 - @RequestMapping("/api/admin/industrial-epc/station-business-audits")
 - @GetMapping
 - @GetMapping("/export")
+- @GetMapping("/{id}/detail")
 - @PostMapping("/{id}/audit")
 
 ## LightCmEpcStationController
@@ -9933,15 +10113,19 @@
 - @GetMapping
 - @GetMapping("/installers")
 - @GetMapping("/{id}/inverters")
+- @GetMapping("/{id}/owner-images")
 - @PostMapping("/{id}/audit")
 
 ## StationPlanChangeController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/StationPlanChangeController.java`
 - @RequestMapping("/api/admin/industrial-epc/station-plan-changes")
 - @GetMapping
-- @GetMapping("/{id}")
-- @GetMapping("/{id}/audit-detail")
-- @PostMapping("/{id}/audit")
+- @GetMapping("/export")
+- @GetMapping("/{changeId}/detail")
+- @GetMapping("/{changeId}/last-reject-reason")
+- @PutMapping("/{changeId}/approve")
+- @PutMapping("/{changeId}/asset-approve")
+- @PutMapping("/{changeId}/acceptance-approve")
 
 ## SimplePreOrderController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/industrialepc/controller/SimplePreOrderController.java`
@@ -9966,6 +10150,24 @@
 - @RequestMapping("/api/admin/industrial-epc/projects")
 - @GetMapping
 - @GetMapping("/{id}")
+- @GetMapping("/regions/provinces")
+- @GetMapping("/regions")
+- @GetMapping("/funnels/{funnelCode}")
+- @GetMapping("/investors/by-name")
+- @PostMapping("/project-set")
+- @PutMapping("/project-set/{id}")
+- @PostMapping("/project-vote")
+- @PutMapping("/project-vote/{id}")
+- @PostMapping(value = "/project-set/upload-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+- @PostMapping(value = "/project-vote/upload-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+- @GetMapping("/{id}/pre-track")
+- @GetMapping("/{id}/vote-track")
+- @PostMapping("/{id}/contracts")
+- @PostMapping(value = "/{id}/contracts/upload-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+- @PostMapping("/{id}/receipt-milestones")
+- @PostMapping("/{id}/payment-milestones/gross-margin")
+- @PostMapping("/{id}/payment-milestones")
+- @PostMapping(value = "/{id}/payment-milestones/upload-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 - @PostMapping("/engineering-info")
 - @PostMapping("/work-status")
 
@@ -11090,6 +11292,11 @@
 - @GetMapping
 - @GetMapping("/options")
 - @GetMapping("/{id}/detail")
+- @GetMapping("/reverse-template")
+- @PostMapping("/reverse-import")
+- @GetMapping("/export")
+- @GetMapping("/batch-summary")
+- @PostMapping("/audit")
 
 ## PuYinPriceConfigController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/puyin/controller/PuYinPriceConfigController.java`
@@ -11196,6 +11403,10 @@
 - @PutMapping("/users/{userId}/roles")
 - @GetMapping("/users/{userId}/permissions")
 - @PutMapping("/users/{userId}/permissions")
+- @GetMapping("/users/{userId}/sub-centers")
+- @PostMapping("/users/{userId}/sub-centers")
+- @GetMapping("/users/{userId}/sub-centers/selectable")
+- @PostMapping("/users/{userId}/sub-centers/remove")
 
 ## AuthzController
 - 文件: `rrsjk-admin-bff/src/main/java/com/rrsjk/adminbff/authz/AuthzController.java`
@@ -16357,8 +16568,8 @@
 - @RequestMapping("/competitorPrice/list.html")
 - @RequestMapping("/componentPrice/list.html")
 - @RequestMapping("/componentSwitch/list.html")
-- @RequestMapping(value = { "/listProvince.do" })
-- @RequestMapping(value = { "/listRegion.do" })
+- @RequestMapping(value = {"/listProvince.do"})
+- @RequestMapping(value = {"/listRegion.do"})
 - @RequestMapping("/purchasePrice/list")
 - @RequestMapping("/purchasePrice/delete")
 - @RequestMapping("/purchasePrice/export")

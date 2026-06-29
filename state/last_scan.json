@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-28T23:01:19.049546",
+  "last_scan_at": "2026-06-29T23:01:36.018213",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -12,7 +12,7 @@
       "branch": "master"
     },
     "app_aiwork_flutter": {
-      "head": "4f77e6fb761adb00b2e9e4fc54359b0348299388",
+      "head": "93512d22ce9297c8a61d6bfc47d2345478106edf",
       "path": "/data/pvcode/app_aiwork_flutter",
       "branch": "master"
     },
@@ -297,9 +297,9 @@
       "branch": "master"
     },
     "repairs": {
-      "head": "21f59d55719953ff25d65da449688b7251290c58",
+      "head": "03afcfde90803ae0a69e8f9b3807393155480b0e",
       "path": "/data/pvcode/repairs",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrs-dispenser-operator-android3": {
       "head": "586e934fe1e0764939bb6fc4ea229ca795d1d268",
@@ -312,9 +312,9 @@
       "branch": "master"
     },
     "rrs-dispenser-server": {
-      "head": "5af33ddf35df080443bfaa697b65414c829d5fe8",
+      "head": "cb2c2742545f06391eac198b2e660f11144b4c64",
       "path": "/data/pvcode/rrs-dispenser-server",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-activity-service": {
       "head": "2cbbcc27d365e3fd0691c92d16a1f26487f90768",
@@ -337,12 +337,12 @@
       "branch": "master"
     },
     "rrsjk-admin-authz-service": {
-      "head": "94a9d7df1fc7c392a8aacd71f8f46e9214eca24e",
+      "head": "89e9e4a1892d44cb22b04eecfbd79af34ff848a1",
       "path": "/data/pvcode/rrsjk-admin-authz-service",
       "branch": "master"
     },
     "rrsjk-admin-bff": {
-      "head": "a4bbb3a3320cb0c7d09bef4d5a4fdc6a6ff23f42",
+      "head": "aaf133175a02a86b2ec091119b8973a50aa7e79e",
       "path": "/data/pvcode/rrsjk-admin-bff",
       "branch": "master"
     },
@@ -357,7 +357,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "704d6b0907a71bcdc8829e5bf1dad568a562a7b2",
+      "head": "afee4089ff68ba2d4f7361d6c2cba59cc6d59052",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -382,9 +382,9 @@
       "branch": "master"
     },
     "rrsjk-cms-service": {
-      "head": "06614f56a111971886e301bf41564372d5069aaf",
+      "head": "6fa0b569a150b62aff41c088388d59de36839bf0",
       "path": "/data/pvcode/rrsjk-cms-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-echannel-service": {
       "head": "d0675c57b77be2f75cb6ecb804a197350916e4a7",
@@ -392,9 +392,9 @@
       "branch": "master"
     },
     "rrsjk-energystorage-service": {
-      "head": "5fa06b57835397b72f49be7e6a2089161a819c2f",
+      "head": "8ab88e8a5251074bccf3b7d517c96b1ff0fc9910",
       "path": "/data/pvcode/rrsjk-energystorage-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-finance-service": {
       "head": "724881d13b1ac6dfff6f3fe341967126c780192e",
@@ -407,19 +407,19 @@
       "branch": "master"
     },
     "rrsjk-hds-web": {
-      "head": "850d4954d9017138a8644a3894bf6a1fc0b281fb",
+      "head": "cb9cee2e6878d5be4d413ddf9292105288c678e1",
       "path": "/data/pvcode/rrsjk-hds-web",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-item-service": {
-      "head": "f4e601d8152aceabb87872c31c4e6055c422aba4",
+      "head": "f9bee40a03787a7bd95d2fef25c3e3b2a91aaf21",
       "path": "/data/pvcode/rrsjk-item-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-light-common": {
-      "head": "f6ab440a63efe143d91e51fce06355c82def8dbd",
+      "head": "1b92d30d9470af17e76deddc2aeb03262b6ca158",
       "path": "/data/pvcode/rrsjk-light-common",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-light-data-service": {
       "head": "b88be40820c8c091c7c8f56674a481d59483bbc8",
@@ -427,9 +427,9 @@
       "branch": "master"
     },
     "rrsjk-light-iot-service": {
-      "head": "7dcf95b5137c802d0f003815cd9591f31db5f25b",
+      "head": "f5ebe2581b36f44e7f1cc636cb41324e6620e9bb",
       "path": "/data/pvcode/rrsjk-light-iot-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-light-message-service": {
       "head": "a4310b9633545ba572dd8af1716748c5fa86e831",
@@ -437,9 +437,9 @@
       "branch": "master"
     },
     "rrsjk-light-openapi-service": {
-      "head": "6bb7089924f66ed181f9421d8b85ec4322b7d08a",
+      "head": "9e19015921c7f64e4589afb142a8b7083a4dfc8b",
       "path": "/data/pvcode/rrsjk-light-openapi-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-light-operation-service": {
       "head": "b7e362819fb061f43607cd76ced66e9e140ff8dc",
@@ -447,12 +447,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "0fcf50092cfaf8fa2eabdae01770c1d132e56549",
+      "head": "7a26f9a5a89d24c47e8b6706095fc9159effa1a4",
       "path": "/data/pvcode/rrsjk-light-report-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-light-service": {
-      "head": "0c7ec4c8527ffcf058d92477415911c0084d2cd3",
+      "head": "3549b9c11f4f00b0ae25f4345bbe78ee623c91e5",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -472,9 +472,9 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "fc3a6108cff15ac9a120f3ad50a53127af0f5c16",
+      "head": "43a0a2bf9aec5342c2765a3f9f2f52133f5e9298",
       "path": "/data/pvcode/rrsjk-merchant-web",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-migration-member": {
       "head": "7cea47898e66df6ef55113eddc8616422fff33ce",
@@ -517,9 +517,9 @@
       "branch": "master"
     },
     "rrsjk-pvbusiness-job-service": {
-      "head": "91c1ad2d8ef3ee2b69f0c57de9e761ca25760408",
+      "head": "fa67f619c672e414891e8d3e00199f7d0b603a2b",
       "path": "/data/pvcode/rrsjk-pvbusiness-job-service",
-      "branch": "dev"
+      "branch": "master"
     },
     "rrsjk-report-web": {
       "head": "6cf8b12d00dd2bab8ae78d74b236b2c93afb4cb4",
@@ -612,7 +612,7 @@
       "branch": "master"
     },
     "vpp-api-gect": {
-      "head": "1a7ae6a7beaa1140528e2779480ae1d6d6287322",
+      "head": "0afee9791fc133efb338c376cf93833a4bacc8e8",
       "path": "/data/pvcode/vpp-api-gect",
       "branch": "master"
     },

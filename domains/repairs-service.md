@@ -645,6 +645,34 @@
 
 ---
 
+## 17. WfTaskService 审批接口返回类型重构 (2026-06-26~29, 代码明确证明)
+
+**来源**: `repairs/repairs-api/src/main/java/com/pvs/ops/flowable/service/IWfTaskService.java` + `repairs-impl/.../WfTaskServiceImpl.java` (commits 082eb82f, cdca036a, bfe18d67, A0026566, 2026-06-26)
+
+### 接口签名变更
+所有审批操作方法从 `void` 改为返回 `ExecuteResult`：
+- `complete(WfTaskBo, SysUserDto)` → `ExecuteResult`
+- `taskReject(WfTaskBo, SysUserDto)` → `ExecuteResult`
+- `taskRejectWarehouse(ProcessQuery, SysUserDto)` → `ExecuteResult`
+- `taskReturn(WfTaskBo, SysUserDto)` → `ExecuteResult`
+
+### 错误处理策略变更
+- **变更前**: 使用 `throw new BusinessException(...)` / `throw new RuntimeException(...)` 抛异常
+- **变更后**: 使用 `ExecuteResult.newErrorResult("错误信息")` 返回结果对象
+- **新增依赖**: `com.haier.rrsframework.common.ExecuteResult`
+- **日志增强**: 流程处理失败时增加 `log.error("流程处理失败，流程实例ID: {}, 审批人: {}", ...)` 结构化日志
+- **私有方法同步**: `orderProcess()` 也从 `void` 改为返回 `ExecuteResult`
+- **注意**: `taskReject` 和 `taskRejectWarehouse` 的 catch 块中仍保留 `throw new BusinessException(...)` 而非返回 ExecuteResult（不一致）
+
+### 新增 Dubbo 依赖
+- **pom.xml**: 新增 `rrsjk-light-data-api:0.0.1-SNAPSHOT` 依赖，表明 repairs 服务开始调用发电数据服务
+
+### 其他变更
+- `RepairsAndRrsServiceImpl.java`: 修改日志记录方式 (commit b4bd67dc, 2026-06-29)
+- `logback-spring.xml`: prod 环境添加 MyBatis DEBUG 配置 (commit e8e297f, 2026-06-24)
+
+---
+
 ## 来源
 
 - `repairs` 全量通读 2026-05-22 (第9轮), 重扫 2026-06-16 (第32轮)

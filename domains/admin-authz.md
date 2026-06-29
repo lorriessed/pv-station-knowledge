@@ -1003,3 +1003,42 @@ BFF 层共 **376 个 Controller**，分布在 **48 个业务模块**：
 | 零碳 | `zerocarbon` | 零碳电站 |
 | 招银 | `zhaoyin` | 招银业务 |
 | 中银 | `zhongyin` | 中银业务 |
+
+## 11. AuthzSubCenterService — 分中心用户管理 Dubbo 服务 (2026-06-25, 代码明确证明)
+
+**来源**: `rrsjk-admin-authz-service` (commits 5fc7ca5d..89e9e4a, lilong/yumiao, 2026-06-25~29)
+**关联需求**: TAEI-3270【分中心管理】切换新的Dubbo服务和数据源
+
+### 新增接口: `AuthzSubCenterService`
+**包路径**: `com.rrsjk.adminauthz.api.AuthzSubCenterService`
+
+| 方法 | 说明 |
+|---|---|
+| `listSubCenters(code, name, page, size)` | 分页查询分中心列表 |
+| `countSubCenters(code, name)` | 分中心总数 |
+| `getSubCenter(code)` | 按编码查分中心详情 |
+| `listSubCentersByUserId(userId)` | 查用户关联的所有分中心 |
+| `listUsersBySubCenterCode(subCenterCode)` | 查分中心下所有用户 |
+| `listEnabledUnassignedUsersByName(subCenterCode, name)` | 查未分配到该分中心的可用用户（按姓名模糊搜索） |
+| `batchAddUsers(subCenterCode, userIds, operator)` | 批量添加用户到分中心 |
+| `batchRemoveUsers(subCenterCode, userIds)` | 批量从分中心移除用户 |
+| `addUserSubCenters(userId, subCenterCodes, operator)` | 给用户批量关联分中心 |
+| `listEnabledUnassignedSubCentersByUserId(userId, keyword)` | 查用户未关联的分中心列表 |
+| `removeUserSubCenters(userId, subCenterCodes)` | 移除用户的分中心关联 |
+
+### 新增 DTO
+- `AuthzSubCenterDetailDTO` — 分中心详情（扩展自 AuthzSubCenterDTO，增加更多字段）
+- `AuthzSubCenterUserDTO` — 分中心用户关联信息（extends userResultMap，含 clientType/createdAt/createdBy）
+- `AuthzUserSubCenterDTO` — 用户-分中心关联实体（userId, subCenterCode, subCenterName, clientType, createdBy）
+
+### 数据层变更
+- **新增 Mapper 方法**: 13 个新 SQL 查询（`AuthzRepositoryMapper.xml` 新增 146 行）
+- **涉及表**: `authz_user`, `authz_user_sub_center`（用户-分中心关联表）
+- **Repository 层**: `AuthzRepository` 接口 + `MybatisAuthzRepository` 实现新增对应方法
+- **service.xml**: 新增 Dubbo reference（具体引用待确认）
+
+### 权限迁移 SQL
+- `migration_20260613_self_finance_pay_account_configs_page.sql` 更新:
+  - 出款账户配置页面 Vue3 迁移（旧: `/admin/payAccountQuotaConfig/list.html` → 新: `self-finance/pay-account-configs/index`）
+  - 新增 `self-finance.pay-account-configs.update` 按钮权限（"出款账户配置编辑预算"）
+  - ADMIN_AUTHZ_SUPER 角色自动关联新权限
