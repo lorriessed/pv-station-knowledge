@@ -214,3 +214,8 @@
 - `sp_oldback_lists` — 旧件回退单主表
 - `sp_oldback_lists_detail` — 旧件回退单明细
 - `sp_storeage` / `sp_storeage_del` — 库存表 / 库存删除备份表
+
+### 中转仓调中转仓 (代码明确证明, 2026-06-29)
+**来源**: `rrsjk-light-service` → `LightTransferOrderServiceImpl.java` + `LightStoreModel.java` (姜传德/德, commits f3f70ba427/3986928851, 分支 jcd-optimization, 2026-06-29)
+
+**变更**: 支持中转仓之间的直接调拨（此前可能只支持从中转仓到项目仓或反向）。`LightStoreModel` 新增1个字段支持该场景。

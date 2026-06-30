@@ -2029,3 +2029,28 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 - 新: `LocalDate.now().minusDays(1)` (前一天)
 - 原因: 当天数据可能尚未完成打标/汇总
 - 前端同步: datebox 默认值改为 `defaultReportDate()` (前一天)
+
+## TAEI-3080 公建/整村租金请款申请二期 (代码明确证明, 2026-06-29)
+
+**来源**: `rrsjk-light-service` (龙龙/王斌, commits c3c51454f2/59342c4762, 分支 20260626_longlong_taei_3080_rent_payment, 2026-06-29)
+
+### 公建租金请款 (LightProjectRentPayment)
+新增实体/DAO/Service 全套:
+- `LightProjectRentPayment.java` (157行) — 公建租金请款主实体
+- `LightProjectRentPaymentFile.java` — 请款附件
+- `LightProjectRentPaymentInvoice.java` — 请款发票
+- `LightProjectRentPaymentItem.java` — 请款明细项
+- `LightRentPaymentLog.java` (85行) — 请款操作日志
+- `LightProjectRentRecord.java` — 新增字段 (4行改动)
+- 对应 DAO + MyBatis Mapper XML 全套
+
+### 整村租金请款 (LightWvRentPayment)
+独立于公建的整村(Wv=Whole Village)请款体系:
+- `LightWvRentPayment.java` (157行) — 整村租金请款主实体
+- `LightWvRentPaymentFile.java` / `LightWvRentPaymentInvoice.java` / `LightWvRentPaymentItem.java`
+- `LightWvRentPaymentServiceImpl.java` (473行) — 完整业务实现
+- `LightWvRentPayment.xml` (142行) — MyBatis Mapper
+- `LightWvRentRecord.java` — 新增1字段
+
+### 架构观察
+公建(Pub)和整村(Whole Village)使用**平行实体体系**（LightProject vs LightWv前缀），而非共用一套。请款流程包含：主表+附件+发票+明细项+操作日志五张表。与一期相比，二期扩展了文件管理和发票管理。

@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-29T22:00:37.465219",
+  "last_run_at": "2026-06-30T22:00:58.606533",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -202,9 +202,9 @@
     "rrsjk-merchant-service": "2026-06-25T22:05:52.730634",
     "rrsjk-migration-member": "2026-06-25T22:05:52.730634",
     "rrsjk-migration-mix": "2026-06-25T22:05:52.730634",
-    "rrsjk-mobile-h5": "2026-06-02T22:00:09.001485",
-    "rrsjk-mobile-web": "2026-06-02T22:00:09.001485",
-    "rrsjk-oauth2-web": "2026-06-02T22:00:09.001485",
+    "rrsjk-mobile-h5": "2026-06-30T22:05:07",
+    "rrsjk-mobile-web": "2026-06-30T22:05:07",
+    "rrsjk-oauth2-web": "2026-06-30T22:05:07",
     "rrsjk-pay-service": "2026-06-02T22:00:09.001485",
     "rrsjk-pay-web": "2026-06-02T22:00:09.001485",
     "rrsjk-pvbusiness-job-service": "2026-06-03T22:09:13",
@@ -261,8 +261,8 @@
     "usher-dependencies": "2026-06-29T22:00:37.465219",
     "usher-groovy-flex": "2026-06-29T22:00:37.465219",
     "usher-protofuse": "2026-06-29T22:00:37.465219",
-    "usher-rpc": "2026-06-01T22:04:09.414716+08:00",
-    "usher-stream": "2026-06-01T22:04:09.414716+08:00",
+    "usher-rpc": "2026-06-30T22:05:07",
+    "usher-stream": "2026-06-30T22:05:07",
     "app_aiwork_flutter": "2026-06-18T22:04:51.787887",
     "autotest": "2026-06-18T22:04:51.787887",
     "date_extraction": "2026-06-18T22:04:51.787887",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 43,
-  "last_sweep_at": "2026-06-29T22:00:37"
+  "sweep_round": 44,
+  "last_sweep_at": "2026-06-30T22:05:07"
 }

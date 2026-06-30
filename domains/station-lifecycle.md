@@ -1052,3 +1052,16 @@ if (exist != null) {
 **来源**: `rrsjk-admin-web` → `StationListExport.java` (wangxiran, commit fa22487d, 2026-06-26)
 - **新增参数**: 租赁模式(leaseMode) + 营业状态 — 电站列表导出支持按资方模式和营业状态筛选
 - **证据等级**: 代码明确证明
+
+### 运维商合同查询重构 — 主表切换 (代码明确证明, 2026-06-29)
+**来源**: `rrsjk-light-service` → `LightStationContractRecord.xml` (孙志男/sunzn, commits 4974eda91a/eb9b783fd9, 分支 szn_sht_contract_20260624, 2026-06-29)
+
+**变更内容**:
+- **查询主表从 `light_station` 改为 `light_station_contract_record`** — 合同查询不再以电站表为主表
+- **INNER JOIN → LEFT JOIN** — 避免电站记录缺失导致合同数据丢失
+- 新增 `opContractColumn` SQL 片段定义查询字段列表
+- 业主名/电站编码搜索字段来源改为合同记录表
+- 移除多余的 `sr.type = 0` 条件，保留合同类型/状态筛选
+- 数据权限隔离策略通过注释说明
+
+**业务影响**: 此前合同查询依赖电站表存在记录，如果电站数据缺失则合同记录也会丢失。重构后以合同记录表为主，确保合同数据完整性。

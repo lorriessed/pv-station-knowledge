@@ -655,3 +655,25 @@
 - **影响方法**: `listTotalStationCodeGrid`, `listYearStationCodeGrid`, `listMonthStationCodeGrid`, `listDayStationCodeGrid`
 - **业务含义**: 并网报表的电站编码查询数据源从DWS数仓层回退到V3业务库(`LightInveterData`表)直接查询。可能原因: DWS层数据延迟或准确性问题导致并网统计偏差
 - **证据等级**: 代码明确证明
+
+### 商户通逆变器查询扩展 (代码明确证明, 2026-06-29)
+**来源**: `rrsjk-light-data-service` (马金虎/majinhu, commits 030c11dd/49b9b627/e1112e91/9b994f10, 分支 2026-06-29-shanghutongnibianqi, 2026-06-29)
+
+**新增方法** (DwsInveterDataService):
+- `queryCountByOp()` / `findByOp()` — 按运营商查询逆变器统计
+- `getBySnSimple()` — 简化序列号查询
+- `findByPageBySht()` / `countBySht()` — 商户通分页查询+计数
+- `getDayChartSecond()` — 日图表秒级数据
+
+**修复**: `inverter_state` 字段在大数据(DWS)中字段名不一致问题
+
+**架构**: 继续走 DWS 双数据源并行模式（MySQL + DWS），新增方法在 DwsInveterData.xml 中实现。
+
+### 资方大屏户用电站统计排除EPC工商业 (代码明确证明, 2026-06-29)
+**来源**: `rrsjk-light-report-service` → `LightInveterDataServiceImpl.java` + `LightStation.xml` (代继宁, commit 2f4cd1f58, 分支 20260625-assetYxName, 2026-06-29)
+
+**变更**:
+- 在 `findStationCodeYearMonth` 查询中新增条件 `AND mode != 'EPC'`
+- 通过参数 `stationMode = "common"` 触发过滤
+- 影响年份: 2024年及以后的数据查询（2023年及以前不受影响）
+- **业务含义**: 资方大屏统计"户用电站"时，排除 EPC 工商业电站，确保统计数据纯净

@@ -347,3 +347,10 @@
 - `policyForecastList` 前端 JS 重构 (104行变更)
 
 **业务含义**: 政策预测报表体系从"初版预测"扩展到"终版预测"，终版可能在初版基础上经过人工调整或审批确认。两个Controller并存，分别对应不同阶段的预测数据。
+
+### 七期：街道级筛选 (代码明确证明, 2026-06-30)
+**来源**: `rrsjk-admin-web` → `ReportPolicyForecastController.java` + `ReportPolicyForecastFinalController.java` (龙龙, commit `42e7a0fd3`, 2026-06-30, TAEI-3190)
+
+- `buildParams()` 方法新增 `streetId` 参数（`request.getParameter("streetId")`）
+- 初版和终版政策预测报表均支持按 **省/市/区/街道** 四级筛选
+- 前端配套: 需街道级下拉选择组件（推断自参数名）

@@ -223,6 +223,15 @@ Dubbo 应用名：`repairs-service`
 | rrsjk-finance-service | `InvoiceService` | 发票服务 |
 | rrsjk-finance-service | `MdrCustomerService` | 客户管理 |
 
+### 1.7 Flowable 审批接口重构 (2026-06-23 代码证明)
+- **来源**: `repairs` commit `21f59d55` (2026-06-23, 徐勇, Merge #90)
+- **接口签名变更**: `IWfTaskService` 的 `complete()`, `taskReject()`, `taskRejectWarehouse()`, `taskReturn()` 返回类型从 `ExecuteResult` 改为 `void`
+- **错误处理模式变更**: 从返回错误码（`ExecuteResult.newErrorResult()`）改为抛异常（`BusinessException`/`RuntimeException`）
+- **私有方法同步**: `orderProcess()` 从 `ExecuteResult` 改为 `void`
+- **代码精简**: `SpOrderServiceImpl`（-226行）、`SpTranSnServiceImpl`（-162行）、`WoPartServiceImpl`（-229行）被大幅删除
+- **依赖移除**: `rrsjk-light-data-api` 从 pom.xml 移除，`service.xml` 移除 3 行 Dubbo reference
+- **⚠️ 消费者影响**: repairs 的 Dubbo 消费者需适配异常驱动模式，不再通过 ExecuteResult.isSuccess() 判断
+
 ---
 
 ## 2. rrsjk-item-service - 商品/物料服务

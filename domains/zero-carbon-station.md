@@ -177,3 +177,9 @@
 - **新增校验**: 套餐数量不能为负数（`changeStock <= 0` → RS0008）
 - **重复操作处理**: 幂等检查命中时返回明确错误信息 RS0009（"已更新过零碳适家套餐库存，请勿再重复执行"）
 - **流水记录**: `changeLog.setChangeType()` 从硬编码 `1` 改为使用 `setMealStockParamDto.getChangeType()`，支持记录不同类型的扣减
+
+### 零碳套餐起购字段移除 (代码明确证明, 2026-06-25, TAEI-3144)
+**来源**: `rrsjk-item-service` → `ZeroCarbonItemSetMealRequest.java` (代继宁, commit `f4e601d8`, 2026-06-25)
+- **移除字段**: `minimumPurchaseType`（起购类型）和 `minimumPurchaseQuantity`（起购量）从 `ZeroCarbonItemSetMealRequest` DTO 中删除
+- **业务含义**: 零碳套餐不再需要起购类型和起购量配置，简化了套餐创建/编辑的请求参数
+- **配套变更**: rrs-parent 版本从 8.0.5 降回 7.0.2；移除 `aliyun-encdb-mysql-jdbc` 数据库加密驱动包依赖

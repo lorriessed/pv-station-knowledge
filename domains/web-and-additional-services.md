@@ -381,6 +381,8 @@ appapi-web (Consumer + Adapter)
 - **认证**: AccessTokenCheckFilter + OAuth2
 - **渠道**: M站、微信小程序
 
+**关联前端仓库**: `rrsjk-mobile-h5`（Vue.js 乐农商城 H5，137 个 Vue 文件，最后提交 2024-10-09，已停滞）。该仓库是乐农商城的移动端 H5 配套前端，与 `rrsjk-mobile-web` 后端配合使用。注意：与 PVS 光伏的 `nahui-pv.mobile-h5`（React 18）是完全不同的项目。
+
 ### 3.2 Controller/API 完整列表
 
 #### 电站管理 (`/station`)

@@ -1042,3 +1042,27 @@ BFF 层共 **376 个 Controller**，分布在 **48 个业务模块**：
   - 出款账户配置页面 Vue3 迁移（旧: `/admin/payAccountQuotaConfig/list.html` → 新: `self-finance/pay-account-configs/index`）
   - 新增 `self-finance.pay-account-configs.update` 按钮权限（"出款账户配置编辑预算"）
   - ADMIN_AUTHZ_SUPER 角色自动关联新权限
+
+## 12. rrsjk-admin-bff 大规模 BFF 对齐 (代码明确证明, 2026-06-29)
+
+**来源**: `rrsjk-admin-bff` commits by yumiao (2026-06-29, 40+ commits)
+
+### 新增端点/功能
+- **支付账号配置**: `PayAccountConfigController` + `PayAccountConfigUpdateRequest` — 支付账号配置更新端点
+- **EPC 项目漏斗**: `LightProjectFunnelClient`（新增 Dubbo client）+ `ProjectFunnelView` — 项目漏斗管理
+- **EPC 项目投票**: `CmLightProjectVoteSaveRequest`, `CmLightProjectVoteFeeRequest`, `CmLightProjectVoteImageRequest` — 项目投票提交
+- **EPC 项目集**: `CmLightProjectSetSaveRequest`, `CmLightProjectCapitalInfoRequest` — 项目集创建/编辑
+- **EPC 施工跟踪附件**: `ProjectTrackAttachmentGroupView`, `ProjectTrackAttachmentRowView`, `ProjectTrackAttachmentColumnView` — 施工跟踪详情
+- **EPC 审核详情视图**: `LightCmEpcStationTechDetailView`, `LightCmEpcStationBusinessDetailView` — 技术方案/商务审核详情
+
+### Finance 模块对齐（分页/过滤规则）
+FinanceOrderController, FinanceInvoiceController, FinanceOrderWarningController, FinanceInternalPurchaseController, FinanceInternalPurchaseOrderController, FinanceInnerOrderController, FinanceGiftOrderController, FinanceGiftBudgetMicrostoreController, FinanceGiftBudgetAuditController, FinanceCouponController — 分页大小和过滤规则对齐旧版 rrsjk-admin-web
+
+### SelfFinance 模块对齐
+ZeroCarbonSettleAuditController（格式化）, YbzPayoutLogController（用户范围）, RetentionPaymentController（导出对等）, RealtimeIncomeDetailController（导出对等）, QuotaAuditController（后端对等+LightServiceProviderClient 调整）, NoPaperAuditController（导出）, ManualIncomeRecordController（导入校验）, FrozenPurchaseController（选项映射）
+
+### Warehouse 模块
+- `WarehouseTransferSpApplicationController` — 调拨调入分中心功能
+
+### IndustrialProductionValue
+- `CmProductionValueController` — 产值验证消息对齐

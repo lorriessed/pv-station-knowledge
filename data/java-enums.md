@@ -479,7 +479,6 @@
 - `FlowComment` -> `repairs/repairs-impl/src/main/java/com/pvs/ops/flowable/config/common/enums/FlowComment.java`
 - `BusinessNameEnum` -> `repairs/repairs-impl/src/main/java/com/pvs/ops/flowable/enm/BusinessNameEnum.java`
 - `ReportHouseTypeEnum` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/entity/enums/ReportHouseTypeEnum.java`
-- `VoucherSideEnum` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/constant/VoucherSideEnum.java`
 - `ProvinceEnum` -> `rrsjk-light-report-service/rrsjk-light-report-api/src/main/java/com/rrsjk/report/constant/ProvinceEnum.java`
 - `CompanyEnum` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/java/com/rrsjk/report/constant/CompanyEnum.java`
 - `DecodeHintType` -> `rrs-dispenser-operator-android3/app/src/main/java/com/old/zxing/DecodeHintType.java`
