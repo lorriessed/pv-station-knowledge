@@ -719,6 +719,11 @@
 - `ReportAssetScreenCmGridService` — 工商业电站月/年/累计并网数量及装机容量
 - 接口: `getCmGrid.do` → `/light/screen/asset/getCmGrid.do`
 
+**新增: 工单数量统计接口 (2026-04-28)**:
+- `ReportAssetScreenWorkOrderService` — 获取工单数量统计
+- 接口: `getWorkOrderCount.do` → `/light/screen/asset/getWorkOrderCount.do`
+- 开发者: laowang, commit 0b157ce4
+
 **Adapter 模式**: 通过 Adapter 层聚合多个数据源
 | Adapter | 说明 |
 |---------|------|

@@ -246,3 +246,36 @@ rrsjk-light-service (Dubbo Service)
 - **影响**: 电费收益作废流程中，判断条件从 `WAIT_SENT_OLD`/`WAIT_SENT` 改为 `SENT_OLD`/`SENT`
 - **业务意义**: FAP 状态语义从"待发送"改为"已发送"，更准确反映实际状态
 
+### 电费发票批量异步导入 (TAEI-3266, 2026-07-01)
+**来源**: `rrsjk-admin-web` → `LightCapitalProjectElectricOrderInvoiceController.java` (代继宁, commits c055f98~0a20c7f, 2026-06-25~07-01)
+**证据等级**: 代码明确证明
+
+新增 4 个接口支持电费发票 Excel 批量异步导入:
+- `POST /lightProjectElectricOrderInvoice/downloadImportTemplate.do` — 下载导入模板 (EasyExcel)
+- `POST /lightProjectElectricOrderInvoice/importInvoiceAsync.do` — 异步导入发票 (MultipartFile → InvoiceImportDTO)
+- `GET /lightProjectElectricOrderInvoice/getImportProgress.do` — 查询导入进度 (ImportProgressDTO)
+- `GET /lightProjectElectricOrderInvoice/getImportFailList.do` — 查询导入失败列表 (分页, ImportFailDTO)
+
+模板 DTO: `LightInvoiceImportTemplateDTO` — 字段: batchNo, relationNo, invoiceNumber, invoiceAt, fileUrl
+Service: `LightProjectElectricOrderInvoiceService.importInvoiceAsync()` / `getImportProgress()` / `getImportFailList()`
+前端: `lightCapitalProjectElectricOrderInvoiceList.ftl` (+400行交互)
+
+### 电费收益筛选增强 — 确认收款时间 (TAEI-3194, 2026-07-01)
+**来源**: `rrsjk-admin-web` → `LightProjectElectricOrderController.java`, `LightProjectElectricOrderStationController.java` (lilong, commits b393392~43a395a, 2026-06-22~06-23)
+**证据等级**: 代码明确证明
+
+- 电费收益列表和电站维度列表新增 `accountAtStart`/`accountAtEnd` 筛选条件（确认收款时间范围）
+- `fillOutParams()` 方法新增两个参数，映射到 SQL `accountAtStart`/`accountAtEnd`
+- 电站维度调整分中心权限查询逻辑
+- 新增"重置筛选条件"按钮
+- Excel 导出新增确认收款时间列 (`LightProjectElectricOrderStationExcel.java` +3行)
+
+### AI 对账日期解析容错 (TAEI-3110, 2026-07-01)
+**来源**: `rrsjk-admin-web` → `AiReconciliationHandler.java` (lilong, commit ecedaac, 2026-07-01)
+**证据等级**: 代码明确证明
+
+- 旧逻辑: AI 识别日期格式错误时抛出 `BusinessException("对账单日期识别失败")` 阻断整个对账流程
+- 新逻辑: 日期解析出错不阻断，startDate/endDate 变量提到 try 外部，解析失败后日期字段留空继续展示
+- 产品经理明确要求: 日期识别失败不应影响整体对账流程
+- 税额自动计算规则不变: 含税价 ÷ 1.13 × 0.13
+

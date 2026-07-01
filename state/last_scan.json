@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-06-30T23:02:01.429090",
+  "last_scan_at": "2026-07-01T23:01:32.840273",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -12,7 +12,7 @@
       "branch": "master"
     },
     "app_aiwork_flutter": {
-      "head": "e20b581918e99edcd581e69e9fff459ee2ec4f60",
+      "head": "c89b31c9d87241e8a2b0d029fd2cb337eee204ec",
       "path": "/data/pvcode/app_aiwork_flutter",
       "branch": "master"
     },
@@ -122,7 +122,7 @@
       "branch": "master"
     },
     "nahui-dicts-serve": {
-      "head": "eaade8f8e29690fd25dbbf30ba8a0ec42acf6f9b",
+      "head": "776a8483ea4e97c30ad1541301f2e03c1d1b252e",
       "path": "/data/pvcode/nahui-dicts-serve",
       "branch": "master"
     },
@@ -147,12 +147,12 @@
       "branch": "master"
     },
     "nahui-pv.hds-h5": {
-      "head": "682ad0190cb58680fdac26661a25b5d2feb370eb",
+      "head": "d494db526994cc4bfca5e3f57586ac6149efb598",
       "path": "/data/pvcode/nahui-pv.hds-h5",
       "branch": "master"
     },
     "nahui-pv.merchant-micro.osp": {
-      "head": "dfe881ce128041922442d4d897408bd459229df2",
+      "head": "3aef64d0ed0a2a8d31871b1de37cc52603e2c180",
       "path": "/data/pvcode/nahui-pv.merchant-micro.osp",
       "branch": "master"
     },
@@ -167,7 +167,7 @@
       "branch": "master"
     },
     "nahui-pv.mobile-h5": {
-      "head": "86fdedfff508a2d53c8498f31f70915abc73ae0c",
+      "head": "d3700b6e2f16a0674247927f76c20c1a5ffc949e",
       "path": "/data/pvcode/nahui-pv.mobile-h5",
       "branch": "master"
     },
@@ -262,7 +262,7 @@
       "branch": "master"
     },
     "pv.osp-uni": {
-      "head": "fc7b11e1371ae1a8cc99d0580426904301e3a4e7",
+      "head": "61a8bfef8da74d9ca3cbcc0af98fe923f98fb57b",
       "path": "/data/pvcode/pv.osp-uni",
       "branch": "master"
     },
@@ -354,10 +354,10 @@
     "rrsjk-admin-operation-log-service": {
       "head": "477af9567e4a72cf4b74b8ddf396d0e67014b291",
       "path": "/data/pvcode/rrsjk-admin-operation-log-service",
-      "branch": "dev"
+      "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "42e7a0fd390267ac3bb22ec4cb30a3b8f776f2b4",
+      "head": "8ef0ffafbb9ff4c27bd2412b26f064a3a80e6fa3",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -422,7 +422,7 @@
       "branch": "master"
     },
     "rrsjk-light-data-service": {
-      "head": "8e75fb21edd612c1a76ea5ea6e19107df6177a2f",
+      "head": "1983c8547f51ba43c03b1a9b6b688a2c647d42df",
       "path": "/data/pvcode/rrsjk-light-data-service",
       "branch": "master"
     },
@@ -447,12 +447,12 @@
       "branch": "master"
     },
     "rrsjk-light-report-service": {
-      "head": "183671d007eb52af9ef25bbfcf6381d5ca50bdb4",
+      "head": "91655a652158ae0a45658af03a742c4c54010242",
       "path": "/data/pvcode/rrsjk-light-report-service",
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "da8f419e0b38904476289ee5520dbc15ea3a3e41",
+      "head": "e3f787fbfdb82846b785a7a209d7a5fd7213cca5",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -462,7 +462,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-h5": {
-      "head": "f163bce8af22a5275d96a81a4810671148342783",
+      "head": "ffc9f4af890b785db89c773fd74964a289b62611",
       "path": "/data/pvcode/rrsjk-merchant-h5",
       "branch": "master"
     },
@@ -472,7 +472,7 @@
       "branch": "master"
     },
     "rrsjk-merchant-web": {
-      "head": "fc3a6108cff15ac9a120f3ad50a53127af0f5c16",
+      "head": "f61e53864c587bfeaa9e85ffbac81c785b6464a6",
       "path": "/data/pvcode/rrsjk-merchant-web",
       "branch": "master"
     },
@@ -482,14 +482,14 @@
       "branch": "master"
     },
     "rrsjk-migration-mix": {
-      "head": "5e46f44ff14cd2119d56de143153604aa0ffdf3e",
+      "head": "9783d7e9dea88b973bc68576d5ab85d9ba258ec7",
       "path": "/data/pvcode/rrsjk-migration-mix",
-      "branch": "dev"
+      "branch": "master"
     },
     "rrsjk-mobile-h5": {
       "head": "fc837173c0db3a663a678098152550df72a02901",
       "path": "/data/pvcode/rrsjk-mobile-h5",
-      "branch": "dev"
+      "branch": "master"
     },
     "rrsjk-mobile-web": {
       "head": "2fe7b71a6848e1c83c6c5082d7c835ee75136d2f",
@@ -497,9 +497,9 @@
       "branch": "master"
     },
     "rrsjk-oauth2-web": {
-      "head": "63f3696421874dc8997edde19543da33166fa05c",
+      "head": "f247dba20e7331e96897e72572b90ccc82fc3c0e",
       "path": "/data/pvcode/rrsjk-oauth2-web",
-      "branch": "dev"
+      "branch": "master"
     },
     "rrsjk-openapi-web": {
       "head": "797cf10a353348b55576b91905b37bdbf424ae19",
@@ -532,7 +532,7 @@
       "branch": "master"
     },
     "rrsjk-trade-service": {
-      "head": "18ce16f4a8c2341111fb841520b67604a216b285",
+      "head": "59adc680feda5152a365095ad2f3d706296df43d",
       "path": "/data/pvcode/rrsjk-trade-service",
       "branch": "master"
     },
@@ -542,9 +542,9 @@
       "branch": "master"
     },
     "system-service": {
-      "head": "f412d9e751e6be6fcb5928de6a69869a2b599c6f",
+      "head": "fc0aedbb26d25e9a8cd63841f2b7432d15b616a5",
       "path": "/data/pvcode/system-service",
-      "branch": "dev"
+      "branch": "master"
     },
     "uni-choose-file-android": {
       "head": "e02f95ceec8a75aea3973fd611ef92258db26885",

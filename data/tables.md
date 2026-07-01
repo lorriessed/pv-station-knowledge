@@ -573,3 +573,29 @@ MySQL (rrsjk_light + rrsjk_light_report) ── ④ 模式流程日清 (modeRiqi
   - `id` Long PK, `inverter_sn` String 逆变器SN码, `province_code` String 省份编码(如440000), `province_name` String 省份名称, `created_at` datetime, `updated_at` datetime
   - 用途: Kafka省份Topic双写时按SN查询省份编码，分组发送到`{provinceCode}-vpp-electric` topic
   - 关联: `KafkaProducerService.sendToProvinceDoubleWriteQueue()` 批量查询
+
+### 光伏自有资产表 (代码明确证明, 2026-07-01)
+**来源**: `rrsjk-pvbusiness-job-service` → `LightOwnAsset.xml`, `LightOwnAssetStatus.xml`
+- **light_own_asset**: 光伏自有资产主表 (rrsjk_light库 via pvbusiness-job-service)
+  - `id` Long PK, `cbs_id` CBS主键(LOA+日期+序号), `contract_number` 合同编号, `contract_name` 合同名称, `lessor_code` 出租方, `lessee_code` 承租方, `asset_type` 资产类型, `cbs_type` CBS类型(STATION), `status` 状态(IMPORTED/TRANSFERRED/WAIT_AUDIT/ERROR), `uuid` 租赁系统主键, `serial_number` 单据号, `belnr` SAP凭证号, `rent_total` 租金合计, `rent` 租金, `tax_flag` 保税标志, `invoice_method` 发票选项, `invoice_type` 发票类型, `payment_type` 付款类型, `lease_type` 付款周期
+  - 关联: `light_company_info.company_code` = `lessee_code`
+- **light_own_asset_status**: 资产审批状态变更记录 (rrsjk_light库)
+  - `id` Long PK, `cbs_id`, `uuid`, `serial_number`, `contract_number`, `status`, `reject_time`, `reject_node`, `rejecter_name`, `rejecter`, `reject_reason`, `approval_node`, `approver_name`, `approver`, `approval_time`, `belnr`, `error_msg`, `created_at`
+- **light_asset_application_log**: HSCC接口调用日志 (local库)
+  - `id` Long PK, `url` 请求地址, `request` 请求体, `response` 响应体, `created_at`
+- **light_company_info**: 项目公司信息 (rrsjk_light库)
+  - 含 `company_code`, `cost_center_code`, `cost_center_name`, `profit_center_code`, `bank_account` 等银行/财务信息
+
+### 超期库存管控表 (代码明确证明, 2026-07-01)
+**来源**: `rrsjk-pvbusiness-job-service` → `EnergyOverdueInventoryControl*.xml`
+- **energy_overdue_inventory_control_summary**: 超期库存汇总 (report库)
+- **energy_overdue_inventory_control_center**: 超期库存-分中心维度 (report库)
+  - 含组件/逆变器各库龄段(60d/90d/120d/150d/180d/360d/1y/2y/3y+)的 quantity/amount/process
+- **energy_overdue_inventory_control_sku**: 超期库存-物料维度 (report库)
+- **energy_overdue_inventory_control_data_base**: 超期库存基础数据 (report库)
+
+### GVS库龄分析表 (代码明确证明, 2026-07-01)
+**来源**: `rrsjk-pvbusiness-job-service` → `GvsWarehouseAgeAnalysis.xml`
+- **gvs_warehouse_age_analysis**: GVS仓库库龄分析 (report库)
+  - 含工厂/物料/库存地点/品牌/各库龄段数量金额
+- **sap_sp_center_relation**: SAP SP与分中心关联 (report库)

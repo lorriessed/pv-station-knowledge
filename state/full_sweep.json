@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-06-30T22:00:58.606533",
+  "last_run_at": "2026-07-01T22:00:27.248963",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -205,11 +205,11 @@
     "rrsjk-mobile-h5": "2026-06-30T22:05:07",
     "rrsjk-mobile-web": "2026-06-30T22:05:07",
     "rrsjk-oauth2-web": "2026-06-30T22:05:07",
-    "rrsjk-pay-service": "2026-06-02T22:00:09.001485",
-    "rrsjk-pay-web": "2026-06-02T22:00:09.001485",
-    "rrsjk-pvbusiness-job-service": "2026-06-03T22:09:13",
-    "rrsjk-report-web": "2026-06-03T22:09:13",
-    "rrsjk-system-service": "2026-06-03T22:09:13",
+    "rrsjk-pay-service": "2026-07-01T22:11:49",
+    "rrsjk-pay-web": "2026-07-01T22:11:49",
+    "rrsjk-pvbusiness-job-service": "2026-07-01T22:11:49",
+    "rrsjk-report-web": "2026-07-01T22:11:49",
+    "rrsjk-system-service": "2026-07-01T22:11:49",
     "rrsjk-trade-service": "2026-06-03T22:09:13",
     "system-service": "2026-06-03T22:09:13",
     "uni-choose-file-android": "2026-06-04T22:06:51.406075",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 44,
-  "last_sweep_at": "2026-06-30T22:05:07"
+  "sweep_round": 46,
+  "last_sweep_at": "2026-07-01T22:11:49"
 }

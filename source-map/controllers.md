@@ -6418,6 +6418,7 @@
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/agent/AgentTokenController.java`
 - @RequestMapping("/api/agent/token")
 - @GetMapping("/getAgentToken")
+- @GetMapping("/getAgentDetail")
 
 ## TransitStoreController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/transit/TransitStoreController.java`
@@ -6776,6 +6777,12 @@
 - @GetMapping("doExport.do")
 - @PostMapping("addProcess.do")
 - @PostMapping("createAppeal.do")
+
+## LightOpStationContractController
+- 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/LightOpStationContractController.java`
+- @RequestMapping("/lightOpStationContract")
+- @GetMapping("list.do")
+- @GetMapping("viewContract.do")
 
 ## PurchaseApplySettleNoPaperOperationController
 - 文件: `rrsjk-merchant-web/src/main/java/com/rrsjk/merchant/controller/lightoperation/PurchaseApplySettleNoPaperOperationController.java`
@@ -19006,6 +19013,10 @@
 - @RequestMapping("doList.do")
 - @RequestMapping(value = "/confirmInvoice.do", method = {RequestMethod.POST})
 - @RequestMapping("/doExport.do")
+- @RequestMapping("/downloadImportTemplate.do")
+- @RequestMapping("/importInvoiceAsync.do")
+- @RequestMapping("/getImportProgress.do")
+- @RequestMapping("/getImportFailList.do")
 
 ## RegionModifyAuditController
 - 文件: `rrsjk-admin-web/src/main/java/com/rrsjk/admin/controller/light/RegionModifyAuditController.java`

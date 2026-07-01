@@ -2054,3 +2054,32 @@ LightFapRecordServiceImpl 作为 FAP 回调中心，当前 BizTypeEnum 已覆盖
 
 ### 架构观察
 公建(Pub)和整村(Whole Village)使用**平行实体体系**（LightProject vs LightWv前缀），而非共用一套。请款流程包含：主表+附件+发票+明细项+操作日志五张表。与一期相比，二期扩展了文件管理和发票管理。
+
+### 税额计算重构 — 按公司维度拆分事务 (2026-07-01)
+**来源**: `rrsjk-light-service` → `RentTaxAmountServiceImpl.java` (代继宁, commit 2a1bf83, 2026-07-01)
+**证据等级**: 代码明确证明
+
+- 将税额计算从单一事务改为按公司维度拆分事务
+- 增加防重复记账校验
+- 背景: 避免大事务锁表，提升并发性能
+
+### 成本核算报表导出优化 (2026-07-01)
+**来源**: `rrsjk-admin-web` → `LightStationCostSummaryController.java`, `AsyncConfig.java` (解钦, commits 69f71f5~1890725, 2026-07-01)
+**证据等级**: 代码明确证明
+
+- 新增 `AsyncConfig.java` (17行) — 异步线程池配置
+- 成本核算报表导出从自定义线程池改为默认线程池
+- 对应 `rrsjk-light-service` 的 `LightStationCostSummaryService` / `LightStationCostSummaryServiceImpl` 同步修改
+
+### 结算列表导出优化 (2026-07-01)
+**来源**: `rrsjk-admin-web` → `LightProjectRentRecordController.java` (laowang, commits b834560~dd1fa50, 2026-07-01)
+**证据等级**: 代码明确证明
+
+- 优化结算列表导出功能的资本筛选逻辑
+- 修复项目公司代码列表初始化空指针异常（`LightProjectRentRecordController` 中初始化项目公司代码列表）
+
+### 工商业收款作废更改 (2026-07-01)
+**来源**: `rrsjk-light-service` → `CmLightProjectReceiptServiceImpl.java` (tn_wanb, commit 7665a78, 2026-07-01)
+**证据等级**: 代码明确证明
+
+- 工商业收款作废逻辑变更

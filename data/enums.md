@@ -412,6 +412,8 @@
 - `osp/general/stopPayDisputeR.js` — 纠纷恢复原因（原 stopPayRecoverReason.js, 2026-06-03 R062 重命名）
 - `osp/general/stopPayStatus.js` — 租金停付状态（对应后端 StatusEnum 9个状态）
 - `osp/general/stopPayType.js` — 租金停付类型（OWNER_APPLY业主申请 / DISPUTE_SUSPEND纠纷停付）
+- `osp/general/ownerContractStatus.js` — 业主合同状态 (2026-07-01 新增，前端配置证明)
+- `osp/general/ownerContractType.js` — 业主合同类型 (2026-07-01 新增，前端配置证明)
 
 ### 华融 (hr)
 - `hr/userInfoStatus.js` — 华融用户信息登记状态

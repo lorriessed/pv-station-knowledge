@@ -677,3 +677,12 @@
 - 通过参数 `stationMode = "common"` 触发过滤
 - 影响年份: 2024年及以后的数据查询（2023年及以前不受影响）
 - **业务含义**: 资方大屏统计"户用电站"时，排除 EPC 工商业电站，确保统计数据纯净
+
+### 中核推送熔断优化 — 移除熔断时数据库更新 (代码明确证明, 2026-07-01)
+**来源**: `rrsjk-light-data-service` → `ElecPushServiceImpl.java` (yumiao, commit 1983c85, 2026-07-01)
+
+**变更**:
+- `fallbackDoPushZH()`: 注释掉熔断打开时的 warn 日志
+- `updateZhPushResult()`: 整个方法体被注释掉 — 熔断时不再更新 `light_elec_push` 表的 `lastSendAt`/`sendResult`/`dataTimestamp` 字段
+- **影响**: 熔断期间 `light_elec_push` 表不会被写入，减少数据库压力。但这也意味着无法从该表追踪熔断发生的时间点
+- **背景**: 中核(ZH)模式通过 MQTT 推送逆变器发电数据，使用 Resilience4j 熔断器 (`circuitBreakerRegistry.circuitBreaker("doPushZH")`) 保护推送链路

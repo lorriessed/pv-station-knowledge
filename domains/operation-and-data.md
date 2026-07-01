@@ -699,3 +699,22 @@ rrsjk-light-data-service
 - **字段**: forecastMonth(预测月份), provinceId, cityId, regionId(区县), mode(模式), 多个预测指标
 - **功能**: 区县三级联动（省→市→区县）+ 完整导入导出 + Dubbo服务暴露
 - **关联实体**: 与已有的 ReportPolicyForecast（预测初版）并存，"终"版支持手动导入修正
+
+### 低效电站报表 (2026-06-30 新增)
+
+**Dubbo服务**: `EnergyLowEfficiencyStationService` — 新增报表服务
+- **注册**: `service.xml` 中声明 `<dubbo:service ref="energyLowEfficiencyStationServiceImpl">`, timeout=9000000
+- **仓库**: rrsjk-light-report-service
+- **开发者**: 姜传德(德), 2026-06-30
+- **关联**: 低效电站字段来源（仅存低效、团队字段来源），分支 `jcd/inefficient-station-20260629`
+- **来源**: `rrsjk-light-report-service/service.xml` (commit f99979c4, 代码明确证明)
+
+### 大屏数据源迁移 — ADS替换DWS持续进行 (2026-06-30 更新)
+
+**开发者**: 马金虎(majinhu), 2026-06-30, 多个分支:
+- **招银大屏**: `ReportScreenDashboardServiceImpl` 替换大数据查询 (237行重构)
+- **华容大屏**: `ReportHuarongScreenDashboardServiceImpl`, `ReportHuarongScreenMonthElecServiceImpl`, `ReportScreenMonthElecServiceImpl` 替换大数据
+- **浦银大屏**: `realTimeStationElecChartMonthDao` → `adsReportStationChartMonthDao` 迁移
+- **新增DAO**: `AdsReportInveterChartYearDao`, `AdsReportStationChartMonthDao`
+- **模式**: 与 ADS 迁移一致 — 从 DWS 层查询改为 ADS 层查询，减少中间层依赖
+- **来源**: `rrsjk-light-report-service` (commits 690827255, 966b236ba, 463d5020e, 代码明确证明)

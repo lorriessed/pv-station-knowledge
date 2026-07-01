@@ -94,9 +94,13 @@
     94|| fapManual.do | POST | 发票手工处理 | - |
     95|| checkElecNoBound | POST | 检查发电户号绑定 | - |
     96|| checkBatchNoForConfirmSk.do | POST | 批次号确认前校验 | - |
-    97|| lightProjectElectricOrderInvoiceList.html | GET | 发票列表页 | lightProjectElectricOrder:read:list |
-    98|
-    99|**导出逻辑** (2026-05-07 重构):
+    | lightProjectElectricOrderInvoiceList.html | GET | 发票列表页 | lightProjectElectricOrder:read:list |
+    | downloadImportTemplate.do | GET | 下载发票导入模板 (EasyExcel) | - |
+    | importInvoiceAsync.do | POST | 异步批量导入发票 (MultipartFile) | lightProjectElectricOrderInvoice:import |
+    | getImportProgress.do | GET | 查询导入进度 | - |
+    | getImportFailList.do | GET | 查询导入失败列表 (分页) | - |
+
+    **导出逻辑** (2026-05-07 重构):
    100|- 导出接口已切换到 report-service ODS 数据源
    101|- 保留原有 light-service 用于其他 CRUD 操作
    102|- 增加导出限制功能

@@ -316,3 +316,41 @@ spring.datasource.druid:
 **最近更新** (2026-06): 解钦品牌定制 — 登录页重新设计、Snail Job→HaierEnergy 品牌替换
 **与 PVS 关系**: 这是 PVS 微服务使用的分布式任务调度平台的**管理后台前端**。后端服务 (Snail Job Server) 不在此仓库。PVS 各服务通过 Snail Job SDK 注册和执行定时任务。
 **业务价值**: 中 — 基础设施管理工具，不包含光伏业务逻辑，但是 PVS 定时任务运维的入口
+
+### EventBus 线程池优化 (2026-06-30)
+
+**变更**: `EventBusConfig.java` 中 `lightEventBus` 线程池新增 `allowCoreThreadTimeOut(true)`
+- **配置**: 核心线程 800, 最大线程 1300, 队列容量 10000
+- **优化目的**: 空闲时允许核心线程超时释放，避免长时间空闲占用内存资源
+- **同步变更**: `rrsjk-light-data-service` 中 liuchunwei 也设置了大容量线程池核心线程允许超时
+- **开发者**: liuchunwei, 2026-06-30, 分支 `liuchunwei/performance`
+- **来源**: `rrsjk-light-service/EventBusConfig.java` (commit f546c4e5), `rrsjk-light-data-service` (commit 8e75fb21), 代码明确证明
+
+### 工商风险接口对接 (2026-06-30 新增)
+
+**开发者**: 包鑫(baoxin), 2026-06-30, 9次提交
+- **涉及文件**: `service.xml` (Dubbo服务声明), `LightElecSealUse.xml` (电子签章使用Mapper)
+- **分支**: `v2026-06-29-bx-businessrisks`
+- **状态**: 持续迭代中，多次修复接口对接问题
+- **业务含义**: 工商风险查询接口对接 — 可能涉及企业工商信息查询、风险评估等功能
+- **来源**: `rrsjk-light-service` (commits 63a0f78e~da8f419e, 代码明确证明)
+
+### rrsjk-system-service 近期变更 (2026-05~06)
+
+**来源**: `rrsjk-system-service` git log (代码明确证明, 2026-07-01 通读)
+
+| 日期 | 提交 | 变更内容 |
+|------|------|---------|
+| 2026-06-03 | `463eb64` | expose shared dictionary filters — 共享字典过滤器暴露 |
+| 2026-05-12 | `6542e24` | fix(bank): 修正主银行信息查询方法名 |
+| 2026-05-11 | `a89cb44` | feat(bank): 添加通过银行联行号获取银行信息的功能 |
+| 2026-05-11 | `17e1a29` | feat(bank): 添加银行联行号字段和华融主银行信息功能 |
+| 2026-04-08 | `c98160c` | 短信更改 |
+| 2026-02-10 | `365cb43` | feat(basic): 添加GfMatchRegion匹配区域功能模块 |
+
+**新增功能**:
+- **HrflcBankInfo**: 华融租赁专属银行信息表，通过联行号查询 (`getHrflcBankInfoByBankNumber`)
+- **GfMatchRegion**: 广发匹配区域管理 (CRUD + batchInsert)
+- **DhMatchRegion**: 大华匹配区域管理 (同 GfMatchRegion 结构)
+- **CalendarDayService**: 日历表服务 (工作日/节假日)，支持按日期/年月日/年月查询，Guava LoadingCache 缓存 (24小时)
+- **OCR 身份证识别**: `OcrAnalyseRecordService` 集成阿里云 OCR SDK，支持身份证正反面识别，含有效期校验 (`isCurrentDateBefore`)

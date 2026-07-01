@@ -307,3 +307,17 @@ rrsjk-light-service / rrsjk-light-data-service (Dubbo 提供者)
 - **ZhaoYinLeaseServiceImpl**: 实现查询逻辑，从 ODS 表 `ods_light_station_elec` 获取数据
 - **ZhaoYinLeaseController** (rrsjk-openapi-web): 新增对应接口，增强日期参数校验
 - **证据等级**: 代码明确证明
+
+### TAEI-3355: 招银组件功率匹配逻辑优化 — 固定值→区间 + 租金阶段化 (2026-06-30 更新)
+
+**需求**: 招银产品编码"组件功率"匹配逻辑从固定值改为区间匹配，同时新增租金阶段化计算。
+
+**代码变更** (lilong/李龙, 2026-06-30, commits ee875505~c0aadb55):
+- **CmbElectricPrice.java**: 新增 5 个租金区间字段 `rent_1_5`, `rent_6_10`, `rent_11_15`, `rent_16_20`, `rent_21_25`（BigDecimal类型），对应不同功率区间（1-5kW, 6-10kW, 11-15kW, 16-20kW, 21-25kW）的租金价格
+- **RentPhaseUtil.java**: 新增工具类，用于根据电站功率确定所属租金阶段
+- **CmbLeasingPushApiServiceImpl.java**: 新增 `getRentPolicyInfo()` 方法，从 `LightStationPolicy` 查询租金配置数据，注入 `LightCompanyPolicyService`、`LightStationPolicyDao`、`LightPriceModel`
+- **CmbLeasingStation.xml**: 新增 SQL 查询支持
+
+**业务含义**: 招银租赁的租金计算从"单一固定值"升级为"按功率区间分档"，5 个档位对应不同容量段的电站租金标准。这是招银资方 pricing 模型的重要演进。
+
+**来源**: `rrsjk-light-service` — `CmbElectricPrice.java`, `RentPhaseUtil.java`, `CmbLeasingPushApiServiceImpl.java`, `CmbLeasingStation.xml` (2026-06-30 提交 ee875505, 代码明确证明)

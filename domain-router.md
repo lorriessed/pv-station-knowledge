@@ -99,12 +99,21 @@
     71|- MCP：优先 `electric_pv_mysql_prod`
     72|- **已知电站模式**: ZH(户用)、CQ_GDT(重庆国电投) 有专用逆变器查询链路
     73|
-    74|## 报表和大屏
-    75|
-    76|- 关键词：大屏、报表、导出、日报、月报、资产屏。
-    77|- 知识库：`domains/*`、`ops/*`
-    78|- 代码入口：`rrsjk-light-report-service`、`rrsjk-report-web`、Mapper XML
-    79|- 常见表：先查 `data/sql-table-refs.md`
+    ## 报表和大屏
+
+    - 关键词：大屏、报表、导出、日报、月报、资产屏、低效电站。
+    - 知识库：`domains/*`、`ops/*`
+    - 代码入口：`rrsjk-light-report-service`、`rrsjk-report-web`、Mapper XML
+    - 常见表：先查 `data/sql-table-refs.md`
+    - **低效电站报表** (2026-07-01 新增):
+      - 知识库: `domains/station-lifecycle.md` (待补充)
+      - 代码入口: `rrsjk-light-report-service` → `EnergyLowEfficiencyStationService`, `EnergyLowEfficiencyStationServiceImpl`, `LowEfficiencyStationModel`
+      - 定时任务: `EnergyJobService.autoCreateLowEfficiencyStationData()` — 7天/30天发电小时数对比区域加权平均
+      - 数据源: ODS (SelectDB) → local (rrsjk_light_report)
+      - 关联: 运维工单故障回填 (`LightOperationWorkOrderDao.findByStationCodes`)
+    - **招银大屏** (2026-07-01 大数据迁移):
+      - 代码入口: `rrsjk-light-report-service` → `CmbDashboardImpl`, `ReportScreenDashboardServiceImpl`
+      - 新增 DAO 方法: `queryDayElectricForCmb`, `getCmbRealtimePower`, `findCmbDashBoardCountData`, `getElectricAndIncomeByCodeCmb`
     80|
     81|## 云效需求/MR/流水线
     82|
@@ -112,14 +121,20 @@
     84|- MCP：`yunxiao_devops`
     85|- 知识库：`runbooks/`、周报/日报任务记录
     86|- 回答要求：给出需求编号、负责人、状态、MR 标题或流水线名称。
-    87|
-## 电站合同 (`domains/station-contract.md`)
-- 关键词：合同、签约、DCC、用印、短信、签署、快捷签。
-- 核心表：`light_station_contract_record`、`light_station_contract_record_log`、`light_elec_contract`
-- 常见枚举：`ContractTypeEnum` (MASTER/INSTALL/FINANCE/STOP/OWNERSHIP_PROVE 等)
-- 签署方式：ONLINE(线上 DCC 签章)、OFFLINE(线下纸质)
-- 短信模板：1133(主合同)、1134(装机)、1135(结算)、1146(权属证明)
-- 事件总线：`LightStationDccContractEvent` → `LightStationDccContractListener`
+    ## 电站合同 (`domains/station-contract.md`)
+    - 关键词：合同、签约、DCC、用印、短信、签署、快捷签、业主租赁合同。
+    - 知识库：`domains/station-contract.md`
+    - 核心表：`light_station_contract_record`、`light_station_contract_record_log`、`light_elec_contract`
+    - 常见枚举：`ContractTypeEnum` (MASTER/INSTALL/FINANCE/STOP/OWNERSHIP_PROVE 等)
+    - 签署方式：ONLINE(线上 DCC 签章)、OFFLINE(线下纸质)
+    - 短信模板：1133(主合同)、1134(装机)、1135(结算)、1146(权属证明)
+    - 事件总线：`LightStationDccContractEvent` → `LightStationDccContractListener`
+    - **业主租赁合同管理** (2026-07-01 新增):
+      - 前端: `nahui-pv.merchant-micro.osp` → `src/views/osp/landlordInfo/ownerContract.vue` (563行)
+      - 路由: `src/router/modules/osp.js` 新增路由
+      - API: `src/api/osp.js` 新增接口
+      - 菜单: `_type_menus.js` 新增菜单项
+      - 前端字典: `nahui-dicts-serve` → `src/data/osp/general/ownerContractStatus.js`, `ownerContractType.js`
 
 ## CBS 管理后台 (`domains/cbs-management.md`)
 - 关键词：CBS、分中心、分中心用户、后台管理、定时任务日志、登录认证、菜单管理。
@@ -195,4 +210,12 @@
 - 常见表：`admin_oper_log`, `admin_login_log`, `admin_log_body_detail`
 - 数据库：`rrsjk_admin_operation_log`
 - 注意：与 Web 端 `rrsjk-admin-bff` (port 8081) 平行但独立，共享 auth-server 和 authz-service
+
+## 光伏业务定时任务 (`domains/pvbusiness-job-service.md`)
+- 关键词：定时任务、资产推送、HSCC、使用权资产、超期库存管控、GVS库龄分析、分布式锁、SingleJob
+- 知识库：`domains/pvbusiness-job-service.md`
+- 代码入口：`rrsjk-pvbusiness-job-service` → `LightOwnAssetServiceImpl`(资产导入/推送/查询), `EnergyOverdueInventoryControlServiceImpl`(超期库存报表), `LightAssetInterfaceServiceImpl`(HSCC接口)
+- 常见表：`light_own_asset`, `light_own_asset_status`, `light_asset_application_log`, `light_company_info`, `energy_overdue_inventory_control_summary/center/sku/data_base`, `gvs_warehouse_age_analysis`
+- 数据库：`rrscom`(7个数据源: local/light/report/elec/operation/shop/finance)
+- 注意：不对外暴露 REST API，纯后台定时任务服务。通过 @SingleJob 注解实现分布式锁防重入
 
