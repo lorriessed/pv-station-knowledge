@@ -2946,6 +2946,11 @@
 - statements: `insert:create`, `update:update`, `select:get`, `select:findByLoginId`, `select:findByLoginIdAndResourceTypeAndEnable`
 - tables: `id`
 
+## rrsjk-merchant-service/rrsjk-merchant-impl/src/main/resources/mybatis/mapper/mch/MerchantInfoAudit.xml
+- namespace: `com.rrsjk.merchant.dao.MerchantInfoAuditDao`
+- statements: `select:getMerchantInfoAuditByName`, `select:getMerchantInfoAuditByMemberId`, `select:getMerchantInfoAuditByMerchantCode`, `select:findBy`, `update:updateMerchantInfoAudit`, `insert:addMerchantInfoAudit`, `delete:deleteMerchantInfoAudit`, `select:getMerchantInfoAuditById`, `select:countOf`
+- tables: `MerchantInfoAudit`, `id`, `your`
+
 ## rrsjk-merchant-service/rrsjk-merchant-impl/src/main/resources/mybatis/mapper/mch/MerchantRegion.xml
 - namespace: `com.rrsjk.merchant.mch.dao.MerchantRegionDao`
 - statements: `insert:create`, `insert:batchInsert`, `select:findByMerchantId`, `delete:deleteAllMasterRegion`, `select:findMasterRegion`

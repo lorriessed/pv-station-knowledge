@@ -1065,3 +1065,15 @@ if (exist != null) {
 - 数据权限隔离策略通过注释说明
 
 **业务影响**: 此前合同查询依赖电站表存在记录，如果电站数据缺失则合同记录也会丢失。重构后以合同记录表为主，确保合同数据完整性。
+
+### 运维商合同状态过滤扩展 — 从3个到8个状态 (代码明确证明, 2026-07-02)
+**来源**: `rrsjk-light-service` → `LightStationContractRecord.xml` → `opContractCondition` SQL片段 (孙志男/sunzn, commit 3bf51c78b5, 2026-07-02, 分支 szn_sht_contract_20260624)
+
+**变更内容**:
+- 运维商合同查询的状态白名单从 3 个扩展到 8 个:
+  - **旧**: `WAIT_SIGN`, `WAIT_COMPANY_SIGN`, `SIGNED`
+  - **新**: +`WAIT_USER_SIGN`(待用户签署), `WAIT_GUARANTOR_SIGN`(待担保人签署), `WAIT_PARTNER_SIGN`(待合伙人签署), `WAIIT_SERVICE_SING`(待服务商签署), `WAIT_COMPANY_SIGN`
+- **⚠️ 疑似拼写错误**: `WAIIT_SERVICE_SING` 中有双I (`WAIIT`)，且缺少 `ED` 后缀，可能是代码bug
+- **修复**: 同时修复了合同状态查询条件缺失问题（commit message: "fix(contract): 修复合同状态查询条件缺失问题"）
+
+**业务影响**: 运维商合同列表此前只显示"待签署/待公司签署/已签署"3种状态，现在能看到全部签署流程中的合同（用户签署、担保人签署、合伙人签署、服务商签署等环节），数据可见性大幅提升。

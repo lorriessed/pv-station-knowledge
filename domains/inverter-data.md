@@ -686,3 +686,17 @@
 - `updateZhPushResult()`: 整个方法体被注释掉 — 熔断时不再更新 `light_elec_push` 表的 `lastSendAt`/`sendResult`/`dataTimestamp` 字段
 - **影响**: 熔断期间 `light_elec_push` 表不会被写入，减少数据库压力。但这也意味着无法从该表追踪熔断发生的时间点
 - **背景**: 中核(ZH)模式通过 MQTT 推送逆变器发电数据，使用 Resilience4j 熔断器 (`circuitBreakerRegistry.circuitBreaker("doPushZH")`) 保护推送链路
+
+### ADS 报表迁移进展 — 大屏系列切换 (代码明确证明, 2026-06-30~07-01)
+- **来源**: `rrsjk-light-report-service` (majinhu, 12 commits, 2026-06-24~07-01)
+- **关联需求**: TAEI-3283(华容大屏), TAEI-3284(招银大屏) — 均已发版
+- **迁移清单**:
+  - CmbDashboardImpl → ADS (招银大屏)
+  - ReportScreenDashboardServiceImpl → ADS (招银大屏)
+  - ReportHuarongScreenDashboardServiceImpl → ADS (华容大屏)
+  - HuaRongDashboardImpl → ADS (华容大屏)
+  - LightStationService.findStationDetail → ADS
+  - queryDayElectricByCodeInAssert → ADS
+  - green_energy_energy_leased_station_asset_management → ADS
+  - 浦银大屏: realTimeStationElecChartMonthDao → adsReportStationChartMonthDao
+- **状态**: 招银/华容/浦银三个资方大屏已全部切换到大数据层

@@ -183,3 +183,20 @@
 - **移除字段**: `minimumPurchaseType`（起购类型）和 `minimumPurchaseQuantity`（起购量）从 `ZeroCarbonItemSetMealRequest` DTO 中删除
 - **业务含义**: 零碳套餐不再需要起购类型和起购量配置，简化了套餐创建/编辑的请求参数
 - **配套变更**: rrs-parent 版本从 8.0.5 降回 7.0.2；移除 `aliyun-encdb-mysql-jdbc` 数据库加密驱动包依赖
+
+### 零碳套餐库存手动下调 — Trade Service 入口 (代码明确证明, 2026-06-17, TAEI-3144)
+**来源**: `rrsjk-trade-service` → `LightPurchaseSalesOrderService.java`, `LightPurchaseSalesOrderServiceImpl.java`, `SetMealStockOperate.java` (代继宁, commit 35a02481, 2026-06-17)
+- **新增 Dubbo 接口**: `LightPurchaseSalesOrderService.reduceSetMealPlanStock(setMealCode, orderNo, quantity)` — 手动下调套餐库存的 trade-service 入口
+- **调用链**: `reduceSetMealPlanStock()` → `SetMealStockOperate.setMealStock()` → `ZeroCarbonItemSetMealStockService.updateStock()`
+- **changeType=3**: 手动下调走与 changeType=1（下单扣减）相同的 `updateStock` 路径，区别在于 changeType 标识记录在流水日志中
+- **分布式锁**: `SetMealStockOperate` 使用 Redis 分布式锁 + 看门狗续期确保库存操作原子性
+
+### 零碳质保金退款审核流程重构 (代码明确证明, 2026-07-01)
+- **来源**: `rrsjk-finance-service/ZeroCarbonApplySettleDepositRefundServiceImpl.java` (代继宁, commit 5dcf05cf, 2026-07-01)
+- **关联需求**: TAEI-3246 【零碳适家】退安装质保金
+- **变更**: 960+/276- 行, 8 文件。质保金退款从简单审核扩展为多步骤流程:
+  1. 预算占用逻辑（退款前需先占用预算）
+  2. 审核流程重构（ZeroCarbonApplySettleDepositRefundDao 新增方法）
+  3. 云报账定时任务（自动对接集团报账系统）
+- **涉及实体**: ZeroCarbonApplySettleDepositRefund, ZeroCarbonApplySettleLog, ZeroCarbonSettleDepositDetailDto
+- **Mapper变更**: ZeroCarbonApplySettleDepositRefund.xml (+99行), ZeroCarbonDepositRecord.xml

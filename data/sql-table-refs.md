@@ -36,6 +36,7 @@
 - `MemberInvoices` -> `cbs-web/src/main/resources/sql-mapper/shop-read/InvoiceMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/HpDispatchMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/InvoicesMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/MemberInvoicesMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/SimpleOrderMapper.xml`
 - `MemberVatInvoice` -> `cbs-web/src/main/resources/sql-mapper/shop-read/InvoiceMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/InvoicesMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/SimpleOrderMapper.xml`
 - `Members` -> `cbs-web/src/main/resources/sql-mapper/shop-read/InvoiceMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/MembersMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/OrderToJDERecordMapper.xml`, `rrsjk-migration-mix/rrsjk-migration-mix-impl/src/main/resources/mybatis/mapper/shop/ShopMembersMapper.xml`
+- `MerchantInfoAudit` -> `rrsjk-merchant-service/rrsjk-merchant-impl/src/main/resources/mybatis/mapper/mch/MerchantInfoAudit.xml`
 - `NetPoints` -> `item-service/item-impl/src/main/resources/item-sql-mapper/NetPointsMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/OrderWorkflowsMapper.xml`
 - `OP2JDESharing` -> `order-service/order-impl/src/main/resources/order-sql-mapper/OrderToJDERecordMapper.xml`
 - `Order2ths` -> `cbs-web/src/main/resources/sql-mapper/shop-read/InvoiceMapper.xml`, `order-service/order-impl/src/main/resources/order-sql-mapper/Order2thsMapper.xml`
@@ -841,6 +842,7 @@
 - `ybz_bill_query_result` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/resources/mybatis/mapper/zerocarbon/YbzBillQueryResult.xml`
 - `ybz_bill_request_param_record` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/resources/mybatis/mapper/zerocarbon/YbzBillRequestParamRecord.xml`
 - `ybz_record` -> `rrsjk-finance-service/rrsjk-finance-impl/src/main/resources/mybatis/mapper/ybz/YbzRecord.xml`
+- `your` -> `rrsjk-merchant-service/rrsjk-merchant-impl/src/main/resources/mybatis/mapper/mch/MerchantInfoAudit.xml`
 - `yuexiu_electricity_bill` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/light/LightElectricOrder.xml`
 - `yuexiu_interactive_log` -> `rrsjk-light-service/rrsjk-light-impl/src/main/resources/mybatis/mapper/YuexiuInteractiveLog.xml`
 - `yuexiu_leasing_light_station` -> `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/dws/DwsLightStationElectricDayReportNew.xml`, `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/elec/LightInveterData.xml`, `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/elec/LightStationElectricDayReportNew.xml`, `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/elec/ReportLightStation.xml`, `rrsjk-light-report-service/rrsjk-light-report-impl/src/main/resources/mybatis/mapper/local/YueXiuLeasingStation.xml`

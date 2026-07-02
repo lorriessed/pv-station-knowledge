@@ -354,3 +354,27 @@
 - `buildParams()` 方法新增 `streetId` 参数（`request.getParameter("streetId")`）
 - 初版和终版政策预测报表均支持按 **省/市/区/街道** 四级筛选
 - 前端配套: 需街道级下拉选择组件（推断自参数名）
+
+### AccurateToRegionEnum — 单商单区模式枚举 (代码明确证明, 2026-07-01)
+- **来源**: `rrsjk-light-service/LightInstantRewardPolicy.java` + `LightInstantRewardJobServiceImpl.java` (潘乃华, commit fe3fc167, 2026-07-01)
+- **关联需求**: TAEI-3391 【电费】暂估冲暂估逻辑重构 (前置准备)
+- **枚举值**: 单商单省 / 单商单县 / 单商单区
+- **用途**: 替换原硬编码字符串判断，统一管理即时奖励政策的地理精度模式
+- **影响**: LightInstantRewardJobServiceImpl 重构支持区县分组处理，导入功能新增单商单区解析验证
+
+### 即时奖励台阶从6级扩展到9级 (代码明确证明, 2026-07-02)
+- **来源**: `rrsjk-light-service` → `LightInstantRewardJobServiceImpl.java` (龙龙, commits 2f56cbdf1e/f011915f95, 2026-07-02)
+- **变更**: `calculatePolicyPrice()` 方法新增三级台阶匹配:
+  - 新增: `seventhTarget/Price`, `eighthTarget/Price`, `ninthTarget/Price`
+  - 匹配顺序: ninth → eighth → seventh → sixth → fifth → fourth → third → second → first
+  - 容量单位: 台阶目标值以 MW 为单位，比较时转换为 W (`×1000000`)
+- **同时**: A段月度总结中 `handleStationToReward()` 的完工时效筛选参数从 `true` 改为 `false`
+- **影响**: 营销政策2.0A段支持更细粒度的容量阶梯奖励，最多9级
+
+### 政策区域Excel导入去重修复 — 多级参数匹配 (代码明确证明, 2026-07-02)
+- **来源**: `rrsjk-admin-web` → `LightEnablePolicyController.java` (龙龙, commit aaf07f8978, 2026-07-02)
+- **修复**: `checkArea()` 方法从单参数(name)改为可变参数(String... names)
+  - 省级去重: 仅匹配省名 (1个参数)
+  - 市级去重: 同时匹配省名+市名 (2个参数) — **修复了不同省份同名城市被误去重**
+  - 区县级去重: 同时匹配省名+市名+区名 (3个参数) — **修复了不同城市同名区县被误去重**
+- **影响**: 政策Excel导入时区域去重逻辑更精确，避免跨省份同名区市的错误过滤

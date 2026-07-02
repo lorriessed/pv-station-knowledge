@@ -1,5 +1,5 @@
 {
-  "last_scan_at": "2026-07-01T23:01:32.840273",
+  "last_scan_at": "2026-07-02T23:01:50.830609",
   "repos": {
     "DB_TOOL": {
       "head": "14e69e5bdf78adec0f2fd23fbf329206ebe04008",
@@ -32,7 +32,7 @@
       "branch": "master"
     },
     "cbs-web": {
-      "head": "e651a0a01476df7204e22aeeef62cdf6ef8ff9ab",
+      "head": "82559ccfa1867ea114c71039d6f669a92c23ac73",
       "path": "/data/pvcode/cbs-web",
       "branch": "master"
     },
@@ -202,7 +202,7 @@
       "branch": "main"
     },
     "nahuipv_greenergy_flutter": {
-      "head": "5a4d4b043a9d8e09cf118b16c3882f0149afa480",
+      "head": "908f2d718614c460ce10bfb031c64aff922a156f",
       "path": "/data/pvcode/nahuipv_greenergy_flutter",
       "branch": "master"
     },
@@ -357,7 +357,7 @@
       "branch": "master"
     },
     "rrsjk-admin-web": {
-      "head": "8ef0ffafbb9ff4c27bd2412b26f064a3a80e6fa3",
+      "head": "aaf07f89788f78689f28eb1cd2a0aede2c44cd5d",
       "path": "/data/pvcode/rrsjk-admin-web",
       "branch": "master"
     },
@@ -407,7 +407,7 @@
       "branch": "master"
     },
     "rrsjk-hds-web": {
-      "head": "31446df656de95953b05313a6099073d60e04241",
+      "head": "a3d4e76b9a75d07173669c8e282266ecb047d03e",
       "path": "/data/pvcode/rrsjk-hds-web",
       "branch": "master"
     },
@@ -452,7 +452,7 @@
       "branch": "master"
     },
     "rrsjk-light-service": {
-      "head": "e3f787fbfdb82846b785a7a209d7a5fd7213cca5",
+      "head": "2f56cbdf1e3e76d5f0f3fb8f261c6d5530aa9be7",
       "path": "/data/pvcode/rrsjk-light-service",
       "branch": "master"
     },
@@ -467,9 +467,9 @@
       "branch": "master"
     },
     "rrsjk-merchant-service": {
-      "head": "c10af9f5f82c08692515161b9a141d8d1bd16ea0",
+      "head": "086d991435da93e4520c73f9f4b79e9c6efec632",
       "path": "/data/pvcode/rrsjk-merchant-service",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-merchant-web": {
       "head": "f61e53864c587bfeaa9e85ffbac81c785b6464a6",
@@ -489,7 +489,7 @@
     "rrsjk-mobile-h5": {
       "head": "fc837173c0db3a663a678098152550df72a02901",
       "path": "/data/pvcode/rrsjk-mobile-h5",
-      "branch": "master"
+      "branch": "dev"
     },
     "rrsjk-mobile-web": {
       "head": "2fe7b71a6848e1c83c6c5082d7c835ee75136d2f",
@@ -632,7 +632,7 @@
       "branch": "master"
     },
     "vpp-api-system": {
-      "head": "963e30627f6f675a492261272548b8fbd75d0b32",
+      "head": "5a646a0b33b19e164c4e737aa063f129dd40f414",
       "path": "/data/pvcode/vpp-api-system",
       "branch": "master"
     },

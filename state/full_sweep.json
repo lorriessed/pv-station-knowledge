@@ -1,5 +1,5 @@
 {
-  "last_run_at": "2026-07-01T22:00:27.248963",
+  "last_run_at": "2026-07-02T22:00:47.499013",
   "completed_repos": [
     "DB_TOOL",
     "Inverter_recognition",
@@ -210,17 +210,17 @@
     "rrsjk-pvbusiness-job-service": "2026-07-01T22:11:49",
     "rrsjk-report-web": "2026-07-01T22:11:49",
     "rrsjk-system-service": "2026-07-01T22:11:49",
-    "rrsjk-trade-service": "2026-06-03T22:09:13",
-    "system-service": "2026-06-03T22:09:13",
-    "uni-choose-file-android": "2026-06-04T22:06:51.406075",
-    "uni-choose-file-ios": "2026-06-04T22:06:51.406075",
+    "rrsjk-trade-service": "2026-07-02T22:00:47.499013",
+    "system-service": "2026-07-02T22:00:47.499013",
+    "uni-choose-file-android": "2026-07-02T22:00:47.499013",
+    "uni-choose-file-ios": "2026-07-02T22:00:47.499013",
     "watermark-camera-android": "2026-06-04T22:06:51.406075",
     "watermark-camera-ios": "2026-06-04T22:06:51.406075",
     "cbs-web": "2026-06-10T22:00:29.841836",
     "base-service": "2026-06-10T22:00:29.841836",
     "he-vpp.admin-h5": "2026-06-10T22:00:29.841836",
     "he-vpp.hnzl-h5": "2026-06-10T22:00:29.841836",
-    "vpp-api-auth": "2026-06-04T22:06:51.406075",
+    "vpp-api-auth": "2026-07-02T22:00:47.499013",
     "vpp-api-gpower": "2026-06-06T22:05:26.927273",
     "vpp-api-km": "2026-06-06T22:05:26.927273",
     "vpp-api-meta": "2026-06-06T22:05:26.927273",
@@ -382,6 +382,6 @@
     "nahui-pv.merchant-monorepo-h5",
     "rrsjk-mobile-h5"
   ],
-  "sweep_round": 46,
+  "sweep_round": 47,
   "last_sweep_at": "2026-07-01T22:11:49"
 }

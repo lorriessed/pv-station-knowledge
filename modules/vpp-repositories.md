@@ -11,7 +11,7 @@
 | vpp-api-ems | /data/pvcode/vpp-api-ems | 2026-05-13 全量通读 ✅ | 能控系统/代理商管理/用户管理/登录鉴权 |
 | vpp-api-gateway | /data/pvcode/vpp-api-gateway | 2026-05-13 全量通读 ✅ | Spring Cloud Gateway/JWT鉴权/跨域/异常处理 |
 | vpp-api-gect | /data/pvcode/vpp-api-gect | 2026-05-13 全量通读 ✅ | 绿证交易(客户/订单/采购/发票/SAP), JDK 17 |
-| vpp-api-auth | /data/pvcode/vpp-api-auth | 待通读 | 认证授权服务 |
+| vpp-api-auth | /data/pvcode/vpp-api-auth | 已通读 ✅ (2026-07-02) | 认证授权服务 |
 | vpp-api-gpower | /data/pvcode/vpp-api-gpower | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 绿电收益管理/电网公司/MDM主数据/SAP记账/电价数据报表(新增) |
 | vpp-api-km | /data/pvcode/vpp-api-km | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 知识库目录/文件管理/标签/权限控制 (JDK 17升级) |
 | vpp-api-meta | /data/pvcode/vpp-api-meta | 2026-06-06 重扫 ✅ (2026-05-14 首扫) | 产品管理/出货日志/Excel导入 |

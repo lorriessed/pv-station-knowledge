@@ -803,6 +803,12 @@ order-service 在 2025-11 新增了 **ESAP 服务**集成，这是 SAP 接口的
 - `LightOrderToEnergyStorageQueue` — 订单推送到储能队列
 - `PcsOrderDeliveryToLightQueue` — PCS发货回推光伏队列 (自动发货)
 
+**储能订单推送触发条件** (代码明确证明, 2026-07-01):
+- **来源**: `rrsjk-trade-service` → `LightPurchaseSalesPurchaseOrderServiceImpl.java` (commit: 03a0b6e0, laowang, 2026-07-01)
+- **规则**: 采购单确认时，同时满足 `supplierCode == "V99694"` AND `companyCode == "1QJ0"` 才推送到储能系统
+- **变更**: 此前仅检查供应商代码 V99694，2026-07-01 增加公司代码 1QJ0 校验，避免不符合条件的订单被错误推送
+- **推送内容**: 订单号、子订单号、订单类型、SKU编码、价格、数量、公司信息、收货地址等 → `LightOrderToEnergyStorageQueue` 表
+
 **与现有 SAP 集成的关系**: order-service 已有成熟的 SAP 同步体系 (SyncSelfOrderToSapService, SyncFinanceToSapService, SyncInvoiceToSapService)，ESAP 是对现有 SAP 集成能力的扩展，专门面向卡奥斯平台。
 
 ---

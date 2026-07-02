@@ -718,3 +718,35 @@ rrsjk-light-data-service
 - **新增DAO**: `AdsReportInveterChartYearDao`, `AdsReportStationChartMonthDao`
 - **模式**: 与 ADS 迁移一致 — 从 DWS 层查询改为 ADS 层查询，减少中间层依赖
 - **来源**: `rrsjk-light-report-service` (commits 690827255, 966b236ba, 463d5020e, 代码明确证明)
+
+### 低效电站关联故障工单 (2026-07-01 更新)
+
+**开发者**: 姜传德(德), 2026-07-01, 分支 `jcd/inefficient-station-20260629`
+- **变更**: 低效电站报表新增关联运维工单（故障工单）功能
+- **涉及文件**:
+  - `EnergyLowEfficiencyStation.java` — 实体新增关联故障字段
+  - `EnergyLowEfficiencyStation.xml` — Mapper 新增关联查询
+  - `LightOperationWorkOrderMapper.xml` — 运维工单 Mapper 新增查询
+  - `LightOperationWorkOrderDao.java` — DAO 层新增方法
+  - `LowEfficiencyStationModel.java` — 模型层新增字段
+- **新增功能**: 低效电站下拉查询（`EnergyLowEfficiencyStationService` 新增接口）
+- **来源**: `rrsjk-light-report-service` (commits 9c2ef60a4d, 99efcff19f, 代码明确证明)
+
+### 大屏数据源迁移 — 2026-07-01 持续 (2026-07-01 更新)
+
+**开发者**: 马金虎(majinhu), 2026-07-01
+- **新增迁移**:
+  - `queryDayElectricByCodeInAssert` → 切换大数据 (DwsLightStationElectricDayReportNew.xml)
+  - `LightStationService.findStationDetail` → 切换大数据 (GreenEnergyInverterCurrent.xml + DwsLightStationElectricDayReportNew.xml)
+  - 招银大屏继续切换大数据 (AdsReportStationChartMonth.xml)
+  - `ods.green_energy_energy_leased_station_asset_management` → 切换大数据
+- **模式**: 持续从 DWS/ODS 层迁移到 ADS 层查询
+- **来源**: `rrsjk-light-report-service` (commits e2f52dbe, 6e7f2c5c, ff7a3977, bf539737, 代码明确证明)
+
+### 分中心查询统一重构 — putSubCenterNew 模式 (2026-07-02)
+
+**开发者**: 德(90a9f62098), sunzn(a3d4e76b9a), 2026-07-02
+- **rrsjk-admin-web**: `LightStockTakingController.java` — 库存盘点列表/导出的分中心查询从手动遍历 `SysPartyUser` → `SysParty` 改为统一方法 `putSubCenterNew(params, request)`
+- **rrsjk-hds-web**: `LightStationInverterChangeController.java` — 电站数据变更导出从 `getSubCenterCodeList(memberId)` 改为 `currentHdsUser()` + `hdsUser.isSubCenterUser()` 模式
+- **模式**: 多个Controller正在统一分中心权限查询逻辑，消除重复代码
+- **来源**: `rrsjk-admin-web`, `rrsjk-hds-web` (代码明确证明)

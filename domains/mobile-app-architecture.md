@@ -869,5 +869,6 @@ MySQL (rrsjk_light + rrsjk_light_report) + SAP
 
 | 日期 | 更新内容 |
 |---|---|
+| 2026-07-02 | nahuipv_greenergy_flutter: 广发模式商机详情新增补充材料字段 (`dh_business_info.dart` 新增字段, `dh_business_detail_page.dart` 107行变更)、单位统一(kW/kWh小写k/h MW大写)、商机详情移除空图片预览新增PDF占位图、合同管理经销商字段修改、版本2.2.4→2.2.5。app_aiwork_flutter: 新增基于eventflux的SSE客户端(AI工作助手基础设施)。nahui-pv.mobile-h5: 广发补充材料增加必填提示。 |
 | 2026-06-10 | HDS 管理平台：户用业绩报表下载功能新增（`reports/board.vue` 230行变更，含下载逻辑优化）、借件订单详情页增加是否自提字段展示。merchant-micro.osp：组件订单详情增加是否自提/特殊原因字段显示，借件订单保存取分中心逻辑调整，建站商和中心仓出库可录入无组件SN原因。 |
 | 2026-06-09 | HDS 管理平台：工商业电站详情组件大规模下线（industryCommerce 目录 10,000+ 行删除）、年保管理页面下线、"检出仓库"→"出库状态"字段改名、分中心优化、大屏登录变化、上传进度组件下线、运维路由精简。mobile-h5：电站转单页面删除、录入/受理页面精简。 |
